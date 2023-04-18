@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kafka.fullname" . }}-kafka
+  labels:
+    service: kafka
+  {{- include "kafka.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.kafka.replicas }}
+  selector:
+    matchLabels:
+      service: kafka
+    {{- include "kafka.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        service: kafka
+      {{- include "kafka.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: KAFKA_BROKER_ID
+          value: {{ quote .Values.kafka.kafka.env.kafkaBrokerId }}
+        - name: KAFKA_LISTENERS
+          value: {{ quote .Values.kafka.kafka.env.kafkaListeners }}
+        - name: KAFKA_ADVERTISED_LISTENERS
+          value: {{ quote .Values.kafka.kafka.env.kafkaAdvertisedListeners }}
+        - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
+          value: {{ quote .Values.kafka.kafka.env.kafkaListenerSecurityProtocolMap }}
+        - name: KAFKA_INTER_BROKER_LISTENER_NAME
+          value: {{ quote .Values.kafka.kafka.env.kafkaInterBrokerListenerName }}
+        - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+          value: {{ quote .Values.kafka.kafka.env.kafkaOffsetsTopicReplicationFactor }}
+        - name: KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS
+          value: {{ quote .Values.kafka.kafka.env.kafkaGroupInitialRebalanceDelayMs }}
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: {{ quote .Values.kafka.kafka.env.kafkaZookeeperConnect }}
+        - name: KAFKA_TRANSACTION_STATE_LOG_MIN_ISR
+          value: {{ quote .Values.kafka.kafka.env.kafkaTransactionStateLogMinIsr }}
+        - name: KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR
+          value: {{ quote .Values.kafka.kafka.env.kafkaTransactionStateLogReplicationFactor
+            }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.kafka.kafka.image.repository }}:{{ .Values.kafka.kafka.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.kafka.kafka.imagePullPolicy }}
+        name: kafka
+        ports:
+        - containerPort: 9092
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/kafka
+          name: kafka-broker-storage
+      enableServiceLinks: false
+      hostname: kafka
+      restartPolicy: Always
+      securityContext:
+        fsGroup: 1000
+      volumes:
+      - name: kafka-broker-storage
+        persistentVolumeClaim:
+          claimName: {{ include "kafka.fullname" . }}-pv-claim
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kafka.fullname" . }}-zookeeper
+  labels:
+    service: zookeeper
+  {{- include "kafka.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.zookeeper.replicas }}
+  selector:
+    matchLabels:
+      service: zookeeper
+    {{- include "kafka.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        service: zookeeper
+      {{- include "kafka.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: {{ quote .Values.zookeeper.zookeeper.env.tz }}
+        - name: ZOOKEEPER_CLIENT_PORT
+          value: {{ quote .Values.zookeeper.zookeeper.env.zookeeperClientPort }}
+        - name: ZOOKEEPER_SERVER_ID
+          value: {{ quote .Values.zookeeper.zookeeper.env.zookeeperServerId }}
+        - name: ZOOKEEPER_TICK_TIME
+          value: {{ quote .Values.zookeeper.zookeeper.env.zookeeperTickTime }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.zookeeper.zookeeper.image.repository }}:{{ .Values.zookeeper.zookeeper.image.tag
+          | default .Chart.AppVersion }}
+        name: zookeeper
+        ports:
+        - containerPort: 2181
+        resources: {}
+      hostname: zookeeper
+      restartPolicy: Always

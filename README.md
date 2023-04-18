@@ -19,7 +19,17 @@
 
 ## Overview
 
-Describe the purpose of your project. Add additional sections as necessary to help collaborators and potential collaborators understand and use your project.
+This repository containers helm charts needed to deploy microservice as related to the NBS application. 
+
+## Charts
+The following helm charts are contained within this repository:
+
+1. [patient-search](charts/patient-search) - deploys the modern NBS container
+2. [elasticsearch](charts/elasticsearch) - deploys elasticsearch opensource project
+3. [nifi](charts/nife) - deploys NiFi opensource project
+4. [hybrid-integration](charts/[hybrid-integration) - deploys nginx container for routing application traffic5. 
+5. [kafka](charts/kafka) - (local or on-prem only) deploys kafka service
+6. [common-asset-server](charts/common-asset-server) - (currrently not in use) deploys resources in a common space to be used by existing microservices
   
 ## Public Domain Standard Notice
 This repository constitutes a work of the United States Government and is not
