@@ -1,0 +1,15 @@
+# Used with official helm chart
+controller:
+  config:
+    compute-full-forwarded-for: "true"
+    use-forwarded-headers: "true"
+    proxy-body-size: "0"
+  ingressClassResource:
+    enabled: true
+    default: false
+  replicaCount: 1
+  admissionWebhooks:
+    enabled: true
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
