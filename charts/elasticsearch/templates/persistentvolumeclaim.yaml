@@ -6,7 +6,7 @@ metadata:
   {{- include "elasticsearch.labels" . | nindent 4 }}
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
       storage: {{ .Values.pvc.esPvClaim.storageRequest | quote }}

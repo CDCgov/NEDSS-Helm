@@ -46,3 +46,10 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+pvc:
+  esPvClaim:
+    storageClass: efs-es
+    storageRequest: 20Gi
+
+efsFileSystemId: ""
