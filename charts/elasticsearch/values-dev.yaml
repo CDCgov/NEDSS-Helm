@@ -46,3 +46,8 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+pvc:
+  esPvClaim:
+    storageClass: elasticsearch-gp-elastic
+    storageRequest: 20Gi
