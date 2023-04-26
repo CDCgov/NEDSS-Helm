@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "main-5"
+  tag: "main-7"
 
 imagePullSecrets: []
 nameOverride: ""

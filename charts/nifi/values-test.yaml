@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/nifi
   pullPolicy: IfNotPresent
-  tag: "main-4"
+  tag: "main-7"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -50,7 +50,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "6Gi"
+    memory: "4Gi"
 
 autoscaling:
   enabled: false
