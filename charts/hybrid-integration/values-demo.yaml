@@ -56,6 +56,12 @@ ingress:
       if ($args ~ ContextAction=GlobalPatient){
             rewrite ^ http://app.demo-cdc-nbs.eqsandbox.com/nbs/redirect/advancedSearch permanent;
           }
+      if ($args ~ ContextAction=ViewFile){
+            rewrite ^ http://app.demo-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile permanent;
+          }
+      if ($args ~ ContextAction=FileSummary){
+            rewrite ^ http://app.demo-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile permanent;
+          }
   tls:
     - secretName: app.demo-cdc-nbs.eqsandbox.com
       hosts:
