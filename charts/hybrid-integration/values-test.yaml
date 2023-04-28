@@ -56,11 +56,11 @@ ingress:
       if ($args ~ ContextAction=GlobalPatient){
             rewrite ^ http://app.test-cdc-nbs.eqsandbox.com/nbs/redirect/advancedSearch permanent;
           }
-      if ($args ~ ContextAction=ViewFile){
-            rewrite ^ http://app.test-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile permanent;
+       if ($args ~ ContextAction=ViewFile){
+            return 307 https://app.test-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile?$args;
           }
       if ($args ~ ContextAction=FileSummary){
-            rewrite ^ http://app.test-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile permanent;
+            return 307 https://app.test-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile?$args;
           }
   tls:
     - secretName: app.test-cdc-nbs.eqsandbox.com
