@@ -5,7 +5,7 @@ env: "ai"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "main-84"
+  tag: "main-93"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -16,7 +16,10 @@ serviceAccount:
   annotations: {}
   name: ""
 
-podAnnotations: {}
+podAnnotations: 
+  prometheus.io/path: "/api/v1/metrics/prometheus"
+  prometheus.io/port: "8080"
+  prometheus.io/scrape: "true"
 
 podSecurityContext: {}
 
