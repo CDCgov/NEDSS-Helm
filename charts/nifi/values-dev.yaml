@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "main-5"
+  tag: "main-7"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -50,7 +50,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "6Gi"
+    memory: "4Gi"
 
 autoscaling:
   enabled: false
