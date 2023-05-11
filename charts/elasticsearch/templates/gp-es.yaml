@@ -1,3 +1,4 @@
+{{- if .Values.pvc.esPvClaim.enabled -}}
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -12,3 +13,4 @@ parameters:
 provisioner: ebs.csi.aws.com
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
+{{- end }}

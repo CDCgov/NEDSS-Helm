@@ -51,5 +51,6 @@ affinity: {}
 
 pvc:
   esPvClaim:
+    enabled: true
     storageClass: elasticsearch-gp-elastic
     storageRequest: 20Gi

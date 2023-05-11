@@ -5,7 +5,9 @@ image:
   pullPolicy: IfNotPresent
   tag: "main-3"
 
-imagePullSecrets: []
+imagePullSecrets: 
+  - name: us-east-1-ecr-registry
+
 nameOverride: ""
 fullnameOverride: ""
 
@@ -35,13 +37,13 @@ ingress:
 
 resources: 
   limits:
-    memory: "12Gi"
+    memory: "2Gi"
 
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 20
 
 nodeSelector: {}
 
@@ -51,6 +53,6 @@ affinity: {}
 
 pvc:
   esPvClaim:
-    enabled: true
+    enabled: false
     storageClass: elasticsearch-gp-elastic
-    storageRequest: 20Gi
+    storageRequest: 5Gi

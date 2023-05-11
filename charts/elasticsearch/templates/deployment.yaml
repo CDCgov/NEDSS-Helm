@@ -39,9 +39,11 @@ spec:
               protocol: TCP
           securityContext:
             runAsUser:  {{ .Values.securityContext.runAsUser }}
+          {{- if .Values.pvc.esPvClaim.enabled -}}
           volumeMounts:
           - mountPath: /usr/share/elasticsearch/data
-            name: es-persistent-storage      
+            name: es-persistent-storage
+          {{- end }}      
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -58,7 +60,9 @@ spec:
       {{- end }}
       securityContext:
         fsGroup: {{ .Values.securityContext.fsGroup }}
+      {{- if .Values.pvc.esPvClaim.enabled -}}
       volumes:
       - name: es-persistent-storage
         persistentVolumeClaim:
           claimName: {{ include "elasticsearch.fullname" . }}-es-pv-claim
+      {{- end }} 

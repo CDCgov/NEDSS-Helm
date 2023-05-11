@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-db
+  labels:
+    app: NBS
+    type: Database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: NBS
+      type: Database
+  template:
+    metadata:
+      labels:
+        app: NBS
+        type: Database
+    spec:
+      containers:
+      - name: test-db
+        image: 
+        ports:
+          - containerPort: 1433
+            protocol: TCP
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-db
+  labels:
+    app: NBS
+    type: Database
+spec:
+  type: ClusterIP
+  ports:
+    - name: tcp-port
+      port: 1433
+      targetPort: 1433    
+  selector:
+    app: NBS
+    type: Database
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-db
+spec:
+  ingressClassName: nginx  
+  rules:
+  - host: test-db.localdev.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: test-db
+            port:
+              number: 1433
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer: {}

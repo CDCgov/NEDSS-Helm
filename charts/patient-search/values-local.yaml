@@ -1,0 +1,72 @@
+replicaCount: 1
+
+env: "dev"
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: "main-84"
+
+imagePullSecrets: 
+  - name: us-east-1-ecr-registry
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+  httpsPort: 443
+
+ingress:
+  enabled: false
+  className: "nginx"  
+  # tls:
+  #   - secretName: ps.localhost
+  #     hosts:
+  #       - ps.localhost
+  hosts:
+    - host: patient-search.localdev.me
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: patient-search
+            port:
+              number: 80
+
+# nbsExternalName: app-classic.dev-cdc-nbs.eqsandbox.com
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: "patient-search.localdev.me"
+
+elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
+
+jdbc:
+  connectionString: ""
+  user: ""
+  password: ""
