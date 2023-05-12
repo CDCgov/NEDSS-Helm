@@ -25,26 +25,27 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
   httpsPort: 443
 
 ingress:
-  enabled: false
+  enabled: true
+  tlsEnabled: false
   className: "nginx"  
   # tls:
-  #   - secretName: ps.localhost
+  #   - secretName: nbs.localdev.me
   #     hosts:
-  #       - ps.localhost
-  hosts:
-    - host: patient-search.localdev.me
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: patient-search
-            port:
-              number: 80
+  #       - nbs.localdev.me
+  # hosts:
+  #   - host: nbs.localdev.me
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: patient-search
+  #           port:
+  #             number: 8080
 
 # nbsExternalName: app-classic.dev-cdc-nbs.eqsandbox.com
 
@@ -62,7 +63,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "patient-search.localdev.me"
+ingressHost: "nbs.localdev.me"
 
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 

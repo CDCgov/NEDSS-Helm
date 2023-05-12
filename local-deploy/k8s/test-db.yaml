@@ -19,7 +19,15 @@ spec:
     spec:
       containers:
       - name: test-db
-        image: 
+        image: ""
+        imagePullPolicy: IfNotPresent 
+        env:
+            - name: ACCEPT_EULA
+              value: "1"
+            - name: SQLCMDPASSWORD
+              value: fake.fake.fake.1234
+            - name: SA_PASSWORD
+              value: fake.fake.fake.1234
         ports:
           - containerPort: 1433
             protocol: TCP
@@ -53,11 +61,11 @@ spec:
   - host: test-db.localdev.me
     http:
       paths:
-      - backend:
+      - backend:          
           service:
             name: test-db
             port:
-              number: 1433
+              number: 1433        
         path: /
         pathType: Prefix
 status:

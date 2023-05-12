@@ -29,6 +29,7 @@ service:
 
 ingress:
   enabled: true
+  tlsEnabled: true
   className: "nginx"  
   tls:
     - secretName: app.ai-cdc-nbs.eqsandbox.com

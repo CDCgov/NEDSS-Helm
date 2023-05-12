@@ -3,7 +3,7 @@
 JDBC_USER=
 JDBC_PASS=
 
-kubectl create -f ./k8s/test-db.yaml
+kubectl apply -f ./k8s/test-db.yaml
 
 sleep 30
 kubectl wait --for=condition=ready pod -l app=NBS
