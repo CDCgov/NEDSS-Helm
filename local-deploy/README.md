@@ -11,7 +11,7 @@ The aim of this README is to provide step-by-step instructions in deploying exis
 3. Access to required AWS ECR 
 4. Access to required AWS S3
 
-## Quick Guide
+## Quick Start Guide
 (WIP and subject to substantial changes)
 This section is intended to be used if you are familiar with docker desktop and kubernetes and want to run a few commands to get your microservice running. 
 **NOTE: Check EACH shell script for additional parameters to be set within.**
@@ -19,7 +19,8 @@ This section is intended to be used if you are familiar with docker desktop and 
 2. Run download_legacy_db.sh
 3. Run install_dependencies.sh
 4. Create the local database from the provided kubernetes manifest [test-db.yaml](./k8s/test-db.yaml) (**ensure the proper image tag is set within**).
-5. Use helm to deploy desired microservice with the reference to the **values-local.yaml** file provided within each helm chart directory.
+5a. Run install_core_microservices.sh
+5b. Use helm to deploy desired microservice with the reference to the **values-local.yaml** file provided within each helm chart directory.
 
 ## Enable Kubernetes in Docker Desktop (https://docs.docker.com/desktop/kubernetes/)
 Once Docker Desktop has been successfully installed follow the steps below to enable Kubernetes.
@@ -46,6 +47,7 @@ Once Docker Desktop has been successfully installed follow the steps below to en
 ## Accessing Applications
 The goal of this deployment is give developers access to resources in their local environments similar to those in a production setting. As such services are intended, where possible, to be accessed via localhost. Below is a list of microservices and how to access them should they be deployed in your local Kubernetes cluster.
 
-1. nifi - in your browser naviaget to https://localhost/nifi/login
+1. NBS application (modern login) - http://nbs.localdev.me
+2. nifi - in your browser naviaget to https://localhost/nifi/login
 
 helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace
