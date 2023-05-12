@@ -18,9 +18,7 @@ podAnnotations: {}
 
 podSecurityContext: {}
 
-securityContext: 
-  runAsUser: 1000
-  fsGroup: 1000
+securityContext: {}
 
 service:
   type: ClusterIP
@@ -35,7 +33,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "12Gi"
+    memory: "6Gi"
 
 autoscaling:
   enabled: false
@@ -48,8 +46,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-pvc:
-  esPvClaim:
-    storageClass: elasticsearch-gp-elastic
-    storageRequest: 20Gi
