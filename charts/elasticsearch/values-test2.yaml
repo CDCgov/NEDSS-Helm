@@ -51,5 +51,7 @@ affinity: {}
 
 pvc:
   esPvClaim:
-    storageClass: elasticsearch-gp-elastic
+    storageClass: efs-es
     storageRequest: 20Gi
+
+efsFileSystemId: ""
