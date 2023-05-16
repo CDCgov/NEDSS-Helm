@@ -38,7 +38,7 @@ spec:
               containerPort: 8080
               protocol: TCP
           command: ['java', '-jar', 'api.jar']
-          args: ['--nbs.elasticsearch.url={{ .Values.elasticSearchHost }}', '--spring.datasource.url={{ .Values.jdbc.connectionString }}', '--spring.datasource.username={{ .Values.jdbc.user }}', '--spring.datasource.password={{ .Values.jdbc.password }}']
+          args: ['--nbs.elasticsearch.url={{ .Values.elasticSearchHost }}', '--spring.datasource.url={{ .Values.jdbc.connectionString }}', '--spring.datasource.username={{ .Values.jdbc.user }}', '--spring.datasource.password={{ .Values.jdbc.password }}', '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}']
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
