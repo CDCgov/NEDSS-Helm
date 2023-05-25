@@ -62,6 +62,38 @@ ingress:
       if ($args ~ ContextAction=FileSummary){
             return 307 https://app.ai-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile?$args;
           }
+      if ($args ~ ContextAction=ReturnToFileEvents){
+            rewrite ^ https://app.ai-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+          }
+      if ($args ~ ContextAction=ReturnToFileSummary){
+            rewrite ^ https://app.ai-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/summary/return?$args permanent;
+          }
+      location ~ /nbs/SelectCondition1.do  {
+        if ($args ~ ContextAction=Cancel){
+            rewrite ^ https://app.ai-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+          }
+      }
+      location ~ /nbs/AddObservationMorb2.do {
+        if ($is_args ~ ''){
+            return 307 https://app.ai-cdc-nbs.eqsandbox.com/nbs/redirect/patient/report/morbidity/submit;
+          }
+        if ($args ~ ContextAction=Cancel){
+            rewrite ^ https://app.ai-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+          }
+      }
+      location ~ /nbs/PageAction.do
+      {
+          set $ab 1;
+          if ($arg_method !~ mergeSubmit) {
+              set $ab 0;
+          }
+          if ($arg_ContextAction !~ Submit) {
+              set $ab 0;
+          }
+          if ($ab) {
+              rewrite ^ https://app.ai-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+          }
+      }
   tls:
     - secretName: app.ai-cdc-nbs.eqsandbox.com
       hosts:
