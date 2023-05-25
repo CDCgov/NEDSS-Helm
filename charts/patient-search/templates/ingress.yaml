@@ -27,6 +27,48 @@ metadata:
             set $proxy_host $proxy_upstream_name;
             set $service_name "{{ $fullName }}";
           }
+      if ($args ~ ContextAction=ReturnToFileEvents){
+            set $proxy_upstream_name "default-patient-search-8080";
+            set $proxy_host $proxy_upstream_name;
+            set $service_name "patient-search";
+          }
+      if ($args ~ ContextAction=ReturnToFileSummary){
+            set $proxy_upstream_name "default-patient-search-8080";
+            set $proxy_host $proxy_upstream_name;
+            set $service_name "patient-search";
+          }
+      location ~ /nbs/SelectCondition1.do  {
+        set $proxy_upstream_name "default-patient-search-8080";
+            set $proxy_host $proxy_upstream_name;
+            set $service_name "patient-search";
+      }
+      location ~ /nbs/AddObservationMorb2.do {
+        if ($is_args ~ ''){
+            set $proxy_upstream_name "default-patient-search-8080";
+            set $proxy_host $proxy_upstream_name;
+            set $service_name "patient-search";
+          }
+        if ($args ~ ContextAction=Cancel){
+            set $proxy_upstream_name "default-patient-search-8080";
+            set $proxy_host $proxy_upstream_name;
+            set $service_name "patient-search";
+          }
+      }
+      location ~ /nbs/PageAction.do
+      {
+          set $ab 1;
+          if ($arg_method !~ mergeSubmit) {
+              set $ab 0;
+          }
+          if ($arg_ContextAction !~ Submit) {
+              set $ab 0;
+          }
+          if ($ab) {
+            set $proxy_upstream_name "default-patient-search-8080";
+            set $proxy_host $proxy_upstream_name;
+            set $service_name "patient-search";
+          }
+      }
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
@@ -60,6 +102,34 @@ spec:
                   number: {{ $svcPort }}
           - path: "/nbs/redirect/patientProfile"
             pathType: Exact
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          - path: "/nbs/redirect/patientProfile/events/return"
+            pathType: Exact
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          - path: "/nbs/redirect/patientProfile/events/summary"
+            pathType: Exact
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          - path: "/nbs/redirect/patient/report/morbidity/submit"
+            pathType: Exact
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          - path: "/nbs/api(/|$)(.*)"
+            pathType: Prefix
             backend:
               service:
                 name: {{ $fullName }}
