@@ -1,0 +1,22 @@
+kafka:
+  enabled: true
+  replicas: 3
+  externalAccess:
+    enabled: true
+    type: nodeport
+    nodePort: 31090
+  storage:
+    size: 100Gi
+    storageClass: aws-ebs
+
+zookeeper:
+  enabled: true
+  replicas: 3
+  externalAccess:
+    enabled: true
+    type: nodeport
+    nodePort: 31091
+  storage:
+    size: 50Gi
+    storageClass: aws-ebs
+

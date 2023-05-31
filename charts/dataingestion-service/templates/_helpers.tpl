@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "patient-search.name" -}}
+{{- define "dataingestion-service.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "patient-search.fullname" -}}
+{{- define "dataingestion-service.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,18 +26,18 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "patient-search.chart" -}}
+{{- define "dataingestion-service.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "patient-search.labels" -}}
+{{- define "dataingestion-service.labels" -}}
 app: NBS
 type: App
-helm.sh/chart: {{ include "patient-search.chart" . }}
-{{ include "patient-search.selectorLabels" . }}
+helm.sh/chart: {{ include "dataingestion-service.chart" . }}
+{{ include "dataingestion-service.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -47,19 +47,19 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "patient-search.selectorLabels" -}}
+{{- define "dataingestion-service.selectorLabels" -}}
 app: NBS
 type: App
-app.kubernetes.io/name: {{ include "patient-search.name" . }}
+app.kubernetes.io/name: {{ include "dataingestion-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "patient-search.serviceAccountName" -}}
+{{- define "dataingestion-service.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "patient-search.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "dataingestion-service.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
