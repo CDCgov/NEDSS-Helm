@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.19.0-SNAPSHOT.fe8070d
+  tag: 1.19.0-SNAPSHOT.6866589
 
 imagePullSecrets: []
 nameOverride: ""
