@@ -81,19 +81,27 @@ ingress:
             rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
           }
       }
-      location ~ /nbs/PageAction.do
-      {
-          set $ab 1;
-          if ($arg_method !~ mergeSubmit) {
-              set $ab 0;
+      location ~ /nbs/AddObservationLab2.do  {
+        if ($args ~ ContextAction=Submit){
+            return 307 https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patient/report/lab/submit;
           }
-          if ($arg_ContextAction !~ Submit) {
-              set $ab 0;
-          }
-          if ($ab) {
-              rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+        if ($args ~ ContextAction=Cancel){
+            rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
           }
       }
+      #location ~ /nbs/PageAction.do
+      #{
+      #    set $ab X;
+      #    if ($args ~ method=mergeSubmit) {
+      #        set $ab A;
+      #    }
+      #    if ($args ~ ContextAction=Submit) {
+      #        set $ab "${ab}B";
+      #    }
+      #    if ($ab = AB) {
+      #        rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+      #    }
+      #}
   tls:
     - secretName: app.dev-cdc-nbs.eqsandbox.com
       hosts:
