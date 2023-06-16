@@ -43,32 +43,30 @@ metadata:
             set $service_name "patient-search";
       }
       location ~ /nbs/AddObservationMorb2.do {
-        if ($is_args ~ ''){
             set $proxy_upstream_name "default-patient-search-8080";
             set $proxy_host $proxy_upstream_name;
             set $service_name "patient-search";
-          }
-        if ($args ~ ContextAction=Cancel){
-            set $proxy_upstream_name "default-patient-search-8080";
-            set $proxy_host $proxy_upstream_name;
-            set $service_name "patient-search";
-          }
       }
-      location ~ /nbs/PageAction.do
-      {
-          set $ab 1;
-          if ($arg_method !~ mergeSubmit) {
-              set $ab 0;
-          }
-          if ($arg_ContextAction !~ Submit) {
-              set $ab 0;
-          }
-          if ($ab) {
+      location ~ /nbs/AddObservationLab2.do {
             set $proxy_upstream_name "default-patient-search-8080";
             set $proxy_host $proxy_upstream_name;
             set $service_name "patient-search";
-          }
       }
+      #location ~ /nbs/PageAction.do
+      #{
+      #    set $ab X;
+      #    if ($args ~ method=mergeSubmit) {
+      #        set $ab A;
+      #    }
+      #    if ($args ~ ContextAction=Submit) {
+      #        set $ab "${ab}B";
+      #    }
+      #    if ($ab = AB) {
+      #      set $proxy_upstream_name "default-patient-search-8080";
+      #      set $proxy_host $proxy_upstream_name;
+      #      set $service_name "patient-search";
+      #    }
+      #}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
@@ -122,6 +120,13 @@ spec:
                 port:
                   number: {{ $svcPort }}
           - path: "/nbs/redirect/patient/report/morbidity/submit"
+            pathType: Exact
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          - path: "/nbs/redirect/patient/report/lab/submit"
             pathType: Exact
             backend:
               service:
