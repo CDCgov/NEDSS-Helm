@@ -52,6 +52,11 @@ metadata:
             set $proxy_host $proxy_upstream_name;
             set $service_name "patient-search";
       }
+      if ($args ~ method=mergeSubmit&ContextAction=Submit) {
+            set $proxy_upstream_name "default-patient-search-8080";
+            set $proxy_host $proxy_upstream_name;
+            set $service_name "patient-search";
+      }
       #location ~ /nbs/PageAction.do
       #{
       #    set $ab X;
