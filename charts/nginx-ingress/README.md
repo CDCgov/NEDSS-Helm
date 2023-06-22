@@ -8,4 +8,4 @@ Default values for nginx-ingress charts.
 
 | Key | Type | Default | Description |
 | -------------- | -------------- | -------------- | -------------- |
-| controller | string |  |  |
+| controller | string |  | Ingress controller configuration |
