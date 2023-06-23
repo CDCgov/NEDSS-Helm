@@ -89,6 +89,9 @@ ingress:
             rewrite ^ https://app.demo-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
           }
       }
+      if ($args ~ method=mergeSubmit&ContextAction=Submit){
+            rewrite ^ https://app.demo-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+          }
       #location ~ /nbs/PageAction.do
       #{
       #    set $ab X;
