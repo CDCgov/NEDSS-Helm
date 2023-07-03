@@ -18,7 +18,7 @@ podAnnotations: {}
 
 podSecurityContext: {}
 
-securityContext: 
+securityContext:
   runAsUser: 1000
   fsGroup: 1000
 
@@ -51,5 +51,7 @@ affinity: {}
 
 pvc:
   esPvClaim:
-    storageClass: elasticsearch-gp-elastic
+    storageClass: efs-es
     storageRequest: 20Gi
+
+efsFileSystemId: ""
