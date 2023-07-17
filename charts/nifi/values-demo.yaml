@@ -51,8 +51,10 @@ ingress:
 resources:
   requests:
     memory: "6Gi"
+    ephemeral-storage: "10Gi"
   limits:
     memory: "12Gi"
+    ephemeral-storage: "30Gi"
 
 autoscaling:
   enabled: false
