@@ -89,6 +89,11 @@ ingress:
             rewrite ^ https://app.test2-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
           }
       }
+      location ~ /login {
+        if ($is_args ~ ''){
+            return 307 https://app.test2-cdc-nbs.eqsandbox.com/nbs/login;
+          }
+      }
       if ($args ~ method=mergeSubmit&ContextAction=Submit){
             rewrite ^ https://app.test2-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
           }
