@@ -68,11 +68,11 @@ ingress:
       if ($args ~ ContextAction=ReturnToFileSummary){
             rewrite ^ https://app.test-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/summary/return?$args permanent;
           }
-      location ~ /nbs/SelectCondition1.do  {
-        if ($args ~ ContextAction=Cancel){
-            rewrite ^ https://app.test-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
-          }
-      }
+      #location ~ /nbs/SelectCondition1.do  {
+      #  if ($args ~ ContextAction=Cancel){
+      #      rewrite ^ https://app.test-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+      #    }
+      #}
       location ~ /nbs/AddObservationMorb2.do {
         if ($is_args ~ ''){
             return 307 https://app.test-cdc-nbs.eqsandbox.com/nbs/redirect/patient/report/morbidity/submit;
