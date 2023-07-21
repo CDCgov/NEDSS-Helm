@@ -129,7 +129,7 @@ ingress:
             port:
               number: 443
 
-nbsExternalName: app.demo-classic.nbspreview.com
+nbsExternalName: app-classic.demo.nbspreview.com
 
 
 resources: {}
