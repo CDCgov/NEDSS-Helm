@@ -31,11 +31,12 @@ ingress:
   enabled: true
   className: "nginx"  
   tls:
-    - secretName: app.ai-cdc-nbs.eqsandbox.com
+    - secretName: app.datateam-cdc-nbs.eqsandbox.com
       hosts:
-        - app.ai-cdc-nbs.eqsandbox.com
+        - app.datateam-cdc-nbs.eqsandbox.com
 
-nbsExternalName: app-classic.ai-cdc-nbs.eqsandbox.com
+nbsExternalName: app-classic.datateam-cdc-nbs.eqsandbox.com
+
 
 resources: {}
 
@@ -51,7 +52,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.ai-cdc-nbs.eqsandbox.com"
+ingressHost: "app.datateam-cdc-nbs.eqsandbox.com"
 
 jdbc:
   connectionString: ""

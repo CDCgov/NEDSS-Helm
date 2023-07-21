@@ -5,7 +5,7 @@ env: "dev"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 0.0.1-SNAPSHOT
+  tag: test_local
 
 imagePullSecrets: []
 nameOverride: ""
@@ -31,11 +31,9 @@ ingress:
   enabled: true
   className: "nginx"  
   tls:
-    - secretName: app.dev-cdc-nbs.eqsandbox.com
+    - secretName: dataingestion.datateam-cdc-nbs.eqsandbox.com
       hosts:
-        - app.dev-cdc-nbs.eqsandbox.com
-
-nbsExternalName: app-classic.dev-cdc-nbs.eqsandbox.com
+        - dataingestion.datateam-cdc-nbs.eqsandbox.com
 
 resources: {}
 
@@ -51,9 +49,20 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.dev-cdc-nbs.eqsandbox.com"
+ingressHost: "dataingestion.datateam-cdc-nbs.eqsandbox.com"
 
 jdbc:
-  connectionString: ""
-  user: ""
+  dbserver: ""
+  dbname: ""
+  username: ""
   password: ""
+
+  nbs:
+    dbserver: ""
+    dbname: ""
+    username: ""
+    password: ""
+
+
+kafka:
+  cluster: ""

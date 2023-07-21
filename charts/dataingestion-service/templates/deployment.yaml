@@ -37,8 +37,25 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          command: ['java', '-jar', 'api.jar']
-          args: ['--spring.datasource.url={{ .Values.jdbc.url }}', '--spring.datasource.username={{ .Values.jdbc.username }}', '--spring.datasource.password={{ .Values.jdbc.password }}','--spring.datasource.nbs.url={{ .Values.jdbc.nbs.url }}', '--spring.datasource.nbs.username={{ .Values.jdbc.nbs.username }}', '--spring.datasource.nbs.password={{ .Values.jdbc.nbs.password }}', '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}']
+          env:
+            - name: DI_DBSERVER
+              value: {{ .Values.jdbc.dbserver }}
+            - name: DI_DBNAME
+              value: {{ .Values.jdbc.dbname }}
+            - name: DI_USERNAME
+              value: {{ .Values.jdbc.username }}
+            - name: DI_PASSWORD
+              value: {{ .Values.jdbc.password }}
+            - name: DI_NBS_DBSERVER
+              value: {{ .Values.jdbc.nbs.dbserver }}
+            - name: DI_NBS_DBNAME
+              value: {{ .Values.jdbc.nbs.dbname }}
+            - name: DI_NBS_DBUSER
+              value: {{ .Values.jdbc.nbs.username }}
+            - name: DI_NBS_DBPASSWORD
+              value: {{ .Values.jdbc.nbs.password }}
+            - name: BOOTSTRAP_SERVERS
+              value: {{ .Values.kafka.cluster }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
