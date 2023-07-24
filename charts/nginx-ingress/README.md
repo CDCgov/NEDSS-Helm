@@ -1,6 +1,6 @@
 # Overview
 
-Contained are the assests needed for nginx-ingress.
+Contained are the assets needed for nginx-ingress.
 
 ## Values
 
