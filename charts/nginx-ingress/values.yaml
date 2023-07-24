@@ -9,7 +9,11 @@ controller:
     default: false
   replicaCount: 1
   admissionWebhooks:
-    enabled: true
+    enabled: false
+  annotations:
+    traffic.sidecar.istio.io/includeInboundPorts: ""
+    traffic.sidecar.istio.io/excludeInboundPorts: 80,443,8443,9200
+    sidecar.istio.io/inject: 'true'
   service:
     annotations:
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
