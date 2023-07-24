@@ -56,6 +56,9 @@ spec:
               value: {{ .Values.jdbc.nbs.password }}
             - name: BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.cluster }}
+          volumeMounts:
+          - mountPath: /usr/share/dataingestion/data
+            name: di-persistent-storage     
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -70,3 +73,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - name: di-persistent-storage
+        persistentVolumeClaim:
+          claimName: {{ include "dataingestion-service.fullname" . }}-di-pvc
