@@ -6,6 +6,7 @@ metadata:
   {{- include "dataingestion-service.labels" . | nindent 4 }}
 spec:
   accessModes:
+  # read and write to single node
   - ReadWriteOnce
   resources:
     requests:
