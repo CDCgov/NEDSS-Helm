@@ -33,7 +33,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "12Gi"
+    memory: "6Gi"
 
 autoscaling:
   enabled: false
