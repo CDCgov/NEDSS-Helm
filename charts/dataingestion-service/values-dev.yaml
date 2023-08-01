@@ -3,9 +3,9 @@ replicaCount: 1
 env: "dev"
 
 image:
-  repository: ""
+  repository: dnguyen1856/di_local_multi
   pullPolicy: IfNotPresent
-  tag: test_local
+  tag: test_3
 
 imagePullSecrets: []
 nameOverride: ""
@@ -66,6 +66,9 @@ jdbc:
 
 kafka:
   cluster: ""
+
+log:
+  path: "/usr/share/dataingestion/data"
 
 pvc:
   diPvClaim:

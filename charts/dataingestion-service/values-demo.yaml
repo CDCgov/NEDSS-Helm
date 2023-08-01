@@ -58,6 +58,8 @@ jdbc:
   user: ""
   password: ""
 
+log:
+  path: ""
 
 pvc:
   diPvClaim:

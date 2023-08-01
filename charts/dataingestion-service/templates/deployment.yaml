@@ -56,6 +56,8 @@ spec:
               value: {{ .Values.jdbc.nbs.password }}
             - name: BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.cluster }}
+            - name: DI_LOG_PATH
+              value: {{ .Values.log.path }}
           volumeMounts:
           - mountPath: /usr/share/dataingestion/data
             name: di-persistent-storage     

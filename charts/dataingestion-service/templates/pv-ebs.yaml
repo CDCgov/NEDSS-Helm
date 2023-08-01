@@ -11,4 +11,4 @@ parameters:
   type: gp2
 provisioner: ebs.csi.aws.com
 reclaimPolicy: Delete
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
