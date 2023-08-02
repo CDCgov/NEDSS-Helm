@@ -2,7 +2,7 @@
 
 **Template for clearance: This project serves as a template to aid projects in starting up and moving through clearance procedures. To start, create a new repository and implement the required [open practices](open_practices.md), train on and agree to adhere to the organization's [rules of behavior](rules_of_behavior.md), and [send a request through the create repo form](https://forms.office.com/Pages/ResponsePage.aspx?id=aQjnnNtg_USr6NJ2cHf8j44WSiOI6uNOvdWse4I-C2NUNk43NzMwODJTRzA4NFpCUk1RRU83RTFNVi4u) using language from this template as a Guide.**
 
-**General disclaimer** This repository was created for use by CDC programs to collaborate on public health related projects in support of the [CDC mission](https://www.cdc.gov/about/organization/mission.htm).  GitHub is not hosted by the CDC, but is a third party website used by CDC and its partners to share information and collaborate on software. CDC use of GitHub does not imply an endorsement of any one particular service, product, or enterprise. 
+**General disclaimer** This repository was created for use by CDC programs to collaborate on public health related projects in support of the [CDC mission](https://www.cdc.gov/about/organization/mission.htm).  GitHub is not hosted by the CDC, but is a third party website used by CDC and its partners to share information and collaborate on software. CDC use of GitHub does not imply an endorsement of any one particular service, product, or enterprise.
 
 ## Access Request, Repo Creation Request
 
@@ -19,19 +19,23 @@
 
 ## Overview
 
-This repository containers helm charts needed to deploy microservice as related to the NBS application. 
+This repository contains helm charts needed to deploy microservice as related to the NBS application.
 
 ## Charts
+
 The following helm charts are contained within this repository:
 
 1. [patient-search](charts/patient-search) - deploys the modern NBS container
 2. [elasticsearch](charts/elasticsearch) - deploys elasticsearch opensource project
-3. [nifi](charts/nife) - deploys NiFi opensource project
-4. [hybrid-integration](charts/[hybrid-integration) - deploys nginx container for routing application traffic5. 
-5. [kafka](charts/kafka) - (local or on-prem only) deploys kafka service
-6. [common-asset-server](charts/common-asset-server) - (currrently not in use) deploys resources in a common space to be used by existing microservices
+3. [elasticsearch-efs](charts/elasticsearch-efs) - deploys eleasticsearch efs service
+4. [nifi](charts/nife) - deploys NiFi opensource project
+5. [nginx-ingress](charts/nginx-ingress) - deploys nginx-ingress controller opensource project
+6. [hybrid-integration](charts/hybrid-integration) - deploys nginx container for routing application traffic5
+7. [kafka](charts/kafka) - (local or on-prem only) deploys kafka service
+8. [common-asset-server](charts/common-asset-server) - (currrently not in use) deploys resources in a common space to be used by existing microservices
   
 ## Public Domain Standard Notice
+
 This repository constitutes a work of the United States Government and is not
 subject to domestic copyright protection under 17 USC § 105. This repository is in
 the public domain within the United States, and copyright and related rights in
@@ -41,6 +45,7 @@ submitting a pull request you are agreeing to comply with this waiver of
 copyright interest.
 
 ## License Standard Notice
+
 The repository utilizes code licensed under the terms of the Apache Software
 License and therefore is licensed under ASL v2 or later.
 
@@ -53,11 +58,12 @@ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE. See the Apache Software License for more details.
 
 You should have received a copy of the Apache Software License along with this
-program. If not, see http://www.apache.org/licenses/LICENSE-2.0.html
+program. If not, see (<http://www.apache.org/licenses/LICENSE-2.0.html>)
 
 The source code forked from other open source projects will inherit its license.
 
 ## Privacy Standard Notice
+
 This repository contains only non-sensitive, publicly available data and
 information. All material and community participation is covered by the
 [Disclaimer](https://github.com/CDCgov/template/blob/master/DISCLAIMER.md)
@@ -65,6 +71,7 @@ and [Code of Conduct](https://github.com/CDCgov/template/blob/master/code-of-con
 For more information about CDC's privacy policy, please visit [http://www.cdc.gov/other/privacy.html](https://www.cdc.gov/other/privacy.html).
 
 ## Contributing Standard Notice
+
 Anyone is encouraged to contribute to the repository by [forking](https://help.github.com/articles/fork-a-repo)
 and submitting a pull request. (If you are new to GitHub, you might start with a
 [basic tutorial](https://help.github.com/articles/set-up-git).) By contributing
@@ -77,11 +84,13 @@ All comments, messages, pull requests, and other submissions received through
 CDC including this GitHub page may be subject to applicable federal law, including but not limited to the Federal Records Act, and may be archived. Learn more at [http://www.cdc.gov/other/privacy.html](http://www.cdc.gov/other/privacy.html).
 
 ## Records Management Standard Notice
+
 This repository is not a source of government records, but is a copy to increase
 collaboration and collaborative potential. All government records will be
 published through the [CDC web site](http://www.cdc.gov).
 
 ## Additional Standard Notices
+
 Please refer to [CDC's Template Repository](https://github.com/CDCgov/template)
 for more information about [contributing to this repository](https://github.com/CDCgov/template/blob/master/CONTRIBUTING.md),
 [public domain notices and disclaimers](https://github.com/CDCgov/template/blob/master/DISCLAIMER.md),

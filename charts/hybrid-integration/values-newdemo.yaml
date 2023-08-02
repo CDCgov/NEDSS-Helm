@@ -51,46 +51,46 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       if ($args ~ method=patientSearchSubmit){
-            return 307 https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/simpleSearch;
+            return 307 https://app.demo.nbspreview.com/nbs/redirect/simpleSearch;
           }
       if ($args ~ ContextAction=GlobalPatient){
-            rewrite ^ http://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/advancedSearch permanent;
+            rewrite ^ http://app.demo.nbspreview.com/nbs/redirect/advancedSearch permanent;
           }
       if ($args ~ ContextAction=ViewFile){
-            return 307 https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile?$args;
+            return 307 https://app.demo.nbspreview.com/nbs/redirect/patientProfile?$args;
           }
       if ($args ~ ContextAction=FileSummary){
-            return 307 https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile?$args;
+            return 307 https://app.demo.nbspreview.com/nbs/redirect/patientProfile?$args;
           }
       if ($args ~ ContextAction=ReturnToFileEvents){
-            rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+            rewrite ^ https:/app.demo.nbspreview.com/nbs/redirect/patientProfile/events/return?$args permanent;
           }
       if ($args ~ ContextAction=ReturnToFileSummary){
-            rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/summary/return?$args permanent;
+            rewrite ^ https://app.demo.nbspreview.com/nbs/redirect/patientProfile/summary/return?$args permanent;
           }
       #location ~ /nbs/SelectCondition1.do  {
       #  if ($args ~ ContextAction=Cancel){
-      #      rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+      #      rewrite ^ https://app.demo.nbspreview.com/nbs/redirect/patientProfile/events/return?$args permanent;
       #    }
       #}
       location ~ /nbs/AddObservationMorb2.do {
         if ($is_args ~ ''){
-            return 307 https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patient/report/morbidity/submit;
+            return 307 https://app.demo.nbspreview.com/nbs/redirect/patient/report/morbidity/submit;
           }
         if ($args ~ ContextAction=Cancel){
-            rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+            rewrite ^ https://app.demo.nbspreview.com/nbs/redirect/patientProfile/events/return?$args permanent;
           }
       }
       location ~ /nbs/AddObservationLab2.do  {
         if ($args ~ ContextAction=Submit){
-            return 307 https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patient/report/lab/submit;
+            return 307 https://app.demo.nbspreview.com/nbs/redirect/patient/report/lab/submit;
           }
         if ($args ~ ContextAction=Cancel){
-            rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+            rewrite ^ https://app.demo.nbspreview.com/nbs/redirect/patientProfile/events/return?$args permanent;
           }
       }
       if ($args ~ method=mergeSubmit&ContextAction=Submit){
-            rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+            rewrite ^ https://app.demo.nbspreview.com/nbs/redirect/patientProfile/events/return?$args permanent;
           }
       #location ~ /nbs/PageAction.do
       #{
@@ -102,15 +102,15 @@ ingress:
       #        set $ab "${ab}B";
       #    }
       #    if ($ab = AB) {
-      #        rewrite ^ https://app.dev-cdc-nbs.eqsandbox.com/nbs/redirect/patientProfile/events/return?$args permanent;
+      #        rewrite ^ https://app.demo.nbspreview.com/nbs/redirect/patientProfile/events/return?$args permanent;
       #    }
       #}
   tls:
-    - secretName: app.dev-cdc-nbs.eqsandbox.com
+    - secretName: app.demo.nbspreview.com
       hosts:
-        - app.dev-cdc-nbs.eqsandbox.com
+        - app.demo.nbspreview.com
   hosts:
-    - host: elastic.dev-cdc-nbs.eqsandbox.com
+    - host: elastic.demo.nbspreview.com
       paths:
         - path: "/"
           pathType: Prefix
@@ -119,7 +119,7 @@ ingress:
               name: elasticsearch
               port:
                 number: 9200
-    - host: app.dev-cdc-nbs.eqsandbox.com
+    - host: app.demo.nbspreview.com
       paths:      
       - path: /nbs(/|$)(.*)
         pathType: Prefix
@@ -129,7 +129,7 @@ ingress:
             port:
               number: 443
 
-nbsExternalName: app-classic.dev-cdc-nbs.eqsandbox.com
+nbsExternalName: app-classic.demo.nbspreview.com
 
 
 resources: {}
