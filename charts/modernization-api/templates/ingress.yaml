@@ -24,7 +24,7 @@ spec:
                 port:
                   number: {{ $svcPort }}
           - path: "/nbs/redirect/(/|$)(.*)"
-            pathType: Exact
+            pathType: Prefix
             backend:
               service:
                 name: {{ $fullName }}
@@ -45,7 +45,7 @@ spec:
                 port:
                   number: {{ .Values.service.httpsPort }}
           - path: "/nbs(/|$)(.*)"
-            pathType: Exact
+            pathType: Prefix
             backend:
               service:
                 name: nbs-gateway
