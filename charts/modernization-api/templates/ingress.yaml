@@ -1,0 +1,53 @@
+{{- $fullName := include "modernization-api.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-ingress-resource
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  tls:
+    - secretName: {{ .Values.ingressHost }}
+      hosts:
+        - {{ .Values.ingressHost }}
+  rules:
+    - host: {{ .Values.ingressHost }}
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          - path: "/nbs/redirect/(/|$)(.*)"
+            pathType: Exact
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          - path: "/nbs/api(/|$)(.*)"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          - path: /images/nedssLogo.jpg
+            pathType: Exact
+            backend:
+              service:
+                name: nbs-legacy
+                port:
+                  number: {{ .Values.service.httpsPort }}
+          - path: "/nbs(/|$)(.*)"
+            pathType: Exact
+            backend:
+              service:
+                name: nbs-gateway
+                port:
+                  number: {{ .Values.service.httpsPort }}
