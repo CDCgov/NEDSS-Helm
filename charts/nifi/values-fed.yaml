@@ -34,7 +34,7 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi.fed.nbspreview.com"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
   tls:
-    - secretName: nifi.demo.nbspreview.com
+    - secretName: nifi.fed.nbspreview.com
       hosts:
         - nifi.fed.nbspreview.com
   hosts:
