@@ -1,12 +1,12 @@
 deployment:
   replicas: 1
 
-env: "test"
+env: "newdemo"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.dd2e600
+  tag: 1.0.1-SNAPSHOT.4683cd1
 
 gatewayService:
   ports:
@@ -21,8 +21,8 @@ kubernetesClusterDomain: cluster.local
 
 resources: {}
 
-nbsExternalName: app-classic.test-cdc-nbs.eqsandbox.com
+nbsExternalName: app-classic.fed.nbspreview.com
 
-ingressHost: "app.test-cdc-nbs.eqsandbox.com"
+ingressHost: "app.fed.nbspreview.com"
 
 modernizationApiHost: "http://modernization-api.default.svc.cluster.local:8080"

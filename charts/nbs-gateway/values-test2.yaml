@@ -21,8 +21,8 @@ kubernetesClusterDomain: cluster.local
 
 resources: {}
 
-nbsExternalName: app-classic.dev-cdc-nbs.eqsandbox.com
+nbsExternalName: app-classic.test2-cdc-nbs.eqsandbox.com
 
-ingressHost: "app.dev-cdc-nbs.eqsandbox.com"
+ingressHost: "app.test2-cdc-nbs.eqsandbox.com"
 
 modernizationApiHost: "http://modernization-api.default.svc.cluster.local:8080"
