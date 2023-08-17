@@ -19,9 +19,11 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        args: ['--nbs.gateway.defaults.protocol=https','--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}','--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}','--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}']
+        args: ['--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}','--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}','--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}']
         command: ['java', '-jar', 'api.jar']
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        ports:
+        - containerPort: 8000
         resources:
             {{- toYaml .Values.resources | nindent 12 }}
      
