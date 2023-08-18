@@ -41,13 +41,13 @@ spec:
             pathType: Exact
             backend:
               service:
-                name: nbs-gateway
+                name: nbs-gateway-svc
                 port:
                   number: {{ .Values.service.gatewayPort }}
           - path: "/nbs/"
             pathType: Prefix
             backend:
               service:
-                name: nbs-gateway
+                name: nbs-gateway-svc
                 port:
                   number: {{ .Values.service.gatewayPort }}
