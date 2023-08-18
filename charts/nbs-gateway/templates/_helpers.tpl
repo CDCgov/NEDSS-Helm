@@ -46,8 +46,6 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "nbs-gateway.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "nbs-gateway.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
