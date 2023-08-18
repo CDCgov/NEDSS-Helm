@@ -25,4 +25,4 @@ nbsExternalName: app-classic.fed.nbspreview.com
 
 ingressHost: "app.fed.nbspreview.com"
 
-modernizationApiHost: "http://modernization-api.default.svc.cluster.local:8080"
+modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
