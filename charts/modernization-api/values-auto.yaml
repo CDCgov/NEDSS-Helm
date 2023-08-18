@@ -1,6 +1,7 @@
 replicaCount: 1
 
 env: "ai"
+modern_url: app.ai-cdc-nbs.eqsandbox.com
 
 image:
   repository: ""
@@ -32,11 +33,19 @@ ingress:
   enabled: true
   className: "nginx"  
   tls:
-    - secretName: app.ai-cdc-nbs.eqsandbox.com
+    - secretName: {{ tpl .Values.modern_url . }}
       hosts:
-        - app.ai-cdc-nbs.eqsandbox.com
+        - {{ tpl .Values.modern_url . }}
 
 nbsExternalName: app-classic.ai-cdc-nbs.eqsandbox.com
+
+# determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
+istioGatewayIngress:
+  enabled: true
+  host: {{ tpl .Values.modern_url . }}
+  gatewayNamespace: "istio-ingress"
+  certificateName: ""
+  certificateIssuerName: "istio-cdc"
 
 resources: {}
 
