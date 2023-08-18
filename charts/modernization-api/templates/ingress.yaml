@@ -43,11 +43,11 @@ spec:
               service:
                 name: nbs-gateway
                 port:
-                  number: {{ .Values.service.httpsPort }}
+                  number: {{ .Values.service.gatewayPort }}
           - path: "/nbs/"
             pathType: Prefix
             backend:
               service:
                 name: nbs-gateway
                 port:
-                  number: {{ .Values.service.httpsPort }}
+                  number: {{ .Values.service.gatewayPort }}

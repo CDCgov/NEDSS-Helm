@@ -27,6 +27,7 @@ service:
   type: ClusterIP
   port: 8080
   httpsPort: 443
+  gatewayPort: 8000
 
 ingress:
   enabled: true
