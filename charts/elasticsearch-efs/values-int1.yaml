@@ -50,6 +50,6 @@ affinity: {}
 pvc:
   esPvClaim:
     storageClass: efs-es
-    storageRequest: 20Gi
+    storageRequest: 100Gi
 
 efsFileSystemId: ""
