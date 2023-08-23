@@ -53,8 +53,8 @@ resources:
     memory: "6Gi"
 
 jvmheap:
-  init: "6g"
-  max: "6g"
+  init: "4g"
+  max: "4g"
 
 
 autoscaling:
