@@ -45,7 +45,7 @@ istioGatewayIngress:
   host: app.demo-cdc-nbs.eqsandbox.com
   gatewayNamespace: "istio-ingress"
   certificateName: ""
-  certificateIssuerName: "istio-cdc"
+  certificateIssuerName: "letsencrypt-production"
 
 resources: {}
 

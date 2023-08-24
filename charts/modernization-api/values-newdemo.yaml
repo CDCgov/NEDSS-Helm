@@ -45,7 +45,7 @@ istioGatewayIngress:
   host: app.demo.nbspreview.com
   gatewayNamespace: "istio-ingress"
   certificateName: ""
-  certificateIssuerName: "istio-cdc"
+  certificateIssuerName: "letsencrypt-production"
 
 resources: {}
 
