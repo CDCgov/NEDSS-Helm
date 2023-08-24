@@ -28,6 +28,7 @@ service:
   httpsPort: 443
   gatewayPort: 8000
 
+# nginx-ingress
 ingress:
   enabled: true
   className: "nginx"  
@@ -37,6 +38,14 @@ ingress:
         - app.demo.nbspreview.com
 
 nbsExternalName: app-classic.demo.nbspreview.com
+
+# determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
+istioGatewayIngress:
+  enabled: false
+  host: app.demo.nbspreview.com
+  gatewayNamespace: "istio-ingress"
+  certificateName: ""
+  certificateIssuerName: "istio-cdc"
 
 resources: {}
 
