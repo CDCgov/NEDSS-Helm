@@ -1,0 +1,15 @@
+{{- if .Values.istioGatewayIngress.enabled -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "modernization-api.fullname" . }}
+  namespace: {{ .Values.istioGatewayIngress.gatewayNamespace }}
+spec:
+  issuerRef:
+    kind: ClusterIssuer
+    name: {{ .Values.istioGatewayIngress.certificateIssuerName }}
+  secretName: {{ include "modernization-api.fullname" . }}
+  commonName: {{ .Values.istioGatewayIngress.host }}
+  dnsNames:
+  - {{ .Values.istioGatewayIngress.host }}
+{{- end }}

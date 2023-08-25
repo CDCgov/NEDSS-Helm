@@ -64,3 +64,27 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create the name of the cert-manager credential to use
+*/}}
+{{- define "modernization-api.certificateSecretName" -}}
+{{- if .Values.istioGatewayIngress.enabled }}
+{{- default (include "modernization-api.fullname" .) .Values.istioGatewayIngress.certificateSecretName }}
+{{- else }}
+{{- default "default" .Values.ingress.certificateSecretName }}
+{{- end }}
+{{- end }}
+
+{{/*
+Create the name of the istio-ingress-gateway to use
+*/}}
+{{- define "modernization-api.istioIngressGatewayName" -}}
+{{- if .Values.istioGatewayIngress.enabled }}
+{{- default (include "modernization-api.fullname" .) .Values.istioGatewayIngress.istioIngressGatewayName }}
+{{- else }}
+{{- default "default" .Values.ingress.istioIngressGatewayName }}
+{{- end }}
+{{- end }}
+
+

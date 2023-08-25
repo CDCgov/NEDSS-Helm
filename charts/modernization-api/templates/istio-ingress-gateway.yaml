@@ -1,0 +1,27 @@
+{{- if .Values.istioGatewayIngress.enabled -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: {{ include "modernization-api.fullname" . }}
+spec:
+  selector:
+    app: NBS
+    istio: ingressgateway # use istio default ingress gateway
+  servers:  
+  - port:
+      number: {{ .Values.service.port }}
+      name: http2
+      protocol: HTTP
+    hosts:
+    - {{ .Values.istioGatewayIngress.host }}
+  - port:
+      number: {{ .Values.service.httpsPort }}
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: {{ include "modernization-api.fullname" . }}
+    hosts:
+    - {{ .Values.istioGatewayIngress.host }}
+{{- end }}
