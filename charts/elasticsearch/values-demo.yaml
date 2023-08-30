@@ -18,7 +18,9 @@ podAnnotations: {}
 
 podSecurityContext: {}
 
-securityContext: {}
+securityContext: 
+  runAsUser: 1000
+  fsGroup: 1000
 
 service:
   type: ClusterIP
@@ -46,3 +48,8 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+pvc:
+  esPvClaim:
+    storageClass: elasticsearch-gp-elastic
+    storageRequest: 100Gi

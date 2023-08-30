@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nbs-gateway.fullname" . }}-deployment
+  labels:
+    app: NBS
+    type: App
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: NBS
+      type: App
+  template:
+    metadata:
+      labels:
+        app: NBS
+        type: App
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        args: ['--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}','--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}','--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}']
+        command: ['java', '-jar', 'api.jar']
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        ports:
+        - containerPort: 8000
+        resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+     
