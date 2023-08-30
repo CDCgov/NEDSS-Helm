@@ -26,17 +26,17 @@ spec:
         prefix: "/nbs/"
     route:
     - destination:
-        host: gateway-service
+        host: nbs-gateway-svc
         port:
-          number: 443
+          number: 8000
   - match:
     - uri:
         exact: /images/nedssLogo.jpg    
     route:
     - destination:
-        host: gateway-service
+        host: nbs-gateway-svc
         port:
-          number: 443
+          number: 8000
   - match:    
     - uri:
         prefix: /
