@@ -5,7 +5,7 @@ env: "ai"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.46ec9cd"
+  tag: "1.0.1-SNAPSHOT.48654af"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -44,7 +44,6 @@ istioGatewayIngress:
   enabled: true
   host: app.ai-cdc-nbs.eqsandbox.com
   gatewayNamespace: "istio-ingress"
-  certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
 resources: {}
