@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vault.fullname" . }}
+  labels:
+    {{- include "vault.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.vault.autoscaling.enabled }}
+  replicas: {{ .Values.vault.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "vault.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.vault.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "vault.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.vault.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "vault.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.vault.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.vault.securityContext | nindent 12 }}
+          image: "{{ .Values.vault.image.repository }}:{{ .Values.vault.image.tag | .Values.vault.version }}"
+          imagePullPolicy: {{ .Values.vault.image.pullPolicy }}
+          env:
+            - name: VAULT_LOCAL_CONFIG
+              value: |
+                storage "consul" {
+                  address = "http://consul:8500"
+                  path    = "vault/"
+                }
+                listener "tcp" {
+                  address     = "0.0.0.0:8200"
+                  tls_disable = 1
+                }
+          ports:
+            - name: vault
+              containerPort: 8200
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: vault
+          readinessProbe:
+            httpGet:
+              path: /
+              port: vault
+          resources:
+            {{- toYaml .Values.vault.resources | nindent 12 }}
+      {{- with .Values.vault.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.vault.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.vault.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

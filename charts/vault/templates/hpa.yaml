@@ -1,0 +1,28 @@
+{{- if .Values.vault.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "vault.fullname" . }}
+  labels:
+    {{- include "vault.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "vault.fullname" . }}
+  minReplicas: {{ .Values.vault.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.vault.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.vault.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.vault.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.vault.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.vault.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consul
+spec:
+  replicas: {{ .Values.consul.replicas }}
+  selector:
+    matchLabels:
+      app: consul
+  template:
+    metadata:
+      labels:
+        app: consul
+    spec:
+      volumes:
+        - name: efs-storage
+          persistentVolumeClaim:
+            claimName: efs-pvc
+      containers:
+        - name: consul
+          image: {{ .Values.consul.image }}
+          volumeMounts:
+            - mountPath: /consul/data
+              name: efs-storage
