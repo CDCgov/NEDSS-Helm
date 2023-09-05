@@ -6,7 +6,7 @@ image:
   repository: ""
   pullPolicy: IfNotPresent
   #tag: "1.0.1-SNAPSHOT.a820da2"
-  tag: 1.0.1-DEMO.f205cc0
+  tag: 1.0.1-DEMO.44cb11f
 
 imagePullSecrets: []
 nameOverride: ""
