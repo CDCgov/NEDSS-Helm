@@ -9,6 +9,6 @@ mountOptions:
 - debug
 parameters:
   type: gp2
-provisioner: ebs.csi.aws.com
+provisioner: efs.csi.aws.com
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
