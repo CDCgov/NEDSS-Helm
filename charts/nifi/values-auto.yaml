@@ -52,6 +52,10 @@ resources:
   limits:
     memory: "6Gi"
 
+jvmheap:
+  init: "4g"
+  max: "4g"
+
 autoscaling:
   enabled: false
   minReplicas: 1
