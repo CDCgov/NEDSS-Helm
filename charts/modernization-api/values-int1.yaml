@@ -38,7 +38,9 @@ ingress:
 
 nbsExternalName: app-classic.int1.nbspreview.com
 
-resources: {}
+resources: 
+  limits:
+    memory: "4Gi"
 
 autoscaling:
   enabled: false

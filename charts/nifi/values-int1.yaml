@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.19.0-SNAPSHOT.ff8163b
+  tag: 1.19.0-SNAPSHOT.5e98d03
 
 imagePullSecrets: []
 nameOverride: ""
@@ -51,6 +51,11 @@ ingress:
 resources: 
   limits:
     memory: "6Gi"
+
+jvmheap:
+  init: "4g"
+  max: "4g"
+
 
 autoscaling:
   enabled: false
