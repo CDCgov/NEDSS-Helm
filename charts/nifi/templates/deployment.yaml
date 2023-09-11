@@ -44,6 +44,10 @@ spec:
               value: {{ .Values.jdbcConnectionString }}
             - name: ELASTICSEARCH_HTTP_HOSTS
               value: {{ .Values.elasticSearchHost }}
+            - name: NIFI_JVM_HEAP_INIT
+              value: {{ .Values.jvmheap.init }}
+            - name: NIFI_JVM_HEAP_MAX
+              value: {{ .Values.jvmheap.max }}
           ports:
             - containerPort: {{ .Values.containerPort }}
           resources:

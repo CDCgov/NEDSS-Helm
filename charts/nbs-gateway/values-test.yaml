@@ -1,0 +1,28 @@
+deployment:
+  replicas: 1
+
+env: "test"
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: 1.0.1-SNAPSHOT.4683cd1
+
+gatewayService:
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000
+  - name: https
+    port: 443
+    targetPort: 8000
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local
+
+resources: {}
+
+nbsExternalName: app-classic.test-cdc-nbs.eqsandbox.com
+
+ingressHost: "app.test-cdc-nbs.eqsandbox.com"
+
+modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"

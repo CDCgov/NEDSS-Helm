@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/nifi
+  repository: ""
   pullPolicy: IfNotPresent
-  tag: "main-7"
+  tag: "1.19.0-SNAPSHOT.ff8163b"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -51,6 +51,10 @@ ingress:
 resources: 
   limits:
     memory: "4Gi"
+
+jvmheap:
+  init: "2g"
+  max: "2g"
 
 autoscaling:
   enabled: false

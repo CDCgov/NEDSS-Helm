@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dev"
+env: "int1"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.df8a353
+  tag: 1.0.1-RC_20230906.de03452
 
 imagePullSecrets: []
 nameOverride: ""
@@ -31,11 +31,11 @@ ingress:
   enabled: true
   className: "nginx"  
   tls:
-    - secretName: app.dev-cdc-nbs.eqsandbox.com
+    - secretName: app.int1.nbspreview.com
       hosts:
-        - app.dev-cdc-nbs.eqsandbox.com
+        - app.int1.nbspreview.com
 
-nbsExternalName: app-classic.dev-cdc-nbs.eqsandbox.com
+nbsExternalName: app-classic.int1.nbspreview.com
 
 resources: {}
 
@@ -51,7 +51,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.dev-cdc-nbs.eqsandbox.com"
+ingressHost: "app.int1.nbspreview.com"
 
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 

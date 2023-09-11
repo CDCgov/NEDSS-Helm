@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dev"
+env: "demo"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.df8a353
+  tag: 1.0.1-DEMO.f205cc0
 
 imagePullSecrets: []
 nameOverride: ""
@@ -26,16 +26,26 @@ service:
   type: ClusterIP
   port: 8080
   httpsPort: 443
+  gatewayPort: 8000
 
+# nginx-ingress
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
-    - secretName: app.dev-cdc-nbs.eqsandbox.com
+    - secretName: app.demo-cdc-nbs.eqsandbox.com
       hosts:
-        - app.dev-cdc-nbs.eqsandbox.com
+        - app.demo-cdc-nbs.eqsandbox.com
 
-nbsExternalName: app-classic.dev-cdc-nbs.eqsandbox.com
+nbsExternalName: app-classic.demo-cdc-nbs.eqsandbox.com
+
+# determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
+istioGatewayIngress:
+  enabled: false
+  host: app.demo-cdc-nbs.eqsandbox.com
+  gatewayNamespace: "istio-ingress"
+  certificateName: ""
+  certificateIssuerName: "letsencrypt-production"
 
 resources: {}
 
@@ -51,7 +61,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.dev-cdc-nbs.eqsandbox.com"
+ingressHost: "app.demo-cdc-nbs.eqsandbox.com"
 
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
