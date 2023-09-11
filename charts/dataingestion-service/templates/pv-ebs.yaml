@@ -1,14 +1,9 @@
-apiVersion: storage.k8s.io/v1
 kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
-  name: {{ .Values.pvc.diPvClaim.storageClass | quote }}
-  labels:
-  {{- include "dataingestion-service.labels" . | nindent 4 }}
-allowVolumeExpansion: true
-mountOptions:
-- debug
-parameters:
-  type: gp2
+  name: efs-es
 provisioner: efs.csi.aws.com
-reclaimPolicy: Delete
-volumeBindingMode: WaitForFirstConsumer
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: {{ .Values.efsFileSystemId | quote }}
+  directoryPerms: "700"

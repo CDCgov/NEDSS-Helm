@@ -6,8 +6,7 @@ metadata:
   {{- include "dataingestion-service.labels" . | nindent 4 }}
 spec:
   accessModes:
-  # read and write to single node
-  - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: {{ .Values.pvc.diPvClaim.storageRequest | quote }}
