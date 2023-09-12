@@ -1,0 +1,28 @@
+deployment:
+  replicas: 1
+
+env: "int1"
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: 1.0.1-SNAPSHOT.742972f
+
+gatewayService:
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000
+  - name: https
+    port: 443
+    targetPort: 8000
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local
+
+resources: {}
+
+nbsExternalName: 
+
+ingressHost: 
+
+modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
