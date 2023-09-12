@@ -1,0 +1,79 @@
+replicaCount: 1
+
+env: "dev"
+
+image:
+  repository: dnguyen1856/di_local_multi
+  pullPolicy: IfNotPresent
+  tag: test_3
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: "/omni-deployment-service/actuator/prometheus"
+  prometheus.io/port: "8443"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+  httpsPort: 443
+
+ingress:
+  enabled: true
+  className: "nginx"  
+  tls:
+    - secretName: dataingestion.datateam-cdc-nbs.eqsandbox.com
+      hosts:
+        - dataingestion.datateam-cdc-nbs.eqsandbox.com
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: "dataingestion.datateam-cdc-nbs.eqsandbox.com"
+
+jdbc:
+  dbserver: ""
+  dbname: ""
+  username: ""
+  password: ""
+
+  nbs:
+    dbserver: ""
+    dbname: ""
+    username: ""
+    password: ""
+
+
+kafka:
+  cluster: ""
+
+log:
+  path: "/usr/share/dataingestion/data"
+
+pvc:
+  diPvClaim:
+    storageClass: dataingestion-gp
+    storageRequest: 20Gi
