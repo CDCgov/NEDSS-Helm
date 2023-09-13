@@ -11,10 +11,11 @@ Make sure the helm chart is on your local machine and run the following commands
 
 **Mac OS/Linux**
 
-helm install elasticsearch -f .\elasticsearch-efs\values.yaml elasticsearch
+helm install elasticsearch -f ./elasticsearch-efs/values.yaml elasticsearch
+
 **Windows**
 
-helm install elasticsearch -f ./elasticsearch-efs/values.yaml elasticsearch
+helm install elasticsearch -f .\elasticsearch-efs\values.yaml elasticsearch
 
 # Remove Chart
 To uninstall helm chart, run the following command:
