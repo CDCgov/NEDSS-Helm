@@ -11,8 +11,11 @@ Elastic Search(EFS) helm chart
 Make sure the helm chart is on your local machine and run the following commands:
 
 **Mac OS/Linux**
+
 helm install modernization-api -f .\modernization-api\values.yaml --set jdbc.connectionString='yourConnectionString' modernization-api
+
 **Windows**
+
 helm install modernization-api -f ./modernization-api/values.yaml --set jdbc.connectionString='yourConnectionString' modernization-api
 
 # Remove Chart
