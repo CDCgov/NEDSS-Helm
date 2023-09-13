@@ -21,8 +21,8 @@ kubernetesClusterDomain: cluster.local
 
 resources: {}
 
-nbsExternalName: 
+nbsExternalName: app-classic.example.com
 
-ingressHost: 
+ingressHost:  
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
