@@ -1,7 +1,7 @@
 deployment:
   replicas: 1
 
-env: "int1"
+env: "prod"
 
 image:
   repository: ""
