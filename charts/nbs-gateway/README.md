@@ -12,11 +12,11 @@ Make sure the helm chart is on your local machine and run the following commands
 
 **Mac OS/Linux**
 
-helm install nbs-gateway -f .\nbs-gateway\values.yaml --set jdbc.connectionString='yourConnectionString' nbs-gateway
+helm install nbs-gateway -f .\nbs-gateway\values.yaml nbs-gateway
 
 **Windows**
 
-helm install nbs-gateway -f ./nbs-gateway/values.yaml --set jdbc.connectionString='yourConnectionString' nbs-gatway
+helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gatway
 
 # Remove Chart
 To uninstall helm chart, run the following command:
