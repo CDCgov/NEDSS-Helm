@@ -16,7 +16,7 @@ helm install nbs-gateway -f .\nbs-gateway\values.yaml nbs-gateway
 
 **Windows**
 
-helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gatway
+helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gateway
 
 # Remove Chart
 To uninstall helm chart, run the following command:
