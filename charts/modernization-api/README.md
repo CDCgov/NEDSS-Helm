@@ -12,11 +12,11 @@ Make sure the helm chart is on your local machine and run the following commands
 
 **Mac OS/Linux**
 
-helm install modernization-api -f .\modernization-api\values.yaml modernization-api
+helm install modernization-api -f ./modernization-api/values.yaml modernization-api
 
 **Windows**
 
-helm install modernization-api -f ./modernization-api/values.yaml modernization-api
+helm install modernization-api -f .\modernization-api\values.yaml modernization-api
 
 # Remove Chart
 To uninstall helm chart, run the following command:
