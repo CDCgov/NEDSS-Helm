@@ -6,7 +6,8 @@ Kubernetes >=1.20.0-0
 Elastic Search(EFS) helm chart
 
 # Install Chart
-**Note: Please ensure image.repository, image.tag, nbsExternalName, ingressHost and jdbc values are populated before running this helm chart. Ingress values need to reflect the correct host names under ingress for tls secretName and hosts.  Please see the values section below for more details. Also, pass the correct connection string while running the helm chart.  **
+# Note: Please ensure image.repository, image.tag, nbsExternalName, ingressHost and jdbc values are populated before running this helm chart. Ingress values need to reflect the correct host names under ingress for tls secretName and hosts.  Please see the values section below for more details. Also, pass the correct connection string while running the helm chart. 
+
 Make sure the helm chart is on your local machine and run the following commands:
 
 **Mac OS/Linux**
@@ -19,7 +20,7 @@ To uninstall helm chart, run the following command:
 
 helm uninstall modernization-api
 
-## Values
+# Values
 Values for modernization-api charts.
 
 | Key | Type | Default | Description |
