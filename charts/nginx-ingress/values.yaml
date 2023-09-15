@@ -13,3 +13,7 @@ controller:
   service:
     annotations:
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "10254"
+      #prometheus.io/scheme: https
+      prometheus.io/path: /metrics
