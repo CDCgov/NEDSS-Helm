@@ -5,8 +5,7 @@ env: "test"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  #tag: "1.0.1-SNAPSHOT.a820da2"
-  tag: 1.0.1-DEMO.44cb11f
+  tag: 1.0.1-RC_20230906.de03452
 
 imagePullSecrets: []
 nameOverride: ""
@@ -32,7 +31,7 @@ service:
 # nginx-ingress
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
     - secretName: app.test-cdc-nbs.eqsandbox.com
       hosts:

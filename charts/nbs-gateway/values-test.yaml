@@ -6,16 +6,16 @@ env: "test"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.4683cd1
+  tag: 1.0.1-SNAPSHOT.188e013
 
 gatewayService:
   ports:
-  - name: http
-    port: 8000
-    targetPort: 8000
-  - name: https
-    port: 443
-    targetPort: 8000
+    - name: http
+      port: 8000
+      targetPort: 8000
+    - name: https
+      port: 443
+      targetPort: 8000
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
 

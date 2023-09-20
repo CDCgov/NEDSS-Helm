@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.19.0-SNAPSHOT.ff8163b"
+  tag: 1.19.0-SNAPSHOT.43ae4c5
 
 imagePullSecrets: []
 nameOverride: ""
@@ -40,15 +40,15 @@ ingress:
   hosts:
     - host: nifi.test-cdc-nbs.eqsandbox.com
       paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nifi
-            port:
-              number: 8443
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: nifi
+              port:
+                number: 8443
 
-resources: 
+resources:
   limits:
     memory: "4Gi"
 
