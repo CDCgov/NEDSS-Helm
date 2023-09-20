@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: ""
+  repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/elasticsearch"
   pullPolicy: IfNotPresent
   tag: "main-3"
 
