@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: ""
+  repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/nifi"
   pullPolicy: IfNotPresent
-  tag: 1.19.0-SNAPSHOT.5e98d03
+  tag: 1.19.0-SNAPSHOT.3fae035
 
 imagePullSecrets: []
 nameOverride: ""
