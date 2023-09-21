@@ -20,8 +20,8 @@ podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/omni-deployment-service/actuator/prometheus"
   prometheus.io/port: "8443"
-  prometheus.io/scheme: https
-  
+  prometheus.io/scheme: "https"
+
 podSecurityContext: {}
 
 securityContext: {}
