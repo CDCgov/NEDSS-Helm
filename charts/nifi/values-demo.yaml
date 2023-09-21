@@ -56,6 +56,10 @@ resources:
     memory: "12Gi"
     ephemeral-storage: "30Gi"
 
+jvmheap:
+  init: "10g"
+  max: "10g"
+
 autoscaling:
   enabled: false
   minReplicas: 1
