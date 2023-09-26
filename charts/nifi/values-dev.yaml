@@ -18,7 +18,9 @@ podAnnotations: {}
 
 podSecurityContext: {}
 
-securityContext: {}
+securityContext: 
+  runAsUser: 1000
+  fsGroup: 1000
 
 service:
   type: ClusterIP
@@ -31,14 +33,14 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/upstream-vhost: "localhost:8443"
     nginx.ingress.kubernetes.io/proxy-redirect-from: "https://localhost:8443"
-    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi.dev-cdc-nbs.eqsandbox.com"
+    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi3.ai-cdc-nbs.eqsandbox.com"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
   tls:
-    - secretName: nifi.dev-cdc-nbs.eqsandbox.com
+    - secretName: nifi3.ai-cdc-nbs.eqsandbox.com
       hosts:
-        - nifi.dev-cdc-nbs.eqsandbox.com
+        - nifi3.ai-cdc-nbs.eqsandbox.com
   hosts:
-    - host: nifi.dev-cdc-nbs.eqsandbox.com
+    - host: nifi3.ai-cdc-nbs.eqsandbox.com
       paths:
       - path: /
         pathType: Prefix
@@ -50,11 +52,11 @@ ingress:
 
 resources: 
   limits:
-    memory: "4Gi"
+    memory: "1G"
 
 jvmheap:
-  init: "2g"
-  max: "2g"
+  init: "600M"
+  max: "600M"
 
 autoscaling:
   enabled: false
@@ -73,3 +75,14 @@ containerPort: 8443
 jdbcConnectionString: ""
 singleUserCredentialsPassword: ""
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
+
+pvc:
+  nifiPvClaim:
+    storageRequestState: 5Gi
+    storageRequestDatabaseRepository: 5Gi
+    storageRequestFlowfileRepository: 10Gi
+    storageRequestContentRepository: 5Gi
+    storageRequestProvenanceRepository: 10Gi
+    storageRequestStorageclassLogs: 10Gi
+
+efsFileSystemId: ""

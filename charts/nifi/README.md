@@ -53,3 +53,10 @@ Default values for nifi charts.
 | jdbcConnectionString | string | "" | Java database connection. Please populate the correct NBS_ODSE database connection string with credentials |
 | singleUserCredentialsPassword | string | "" | Set the NIFI password for NIFI Admin UI |
 | elasticSearchHost | string | "http://elasticsearch.default.svc.cluster.local:9200" | Elastic search host |
+| efsFileSystemId | string | "" | EFS ID |
+| storageRequestState | string | "5Gi" | Storage size of directory. Contains state and configuration of a NiFi |
+| storageRequestDatabaseRepository | "5Gi" | Storage size of directory. Contains user access and flow controller history |
+| storageRequestFlowfileRepository | "10Gi" | Storage size of directory. Contains metadata/attributes about FlowFiles actively processing through NiFi dataflow(s) |
+| storageRequestContentRepository | "5Gi" | Storage size of directory. Contains content of all FlowFiles exists |
+| storageRequestProvenanceRepository | "10Gi" | Storage size of directory. Contains history of each FlowFile stored |
+| storageRequestStorageclassLogs | "10Gi" | Storage size of directory. Contains Nifi logs |
