@@ -47,7 +47,11 @@ istioGatewayIngress:
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
-resources: {}
+resources:
+  requests:
+    memory: "2Gi"
+  limits:
+    memory: "2Gi"
 
 autoscaling:
   enabled: false
