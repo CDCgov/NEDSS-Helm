@@ -4,9 +4,9 @@ deployment:
 env: "prod"
 
 image:
-  repository: ""
+  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.742972f
+  tag: v1.0.0
 
 gatewayService:
   ports:
