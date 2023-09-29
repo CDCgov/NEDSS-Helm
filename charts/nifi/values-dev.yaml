@@ -48,13 +48,15 @@ ingress:
             port:
               number: 8443
 
-resources: 
+resources:
+  requests:
+    memory: "2Gi"
   limits:
-    memory: "4Gi"
+    memory: "2Gi"
 
 jvmheap:
-  init: "2g"
-  max: "2g"
+  init: "1g"
+  max: "1g"
 
 autoscaling:
   enabled: false
