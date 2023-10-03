@@ -51,17 +51,17 @@ spec:
           ports:
             - containerPort: {{ .Values.containerPort }}
           volumeMounts:
-            - name: nifi-persistent-storage-state
+            - name: nifi-persistent-storage
               mountPath: /opt/nifi/nifi-current/state
-            - name: nifi-persistent-storage-database-repository
+            - name: nifi-persistent-storage
               mountPath: /opt/nifi/nifi-current/database_repository
-            - name: nifi-persistent-storage-flowfile-repository
+            - name: nifi-persistent-storage
               mountPath: /opt/nifi/nifi-current/flowfile_repository
-            - name: nifi-persistent-storage-content-repository
+            - name: nifi-persistent-storage
               mountPath: /opt/nifi/nifi-current/content_repository
-            - name: nifi-persistent-storage-provenance-repository
+            - name: nifi-persistent-storage
               mountPath: /opt/nifi/nifi-current/provenance_repository
-            - name: nifi-persistent-storage-logs
+            - name: nifi-persistent-storage
               mountPath: /opt/nifi/nifi-current/logs
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -78,21 +78,6 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-      - name: nifi-persistent-storage-state
+      - name: nifi-persistent-storage
         persistentVolumeClaim:
-          claimName: {{ include "nifi.fullname" . }}-pv-claim-state
-      - name: nifi-persistent-storage-database-repository
-        persistentVolumeClaim:
-          claimName: {{ include "nifi.fullname" . }}-pv-claim-database-repository
-      - name: nifi-persistent-storage-flowfile-repository
-        persistentVolumeClaim:
-          claimName: {{ include "nifi.fullname" . }}-pv-claim-flowfile-repository
-      - name: nifi-persistent-storage-content-repository
-        persistentVolumeClaim:
-          claimName: {{ include "nifi.fullname" . }}-pv-claim-content-repository
-      - name: nifi-persistent-storage-provenance-repository
-        persistentVolumeClaim:
-          claimName: {{ include "nifi.fullname" . }}-pv-claim-provenance-repository
-      - name: nifi-persistent-storage-logs
-        persistentVolumeClaim:
-          claimName: {{ include "nifi.fullname" . }}-pv-claim-logs
+          claimName: {{ include "nifi.fullname" . }}-pv-claim

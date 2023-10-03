@@ -1,67 +1,7 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: {{ include "nifi.fullname" . }}-storageclass-state
-provisioner: efs.csi.aws.com
-parameters:
-  provisioningMode: efs-ap
-  fileSystemId: {{ .Values.efsFileSystemId | quote }}
-  directoryPerms: "700"
-
----
-
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: {{ include "nifi.fullname" . }}-storageclass-database-repository
-provisioner: efs.csi.aws.com
-parameters:
-  provisioningMode: efs-ap
-  fileSystemId: {{ .Values.efsFileSystemId | quote }}
-  directoryPerms: "700"
-
----
-
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: {{ include "nifi.fullname" . }}-storageclass-flowfile-repository
-provisioner: efs.csi.aws.com
-parameters:
-  provisioningMode: efs-ap
-  fileSystemId: {{ .Values.efsFileSystemId | quote }}
-  directoryPerms: "700"
-
----
-
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: {{ include "nifi.fullname" . }}-storageclass-content-repository
-provisioner: efs.csi.aws.com
-parameters:
-  provisioningMode: efs-ap
-  fileSystemId: {{ .Values.efsFileSystemId | quote }}
-  directoryPerms: "700"
-
----
-
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: {{ include "nifi.fullname" . }}-storageclass-provenance-repository
-provisioner: efs.csi.aws.com
-parameters:
-  provisioningMode: efs-ap
-  fileSystemId: {{ .Values.efsFileSystemId | quote }}
-  directoryPerms: "700"
-
----
-
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: {{ include "nifi.fullname" . }}-storageclass-logs
+  name: {{ include "nifi.fullname" . }}-storageclass
 provisioner: efs.csi.aws.com
 parameters:
   provisioningMode: efs-ap

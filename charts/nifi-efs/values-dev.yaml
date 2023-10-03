@@ -78,11 +78,6 @@ elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 pvc:
   nifiPvClaim:
-    storageRequestState: 5Gi
-    storageRequestDatabaseRepository: 5Gi
-    storageRequestFlowfileRepository: 10Gi
-    storageRequestContentRepository: 5Gi
-    storageRequestProvenanceRepository: 10Gi
-    storageRequestStorageclassLogs: 10Gi
+    storageRequest: 50Gi
 
 efsFileSystemId: ""

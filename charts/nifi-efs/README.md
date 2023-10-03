@@ -54,9 +54,4 @@ Default values for nifi charts.
 | singleUserCredentialsPassword | string | "" | Set the NIFI password for NIFI Admin UI |
 | elasticSearchHost | string | "http://elasticsearch.default.svc.cluster.local:9200" | Elastic search host |
 | efsFileSystemId | string | "" | EFS ID |
-| storageRequestState | string | "5Gi" | Storage size of directory. Contains state and configuration of a NiFi |
-| storageRequestDatabaseRepository | string | "5Gi" | Storage size of directory. Contains user access and flow controller history |
-| storageRequestFlowfileRepository | string | "10Gi" | Storage size of directory. Contains metadata/attributes about FlowFiles actively processing through NiFi dataflow(s) |
-| storageRequestContentRepository | string | "5Gi" | Storage size of directory. Contains content of all FlowFiles exists |
-| storageRequestProvenanceRepository | string | "10Gi" | Storage size of directory. Contains history of each FlowFile stored |
-| storageRequestStorageclassLogs | string | "10Gi" | Storage size of directory. Contains Nifi logs |
+| storageRequest | string | "50Gi" | Storage size of NiFi Stage,Database_Repository,Flowfile_Repository,Content_Repository,Provenance_Repository and Logs directories |
