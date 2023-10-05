@@ -27,6 +27,10 @@ service:
   port: 8080
   httpsPort: 443
   gatewayPort: 8000
+  pageBuilderPort: 8095
+
+pageBuilder:
+  enabled: "false"
 
 ingress:
   enabled: true

@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "modernization-api.fullname" . }}
+  name: {{ include "page-builder-api.fullname" . }}
   labels:
-    {{- include "modernization-api.labels" . | nindent 4 }}
+    {{- include "page-builder-api.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "modernization-api.selectorLabels" . | nindent 6 }}
+      {{- include "page-builder-api.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "modernization-api.selectorLabels" . | nindent 8 }}
+        {{- include "page-builder-api.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "modernization-api.serviceAccountName" . }}
+      serviceAccountName: {{ include "page-builder-api.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -35,10 +35,10 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           command: ['java', '-jar', 'api.jar']
-          args: ['--nbs.elasticsearch.url={{ .Values.elasticSearchHost }}', '--spring.datasource.url={{ .Values.jdbc.connectionString }}', '--spring.datasource.username={{ .Values.jdbc.user }}', '--spring.datasource.password={{ .Values.jdbc.password }}', '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}', '--nbs.ui.features.pageBuilder.enabled={{ .Values.pageBuilder.enabled }}']
+          args: ['--spring.datasource.url={{ .Values.jdbc.connectionString }}', '--spring.datasource.username={{ .Values.jdbc.user }}', '--spring.datasource.password={{ .Values.jdbc.password }}', '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}', '--server.port={{ .Values.service.port }}']
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
