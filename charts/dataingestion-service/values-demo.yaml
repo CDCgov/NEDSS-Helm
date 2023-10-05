@@ -53,17 +53,17 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.int1.nbspreview.com"
+ingressHost: ""
 
 jdbc:
   dbserver: ""
   dbname: "NBS_DataIngest"
-  username: "admin"
+  username: ""
   password: ""
 
 nbs:
   dbserver: ""
-  dbname: ""
+  dbname: "nbs_msgoute"
   username: ""
   password: ""
 
