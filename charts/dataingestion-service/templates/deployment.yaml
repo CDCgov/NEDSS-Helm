@@ -47,17 +47,21 @@ spec:
             - name: DI_PASSWORD
               value: {{ .Values.jdbc.password }}
             - name: DI_NBS_DBSERVER
-              value: {{ .Values.jdbc.nbs.dbserver }}
+              value: {{ .Values.nbs.dbserver }}
             - name: DI_NBS_DBNAME
-              value: {{ .Values.jdbc.nbs.dbname }}
+              value: {{ .Values.nbs.dbname }}
             - name: DI_NBS_DBUSER
-              value: {{ .Values.jdbc.nbs.username }}
+              value: {{ .Values.nbs.username }}
             - name: DI_NBS_DBPASSWORD
-              value: {{ .Values.jdbc.nbs.password }}
+              value: {{ .Values.nbs.password }}
             - name: BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.cluster }}
             - name: DI_LOG_PATH
               value: {{ .Values.log.path }}
+            - name: DI_RSA_PRIVATE_KEY
+              value: {{ .Values.rsa.privateKey }}
+            - name: DI_RSA_PUBLIC_KEY
+              value: {{ .Values.rsa.publicKey }}
           volumeMounts:
           - mountPath: /usr/share/dataingestion/data
             name: di-persistent-storage     
