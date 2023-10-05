@@ -1,11 +1,23 @@
 replicaCount: 1
 
-env: "dev"
+env: "prod"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
   tag: 1.0.1-SNAPSHOT.62faecc
+
+# Host URL for application
+ingressHost: app.ai-cdc-nbs.eqsandbox.com
+
+# URL for access to classic application
+nbsExternalName: app-classic.ai-cdc-nbs.eqsandbox.com
+
+#Database access credentials
+jdbc:
+  connectionString: ""
+  user: ""
+  password: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -24,38 +36,31 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 8095
   httpsPort: 443
   gatewayPort: 8000
-  pageBuilderPort: 8095
 
-pageBuilder:
-  enabled: "true"
-
-# nginx-ingress
+# determine whether or not to use nginx for ingress (only 1 ingress should be used to prevent conflicts) 
 ingress:
   enabled: true
   className: "nginx"  
-  tls:
-    - secretName: app.dev-cdc-nbs.eqsandbox.com
-      hosts:
-        - app.dev-cdc-nbs.eqsandbox.com
-
-nbsExternalName: app-classic.dev-cdc-nbs.eqsandbox.com
+  # tls:
+  #   - secretName: app.example.com
+  #     hosts:
+  #       - app.example.com
 
 # determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
 istioGatewayIngress:
   enabled: false
-  host: app.dev-cdc-nbs.eqsandbox.com
+  # host: app.example.com
   gatewayNamespace: "istio-ingress"
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
-resources:
-  requests:
-    memory: "2Gi"
+# Kubernetes resource limits
+resources: 
   limits:
-    memory: "2Gi"
+    memory: "1Gi"
 
 autoscaling:
   enabled: false
@@ -68,12 +73,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.dev-cdc-nbs.eqsandbox.com"
-
-elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
-
-jdbc:
-  connectionString: ""
-  user: ""
-  password: ""

@@ -5,7 +5,7 @@ env: "ai"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.48654af"
+  tag: 	1.0.1-SNAPSHOT.62faecc
 
 imagePullSecrets: []
 nameOverride: ""
@@ -27,10 +27,14 @@ service:
   port: 8080
   httpsPort: 443
   gatewayPort: 8000
+  pageBuilderPort: 8095
+
+pageBuilder:
+  enabled: "true"
 
 # nginx-ingress
 ingress:
-  enabled: false
+  enabled: true
   className: "nginx"  
   tls:
     - secretName: app.ai-cdc-nbs.eqsandbox.com
@@ -41,12 +45,14 @@ nbsExternalName: app-classic.ai-cdc-nbs.eqsandbox.com
 
 # determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
 istioGatewayIngress:
-  enabled: true
+  enabled: false
   host: app.ai-cdc-nbs.eqsandbox.com
   gatewayNamespace: "istio-ingress"
   certificateIssuerName: "letsencrypt-production"
 
-resources: {}
+resources: 
+  limits:
+    memory: "2Gi"
 
 autoscaling:
   enabled: false
