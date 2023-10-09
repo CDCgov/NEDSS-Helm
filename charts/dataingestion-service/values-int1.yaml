@@ -76,7 +76,7 @@ log:
 
 pvc:
   diPvClaim:
-    storageClass: dataingestion-gp
+    storageClass: efs-dataingestion
     storageRequest: 20Gi
 
 efsFileSystemId: ""
