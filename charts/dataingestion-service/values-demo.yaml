@@ -3,7 +3,7 @@ replicaCount: 1
 env: "dev"
 
 image:
-  repository: dnguyen1856/di_local_multi
+  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-ingestion-service
   pullPolicy: IfNotPresent
   tag: test_3
 
@@ -35,9 +35,9 @@ ingress:
   enabled: true
   className: "nginx"  
   tls:
-    - secretName: dataingestion.datateam-cdc-nbs.eqsandbox.com
+    - secretName: 
       hosts:
-        - dataingestion.datateam-cdc-nbs.eqsandbox.com
+        - 
 
 resources: {}
 
@@ -53,19 +53,19 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.datateam-cdc-nbs.eqsandbox.com"
+ingressHost: ""
 
 jdbc:
   dbserver: ""
-  dbname: ""
+  dbname: "NBS_DataIngest"
   username: ""
   password: ""
 
-  nbs:
-    dbserver: ""
-    dbname: ""
-    username: ""
-    password: ""
+nbs:
+  dbserver: ""
+  dbname: "nbs_msgoute"
+  username: ""
+  password: ""
 
 
 kafka:
@@ -80,3 +80,7 @@ pvc:
     storageRequest: 20Gi
 
 efsFileSystemId: ""
+
+rsa:
+  privateKey:
+  publicKey:
