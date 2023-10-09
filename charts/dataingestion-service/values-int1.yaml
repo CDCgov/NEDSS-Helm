@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dev"
+env: "int1"
 
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-ingestion-service
   pullPolicy: IfNotPresent
-  tag: test_3
+  tag: 1.0.1-1.1.1.RELTAG.22635ba
 
 imagePullSecrets: []
 nameOverride: ""
