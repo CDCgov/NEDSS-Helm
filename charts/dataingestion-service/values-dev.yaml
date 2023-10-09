@@ -1,0 +1,86 @@
+replicaCount: 1
+
+env: "dev"
+
+image:
+  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-ingestion-service
+  pullPolicy: IfNotPresent
+  tag: 1.0.1-SNAPSHOT.22635ba
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: "/actuator/prometheus"
+  prometheus.io/port: "8080"
+  #prometheus.io/scheme: "https"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+  httpsPort: 443
+
+ingress:
+  enabled: true
+  className: "nginx"  
+  tls:
+    - secretName: dataingestion.datateam-cdc-nbs.eqsandbox.com
+      hosts:
+        - dataingestion.datateam-cdc-nbs.eqsandbox.com
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: "dataingestion.datateam-cdc-nbs.eqsandbox.com"
+
+jdbc:
+  dbserver: "nbs-msgoute-20221213.czya31goozkz.us-east-1.rds.amazonaws.com"
+  dbname: "NBS_DataIngest"
+  username: "admin"
+  password: ""
+
+nbs:
+  dbserver: "cdc-nbs-legacy-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com"
+  dbname: "nbs_msgoute"
+  username: "nbs_ods"
+  password: ""
+
+
+kafka:
+  cluster: "b-1.nbskafkadev01.f5qktb.c11.kafka.us-east-1.amazonaws.com:9092"
+
+log:
+  path: "/usr/share/dataingestion/data"
+
+pvc:
+  diPvClaim:
+    storageClass: dataingestion-gp
+    storageRequest: 20Gi
+
+efsFileSystemId: ""
+
+rsa:
+  privateKey:
+  publicKey:
