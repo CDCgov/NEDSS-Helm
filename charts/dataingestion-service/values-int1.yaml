@@ -20,7 +20,7 @@ podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
   prometheus.io/port: "8080"
-  #prometheus.io/scheme: "https"
+  ###prometheus.io/scheme: "https"
 
 podSecurityContext: {}
 
