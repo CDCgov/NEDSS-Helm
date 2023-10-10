@@ -53,7 +53,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "demo.nbspreview.com/dataingestion"
+ingressHost: "dataingestion.demo.nbspreview.com"
 
 jdbc:
   dbserver: "cdc-nbs-legacy-rds-mssql.c1yhzcwwxisa.us-east-1.rds.amazonaws.com"
