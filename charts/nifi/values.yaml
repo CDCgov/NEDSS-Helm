@@ -71,6 +71,15 @@ affinity: {}
 
 containerPort: 8443
 
+# NiFi Username which will be set while deploying 
+singleUserCredentialsUsername: ""
+
+# NiFi Sensitive Props key which will be set while deploying 
+nifiSensitivePropsKey: ""   
+
+#JDBC end pont for database
 jdbcConnectionString: ""
+
+# NiFi Password which will be set while deploying 
 singleUserCredentialsPassword: ""
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"

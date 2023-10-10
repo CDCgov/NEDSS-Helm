@@ -51,5 +51,10 @@ Default values for nifi charts.
 | affinity | object | {} | Define needed constraints |
 | containerPort | int | 8443 | Set container port |
 | jdbcConnectionString | string | "" | Java database connection. Please populate the correct NBS_ODSE database connection string with credentials |
-| singleUserCredentialsPassword | string | "" | Set the NIFI password for NIFI Admin UI |
+| singleUserCredentialsUsername | string | "" | Set the NIFI username for NIFI UI |
+| singleUserCredentialsPassword | string | "" | Set the NIFI password for NIFI UI |
+| nifiSensitivePropsKey | string | "" | Set the NIFI Sensitive Props Key|
 | elasticSearchHost | string | "http://elasticsearch.default.svc.cluster.local:9200" | Elastic search host |
+
+ 
+ 
