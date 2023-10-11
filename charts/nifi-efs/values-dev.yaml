@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: ""
-  pullPolicy: IfNotPresent
-  tag: 1.19.0-SNAPSHOT.43ae4c5
+  repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/nifi"
+  pullPolicy: Always
+  tag: 1.0.1-DELETE-ME.ac3deda
 
 imagePullSecrets: []
 nameOverride: ""
@@ -33,14 +33,14 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/upstream-vhost: "localhost:8443"
     nginx.ingress.kubernetes.io/proxy-redirect-from: "https://localhost:8443"
-    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi3.ai-cdc-nbs.eqsandbox.com"
+    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi.ai-cdc-nbs.eqsandbox.com"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
   tls:
-    - secretName: nifi3.ai-cdc-nbs.eqsandbox.com
+    - secretName: nifi.ai-cdc-nbs.eqsandbox.com
       hosts:
-        - nifi3.ai-cdc-nbs.eqsandbox.com
+        - nifi.ai-cdc-nbs.eqsandbox.com
   hosts:
-    - host: nifi3.ai-cdc-nbs.eqsandbox.com
+    - host: nifi.ai-cdc-nbs.eqsandbox.com
       paths:
       - path: /
         pathType: Prefix
@@ -53,10 +53,6 @@ ingress:
 resources: 
   limits:
     memory: "1G"
-
-jvmheap:
-  init: "600M"
-  max: "600M"
 
 autoscaling:
   enabled: false
@@ -72,12 +68,26 @@ affinity: {}
 
 containerPort: 8443
 
-jdbcConnectionString: ""
-singleUserCredentialsPassword: ""
-elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
-
 pvc:
   nifiPvClaim:
     storageRequest: 50Gi
 
-efsFileSystemId: ""
+efsFileSystemId: "fs-04cf7f1e7647dd59e"
+
+### Nifi Configurations ###
+
+jvmheap:
+  init: "600M"
+  max: "600M"
+
+jdbcConnectionString: "jdbc:sqlserver://cdc-nbs-legacy-rds-mssql.cvvnwr59v2sd.us-east-1.rds.amazonaws.com:1433;databaseName=NBS_ODSE;user=nbs_ods;password=ods;encrypt=true;trustServerCertificate=true;"
+
+elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
+
+# Default NiFi Admin Username and Password. Password must be minimum of 12 characters
+singleUserCredentialsUsername: "nbs-admin"
+singleUserCredentialsPassword: "thisisatestnbs"
+
+# NiFi Sensitive Props Key. Specifies the source string used to derive an encryption key.
+# The Sensitive Properties Key is not the encryption key itself, but the password from which NiFi derives the actual encryption key.
+nifiSensitivePropsKey: "12345678901234567890A"
