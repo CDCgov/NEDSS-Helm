@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/nifi"
+  repository: ""
   pullPolicy: Always
-  tag: 1.0.1-DELETE-ME.ac3deda
+  tag: 
 
 imagePullSecrets: []
 nameOverride: ""
@@ -80,14 +80,14 @@ jvmheap:
   init: "600M"
   max: "600M"
 
-jdbcConnectionString: "jdbc:sqlserver://cdc-nbs-legacy-rds-mssql.cvvnwr59v2sd.us-east-1.rds.amazonaws.com:1433;databaseName=NBS_ODSE;user=nbs_ods;password=ods;encrypt=true;trustServerCertificate=true;"
+jdbcConnectionString: ""
 
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 # Default NiFi Admin Username and Password. Password must be minimum of 12 characters
-singleUserCredentialsUsername: "nbs-admin"
-singleUserCredentialsPassword: "thisisatestnbs"
+singleUserCredentialsUsername: ""
+singleUserCredentialsPassword: ""
 
 # NiFi Sensitive Props Key. Specifies the source string used to derive an encryption key.
 # The Sensitive Properties Key is not the encryption key itself, but the password from which NiFi derives the actual encryption key.
-nifiSensitivePropsKey: "12345678901234567890A"
+nifiSensitivePropsKey: ""

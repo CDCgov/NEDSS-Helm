@@ -52,7 +52,6 @@ resources:
   limits:
     memory: "6Gi"
 
-
 autoscaling:
   enabled: false
   minReplicas: 1
