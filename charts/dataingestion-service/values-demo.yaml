@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dev"
+env: "demo"
 
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-ingestion-service
   pullPolicy: IfNotPresent
-  tag: test_3
+  tag: 1.0.1-1.1.1.RELTAG.22635ba
 
 imagePullSecrets: []
 nameOverride: ""
@@ -53,30 +53,30 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: ""
+ingressHost: "dataingestion.demo.nbspreview.com"
 
 jdbc:
-  dbserver: ""
+  dbserver: "cdc-nbs-legacy-rds-mssql.c1yhzcwwxisa.us-east-1.rds.amazonaws.com"
   dbname: "NBS_DataIngest"
-  username: ""
+  username: "admin"
   password: ""
 
 nbs:
-  dbserver: ""
+  dbserver: "cdc-nbs-legacy-rds-mssql.c1yhzcwwxisa.us-east-1.rds.amazonaws.com"
   dbname: "nbs_msgoute"
-  username: ""
+  username: "admin"
   password: ""
 
 
 kafka:
-  cluster: ""
+  cluster: "b-1.mskclusterdevelopment.yqces1.c3.kafka.us-east-1.amazonaws.com:9092"
 
 log:
   path: "/usr/share/dataingestion/data"
 
 pvc:
   diPvClaim:
-    storageClass: dataingestion-gp
+    storageClass: efs-dataingestion
     storageRequest: 20Gi
 
 efsFileSystemId: ""
