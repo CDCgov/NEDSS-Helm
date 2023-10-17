@@ -35,9 +35,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: NIFI_SENSITIVE_PROPS_KEY
-              value: '12345678901234567890A'
+              value: {{ .Values.nifiSensitivePropsKey }}
             - name: SINGLE_USER_CREDENTIALS_USERNAME
-              value: admin
+              value: {{ .Values.singleUserCredentialsUsername }}
             - name: SINGLE_USER_CREDENTIALS_PASSWORD
               value: {{ .Values.singleUserCredentialsPassword }}
             - name: JDBC_CONNECTION_STRING
@@ -59,10 +59,6 @@ spec:
               mountPath: /opt/nifi/nifi-current/flowfile_repository
             - name: nifi-persistent-storage
               mountPath: /opt/nifi/nifi-current/content_repository
-            - name: nifi-persistent-storage
-              mountPath: /opt/nifi/nifi-current/provenance_repository
-            - name: nifi-persistent-storage
-              mountPath: /opt/nifi/nifi-current/logs
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
