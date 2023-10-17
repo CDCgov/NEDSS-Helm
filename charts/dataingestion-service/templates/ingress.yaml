@@ -17,7 +17,7 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:
-          - path: "/"
+          - path: "/dataingestion-service"
             pathType: Prefix
             backend:
               service:
