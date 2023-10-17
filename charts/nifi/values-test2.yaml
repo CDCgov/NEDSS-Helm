@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "main-7"
+  tag: 1.0.1-RC_20230928.f0e3eab
 
 imagePullSecrets: []
 nameOverride: ""
@@ -31,14 +31,14 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/upstream-vhost: "localhost:8443"
     nginx.ingress.kubernetes.io/proxy-redirect-from: "https://localhost:8443"
-    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi.test2-cdc-nbs.eqsandbox.com"
+    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi.test.nbspreview.com"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
   tls:
-    - secretName: nifi.test2-cdc-nbs.eqsandbox.com
+    - secretName: nifi.test.nbspreview.com
       hosts:
-        - nifi.test2-cdc-nbs.eqsandbox.com
+        - nifi.test.nbspreview.com
   hosts:
-    - host: nifi.test2-cdc-nbs.eqsandbox.com
+    - host: nifi.test.nbspreview.com
       paths:
       - path: /
         pathType: Prefix
@@ -48,15 +48,13 @@ ingress:
             port:
               number: 8443
 
-resources:
-  requests:
-    memory: "6Gi"
+resources: 
   limits:
-    memory: "12Gi"
+    memory: "3Gi"
 
 jvmheap:
-  init: "6g"
-  max: "6g"
+  init: "2g"
+  max: "2g"
 
 autoscaling:
   enabled: false

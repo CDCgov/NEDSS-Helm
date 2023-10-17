@@ -56,13 +56,13 @@ affinity: {}
 ingressHost: "dataingestion.int1.nbspreview.com"
 
 jdbc:
-  dbserver: "cdc-nbs-legacy-rds-mssql.clubdoy7zd5o.us-east-1.rds.amazonaws.com"
+  dbserver: "cdc-nbs-legacy-rds-mssql-test-10-11-23.clubdoy7zd5o.us-east-1.rds.amazonaws.com"
   dbname: "NBS_DataIngest"
   username: "admin"
   password: ""
 
 nbs:
-  dbserver: "cdc-nbs-legacy-rds-mssql.clubdoy7zd5o.us-east-1.rds.amazonaws.com"
+  dbserver: "cdc-nbs-legacy-rds-mssql-test-10-11-23.clubdoy7zd5o.us-east-1.rds.amazonaws.com"
   dbname: "nbs_msgoute"
   username: "admin"
   password: ""
