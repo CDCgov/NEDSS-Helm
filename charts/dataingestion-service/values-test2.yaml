@@ -1,9 +1,9 @@
 replicaCount: 1
 
-env: "test2"
+env: "test"
 
 image:
-  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-ingestion-service
+  repository: ""
   pullPolicy: IfNotPresent
   tag: 1.0.1-SNAPSHOT.e063d07
 
