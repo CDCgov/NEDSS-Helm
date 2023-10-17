@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-ingestion-service
   pullPolicy: IfNotPresent
-  tag: 1.0.1-1.1.1.RELTAG.22635ba
+  tag: 1.0.1-SNAPSHOT.e063d07
 
 imagePullSecrets: []
 nameOverride: ""
@@ -19,8 +19,7 @@ serviceAccount:
 podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
-  prometheus.io/port: "8080"
-  ###prometheus.io/scheme: "https"
+  prometheus.io/port: "8081"
 
 podSecurityContext: {}
 
@@ -28,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 8081
   httpsPort: 443
 
 ingress:
