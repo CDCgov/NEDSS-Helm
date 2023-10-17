@@ -52,11 +52,6 @@ resources:
   limits:
     memory: "3Gi"
 
-jvmheap:
-  init: "2g"
-  max: "2g"
-
-
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -75,14 +70,13 @@ pvc:
   nifiPvClaim:
     storageRequest: 50Gi
 
-
 efsFileSystemId: ""
 
 ### Nifi Configurations ###
 
 jvmheap:
-  init: "6g"
-  max: "6g"
+  init: "2g"
+  max: "2g"
 
 jdbcConnectionString: ""
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
