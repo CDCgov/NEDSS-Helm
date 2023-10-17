@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"  
   tls:
-    - secretName: test.nbspreview.com
+    - secretName: dataingestion.test.nbspreview.com
       hosts:
-        - test.nbspreview.com
+        - dataingestion.test.nbspreview.com
 
 resources: {}
 
@@ -52,7 +52,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "test.nbspreview.com"
+ingressHost: "dataingestion.test.nbspreview.com"
 
 jdbc:
   dbserver: "cdc-nbs-legacy-rds-mssql.chpvldsisz22.us-east-1.rds.amazonaws.com"
