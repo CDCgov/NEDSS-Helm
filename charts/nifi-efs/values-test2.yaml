@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-RC_20230928.f0e3eab
+  tag: 1.0.1-RC_20231017.846b2b8
 
 imagePullSecrets: []
 nameOverride: ""
