@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.664f48d
+  tag: 1.0.1-SNAPSHOT.c45745a
 
 # Host URL for application
 ingressHost: app.dev-cdc-nbs.eqsandbox.com
