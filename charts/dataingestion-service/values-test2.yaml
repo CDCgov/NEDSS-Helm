@@ -55,20 +55,20 @@ affinity: {}
 ingressHost: "dataingestion.test.nbspreview.com"
 
 jdbc:
-  dbserver: "cdc-nbs-legacy-rds-mssql.chpvldsisz22.us-east-1.rds.amazonaws.com"
-  dbname: "NBS_DataIngest"
-  username: "admin"
+  dbserver: ""
+  dbname: ""
+  username: ""
   password: ""
 
 nbs:
-  dbserver: "cdc-nbs-legacy-rds-mssql.chpvldsisz22.us-east-1.rds.amazonaws.com"
-  dbname: "nbs_msgoute"
-  username: "admin"
+  dbserver: ""
+  dbname: ""
+  username: ""
   password: ""
 
 
 kafka:
-  cluster: "b-1.mskclusterdevelopment.wadivf.c10.kafka.us-east-1.amazonaws.com:9092"
+  cluster: ""
 
 log:
   path: "/usr/share/dataingestion/data"
