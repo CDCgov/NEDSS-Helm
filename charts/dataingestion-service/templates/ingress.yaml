@@ -6,7 +6,7 @@ metadata:
   name: {{ include "dataingestion-service.fullname" . }}
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    nginx.ingress.kuberenetes.io/rewrite-target: /
+    # nginx.ingress.kuberenetes.io/rewrite-target: /
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
