@@ -55,20 +55,20 @@ affinity: {}
 ingressHost: "dataingestion.datateam-cdc-nbs.eqsandbox.com"
 
 jdbc:
-  dbserver: "nbs-msgoute-20221213.czya31goozkz.us-east-1.rds.amazonaws.com"
-  dbname: "NBS_DataIngest"
-  username: "admin"
+  dbserver: ""
+  dbname: ""
+  username: ""
   password: ""
 
 nbs:
-  dbserver: "cdc-nbs-legacy-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com"
-  dbname: "nbs_msgoute"
-  username: "nbs_ods"
+  dbserver: ""
+  dbname: ""
+  username: ""
   password: ""
 
 
 kafka:
-  cluster: "b-1.nbskafkadev01.f5qktb.c11.kafka.us-east-1.amazonaws.com:9092"
+  cluster: ""
 
 log:
   path: "/usr/share/dataingestion/data"
