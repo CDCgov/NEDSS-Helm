@@ -35,7 +35,7 @@ Common labels
 */}}
 {{- define "dataingestion-service.labels" -}}
 app: NBS
-type: App
+type: Data
 helm.sh/chart: {{ include "dataingestion-service.chart" . }}
 {{ include "dataingestion-service.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
@@ -49,7 +49,7 @@ Selector labels
 */}}
 {{- define "dataingestion-service.selectorLabels" -}}
 app: NBS
-type: App
+type: Data
 app.kubernetes.io/name: {{ include "dataingestion-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
