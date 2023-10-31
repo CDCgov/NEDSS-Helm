@@ -3,9 +3,9 @@ replicaCount: 1
 env: "prod"
 
 image:
-  repository: ""
+  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: 1.0.1-RC_20230906.de03452
+  tag: v1.0.1
 
 imagePullSecrets: []
 nameOverride: ""
