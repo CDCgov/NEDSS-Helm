@@ -79,6 +79,9 @@ jvmheap:
   init: "4g"
   max: "4g"
 
+# jdbcConnectionString is passed in as an override and all values must be supplied. 
+# Replace <db_endpoint>, <database>, <username>, and <password> in the following:
+# "jdbc:sqlserver://<db_endpoint>:1433;databaseName=<database>;user=<username>;password=<password>;encrypt=true;trustServerCertificate=true;"
 jdbcConnectionString: ""
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
