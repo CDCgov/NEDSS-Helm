@@ -25,7 +25,7 @@ service:
   port: 8443
 
 ingress:
-  enabled: true
+  enabled: false
   className: "nginx"
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
