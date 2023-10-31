@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: v1.0.0
+  tag: v1.0.1
 
 imagePullSecrets: []
 nameOverride: ""
@@ -27,6 +27,10 @@ service:
   port: 8080
   httpsPort: 443
   gatewayPort: 8000
+  pageBuilderPort: 8095
+
+pageBuilder:
+  enabled: "false"
 
 ingress:
   enabled: true
@@ -67,6 +71,9 @@ ingressHost: "app.example.com"
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 jdbc:
+  # jdbc.connectionString is passed in as an override and all values must be supplied. 
+  # Replace <db_endpoint>, <database>, <username>, and <password> in the following:
+  # "jdbc:sqlserver://<db_endpoint>:1433;databaseName=<database>;user=<username>;password=<password>;encrypt=true;trustServerCertificate=true;"
   connectionString: ""
   user: ""
   password: ""

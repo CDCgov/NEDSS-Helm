@@ -52,4 +52,13 @@ spec:
                 name: nbs-gateway-svc
                 port:
                   number: {{ .Values.service.gatewayPort }}
+          {{- if eq .Values.pageBuilder.enabled "true" }}
+          - path: "/nbs/page-builder/"
+            pathType: Prefix
+            backend:
+              service:
+                name: page-builder-api
+                port:
+                  number: {{ .Values.service.pageBuilderPort }}
+          {{- end }}
 {{- end }}

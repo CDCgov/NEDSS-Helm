@@ -49,4 +49,4 @@ Values for modernization-api charts.
 | affinity | object | {} | Define needed contraints |
 | ingressHost | string | "app.example.com" | configure ingress hostname |
 | elasticSearchHost | string | "<http://elasticsearch.default.svc.cluster.local:9200>" | Elastic search host. Default values should work, no changes needed unless there is a change in the elastic search deployment name. |
-| jdbc | Object |  | Java database connection. This is required. This needs to updated. |
+| jdbc | Object |  | Java database connection. This is required. This needs to updated. See values.yaml for descriptions of supplied values. |

@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/elasticsearch"
   pullPolicy: IfNotPresent
-  tag: v1.0.0
+  tag: v1.0.1
 
 imagePullSecrets: []
 nameOverride: ""
