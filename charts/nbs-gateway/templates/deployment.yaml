@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        args: ['--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}','--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}','--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}']
+        args: ['--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}','--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}','--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}','--nbs.gateway.pagebuilder.service={{ .Values.modernizationApiHost }}', '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}']
         command: ['java', '-jar', 'api.jar']
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         ports:

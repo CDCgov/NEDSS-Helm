@@ -19,6 +19,9 @@ gatewayService:
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
 
+pageBuilder:
+  enabled: "false"
+
 resources: {}
 
 nbsExternalName: app-classic.example.com
