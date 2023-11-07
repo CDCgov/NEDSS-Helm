@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "test"
+env: "sandboxdev"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-RC_BRANCH_7.1.56ef00b
+  tag: 1.0.1-SNAPSHOT.131f0b7
 
 imagePullSecrets: []
 nameOverride: ""
@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"  
   tls:
-    - secretName: dataingestion.test.nbspreview.com
+    - secretName: dataingestion.fts1.nbspreview.com
       hosts:
-        - dataingestion.test.nbspreview.com
+        - dataingestion.fts1.nbspreview.com
 
 resources: {}
 
@@ -52,7 +52,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.test.nbspreview.com"
+ingressHost: "dataingestion.fts1.nbspreview.com"
 
 jdbc:
   dbserver: ""
