@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "int1"
+env: "prod"
 
 image:
-  repository: ""
+  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.1d510a3
+  tag: "v1.0.0"
 
 imagePullSecrets: []
 nameOverride: ""
