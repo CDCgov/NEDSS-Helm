@@ -29,3 +29,5 @@ nbsExternalName: app-classic.int1.nbspreview.com
 ingressHost: "app.int1.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
+
+pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
