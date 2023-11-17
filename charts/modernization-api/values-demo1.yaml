@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "test2"
+env: "demo1"
 
 image:
   repository: ""
