@@ -29,3 +29,5 @@ nbsExternalName: app-classic.example.com
 ingressHost:  
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
+
+pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
