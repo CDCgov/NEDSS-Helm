@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - sgz-trivy-scan-poc2
     paths:
       - "charts/**"
   pull_request:
