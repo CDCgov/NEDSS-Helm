@@ -6,9 +6,8 @@ on:
   push:
     branches:
       - main
-      - sgz-trivy-scan-poc2
-    # paths:
-    #   - "charts/**"
+    paths:
+      - "charts/**"
   pull_request:
     branches:
       - main
@@ -33,7 +32,7 @@ jobs:
           hide-progress: false
           format: 'sarif'
           scan-ref: ./charts/
-          output: 'charts/trivy-results.sarif'
+          output: 'trivy-results.sarif'
           limit-severities-for-sarif: true
           exit-code: '0'
           ignore-unfixed: true
