@@ -7,8 +7,8 @@ on:
     branches:
       - main
       - sgz-trivy-scan-poc2
-    paths:
-      - "charts/**"
+    # paths:
+    #   - "charts/**"
   pull_request:
     branches:
       - main
