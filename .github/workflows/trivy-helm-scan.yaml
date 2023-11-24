@@ -4,10 +4,10 @@
 # For events triggered by pull_request, results are uploaded to GitHub security tab under the referring branch 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - "charts/**"
+    # branches:
+    #   - main
+    # paths:
+    #   - "charts/**"
   pull_request:
     branches:
       - main
