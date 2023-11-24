@@ -1,0 +1,48 @@
+# This scanner uses Trivy (https://github.com/aquasecurity/trivy-action) to scan helm charts for vulnerabilities
+
+# Event trigger is on merge to main, pull request to main, or manual
+# For events triggered by pull_request, results are uploaded to GitHub security tab under the referring branch 
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "charts/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "charts/**"
+  workflow_dispatch:
+    
+jobs:
+  scan-helm:
+    name: Scan Helm Charts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Runs Trivy scanner on the charts directory
+      - name: Run Trivy vulnerability scanner in IaC mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          hide-progress: false
+          format: 'sarif'
+          scan-ref: ./charts/
+          output: 'trivy-results.sarif'
+          limit-severities-for-sarif: true
+          exit-code: '0'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          skip-dirs: "cdc-address-api,common-asset-server,elasticsearch,nifi,kafka,patient-search,hybrid-integration"
+
+      # uploads results of scan to GitHub actions even if above fails
+      - name: Upload Trivy scan results to GitHub Security tab
+        if: always()
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+    
