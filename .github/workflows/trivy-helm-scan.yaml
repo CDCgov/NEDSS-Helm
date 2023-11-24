@@ -1,0 +1,39 @@
+# This scanner uses Trivy (https://github.com/aquasecurity/trivy-action) to scan helm charts for vulnerabilities
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "charts/**"
+  workflow_dispatch:
+    
+jobs:
+  scan-helm:
+    name: Scan Helm Charts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Runs Trivy scanner on the charts directory
+      - name: Run Trivy vulnerability scanner in IaC mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          hide-progress: false
+          format: 'sarif'
+          scan-ref: ./charts/
+          output: 'trivy-results.sarif'
+          limit-severities-for-sarif: true
+          exit-code: '0'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH,MEDIUM'
+
+      # uploads results of scan to GitHub actions even if above fails
+      - name: Upload Trivy scan results to GitHub Security tab
+        if: always()
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+    
