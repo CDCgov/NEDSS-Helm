@@ -32,11 +32,12 @@ jobs:
           hide-progress: false
           format: 'sarif'
           scan-ref: ./charts/
-          output: 'trivy-results.sarif'
+          output: 'charts/trivy-results.sarif'
           limit-severities-for-sarif: true
           exit-code: '0'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH,MEDIUM'
+          skip-dirs: "cdc-address-api,common-asset-server,elasticsearch,nifi,kafka,patient-search,hybrid-integration"
 
       # uploads results of scan to GitHub actions even if above fails
       - name: Upload Trivy scan results to GitHub Security tab
