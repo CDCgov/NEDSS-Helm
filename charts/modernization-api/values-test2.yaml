@@ -5,7 +5,7 @@ env: "test2"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-RC_20231031.8e6aa01
+  tag: 1.0.1-TEST.57dfc7e
 
 imagePullSecrets: []
 nameOverride: ""
@@ -35,7 +35,7 @@ pageBuilder:
 # nginx-ingress
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
     - secretName: app.test.nbspreview.com
       hosts:
