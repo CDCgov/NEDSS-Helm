@@ -50,7 +50,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "3Gi"
+    memory: "1Gi"
 
 autoscaling:
   enabled: false
@@ -68,7 +68,7 @@ containerPort: 8443
 
 pvc:
   nifiPvClaim:
-    storageRequest: 50Gi
+    storageRequest: 20Gi
 
 efsFileSystemId: ""
 
