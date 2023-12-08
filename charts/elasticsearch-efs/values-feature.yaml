@@ -35,7 +35,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "3Gi"
+    memory: "1Gi"
 
 autoscaling:
   enabled: false
@@ -52,6 +52,6 @@ affinity: {}
 pvc:
   esPvClaim:
     storageClass: efs-es
-    storageRequest: 100Gi
+    storageRequest: 20Gi
 
 efsFileSystemId: ""

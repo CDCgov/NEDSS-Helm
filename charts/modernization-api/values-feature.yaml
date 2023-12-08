@@ -52,7 +52,7 @@ nbsExternalName: app-classic.feature.nbspreview.com
 
 resources:
   limits:
-    memory: "2Gi"
+    memory: "1Gi"
 
 autoscaling:
   enabled: false
