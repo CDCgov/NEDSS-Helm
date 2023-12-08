@@ -1,0 +1,33 @@
+deployment:
+  replicas: 1
+
+env: "feature"
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: 1.0.1-SNAPSHOT.b7f9d59
+
+gatewayService:
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000
+  - name: https
+    port: 443
+    targetPort: 8000
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local
+
+pageBuilder:
+  enabled: "true"
+
+resources: {}
+
+nbsExternalName: app-classic.feature.nbspreview.com
+
+ingressHost: "app.feature.nbspreview.com"
+
+modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
+
+pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
