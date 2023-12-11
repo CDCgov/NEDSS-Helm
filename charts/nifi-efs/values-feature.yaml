@@ -50,7 +50,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "1Gi"
+    memory: "2Gi"
 
 autoscaling:
   enabled: false
@@ -75,8 +75,8 @@ efsFileSystemId: ""
 ### Nifi Configurations ###
 
 jvmheap:
-  init: "2g"
-  max: "2g"
+  init: "1g"
+  max: "1g"
 
 jdbcConnectionString: ""
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
