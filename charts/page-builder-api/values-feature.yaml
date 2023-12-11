@@ -5,7 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.f058b96
+  tag: 1.0.1-SNAPSHOT.a407cee
 
 # Host URL for application
 ingressHost: app.feature.nbspreview.com
