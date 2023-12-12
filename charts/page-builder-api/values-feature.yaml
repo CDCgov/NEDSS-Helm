@@ -1,17 +1,17 @@
 replicaCount: 1
 
-env: "int1"
+env: "feature"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.f3ef54c
+  tag: 1.0.1-SNAPSHOT.a407cee
 
 # Host URL for application
-ingressHost: app.int1.nbspreview.com
+ingressHost: app.feature.nbspreview.com
 
 # URL for access to classic application
-nbsExternalName: app-classic.int1.nbspreview.com
+nbsExternalName: app-classic.feature.nbspreview.com
 
 #Database access credentials
 jdbc:
@@ -60,7 +60,7 @@ istioGatewayIngress:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "2Gi"
+    memory: "1Gi"
 
 autoscaling:
   enabled: false

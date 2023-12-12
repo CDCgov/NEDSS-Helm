@@ -1,23 +1,11 @@
 replicaCount: 1
 
-env: "int1"
+env: "feature"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.f3ef54c
-
-# Host URL for application
-ingressHost: app.int1.nbspreview.com
-
-# URL for access to classic application
-nbsExternalName: app-classic.int1.nbspreview.com
-
-#Database access credentials
-jdbc:
-  connectionString: ""
-  user: ""
-  password: ""
+  tag: 1.0.1-SNAPSHOT.9d6a00e
 
 imagePullSecrets: []
 nameOverride: ""
@@ -36,31 +24,35 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8095
+  port: 8080
   httpsPort: 443
   gatewayPort: 8000
+  pageBuilderPort: 8095
 
-# determine whether or not to use nginx for ingress (only 1 ingress should be used to prevent conflicts)
+pageBuilder:
+  enabled: "true"
+
 ingress:
   enabled: true
   className: "nginx"
-  # tls:
-  #   - secretName: app.example.com
-  #     hosts:
-  #       - app.example.com
+  tls:
+    - secretName: app.feature.nbspreview.com
+      hosts:
+        - app.feature.nbspreview.com
 
 # determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
 istioGatewayIngress:
   enabled: false
-  # host: app.example.com
+  host: app.feature.nbspreview.com
   gatewayNamespace: "istio-ingress"
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
-# Kubernetes resource limits
+nbsExternalName: app-classic.feature.nbspreview.com
+
 resources:
   limits:
-    memory: "2Gi"
+    memory: "1Gi"
 
 autoscaling:
   enabled: false
@@ -73,3 +65,12 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+ingressHost: "app.feature.nbspreview.com"
+
+elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
+
+jdbc:
+  connectionString: ""
+  user: ""
+  password: ""

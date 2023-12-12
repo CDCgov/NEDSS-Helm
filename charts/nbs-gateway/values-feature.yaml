@@ -1,7 +1,7 @@
 deployment:
   replicas: 1
 
-env: "int1"
+env: "feature"
 
 image:
   repository: ""
@@ -24,9 +24,9 @@ pageBuilder:
 
 resources: {}
 
-nbsExternalName: app-classic.int1.nbspreview.com
+nbsExternalName: app-classic.feature.nbspreview.com
 
-ingressHost: "app.int1.nbspreview.com"
+ingressHost: "app.feature.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
