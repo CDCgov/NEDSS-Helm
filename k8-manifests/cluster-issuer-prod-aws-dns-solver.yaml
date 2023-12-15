@@ -1,0 +1,23 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-production
+spec:
+  acme:
+    email: email@sample.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      # Secret resource that will be used to store the account's private key.
+      name: letsencrypt-production-issuer-account-key
+    solvers:
+    # example: cross-account zone management for example.com
+    # this solver uses ambient credentials (i.e. inferred from the environment or EC2 Metadata Service)
+    # to assume a role in a different account
+    - selector:
+        # domain 
+        dnsZones:
+          - "example.com" 
+      dns01:
+        route53:
+          region: us-east-1
+          hostedZoneID: SAMPLEHOSTEDZONEID123 # Route53 public hosted zone ID
