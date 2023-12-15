@@ -31,6 +31,11 @@ service:
 
 pageBuilder:
   enabled: "true"
+  page:
+    library:
+      enabled: "true"
+    management:
+      enabled: "true"
 
 ingress:
   enabled: true

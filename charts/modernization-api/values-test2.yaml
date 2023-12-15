@@ -31,6 +31,11 @@ service:
 
 pageBuilder:
   enabled: "false"
+  page:
+    library:
+      enabled: "false"
+    management:
+      enabled: "false"
 
 # nginx-ingress
 ingress:
