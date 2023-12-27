@@ -30,10 +30,10 @@ service:
   pageBuilderPort: 8095
 
 pageBuilder:
-  enabled: "false"
+  enabled: "true"
   page:
     library:
-      enabled: "false"
+      enabled: "true"
     management:
       enabled: "false"
 
