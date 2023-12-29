@@ -36,6 +36,10 @@ pageBuilder:
       enabled: "true"
     management:
       enabled: "true"
+      create:
+        enabled: "true"
+      edit:
+        enabled: "true"
 
 ingress:
   enabled: true

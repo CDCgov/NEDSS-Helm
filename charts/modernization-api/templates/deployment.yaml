@@ -38,7 +38,7 @@ spec:
               containerPort: 8080
               protocol: TCP
           command: ['java', '-jar', 'api.jar']
-          args: ['--nbs.elasticsearch.url={{ .Values.elasticSearchHost }}', '--spring.datasource.url={{ .Values.jdbc.connectionString }}', '--spring.datasource.username={{ .Values.jdbc.user }}', '--spring.datasource.password={{ .Values.jdbc.password }}', '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}', '--nbs.ui.features.pageBuilder.enabled={{ .Values.pageBuilder.enabled }}', '--nbs.ui.features.pageBuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}','--nbs.ui.features.pageBuilder.page.management.enabled={{ .Values.pageBuilder.page.management.enabled }}']
+          args: ['--nbs.elasticsearch.url={{ .Values.elasticSearchHost }}', '--spring.datasource.url={{ .Values.jdbc.connectionString }}', '--spring.datasource.username={{ .Values.jdbc.user }}', '--spring.datasource.password={{ .Values.jdbc.password }}', '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}', '--nbs.ui.features.pageBuilder.enabled={{ .Values.pageBuilder.enabled }}', '--nbs.ui.features.pageBuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}','--nbs.ui.features.pageBuilder.page.management.enabled={{ .Values.pageBuilder.page.management.enabled }}', '--nbs.ui.features.pageBuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', '--nbs.ui.features.pageBuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}']
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
