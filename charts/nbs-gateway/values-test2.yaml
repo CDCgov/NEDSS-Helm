@@ -26,6 +26,10 @@ pageBuilder:
       enabled: "true"
     management:
       enabled: "false"
+      create:
+        enabled: "false"
+      edit:
+        enabled: "false"
 
 resources: {}
 

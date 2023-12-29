@@ -10,12 +10,12 @@ image:
 
 gatewayService:
   ports:
-  - name: http
-    port: 8000
-    targetPort: 8000
-  - name: https
-    port: 443
-    targetPort: 8000
+    - name: http
+      port: 8000
+      targetPort: 8000
+    - name: https
+      port: 443
+      targetPort: 8000
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
 
@@ -26,12 +26,16 @@ pageBuilder:
       enabled: "false"
     management:
       enabled: "false"
+      create:
+        enabled: "false"
+      edit:
+        enabled: "false"
 
 resources: {}
 
 nbsExternalName: app-classic.example.com
 
-ingressHost:  
+ingressHost:
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
