@@ -25,7 +25,6 @@ pageBuilder:
     library:
       enabled: "true"
     management:
-      enabled: "true"
       create:
         enabled: "true"
       edit:
