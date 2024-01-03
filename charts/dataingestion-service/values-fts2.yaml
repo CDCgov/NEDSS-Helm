@@ -5,7 +5,7 @@ env: "sandboxdev"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT_KEYCLOAK2.87667dc
+  tag: 1.0.1-SNAPSHOT_KEYCLOAK3.2876ca1
 
 imagePullSecrets: []
 nameOverride: ""
