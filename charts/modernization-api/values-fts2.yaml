@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "int1"
+env: "fts2"
 
 image:
   repository: ""
@@ -35,29 +35,29 @@ pageBuilder:
     library:
       enabled: "true"
     management:
-      enabled: "true"
+      enabled: "false"
 
 ingress:
   enabled: true
   className: "nginx"
   tls:
-    - secretName: app.int1.nbspreview.com
+    - secretName: app.fts2.nbspreview.com
       hosts:
-        - app.int1.nbspreview.com
+        - app.fts2.nbspreview.com
 
 # determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
 istioGatewayIngress:
   enabled: false
-  host: app.int1.nbspreview.com
+  host: app.fts2.nbspreview.com
   gatewayNamespace: "istio-ingress"
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
-nbsExternalName: app-classic.int1.nbspreview.com
+nbsExternalName: app-classic.fts2.nbspreview.com
 
 resources:
   limits:
-    memory: "2Gi"
+    memory: "1Gi"
 
 autoscaling:
   enabled: false
@@ -71,7 +71,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.int1.nbspreview.com"
+ingressHost: "app.fts2.nbspreview.com"
 
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
