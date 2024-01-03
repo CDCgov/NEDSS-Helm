@@ -5,7 +5,7 @@ env: "sandboxdev"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT_KEYCLOAK.2c63359
+  tag: 1.0.1-SNAPSHOT.597475c
 
 imagePullSecrets: []
 nameOverride: ""
@@ -81,3 +81,7 @@ pvc:
 efsFileSystemId: ""
 
 authUri: ""
+
+rsa:
+  privateKey:
+  publicKey:
