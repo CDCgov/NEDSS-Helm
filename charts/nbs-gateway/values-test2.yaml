@@ -20,10 +20,10 @@ gatewayService:
 kubernetesClusterDomain: cluster.local
 
 pageBuilder:
-  enabled: "true"
+  enabled: "false"
   page:
     library:
-      enabled: "true"
+      enabled: "false"
     management:
       enabled: "false"
 
