@@ -35,7 +35,10 @@ pageBuilder:
     library:
       enabled: "false"
     management:
-      enabled: "false"
+      create:
+        enabled: "false"
+      edit:
+        enabled: "false"
 
 # nginx-ingress
 ingress:
