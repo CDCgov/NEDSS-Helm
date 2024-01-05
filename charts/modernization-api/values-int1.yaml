@@ -38,7 +38,7 @@ pageBuilder:
       create:
         enabled: "true"
       edit:
-        enabled: "true"
+        enabled: "false"
 
 ingress:
   enabled: true
