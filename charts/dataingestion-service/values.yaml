@@ -82,6 +82,8 @@ pvc:
 
 efsFileSystemId: ""
 
+authUri: ""
+
 rsa:
   privateKey:
   publicKey:
