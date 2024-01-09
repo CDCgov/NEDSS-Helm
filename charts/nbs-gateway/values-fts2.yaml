@@ -1,7 +1,7 @@
 deployment:
   replicas: 1
 
-env: "feature"
+env: "fts2"
 
 image:
   repository: ""
@@ -10,12 +10,12 @@ image:
 
 gatewayService:
   ports:
-    - name: http
-      port: 8000
-      targetPort: 8000
-    - name: https
-      port: 443
-      targetPort: 8000
+  - name: http
+    port: 8000
+    targetPort: 8000
+  - name: https
+    port: 443
+    targetPort: 8000
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
 
@@ -25,16 +25,13 @@ pageBuilder:
     library:
       enabled: "true"
     management:
-      create:
-        enabled: "false"
-      edit:
-        enabled: "false"
+      enabled: "false"
 
 resources: {}
 
-nbsExternalName: app-classic.feature.nbspreview.com
+nbsExternalName: app-classic.fts2.nbspreview.com
 
-ingressHost: "app.feature.nbspreview.com"
+ingressHost: "app.fts2.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 

@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dev"
+env: "sandboxdev"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.bc2397e
+  tag: 1.0.1-SNAPSHOT_KEYCLOAK5.f51aaaf
 
 imagePullSecrets: []
 nameOverride: ""
@@ -32,11 +32,11 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
-    - secretName: dataingestion.datateam-cdc-nbs.eqsandbox.com
-      hosts:
-        - dataingestion.datateam-cdc-nbs.eqsandbox.com
+  - secretName: dataingestion.fts2.nbspreview.com
+    hosts:
+    - dataingestion.fts2.nbspreview.com
 
 resources: {}
 
@@ -52,7 +52,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.datateam-cdc-nbs.eqsandbox.com"
+ingressHost: "dataingestion.fts2.nbspreview.com"
 
 jdbc:
   dbserver: ""
@@ -75,7 +75,7 @@ log:
 
 pvc:
   diPvClaim:
-    storageClass: dataingestion-gp
+    storageClass: efs-dataingestion
     storageRequest: 20Gi
 
 efsFileSystemId: ""
