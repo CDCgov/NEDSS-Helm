@@ -6,7 +6,7 @@ env: "test2"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.57dfc7e
+  tag: 1.0.1-TEST.ac01645
 
 gatewayService:
   ports:
@@ -25,7 +25,10 @@ pageBuilder:
     library:
       enabled: "false"
     management:
-      enabled: "false"
+      create:
+        enabled: "false"
+      edit:
+        enabled: "false"
 
 resources: {}
 

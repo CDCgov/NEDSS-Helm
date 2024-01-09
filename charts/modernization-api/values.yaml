@@ -35,11 +35,14 @@ pageBuilder:
     library:
       enabled: "false"
     management:
-      enabled: "false"
+      create:
+        enabled: "false"
+      edit:
+        enabled: "false"
 
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
     - secretName: app.example.com
       hosts:
@@ -55,7 +58,7 @@ istioGatewayIngress:
 
 nbsExternalName: app-classic.example.com
 
-resources: 
+resources:
   limits:
     memory: "4Gi"
 
@@ -76,7 +79,7 @@ ingressHost: "app.example.com"
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 jdbc:
-  # jdbc.connectionString is passed in as an override and all values must be supplied. 
+  # jdbc.connectionString is passed in as an override and all values must be supplied.
   # Replace <db_endpoint>, <database>, <username>, and <password> in the following:
   # "jdbc:sqlserver://<db_endpoint>:1433;databaseName=<database>;user=<username>;password=<password>;encrypt=true;trustServerCertificate=true;"
   connectionString: ""

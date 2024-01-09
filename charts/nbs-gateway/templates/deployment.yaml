@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        args: ['--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}','--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}','--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}','--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}', '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}', '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}','--nbs.gateway.pagebuilder.page.management.enabled={{ .Values.pageBuilder.page.management.enabled }}']
+        args: ['--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}','--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}','--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}','--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}', '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}', '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}','--nbs.gateway.pagebuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', '--nbs.gateway.pagebuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}']
         command: ['java', '-jar', 'api.jar']
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         ports:
