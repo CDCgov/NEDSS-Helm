@@ -6,7 +6,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.a29e15d
+  tag: 1.0.1-SNAPSHOT.f9c5d47
 
 gatewayService:
   ports:
@@ -26,7 +26,7 @@ pageBuilder:
       enabled: "true"
     management:
       create:
-        enabled: "false"
+        enabled: "true"
       edit:
         enabled: "false"
 
