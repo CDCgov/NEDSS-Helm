@@ -29,7 +29,7 @@ on:
       excluded_paths:
         description: A CSV list detailing specific files and directories to exclude from the provided paths (this variable serves only to limit scope of the paths variable).
         type: string
-        default: "charts/modernization-api/values-*, charts/nbs-gateway/values-*, charts/dataingestion-service/values-*, charts/nginx-ingress/values-*, charts/elasticsearch-efs/values-*, charts/nifi-efs/values-*"
+        default: "charts/modernization-api/values-*, charts/nbs-gateway/values-*, charts/dataingestion-service/values-*, charts/elasticsearch-efs/values-*, charts/nifi-efs/values-*"
         required: false
     secrets:
       GIT_USER_EMAIL:
