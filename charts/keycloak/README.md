@@ -24,7 +24,7 @@ organization
 * msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi 
 5. install SSMS to run sql
 * connect with powershell
-* cd Users\sso-<username>\Desktop
+* cd Users\sso-username\Desktop
 * & 'C:\Program Files\Amazon\AWSCLIV2\aws.exe' s3 cp s3://cdc-nbs-shared-software/SSMS-Setup-ENU.exe .
 * connect to gui and install SSMS
 6. run SQL Server Management Studio 19 and run SQL
