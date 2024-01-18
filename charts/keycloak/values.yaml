@@ -1078,7 +1078,7 @@ postgresql:
 ## @param externalDatabase.annotations Additional custom annotations for external database secret object
 ##
 externalDatabase:
-  host: "cdc-nbs-legacy-rds-mssql.EXAMPLE_DB.us-east-1.rds.amazonaws.com"
+  host: "EXAMPLE_DB_ENDPOINT"
   port: 1433
   #user: NBS_keycloak
   #database: keycloak
@@ -1088,7 +1088,7 @@ extraEnvVars:
   - name: KC_DB # override values from the conf file
     value: 'mssql'
   - name: KC_DB_URL
-    value: 'jdbc:sqlserver://cdc-nbs-legacy-rds-mssql.EXAMPLE_DB.us-east-1.rds.amazonaws.com:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;'
+    value: 'jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;'
   - name: KC_DB_USERNAME
     value: 'NBS_keycloak'
   - name: KC_DB_PASSWORD
