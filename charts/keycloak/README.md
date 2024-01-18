@@ -58,7 +58,7 @@ Need to change jdbc connect string and EXAMPLE passwords in values file
   *   externalDatabase.port
 Search for EXAMPLE_ and replace
 
-## install Helm chart with new values
+## Install Helm chart with new values
 1. Connect to Kubernetes
 
 ***AWS/EKS example***
@@ -68,7 +68,7 @@ Search for EXAMPLE_ and replace
 2. test this worked
 * kubectl get pods
 
-## Install Keycloak with Helm
+###` Install Keycloak with Helm
 
 1. change to parent directory
 2. helm install keycloak --namespace keycloak --create-namespace -f keycloak/values-keycloak-${TMP_SITE}.yaml keycloak;  
