@@ -60,9 +60,10 @@ Search for EXAMPLE_ and replace
 
 ## install Helm chart with new values
 1. Connect to Kubernetes
+
 ***AWS/EKS example***
-TMP_CLUSTER=$(aws eks list-clusters --query 'clusters' --output text)
-aws eks update-kubeconfig --region us-east-1 --name ${TMP_CLUSTER}
+* TMP_CLUSTER=$(aws eks list-clusters --query 'clusters' --output text)
+* aws eks update-kubeconfig --region us-east-1 --name ${TMP_CLUSTER}
 
 2. test this worked
 * kubectl get pods
@@ -90,9 +91,11 @@ Or via GUI using Create Realm then import
 
 ## Regenerate the client secret (and record to use with app integrations)
 1. navigate to NBS realm
-2. select clients
-3. select di client
-4. regenerate secret
+1. select clients
+1. select di client
+1. select credentials
+1. regenerate secret
+1. store client secret in secrets manager keycloak/client/secret/di
 
 ## cleanup
 1. helm delete keycloak --namespace keycloak -f keycloak/values-keycloak-${TMP_SITE}.yaml keycloak;  
