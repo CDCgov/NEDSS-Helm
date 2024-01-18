@@ -13,6 +13,7 @@ organization
 
 1. IAM user or credentials to assume in a single account.
 2. Helm executable
+3. SQL client with the ability to connect to database instance
 
 ## Prepare Database:
 
@@ -20,21 +21,24 @@ organization
 2. get RDS admin password from secrets manager 
 3. connect to RDS instance in account with SSMS (install w/ powershell) 
 4. install/use the aws cli if you have to fetch files from s3 
-msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi 
+* msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi 
 5. install SSMS to run sql
 * connect with powershell
 * cd Users\sso-<username>\Desktop
-* "C:\Program Files\Amazon\AWSCLIV2\aws.exe" s3 cp s3://cdc-nbs-shared-software/SSMS-Setup-ENU.exe .
+* & 'C:\Program Files\Amazon\AWSCLIV2\aws.exe' s3 cp s3://cdc-nbs-shared-software/SSMS-Setup-ENU.exe .
 * connect to gui and install SSMS
-6. run SSMS and run SQL
+6. run SQL Server Management Studio 19 and run SQL
+* Authenticate to db server with DB endpoint, SQL auth, (in AWS retrieve
+  admin user from RDS and "password" from secrets manager)
 * select new query
-* paste keycloak.sql into window
+* paste nbs_keycloak.sql into window
 * "execute" 
 * refresh in left pane and confirm keycloak db exists
 
 ## Copy and modify Values file
 Need to change jdbc connect string and EXAMPLE passwords in values file
 1. copy values.yaml file for specific environment
+
 ***AWS/Shell Example***
 * paste aws credentials in session
 * TMP_DB_ENDPOINT=$(aws rds describe-db-instances --query 'DBInstances[*].Endpoint.Address' --output text)
