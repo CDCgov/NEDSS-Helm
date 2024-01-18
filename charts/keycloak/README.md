@@ -56,7 +56,7 @@ Need to change jdbc connect string and EXAMPLE passwords in values file
   *   KC_TRANSACTION_XA_ENABLED 
   *   externalDatabase.host
   *   externalDatabase.port
-Search for EXAMPLE_ and replace
+  *   Search for EXAMPLE_ and replace
 
 ## Install Helm chart with new values
 1. Connect to Kubernetes
