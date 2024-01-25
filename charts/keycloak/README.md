@@ -103,9 +103,9 @@ Or via GUI using Create Realm then import
 1. delete containers that utilize keycloak
 * e.g. helm uninstall dataingestion-service
 1. drop keycloak database (nbs_keycloak_remove.sql) - this may show as busy
-* USE [master];
-* GO
-* ALTER DATABASE [keycloak] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-* GO
-* DROP DATABASE [keycloak]
+> USE [master];
+> GO
+> ALTER DATABASE [keycloak] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+> GO
+> DROP DATABASE [keycloak]
 
