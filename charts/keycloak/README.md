@@ -99,10 +99,10 @@ Or via GUI using Create Realm then import
 
 ## cleanup
 1. helm uninstall keycloak -n keycloak
-1. backup keycloak database (rds snapshot, sqldump etc)
-1. delete containers that utilize keycloak
+2. backup keycloak database (rds snapshot, sqldump etc)
+3. delete containers that utilize keycloak
 * e.g. helm uninstall dataingestion-service
-1. drop keycloak database (nbs_keycloak_remove.sql) - this may show as busy
+4. drop keycloak database (nbs_keycloak_remove.sql) - this may show as busy
 > USE [master];
 
 > GO
