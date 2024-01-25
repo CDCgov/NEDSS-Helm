@@ -98,6 +98,18 @@ Or via GUI using Create Realm then import
 1. store client secret in secrets manager keycloak/client/secret/di
 
 ## cleanup
-1. helm delete keycloak --namespace keycloak -f keycloak/values-keycloak-${TMP_SITE}.yaml keycloak;  
+1. helm uninstall keycloak -n keycloak
+2. backup keycloak database (rds snapshot, sqldump etc)
+3. delete containers that utilize keycloak
+* e.g. helm uninstall dataingestion-service
+4. drop keycloak database (nbs_keycloak_remove.sql) - this may show as busy
+> USE [master];
 
+> GO
+
+> ALTER DATABASE [keycloak] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+
+> GO
+
+> DROP DATABASE [keycloak]
 
