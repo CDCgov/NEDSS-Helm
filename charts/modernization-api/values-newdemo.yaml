@@ -35,7 +35,7 @@ pageBuilder:
 # nginx-ingress
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
     - secretName: app.demo.nbspreview.com
       hosts:
@@ -73,3 +73,9 @@ jdbc:
   connectionString: ""
   user: ""
   password: ""
+
+ui:
+  smarty:
+    key: ""
+  analytics:
+    key: ""
