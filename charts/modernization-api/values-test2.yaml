@@ -81,3 +81,9 @@ jdbc:
   connectionString: ""
   user: ""
   password: ""
+
+ui:
+  smarty:
+    key: ""
+  analytics:
+    key: ""
