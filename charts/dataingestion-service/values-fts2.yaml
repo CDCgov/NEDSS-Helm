@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "sandboxdev"
+env: "fts2"
 
 image:
   repository: ""
@@ -81,7 +81,3 @@ pvc:
 efsFileSystemId: ""
 
 authUri: ""
-
-rsa:
-  privateKey:
-  publicKey:

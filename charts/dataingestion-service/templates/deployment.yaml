@@ -58,10 +58,6 @@ spec:
               value: {{ .Values.kafka.cluster }}
             - name: DI_LOG_PATH
               value: {{ .Values.log.path }}
-            - name: DI_RSA_PRIVATE_KEY
-              value: {{ .Values.rsa.privateKey }}
-            - name: DI_RSA_PUBLIC_KEY
-              value: {{ .Values.rsa.publicKey }}
             - name: DI_AUTH_URI
               value: {{ .Values.authUri }}
           volumeMounts:
