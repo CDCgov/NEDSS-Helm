@@ -32,11 +32,11 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
-    - secretName: dataingestion.datateam-cdc-nbs.eqsandbox.com
-      hosts:
-        - dataingestion.datateam-cdc-nbs.eqsandbox.com
+  - secretName: dataingestion.datateam-cdc-nbs.eqsandbox.com
+    hosts:
+    - dataingestion.datateam-cdc-nbs.eqsandbox.com
 
 resources: {}
 
@@ -81,7 +81,3 @@ pvc:
 efsFileSystemId: ""
 
 authUri: ""
-
-rsa:
-  privateKey:
-  publicKey:

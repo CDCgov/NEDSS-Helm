@@ -32,11 +32,11 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
-    - secretName: dataingestion.test.nbspreview.com
-      hosts:
-        - dataingestion.test.nbspreview.com
+  - secretName: dataingestion.test.nbspreview.com
+    hosts:
+    - dataingestion.test.nbspreview.com
 
 resources: {}
 
@@ -81,7 +81,3 @@ pvc:
 efsFileSystemId: ""
 
 authUri: ""
-
-rsa:
-  privateKey:
-  publicKey:
