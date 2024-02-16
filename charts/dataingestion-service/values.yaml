@@ -32,11 +32,11 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
-    - secretName: "app.example.com"
-      hosts:
-        - "app.example.com"
+  - secretName: "app.example.com"
+    hosts:
+    - "app.example.com"
 
 resources: {}
 
@@ -83,8 +83,3 @@ pvc:
 efsFileSystemId: ""
 
 authUri: ""
-
-rsa:
-  privateKey:
-  publicKey:
-
