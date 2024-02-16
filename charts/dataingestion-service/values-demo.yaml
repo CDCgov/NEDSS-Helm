@@ -33,11 +33,11 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   tls:
-    - secretName: 
-      hosts:
-        - 
+  - secretName:
+    hosts:
+    -
 
 resources: {}
 
@@ -81,6 +81,4 @@ pvc:
 
 efsFileSystemId: ""
 
-rsa:
-  privateKey:
-  publicKey:
+authUri: ""
