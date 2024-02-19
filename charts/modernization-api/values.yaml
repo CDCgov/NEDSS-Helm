@@ -75,6 +75,7 @@ tolerations: []
 affinity: {}
 
 ingressHost: "app.example.com"
+tlsCertificateSecretName: "app.example.com" # if using LetsEncrypt this should match ingressHost
 
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 

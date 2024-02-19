@@ -5,12 +5,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: main-ingress-resource
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  # annotations:
+  #   cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
-    - secretName: {{ .Values.ingressHost }}
+    - secretName: {{ .Values.tlsCertificateSecretName }}
       hosts:
         - {{ .Values.ingressHost }}
   rules:
