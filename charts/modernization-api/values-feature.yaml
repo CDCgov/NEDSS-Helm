@@ -5,7 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.4916441
+  tag: 1.0.1-SNAPSHOT.b8bde58
 
 imagePullSecrets: []
 nameOverride: ""
@@ -38,7 +38,7 @@ pageBuilder:
       create:
         enabled: "true"
       edit:
-        enabled: "false"
+        enabled: "true"
 
 ingress:
   enabled: true
