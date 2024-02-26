@@ -81,3 +81,9 @@ pvc:
 efsFileSystemId: ""
 
 authUri: ""
+
+sftp:
+  enabled: "false"
+  host: ""
+  username: ""
+  password: ""
