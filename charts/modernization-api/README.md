@@ -60,3 +60,4 @@ Values for modernization-api charts.
 | ui.smarty.key       | string |                                                                                | The embedded key used to authenticate the PostHog analytics client                                                                 |
 | ui.analytics        | Object |                                                                                | Settings for the analytics used by the modernization-ui                                                                            |
 | ui.analytics.key    | string |                                                                                | The key used to authenticate the PostHog client                                                                                    |
+
