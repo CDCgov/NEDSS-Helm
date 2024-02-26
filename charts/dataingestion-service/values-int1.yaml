@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.6e51805
+  tag: 1.0.1-SNAPSHOT.20c9d81
 
 imagePullSecrets: []
 nameOverride: ""
@@ -81,3 +81,9 @@ pvc:
 efsFileSystemId: ""
 
 authUri: ""
+
+sftp:
+  enabled: ""
+  host: ""
+  username: ""
+  password: ""
