@@ -83,7 +83,7 @@ efsFileSystemId: ""
 authUri: ""
 
 sftp:
-  enabled: "false"
+  enabled: false
   host: ""
   username: ""
   password: ""
