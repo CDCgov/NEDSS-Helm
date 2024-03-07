@@ -3,7 +3,7 @@ controller:
   config:
     compute-full-forwarded-for: "true"
     use-forwarded-headers: "true"
-    proxy-body-size: "0"
+    #proxy-body-size: "0"
   ingressClassResource:
     enabled: true
     default: false
