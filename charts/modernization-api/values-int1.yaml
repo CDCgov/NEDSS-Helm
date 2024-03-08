@@ -57,7 +57,7 @@ istioGatewayIngress:
   certificateIssuerName: "letsencrypt-production"
 
 mTLS:
-  enabled: false
+  enabled: true
 
 nbsExternalName: app-classic.int1.nbspreview.com
 
