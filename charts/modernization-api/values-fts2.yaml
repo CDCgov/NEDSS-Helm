@@ -53,6 +53,9 @@ istioGatewayIngress:
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
+mTLS:
+  enabled: false
+
 nbsExternalName: app-classic.fts2.nbspreview.com
 
 resources:
