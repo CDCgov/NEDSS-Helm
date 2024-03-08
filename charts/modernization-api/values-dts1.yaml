@@ -59,6 +59,9 @@ istioGatewayIngress:
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
+mTLS:
+  enabled: "false"
+
 resources: {}
 
 autoscaling:

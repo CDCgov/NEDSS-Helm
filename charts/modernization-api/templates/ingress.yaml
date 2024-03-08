@@ -7,6 +7,9 @@ metadata:
   name: main-ingress-resource
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
+    {{- if eq .Values.mTLS.enabled "true"}}
+    nginx.ingress.kubernetes.io/service-upstream: "true"    
+    {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
