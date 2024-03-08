@@ -50,6 +50,9 @@ istioGatewayIngress:
   gatewayNamespace: "istio-ingress"
   certificateIssuerName: "letsencrypt-production"
 
+mTLS:
+  enabled: false
+
 resources:
   limits:
     memory: "2Gi"
