@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "int1"
+env: "ce1"
 
 image:
   repository: ""
