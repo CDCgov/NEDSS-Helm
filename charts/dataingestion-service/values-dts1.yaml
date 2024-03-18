@@ -38,7 +38,10 @@ ingress:
     hosts:
     - dataingestion.dts1.nbspreview.com
 
-resources: {}
+# Kubernetes resource limits
+resources:
+  limits:
+    memory: "2Gi"
 
 autoscaling:
   enabled: false
