@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.6f7b458
+  tag: 1.0.1-SNAPSHOT.95399a8
 
 # Host URL for application
 ingressHost: app.int1.nbspreview.com
