@@ -75,10 +75,10 @@ log:
 
 pvc:
   diPvClaim:
-    storageClass: azurefile-dataingestion
+    storageClass: dataingestion
     storageRequest: 20Gi
 
-# efsFileSystemId: ""
+efsFileSystemId: ""
 
 authUri: ""
 
@@ -87,3 +87,5 @@ sftp:
   host: ""
   username: ""
   password: ""
+
+cloudProvider: "" # or "aws" or "azure"

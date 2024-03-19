@@ -1,9 +1,21 @@
-kind: StorageClass
 apiVersion: storage.k8s.io/v1
+kind: StorageClass
 metadata:
-  name: {{ .Values.pvc.diPvClaim.storageClass | quote }}
-provisioner: efs.csi.aws.com
+  name: 
+    {{- if or (eq .Values.cloudProvider "aws") (eq .Values.cloudProvider "azure") }}
+    {{ .Values.pvc.diPvClaim.storageClass | quote }}
+    {{- else }}
+    {{- end }}
+provisioner: 
+  {{- if eq .Values.cloudProvider "aws" }}
+  efs.csi.aws.com
+  {{- else if eq .Values.cloudProvider "azure" }}
+  file.csi.azure.com
+  {{- else }}
+  {{- end }}
 parameters:
+  {{- if eq .Values.cloudProvider "aws" }}
   provisioningMode: efs-ap
   fileSystemId: {{ .Values.efsFileSystemId | quote }}
   directoryPerms: "700"
+  {{- end }}
