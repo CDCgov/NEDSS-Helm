@@ -3,17 +3,14 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ include "dataingestion-service.fullname" . }}-di-pvc
   labels:
-{{- include "dataingestion-service.labels" . | nindent 4 }}
+  {{- include "dataingestion-service.labels" . | nindent 4 }}
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: {{ .Values.pvc.diPvClaim.storageRequest | quote }}
-{{- if or (eq .Values.cloudProvider "aws") (eq .Values.cloudProvider "azure") }}
   storageClassName: {{ .Values.pvc.diPvClaim.storageClass | quote }}
-{{- else }}
-{{- end }}
 
 
 

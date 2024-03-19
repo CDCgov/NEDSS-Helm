@@ -88,4 +88,15 @@ sftp:
   username: ""
   password: ""
 
-cloudProvider: "" # or "aws" or "azure"
+# Valid values are "azure" or "aws"
+cloudProvider: "azure"
+aws:
+  efs:
+    storageClass: efs-es
+    storageRequest: 100Gi
+    efsFileSystemId: ""
+
+azure:
+  files:
+    storageClass: azurefile-csi
+    storageRequest: 100Gi
