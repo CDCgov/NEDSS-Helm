@@ -39,9 +39,7 @@ ingress:
     - dataingestion.dts1.nbspreview.com
 
 # Kubernetes resource limits
-resources:
-  limits:
-    memory: "6Gi"
+resources: {}
 
 autoscaling:
   enabled: false
