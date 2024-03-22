@@ -49,9 +49,20 @@ tolerations: []
 
 affinity: {}
 
-pvc:
-  esPvClaim:
+
+
+
+cloudProvider: azure
+
+
+aws:
+  efs:
     storageClass: efs-es
     storageRequest: 100Gi
+    efsFileSystemId: ""
 
-efsFileSystemId: ""
+azure:
+  files:
+    storageClass: azurefile-csi
+    storageRequest: 100Gi
+  
