@@ -91,3 +91,5 @@ ui:
     key: ""
   analytics:
     key: ""
+
+cloudProvider: azure
