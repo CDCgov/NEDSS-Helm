@@ -1,0 +1,9 @@
+controller:
+  service:
+    loadBalancerIP: 10.16.3.137
+    annotations:
+      #Use for public IP and public cluster
+      #service.beta.kubernetes.io/azure-load-balancer-ipv4: "172.210.88.42"
+      #FOr private IP and private cluster use the following:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+      service.beta.kubernetes.io/azure-load-balancer-internal-subnet: csels-nbs-dev-low-modern-app-vnet-sn
