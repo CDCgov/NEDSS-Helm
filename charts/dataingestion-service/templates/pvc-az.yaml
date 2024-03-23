@@ -9,5 +9,5 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: {{ .Values.pvc.diPvClaim.storageRequest | quote }}
-  storageClassName: {{ .Values.pvc.diPvClaim.storageClass | quote }}
+      storage: {{ .Values.azure.files.storageRequest | quote }}
+  storageClassName: {{ .Values.azure.files.storageClass | quote }}
