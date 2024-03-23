@@ -75,12 +75,12 @@ kafka:
 log:
   path: "/usr/share/dataingestion/data"
 
-pvc:
-  diPvClaim:
-    storageClass: efs-dataingestion
-    storageRequest: 20Gi
+# pvc:
+#   diPvClaim:
+#     storageClass: efs-dataingestion
+#     storageRequest: 20Gi
 
-efsFileSystemId: ""
+# efsFileSystemId: ""
 
 authUri: ""
 
@@ -93,9 +93,9 @@ azure:
     storageClass: azurefile-csi
     storageRequest: 20Gi
 
-aws:
-  efs:
-    storageClass: efs-es
-    storageRequest: 20Gi
-    efsFileSystemId: ""
+# aws:
+#   efs:
+#     storageClass: efs-es
+#     storageRequest: 20Gi
+#     efsFileSystemId: ""
 
