@@ -93,9 +93,9 @@ azure:
     storageClass: azurefile-csi
     storageRequest: 20Gi
 
-# aws:
-#   efs:
-#     storageClass: efs-es
-#     storageRequest: 20Gi
-#     efsFileSystemId: ""
+aws:
+  efs:
+    storageClass: efs-es
+    storageRequest: 20Gi
+    efsFileSystemId: ""
 
