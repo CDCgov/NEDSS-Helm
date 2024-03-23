@@ -11,7 +11,3 @@ spec:
     requests:
       storage: {{ .Values.pvc.diPvClaim.storageRequest | quote }}
   storageClassName: {{ .Values.pvc.diPvClaim.storageClass | quote }}
-
-
-
-

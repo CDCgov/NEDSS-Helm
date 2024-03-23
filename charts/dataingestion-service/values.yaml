@@ -83,3 +83,18 @@ pvc:
 efsFileSystemId: ""
 
 authUri: ""
+
+#############################
+
+cloudProvider: azure   # or aws
+
+aws:
+  efs:
+    storageClass: efs-es
+    storageRequest: 100Gi
+    efsFileSystemId: ""
+
+azure:
+  files:
+    storageClass: azurefile-csi
+    storageRequest: 100Gi
