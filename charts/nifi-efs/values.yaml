@@ -31,14 +31,14 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/upstream-vhost: "localhost:8443"
     nginx.ingress.kubernetes.io/proxy-redirect-from: "https://localhost:8443"
-    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi.example.com"
+    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi.EXAMPLE_DOMAIN"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
   tls:
-    - secretName: nifi.example.com
+    - secretName: nifi.EXAMPLE_DOMAIN
       hosts:
-        - nifi.example.com
+        - nifi.EXAMPLE_DOMAIN
   hosts:
-    - host: nifi.example.com
+    - host: nifi.EXAMPLE_DOMAIN
       paths:
       - path: /
         pathType: Prefix

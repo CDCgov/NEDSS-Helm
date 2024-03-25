@@ -54,4 +54,4 @@ pvc:
     storageClass: efs-es
     storageRequest: 100Gi
 
-efsFileSystemId: ""
+efsFileSystemId: "EXAMPLE_EFS_ID"
