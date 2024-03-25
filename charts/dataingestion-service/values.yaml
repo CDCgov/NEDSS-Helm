@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: "app.example.com"
+  - secretName: "app.EXAMPLE_DOMAIN"
     hosts:
-    - "app.example.com"
+    - "app.EXAMPLE_DOMAIN"
 
 resources: {}
 
@@ -52,7 +52,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.example.com"
+ingressHost: "app.EXAMPLE_DOMAIN"
 
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
@@ -80,6 +80,6 @@ pvc:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
 
-efsFileSystemId: ""
+efsFileSystemId: "EXAMPLE_EFS_ID"
 
 authUri: ""

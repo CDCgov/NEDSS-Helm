@@ -32,7 +32,7 @@ pageBuilder:
 
 resources: {}
 
-nbsExternalName: app-classic.example.com
+nbsExternalName: app-classic.EXAMPLE_DOMAIN
 
 ingressHost:
 

@@ -8,10 +8,10 @@ image:
   tag: "v1.0.8"
 
 # Host URL for application
-ingressHost: "app.example.com"
+ingressHost: "app.EXAMPLE_DOMAIN"
 
 # URL for access to classic application
-nbsExternalName: app-classic.example.com
+nbsExternalName: app-classic.EXAMPLE_DOMAIN
 
 #Database access credentials
 jdbc:
@@ -45,14 +45,14 @@ ingress:
   enabled: true
   className: "nginx"  
   # tls:
-  #   - secretName: app.example.com
+  #   - secretName: app.EXAMPLE_DOMAIN
   #     hosts:
-  #       - app.example.com
+  #       - app.EXAMPLE_DOMAIN
 
 # determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
 istioGatewayIngress:
   enabled: false
-  # host: app.example.com
+  # host: app.EXAMPLE_DOMAIN
   gatewayNamespace: "istio-ingress"
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"

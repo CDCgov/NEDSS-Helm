@@ -4,7 +4,7 @@ metadata:
   name: letsencrypt-production
 spec:
   acme:
-    email: email@sample.com
+    email: EXAMPLE_USER@EXAMPLE_DOMAIN
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       # Secret resource that will be used to store the account's private key.
@@ -16,8 +16,8 @@ spec:
     - selector:
         # domain 
         dnsZones:
-          - "example.com" 
+          - "EXAMPLE_DOMAIN" 
       dns01:
         route53:
           region: us-east-1
-          hostedZoneID: SAMPLEHOSTEDZONEID123 # Route53 public hosted zone ID
+          hostedZoneID: EXAMPLE_HOSTEDZONEID # Route53 public hosted zone ID

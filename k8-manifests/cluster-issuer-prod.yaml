@@ -7,7 +7,7 @@ spec:
     # You must replace this email address with your own.
     # Let's Encrypt will use this to contact you about expiring
     # certificates, and issues related to your account.
-    email: email@sample.com
+    email: EXAMPLE_USER@EXAMPLE_DOMAIN
     #server: https://acme-staging-v02.api.letsencrypt.org/directory
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
