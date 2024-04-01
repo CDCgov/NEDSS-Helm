@@ -54,6 +54,8 @@ spec:
               value: {{ .Values.nbs.username }}
             - name: DI_NBS_DBPASSWORD
               value: {{ .Values.nbs.password }}
+            - name: DI_ODSE_DBNAME
+              value: {{ .Values.odse.dbname }}
             - name: BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.cluster }}
             - name: DI_LOG_PATH

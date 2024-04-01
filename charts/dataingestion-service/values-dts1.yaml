@@ -67,6 +67,8 @@ nbs:
   username: ""
   password: ""
 
+odse:
+  dbname: ""
 
 kafka:
   cluster: ""
