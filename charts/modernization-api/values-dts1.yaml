@@ -30,15 +30,15 @@ service:
   pageBuilderPort: 8095
 
 pageBuilder:
-  enabled: "false"
+  enabled: "true"
   page:
     library:
-      enabled: "false"
+      enabled: "true"
     management:
       create:
-        enabled: "false"
+        enabled: "true"
       edit:
-        enabled: "false"
+        enabled: "true"
 
 # nginx-ingress
 ingress:
