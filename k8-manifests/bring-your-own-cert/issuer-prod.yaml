@@ -1,9 +1,0 @@
-# For more details see https://cert-manager.io/docs/configuration/ca/
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: nbs-modernization-api-ca-issuer # name of issuer
-  namespace: default
-spec:
-  ca:
-    secretName: nbs-modernization-api-key-pair # key pair secret name from ca-secret.yaml
