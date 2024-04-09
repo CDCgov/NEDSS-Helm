@@ -84,6 +84,13 @@ efsFileSystemId: ""
 
 authUri: ""
 
+# from dts1
+sftp:
+  enabled: "false"
+  host: ""
+  username: ""
+  password: ""
+
 ########################################
 
 cloudProvider: aws   # or aws
