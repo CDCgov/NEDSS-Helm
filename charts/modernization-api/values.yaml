@@ -93,3 +93,4 @@ ui:
     key: ""
 
 cloudProvider: azure
+useCertManager: false

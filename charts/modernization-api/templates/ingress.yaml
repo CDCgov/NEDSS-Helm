@@ -6,7 +6,7 @@ kind: Ingress
 metadata:
   name: main-ingress-resource
   annotations:
-    {{- if eq .Values.cloudProvider "aws" }}
+    {{- if .Values.useCertManager }}
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     {{- end }}
 spec:
