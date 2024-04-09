@@ -103,7 +103,7 @@ azure:
 
 aws:
   efs:
-    storageClass: efs-es
+    storageClass: efs-dataingestion
     storageRequest: 20Gi
     efsFileSystemId: ""
 
