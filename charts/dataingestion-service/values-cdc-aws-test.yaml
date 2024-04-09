@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: "app.example.com"
+  - secretName: "dataingestion.dev.nbspreview.cdc.gov"
     hosts:
-    - "app.example.com"
+    - "dataingestion.dev.nbspreview.cdc.gov"
 
 resources: {}
 
@@ -52,7 +52,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.example.com"
+ingressHost: "dataingestion.dev.nbspreview.cdc.gov"
 
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
@@ -86,7 +86,7 @@ authUri: ""
 
 ########################################
 
-cloudProvider: azure   # or aws
+cloudProvider: aws   # or aws
 useCertManager: false
 
 azure:

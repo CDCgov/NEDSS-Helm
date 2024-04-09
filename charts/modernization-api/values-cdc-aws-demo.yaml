@@ -1,0 +1,96 @@
+replicaCount: 1
+
+env: "prod"
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: "v1.0.9"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+  httpsPort: 443
+  gatewayPort: 8000
+  pageBuilderPort: 8095
+
+pageBuilder:
+  enabled: "true"
+  page:
+    library:
+      enabled: "true"
+    management:
+      create:
+        enabled: "true"
+      edit:
+        enabled: "false"
+
+ingress:
+  enabled: true
+  className: "nginx"
+  tls:
+    - secretName: app.nbspreview.cdc.gov
+      hosts:
+        - app.nbspreview.cdc.gov
+
+# determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
+istioGatewayIngress:
+  enabled: false
+  host: app.example.com
+  gatewayNamespace: "istio-ingress"
+  certificateName: ""
+  certificateIssuerName: "letsencrypt-production"
+
+nbsExternalName: app-classic.nbspreview.cdc.gov
+
+resources:
+  limits:
+    memory: "4Gi"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: "app.nbspreview.cdc.gov"
+
+elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
+
+jdbc:
+  # jdbc.connectionString is passed in as an override and all values must be supplied.
+  # Replace <db_endpoint>, <database>, <username>, and <password> in the following:
+  # "jdbc:sqlserver://<db_endpoint>:1433;databaseName=<database>;user=<username>;password=<password>;encrypt=true;trustServerCertificate=true;"
+  connectionString: ""
+  user: ""
+  password: ""
+
+ui:
+  smarty:
+    key: ""
+  analytics:
+    key: ""
+
+cloudProvider: aws
+useCertManager: false
