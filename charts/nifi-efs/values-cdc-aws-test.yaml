@@ -50,7 +50,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "6Gi"
+    memory: "2Gi"
 
 autoscaling:
   enabled: false
@@ -103,8 +103,8 @@ azure:
 ### Nifi Configurations ###
 
 jvmheap:
-  init: "4g"
-  max: "4g"
+  init: "1g"
+  max: "1g"
 
 # jdbcConnectionString is passed in as an override and all values must be supplied. 
 # Replace <db_endpoint>, <database>, <username>, and <password> in the following:
