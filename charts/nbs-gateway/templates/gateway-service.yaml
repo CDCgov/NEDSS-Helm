@@ -7,8 +7,6 @@ metadata:
 spec:
   type: {{ .Values.gatewayService.type }}
   selector:
-    app: NBS
-    type: App
-  {{- include "nbs-gateway.selectorLabels" . | nindent 4 }}
+    {{- include "nbs-gateway.selectorLabels" . | nindent 4 }}
   ports:
 	{{- .Values.gatewayService.ports | toYaml | nindent 2 -}}

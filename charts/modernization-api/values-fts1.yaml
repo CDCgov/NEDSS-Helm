@@ -3,9 +3,9 @@ replicaCount: 1
 env: "fts1"
 
 image:
-  repository: ""
+  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.bc0286c
+  tag: v1.0.9
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,7 +30,7 @@ service:
   pageBuilderPort: 8095
 
 pageBuilder:
-  enabled: "true"
+  enabled: "false"
 
 ingress:
   enabled: true
@@ -74,9 +74,9 @@ ingressHost: "app.fts1.nbspreview.com"
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 jdbc:
-  connectionString: ""
-  user: ""
-  password: ""
+  connectionString: "jdbc:sqlserver://nbs-db.private-fts1.nbspreview.com:1433;databaseName=NBS_ODSE;user=nbs_ods;password=ods;encrypt=true;trustServerCertificate=true;"
+  user: "nbs_ods"
+  password: "ods"
 
 ui:
   smarty:

@@ -34,6 +34,8 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "nbs-gateway.labels" -}}
+app: NBS
+type: App
 helm.sh/chart: {{ include "nbs-gateway.chart" . }}
 {{ include "nbs-gateway.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
@@ -46,6 +48,10 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "nbs-gateway.selectorLabels" -}}
+app: NBS
+type: App
+app.kubernetes.io/name: {{ include "nbs-gateway.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
