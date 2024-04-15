@@ -74,9 +74,9 @@ ingressHost: "app.fts1.nbspreview.com"
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 jdbc:
-  connectionString: "jdbc:sqlserver://nbs-db.private-fts1.nbspreview.com:1433;databaseName=NBS_ODSE;user=nbs_ods;password=ods;encrypt=true;trustServerCertificate=true;"
-  user: "nbs_ods"
-  password: "ods"
+  connectionString: ""
+  user: ""
+  password: ""
 
 ui:
   smarty:
