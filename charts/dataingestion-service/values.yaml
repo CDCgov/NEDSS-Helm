@@ -68,6 +68,8 @@ nbs:
   username: ""
   password: ""
 
+odse:
+  dbname: ""
 
 kafka:
   cluster: ""
@@ -83,3 +85,9 @@ pvc:
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
 authUri: ""
+
+sftp:
+  enabled: ""
+  host: ""
+  username: ""
+  password: ""
