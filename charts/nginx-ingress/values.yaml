@@ -1,5 +1,7 @@
 # Used with official helm chart
 controller:
+  podAnnotations:
+    linkerd.io/inject: enabled
   config:
     compute-full-forwarded-for: "true"
     use-forwarded-headers: "true"

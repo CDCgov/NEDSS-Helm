@@ -4,9 +4,9 @@ deployment:
 env: "auto"
 
 image:
-  repository: ""
+  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.4683cd1
+  tag: v1.0.9
 
 gatewayService:
   ports:
@@ -19,14 +19,22 @@ gatewayService:
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
 
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
 pageBuilder:
   enabled: "false"
 
 resources: {}
+  # requests:
+  #   cpu: "1"
 
-nbsExternalName: app-classic.ai-cdc-nbs.eqsandbox.com
+nbsExternalName: app-classic.fts1.nbspreview.com
 
-ingressHost: "app.ai-cdc-nbs.eqsandbox.com"
+ingressHost: "app.fts1.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 

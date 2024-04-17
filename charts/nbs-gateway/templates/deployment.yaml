@@ -3,19 +3,20 @@ kind: Deployment
 metadata:
   name: {{ include "nbs-gateway.fullname" . }}-deployment
   labels:
-    app: NBS
-    type: App
+    {{- include "nbs-gateway.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
-      app: NBS
-      type: App
+      {{- include "nbs-gateway.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
-        app: NBS
-        type: App
+        {{- include "nbs-gateway.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
@@ -26,4 +27,17 @@ spec:
         - containerPort: 8000
         resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
      

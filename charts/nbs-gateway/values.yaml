@@ -39,3 +39,16 @@ ingressHost:
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

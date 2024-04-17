@@ -7,9 +7,12 @@ metadata:
   name: main-ingress-resource
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    {{- if .Values.mTLS.enabled }}
-    nginx.ingress.kubernetes.io/service-upstream: "true"    
-    {{- end }}
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    # nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    # nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+    # nginx.ingress.kubernetes.io/use-regex: "true"
+    #nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
@@ -19,14 +22,7 @@ spec:
   rules:
     - host: {{ .Values.ingressHost }}
       http:
-        paths:
-          - path: "/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  number: {{ $svcPort }}
+        paths:          
           - path: "/nbs/redirect/"
             pathType: Prefix
             backend:
@@ -40,21 +36,7 @@ spec:
               service:
                 name: {{ $fullName }}
                 port:
-                  number: {{ $svcPort }}
-          - path: /images/nedssLogo.jpg
-            pathType: Exact
-            backend:
-              service:
-                name: nbs-gateway-svc
-                port:
-                  number: {{ .Values.service.gatewayPort }}
-          - path: "/nbs/"
-            pathType: Prefix
-            backend:
-              service:
-                name: nbs-gateway-svc
-                port:
-                  number: {{ .Values.service.gatewayPort }}
+                  number: {{ $svcPort }}                  
           {{- if eq .Values.pageBuilder.enabled "true" }}
           - path: "/nbs/page-builder/"
             pathType: Prefix
@@ -64,4 +46,32 @@ spec:
                 port:
                   number: {{ .Values.service.pageBuilderPort }}
           {{- end }}
+          - path: "/nbs/"
+            pathType: Prefix
+            backend:
+              service:
+                name: nbs-gateway-svc  #nbs-gateway-ext
+                port:
+                  number: {{ .Values.service.gatewayPort }} #443
+          - path: /images/nedssLogo.jpg
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: nbs-gateway-svc #nbs-gateway-ext
+                port:
+                  number: {{ .Values.service.gatewayPort }} #443  
+          - path: /favicon.ico
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: nbs-gateway-svc  #nbs-gateway-ext
+                port:
+                  number: {{ .Values.service.gatewayPort }} #443
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
 {{- end }}
