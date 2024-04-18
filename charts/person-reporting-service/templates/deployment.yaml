@@ -40,16 +40,16 @@ spec:
           env:
             - name: DB_URL
               value: {{ .Values.jdbc.dbserver }}
+            - name: DI_DBNAME
+              value: {{ .Values.jdbc.dbname }}
             - name: DB_USERNAME
               value: {{ .Values.jdbc.username }}
             - name: DB_PASSWORD
               value: {{ .Values.jdbc.password }}
-            - name: KAFKA_BOOTSTRAP_SERVER
+            - name: BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.cluster }}
             - name: DA_LOG_PATH
               value: {{ .Values.log.path }}
-            - name: DB_ODSE
-              value: {{ .Values.odse.dbname }}
           volumeMounts:
           - mountPath: /usr/share/person-reporting/data
             name: da-persistent-storage

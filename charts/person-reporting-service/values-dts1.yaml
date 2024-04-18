@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: app.dts1.nbspreview.com
+  - secretName: personreporting.dts1.nbspreview.com
     hosts:
-    - app.dts1.nbspreview.com
+    - personreporting.dts1.nbspreview.com
 
 # Kubernetes resource limits
 resources: {}
@@ -53,15 +53,22 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.dts1.nbspreview.com"
+ingressHost: "personreporting.dts1.nbspreview.com"
 
 jdbc:
   dbserver: ""
+  dbname: ""
+  username: ""
+  password: ""
+
+nbs:
+  dbserver: ""
+  dbname: ""
   username: ""
   password: ""
 
 odse:
-  dbname: "NBS_ODSE"
+  dbname: ""
 
 kafka:
   cluster: ""
@@ -73,3 +80,13 @@ pvc:
   daPvClaim:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
+
+efsFileSystemId: ""
+
+authUri: ""
+
+sftp:
+  enabled: ""
+  host: ""
+  username: ""
+  password: ""

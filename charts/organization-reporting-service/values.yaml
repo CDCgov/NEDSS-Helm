@@ -27,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8092
+  port: 8091
   httpsPort: 443
 
 ingress:
@@ -58,6 +58,13 @@ ingressHost: "app.EXAMPLE_DOMAIN"
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: ""
+  dbname: ""
+  username: ""
+  password: ""
+
+nbs:
+  dbserver: ""
+  dbname: ""
   username: ""
   password: ""
 
@@ -74,3 +81,13 @@ pvc:
   daPvClaim:
     storageClass: efs-organization-reporting
     storageRequest: 5Gi
+
+efsFileSystemId: "EXAMPLE_EFS_ID"
+
+authUri: ""
+
+sftp:
+  enabled: ""
+  host: ""
+  username: ""
+  password: ""

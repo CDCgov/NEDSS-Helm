@@ -58,8 +58,16 @@ ingressHost: "app.EXAMPLE_DOMAIN"
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: ""
+  dbname: ""
   username: ""
   password: ""
+
+nbs:
+  dbserver: ""
+  dbname: ""
+  username: ""
+  password: ""
+
 odse:
   dbname: ""
 
@@ -73,3 +81,13 @@ pvc:
   daPvClaim:
     storageClass: efs-person-reporting
     storageRequest: 5Gi
+
+efsFileSystemId: "EXAMPLE_EFS_ID"
+
+authUri: ""
+
+sftp:
+  enabled: ""
+  host: ""
+  username: ""
+  password: ""
