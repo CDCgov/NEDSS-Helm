@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "organization-reporting-service.fullname" . }}
+  labels:
+    {{- include "organization-reporting-service.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      name: http
+    - port: {{ .Values.service.httpsPort }}
+      targetPort: {{ .Values.service.port }}
+      name: https
+  selector:
+    {{- include "organization-reporting-service.selectorLabels" . | nindent 4 }}
