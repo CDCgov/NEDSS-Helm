@@ -17,7 +17,7 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:
-          - path: "/"
+          - path: "/orgreportingsvc"
             pathType: Prefix
             backend:
               service:
