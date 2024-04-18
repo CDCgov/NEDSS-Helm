@@ -1,0 +1,26 @@
+{{- $fullName := include "person-reporting-service.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "person-reporting-service.fullname" . }}
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    # nginx.ingress.kuberenetes.io/rewrite-target: /
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  tls:
+    - secretName: {{ .Values.ingressHost }}
+      hosts:
+        - {{ .Values.ingressHost }}
+  rules:
+    - host: {{ .Values.ingressHost }}
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
