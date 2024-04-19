@@ -53,7 +53,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "personreporting.dts1.nbspreview.com"
+ingressHost: "app.dts1.nbspreview.com"
 
 jdbc:
   dbserver: ""
