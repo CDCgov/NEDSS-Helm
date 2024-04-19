@@ -40,8 +40,6 @@ spec:
           env:
             - name: DB_URL
               value: {{ .Values.jdbc.dbserver }}
-            - name: DI_DBNAME
-              value: {{ .Values.jdbc.dbname }}
             - name: DB_USERNAME
               value: {{ .Values.jdbc.username }}
             - name: DB_PASSWORD
@@ -50,6 +48,8 @@ spec:
               value: {{ .Values.kafka.cluster }}
             - name: DA_LOG_PATH
               value: {{ .Values.log.path }}
+            - name: DB_ODSE
+              value: {{ .Values.odse.dbname }}
           volumeMounts:
           - mountPath: /usr/share/organization-reporting/data
             name: da-persistent-storage
