@@ -57,18 +57,11 @@ ingressHost: "organizationreporting.dts1.nbspreview.com"
 
 jdbc:
   dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
-
-nbs:
-  dbserver: ""
-  dbname: ""
   username: ""
   password: ""
 
 odse:
-  dbname: ""
+  dbname: "NBS_ODSE"
 
 kafka:
   cluster: ""
