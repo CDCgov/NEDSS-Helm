@@ -58,13 +58,6 @@ ingressHost: "app.EXAMPLE_DOMAIN"
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
-
-nbs:
-  dbserver: ""
-  dbname: ""
   username: ""
   password: ""
 
