@@ -27,16 +27,16 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8091
+  port: 8092
   httpsPort: 443
 
 ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: organizationreporting.dts1.nbspreview.com
+  - secretName: app.dts1.nbspreview.com
     hosts:
-    - organizationreporting.dts1.nbspreview.com
+    - app.dts1.nbspreview.com
 
 # Kubernetes resource limits
 resources: {}
@@ -74,12 +74,3 @@ pvc:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
 
-efsFileSystemId: ""
-
-authUri: ""
-
-sftp:
-  enabled: ""
-  host: ""
-  username: ""
-  password: ""

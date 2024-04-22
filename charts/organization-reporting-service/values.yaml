@@ -27,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8091
+  port: 8092
   httpsPort: 443
 
 ingress:
@@ -74,13 +74,3 @@ pvc:
   daPvClaim:
     storageClass: efs-organization-reporting
     storageRequest: 5Gi
-
-efsFileSystemId: "EXAMPLE_EFS_ID"
-
-authUri: ""
-
-sftp:
-  enabled: ""
-  host: ""
-  username: ""
-  password: ""
