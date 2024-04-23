@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "ft"
+env: "feature"
 
 image:
   repository: ""
@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: dataingestion.ft.nbspreview.com
+  - secretName: dataingestion.feature.nbspreview.com
     hosts:
-    - dataingestion.ft.nbspreview.com
+    - dataingestion.feature.nbspreview.com
 
 # Kubernetes resource limits
 resources: {}
@@ -53,7 +53,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.ft.nbspreview.com"
+ingressHost: "dataingestion.feature.nbspreview.com"
 
 jdbc:
   dbserver: ""
