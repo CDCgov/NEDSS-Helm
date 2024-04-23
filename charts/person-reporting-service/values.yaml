@@ -57,14 +57,14 @@ ingressHost: "app.EXAMPLE_DOMAIN"
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
-  dbserver: ""
-  username: ""
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  username: "EXAMPLE_DB_USER"
+  password: "EXAMPLE_DB_USER_PASSWORD"
 odse:
-  dbname: ""
+  dbname: "EXAMPLE_DB_NAME"
 
 kafka:
-  cluster: ""
+  cluster: "EXAMPLE_KAFKA_CLUSTER"
 
 log:
   path: "/usr/share/person-reporting/data"
@@ -73,3 +73,4 @@ pvc:
   daPvClaim:
     storageClass: efs-person-reporting
     storageRequest: 5Gi
+
