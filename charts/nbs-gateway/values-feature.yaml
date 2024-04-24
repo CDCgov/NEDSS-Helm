@@ -6,7 +6,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.f1c9718
+  tag: 1.0.1-SNAPSHOT.861a827
 
 gatewayService:
   ports:
