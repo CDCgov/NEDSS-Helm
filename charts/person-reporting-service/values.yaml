@@ -69,4 +69,3 @@ kafka:
 
 log:
   path: "/usr/share/person-reporting/data"
-
