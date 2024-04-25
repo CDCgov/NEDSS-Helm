@@ -75,3 +75,4 @@ pvc:
     storageClass: efs-person-reporting
     storageRequest: 5Gi
 
+efsFileSystemId: "EXAMPLE_EFS_ID"

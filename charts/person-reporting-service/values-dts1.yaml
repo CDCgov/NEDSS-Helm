@@ -73,3 +73,5 @@ pvc:
   daPvClaim:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
+
+efsFileSystemId: ""
