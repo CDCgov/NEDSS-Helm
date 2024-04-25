@@ -70,9 +70,3 @@ kafka:
 log:
   path: "/usr/share/organization-reporting/data"
 
-pvc:
-  daPvClaim:
-    storageClass: efs-organization-reporting
-    storageRequest: 20Gi
-
-efsFileSystemId: "EXAMPLE_EFS_ID"
