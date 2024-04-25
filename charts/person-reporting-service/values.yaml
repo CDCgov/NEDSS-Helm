@@ -73,6 +73,6 @@ log:
 pvc:
   daPvClaim:
     storageClass: efs-person-reporting
-    storageRequest: 5Gi
+    storageRequest: 20Gi
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
