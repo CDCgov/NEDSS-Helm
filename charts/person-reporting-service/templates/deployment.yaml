@@ -50,9 +50,6 @@ spec:
               value: {{ .Values.log.path }}
             - name: DB_ODSE
               value: {{ .Values.odse.dbname }}
-          volumeMounts:
-          - mountPath: /usr/share/person-reporting/data
-            name: da-persistent-storage
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -67,7 +64,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      volumes:
-      - name: da-persistent-storage
-        persistentVolumeClaim:
-          claimName: {{ include "person-reporting-service.fullname" . }}-da-pvc
