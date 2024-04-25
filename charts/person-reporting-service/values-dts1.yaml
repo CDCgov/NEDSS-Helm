@@ -69,9 +69,3 @@ kafka:
 log:
   path: "/usr/share/personreporting/data"
 
-pvc:
-  daPvClaim:
-    storageClass: efs-dataingestion
-    storageRequest: 20Gi
-
-efsFileSystemId: ""
