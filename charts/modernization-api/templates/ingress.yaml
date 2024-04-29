@@ -60,7 +60,7 @@ spec:
                 name: nbs-gateway-svc #nbs-gateway-ext
                 port:
                   number: {{ .Values.service.gatewayPort }} #443
-          - path: "/personreportingsvc/"
+          - path: "/status/"
             pathType: Prefix
             backend:
               service:
