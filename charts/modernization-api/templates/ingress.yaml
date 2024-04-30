@@ -76,7 +76,7 @@ spec:
               service:
                 name: organization-reporting-service
                 port:
-                  number: {{ .Values.reportingService.personReportingServicePort }}
+                  number: {{ .Values.reportingService.organizationReportingServicePort }}
           {{- end }}
           - path: /favicon.ico
             pathType: ImplementationSpecific
