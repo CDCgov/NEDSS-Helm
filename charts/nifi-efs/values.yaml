@@ -71,7 +71,7 @@ pvc:
     storageRequest: 50Gi
 
 
-efsFileSystemId: ""
+efsFileSystemId: "EXAMPLE_EFS_ID"
 
 ### Nifi Configurations ###
 
@@ -82,13 +82,13 @@ jvmheap:
 # jdbcConnectionString is passed in as an override and all values must be supplied. 
 # Replace <db_endpoint>, <database>, <username>, and <password> in the following:
 # "jdbc:sqlserver://<db_endpoint>:1433;databaseName=<database>;user=<username>;password=<password>;encrypt=true;trustServerCertificate=true;"
-jdbcConnectionString: ""
+jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_DB_USER;password=EXAMPLE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 # Default NiFi Admin Username and Password. Password must be minimum of 12 characters
-singleUserCredentialsUsername: ""
-singleUserCredentialsPassword: ""
+singleUserCredentialsUsername: "EXAMPLE_NIFI_ADMIN_USER"
+singleUserCredentialsPassword: "EXAMPLE_NIFI_ADMIN_USER_PASSWORD"
 
 # NiFi Sensitive Props Key. Specifies the source string used to derive an encryption key.
 # The Sensitive Properties Key is not the encryption key itself, but the password from which NiFi derives the actual encryption key.
-nifiSensitivePropsKey: ""
+nifiSensitivePropsKey: "EXAMPLE_NIFI_SENSITIVE_PROPS"
