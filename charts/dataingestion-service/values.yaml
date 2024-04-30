@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: "app.EXAMPLE_DOMAIN"
+  - secretName: "dataingestion.EXAMPLE_DOMAIN"
     hosts:
-    - "app.EXAMPLE_DOMAIN"
+    - "dataingestion.EXAMPLE_DOMAIN"
 
 resources: {}
 
@@ -52,7 +52,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.EXAMPLE_DOMAIN"
+ingressHost: "dataingestion.EXAMPLE_DOMAIN"
 
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
