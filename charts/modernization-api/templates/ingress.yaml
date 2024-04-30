@@ -66,14 +66,14 @@ spec:
               service:
                 name: person-reporting-service
                 port:
-                  number: 8091
+                  number: {{ .Values.service.personReportingSvcPort }}
           - path: "/reporting/organization-svc/"
             pathType: Prefix
             backend:
               service:
                 name: organization-reporting-service
                 port:
-                  number: 8092
+                  number: {{ .Values.service.organizationReportingSvcPort }}
           - path: /favicon.ico
             pathType: ImplementationSpecific
             backend:
