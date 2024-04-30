@@ -40,6 +40,11 @@ pageBuilder:
       edit:
         enabled: "true"
 
+reportingService: 
+  enabled: "false"
+  personReportingServicePort: 8091
+  organizationReportingServicePort: 8092
+
 ingress:
   enabled: true
   className: "nginx"

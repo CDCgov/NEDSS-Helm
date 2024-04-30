@@ -28,8 +28,11 @@ service:
   httpsPort: 443
   gatewayPort: 8000
   pageBuilderPort: 8095
-  personReportingSvcPort: 8091
-  organizationReportingSvcPort: 8092
+
+reportingService: 
+  enabled: "true"
+  personReportingServicePort: 8091
+  organizationReportingServicePort: 8092
 
 pageBuilder:
   enabled: "true"

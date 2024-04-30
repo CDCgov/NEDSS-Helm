@@ -29,6 +29,11 @@ service:
   gatewayPort: 8000
   pageBuilderPort: 8095
 
+reportingService: 
+  enabled: "true"
+  personReportingServicePort: 8091
+  organizationReportingServicePort: 8092
+
 pageBuilder:
   enabled: "true"
   page:
