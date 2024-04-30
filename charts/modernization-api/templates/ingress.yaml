@@ -60,20 +60,24 @@ spec:
                 name: nbs-gateway-svc #nbs-gateway-ext
                 port:
                   number: {{ .Values.service.gatewayPort }} #443
+          {{- if eq .Values.reportingService.enabled "true" }}
           - path: "/reporting/person-svc/"
             pathType: Prefix
             backend:
               service:
                 name: person-reporting-service
                 port:
-                  number: {{ .Values.service.personReportingSvcPort }}
+                  number: {{ .Values.reportingService.personReportingServicePort }}
+          {{- end }}
+          {{- if eq .Values.reportingService.enabled "true" }}
           - path: "/reporting/organization-svc/"
             pathType: Prefix
             backend:
               service:
                 name: organization-reporting-service
                 port:
-                  number: {{ .Values.service.organizationReportingSvcPort }}
+                  number: {{ .Values.reportingService.personReportingServicePort }}
+          {{- end }}
           - path: /favicon.ico
             pathType: ImplementationSpecific
             backend:
