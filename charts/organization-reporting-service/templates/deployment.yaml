@@ -44,7 +44,7 @@ spec:
               value: {{ .Values.jdbc.username }}
             - name: DB_PASSWORD
               value: {{ .Values.jdbc.password }}
-            - name: BOOTSTRAP_SERVERS
+            - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
             - name: DA_LOG_PATH
               value: {{ .Values.log.path }}
