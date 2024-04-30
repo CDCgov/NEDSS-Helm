@@ -59,7 +59,21 @@ spec:
               service:
                 name: nbs-gateway-svc #nbs-gateway-ext
                 port:
-                  number: {{ .Values.service.gatewayPort }} #443  
+                  number: {{ .Values.service.gatewayPort }} #443
+          - path: "/reporting/person-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: person-reporting-service
+                port:
+                  number: {{ .Values.service.personReportingSvcPort }}
+          - path: "/reporting/organization-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: organization-reporting-service
+                port:
+                  number: {{ .Values.service.organizationReportingSvcPort }}
           - path: /favicon.ico
             pathType: ImplementationSpecific
             backend:

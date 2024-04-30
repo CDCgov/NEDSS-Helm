@@ -35,7 +35,7 @@ Common labels
 */}}
 {{- define "person-reporting-service.labels" -}}
 app: NBS
-type: Data
+type: App
 helm.sh/chart: {{ include "person-reporting-service.chart" . }}
 {{ include "person-reporting-service.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
@@ -49,7 +49,7 @@ Selector labels
 */}}
 {{- define "person-reporting-service.selectorLabels" -}}
 app: NBS
-type: Data
+type: App
 app.kubernetes.io/name: {{ include "person-reporting-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
