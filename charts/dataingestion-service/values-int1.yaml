@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-fix-jaxb-1.35ba5dc
+  tag: 1.0.1-INT-xml.b8d42a4.b8d42a4
 
 imagePullSecrets: []
 nameOverride: ""
