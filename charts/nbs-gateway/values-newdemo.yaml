@@ -26,3 +26,15 @@ nbsExternalName: app-classic.demo.nbspreview.com
 ingressHost: "app.demo.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
+
+modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
+
+pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+# OIDC settings
+oidc:
+  enabled: "true"
+  issuerUri: "https://app.demo.nbspreview.com/auth/realms/nbs-users"
+  client:
+    id: ""
+    secret: ""

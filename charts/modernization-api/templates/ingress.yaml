@@ -23,43 +23,6 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:          
-          - path: "/nbs/redirect/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  number: {{ $svcPort }}
-          - path: "/nbs/api/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  number: {{ $svcPort }}                  
-          {{- if eq .Values.pageBuilder.enabled "true" }}
-          - path: "/nbs/page-builder/"
-            pathType: Prefix
-            backend:
-              service:
-                name: page-builder-api
-                port:
-                  number: {{ .Values.service.pageBuilderPort }}
-          {{- end }}
-          - path: "/nbs/"
-            pathType: Prefix
-            backend:
-              service:
-                name: nbs-gateway-svc  #nbs-gateway-ext
-                port:
-                  number: {{ .Values.service.gatewayPort }} #443
-          - path: /images/nedssLogo.jpg
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: nbs-gateway-svc #nbs-gateway-ext
-                port:
-                  number: {{ .Values.service.gatewayPort }} #443
           {{- if eq .Values.reportingService.enabled "true" }}
           - path: "/reporting/person-svc/"
             pathType: Prefix
@@ -108,7 +71,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ $fullName }}
+                name: nbs-gateway-svc
                 port:
-                  number: {{ $svcPort }}
+                  number: {{ .Values.service.gatewayPort }} #443
+          - path: "/auth/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http          
 {{- end }}

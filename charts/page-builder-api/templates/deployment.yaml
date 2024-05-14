@@ -38,7 +38,14 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           command: ['java', '-jar', 'api.jar']
-          args: ['--spring.datasource.url={{ .Values.jdbc.connectionString }}', '--spring.datasource.username={{ .Values.jdbc.user }}', '--spring.datasource.password={{ .Values.jdbc.password }}', '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}', '--server.port={{ .Values.service.port }}']
+          args: [
+            '--nbs.security.oidc.uri={{ .Values.oidc.issuerUri }}',
+            '--nbs.security.oidc.enabled={{ .Values.oidc.enabled }}',
+            '--spring.datasource.url={{ .Values.jdbc.connectionString }}', 
+            '--spring.datasource.username={{ .Values.jdbc.user }}', 
+            '--spring.datasource.password={{ .Values.jdbc.password }}', 
+            '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}', 
+            '--server.port={{ .Values.service.port }}']
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
