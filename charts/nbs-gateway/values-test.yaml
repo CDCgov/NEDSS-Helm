@@ -26,3 +26,15 @@ nbsExternalName: app-classic.test-cdc-nbs.eqsandbox.com
 ingressHost: "app.test-cdc-nbs.eqsandbox.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
+
+modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
+
+pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+# OIDC settings
+oidc:
+  enabled: "true"
+  issuerUri: "https://app.test.nbspreview.com/auth/realms/nbs-users"
+  client:
+    id: ""
+    secret: ""

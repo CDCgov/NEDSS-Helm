@@ -68,6 +68,12 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
 
+# OIDC settings
+oidc:
+  enabled: "true"
+  issuerUri: "https://EXAMPLE_DOMAIN.com/auth/realms/nbs-users"
+
+
 nodeSelector: {}
 
 tolerations: []
