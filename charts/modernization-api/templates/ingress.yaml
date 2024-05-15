@@ -78,6 +78,24 @@ spec:
                 port:
                   number: {{ .Values.reportingService.organizationReportingServicePort }}
           {{- end }}
+          {{- if eq .Values.reportingService.enabled "true" }}
+                - path: "/reporting/investigation-svc/"
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: investigation-reporting-service
+                      port:
+                        number: {{ .Values.reportingService.investigationReportingServicePort }}
+          {{- end }}
+          {{- if eq .Values.reportingService.enabled "true" }}
+                - path: "/reporting/post-processing-svc/"
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: post-processing-reporting-service
+                      port:
+                        number: {{ .Values.reportingService.postProcessingReportingServicePort }}
+         {{- end }}
           - path: /favicon.ico
             pathType: ImplementationSpecific
             backend:
