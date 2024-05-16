@@ -68,8 +68,6 @@ spec:
                 name: person-reporting-service
                 port:
                   number: {{ .Values.reportingService.personReportingServicePort }}
-          {{- end }}
-          {{- if eq .Values.reportingService.enabled "true" }}
           - path: "/reporting/organization-svc/"
             pathType: Prefix
             backend:
@@ -77,24 +75,20 @@ spec:
                 name: organization-reporting-service
                 port:
                   number: {{ .Values.reportingService.organizationReportingServicePort }}
-          {{- end }}
-          {{- if eq .Values.reportingService.enabled "true" }}
-                - path: "/reporting/investigation-svc/"
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: investigation-reporting-service
-                      port:
-                        number: {{ .Values.reportingService.investigationReportingServicePort }}
-          {{- end }}
-          {{- if eq .Values.reportingService.enabled "true" }}
-                - path: "/reporting/post-processing-svc/"
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: post-processing-reporting-service
-                      port:
-                        number: {{ .Values.reportingService.postProcessingReportingServicePort }}
+          - path: "/reporting/investigation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: investigation-reporting-service
+                port:
+                  number: {{ .Values.reportingService.investigationReportingServicePort }}
+          - path: "/reporting/post-processing-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: post-processing-reporting-service
+                port:
+                  number: {{ .Values.reportingService.postProcessingReportingServicePort }}
          {{- end }}
           - path: /favicon.ico
             pathType: ImplementationSpecific
