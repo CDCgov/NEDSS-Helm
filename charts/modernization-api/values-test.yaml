@@ -32,6 +32,13 @@ service:
 pageBuilder:
   enabled: "false"
 
+reportingService:
+  enabled: "false"
+  personReportingServicePort: 8091
+  organizationReportingServicePort: 8092
+  investigationReportingServicePort: 8093
+  postProcessingReportingServicePort: 8095
+
 # nginx-ingress
 ingress:
   enabled: true

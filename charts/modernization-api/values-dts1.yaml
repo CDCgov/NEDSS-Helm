@@ -33,6 +33,8 @@ reportingService:
   enabled: "true"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
+  investigationReportingServicePort: 8093
+  postProcessingReportingServicePort: 8095
 
 pageBuilder:
   enabled: "true"
