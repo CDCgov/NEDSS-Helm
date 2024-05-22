@@ -82,6 +82,13 @@ spec:
                 name: investigation-reporting-service
                 port:
                   number: {{ .Values.reportingService.investigationReportingServicePort }}
+          - path: "/reporting/observation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: observation-reporting-service
+                port:
+                  number: {{ .Values.reportingService.observationReportingServicePort }}
           - path: "/reporting/post-processing-svc/"
             pathType: Prefix
             backend:
