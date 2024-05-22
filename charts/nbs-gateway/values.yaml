@@ -44,8 +44,7 @@ pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
 
 # OIDC settings
 oidc:
-  enabled: "true"
-  issuerUri: "https://EXAMPLE_DOMAIN.com/auth/realms/nbs-users"
+  enabled: "false"
   client:
     id: ""
     secret: ""
