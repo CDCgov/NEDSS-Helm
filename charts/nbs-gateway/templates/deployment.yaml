@@ -23,7 +23,7 @@ spec:
         args: [
           {{- if eq .Values.oidc.enabled "true" }}        
           '--spring.profiles.include=oidc',
-          '--nbs.security.oidc.uri={{ .Values.oidc.issuerUri }}',
+          '--nbs.security.oidc.uri=https://{{ .Values.ingressHost }}/auth/realms/nbs-users',
           '--nbs.security.oidc.client.id={{ .Values.oidc.client.id }}',
           '--nbs.security.oidc.client.secret={{ .Values.oidc.client.secret }}',
           {{- end }}
