@@ -2,11 +2,19 @@ deployment:
   keycloak:
     env:
       kcDb: mssql
+<<<<<<< HEAD
+      kcDbPassword: 'EXAMPLE_KCDB_PASS8675309'
+      kcDbUrl: jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;
+      kcDbUsername: NBS_keycloak
+      kcHealthEnabled: "true"
+      kcHostname: EXAMPLE_DOMAIN
+=======
       kcDbPassword: EXAMPLE_password
       kcDbUrl: jdbc:sqlserver://EXAMPLE_domain:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;
       kcDbUsername: NBS_keycloak
       kcHealthEnabled: "true"
       kcHostname: EXAMPLE_domain
+>>>>>>> c100e4912b868124c0e4f756a3d4fe4dcf1b3ff0
       kcHostnameStrict: "false"
       kcHttpEnabled: "false"
       kcHttpRelativePath: /auth
@@ -14,7 +22,11 @@ deployment:
       kcProxy: edge
       kcTransactionXaEnabled: "false"
       keycloakAdmin: admin
+<<<<<<< HEAD
+      keycloakAdminPassword: "EXAMPLE_KC_PASSWORD8675309"
+=======
       keycloakAdminPassword: EXAMPLE_password
+>>>>>>> c100e4912b868124c0e4f756a3d4fe4dcf1b3ff0
       kcProxyHeaders: xforwarded
     image:
       repository: quay.io/keycloak/keycloak
