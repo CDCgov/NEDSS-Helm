@@ -1,4 +1,4 @@
-nameOverride: ""
+nameOverride: "052824-v4"
 fullnameOverride: ""
 
 connect:
@@ -24,8 +24,8 @@ connect:
 
   resources:
     limits:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 1000m
+      memory: 2Gi
     requests:
       cpu: 500m
       memory: 1Gi
@@ -34,13 +34,17 @@ connect:
     - name: BOOTSTRAP_SERVERS
       value: "b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
     - name: LOG_LEVEL
-      value: "DEBUG"
+      value: "INFO"
+    - name: NAME
+      value: "debezium-connector-052824-v4"
     - name: CONFIG_STORAGE_TOPIC
       value: "debezium_connect_configs"
     - name: OFFSET_STORAGE_TOPIC
       value: "debezium_connect_offsets"
     - name: STATUS_STORAGE_TOPIC
       value: "debezium_connect_statuses"
+    - name: CONNECT_NAME
+      value: "debezium-connector-052824-v4"
     - name: CONNECT_DATABASE_HISTORY_KAFKA_TOPIC
       value: "nbs-cdc-app"
     - name: CONNECT_CONNECTOR_CLASS
@@ -85,6 +89,8 @@ connect:
       value: "odse.history"
     - name: CONNECT_TABLE_INCLUDE_LIST
       value: "dbo.NBS_page"
+    - name: CONNECT_SNAPSHOT_LOCKING_MODE
+      value: "minimal"
 ui:
   enabled: false
   replicaCount: 1
