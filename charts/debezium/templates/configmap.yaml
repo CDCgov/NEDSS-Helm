@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "debezium.name" . }}-connect
+  labels:
+    {{- include "debezium.labels.connect" . | nindent 4 }}
+data:
+  connector.json: |-
+      {{- .Values.connect.sqlserverconnector| toPrettyJson | nindent 4 }}

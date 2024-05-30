@@ -24,6 +24,14 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "debezium.name" . }}-connect
+            items:
+            - key: "connector.json"
+              path: "connector.json"
+            defaultMode: 0744
       containers:
         - name: {{ .Chart.Name }}-connect
           image: "{{ .Values.connect.image.repository }}:{{ .Values.connect.image.tag | default .Chart.AppVersion }}"
@@ -35,9 +43,18 @@ spec:
           resources:
             {{- toYaml .Values.connect.resources | nindent 12 }}
           {{- with .Values.connect.env }}
+          volumeMounts:
+            - name: config
+              mountPath: /etc/debezium/connector.json
+              subPath: connector.json
           env:
             {{- toYaml . | nindent 12}}
           {{- end}}
+          lifecycle:
+            postStart:
+              exec:
+                command: [ '/bin/sh', '-c', 'sleep 60; curl --request POST --header "Accept:application/json" --header "Content-Type:application/json" "http://127.0.0.1:8083/connectors/" --data "@/etc/debezium/connector.json"' ]
+
       {{- with .Values.connect.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
