@@ -65,6 +65,10 @@ connect:
       value: "b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
     - name: LOG_LEVEL
       value: "INFO"
+    - name: OFFSET_FLUSH_INTERVAL_MS
+      value: "90000"
+    - name: OFFSET_FLUSH_TIMEOUT_MS
+      value: "30000"
     - name: NAME
       value: "debezium-connector-052924-v1"
     - name: CONFIG_STORAGE_TOPIC
