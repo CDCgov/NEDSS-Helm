@@ -54,6 +54,7 @@ connect:
       "transforms.dropPrefix.regex":"cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement":"nbs_$1",
+      "snapshot.mode":"schema_only",
       "database.trustServerCertificate":"true",
       "schema.history.internal.kafka.topic":"odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers":"wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
