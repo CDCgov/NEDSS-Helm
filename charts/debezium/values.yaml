@@ -56,8 +56,6 @@ connect:
       "transforms.dropPrefix.replacement":"nbs_$1",
       "database.trustServerCertificate":"true",
       "snapshot.mode":"no_data",
-      "max.request.size":"5000000",
-      "message.max.bytes":"5000000",
       "schema.history.internal.kafka.topic":"odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers":"b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
     }
