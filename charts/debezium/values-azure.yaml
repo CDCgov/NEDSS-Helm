@@ -55,6 +55,8 @@ connect:
       "transforms.dropPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement":"nbs_$1",
       "snapshot.mode":"schema_only",
+      "max.request.size": "5000000",
+      "message.max.bytes": "5000000",
       "database.trustServerCertificate":"true",
       "schema.history.internal.kafka.topic":"odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers":"wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
@@ -86,6 +88,10 @@ connect:
       value: "1"
     - name: MIN_INSYNC_REPLICAS
       value: "1"
+    - name: CONNECT_MAX_REQUEST_SIZE
+      value: "5000000" # 5MB max size of data event
+    - name: MESSAGE_MAX_BYTES
+      value: "5000000"
 
 ui:
   enabled: false
