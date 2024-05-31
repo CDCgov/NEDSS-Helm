@@ -79,13 +79,13 @@ connect:
     - name: STATUS_STORAGE_TOPIC
       value: "debezium_connect_statuses"
     - name: CONFIG_STORAGE_REPLICATION_FACTOR
-      value: "3"
+      value: "1"
     - name: OFFSET_STORAGE_REPLICATION_FACTOR
-      value: "3"
+      value: "1"
     - name: STATUS_STORAGE_REPLICATION_FACTOR
-      value: "3"
+      value: "1"
     - name: MIN_INSYNC_REPLICAS
-      value: "3"
+      value: "1"
 
 ui:
   enabled: false

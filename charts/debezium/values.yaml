@@ -55,7 +55,7 @@ connect:
       "transforms.dropPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement":"nbs_$1",
       "database.trustServerCertificate":"true",
-      "snapshot.mode":"schema_only",
+      "snapshot.mode":"no_data",
       "schema.history.internal.kafka.topic":"odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers":"b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
     }
@@ -70,6 +70,8 @@ connect:
       value: "90000"
     - name: OFFSET_FLUSH_TIMEOUT_MS
       value: "30000"
+    - name: CONNECT_MAX_REQUEST_SIZE
+      value: "5000000" # 5MB max size of data event
     - name: NAME
       value: "debezium-connector-052924-v1"
     - name: CONFIG_STORAGE_TOPIC
