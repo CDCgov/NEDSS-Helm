@@ -38,7 +38,7 @@ reportingService:
   postProcessingReportingServicePort: 8095
 
 pageBuilder:
-  enabled: "true"
+  enabled: "false"
   page:
     library:
       enabled: "true"
