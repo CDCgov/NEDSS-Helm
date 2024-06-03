@@ -29,6 +29,12 @@ service:
   gatewayPort: 8000
   pageBuilderPort: 8095
 
+landing:
+  base: "/welcome"
+
+welcome:
+  enabled: "true"
+
 pageBuilder:
   enabled: "true"
   page:
@@ -40,7 +46,7 @@ pageBuilder:
       edit:
         enabled: "true"
 
-reportingService: 
+reportingService:
   enabled: "false"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
