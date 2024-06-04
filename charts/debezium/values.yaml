@@ -1,6 +1,6 @@
 nameOverride: ""
 fullnameOverride: ""
-
+log_level: INFO
 connect:
   replicaCount: 1
   imagePullSecrets: [ ]
@@ -8,7 +8,7 @@ connect:
   image:
     repository: quay.io/debezium/connect
     pullPolicy: Always
-    tag: "2.5"
+    tag: "2.7"
 
   service:
     type: ClusterIP
@@ -30,8 +30,13 @@ connect:
       cpu: 500m
       memory: 1Gi
 
+  properties:
+    group_id: "debezium060324v1"
+    topics_basename: "debezium-connector"
+    bootstrap_server: "b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
+
   sqlserverconnector: {
-    "name": "debezium-connector-052924-v1",
+    "name": "debezium060324v1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "tasks.max": "1",
@@ -56,6 +61,8 @@ connect:
       "transforms.dropPrefix.replacement":"nbs_$1",
       "database.trustServerCertificate":"true",
       "snapshot.mode":"no_data",
+      "producer.max.request.size":"10000000", #10MB
+      "producer.message.max.bytes": "10000000", #10MB
       "schema.history.internal.kafka.topic":"odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers":"b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
     }
@@ -66,22 +73,16 @@ connect:
       value: "b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
     - name: LOG_LEVEL
       value: "INFO"
-    - name: OFFSET_FLUSH_INTERVAL_MS
-      value: "90000"
-    - name: OFFSET_FLUSH_TIMEOUT_MS
-      value: "30000"
-    - name: CONNECT_MAX_REQUEST_SIZE
-      value: "5000000" # 5MB max size of data event
-    - name: MESSAGE_MAX_BYTES
-      value: "5000000"
+    - name: KAFKA_LOG4J_OPTS
+      value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-connector-052924-v1"
-    - name: CONFIG_STORAGE_TOPIC
-      value: "debezium_connect_configs"
-    - name: OFFSET_STORAGE_TOPIC
-      value: "debezium_connect_offsets"
-    - name: STATUS_STORAGE_TOPIC
-      value: "debezium_connect_statuses"
+      value: "debezium060324v1"
+#    - name: CONFIG_STORAGE_TOPIC
+#      value: "debezium_connect_config"
+#    - name: OFFSET_STORAGE_TOPIC
+#      value: "debezium_connect_offset"
+#    - name: STATUS_STORAGE_TOPIC
+#      value: "debezium_connect_status"
 
 ui:
   enabled: false

@@ -28,9 +28,6 @@ spec:
         - name: config
           configMap:
             name: {{ include "debezium.name" . }}-connect
-            items:
-            - key: "connector.json"
-              path: "connector.json"
             defaultMode: 0744
       containers:
         - name: {{ .Chart.Name }}-connect
@@ -42,14 +39,21 @@ spec:
               protocol: {{ .Values.connect.service.protocol }}
           resources:
             {{- toYaml .Values.connect.resources | nindent 12 }}
-          {{- with .Values.connect.env }}
           volumeMounts:
             - name: config
               mountPath: /etc/debezium/connector.json
               subPath: connector.json
+            - name: config
+              mountPath: /kafka/config/log4j.properties
+              subPath: log4j.properties
+            - name: config
+              mountPath: /kafka/config/connect-distributed.properties
+              subPath: connect-distributed.properties
+          {{- with .Values.connect.env }}
           env:
             {{- toYaml . | nindent 12}}
           {{- end}}
+          command: ['/kafka/bin/connect-distributed.sh', '/kafka/config/connect-distributed.properties']
           lifecycle:
             postStart:
               exec:

@@ -1,5 +1,6 @@
 nameOverride: ""
 fullnameOverride: ""
+log_level: INFO
 
 connect:
   replicaCount: 1
@@ -8,7 +9,7 @@ connect:
   image:
     repository: quay.io/debezium/connect
     pullPolicy: Always
-    tag: "2.5"
+    tag: "2.7"
 
   service:
     type: ClusterIP
@@ -29,6 +30,11 @@ connect:
     requests:
       cpu: 500m
       memory: 1Gi
+
+  properties:
+    group_id: "debezium-connector-v1"
+    topics_basename: "debezium-connector"
+    bootstrap_server: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
 
   sqlserverconnector: {
     "name": "debezium-connector-v1",
@@ -54,7 +60,7 @@ connect:
       "transforms.dropPrefix.regex":"cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement":"nbs_$1",
-      "snapshot.mode":"schema_only",
+      "snapshot.mode":"no_data",
       "database.trustServerCertificate":"true",
       "schema.history.internal.kafka.topic":"odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers":"wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
@@ -66,30 +72,16 @@ connect:
       value: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
     - name: LOG_LEVEL
       value: "INFO"
-    - name: OFFSET_FLUSH_INTERVAL_MS
-      value: "90000"
-    - name: OFFSET_FLUSH_TIMEOUT_MS
-      value: "30000"
+    - name: KAFKA_LOG4J_OPTS
+      value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
       value: "debezium-connector-v1"
-    - name: CONFIG_STORAGE_TOPIC
-      value: "debezium_connect_configs"
-    - name: OFFSET_STORAGE_TOPIC
-      value: "debezium_connect_offsets"
-    - name: STATUS_STORAGE_TOPIC
-      value: "debezium_connect_statuses"
-    - name: CONFIG_STORAGE_REPLICATION_FACTOR
-      value: "1"
-    - name: OFFSET_STORAGE_REPLICATION_FACTOR
-      value: "1"
-    - name: STATUS_STORAGE_REPLICATION_FACTOR
-      value: "1"
-    - name: MIN_INSYNC_REPLICAS
-      value: "1"
-    - name: CONNECT_MAX_REQUEST_SIZE
-      value: "5000000" # 5MB max size of data event
-    - name: MESSAGE_MAX_BYTES
-      value: "5000000"
+#    - name: CONFIG_STORAGE_TOPIC
+#      value: "debezium_connect_configs"
+#    - name: OFFSET_STORAGE_TOPIC
+#      value: "debezium_connect_offsets"
+#    - name: STATUS_STORAGE_TOPIC
+#      value: "debezium_connect_statuses"
 
 ui:
   enabled: false
