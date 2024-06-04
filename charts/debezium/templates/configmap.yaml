@@ -25,13 +25,16 @@ data:
     value.converter.schemas.enable=false
 
     config.storage.topic={{ .Values.connect.properties.topics_basename }}_config
-    config.storage.replication.factor=2
+    config.storage.replication.factor={{ .Values.connect.properties.default_replication_factor }}
 
     status.storage.topic={{ .Values.connect.properties.topics_basename }}_status
-    status.storage.replication.factor=2
+    status.storage.replication.factor={{ .Values.connect.properties.default_replication_factor }}
 
     offset.storage.topic={{ .Values.connect.properties.topics_basename }}_offset
-    offset.storage.replication.factor=2
+    offset.storage.replication.factor={{ .Values.connect.properties.default_replication_factor }}
+
+    topic.creation.default.replication.factor={{ .Values.connect.properties.default_replication_factor }}
+    topic.creation.default.partitions={{ .Values.connect.properties.default_partitions }}
 
   log4j.properties: |
     log4j.rootLogger={{ .Values.log_level }}, stdout

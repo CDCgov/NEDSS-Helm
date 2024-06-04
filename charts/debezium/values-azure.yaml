@@ -34,6 +34,8 @@ connect:
   properties:
     group_id: "debezium-connector-v1"
     topics_basename: "debezium-connector"
+    default_replication_factor: 2
+    default_partitions: 10
     bootstrap_server: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
 
   sqlserverconnector: {

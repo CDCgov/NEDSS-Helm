@@ -33,6 +33,8 @@ connect:
   properties:
     group_id: "debezium060324v1"
     topics_basename: "debezium-connector"
+    default_replication_factor: 2
+    default_partitions: 10
     bootstrap_server: "b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector: {
