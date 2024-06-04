@@ -64,6 +64,8 @@ connect:
       "transforms.dropPrefix.replacement":"nbs_$1",
       "snapshot.mode":"no_data",
       "database.trustServerCertificate":"true",
+      "topic.creation.default.replication.factor": 2,
+      "topic.creation.default.partitions": 10,
       "schema.history.internal.kafka.topic":"odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers":"wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
     }

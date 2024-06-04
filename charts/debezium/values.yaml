@@ -65,6 +65,8 @@ connect:
       "snapshot.mode":"no_data",
       "producer.max.request.size":"10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
+      "topic.creation.default.replication.factor": 2,
+      "topic.creation.default.partitions": 10,
       "schema.history.internal.kafka.topic":"odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers":"b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
     }
