@@ -68,6 +68,7 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "topic.creation.default.replication.factor": 2,
       "topic.creation.default.partitions": 10,
+      "topic.creation.default.cleanup.policy": "compact",
       "schema.history.internal.kafka.topic":"odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers":"b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
     }
