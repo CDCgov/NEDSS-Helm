@@ -82,7 +82,7 @@ pvc:
 
 efsFileSystemId: ""
 
-authUri: ""
+authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
 sftp:
   enabled: ""
