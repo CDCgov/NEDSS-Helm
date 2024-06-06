@@ -96,6 +96,13 @@ spec:
                 name: post-processing-reporting-service
                 port:
                   number: {{ .Values.reportingService.postProcessingReportingServicePort }}
+          - path: "/reporting/ldfdata-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: ldfdata-reporting-service
+                port:
+                  number: {{ .Values.reportingService.ldfdataReportingServicePort }}
          {{- end }}
           - path: /favicon.ico
             pathType: ImplementationSpecific
