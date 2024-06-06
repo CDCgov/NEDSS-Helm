@@ -81,6 +81,10 @@ ingressHost: "app.feature.nbspreview.com"
 
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
+# OIDC settings
+oidc:
+  enabled: "false"
+
 jdbc:
   connectionString: ""
   user: ""
