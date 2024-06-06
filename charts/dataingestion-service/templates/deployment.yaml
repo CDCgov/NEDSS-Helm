@@ -70,6 +70,8 @@ spec:
               value: {{ .Values.sftp.username }}
             - name: DI_SFTP_PWD
               value: {{ .Values.sftp.password }}
+            - name: DI_SERVER_HOST
+              value: {{ .Values.ingressHost }}
           volumeMounts:
           - mountPath: /usr/share/dataingestion/data
             name: di-persistent-storage     

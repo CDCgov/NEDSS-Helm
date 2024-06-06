@@ -5,7 +5,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.6575161
+  tag: 1.0.1-SNAPSHOT.a05bcff # 1.0.1-SNAPSHOT.1b7c40b  
 
 imagePullSecrets: []
 nameOverride: ""
@@ -29,7 +29,7 @@ service:
   gatewayPort: 8000
   pageBuilderPort: 8095
 
-reportingService: 
+reportingService:
   enabled: "true"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
@@ -38,7 +38,7 @@ reportingService:
   postProcessingReportingServicePort: 8095
 
 pageBuilder:
-  enabled: "true"
+  enabled: "false"
   page:
     library:
       enabled: "true"
@@ -53,9 +53,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-    - secretName: app.dts1.nbspreview.com
-      hosts:
-        - app.dts1.nbspreview.com
+  - secretName: app.dts1.nbspreview.com
+    hosts:
+    - app.dts1.nbspreview.com
 
 nbsExternalName: app-classic.dts1.nbspreview.com
 
