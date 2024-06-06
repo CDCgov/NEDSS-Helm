@@ -6,12 +6,10 @@ deployment:
       kcDbUrl: jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;
       kcDbUsername: NBS_keycloak
       kcHealthEnabled: "true"
-      kcHostname: EXAMPLE_DOMAIN
       kcHostnameStrict: "false"
       kcHttpEnabled: "false"
       kcHttpRelativePath: /auth
       kcMetricsEnabled: "true"
-      kcProxy: edge
       kcTransactionXaEnabled: "false"
       keycloakAdmin: admin
       keycloakAdminPassword: "EXAMPLE_KC_PASSWORD8675309"
