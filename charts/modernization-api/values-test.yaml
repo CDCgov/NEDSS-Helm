@@ -88,7 +88,6 @@ jdbc:
 # OIDC settings
 oidc:
   enabled: "false"
-  issuerUri: "https://app.test.nbspreview.com/auth/realms/nbs-users"
 
 ui:
   smarty:
