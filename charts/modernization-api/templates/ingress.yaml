@@ -60,20 +60,13 @@ spec:
                 port:
                   number: {{ .Values.reportingService.postProcessingReportingServicePort }}
          {{- end }}
-          - path: /favicon.ico
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: nbs-gateway-svc  #nbs-gateway-ext
-                port:
-                  number: {{ .Values.service.gatewayPort }} #443
-          - path: "/"
+          - path: "/auth/realms/nbs-users/"
             pathType: Prefix
             backend:
               service:
-                name: nbs-gateway-svc
+                name: keycloak
                 port:
-                  number: {{ .Values.service.gatewayPort }} #443
+                  name: http
           - path: "/auth/robots.txt"
             pathType: Exact
             backend:
@@ -95,11 +88,18 @@ spec:
                 name: keycloak
                 port:
                   name: http  
-          - path: "/auth/realms/nbs-users/"
+          - path: /favicon.ico
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: nbs-gateway-svc  #nbs-gateway-ext
+                port:
+                  number: {{ .Values.service.gatewayPort }} #443
+          - path: "/"
             pathType: Prefix
             backend:
               service:
-                name: keycloak
+                name: nbs-gateway-svc
                 port:
-                  name: http 
+                  number: {{ .Values.service.gatewayPort }} #443
 {{- end }}
