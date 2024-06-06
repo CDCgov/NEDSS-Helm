@@ -72,7 +72,7 @@ odse:
   dbname: "NBS_ODSE"
 
 kafka:
-  cluster: "MSK_KAFKA_ENDPOINT"
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
 log:
   path: "/usr/share/dataingestion/data"
