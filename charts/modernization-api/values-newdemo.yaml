@@ -79,7 +79,7 @@ jdbc:
 
 # OIDC settings
 oidc:
-  enabled: "true"
+  enabled: "false"
   issuerUri: "https://app.demo.nbspreview.com/auth/realms/nbs-users"
 
 ui:
