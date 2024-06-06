@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "keycloak.fullname" . }}-deployment
+  labels:
+    app: keycloak
+  {{- include "keycloak.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: keycloak
+    {{- include "keycloak.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: keycloak
+      {{- include "keycloak.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - args:
+        - start-dev
+        command:
+        - /opt/keycloak/bin/kc.sh
+        env:
+        - name: KEYCLOAK_ADMIN
+          value: {{ quote .Values.deployment.keycloak.env.keycloakAdmin }}
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: {{ quote .Values.deployment.keycloak.env.keycloakAdminPassword }}
+        - name: KC_DB
+          value: {{ quote .Values.deployment.keycloak.env.kcDb }}
+        - name: KC_DB_URL
+          value: {{ quote .Values.deployment.keycloak.env.kcDbUrl }}
+        - name: KC_DB_USERNAME
+          value: {{ quote .Values.deployment.keycloak.env.kcDbUsername }}
+        - name: KC_DB_PASSWORD
+          value: {{ quote .Values.deployment.keycloak.env.kcDbPassword }}
+        - name: KC_TRANSACTION_XA_ENABLED
+          value: {{ quote .Values.deployment.keycloak.env.kcTransactionXaEnabled }}
+        - name: KC_HEALTH_ENABLED
+          value: {{ quote .Values.deployment.keycloak.env.kcHealthEnabled }}
+        - name: KC_METRICS_ENABLED
+          value: {{ quote .Values.deployment.keycloak.env.kcMetricsEnabled }}
+        - name: KC_HTTP_RELATIVE_PATH
+          value: {{ quote .Values.deployment.keycloak.env.kcHttpRelativePath }}
+        #- name: KC_HOSTNAME
+        #  value: {{ quote .Values.deployment.keycloak.env.kcHostname }}
+        - name: KC_HOSTNAME_STRICT
+          value: {{ quote .Values.deployment.keycloak.env.kcHostnameStrict }}
+        - name: KC_HTTP_ENABLED
+          value: {{ quote .Values.deployment.keycloak.env.kcHttpEnabled }}
+        #- name: KC_PROXY
+        #  value: {{ quote .Values.deployment.keycloak.env.kcProxy }}
+        - name: KC_PROXY_HEADERS
+          value: {{ quote .Values.deployment.keycloak.env.kcProxyHeaders }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.deployment.keycloak.image.repository }}:{{ .Values.deployment.keycloak.image.tag
+          | default .Chart.AppVersion }}
+        name: keycloak
+        ports:
+        - containerPort: 8080
+        resources: {}

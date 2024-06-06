@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "keycloak.fullname" . }}
+  labels:
+    app: keycloak
+  {{- include "keycloak.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.keycloak.type }}
+  selector:
+    app: keycloak
+  {{- include "keycloak.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.keycloak.ports | toYaml | nindent 2 -}}
