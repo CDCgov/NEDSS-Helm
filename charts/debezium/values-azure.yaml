@@ -38,6 +38,7 @@ connect:
     default_partitions: 10
     default_cleanup: "compact"
     bootstrap_server: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
+    sqlserveragentstatus: 1
 
   sqlserverconnector: {
     "name": "debezium-connector-v1",
@@ -52,7 +53,7 @@ connect:
       "database.server.name": "odse",
       "database.history.kafka.bootstrap.servers": "b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
-      "database.sqlserver.agent.status.query": "true",
+      "database.sqlserver.agent.status.query": "1",
       "database.trustServerCertificate": "true",
       "include.schema.changes": "true",
       "key.converter": "org.apache.kafka.connect.json.JsonConverter",

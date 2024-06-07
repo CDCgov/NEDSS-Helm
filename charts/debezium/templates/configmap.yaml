@@ -36,6 +36,9 @@ data:
     topic.creation.default.replication.factor={{ .Values.connect.properties.default_replication_factor }}
     topic.creation.default.partitions={{ .Values.connect.properties.default_partitions }}
     topic.creation.default.cleanup.policy={{ .Values.connect.properties.default_cleanup }}
+    {{- if .Values.connect.properties.sqlserveragentstatus }}
+    database.sqlserver.agent.status.query={{ .Values.connect.properties.sqlserveragentstatus }}
+    {{end}}
 
   log4j.properties: |
     log4j.rootLogger={{ .Values.log_level }}, stdout
