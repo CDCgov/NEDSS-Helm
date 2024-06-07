@@ -1,6 +1,6 @@
 nameOverride: ""
 fullnameOverride: ""
-log_level: INFO
+log_level: DEBUG
 
 connect:
   replicaCount: 1
