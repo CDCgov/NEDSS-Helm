@@ -40,10 +40,10 @@ service:
   httpsPort: 443
   gatewayPort: 8000
 
-# determine whether or not to use nginx for ingress (only 1 ingress should be used to prevent conflicts) 
+# determine whether or not to use nginx for ingress (only 1 ingress should be used to prevent conflicts)
 ingress:
   enabled: true
-  className: "nginx"  
+  className: "nginx"
   # tls:
   #   - secretName: app.EXAMPLE_DOMAIN
   #     hosts:
@@ -58,7 +58,7 @@ istioGatewayIngress:
   certificateIssuerName: "letsencrypt-production"
 
 # Kubernetes resource limits
-resources: 
+resources:
   limits:
     memory: "4Gi"
 
@@ -67,6 +67,10 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
+
+# OIDC settings
+oidc:
+  enabled: "false"
 
 nodeSelector: {}
 

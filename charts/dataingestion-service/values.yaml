@@ -72,7 +72,7 @@ odse:
   dbname: "NBS_ODSE"
 
 kafka:
-  cluster: "MSK_KAFKA_ENDPOINT"
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
 log:
   path: "/usr/share/dataingestion/data"
@@ -84,7 +84,8 @@ pvc:
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
-authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
+#authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
+authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
 sftp:
   enabled: "EXAMPLE_SFTP_ENABLED"

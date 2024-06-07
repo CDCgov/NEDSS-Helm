@@ -20,7 +20,25 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        args: ['--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}','--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}','--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}','--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}', '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}', '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}','--nbs.gateway.pagebuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', '--nbs.gateway.pagebuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}']
+        args: [
+          {{- if eq .Values.oidc.enabled "true" }}        
+          '--spring.profiles.include=oidc',
+          '--nbs.security.oidc.uri=https://{{ .Values.ingressHost }}/auth/realms/nbs-users',
+          '--nbs.security.oidc.client.id={{ .Values.oidc.client.id }}',
+          '--nbs.security.oidc.client.secret={{ .Values.oidc.client.secret }}',
+          {{- end }}
+          '--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}',
+          '--nbs.gateway.ui.service={{ .Values.modernizationUIHost }}',
+          '--nbs.gateway.modernization.service={{ .Values.modernizationApiHost }}',
+          '--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}',
+          '--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}',
+          '--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}', 
+          '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}', 
+          '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}',
+          '--nbs.gateway.pagebuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', 
+          '--nbs.gateway.pagebuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}'
+          #'--spring.cloud.gateway.httpclient.ssl.useInsecureTrustManager=true'
+        ]
         command: ['java', '-jar', 'api.jar']
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         ports:

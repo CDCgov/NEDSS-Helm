@@ -38,4 +38,14 @@ ingressHost: "app.fts1.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
+modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
+
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+# OIDC settings
+oidc:
+  enabled: "true"
+  issuerUri: "https://app.fts1.nbspreview.com/auth/realms/nbs-users"
+  client:
+    id: ""
+    secret: ""

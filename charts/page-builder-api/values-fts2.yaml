@@ -1,11 +1,23 @@
 replicaCount: 1
 
-env: "feature"
+env: "prod"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.f4fdaa7
+  tag: "1.0.1-SNAPSHOT.f4fdaa7"
+
+# Host URL for application
+ingressHost: "app2.fts2.nbspreview.com"
+
+# URL for access to classic application
+nbsExternalName: app-classic.fts2.nbspreview.com
+
+#Database access credentials
+jdbc:
+  connectionString: ""
+  user: ""
+  password: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -24,46 +36,31 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 8095
   httpsPort: 443
   gatewayPort: 8000
-  pageBuilderPort: 8095
 
-pageBuilder:
-  enabled: "true"
-  page:
-    library:
-      enabled: "true"
-    management:
-      create:
-        enabled: "true"
-      edit:
-        enabled: "true"
-
+# determine whether or not to use nginx for ingress (only 1 ingress should be used to prevent conflicts)
 ingress:
   enabled: true
   className: "nginx"
-  tls:
-    - secretName: app.feature.nbspreview.com
-      hosts:
-        - app.feature.nbspreview.com
+  # tls:
+  #   - secretName: app2.fts2.nbspreview.com
+  #     hosts:
+  #       - app2.fts2.nbspreview.com
 
 # determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
 istioGatewayIngress:
   enabled: false
-  host: app.feature.nbspreview.com
+  # host: app2.fts2.nbspreview.com
   gatewayNamespace: "istio-ingress"
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
-mTLS:
-  enabled: false
-
-nbsExternalName: app-classic.feature.nbspreview.com
-
+# Kubernetes resource limits
 resources:
   limits:
-    memory: "1Gi"
+    memory: "4Gi"
 
 autoscaling:
   enabled: false
@@ -77,21 +74,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.feature.nbspreview.com"
-
-elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
-
 # OIDC settings
 oidc:
-  enabled: "false"
-
-jdbc:
-  connectionString: ""
-  user: ""
-  password: ""
-
-ui:
-  smarty:
-    key: ""
-  analytics:
-    key: ""
+  enabled: "true"
+  issuerUri: "https://app.fts2.nbspreview.com/auth/realms/nbs-users"
