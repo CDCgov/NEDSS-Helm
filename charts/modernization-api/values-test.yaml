@@ -86,6 +86,10 @@ jdbc:
   user: ""
   password: ""
 
+# OIDC settings
+oidc:
+  enabled: "false"
+
 ui:
   smarty:
     key: ""

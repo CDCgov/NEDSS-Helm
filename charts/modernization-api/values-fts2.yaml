@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "fts2"
+env: "prod"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.dbbff8c
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -35,7 +35,10 @@ pageBuilder:
     library:
       enabled: "true"
     management:
-      enabled: "false"
+      create:
+        enabled: "true"
+      edit:
+        enabled: "false"
 
 ingress:
   enabled: true
@@ -60,7 +63,7 @@ nbsExternalName: app-classic.fts2.nbspreview.com
 
 resources:
   limits:
-    memory: "1Gi"
+    memory: "4Gi"
 
 autoscaling:
   enabled: false
@@ -79,9 +82,16 @@ ingressHost: "app.fts2.nbspreview.com"
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 jdbc:
+  # jdbc.connectionString is passed in as an override and all values must be supplied.
+  # Replace <db_endpoint>, <database>, <username>, and <password> in the following:
+  # "jdbc:sqlserver://<db_endpoint>:1433;databaseName=<database>;user=<username>;password=<password>;encrypt=true;trustServerCertificate=true;"
   connectionString: ""
   user: ""
   password: ""
+
+# OIDC settings
+oidc:
+  enabled: "true"
 
 ui:
   smarty:
