@@ -73,6 +73,8 @@ connect:
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nbs_$1",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "table.include.list":"NBS_ODSE.dbo.person,NBS_ODSE.dbo.organization",
+      "schema.include.list": "dbo",
       "value.converter.schemas.enable": "true",
     }
   }
