@@ -23,6 +23,7 @@ data:
     snapshot.mode=no_data
     value.converter=org.apache.kafka.connect.json.JsonConverter
     value.converter.schemas.enable=false
+    include.schema.changes=true
 
     config.storage.topic={{ .Values.connect.properties.topics_basename }}_config
     config.storage.replication.factor={{ .Values.connect.properties.default_replication_factor }}
