@@ -42,7 +42,6 @@ connect:
     "name": "debezium060324v1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
-      "tasks.max": "1",
       "database.hostname": "cdc-nbs-legacy-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com",
       "database.port": "1433",
       "database.user": "nbs_ods",
@@ -52,25 +51,28 @@ connect:
       "database.server.name": "odse",
       "database.history.kafka.bootstrap.servers": "b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
-      "topic.prefix":"cdc",
+      # Uncomment following to manually bypass the sqlserver agent status query results
+      #"database.sqlserver.agent.status.query": "true",
+      "database.trustServerCertificate": "true",
+      "include.schema.changes": "true",
       "key.converter": "org.apache.kafka.connect.json.JsonConverter",
       "key.converter.schemas.enable": "true",
-      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-      "value.converter.schemas.enable": "true",
-      "include.schema.changes": "true",
-      "transforms":"dropPrefix",
-      "transforms.dropPrefix.regex":"cdc\\.NBS_ODSE\\.dbo\\.(.+)",
-      "transforms.dropPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
-      "transforms.dropPrefix.replacement":"nbs_$1",
-      "database.trustServerCertificate":"true",
-      "snapshot.mode":"no_data",
-      "producer.max.request.size":"10000000", #10MB
+      "producer.max.request.size": "10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
+      "snapshot.mode": "no_data",
+      "schema.history.internal.kafka.topic": "odse-schema-history",
+      "schema.history.internal.kafka.bootstrap.servers": "b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092",
+      "tasks.max": "1",
+      "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
-      "schema.history.internal.kafka.topic":"odse-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers":"b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
+      "transforms": "dropPrefix",
+      "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
+      "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
+      "transforms.dropPrefix.replacement": "nbs_$1",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "true",
     }
   }
 
