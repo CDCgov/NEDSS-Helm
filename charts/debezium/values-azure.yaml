@@ -32,7 +32,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-connector-v1"
+    group_id: "debezium-connector-v2"
     topics_basename: "debezium-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -41,7 +41,7 @@ connect:
     sqlserveragentstatus: "select dbo.IsSqlAgentRunning()"
 
   sqlserverconnector: {
-    "name": "debezium-connector-v1",
+    "name": "debezium-connector-v2",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net",
@@ -85,7 +85,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-connector-v1"
+      value: "debezium-connector-v2"
 #    - name: CONFIG_STORAGE_TOPIC
 #      value: "debezium_connect_configs"
 #    - name: OFFSET_STORAGE_TOPIC
