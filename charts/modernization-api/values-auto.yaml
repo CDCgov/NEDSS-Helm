@@ -39,6 +39,7 @@ reportingService:
   investigationReportingServicePort: 8093
   observationReportingServicePort: 8094
   postProcessingReportingServicePort: 8095
+  ldfdataReportingServicePort: 8097
 
 # nginx-ingress
 ingress:
