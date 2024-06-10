@@ -37,6 +37,9 @@ reportingService:
   observationReportingServicePort: 8094
   postProcessingReportingServicePort: 8095
 
+dataprocessingService:
+  port: 8082
+
 pageBuilder:
   enabled: "false"
   page:
