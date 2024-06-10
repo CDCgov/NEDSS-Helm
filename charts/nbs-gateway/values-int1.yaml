@@ -19,6 +19,12 @@ gatewayService:
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
 
+landing:
+  base: "/welcome"
+
+welcome:
+  enabled: "true"
+
 pageBuilder:
   enabled: "true"
   page:
@@ -45,7 +51,6 @@ pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
 # OIDC settings
 oidc:
   enabled: "true"
-  issuerUri: "https://app.int1.nbspreview.com/auth/realms/nbs-users"
   client:
     id: ""
     secret: ""

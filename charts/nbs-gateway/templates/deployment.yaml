@@ -21,6 +21,7 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         args: [
+          #'--spring.cloud.gateway.httpclient.ssl.useInsecureTrustManager=true',
           {{- if eq .Values.oidc.enabled "true" }}        
           '--spring.profiles.include=oidc',
           '--nbs.security.oidc.uri=https://{{ .Values.ingressHost }}/auth/realms/nbs-users',
@@ -36,8 +37,9 @@ spec:
           '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}', 
           '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}',
           '--nbs.gateway.pagebuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', 
-          '--nbs.gateway.pagebuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}'
-          #'--spring.cloud.gateway.httpclient.ssl.useInsecureTrustManager=true'
+          '--nbs.gateway.pagebuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}',
+          '--nbs.gateway.welcome.enabled={{ ((.Values).welcome).enabled | default "false" }}',
+          '--nbs.gateway.landing.base={{  ((.Values).landing).base | default "/nbs/login" }}'
         ]
         command: ['java', '-jar', 'api.jar']
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
