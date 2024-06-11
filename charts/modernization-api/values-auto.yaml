@@ -41,6 +41,10 @@ reportingService:
   postProcessingReportingServicePort: 8095
   ldfdataReportingServicePort: 8097
 
+dataprocessingService:
+  enabled: "false"
+  port: 8082
+
 # nginx-ingress
 ingress:
   enabled: true
