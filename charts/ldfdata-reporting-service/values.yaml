@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dts1"
+env: "prod"
 
 image:
-  repository: ""
+  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-reporting-service/ldfdata-reporting-service"
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.8e91494
+  tag: "v1.0.3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -27,18 +27,17 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8081
+  port: 8091
   httpsPort: 443
 
 ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: dataingestion.dts1.nbspreview.com
+  - secretName: "app.EXAMPLE_DOMAIN"
     hosts:
-    - dataingestion.dts1.nbspreview.com
+    - "app.EXAMPLE_DOMAIN"
 
-# Kubernetes resource limits
 resources: {}
 
 autoscaling:
@@ -53,40 +52,20 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.dts1.nbspreview.com"
+ingressHost: "app.EXAMPLE_DOMAIN"
 
+
+# dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
-
-nbs:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  username: "EXAMPLE_DB_USER"
+  password: "EXAMPLE_DB_USER_PASSWORD"
 
 odse:
-  dbname: ""
+  dbname: "EXAMPLE_DB_NAME"
 
 kafka:
-  cluster: ""
+  cluster: "EXAMPLE_KAFKA_CLUSTER"
 
 log:
-  path: "/usr/share/dataingestion/data"
-
-pvc:
-  diPvClaim:
-    storageClass: efs-dataingestion
-    storageRequest: 20Gi
-
-efsFileSystemId: ""
-
-authUri: ""
-
-sftp:
-  enabled: ""
-  host: ""
-  username: ""
-  password: ""
+  path: "/usr/share/ldfdata-reporting/data"
