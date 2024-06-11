@@ -38,6 +38,9 @@ reportingService:
   postProcessingReportingServicePort: 8095
   ldfdataReportingServicePort: 8097
 
+dataprocessingService:
+  port: 8082
+
 pageBuilder:
   enabled: "false"
   page:
