@@ -67,6 +67,7 @@ spec:
                 port:
                   number: {{ .Values.reportingService.ldfdataReportingServicePort }}
          {{- end }}
+          {{- if eq .Values.dataprocessingService.enabled "true" }}
           - path: "/data-processing-svc/rti/"
             pathType: Prefix
             backend:
@@ -74,6 +75,7 @@ spec:
                 name: data-processing-service
                 port:
                   number: {{ .Values.dataprocessingService.port }}
+          {{- end }}        
           - path: "/auth/realms/nbs-users/"
             pathType: Prefix
             backend:
