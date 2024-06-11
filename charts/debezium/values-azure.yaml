@@ -1,6 +1,6 @@
 nameOverride: ""
 fullnameOverride: ""
-log_level: INFO
+log_level: INFO # DEBUG, INFO, ERROR
 
 connect:
   replicaCount: 1
@@ -86,12 +86,6 @@ connect:
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
       value: "debezium-connector-v5"
-#    - name: CONFIG_STORAGE_TOPIC
-#      value: "debezium_connect_configs"
-#    - name: OFFSET_STORAGE_TOPIC
-#      value: "debezium_connect_offsets"
-#    - name: STATUS_STORAGE_TOPIC
-#      value: "debezium_connect_statuses"
 
 ui:
   enabled: false
