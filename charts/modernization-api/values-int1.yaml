@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.899d51a
+  tag: 1.0.1-SNAPSHOT.aaafea0
 
 imagePullSecrets: []
 nameOverride: ""
@@ -29,6 +29,12 @@ service:
   gatewayPort: 8000
   pageBuilderPort: 8095
 
+landing:
+  base: "/welcome"
+
+welcome:
+  enabled: "true"
+
 pageBuilder:
   enabled: "true"
   page:
@@ -40,13 +46,14 @@ pageBuilder:
       edit:
         enabled: "true"
 
-reportingService: 
+reportingService:
   enabled: "false"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
   investigationReportingServicePort: 8093
   observationReportingServicePort: 8094
   postProcessingReportingServicePort: 8095
+  ldfdataReportingServicePort: 8097
 
 ingress:
   enabled: true
