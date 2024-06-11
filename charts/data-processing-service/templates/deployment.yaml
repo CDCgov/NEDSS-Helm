@@ -44,12 +44,6 @@ spec:
               value: {{ .Values.nbs.username }}
             - name: NBS_DBPASSWORD
               value: {{ .Values.nbs.password }}
-            - name: MSGOUT_DBNAME
-              value: {{ .Values.msgoute.dbname }}
-            - name: ODSE_DBNAME
-              value: {{ .Values.odse.dbname }}
-            - name: SRTE_DBNAME
-              value: {{ .Values.srte.dbname }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
           resources:

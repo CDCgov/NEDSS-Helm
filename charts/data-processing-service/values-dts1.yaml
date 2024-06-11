@@ -60,13 +60,6 @@ nbs:
   username: ""
   password: ""
 
-msgoute:
-  dbname: "nbs_msgoute"
-odse:
-  dbname: "nbs_odse"
-srte:
-  dbname: "nbs_srte"
-
 kafka:
   cluster: ""
 
