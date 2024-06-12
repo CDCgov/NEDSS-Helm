@@ -27,16 +27,16 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8081
+  port: 8082
   httpsPort: 443
 
 ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: dataingestion.dts1.nbspreview.com
+  - secretName: app.dts1.nbspreview.com
     hosts:
-    - dataingestion.dts1.nbspreview.com
+    - app.dts1.nbspreview.com
 
 # Kubernetes resource limits
 resources: {}
@@ -53,40 +53,15 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.dts1.nbspreview.com"
-
-jdbc:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
+ingressHost: "app.dts1.nbspreview.com"
 
 nbs:
   dbserver: ""
-  dbname: ""
   username: ""
   password: ""
-
-odse:
-  dbname: ""
 
 kafka:
   cluster: ""
 
 log:
-  path: "/usr/share/dataingestion/data"
-
-pvc:
-  diPvClaim:
-    storageClass: efs-dataingestion
-    storageRequest: 20Gi
-
-efsFileSystemId: ""
-
-authUri: ""
-
-sftp:
-  enabled: ""
-  host: ""
-  username: ""
-  password: ""
+  path: "/usr/share/dataprocessing/data"
