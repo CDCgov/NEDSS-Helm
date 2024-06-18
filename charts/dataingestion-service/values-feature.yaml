@@ -57,18 +57,8 @@ ingressHost: "dataingestion.feature.nbspreview.com"
 
 jdbc:
   dbserver: ""
-  dbname: ""
   username: ""
   password: ""
-
-nbs:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
-
-odse:
-  dbname: ""
 
 kafka:
   cluster: ""
