@@ -6,7 +6,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.8f2d015
+  tag: 1.0.1-SNAPSHOT.05cb44e
 
 gatewayService:
   ports:
@@ -18,6 +18,12 @@ gatewayService:
       targetPort: 8000
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
+
+landing:
+  base: "/welcome"
+
+welcome:
+  enabled: "true"
 
 pageBuilder:
   enabled: "true"
@@ -45,7 +51,6 @@ pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
 # OIDC settings
 oidc:
   enabled: "true"
-  issuerUri: "https://app.int1.nbspreview.com/auth/realms/nbs-users"
   client:
     id: ""
     secret: ""

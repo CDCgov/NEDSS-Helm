@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: "v1.1.1"
+  tag: "v1.1.2"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -36,6 +36,11 @@ reportingService:
   investigationReportingServicePort: 8093
   observationReportingServicePort: 8094
   postProcessingReportingServicePort: 8095
+  ldfdataReportingServicePort: 8097
+
+dataprocessingService:
+  enabled: "false"
+  port: 8082
 
 pageBuilder:
   enabled: "true"
