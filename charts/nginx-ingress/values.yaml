@@ -5,6 +5,7 @@ controller:
   config:
     compute-full-forwarded-for: "true"
     use-forwarded-headers: "true"
+    allow-snippet-annotations: "true"
     #proxy-body-size: "0"
   ingressClassResource:
     enabled: true
