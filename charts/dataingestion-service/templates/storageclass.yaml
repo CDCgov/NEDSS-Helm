@@ -1,4 +1,3 @@
-{{- if eq .Values.cloudProvider "aws" }}
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
@@ -8,4 +7,3 @@ parameters:
   provisioningMode: efs-ap
   fileSystemId: {{ .Values.efsFileSystemId | quote }}
   directoryPerms: "700"
-{{- end }}

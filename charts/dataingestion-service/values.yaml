@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: "app.example.com"
+  - secretName: "dataingestion.EXAMPLE_DOMAIN"
     hosts:
-    - "app.example.com"
+    - "dataingestion.EXAMPLE_DOMAIN"
 
 resources: {}
 
@@ -52,27 +52,27 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.example.com"
+ingressHost: "dataingestion.EXAMPLE_DOMAIN"
 
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  dbname: "NBS_DataIngest"
+  username: "EXAMPLE_DB_USER"
+  password: "EXAMPLE_DB_USER_PASSWORD"
 
 nbs:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  dbname: "NBS_MSGOUTE"
+  username: "EXAMPLE_DB_USER"
+  password: "EXAMPLE_DB_USER_PASSWORD"
 
 odse:
-  dbname: ""
+  dbname: "NBS_ODSE"
 
 kafka:
-  cluster: ""
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
 log:
   path: "/usr/share/dataingestion/data"
@@ -82,12 +82,18 @@ pvc:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
 
-efsFileSystemId: ""
+efsFileSystemId: "EXAMPLE_EFS_ID"
 
-authUri: ""
+#authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
+authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
-########################################
+sftp:
+  enabled: "EXAMPLE_SFTP_ENABLED"
+  host: "EXAMPLE_SFTP_HOST"
+  username: "EXAMPLE_SFTP_USER"
+  password: "EXAMPLE_SFTP_PASS"
 
+##################################
 cloudProvider: azure   # or aws
 useCertManager: false
 
@@ -101,4 +107,3 @@ aws:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
     efsFileSystemId: ""
-

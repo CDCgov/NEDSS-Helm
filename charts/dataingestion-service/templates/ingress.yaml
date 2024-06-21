@@ -4,10 +4,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "dataingestion-service.fullname" . }}
-  {{- if .Values.useCertManager }}
-  annotations:    
+  annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-  {{- end }}    
+    # nginx.ingress.kuberenetes.io/rewrite-target: /
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
