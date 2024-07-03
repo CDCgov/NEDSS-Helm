@@ -6,7 +6,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.05cb44e # 1.0.1-TEST.6575161
+  tag: 1.0.1-TEST.3aeb39f #1.0.1-SNAPSHOT.05cb44e
 
 gatewayService:
   ports:
@@ -19,8 +19,14 @@ gatewayService:
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
 
+landing:
+  base: "/welcome"
+
+welcome:
+  enabled: "true"
+
 pageBuilder:
-  enabled: "false"
+  enabled: "true"
   page:
     library:
       enabled: "true"
@@ -28,7 +34,7 @@ pageBuilder:
       create:
         enabled: "true"
       edit:
-        enabled: "false"
+        enabled: "true"
 
 resources: {}
 
@@ -38,4 +44,13 @@ ingressHost: "app.dts1.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
+modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
+
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+# OIDC settings
+oidc:
+  enabled: "true"
+  client:
+    id: ""
+    secret: ""
