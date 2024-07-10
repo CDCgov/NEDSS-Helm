@@ -41,7 +41,7 @@ sqlServerConnector: {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
     "offset.flush.interval.ms": "2000",
-    "connection.url": "jdbc:sqlserver://cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;",
+    "connection.url": "jdbc:sqlserver://nbs-db.private-dts1.nbspreview.com:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;",
     "connection.user": "nbs_ods",
     "connection.password": "ods",
     "connection.pool.min_size": "5",
@@ -132,7 +132,7 @@ prometheus:
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
-  bootstrapServers: "b-1.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092,b-2.msktest1.5v5oie.c5.kafka.us-east-1.amazonaws.com:9092"
+  bootstrapServers: "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092"
   default_replication_factor: 2
   default_partitions: 10
   default_cleanup: "compact"

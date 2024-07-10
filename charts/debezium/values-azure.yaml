@@ -53,6 +53,7 @@ connect:
       "database.server.name": "odse",
       "database.history.kafka.bootstrap.servers": "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
+#      manually bypass the sqlserver agent status query
       "database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
       "database.trustServerCertificate": "true",
       "include.schema.changes": "true",
