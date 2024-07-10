@@ -6,7 +6,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.861a827
+  tag: 1.0.1-TEST.3aeb39f
 
 gatewayService:
   ports:
@@ -38,4 +38,13 @@ ingressHost: "app.feature.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
+modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
+
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+# OIDC settings
+oidc:
+  enabled: "false"
+  client:
+    id: ""
+    secret: ""
