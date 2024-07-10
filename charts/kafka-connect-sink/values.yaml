@@ -41,7 +41,7 @@ sqlServerConnector: {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
     "offset.flush.interval.ms": "2000",
-    "connection.url": "jdbc:sqlserver://nbs-db.private-dts1.nbspreview.com:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;",
+    "connection.url": "jdbc:sqlserver://nbs-db.private-dts1.nbspreview.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;",
     "connection.user": "nbs_ods",
     "connection.password": "ods",
     "connection.pool.min_size": "5",
