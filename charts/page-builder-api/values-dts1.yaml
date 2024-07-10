@@ -1,23 +1,23 @@
 replicaCount: 1
 
-env: "prod"
+env: "dts1"
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/page-builder-api"
+  repository: ""
   pullPolicy: IfNotPresent
-  tag: "v1.1.4"
+  tag: 1.0.1-SNAPSHOT.8b0acf4
 
 # Host URL for application
-ingressHost: "app.EXAMPLE_DOMAIN"
+ingressHost: app.dts1.nbspreview.com
 
 # URL for access to classic application
-nbsExternalName: app-classic.EXAMPLE_DOMAIN
+nbsExternalName: app-classic.dts1.nbspreview.com
 
 #Database access credentials
 jdbc:
-  connectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_DB_USER;password=EXAMPLE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
-  user: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  connectionString: ""
+  user: ""
+  password: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -45,14 +45,14 @@ ingress:
   enabled: true
   className: "nginx"
   # tls:
-  #   - secretName: app.EXAMPLE_DOMAIN
+  #   - secretName: app.example.com
   #     hosts:
-  #       - app.EXAMPLE_DOMAIN
+  #       - app.example.com
 
 # determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
 istioGatewayIngress:
   enabled: false
-  # host: app.EXAMPLE_DOMAIN
+  # host: app.example.com
   gatewayNamespace: "istio-ingress"
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
@@ -60,7 +60,7 @@ istioGatewayIngress:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "4Gi"
+    memory: "2Gi"
 
 autoscaling:
   enabled: false
@@ -70,7 +70,8 @@ autoscaling:
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
+  issuerUri: "https://app.dts1.nbspreview.com/auth/realms/nbs-users"
 
 nodeSelector: {}
 
