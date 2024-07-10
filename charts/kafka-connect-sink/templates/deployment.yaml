@@ -69,10 +69,6 @@ spec:
             {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-          volumeMounts:
-            - name: config
-              mountPath: /etc/sqlServerConnector.json
-              subPath: sqlServerConnector.json
           env:
             - name: CONNECT_REST_ADVERTISED_HOST_NAME
               valueFrom:
@@ -107,34 +103,26 @@ spec:
               value: "{{ .Values.jmx.port }}"
             {{- end }}
 
-        {{- if .Values.customEnv.CUSTOM_SCRIPT_PATH }}
+        {{- if .Values.SQL_SERVER_CONNECTOR_CONFIG }}
           command:
             - "bash"
             - "-c"
             - |
-{{/*              sleep 60;*/}}
               echo "Installing Connector"
               confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.7.6
-{{/*              $START_SQL_SERVER_CONNECTOR_PATH*/}}
               /etc/confluent/docker/run &
-
-{{/*              $CUSTOM_SCRIPT_PATH*/}}
-{{/*              sleep infinity*/}}
-          {{- if .Values.livenessProbe }}
-          livenessProbe:
-{{ toYaml .Values.livenessProbe | trim | indent 12 }}
-          {{- end }}
+              while : ; do
+                curl_status=$$(curl -s -o /dev/null -w %{http_code} http://localhost:8083/connectors)
+                echo -e $$(date) " Kafka Connect listener HTTP state: " $$curl_status " (waiting for 200)"
+                if [ $$curl_status -eq 200 ] ; then
+                  break
+                fi
+                sleep 10
+              done
+              echo "Starting sqlServerConnector"
+              curl --request POST --header "Accept:application/json" --header "Content-Type:application/json" "http://127.0.0.1:8083/connectors/" --data "@/etc/sqlServerConnector.json"
+              sleep infinity
         {{- end }}
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - "bash"
-                  - "-c"
-                  -
-                    echo "Starting sqlServerConnector"
-                    curl --request POST --header "Accept:application/json" --header "Content-Type:application/json" "http://127.0.0.1:8083/connectors/" --data "@/etc/sqlServerConnector.json"
-
         {{- if .Values.volumeMounts }}
           volumeMounts:
 {{ toYaml .Values.volumeMounts | indent 10 }}
@@ -152,11 +140,6 @@ spec:
           configMap:
             name: {{ template "cp-kafka-connect.fullname" . }}-jmx-configmap
       {{- end }}
-      volumes:
-        - name: config
-          configMap:
-            name: {{ include "cp-kafka-connect.name" . }}-sqlserver-connect
-            defaultMode: 0744
       {{- if .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}

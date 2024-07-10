@@ -36,12 +36,13 @@ configurationOverrides:
 
 sqlServerConnectorEnabled: true
 sqlServerConnector: {
-  "name": "kafka-connect-sqlserver-sink-v1",
+  "name": "Kafka-Connect-SqlServer-Sink-V1",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
-    "connection.url": "jdbc:sqlserver://cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com:1433",
-    "connection.username": "nbs_ods",
+    "offset.flush.interval.ms": "2000",
+    "connection.url": "jdbc:sqlserver://cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;",
+    "connection.user": "nbs_ods",
     "connection.password": "ods",
     "connection.pool.min_size": "5",
     "connection.pool.max_size": "32",
@@ -52,13 +53,18 @@ sqlServerConnector: {
     "pk.mode": "record_key",
     "schema.evolution": "basic",
     "database.time_zone": "UTC",
-    "topics.regex": "nrt_[ a-zA-Z_ ]+",
+    "topics.regex": "nrt_[a-zA-Z_]+",
     "database.trustServerCertificate": "true",
     "quote.identifiers": "true",
     "key.converter.schemas.enable": "true",
     "key.converter": "org.apache.kafka.connect.json.JsonConverter",
     "value.converter.schemas.enable": "true",
-    "value.converter": "org.apache.kafka.connect.json.JsonConverter"
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "dialect.name": "SqlServerDatabaseDialect",
+    "errors.deadletterqueue.topic.name": "nrt-nbs-dlq-1",
+    "errors.deadletterqueue.topic.replication.factor": "2",
+    "errors.log.enable": "true",
+    "errors.log.include.messages": "true"
   }
 }
 
@@ -69,9 +75,9 @@ heapOptions: "-Xms512M -Xmx512M"
 
 ## Additional env variables
 ## CUSTOM_SCRIPT_PATH is the path of the custom shell script to be run mounted in a volume
-customEnv:
- CUSTOM_SCRIPT_PATH: /etc/scripts/create-connectors.sh
- START_SQL_SERVER_CONNECTOR_PATH: /etc/scripts/start-sqlServer-connector.sh
+customEnv: { }
+SQL_SERVER_CONNECTOR_CONFIG: /etc/sqlServerConnector.json
+JDBC_CONNECTOR_CONFIG: /etc/jdbcConnector.sh
 
 resources: { }
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -139,15 +145,20 @@ cp-schema-registry:
 ## List of volumeMounts for connect server container
 ## ref: https://kubernetes.io/docs/concepts/storage/volumes/
 volumeMounts:
-# - name: credentials
-#   mountPath: /etc/creds-volume
+  - name: config
+    mountPath: /etc/sqlServerConnector.json
+    subPath: sqlServerConnector.json
+#  - name: config
+#    mountPath: /etc/jdbcConnector.sh
+#    subPath: jdbcConnector.sh
 
 ## List of volumeMounts for connect server container
 ## ref: https://kubernetes.io/docs/concepts/storage/volumes/
 volumes:
-# - name: credentials
-#   secret:
-#     secretName: creds
+  - name: config
+    configMap:
+      name: cp-kafka-connect-sqlserver-connect
+      defaultMode: 0777
 
 ## Secret with multiple keys to serve the purpose of multiple secrets
 ## Values for all the keys will be base64 encoded when the Secret is created or updated
@@ -162,9 +173,9 @@ secrets:
 ## As an example such a similar script is added to "cp-helm-charts/examples/create-connectors.sh"
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 livenessProbe:
- httpGet:
-   path: /connectors
-   port: 8083
- initialDelaySeconds: 60
- periodSeconds: 5
- failureThreshold: 10
+# httpGet:
+#   path: /connectors
+#   port: 8083
+# initialDelaySeconds: 60
+# periodSeconds: 5
+# failureThreshold: 10

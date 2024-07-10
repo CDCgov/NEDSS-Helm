@@ -8,14 +8,8 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
-  create-connectors.sh: |-
-    sleep 60;
-    echo "Installing Connector"
-    confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.7.6
-
-  start-sqlServer-connector.sh: |-
-    echo "Starting sqlServerConnector"
-    curl --request POST --header "Accept:application/json" --header "Content-Type:application/json" "http://127.0.0.1:8083/connectors/" --data "@/etc/sqlServerConnector.json"
+{{/*  jdbcConnector.sh: |*/}}
+{{/*    {{- include "jdbcConnector" . | indent 4 }}*/}}
 
   sqlServerConnector.json: |-
       {{- .Values.sqlServerConnector| toPrettyJson | nindent 4 }}
