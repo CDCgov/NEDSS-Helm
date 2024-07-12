@@ -50,6 +50,8 @@ spec:
               value: {{ .Values.log.path }}
             - name: DB_ODSE
               value: {{ .Values.odse.dbname }}
+            - name: RDB
+              value: {{ .Values.rdb.dbname }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
