@@ -63,6 +63,9 @@ jdbc:
 odse:
   dbname: "NBS_ODSE"
 
+rdb:
+  dbname: "rdb_modern"
+
 kafka:
   cluster: ""
 
