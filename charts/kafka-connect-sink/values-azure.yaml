@@ -65,7 +65,6 @@ sqlServerConnector: {
     "errors.deadletterqueue.topic.replication.factor": "2",
     "errors.log.enable": "true",
     "errors.log.include.messages": "true"
-
   }
 }
 
