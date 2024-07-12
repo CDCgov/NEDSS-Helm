@@ -64,11 +64,7 @@ sqlServerConnector: {
     "errors.deadletterqueue.topic.name": "nrt-nbs-dlq-1",
     "errors.deadletterqueue.topic.replication.factor": "2",
     "errors.log.enable": "true",
-    "errors.log.include.messages": "true",
-    "transforms": "changeTopicCase",
-    "transforms.changeTopicCase.type": "com.github.jcustenborder.kafka.connect.transform.common.ChangeTopicCase",
-    "transforms.changeTopicCase.from": "LOWER_CAMEL",
-    "transforms.changeTopicCase.to": "UPPER_UNDERSCORE"
+    "errors.log.include.messages": "true"
 
   }
 }
