@@ -1,7 +1,6 @@
 nameOverride: ""
 fullnameOverride: ""
-log_level: INFO # DEBUG, INFO, ERROR
-
+log_level: INFO
 connect:
   replicaCount: 1
   imagePullSecrets: [ ]
@@ -37,24 +36,24 @@ connect:
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
-    bootstrap_server: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
-    sql_server_agent_status: "select dbo.IsSqlAgentRunning()"
+    sql_server_agent_status: ""
+    bootstrap_server: "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector: {
     "name": "debezium-connector-v071524",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
-      "database.hostname": "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net",
+      "database.hostname": "nbs-db.private-dts1.nbspreview.com",
       "database.port": "1433",
       "database.user": "nbs_ods",
       "database.password": "ods",
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
       "database.server.name": "odse",
-      "database.history.kafka.bootstrap.servers": "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092",
+      "database.history.kafka.bootstrap.servers": "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
-#      manually bypass the sqlserver agent status query
-      "database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
+      # Uncomment following to manually bypass the sqlserver agent status query results
+      #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
       "database.trustServerCertificate": "true",
       "include.schema.changes": "true",
       "key.converter": "org.apache.kafka.connect.json.JsonConverter",
@@ -63,7 +62,8 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092",
+      "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092",
+      "table.include.list":"dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.state_defined_field_data",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
@@ -80,7 +80,7 @@ connect:
 
   env:
     - name: BOOTSTRAP_SERVERS
-      value: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
+      value: "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092"
     - name: LOG_LEVEL
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
