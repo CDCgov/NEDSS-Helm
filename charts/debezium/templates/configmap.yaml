@@ -37,7 +37,7 @@ data:
     topic.creation.default.replication.factor={{ .Values.connect.properties.default_replication_factor }}
     topic.creation.default.partitions={{ .Values.connect.properties.default_partitions }}
     topic.creation.default.cleanup.policy={{ .Values.connect.properties.default_cleanup }}
-    {{- if .Values.connect.properties.sql_server_agent_status }}
+    {{- if .Values.connect.properties.sql_server_agent_override }}
     database.sqlserver.agent.status.query={{ .Values.connect.properties.sql_server_agent_status }}
     {{end}}
 

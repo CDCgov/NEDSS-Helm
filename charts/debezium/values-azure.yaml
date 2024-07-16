@@ -38,6 +38,7 @@ connect:
     default_partitions: 10
     default_cleanup: "compact"
     bootstrap_server: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
+    sql_server_agent_override: true
     sql_server_agent_status: "select dbo.IsSqlAgentRunning()"
 
   sqlserverconnector: {
