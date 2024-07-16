@@ -36,7 +36,7 @@ connect:
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
-    sql_server_agent_status: ""
+#    sql_server_agent_status: ""
     bootstrap_server: "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector: {
