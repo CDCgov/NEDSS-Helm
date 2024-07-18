@@ -9,6 +9,10 @@ data:
     {{ $path | trimPrefix "db/odse/" }}: |-
 {{ $.Files.Get $path | indent 6 }}
     {{ end }}
+  {{- range $path, $_ :=  .Files.Glob  "db/rdb/*" }}
+    {{ $path | trimPrefix "db/rdb/" }}: |-
+{{ $.Files.Get $path | indent 6 }}
+    {{ end }}
   {{- range $path, $_ :=  .Files.Glob  "db/master/*" }}
     {{ $path | trimPrefix "db/master/" }}: |-
 {{ $.Files.Get $path | indent 6 }}

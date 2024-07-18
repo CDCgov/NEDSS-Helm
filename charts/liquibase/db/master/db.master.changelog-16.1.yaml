@@ -4,5 +4,5 @@ databaseChangeLog:
       author: liquibase
       changes:
         - sqlFile:
-            path: 001-fn_get_value_by_cd_ques-001.sql
+            path: 001-fn_sql_server_agent_status_override-001.sql.sql
             splitStatements: false
