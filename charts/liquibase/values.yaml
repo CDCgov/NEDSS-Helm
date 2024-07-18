@@ -55,13 +55,7 @@ affinity: {}
 ingressHost: "app.EXAMPLE_DOMAIN"
   
 volumeMounts:
-  - name: config
-    mountPath: "/liquibase/changelog"
 
 volumes:
-  - name: config
-    configMap:
-      name: liquibase
-      defaultMode: 0777
 
 efsFileSystemId: ""
