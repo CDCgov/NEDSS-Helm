@@ -56,7 +56,8 @@ affinity: {}
 ingressHost: "app.int1.nbspreview.com"
 
 jdbc:
-  dbserver: ""
+  master_db_url: "jdbc:sqlserver://nbs-db.private-int1.nbspreview.com:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  odse_db_url: "jdbc:sqlserver://nbs-db.private-int1.nbspreview.com:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   username: ""
   password: ""
 
@@ -68,18 +69,13 @@ rdb:
 
 volumeMounts:
   - name: config
-    mountPath: "/etc/data"
+    mountPath: "/liquibase/changelog"
 
 volumes:
   - name: config
     configMap:
-      name: liquibase-config
+      name: liquibase
       defaultMode: 0777
-
-pvc:
-  liquibasePvClaim:
-    storageClass: liquibase
-    storageRequest: 1Gi
 
 efsFileSystemId: ""
 

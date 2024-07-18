@@ -56,17 +56,12 @@ ingressHost: "app.EXAMPLE_DOMAIN"
   
 volumeMounts:
   - name: config
-    mountPath: "/etc/data"
+    mountPath: "/liquibase/changelog"
 
 volumes:
   - name: config
     configMap:
-      name: liquibase-config
+      name: liquibase
       defaultMode: 0777
-
-pvc:
-  liquibasePvClaim:
-    storageClass: liquibase
-    storageRequest: 1Gi
 
 efsFileSystemId: ""

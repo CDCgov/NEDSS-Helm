@@ -38,8 +38,8 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
-            - name: DB_URL
-              value: {{ .Values.jdbc.dbserver }}
+            - name: DB_URL_MASTER
+              value: {{ .Values.jdbc.master_db_url }}
             - name: DB_USERNAME
               value: {{ .Values.jdbc.username }}
             - name: DB_PASSWORD
@@ -48,22 +48,27 @@ spec:
               value: {{ .Values.odse.dbname }}
             - name: DB_RDB
               value: {{ .Values.rdb.dbname }}
+          command:
+            - "bash"
+            - "-c"
+            - |
+              echo "Executing changelog in DB :"
+              echo {{ .Values.jdbc.master_db_url }}
+              liquibase --changelog-file="db.odse.changelog-16.1.yaml" --searchPath="./changelog" --url="{{ .Values.jdbc.odse_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
+              sleep infinity
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- if .Values.volumeMounts }}
           volumeMounts:
-          {{ toYaml .Values.volumeMounts | indent 10 }}
-          {{- end}}
-      volumes:
-        - name: liquibase-persistent-storage
-          persistentVolumeClaim:
-            claimName: {{ include "liquibase.fullname" . }}-pvc
+{{ toYaml .Values.volumeMounts | indent 10 }}
+        {{- end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
       {{- if .Values.volumes }}
-      {{ toYaml .Values.volumes | trim | indent 6 }}
+{{ toYaml .Values.volumes | trim | indent 6 }}
       {{- end}}
       {{- with .Values.affinity }}
       affinity:
