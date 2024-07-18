@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: 001-fn_get_value_by_cd_ques-001.sql
+            splitStatements: false

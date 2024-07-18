@@ -5,7 +5,11 @@ metadata:
   labels:
     {{- include "liquibase.labels" . | nindent 4 }}
 data:
-  {{- range $path, $_ :=  .Files.Glob  "db/*" }}
-    {{ $path | trimPrefix "db/" }}: |-
+  {{- range $path, $_ :=  .Files.Glob  "db/odse/*" }}
+    {{ $path | trimPrefix "db/odse/" }}: |-
+{{ $.Files.Get $path | indent 6 }}
+    {{ end }}
+  {{- range $path, $_ :=  .Files.Glob  "db/master/*" }}
+    {{ $path | trimPrefix "db/master/" }}: |-
 {{ $.Files.Get $path | indent 6 }}
     {{ end }}

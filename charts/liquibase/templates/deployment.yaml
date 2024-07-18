@@ -37,24 +37,12 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          env:
-            - name: DB_URL_MASTER
-              value: {{ .Values.jdbc.master_db_url }}
-            - name: DB_USERNAME
-              value: {{ .Values.jdbc.username }}
-            - name: DB_PASSWORD
-              value: {{ .Values.jdbc.password }}
-            - name: DB_ODSE
-              value: {{ .Values.odse.dbname }}
-            - name: DB_RDB
-              value: {{ .Values.rdb.dbname }}
           command:
             - "bash"
             - "-c"
             - |
-              echo "Executing changelog in DB :"
-              echo {{ .Values.jdbc.master_db_url }}
-              liquibase --changelog-file="db.odse.changelog-16.1.yaml" --searchPath="./changelog" --url="{{ .Values.jdbc.odse_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
+              echo "Executing changelog in DB : {{ .Values.jdbc.odse_db_url }}"
+              liquibase --changelog-file="db.odse.changelog-16.1.yaml" --searchPath="./changelog/" --url="{{ .Values.jdbc.odse_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
               sleep infinity
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
