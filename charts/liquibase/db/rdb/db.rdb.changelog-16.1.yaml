@@ -1,0 +1,218 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase000-db-general-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 1
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase001-create_nrt_batch_log-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 2
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase002-create_nrt_organization-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 3
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase003-create_nrt_organization_key-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 4
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase004-create_nrt_provider-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 5
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase005-create_nrt_provider_key.sql
+            splitStatements: false
+  - changeSet:
+      id: 6
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase006-create_nrt_patient-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 7
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase007-create_nrt_patient_key-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 8
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase008-create_nrt_investigation-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 9
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase009-create_nrt_investigation_key-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 10
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase010-create_nrt_investigation_confirmation-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 11
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase011-create_nrt_confirmation_method_key-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 12
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase012-create_nrt_investigation_observation-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 13
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase013-create_nrt_notifications-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 14
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase014-create_nrt_notification_key-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 15
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase015-create_nrt_page_case_answer-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 16
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase016-create_nrt_ldf_data_key-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 17
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase017-create_nrt_ldf_group_key-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 18
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase018-create_nrt_observation-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 19
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase019-fn_get_record_status-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 20
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase020-sp_nrt_organization_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 21
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase021-sp_nrt_provider_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 22
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase022-sp_nrt_patient_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 23
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase023-sp_nrt_investigation_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 24
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase024-sp_nrt_notification_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 25
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase025-sp_s_pagebuilder_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 26
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase026-sp_l_pagebuilder_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 27
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase027-sp_d_pagebuilder_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 28
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase028-sp_sld_investigation_repeat_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 29
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase029-sp_page_builder_postprocessing-001.sql
+            splitStatements: false
+  - changeSet:
+      id: 30
+      author: liquibase
+      changes:
+        - sqlFile:
+            path: liquibase030-sp_f_page_case_postprocessing-001.sql
+            splitStatements: false
