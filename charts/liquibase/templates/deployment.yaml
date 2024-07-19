@@ -46,8 +46,8 @@ spec:
               echo "Executing changelog in DB : {{ .Values.jdbc.rdb_db_url }}"
               liquibase --changelog-file="{{ .Values.changelog.rdb }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
               echo "Liquibase Update Complete"
-{{/*              echo "Sleep infinitely"*/}}
-{{/*              sleep infinity*/}}
+              echo "Sleep infinitely"
+              sleep infinity
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- if .Values.volumeMounts }}
