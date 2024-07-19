@@ -70,7 +70,7 @@ autoscaling:
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
 
 nodeSelector: {}
 
