@@ -42,8 +42,12 @@ spec:
             - "-c"
             - |
               echo "Executing changelog in DB : {{ .Values.jdbc.odse_db_url }}"
-              liquibase --changelog-file="db.odse.changelog-16.1.yaml" --searchPath="./changelog/" --url="{{ .Values.jdbc.odse_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
-              sleep infinity
+              liquibase --changelog-file="{{ .Values.changelog.odse }}" --searchPath="./" --url="{{ .Values.jdbc.odse_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
+              echo "Executing changelog in DB : {{ .Values.jdbc.rdb_db_url }}"
+              liquibase --changelog-file="{{ .Values.changelog.rdb }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
+              echo "Liquibase Update Complete"
+{{/*              echo "Sleep infinitely"*/}}
+{{/*              sleep infinity*/}}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- if .Values.volumeMounts }}
