@@ -5,7 +5,7 @@ env: "test2"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.85965c1
+  tag: 1.0.1-TEST.882db34
 
 imagePullSecrets: []
 nameOverride: ""
@@ -95,7 +95,7 @@ elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
 
 jdbc:
   connectionString: ""
