@@ -7,7 +7,7 @@ connect:
 
   image:
     repository: quay.io/debezium/connect
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     tag: "2.7"
 
   service:
@@ -31,16 +31,17 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium24v1"
+    group_id: "debezium-connector-v071524"
     topics_basename: "debezium-connector"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
-    sqlserveragentstatus: "select dbo.IsSqlAgentRunning()"
+    sql_server_agent_override: false
+    sql_server_agent_status: ""
     bootstrap_server: "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector: {
-    "name": "debezium24v1",
+    "name": "debezium-connector-v071524",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -53,7 +54,7 @@ connect:
       "database.history.kafka.bootstrap.servers": "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
-      #"database.sqlserver.agent.status.query": "true",
+      #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
       "database.trustServerCertificate": "true",
       "include.schema.changes": "true",
       "key.converter": "org.apache.kafka.connect.json.JsonConverter",
@@ -86,13 +87,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium24v1"
-#    - name: CONFIG_STORAGE_TOPIC
-#      value: "debezium_connect_config"
-#    - name: OFFSET_STORAGE_TOPIC
-#      value: "debezium_connect_offset"
-#    - name: STATUS_STORAGE_TOPIC
-#      value: "debezium_connect_status"
+      value: "debezium-connector-v071524"
 
 ui:
   enabled: false

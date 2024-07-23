@@ -1,0 +1,81 @@
+replicaCount: 1
+
+env: "dts1"
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: "/actuator/prometheus"
+  prometheus.io/port: "8081"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8091
+  httpsPort: 443
+
+ingress:
+  enabled: true
+  className: "nginx"
+  tls:
+  - secretName: app.dts1.nbspreview.com
+    hosts:
+    - app.dts1.nbspreview.com
+
+# Kubernetes resource limits
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: "app.dts1.nbspreview.com"
+
+changelog:
+  odse: "db.odse.changelog-16.1.yaml"
+  rdb: "db.rdb.changelog-16.1.yaml"
+  master: "db.master.changelog-16.1.yaml"
+jdbc:
+  # Override in argocd deployment
+  master_db_url: "jdbc:sqlserver://:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  odse_db_url: "jdbc:sqlserver://:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  rdb_db_url: "jdbc:sqlserver://:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  username: "nbs_ods"
+  password: "ods"
+
+odse:
+  dbname: "nbs_odse"
+
+rdb:
+  dbname: "rdb_modern"
+
+volumeMounts:
+
+volumes:
+
+efsFileSystemId: ""
+
