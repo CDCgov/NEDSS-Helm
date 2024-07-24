@@ -117,3 +117,5 @@ ui:
   search:
     view:
       enabled: true
+      table:
+        enabled: true
