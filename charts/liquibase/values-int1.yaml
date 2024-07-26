@@ -55,6 +55,11 @@ affinity: {}
 
 ingressHost: "app.int1.nbspreview.com"
 
+changelog:
+  odse: "db.odse.changelog-16.1.yaml"
+  rdb: "db.rdb.changelog-16.1.yaml"
+  master: "db.master.changelog-16.1.yaml"
+
 jdbc:
   master_db_url: "jdbc:sqlserver://nbs-db.private-int1.nbspreview.com:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   odse_db_url: "jdbc:sqlserver://nbs-db.private-int1.nbspreview.com:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
