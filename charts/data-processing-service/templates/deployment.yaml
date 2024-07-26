@@ -39,11 +39,13 @@ spec:
               protocol: TCP
           env:
             - name: NBS_DBSERVER
-              value: {{ .Values.nbs.dbserver }}
+              value: {{ .Values.jdbc.dbserver }}
             - name: NBS_DBUSER
-              value: {{ .Values.nbs.username }}
+              value: {{ .Values.jdbc.username }}
             - name: NBS_DBPASSWORD
-              value: {{ .Values.nbs.password }}
+              value: {{ .Values.jdbc.password }}
+            - name: NBS_AUTH_USER
+              value: {{ .Values.nbs.authuser }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
           resources:

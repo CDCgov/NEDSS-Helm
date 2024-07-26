@@ -55,10 +55,13 @@ affinity: {}
 
 ingressHost: "app.test.nbspreview.com"
 
-nbs:
+jdbc:
   dbserver: ""
   username: ""
   password: ""
+
+nbs:
+  authuser: ""
 
 kafka:
   cluster: ""
