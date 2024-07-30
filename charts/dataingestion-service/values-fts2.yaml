@@ -56,16 +56,8 @@ ingressHost: "dataingestion.fts2.nbspreview.com"
 
 jdbc:
   dbserver: ""
-  dbname: ""
   username: ""
   password: ""
-
-nbs:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
-
 
 kafka:
   cluster: ""

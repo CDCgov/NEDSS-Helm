@@ -57,18 +57,8 @@ ingressHost: "dataingestion.demo.nbspreview.com"
 
 jdbc:
   dbserver: "cdc-nbs-legacy-rds-mssql.c1yhzcwwxisa.us-east-1.rds.amazonaws.com"
-  dbname: "NBS_DataIngest"
   username: "admin"
   password: ""
-
-nbs:
-  dbserver: "cdc-nbs-legacy-rds-mssql.c1yhzcwwxisa.us-east-1.rds.amazonaws.com"
-  dbname: "nbs_msgoute"
-  username: "admin"
-  password: ""
-
-odse:
-  dbname: ""
 
 kafka:
   cluster: "b-1.mskclusterdevelopment.yqces1.c3.kafka.us-east-1.amazonaws.com:9092"

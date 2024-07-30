@@ -56,16 +56,8 @@ ingressHost: "dataingestion.datateam-cdc-nbs.eqsandbox.com"
 
 jdbc:
   dbserver: ""
-  dbname: ""
   username: ""
   password: ""
-
-nbs:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
-
 
 kafka:
   cluster: ""
