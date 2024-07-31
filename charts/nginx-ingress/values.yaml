@@ -6,6 +6,7 @@ controller:
     compute-full-forwarded-for: "true"
     use-forwarded-headers: "true"
     allow-snippet-annotations: "true"
+    #whitelist-source-range: ""         # VPC/VNET CIDR to be passed at run runtime to restrict traffic allowed to nodes to that of the VPC cidr
     #proxy-body-size: "0"
   ingressClassResource:
     enabled: true
@@ -20,3 +21,5 @@ controller:
       prometheus.io/port: "10254"
       #prometheus.io/scheme: https
       prometheus.io/path: /metrics
+    loadBalancerSourceRanges:
+      - ""  # Enter the CIDR range of the EKS VPC or pass it at run time as: controller.service.loadBalancerSourceRanges[0]
