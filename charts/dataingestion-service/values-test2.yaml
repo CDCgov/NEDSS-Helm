@@ -5,7 +5,7 @@ env: "test"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-Test-xml.b8d42a4
+  tag: 1.0.1-SNAPSHOT.59445c9
 
 imagePullSecrets: []
 nameOverride: ""
@@ -56,18 +56,8 @@ ingressHost: "dataingestion.test.nbspreview.com"
 
 jdbc:
   dbserver: ""
-  dbname: ""
   username: ""
   password: ""
-
-nbs:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
-
-odse:
-  dbname: ""
 
 kafka:
   cluster: ""
