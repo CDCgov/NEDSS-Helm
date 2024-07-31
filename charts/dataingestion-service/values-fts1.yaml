@@ -5,7 +5,7 @@ env: "fts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.131f0b7
+  tag: 1.0.1-SNAPSHOT.59445c9
 
 imagePullSecrets: []
 nameOverride: ""
@@ -56,16 +56,8 @@ ingressHost: "dataingestion.fts1.nbspreview.com"
 
 jdbc:
   dbserver: ""
-  dbname: ""
   username: ""
   password: ""
-
-nbs:
-  dbserver: ""
-  dbname: ""
-  username: ""
-  password: ""
-
 
 kafka:
   cluster: ""
