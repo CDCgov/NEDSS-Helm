@@ -24,7 +24,7 @@ spec:
           #'--spring.cloud.gateway.httpclient.ssl.useInsecureTrustManager=true',
           {{- if eq .Values.oidc.enabled "true" }}        
           '--spring.profiles.include=oidc',
-          {{- if hasKey .Values.oidc "uri"}}
+          {{- if ((.Values).oidc).uri}}
           '--nbs.security.oidc.uri={{ .Values.oidc.uri }}',
           {{- else}}
           '--nbs.security.oidc.uri=https://{{ .Values.ingressHost }}/auth/realms/nbs-users',
