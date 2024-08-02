@@ -44,7 +44,7 @@ pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
   client:
     id: ""
     secret: ""
