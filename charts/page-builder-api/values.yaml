@@ -71,6 +71,8 @@ autoscaling:
 # OIDC settings
 oidc:
   enabled: "false"
+  # specifies the uri for the OIDC issuer, defaults to https://ingressHost/auth/realms/nbs-users
+  uri: ""
 
 nodeSelector: {}
 

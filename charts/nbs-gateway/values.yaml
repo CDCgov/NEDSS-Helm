@@ -34,7 +34,7 @@ resources: {}
 
 nbsExternalName: app-classic.EXAMPLE_DOMAIN
 
-ingressHost:
+ingressHost: app.EXAMPLE_DOMAIN
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
