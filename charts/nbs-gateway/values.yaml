@@ -34,7 +34,7 @@ resources: {}
 
 nbsExternalName: app-classic.EXAMPLE_DOMAIN
 
-ingressHost:
+ingressHost: app.EXAMPLE_DOMAIN
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
@@ -45,6 +45,8 @@ pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
 # OIDC settings
 oidc:
   enabled: "false"
+  # specifies the uri for the OIDC issuer, defaults to https://ingressHost/auth/realms/nbs-users
+  uri: ""
   client:
     id: ""
     secret: ""

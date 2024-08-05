@@ -40,7 +40,11 @@ spec:
           command: ['java', '-jar', 'api.jar']
           args: [
             '--nbs.security.oidc.enabled={{ .Values.oidc.enabled }}',
+            {{- if ((.Values).oidc).uri}}
+            '--nbs.security.oidc.uri={{ .Values.oidc.uri }}',
+            {{- else}}
             '--nbs.security.oidc.uri=https://{{ .Values.ingressHost }}/auth/realms/nbs-users',
+            {{- end }}  
             '--spring.datasource.url={{ .Values.jdbc.connectionString }}', 
             '--spring.datasource.username={{ .Values.jdbc.user }}', 
             '--spring.datasource.password={{ .Values.jdbc.password }}', 
