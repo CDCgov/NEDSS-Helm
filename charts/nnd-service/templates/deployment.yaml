@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dataingestion-service.fullname" . }}
+  name: {{ include "nnd-service.fullname" . }}
   labels:
-    {{- include "dataingestion-service.labels" . | nindent 4 }}
+    {{- include "nnd-service.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -46,22 +46,15 @@ spec:
               value: {{ .Values.jdbc.password }}
             - name: BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.cluster }}
-            - name: DI_LOG_PATH
-              value: {{ .Values.log.path }}
-            - name: DI_AUTH_URI
-              value: {{ .Values.authUri }}
-            - name: DI_SFTP_ENABLED
-              value: {{ .Values.sftp.enabled }}
-            - name: DI_SFTP_HOST
-              value: {{ .Values.sftp.host }}  
-            - name: DI_SFTP_USER
-              value: {{ .Values.sftp.username }}
-            - name: DI_SFTP_PWD
-              value: {{ .Values.sftp.password }}
-            - name: DI_SERVER_HOST
+            - name: NND_SERVER_HOST
               value: {{ .Values.ingressHost }}
+            - name: NND_AUTH_URI
+              value: {{ .Values.authUri }}
+            - name: NND_LOG_PATH
+              value: {{ .Values.log.path }}
+
           volumeMounts:
-          - mountPath: /usr/share/dataingestion/data
+          - mountPath: /usr/share/nndservice/data
             name: di-persistent-storage     
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
