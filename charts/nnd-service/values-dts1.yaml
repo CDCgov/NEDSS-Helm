@@ -63,6 +63,8 @@ jdbc:
 kafka:
   cluster: ""
 
+authUri: ""
+
 log:
   path: "/usr/share/nndservice/data"
 
@@ -73,10 +75,3 @@ pvc:
 
 efsFileSystemId: ""
 
-authUri: ""
-
-sftp:
-  enabled: ""
-  host: ""
-  username: ""
-  password: ""

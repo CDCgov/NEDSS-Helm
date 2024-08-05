@@ -63,6 +63,8 @@ jdbc:
 kafka:
   cluster: "b-1.mskclusterdevelopment.yqces1.c3.kafka.us-east-1.amazonaws.com:9092"
 
+authUri: ""
+
 log:
   path: "/usr/share/nndservice/data"
 
@@ -73,10 +75,3 @@ pvc:
 
 efsFileSystemId: ""
 
-authUri: ""
-
-sftp:
-  enabled: ""
-  host: ""
-  username: ""
-  password: ""
