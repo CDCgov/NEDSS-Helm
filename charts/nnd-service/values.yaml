@@ -64,6 +64,9 @@ jdbc:
 kafka:
   cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
+#authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
+authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
+
 log:
   path: "/usr/share/nndservice/data"
 
@@ -73,14 +76,3 @@ pvc:
     storageRequest: 20Gi
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
-
-#authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
-authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
-
-sftp:
-  enabled: "EXAMPLE_SFTP_ENABLED"
-  host: "EXAMPLE_SFTP_HOST"
-  username: "EXAMPLE_SFTP_USER"
-  password: "EXAMPLE_SFTP_PASS"
-
-##################################
