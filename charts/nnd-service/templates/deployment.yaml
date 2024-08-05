@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nnd-service.fullname" . }}
+  labels:
+    {{- include "nnd-service.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "nnd-service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "nnd-service.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "nnd-service.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+          env:
+            - name: NBS_DBSERVER
+              value: {{ .Values.jdbc.dbserver }}
+            - name: NBS_DBUSER
+              value: {{ .Values.jdbc.username }}
+            - name: NBS_DBPASSWORD
+              value: {{ .Values.jdbc.password }}
+            - name: BOOTSTRAP_SERVERS
+              value: {{ .Values.kafka.cluster }}
+            - name: NND_SERVER_HOST
+              value: {{ .Values.ingressHost }}
+            - name: NND_AUTH_URI
+              value: {{ .Values.authUri }}
+            - name: NND_LOG_PATH
+              value: {{ .Values.log.path }}
+
+          volumeMounts:
+          - mountPath: /usr/share/nndservice/data
+            name: di-persistent-storage     
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      - name: di-persistent-storage
+        persistentVolumeClaim:
+          claimName: {{ include "nnd-service.fullname" . }}-di-pvc

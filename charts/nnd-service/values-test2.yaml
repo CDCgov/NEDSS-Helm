@@ -1,0 +1,81 @@
+replicaCount: 1
+
+env: "test"
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: 1.0.1-SNAPSHOT.59445c9
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: "/actuator/prometheus"
+  prometheus.io/port: "8081"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8081
+  httpsPort: 443
+
+ingress:
+  enabled: true
+  className: "nginx"
+  tls:
+  - secretName: nndservice.test.nbspreview.com
+    hosts:
+    - nndservice.test.nbspreview.com
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: "nndservice.test.nbspreview.com"
+
+jdbc:
+  dbserver: ""
+  username: ""
+  password: ""
+
+kafka:
+  cluster: ""
+
+log:
+  path: "/usr/share/nndservice/data"
+
+pvc:
+  diPvClaim:
+    storageClass: efs-nndservice
+    storageRequest: 20Gi
+
+efsFileSystemId: ""
+
+authUri: ""
+
+sftp:
+  enabled: ""
+  host: ""
+  username: ""
+  password: ""
