@@ -6,6 +6,7 @@ kind: Ingress
 metadata:
   name: main-ingress-resource
   annotations:
+    {{- if .Values.useCertManager }}
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     nginx.ingress.kubernetes.io/service-upstream: "true"
     # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"

@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: "v1.0.9"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -29,19 +29,6 @@ service:
   gatewayPort: 8000
   pageBuilderPort: 8095
 
-reportingService:
-  enabled: "false"
-  personReportingServicePort: 8091
-  organizationReportingServicePort: 8092
-  investigationReportingServicePort: 8093
-  observationReportingServicePort: 8094
-  postProcessingReportingServicePort: 8095
-  ldfdataReportingServicePort: 8097
-
-dataprocessingService:
-  enabled: "false"
-  port: 8082
-
 pageBuilder:
   enabled: "true"
   page:
@@ -51,15 +38,15 @@ pageBuilder:
       create:
         enabled: "true"
       edit:
-        enabled: "true"
+        enabled: "false"
 
 ingress:
   enabled: true
   className: "nginx"
   tls:
-    - secretName: app.example.com #app-ext.demo.nbspreview.cdc.gov
+    - secretName: app.nbspreview.cdc.gov
       hosts:
-        - app.example.com
+        - app.nbspreview.cdc.gov
 
 # determine whether or not to use istio-gateway for ingress (only 1 ingress should be used to prevent conflicts)
 istioGatewayIngress:
@@ -69,14 +56,11 @@ istioGatewayIngress:
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
-mTLS:
-  enabled: false
-
-nbsExternalName: app-classic.example.com
+nbsExternalName: app-classic.nbspreview.cdc.gov
 
 resources:
   limits:
-    memory: "6Gi"
+    memory: "4Gi"
 
 autoscaling:
   enabled: false
@@ -90,7 +74,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.example.com"
+ingressHost: "app.nbspreview.cdc.gov"
 
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
@@ -102,15 +86,11 @@ jdbc:
   user: ""
   password: ""
 
-# OIDC settings
-oidc:
-  enabled: "true"
-
 ui:
   smarty:
     key: ""
   analytics:
     key: ""
 
-cloudProvider: azure
+cloudProvider: aws
 useCertManager: false

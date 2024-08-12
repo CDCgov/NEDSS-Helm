@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "int1"
+env: "prod"
 
 image:
-  repository: ""
+  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT-4.4f1c378
+  tag: "v1.0.3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: dataingestion.int1.nbspreview.com
+  - secretName: "dataingestion.dev.nbspreview.cdc.gov"
     hosts:
-    - dataingestion.int1.nbspreview.com
+    - "dataingestion.dev.nbspreview.cdc.gov"
 
 resources: {}
 
@@ -52,8 +52,10 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.int1.nbspreview.com"
+ingressHost: "dataingestion.dev.nbspreview.cdc.gov"
 
+
+# dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: ""
   dbname: ""
@@ -66,8 +68,6 @@ nbs:
   username: ""
   password: ""
 
-odse:
-  dbname: ""
 
 kafka:
   cluster: ""
@@ -84,8 +84,26 @@ efsFileSystemId: ""
 
 authUri: ""
 
+#from dts1
 sftp:
-  enabled: ""
+  enabled: "false"
   host: ""
   username: ""
   password: ""
+
+########################################
+
+cloudProvider: aws   # or aws
+useCertManager: false
+
+azure:
+  files:
+    storageClass: azurefile-csi
+    storageRequest: 20Gi
+
+aws:
+  efs:
+    storageClass: efs-dataingestion
+    storageRequest: 20Gi
+    efsFileSystemId: ""
+

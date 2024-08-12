@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "ce1"
+env: "prod"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: v1.0.3
+  tag: "v1.0.3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: dataingestion.ce1.nbspreview.com
+  - secretName: "dataingestion.nbspreview.cdc.gov"
     hosts:
-    - dataingestion.ce1.nbspreview.com
+    - "dataingestion.nbspreview.cdc.gov"
 
 resources: {}
 
@@ -52,8 +52,10 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.ce1.nbspreview.com"
+ingressHost: "dataingestion.nbspreview.cdc.gov"
 
+
+# dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: ""
   dbname: ""
@@ -75,28 +77,33 @@ log:
 
 pvc:
   diPvClaim:
-    storageClass: dataingestion
+    storageClass: efs-dataingestion
     storageRequest: 20Gi
 
 efsFileSystemId: ""
 
 authUri: ""
 
+# from dts1
 sftp:
-  enabled: ""
+  enabled: "false"
   host: ""
   username: ""
   password: ""
 
-# Valid values are "azure" or "aws"
-cloudProvider: "azure"
-aws:
-  efs:
-    storageClass: efs-es
-    storageRequest: 100Gi
-    efsFileSystemId: ""
+########################################
+
+cloudProvider: aws   # or aws
+useCertManager: false
 
 azure:
   files:
     storageClass: azurefile-csi
-    storageRequest: 100Gi
+    storageRequest: 20Gi
+
+aws:
+  efs:
+    storageClass: efs-dataingestion
+    storageRequest: 20Gi
+    efsFileSystemId: ""
+
