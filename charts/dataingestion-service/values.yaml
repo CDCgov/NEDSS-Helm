@@ -79,7 +79,7 @@ log:
 
 pvc:
   diPvClaim:
-    storageClass: efs-dataingestion
+    storageClass: azurefile-csi-private-di
     storageRequest: 20Gi
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
@@ -99,7 +99,7 @@ useCertManager: false
 
 azure:
   files:
-    storageClass: azurefile-csi
+    storageClass: azurefile-csi-private-di
     storageRequest: 20Gi
 
 aws:
