@@ -6,9 +6,13 @@ kind: Ingress
 metadata:
   name: main-ingress-resource
   annotations:
-    {{- if eq .Values.cloudProvider "aws" }}
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    {{- end }}
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    # nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    # nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+    # nginx.ingress.kubernetes.io/use-regex: "true"
+    #nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
@@ -18,49 +22,100 @@ spec:
   rules:
     - host: {{ .Values.ingressHost }}
       http:
-        paths:
+        paths:          
+          {{- if eq .Values.reportingService.enabled "true" }}
+          - path: "/reporting/person-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: person-reporting-service
+                port:
+                  number: {{ .Values.reportingService.personReportingServicePort }}
+          - path: "/reporting/organization-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: organization-reporting-service
+                port:
+                  number: {{ .Values.reportingService.organizationReportingServicePort }}
+          - path: "/reporting/investigation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: investigation-reporting-service
+                port:
+                  number: {{ .Values.reportingService.investigationReportingServicePort }}
+          - path: "/reporting/observation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: observation-reporting-service
+                port:
+                  number: {{ .Values.reportingService.observationReportingServicePort }}
+          - path: "/reporting/post-processing-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: post-processing-reporting-service
+                port:
+                  number: {{ .Values.reportingService.postProcessingReportingServicePort }}
+          - path: "/reporting/ldfdata-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: ldfdata-reporting-service
+                port:
+                  number: {{ .Values.reportingService.ldfdataReportingServicePort }}
+         {{- end }}
+          {{- if eq .Values.dataprocessingService.enabled "true" }}
+          - path: "/data-processing-svc/rti/"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-processing-service
+                port:
+                  number: {{ .Values.dataprocessingService.port }}
+          {{- end }}        
+          - path: "/auth/realms/nbs-users/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          - path: "/auth/robots.txt"
+            pathType: Exact
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http         
+          - path: "/auth/js/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http  
+          - path: "/auth/resources/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http  
+          - path: /favicon.ico
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: nbs-gateway-svc  #nbs-gateway-ext
+                port:
+                  number: {{ .Values.service.gatewayPort }} #443
           - path: "/"
             pathType: Prefix
             backend:
               service:
-                name: {{ $fullName }}
-                port:
-                  number: {{ $svcPort }}
-          - path: "/nbs/redirect/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  number: {{ $svcPort }}
-          - path: "/nbs/api/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  number: {{ $svcPort }}
-          - path: /images/nedssLogo.jpg
-            pathType: Exact
-            backend:
-              service:
                 name: nbs-gateway-svc
                 port:
-                  number: {{ .Values.service.gatewayPort }}
-          - path: "/nbs/"
-            pathType: Prefix
-            backend:
-              service:
-                name: nbs-gateway-svc
-                port:
-                  number: {{ .Values.service.gatewayPort }}
-          {{- if eq .Values.pageBuilder.enabled "true" }}
-          - path: "/nbs/page-builder/"
-            pathType: Prefix
-            backend:
-              service:
-                name: page-builder-api
-                port:
-                  number: {{ .Values.service.pageBuilderPort }}
-          {{- end }}
+                  number: {{ .Values.service.gatewayPort }} #443
 {{- end }}

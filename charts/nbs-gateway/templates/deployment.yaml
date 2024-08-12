@@ -3,27 +3,62 @@ kind: Deployment
 metadata:
   name: {{ include "nbs-gateway.fullname" . }}-deployment
   labels:
-    app: NBS
-    type: App
+    {{- include "nbs-gateway.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
-      app: NBS
-      type: App
+      {{- include "nbs-gateway.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
-        app: NBS
-        type: App
+        {{- include "nbs-gateway.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        args: ['--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}','--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}','--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}','--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}', '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}', '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}','--nbs.gateway.pagebuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', '--nbs.gateway.pagebuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}']
+        args: [
+          #'--spring.cloud.gateway.httpclient.ssl.useInsecureTrustManager=true',
+          {{- if eq .Values.oidc.enabled "true" }}        
+          '--spring.profiles.include=oidc',
+          '--nbs.security.oidc.uri=https://{{ .Values.ingressHost }}/auth/realms/nbs-users',
+          '--nbs.security.oidc.client.id={{ .Values.oidc.client.id }}',
+          '--nbs.security.oidc.client.secret={{ .Values.oidc.client.secret }}',
+          {{- end }}
+          '--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}',
+          '--nbs.gateway.ui.service={{ .Valeues.modernizationUIHost }}',
+          '--nbs.gateway.modernization.service={{ .Values.modernizationApiHost }}',
+          '--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}',
+          '--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}',
+          '--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}', 
+          '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}', 
+          '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}',
+          '--nbs.gateway.pagebuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', 
+          '--nbs.gateway.pagebuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}',
+          '--nbs.gateway.welcome.enabled={{ ((.Values).welcome).enabled | default "false" }}',
+          '--nbs.gateway.landing.base={{  ((.Values).landing).base | default "/nbs/login" }}',
+          '--spring.cloud.gateway.httpclient.ssl.useInsecureTrustManager=false'
+        ]
         command: ['java', '-jar', 'api.jar']
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         ports:
         - containerPort: 8000
         resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
      

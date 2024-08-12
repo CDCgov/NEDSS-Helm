@@ -4,9 +4,9 @@ deployment:
 env: "prod"
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
+  repository: ""
   pullPolicy: IfNotPresent
-  tag: "v1.0.7"
+  tag: ""
 
 gatewayService:
   ports:
@@ -28,14 +28,34 @@ pageBuilder:
       create:
         enabled: "true"
       edit:
-        enabled: "false"
+        enabled: "true"
 
 resources: {}
-
 nbsExternalName: app-classic.example.com
 
-ingressHost:
+ingressHost: app.example.com
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
+modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
+
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+# OIDC settings
+oidc:
+  enabled: "true"
+  client:
+    id: ""
+    secret: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

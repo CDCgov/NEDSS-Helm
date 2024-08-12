@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nifi"
+  repository: ""
   pullPolicy: IfNotPresent
-  tag: "v1.0.1"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -32,7 +32,7 @@ ingress:
     nginx.ingress.kubernetes.io/upstream-vhost: "localhost:8443"
     nginx.ingress.kubernetes.io/proxy-redirect-from: "https://localhost:8443"
     nginx.ingress.kubernetes.io/proxy-redirect-to: "https://nifi.example.com"
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    #cert-manager.io/cluster-issuer: "letsencrypt-production"
   tls:
     - secretName: nifi.example.com
       hosts:
@@ -85,7 +85,7 @@ containerPort: 8443
 #     storageClass: azurefile-csi
 #     storageRequest: 100Gi
 
-cloudProvider: azure
+cloudProvider: aws
 
 aws:
   efs:
@@ -95,16 +95,17 @@ aws:
 
 azure:
   files:
-    storageClass: azurefile-csi
     storageRequest: 100Gi
+    storageAccountName: 
+    resourceGroupName: 
   
 
 
 ### Nifi Configurations ###
 
 jvmheap:
-  init: "4g"
-  max: "4g"
+  init: "6g"
+  max: "6g"
 
 # jdbcConnectionString is passed in as an override and all values must be supplied. 
 # Replace <db_endpoint>, <database>, <username>, and <password> in the following:

@@ -11,5 +11,5 @@ spec:
   resources:
     requests:
       storage: {{ .Values.azure.files.storageRequest | quote }}
-  storageClassName: azurefile-csi
+  storageClassName: azurefile-csi-private-es
 {{- end }}

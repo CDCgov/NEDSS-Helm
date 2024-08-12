@@ -3,9 +3,9 @@ replicaCount: 1
 env: "prod"
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/modernization-api"
+  repository: ""
   pullPolicy: IfNotPresent
-  tag: "v1.0.7"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -29,6 +29,19 @@ service:
   gatewayPort: 8000
   pageBuilderPort: 8095
 
+reportingService:
+  enabled: "false"
+  personReportingServicePort: 8091
+  organizationReportingServicePort: 8092
+  investigationReportingServicePort: 8093
+  observationReportingServicePort: 8094
+  postProcessingReportingServicePort: 8095
+  ldfdataReportingServicePort: 8097
+
+dataprocessingService:
+  enabled: "false"
+  port: 8082
+
 pageBuilder:
   enabled: "true"
   page:
@@ -38,13 +51,13 @@ pageBuilder:
       create:
         enabled: "true"
       edit:
-        enabled: "false"
+        enabled: "true"
 
 ingress:
   enabled: true
   className: "nginx"
   tls:
-    - secretName: app.example.com
+    - secretName: app.example.com #app-ext.demo.nbspreview.cdc.gov
       hosts:
         - app.example.com
 
@@ -56,11 +69,14 @@ istioGatewayIngress:
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
 
+mTLS:
+  enabled: false
+
 nbsExternalName: app-classic.example.com
 
 resources:
   limits:
-    memory: "4Gi"
+    memory: "6Gi"
 
 autoscaling:
   enabled: false
@@ -86,10 +102,12 @@ jdbc:
   user: ""
   password: ""
 
+# OIDC settings
+oidc:
+  enabled: "true"
+
 ui:
   smarty:
     key: ""
   analytics:
     key: ""
-
-cloudProvider: azure
