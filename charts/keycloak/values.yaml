@@ -12,12 +12,44 @@ deployment:
       kcMetricsEnabled: "true"
       kcTransactionXaEnabled: "false"
       keycloakAdmin: admin
-      keycloakAdminPassword: "EXAMPLE_KC_PASSWORD8675309"
+      keycloakAdminPassword: "EXAMPLE_KC_PASS8675309"
       kcProxyHeaders: xforwarded
     image:
       repository: quay.io/keycloak/keycloak
       tag: 24.0.4
   replicas: 1
+
+# this will load the theme, edit for the current release number
+initContainers:
+  enabled: true
+  image: "alpine:3.12"
+  themeUrl: "https://github.com/CDCgov/NEDSS-Modernization/archive/refs/tags/v7.4.4.zip"  # URL to the theme archive
+  command:
+    - /bin/sh
+    - -c
+    - |
+      # clean up all cruft, only uncomment if needed
+      #rm -rf /keycloak/themes/*
+      
+      # brute force cleanup
+      rm -rf /keycloak/themes/nbs
+      rm -rf /keycloak/themes/login
+
+      # add needed packages
+      apk update
+      apk add --no-cache curl unzip
+
+      # download zip file, hardcoding for testing
+      #curl --output /theme.zip -L {{ .Values.initContainers.themeUrl }}
+      curl --output /keycloak/themes/theme.zip -L https://github.com/CDCgov/NEDSS-Modernization/archive/refs/tags/v7.4.4.zip
+
+      unzip /keycloak/themes/theme.zip 'NEDSS-Modernization-7.4.4/cdc-sandbox/keycloak/theme/nbs/*' -d /keycloak/themes
+
+      cp -pr  /keycloak/themes/NEDSS-Modernization-7.4.4/cdc-sandbox/keycloak/theme/nbs/login /keycloak/themes/
+
+      # cleanup 
+      rm -rf /keycloak/themes/NEDSS-Modernization-7.4.4
+      rm -rf /keycloak/themes/theme.zip
 keycloak:
   ports:
   - name: http
@@ -26,3 +58,18 @@ keycloak:
     targetPort: 8080
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
+
+pvc:
+  kcPvClaim:
+    storageClass: efs-kc
+    storageRequest: 1Gi
+
+#efsFileSystemId: "EXAMPLE_EFS_ID"
+#  storage:
+#    enabled: true
+#    accessModes:
+#      - ReadWriteMany
+#    size: 1Gi
+
+efsFileSystemId: "EXAMPLE_EFS_ID"
+
