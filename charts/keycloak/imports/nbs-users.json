@@ -49,7 +49,7 @@
   ],
   "id": "226c50ff-aa61-409d-a229-72e44ba25a69",
   "realm": "nbs-users",
-  "displayName": "NBS Development",
+  "displayName": "NBS Users",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,
