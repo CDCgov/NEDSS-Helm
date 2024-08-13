@@ -44,12 +44,12 @@ pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
   # specifies the uri for the OIDC issuer, defaults to https://ingressHost/auth/realms/nbs-users
   uri: ""
   client:
-    id: ""
-    secret: ""
+    id: "nbs-modernization"
+    secret: "EXAMPLE_OIDC_SECRET"
 
 podAnnotations: {}
 
