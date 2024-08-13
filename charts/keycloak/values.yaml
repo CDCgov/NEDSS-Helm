@@ -23,7 +23,8 @@ deployment:
 initContainers:
   enabled: true
   image: "alpine:3.12"
-  themeUrl: "https://github.com/CDCgov/NEDSS-Modernization/archive/refs/tags/v7.4.4.zip"  # URL to the theme archive
+  # not used yet
+  themeUrl: "https://github.com/CDCgov/NEDSS-Modernization/archive/refs/tags/v7.5.0.zip"  # URL to the theme archive
   command:
     - /bin/sh
     - -c
@@ -41,14 +42,22 @@ initContainers:
 
       # download zip file, hardcoding for testing
       #curl --output /theme.zip -L {{ .Values.initContainers.themeUrl }}
-      curl --output /keycloak/themes/theme.zip -L https://github.com/CDCgov/NEDSS-Modernization/archive/refs/tags/v7.4.4.zip
 
-      unzip /keycloak/themes/theme.zip 'NEDSS-Modernization-7.4.4/cdc-sandbox/keycloak/theme/nbs/*' -d /keycloak/themes
+      #################################################################################################
+      # current kludge only works when release is finalized - will be done
+      # differently next release - cm
+      #curl --output /keycloak/themes/theme.zip -L https://github.com/CDCgov/NEDSS-Modernization/archive/refs/tags/v7.4.4.zip
+      curl --output /keycloak/themes/theme.zip -L https://github.com/CDCgov/NEDSS-Modernization/archive/refs/tags/v7.5.0.zip
 
-      cp -pr  /keycloak/themes/NEDSS-Modernization-7.4.4/cdc-sandbox/keycloak/theme/nbs/login /keycloak/themes/
+      #unzip /keycloak/themes/theme.zip 'NEDSS-Modernization-7.4.4/cdc-sandbox/keycloak/theme/nbs/*' -d /keycloak/themes
+      unzip /keycloak/themes/theme.zip 'NEDSS-Modernization-7.5.0/cdc-sandbox/keycloak/theme/nbs/*' -d /keycloak/themes
+
+      #cp -pr  /keycloak/themes/NEDSS-Modernization-7.4.4/cdc-sandbox/keycloak/theme/nbs/login /keycloak/themes/
+      cp -pr  /keycloak/themes/NEDSS-Modernization-7.5.0/cdc-sandbox/keycloak/theme/nbs/login /keycloak/themes/
 
       # cleanup 
-      rm -rf /keycloak/themes/NEDSS-Modernization-7.4.4
+      #rm -rf /keycloak/themes/NEDSS-Modernization-7.4.4
+      rm -rf /keycloak/themes/NEDSS-Modernization-7.5.0
       rm -rf /keycloak/themes/theme.zip
 keycloak:
   ports:

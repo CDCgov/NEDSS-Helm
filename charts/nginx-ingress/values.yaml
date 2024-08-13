@@ -21,5 +21,9 @@ controller:
       prometheus.io/port: "10254"
       #prometheus.io/scheme: https
       prometheus.io/path: /metrics
-    loadBalancerSourceRanges:
-      - ""  # Enter the CIDR range of the EKS VPC or pass it at run time as: controller.service.loadBalancerSourceRanges[0]
+    # cm - this can be used (with whitelist-source-range commented above?)
+    # to prevent a Security group with 0.0.0.0 allowed into EKS nodes when
+    # IP address preservation is setup on NLB commented until documented
+    # with working defaults
+    #loadBalancerSourceRanges:
+    #  - "EXAMPLE_LB_CIDR"  # Enter the CIDR range of the EKS VPC or pass it at run time as: controller.service.loadBalancerSourceRanges[0]
