@@ -69,8 +69,9 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
 
 # OIDC settings
+#  must be enabled and configured in nbs-gateway
 oidc:
-  enabled: "false"
+  enabled: "true"
   # specifies the uri for the OIDC issuer, defaults to https://ingressHost/auth/realms/nbs-users
   uri: ""
 
