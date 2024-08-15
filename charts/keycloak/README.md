@@ -39,3 +39,37 @@ login.
 
 
 
+
+
+Deploy the Helm Chart:
+
+helm install keycloak ./keycloak
+
+After the Helm chart is deployed, use the following command to copy the
+theme files from your local machine to the Kubernetes pod:
+kubectl get pods
+
+export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' )
+# get a shell on init container
+alias kcbi='export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g');  kubectl exec -it -c theme-copy --namespace default "${POD_NAME}" -- sh'
+kcbi
+
+# actually copy the theme
+export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' )
+# need to clean up mount point to be consistent between init container and
+# final container
+#kubectl cp ./theme/nbs/login ${POD_NAME}:/keycloak/themes/ -c theme-copy
+# from charts dir
+kubectl cp keycloak/theme/nbs/login ${POD_NAME}:/keycloak/themes/ -c theme-copy
+
+# check location to see files were copied
+export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' )
+kubectl exec -it -c theme-copy --namespace default "${POD_NAME}" -- ls /keycloak/themes
+
+
+Terminate the Init Container:
+
+Once the files are copied, you can terminate the init container by running
+the following command:
+
+kubectl exec ${POD_NAME} -c theme-copy -- pkill sleep
