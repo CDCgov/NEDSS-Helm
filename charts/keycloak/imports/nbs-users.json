@@ -1,12 +1,84 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "msa",
+      "username": "msa",
+      "firstName": "Master",
+      "lastName": "Administrator",
+      "emailVerified": false,
+      "createdTimestamp": 1712600241000,
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "id": "bccbde4c-87a7-40c7-9750-58b74757dde9",
+          "type": "password",
+          "createdDate": 1712600241000,
+          "secretData": "{\"value\":\"AI5md4Njsm2R1R6m+wXHnkqlLByOScvI+y+k2VnUnblTWcCx6yWKZanERUbKtGsoiPtUhDxj2yM86EdemPSCEg==\",\"salt\":\"Z/wAFPCzt4pfvdUlgK01bQ==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":210000,\"algorithm\":\"pbkdf2-sha512\",\"additionalParameters\":{}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "51378db9-952e-4b94-8db5-ae53e76ee8cf",
+      "username": "nbs-users-admin",
+      "emailVerified": false,
+      "createdTimestamp": 1712600241000,
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "id": "e742a1f5-a38d-4be8-8fe3-5d90cc60212d",
+          "type": "password",
+          "userLabel": "My password",
+          "createdDate": 1712600241000,
+          "secretData": "{\"value\":\"VbSGc4S33Sxm1lPbb6CZog6hrLGQUn4hXfIu53X8WAY2D8FSTpit6eVlYGYPVKlxYp1gasQAbkYu1m1z/7dSPA==\",\"salt\":\"5GYscT3nUfIAKVVf/ln94w==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":210000,\"algorithm\":\"pbkdf2-sha512\",\"additionalParameters\":{}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": ["default-roles-nbs development"],
+      "clientRoles": {
+        "realm-management": ["realm-admin"]
+      },
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "superuser",
+      "username": "superuser",
+      "emailVerified": false,
+      "createdTimestamp": 1712600241000,
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "id": "98e3afa1-7cd6-4bc1-ae3a-2470b1e93eb1",
+          "type": "password",
+          "userLabel": "My password",
+          "createdDate": 1712600241000,
+          "secretData": "{\"value\":\"uwKXj+4iZGbEX0awJn1um/lGnXcBjaZuWKEYNONenpM1ANOZkIbHDPZdDY3wcAdLMmzl1aOcY1qkKl0aWKBG4g==\",\"salt\":\"nISVzJFfgNjaETffHS9p1g==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":210000,\"algorithm\":\"pbkdf2-sha512\",\"additionalParameters\":{}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "notBefore": 0,
+      "groups": []
+    }
+  ],
   "clients": [
     {
       "id": "5eaad81d-a0d7-484a-ae79-1d657688b852",
       "clientId": "nbs-modernization",
       "name": "NBS Modernization",
       "description": "The client used by the services that the make up NBS7.",
-      "rootUrl": "",
+      "rootUrl": "${NBS7_BASE_URL}",
       "adminUrl": "",
       "baseUrl": "",
       "surrogateAuthRequired": false,
@@ -45,11 +117,65 @@
         "email"
       ],
       "optionalClientScopes": ["offline_access", "microprofile-jwt"]
+    },
+    {
+      "id": "33c05bd2-18d6-47c2-9d55-4f0d3229d77b",
+      "clientId": "nbs-development",
+      "name": "NBS Users",
+      "description": "A client for NBS Development.",
+      "rootUrl": "${NBS7_BASE_URL}",
+      "adminUrl": "",
+      "baseUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "KK092EEXikR0hpubkwZGHbdtZKw99AJi",
+      "redirectUris": [
+        "/login/oauth2/code/nbs-users",
+        "https://oauth.pstmn.io/v1/callback"
+      ],
+      "webOrigins": ["https://oauth.pstmn.io"],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "publicClient": false,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "oidc.ciba.grant.enabled": "false",
+        "client.secret.creation.time": "1711751600",
+        "backchannel.logout.session.required": "true",
+        "post.logout.redirect.uris": "/nbs/logged-out",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "display.on.consent.screen": "false",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "roles",
+        "profile",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
     }
   ],
   "id": "226c50ff-aa61-409d-a229-72e44ba25a69",
   "realm": "nbs-users",
-  "displayName": "NBS Users",
+  "displayName": "NBS Development",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,
@@ -82,7 +208,7 @@
   "verifyEmail": false,
   "loginWithEmailAllowed": true,
   "duplicateEmailsAllowed": false,
-  "resetPasswordAllowed": true,
+  "resetPasswordAllowed": false,
   "editUsernameAllowed": false,
   "bruteForceProtected": false,
   "permanentLockout": false,
@@ -113,6 +239,7 @@
     "totpAppGoogleName",
     "totpAppMicrosoftAuthenticatorName"
   ],
+  "localizationTexts": {},
   "webAuthnPolicyRpEntityName": "keycloak",
   "webAuthnPolicySignatureAlgorithms": ["ES256"],
   "webAuthnPolicyRpId": "",
@@ -123,6 +250,7 @@
   "webAuthnPolicyCreateTimeout": 0,
   "webAuthnPolicyAvoidSameAuthenticatorRegister": false,
   "webAuthnPolicyAcceptableAaguids": [],
+  "webAuthnPolicyExtraOrigins": [],
   "webAuthnPolicyPasswordlessRpEntityName": "keycloak",
   "webAuthnPolicyPasswordlessSignatureAlgorithms": ["ES256"],
   "webAuthnPolicyPasswordlessRpId": "",
@@ -133,6 +261,7 @@
   "webAuthnPolicyPasswordlessCreateTimeout": 0,
   "webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister": false,
   "webAuthnPolicyPasswordlessAcceptableAaguids": [],
+  "webAuthnPolicyPasswordlessExtraOrigins": [],
   "scopeMappings": [
     {
       "clientScope": "offline_access",
@@ -702,6 +831,7 @@
     "strictTransportSecurity": "max-age=31536000; includeSubDomains"
   },
   "smtpServer": {},
+  "loginTheme": "nbs",
   "eventsEnabled": false,
   "eventsListeners": ["jboss-logging"],
   "enabledEventTypes": [],
@@ -1393,8 +1523,8 @@
       "alias": "TERMS_AND_CONDITIONS",
       "name": "Terms and Conditions",
       "providerId": "TERMS_AND_CONDITIONS",
-      "enabled": false,
-      "defaultAction": false,
+      "enabled": true,
+      "defaultAction": true,
       "priority": 20,
       "config": {}
     },
