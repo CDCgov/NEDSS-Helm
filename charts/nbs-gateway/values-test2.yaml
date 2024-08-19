@@ -6,7 +6,7 @@ env: "test2"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.2cea670
+  tag: 1.0.1-TEST.dea5c6f
 
 gatewayService:
   ports:
