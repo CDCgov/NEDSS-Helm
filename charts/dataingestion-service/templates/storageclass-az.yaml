@@ -17,8 +17,13 @@ mountOptions:
 parameters:
   skuName: Standard_LRS
   #location: us-east-1
-  resourceGroup: csels-nbs-dev-low-rg
-  storageAccount: cselsnbsdelowmainacc
+  resourceGroup: {{ .Values.azure.files.resourceGroupName | quote }}
+  storageAccount: {{ .Values.azure.files.storageAccountName | quote }}
   #customEndpoint: cselsnbsdelowmainacc-file
   shareName: nbs-di
 {{- end }}
+
+
+
+  # resourceGroup: csels-nbs-prd-low-rg
+  # storageAccount: cselsnbsprdlowmainacc #cselsnbsdelowmainacc

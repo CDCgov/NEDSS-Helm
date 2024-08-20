@@ -99,6 +99,8 @@ useCertManager: false
 
 azure:
   files:
+    resourceGroupName: csels-nbs-prd-low-rg
+    storageAccountName: cselsnbsprdlowmainacc
     storageClass: azurefile-csi-private-di
     storageRequest: 20Gi
 
@@ -107,3 +109,4 @@ aws:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
     efsFileSystemId: ""
+
