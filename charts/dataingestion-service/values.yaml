@@ -77,12 +77,12 @@ kafka:
 log:
   path: "/usr/share/dataingestion/data"
 
-pvc:
-  diPvClaim:
-    storageClass: azurefile-csi-private-di
-    storageRequest: 20Gi
+# pvc:
+#   diPvClaim:
+#     storageClass: azurefile-csi-private-di
+#     storageRequest: 20Gi
 
-efsFileSystemId: "EXAMPLE_EFS_ID"
+# efsFileSystemId: "EXAMPLE_EFS_ID"
 
 #authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
 authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
@@ -94,7 +94,7 @@ sftp:
   password: "EXAMPLE_SFTP_PASS"
 
 ##################################
-cloudProvider: azure   # or aws
+cloudProvider: aws
 useCertManager: false
 
 azure:

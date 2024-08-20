@@ -3,10 +3,10 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: {{ .Values.pvc.diPvClaim.storageClass | quote }}
+  name: {{ .Values.aws.efs.storageClass | quote }}
 provisioner: efs.csi.aws.com
 parameters:
   provisioningMode: efs-ap
-  fileSystemId: {{ .Values.efsFileSystemId | quote }}
+  fileSystemId: {{ .Values.aws.efs.efsFileSystemId | quote }}
   directoryPerms: "700"
 {{- end }}
