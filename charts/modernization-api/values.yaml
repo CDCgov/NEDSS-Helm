@@ -112,5 +112,5 @@ ui:
   analytics:
     key: ""
 
-cloudProvider: azure
+cloudProvider: aws
 useCertManager: false
