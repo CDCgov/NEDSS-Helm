@@ -41,7 +41,7 @@ pageBuilder:
         enabled: "true"
 
 reportingService:
-  enabled: "false"
+  enabled: "true"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
   investigationReportingServicePort: 8093
