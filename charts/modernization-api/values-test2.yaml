@@ -30,7 +30,7 @@ service:
   pageBuilderPort: 8095
 
 reportingService: 
-  enabled: "false"
+  enabled: "true"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
   investigationReportingServicePort: 8093
