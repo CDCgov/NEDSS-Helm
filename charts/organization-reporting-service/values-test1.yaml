@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dts1"
+env: "test"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.f8bf154
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -27,16 +27,16 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8093
+  port: 8092
   httpsPort: 443
 
 ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: app.dts1.nbspreview.com
+  - secretName: app.test.nbspreview.com
     hosts:
-    - app.dts1.nbspreview.com
+    - app.test.nbspreview.com
 
 # Kubernetes resource limits
 resources: {}
@@ -53,7 +53,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.dts1.nbspreview.com"
+ingressHost: "app.test.nbspreview.com"
 
 jdbc:
   dbserver: ""
@@ -63,12 +63,8 @@ jdbc:
 odse:
   dbname: "NBS_ODSE"
 
-rdb:
-  dbname: "rdb_modern"
-
 kafka:
   cluster: ""
 
 log:
-  path: "/usr/share/investigationreporting/data"
-
+  path: "/usr/share/organizationreporting/data"

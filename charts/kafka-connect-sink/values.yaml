@@ -41,7 +41,7 @@ sqlServerConnector: {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
     "offset.flush.interval.ms": "2000",
-    "connection.url": "jdbc:sqlserver://tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;",
+    "connection.url": "jdbc:sqlserver://nbs-db.private-demo.nbspreview.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;",
     "connection.user": "",
     "connection.password": "",
     "connection.pool.min_size": "5",
@@ -87,7 +87,7 @@ resources: { }
   # limits:
   #  cpu: 100m
   #  memory: 128Mi
-# requests:
+  # requests:
 #  cpu: 100m
 #  memory: 128Mi
 
@@ -132,7 +132,7 @@ prometheus:
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
-  bootstrapServers: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
+  bootstrapServers: "b-2.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092"
   default_replication_factor: 2
   default_partitions: 10
   default_cleanup: "compact"

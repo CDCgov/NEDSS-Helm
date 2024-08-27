@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.adb77ee
+  tag: 1.0.1-SNAPSHOT.84eaf48
 
 imagePullSecrets: []
 nameOverride: ""
@@ -41,7 +41,7 @@ pageBuilder:
         enabled: "true"
 
 reportingService:
-  enabled: "false"
+  enabled: "true"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
   investigationReportingServicePort: 8093

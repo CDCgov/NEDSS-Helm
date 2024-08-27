@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dts1"
+env: "test"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.f8bf154
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: app.dts1.nbspreview.com
+  - secretName: app.test.nbspreview.com
     hosts:
-    - app.dts1.nbspreview.com
+    - app.test.nbspreview.com
 
 # Kubernetes resource limits
 resources: {}
@@ -53,22 +53,22 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.dts1.nbspreview.com"
+ingressHost: "app.test.nbspreview.com"
 
 changelog:
   odse: "db.odse.changelog-16.1.yaml"
   rdb: "db.rdb.changelog-16.1.yaml"
   master: "db.master.changelog-16.1.yaml"
+
 jdbc:
-  # Override in argocd deployment
-  master_db_url: "jdbc:sqlserver://:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  odse_db_url: "jdbc:sqlserver://:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  rdb_db_url: "jdbc:sqlserver://:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  master_db_url: "jdbc:sqlserver://nbs-db.private-test.nbspreview.com:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  odse_db_url: "jdbc:sqlserver://nbs-db.private-test.nbspreview.com:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  rdb_db_url: "jdbc:sqlserver://nbs-db.private-test.nbspreview.com:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   username: ""
   password: ""
 
 odse:
-  dbname: "nbs_odse"
+  dbname: "NBS_ODSE"
 
 rdb:
   dbname: "rdb_modern"
@@ -77,5 +77,8 @@ volumeMounts:
 
 volumes:
 
+
 efsFileSystemId: ""
+
+
 
