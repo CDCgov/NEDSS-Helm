@@ -67,7 +67,7 @@ odse:
 rdb:
   dbname: "EXAMPLE_DB_NAME"
 
-phc_datamart_enable: "false"
+phcDatamartEnable: "false"
 
 kafka:
   cluster: "EXAMPLE_KAFKA_CLUSTER"

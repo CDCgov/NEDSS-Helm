@@ -53,7 +53,7 @@ spec:
             - name: DB_RDB
               value: {{ .Values.rdb.dbname }}
             - name: PHC_DM_ENABLE
-              value: {{ .Values.phc_datamart_enable }}
+              value: {{ .Values.phcDatamartEnable }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
