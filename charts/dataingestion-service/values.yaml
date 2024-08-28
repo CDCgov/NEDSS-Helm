@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.5"
+  tag: "v1.0.7"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -58,18 +58,8 @@ ingressHost: "dataingestion.EXAMPLE_DOMAIN"
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
-  dbname: "NBS_DataIngest"
   username: "EXAMPLE_DB_USER"
   password: "EXAMPLE_DB_USER_PASSWORD"
-
-nbs:
-  dbserver: "EXAMPLE_DB_ENDPOINT"
-  dbname: "NBS_MSGOUTE"
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
-
-odse:
-  dbname: "NBS_ODSE"
 
 kafka:
   cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"

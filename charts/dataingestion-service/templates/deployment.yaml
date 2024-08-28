@@ -38,24 +38,12 @@ spec:
               containerPort: 8081
               protocol: TCP
           env:
-            - name: DI_DBSERVER
+            - name: NBS_DBSERVER
               value: {{ .Values.jdbc.dbserver }}
-            - name: DI_DBNAME
-              value: {{ .Values.jdbc.dbname }}
-            - name: DI_USERNAME
+            - name: NBS_DBUSER
               value: {{ .Values.jdbc.username }}
-            - name: DI_PASSWORD
+            - name: NBS_DBPASSWORD
               value: {{ .Values.jdbc.password }}
-            - name: DI_NBS_DBSERVER
-              value: {{ .Values.nbs.dbserver }}
-            - name: DI_NBS_DBNAME
-              value: {{ .Values.nbs.dbname }}
-            - name: DI_NBS_DBUSER
-              value: {{ .Values.nbs.username }}
-            - name: DI_NBS_DBPASSWORD
-              value: {{ .Values.nbs.password }}
-            - name: DI_ODSE_DBNAME
-              value: {{ .Values.odse.dbname }}
             - name: BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.cluster }}
             - name: DI_LOG_PATH

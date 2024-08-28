@@ -6,7 +6,7 @@ env: "prod"
 image:
   repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
   pullPolicy: IfNotPresent
-  tag: "v1.1.4"
+  tag: "v1.1.10"
 
 gatewayService:
   ports:
@@ -18,6 +18,12 @@ gatewayService:
       targetPort: 8000
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
+
+landing:
+  base: "/welcome"
+
+welcome:
+  enabled: "true"
 
 pageBuilder:
   enabled: "true"
@@ -34,7 +40,7 @@ resources: {}
 
 nbsExternalName: app-classic.EXAMPLE_DOMAIN
 
-ingressHost:
+ingressHost: app.EXAMPLE_DOMAIN
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
@@ -44,10 +50,12 @@ pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
+  # specifies the uri for the OIDC issuer, defaults to https://ingressHost/auth/realms/nbs-users
+  uri: ""
   client:
-    id: ""
-    secret: ""
+    id: "nbs-modernization"
+    secret: "EXAMPLE_OIDC_SECRET"
 
 podAnnotations: {}
 

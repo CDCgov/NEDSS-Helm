@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/page-builder-api"
   pullPolicy: IfNotPresent
-  tag: "v1.1.4"
+  tag: "v1.1.10"
 
 # Host URL for application
 ingressHost: "app.EXAMPLE_DOMAIN"
@@ -69,8 +69,11 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
 
 # OIDC settings
+#  must be enabled and configured in nbs-gateway
 oidc:
-  enabled: "false"
+  enabled: "true"
+  # specifies the uri for the OIDC issuer, defaults to https://ingressHost/auth/realms/nbs-users
+  uri: ""
 
 security:
   # Used to encrypt JWT, needs to match between page builder and modernization-api

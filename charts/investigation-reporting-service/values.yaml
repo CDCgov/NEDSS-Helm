@@ -4,8 +4,8 @@ env: "prod"
 
 image:
   repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-reporting-service/investigation-reporting-service"
+  tag: "v1.0.1"
   pullPolicy: IfNotPresent
-  tag: "v1.0.3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -62,6 +62,9 @@ jdbc:
   password: "EXAMPLE_DB_USER_PASSWORD"
 
 odse:
+  dbname: "EXAMPLE_DB_NAME"
+
+rdb:
   dbname: "EXAMPLE_DB_NAME"
 
 kafka:

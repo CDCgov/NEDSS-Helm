@@ -6,7 +6,7 @@ env: "test2"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.3aeb39f
+  tag: 1.0.1-TEST.d4b9500
 
 gatewayService:
   ports:
@@ -19,6 +19,12 @@ gatewayService:
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
 
+landing:
+  base: "/welcome"
+
+welcome:
+  enabled: "true"
+
 pageBuilder:
   enabled: "true"
   page:
@@ -28,7 +34,7 @@ pageBuilder:
       create:
         enabled: "true"
       edit:
-        enabled: "false"
+        enabled: "true"
 
 resources: {}
 
@@ -39,3 +45,22 @@ ingressHost: "app.test.nbspreview.com"
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+# OIDC settings
+oidc:
+  enabled: "true"
+  client:
+    id: "nbs-modernization"
+    secret: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

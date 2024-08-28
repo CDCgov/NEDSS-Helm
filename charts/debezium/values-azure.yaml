@@ -8,7 +8,7 @@ connect:
 
   image:
     repository: quay.io/debezium/connect
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     tag: "2.7"
 
   service:
@@ -32,16 +32,17 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-connector-v5"
+    group_id: "debezium-connector-v071524"
     topics_basename: "debezium-connector"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
     bootstrap_server: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
-    sqlserveragentstatus: "select dbo.IsSqlAgentRunning()"
+    sql_server_agent_override: true
+    sql_server_agent_status: "select dbo.IsSqlAgentRunning()"
 
   sqlserverconnector: {
-    "name": "debezium-connector-v5",
+    "name": "debezium-connector-v071524",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net",
@@ -53,6 +54,7 @@ connect:
       "database.server.name": "odse",
       "database.history.kafka.bootstrap.servers": "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
+#      manually bypass the sqlserver agent status query
       "database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
       "database.trustServerCertificate": "true",
       "include.schema.changes": "true",
@@ -85,7 +87,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-connector-v5"
+      value: "debezium-connector-v071524"
 
 ui:
   enabled: false

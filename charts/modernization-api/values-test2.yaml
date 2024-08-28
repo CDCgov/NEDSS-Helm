@@ -5,7 +5,7 @@ env: "test2"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.3aeb39f
+  tag: 1.0.1-TEST.d4b9500
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,7 +30,7 @@ service:
   pageBuilderPort: 8095
 
 reportingService: 
-  enabled: "false"
+  enabled: "true"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
   investigationReportingServicePort: 8093
@@ -95,7 +95,7 @@ elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
 
 jdbc:
   connectionString: ""

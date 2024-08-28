@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.2e6af0c
+  tag: 1.0.1-SNAPSHOT.bee8008
 
 imagePullSecrets: []
 nameOverride: ""
@@ -29,12 +29,6 @@ service:
   gatewayPort: 8000
   pageBuilderPort: 8095
 
-landing:
-  base: "/welcome"
-
-welcome:
-  enabled: "true"
-
 pageBuilder:
   enabled: "true"
   page:
@@ -47,7 +41,7 @@ pageBuilder:
         enabled: "true"
 
 reportingService:
-  enabled: "false"
+  enabled: "true"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
   investigationReportingServicePort: 8093
@@ -56,7 +50,7 @@ reportingService:
   ldfdataReportingServicePort: 8097
 
 dataprocessingService:
-  enabled: "false"
+  enabled: "true"
   port: 8082
 
 ingress:
@@ -114,3 +108,8 @@ ui:
     key: ""
   analytics:
     key: ""
+  search:
+    view:
+      enabled: true
+      table:
+        enabled: true

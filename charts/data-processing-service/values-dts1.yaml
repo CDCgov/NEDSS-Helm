@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dts1"
+env: "dts"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT-D-DP-TEST-2.cb0a239
+  tag: 1.0.1-SNAPSHOT.80adc82
 
 imagePullSecrets: []
 nameOverride: ""
@@ -55,10 +55,13 @@ affinity: {}
 
 ingressHost: "app.dts1.nbspreview.com"
 
-nbs:
+jdbc:
   dbserver: ""
   username: ""
   password: ""
+
+nbs:
+  authuser: ""
 
 kafka:
   cluster: ""
