@@ -66,7 +66,7 @@ odse:
 rdb:
   dbname: "rdb_modern"
 
-phcDatamartEnable: 'true'
+phcDatamartEnable: "true"
 
 kafka:
   cluster: ""
