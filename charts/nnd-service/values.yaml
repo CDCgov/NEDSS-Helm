@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nnd-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.5"
+  tag: "v1.0.1"
 
 imagePullSecrets: []
 nameOverride: ""

@@ -3,9 +3,9 @@ replicaCount: 1
 env: "prod"
 
 image:
-  repository: ""
+  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-reporting-service/investigation-reporting-service"
+  tag: "v1.0.1"
   pullPolicy: IfNotPresent
-  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -66,6 +66,8 @@ odse:
 
 rdb:
   dbname: "EXAMPLE_DB_NAME"
+
+phcDatamartEnable: "false"
 
 kafka:
   cluster: "EXAMPLE_KAFKA_CLUSTER"
