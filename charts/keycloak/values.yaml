@@ -82,3 +82,14 @@ pvc:
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
+aws:
+  efs:
+    storageClass: efs-kc
+    storageRequest: 1Gi
+    efsFileSystemId: "EXAMPLE_EFS_ID"
+
+azure:
+  files:
+    storageRequest: 100Gi
+    storageAccountName: 
+    resourceGroupName: 
