@@ -82,6 +82,8 @@ kubernetesClusterDomain: cluster.local
 
 #efsFileSystemId: "EXAMPLE_EFS_ID"
 
+cloudProvider: aws
+
 aws:
   efs:
     storageClass: efs-kc
