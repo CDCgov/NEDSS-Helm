@@ -13,7 +13,7 @@ controller:
     enabled: true
   service:
     externalTrafficPolicy: "Local"
-    loadBalancerIP: #Populate your private IP here
+    loadBalancerIP: 10.16.16.30 #Populate your private IP here
     annotations:
       #Use for public IP and public cluster
       #service.beta.kubernetes.io/azure-load-balancer-ipv4: 10.16.4.254
