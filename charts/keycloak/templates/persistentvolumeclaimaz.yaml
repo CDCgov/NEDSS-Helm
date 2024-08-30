@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "elasticsearch.fullname" . }}-keycloak-pv-claim
+  name: {{ include "keycloak.fullname" . }}-keycloak-pv-claim
   labels:
-  {{- include "elasticsearch.labels" . | nindent 4 }}
+  {{- include "keycloak.labels" . | nindent 4 }}
 spec:
   accessModes:
   - ReadWriteMany
