@@ -67,6 +67,18 @@ kafka:
 log:
   path: "/usr/share/dataingestion/data"
 
+cloudProvider: aws
+
+#Azure PVC Settings#
+azure:
+  files:
+    resourceGroupName: 
+    storageAccountName: 
+    storageClass: azurefile-csi-private-di
+    storageRequest: 20Gi
+
+#AWS PVC Settings#
+
 pvc:
   diPvClaim:
     storageClass: efs-dataingestion
