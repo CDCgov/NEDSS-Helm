@@ -68,17 +68,21 @@ keycloak:
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
 
+
+cloudProvider: aws
+
+azure:
+  files:
+    storageRequest: 1Gi
+    storageAccountName: 
+    resourceGroupName: 
+
+#AWS PVC Settings
+
 pvc:
   kcPvClaim:
     storageClass: efs-kc
     storageRequest: 1Gi
-
-#efsFileSystemId: "EXAMPLE_EFS_ID"
-#  storage:
-#    enabled: true
-#    accessModes:
-#      - ReadWriteMany
-#    size: 1Gi
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
