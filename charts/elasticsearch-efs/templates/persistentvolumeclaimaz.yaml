@@ -1,4 +1,4 @@
-{{- if eq .Values.cloudProvider "aws" }}
+{{- if eq .Values.cloudProvider "azure" }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -10,6 +10,6 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: {{ .Values.pvc.esPvClaim.storageRequest | quote }}
-  storageClassName: {{ .Values.pvc.esPvClaim.storageClass | quote }}
+      storage: {{ .Values.azure.files.storageRequest | quote }}
+  storageClassName: azurefile-csi-private-es
 {{- end }}
