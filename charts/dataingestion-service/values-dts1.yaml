@@ -5,7 +5,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.aaec8f7
+  tag: 1.0.1-SNAPSHOT.3d9367e
 
 imagePullSecrets: []
 nameOverride: ""
@@ -66,12 +66,24 @@ kafka:
 log:
   path: "/usr/share/dataingestion/data"
 
+cloudProvider: aws
+
+#Azure PVC Settings#
+azure:
+  files:
+    resourceGroupName: 
+    storageAccountName: 
+    storageClass: azurefile-csi-private-di
+    storageRequest: 20Gi
+
+#AWS PVC Settings#
+
 pvc:
   diPvClaim:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
 
-efsFileSystemId: ""
+efsFileSystemId: "EXAMPLE_EFS_ID"
 
 authUri: ""
 

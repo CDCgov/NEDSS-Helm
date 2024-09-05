@@ -1,7 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nifi"
+  #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nifi"
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nifi"
   pullPolicy: IfNotPresent
   tag: "v1.0.1"
 
@@ -65,6 +66,16 @@ tolerations: []
 affinity: {}
 
 containerPort: 8443
+
+cloudProvider: aws
+
+azure:
+  files:
+    storageRequest: 50Gi
+    storageAccountName: 
+    resourceGroupName: 
+
+#AWS PVC Settings
 
 pvc:
   nifiPvClaim:

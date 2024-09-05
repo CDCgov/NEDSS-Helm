@@ -1,7 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/elasticsearch"
+  #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/elasticsearch"
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/elasticsearch"
   pullPolicy: IfNotPresent
   tag: "v1.0.1"
 
@@ -48,6 +49,17 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+
+cloudProvider: aws
+
+azure:
+  files:
+    storageRequest: 100Gi
+    storageAccountName: 
+    resourceGroupName: 
+
+#AWS PVC Settings
 
 pvc:
   esPvClaim:

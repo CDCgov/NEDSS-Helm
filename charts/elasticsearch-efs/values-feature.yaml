@@ -49,6 +49,16 @@ tolerations: []
 
 affinity: {}
 
+cloudProvider: aws
+
+azure:
+  files:
+    storageRequest: 20Gi
+    storageAccountName: 
+    resourceGroupName: 
+
+#AWS PVC Settings
+
 pvc:
   esPvClaim:
     storageClass: efs-es

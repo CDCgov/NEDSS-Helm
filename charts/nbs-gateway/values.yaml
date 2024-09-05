@@ -4,9 +4,10 @@ deployment:
 env: "prod"
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
+  #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nbs-gateway"
   pullPolicy: IfNotPresent
-  tag: "v1.1.7"
+  tag: "v1.2.0"
 
 gatewayService:
   ports:
@@ -18,6 +19,12 @@ gatewayService:
       targetPort: 8000
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
+
+landing:
+  base: "/welcome"
+
+welcome:
+  enabled: "true"
 
 pageBuilder:
   enabled: "true"

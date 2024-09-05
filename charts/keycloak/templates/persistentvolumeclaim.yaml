@@ -1,3 +1,4 @@
+{{- if eq .Values.cloudProvider "aws" }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -11,3 +12,4 @@ spec:
     requests:
       storage: {{ .Values.pvc.kcPvClaim.storageRequest | quote }}
   storageClassName: {{ .Values.pvc.kcPvClaim.storageClass | quote }}
+{{- end }} 
