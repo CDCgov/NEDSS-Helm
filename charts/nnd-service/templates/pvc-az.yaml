@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "dataingestion-service.fullname" . }}-nnd-pvc
+  name: {{ include "nnd-service.fullname" . }}-nnd-pvc
   labels:
-  {{- include "dataingestion-service.labels" . | nindent 4 }}
+  {{- include "nnd-service.labels" . | nindent 4 }}
 spec:
   accessModes:
     - ReadWriteMany
