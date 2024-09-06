@@ -20,6 +20,5 @@ parameters:
   resourceGroup: {{ .Values.azure.files.resourceGroupName | quote }}
   storageAccount: {{ .Values.azure.files.storageAccountName | quote }}
   #customEndpoint: cselsnbsdelowmainacc-file
-  shareName: nbs-di
+  shareName: nbs-nnd
 {{- end }}
-

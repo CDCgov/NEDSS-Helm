@@ -77,3 +77,13 @@ pvc:
     storageRequest: 20Gi
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
+
+cloudProvider: aws
+
+#Azure PVC Settings#
+azure:
+  files:
+    resourceGroupName: 
+    storageAccountName: 
+    storageClass: azurefile-csi-private-nnd
+    storageRequest: 20Gi
