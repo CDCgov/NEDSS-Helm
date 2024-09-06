@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "nnd-service.fullname" . }}-nnd-pvc
+  name: {{ include "nnd-service.fullname" . }}-di-pvc
   labels:
   {{- include "nnd-service.labels" . | nindent 4 }}
 spec:
