@@ -52,15 +52,16 @@ alias kcbi='export POD_NAME=$(kubectl get pods --namespace default -o name | gre
 kcbi
 
 # actually copy the theme
-export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' )
+export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 )
+
+kubectl cp keycloak/theme/nbs/login ${POD_NAME}:/keycloak/themes/ -c theme-copy
 
 # need to clean up mount point to be consistent between init container and
 # final container
 # from charts dir
-kubectl cp keycloak/theme/nbs/login ${POD_NAME}:/keycloak/themes/ -c theme-copy
 
 # check location to see files were copied
-export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' )
+export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 )
 
 kubectl exec -it -c theme-copy --namespace default "${POD_NAME}" -- ls -l /keycloak/themes
 
