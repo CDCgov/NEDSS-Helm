@@ -36,36 +36,38 @@ database) if it is later missing it will generate a white label error on
 login.
 
 
-Deploy the Helm Chart:
+# Deploy the Helm Chart:
 
 helm install keycloak ./keycloak
 
 After the Helm chart is deployed, use the following command to copy the
 theme files from your local machine to the Kubernetes pod:
+
 kubectl get pods
 
 export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 )
 
 # get a shell on init container
+
 alias kcbi='export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 );  kubectl exec -it -c theme-copy --namespace default "${POD_NAME}" -- sh'
 
 kcbi
 
 # actually copy the theme
+
 export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 )
 
 kubectl cp keycloak/theme/nbs/login ${POD_NAME}:/keycloak/themes/ -c theme-copy
 
-# need to clean up mount point to be consistent between init container and
-# final container
-# from charts dir
+( need to clean up mount point to be consistent between init container and final container from charts dir )
 
 # check location to see files were copied
+
 export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 )
 
 kubectl exec -it -c theme-copy --namespace default "${POD_NAME}" -- ls -l /keycloak/themes
 
-Terminate the Init Container:
+# Terminate the Init Container:
 
 Once the files are copied, you can terminate the init container by running
 the following command:
