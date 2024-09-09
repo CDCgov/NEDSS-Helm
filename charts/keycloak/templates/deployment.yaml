@@ -17,14 +17,24 @@ spec:
         app: keycloak
       {{- include "keycloak.selectorLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.initContainers.enabled }}
       initContainers:
-        - name: theme-sync
+        - name: theme-copy
           image: {{ .Values.initContainers.image }}
-          command: {{ toYaml .Values.initContainers.command | nindent 10 }}
+          command:
+            - "sh"
+            - "-c"
+            - |
+              if [ "{{ .Values.initContainers.sleepDuration }}" = "infinite" ]; then
+                sleep infinity;
+              else
+                sleep {{ .Values.initContainers.sleepDuration }};
+              fi
           volumeMounts:
-            - mountPath: /keycloak/themes
-              #name: keycloak-theme
-              name: kc-persistent-storage      
+            - name: kc-persistent-storage
+              mountPath: /keycloak/themes
+      {{- end }}
+
       containers:
       - args:
         - start-dev
