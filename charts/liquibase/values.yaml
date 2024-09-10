@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "demo"
+env: "prod"
 
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/liquibase-service"
@@ -35,9 +35,10 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-    - secretName: app.demo.nbspreview.com
+    - secretName: app.EXAMPLE_DOMAIN
       hosts:
-        - app.demo.nbspreview.com
+        - app.EXAMPLE_DOMAIN
+
 
 # Kubernetes resource limits
 resources: {}
@@ -54,7 +55,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.demo.nbspreview.com"
+ingressHost: "app.EXAMPLE_DOMAIN
 
 changelog:
   odse: "db.odse.changelog-16.1.yaml"
@@ -62,11 +63,11 @@ changelog:
   master: "db.master.changelog-16.1.yaml"
 
 jdbc:
-  master_db_url: "jdbc:sqlserver://nbs-db.private-demo.nbspreview.com:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  odse_db_url: "jdbc:sqlserver://nbs-db.private-demo.nbspreview.com:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  rdb_db_url: "jdbc:sqlserver://nbs-db.private-demo.nbspreview.com:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  username: ""
-  password: ""
+  master_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  odse_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  rdb_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  username: "EXAMPLE_DB_USER"
+  password: "EXAMPLE_DB_USER_PASSWORD"
 
 odse:
   dbname: "NBS_ODSE"
@@ -74,9 +75,9 @@ odse:
 rdb:
   dbname: "rdb_modern"
 
-volumeMounts:
-
-volumes:
-
-
-efsFileSystemId: ""
+# mossc - is this used????
+# volumeMounts:
+# 
+# volumes:
+# 
+# efsFileSystemId: ""
