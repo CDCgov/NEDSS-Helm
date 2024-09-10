@@ -40,8 +40,6 @@ connect:
     sql_server_agent_status: ""
     bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
-  # dbserver: "EXAMPLE_DB_ENDPOINT"
-  
   sqlserverconnector: {
     "name": "debezium-connector-v071524",
     "config": {
