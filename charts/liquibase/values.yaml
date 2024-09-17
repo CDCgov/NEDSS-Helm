@@ -55,7 +55,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.EXAMPLE_DOMAIN
+ingressHost: "app.EXAMPLE_DOMAIN"
 
 changelog:
   odse: "db.odse.changelog-16.1.yaml"
