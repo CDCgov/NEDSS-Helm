@@ -64,6 +64,9 @@ jdbc:
 odse:
   dbname: "EXAMPLE_DB_NAME"
 
+rdb:
+  dbname: "EXAMPLE_NBS_RDB"
+
 kafka:
   cluster: "EXAMPLE_KAFKA_CLUSTER"
 
