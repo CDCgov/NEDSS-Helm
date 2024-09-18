@@ -1,0 +1,203 @@
+{{ $gateway := fromYaml (include "splunk-otel-collector.gateway" .) }}
+{{ $gatewayEnabled := eq (include "splunk-otel-collector.gatewayEnabled" .) "true" }}
+{{ if $gatewayEnabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "splunk-otel-collector.fullname" . }}
+  namespace: {{ template "splunk-otel-collector.namespace" . }}
+  labels:
+    {{- include "splunk-otel-collector.commonLabels" . | nindent 4 }}
+    app: {{ template "splunk-otel-collector.name" . }}
+    component: otel-collector
+    chart: {{ template "splunk-otel-collector.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    app.kubernetes.io/component: otel-collector
+  {{- if $gateway.annotations }}
+  annotations:
+    {{- toYaml $gateway.annotations | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ $gateway.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "splunk-otel-collector.name" . }}
+      component: otel-collector
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "splunk-otel-collector.name" . }}
+        component: otel-collector
+        release: {{ .Release.Name }}
+        {{- if $gateway.podLabels }}
+        {{- toYaml $gateway.podLabels | nindent 8 }}
+        {{- end }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap-gateway.yaml") . | sha256sum }}
+        {{- if $gateway.podAnnotations }}
+        {{- toYaml $gateway.podAnnotations | nindent 8 }}
+        {{- end }}
+        {{- if .Values.autodetect.istio }}
+        sidecar.istio.io/inject: "false"
+        {{- end }}
+    spec:
+      serviceAccountName: {{ template "splunk-otel-collector.serviceAccountName" . }}
+      {{- if .Values.featureGates.explicitMountServiceAccountToken }}} }
+      automountServiceAccountToken: false
+      {{- end }}
+      nodeSelector:
+        {{- if $gateway.nodeSelector }}
+        {{ toYaml $gateway.nodeSelector | nindent 8 }}
+        {{- else }}
+          kubernetes.io/os: {{ .Values.isWindows | ternary "windows" "linux" }}
+        {{- end }}
+      {{- if $gateway.tolerations }}
+      tolerations:
+        {{ toYaml $gateway.tolerations | nindent 8 }}
+      {{- end }}
+      {{- if $gateway.affinity }}
+      affinity:
+        {{- toYaml $gateway.affinity | nindent 8 }}
+      {{- end }}
+      {{- if $gateway.securityContext }}
+      securityContext:
+        {{- include "splunk-otel-collector.securityContext" (dict "isWindows" .Values.isWindows "securityContext" $gateway.securityContext) | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: otel-collector
+        command:
+        {{- if .Values.isWindows }}
+        - powershell.exe
+        - -command
+        - .\otelcol.exe
+        - --config=C:\\conf\relay.yaml
+        {{- else }}
+        - /otelcol
+        - --config=/conf/relay.yaml
+        {{- end }}
+        {{- if .Values.gateway.featureGates }}
+        - --feature-gates={{ .Values.gateway.featureGates }}
+        {{- end }}
+        image: {{ template "splunk-otel-collector.image.otelcol" . }}
+        imagePullPolicy: {{ .Values.image.otelcol.pullPolicy }}
+        env:
+          - name: SPLUNK_MEMORY_TOTAL_MIB
+            value: "{{ include "splunk-otel-collector.convertMemToMib" $gateway.resources.limits.memory | int64 }}"
+          - name: K8S_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: K8S_POD_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          - name: K8S_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: K8S_POD_UID
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.uid
+          - name: K8S_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          {{- if (eq (include "splunk-otel-collector.splunkO11yEnabled" .) "true") }}
+          - name: SPLUNK_OBSERVABILITY_ACCESS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "splunk-otel-collector.secret" . }}
+                key: splunk_observability_access_token
+          {{- end }}
+          {{- if (eq (include "splunk-otel-collector.splunkPlatformEnabled" .) "true") }}
+          - name: SPLUNK_PLATFORM_HEC_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "splunk-otel-collector.secret" . }}
+                key: splunk_platform_hec_token
+          {{- end }}
+          {{- with $gateway.extraEnvs }}
+          {{- . | toYaml | nindent 10 }}
+          {{- end }}
+        ports:
+        {{- range $key, $port := $gateway.ports }}
+        {{- if eq true (and (eq (include "splunk-otel-collector.metricsEnabled" $) "true") (has "metrics" $port.enabled_for)) (and (eq (include "splunk-otel-collector.tracesEnabled" $) "true") (has "traces" $port.enabled_for)) (and (eq (include "splunk-otel-collector.logsEnabled" $) "true") (has "logs" $port.enabled_for)) (and (eq (include "splunk-otel-collector.profilingEnabled" $) "true") (has "profiling" $port.enabled_for)) }}
+        - name: {{ $key }}
+          {{- omit $port "enabled_for" | toYaml | trim | nindent 10 }}
+        {{- end }}
+        {{- end }}
+        readinessProbe:
+          {{- if .Values.readinessProbe.initialDelaySeconds }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          {{- end }}
+          httpGet:
+            path: /
+            port: 13133
+        livenessProbe:
+          {{- if .Values.livenessProbe.initialDelaySeconds }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          {{- end }}
+          httpGet:
+            path: /
+            port: 13133
+        resources:
+          {{- toYaml $gateway.resources | nindent 10 }}
+        volumeMounts:
+        {{- if .Values.featureGates.explicitMountServiceAccountToken }}
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+        {{- end }}
+        {{- if or .Values.splunkPlatform.clientCert .Values.splunkPlatform.clientKey .Values.splunkPlatform.caFile }}
+        - name: secret
+          mountPath: /otel/etc
+          readOnly: true
+        {{- end }}
+        - mountPath: {{ .Values.isWindows | ternary "C:\\conf" "/conf" }}
+          name: collector-configmap
+        {{- if $gateway.extraVolumeMounts }}
+        {{- toYaml $gateway.extraVolumeMounts | nindent 8 }}
+        {{- end }}
+      terminationGracePeriodSeconds: {{ $gateway.terminationGracePeriodSeconds }}
+      volumes:
+      {{- if .Values.featureGates.explicitMountServiceAccountToken }}
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+            - serviceAccountToken:
+                path: token
+            - configMap:
+                name: kube-root-ca.crt
+                items:
+                  - key: ca.crt
+                    path: ca.crt
+            - downwardAPI:
+                items:
+                  - path: namespace
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.namespace
+      {{- end }}
+      - name: collector-configmap
+        configMap:
+          name: {{ template "splunk-otel-collector.fullname" . }}-otel-collector
+          items:
+            - key: relay
+              path: relay.yaml
+      {{- if or .Values.splunkPlatform.clientCert .Values.splunkPlatform.clientKey .Values.splunkPlatform.caFile }}
+      - name: secret
+        secret:
+          secretName: {{ template "splunk-otel-collector.secret" . }}
+      {{- end }}
+      {{- if $gateway.extraVolumes }}
+      {{- toYaml $gateway.extraVolumes | nindent 6 }}
+      {{- end }}
+      {{- if $gateway.priorityClassName }}
+      priorityClassName: {{ $gateway.priorityClassName }}
+      {{- end }}
+{{- end }}
