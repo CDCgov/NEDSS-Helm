@@ -39,9 +39,9 @@ ingress:
     - nndservice.dts1.nbspreview.com
 
 # Kubernetes resource limits
-resources:
-  limits:
-    memory: "8Gi"
+#resources:
+#  limits:
+#    memory: "8Gi"
 
 autoscaling:
   enabled: false
