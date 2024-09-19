@@ -41,7 +41,7 @@ ingress:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "6Gi"
+    memory: "8Gi"
 
 autoscaling:
   enabled: false
