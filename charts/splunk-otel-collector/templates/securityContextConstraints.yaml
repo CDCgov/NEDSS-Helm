@@ -1,0 +1,57 @@
+{{/*
+Default values for SecurityContextConstraints
+*/}}
+{{- define "splunk-otel-collector.defaultSecurityContextConstraints" -}}
+priority: 10
+allowHostNetwork: true
+allowHostPorts: true
+allowHostPID: true
+allowHostDirVolumePlugin: true
+allowHostIPC: false
+allowPrivilegedContainer: false
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- hostPath
+- secret
+# Allow podman/crio socket and /proc access
+seLinuxContext:
+  type: MustRunAs
+  seLinuxOptions:
+    user: "system_u"
+    role: "system_r"
+    type: "spc_t"
+    level: "s0"
+allowedCapabilities: []
+defaultAddCapabilities: []
+fsGroup:
+  type: RunAsAny
+readOnlyRootFilesystem: true
+runAsUser:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+requiredDropCapabilities:
+- ALL
+{{- end -}}
+
+{{- if and (eq (include "splunk-otel-collector.distribution" .) "openshift") .Values.securityContextConstraints.create  }}
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: {{ template "splunk-otel-collector.serviceAccountName" . }}
+  labels:
+    {{- include "splunk-otel-collector.commonLabels" . | nindent 4 }}
+    app: {{ template "splunk-otel-collector.name" . }}
+    chart: {{ template "splunk-otel-collector.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+users:
+- system:serviceaccount:{{ template "splunk-otel-collector.namespace" . }}:{{ template "splunk-otel-collector.serviceAccountName" . }}
+{{- if .Values.operator.enabled }}
+- system:serviceaccount:{{ include "splunk-otel-collector.namespace" . }}:{{ template "opentelemetry-operator.serviceAccountName" .Subcharts.operator }}
+{{- end }}
+{{- $config := include "splunk-otel-collector.defaultSecurityContextConstraints" . | fromYaml }}
+{{ .Values.securityContextConstraintsOverwrite | mustMergeOverwrite $config | toYaml }}
+{{- end }}

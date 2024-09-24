@@ -1,0 +1,83 @@
+{{/* Current jsonschema doesn't enforce below requirement while `splunkRealm` not provided as (an undesired) default value. */}}
+{{- if and (eq (include "splunk-otel-collector.splunkPlatformEnabled" .) "false") (eq (include "splunk-otel-collector.splunkO11yEnabled" .) "false") -}}
+{{ fail "[ERROR] Please set at least one of required `splunkObservability.realm` or `splunkPlatform.endpoint` and corresponding token values to specify the platform(s) to send data." }}
+{{- end -}}
+
+{{- if eq (include "splunk-otel-collector.splunkPlatformEnabled" .) "true" }}
+Splunk OpenTelemetry Collector is installed and configured to send data to Splunk Platform endpoint "{{ .Values.splunkPlatform.endpoint }}".
+{{ end }}
+{{- if eq (include "splunk-otel-collector.splunkO11yEnabled" .) "true" }}
+Splunk OpenTelemetry Collector is installed and configured to send data to Splunk Observability realm {{ include "splunk-otel-collector.o11yRealm" . }}.
+{{ end }}
+
+{{- if .Values.splunkRealm }}
+[WARNING] "splunkRealm" parameter is deprecated, please use "splunkObservability.realm" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0353-to-0360
+{{ end }}
+{{- if .Values.splunkAccessToken }}
+[WARNING] "splunkAccessToken" parameter is deprecated, please use "splunkObservability.accessToken" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0353-to-0360
+{{ end }}
+{{- if .Values.ingestUrl }}
+[WARNING] "ingestUrl" parameter is deprecated, please use "splunkObservability.ingestUrl" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0353-to-0360
+{{ end }}
+{{- if .Values.apiUrl }}
+[WARNING] "apiUrl" parameter is deprecated, please use "splunkObservability.apiUrl" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0353-to-0360
+{{ end }}
+{{- if not (eq (toString .Values.metricsEnabled) "<nil>") }}
+[WARNING] "metricsEnabled" parameter is deprecated, please use "splunkObservability.metricsEnabled" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0353-to-0360
+{{ end }}
+{{- if not (eq (toString .Values.tracesEnabled) "<nil>") }}
+[WARNING] "tracesEnabled" parameter is deprecated, please use "splunkObservability.tracesEnabled" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0353-to-0360
+{{ end }}
+{{- if not (eq (toString .Values.logsEnabled) "<nil>") }}
+[WARNING] "logsEnabled" parameter is deprecated, please use "splunkObservability.logsEnabled" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0353-to-0360
+{{ end }}
+{{- if not (eq (toString .Values.distro) "<nil>") }}
+[WARNING] "distro" parameter is deprecated, please use "distribution" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0371-to-0380
+{{ end }}
+{{- if not (eq (toString .Values.provider) "<nil>") }}
+[WARNING] "provider" parameter is deprecated, please use "cloudProvider" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0371-to-0380
+{{ end }}
+{{- if not (eq (toString .Values.extraAttributes.podLabels) "<nil>") }}
+[WARNING] ".Values.extraAttributes.podLabels" parameter is deprecated, please use ".Values.extraAttributes.fromLabels" instead.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0371-to-0380
+{{ end }}
+{{- if not (eq (toString .Values.otelAgent) "<nil>") }}
+[WARNING] "otelAgent" parameter group is deprecated, please rename it to "agent" in your custom values.yaml.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0371-to-0380
+{{ end }}
+{{- if not (eq (toString .Values.otelCollector) "<nil>") }}
+[WARNING] "otelCollector" parameter group is deprecated, please rename it to "gateway" in your custom values.yaml.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0371-to-0380
+{{ end }}
+{{- if not (eq (toString .Values.otelK8sClusterReceiver) "<nil>") }}
+[WARNING] "otelK8sClusterReceiver" parameter group is deprecated, please rename it to "clusterReceiver" in your custom values.yaml.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0371-to-0380
+{{ end }}
+{{- if not (eq (toString .Values.image.fluentd.initContainer) "<nil>") }}
+[WARNING] "image.fluentd.initContainer" parameter is deprecated now. Now we use the same splunk/fluentd-hec image in init container.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0371-to-0380
+{{ end }}
+{{- $clusterReceiver := fromYaml (include "splunk-otel-collector.clusterReceiver" .) }}
+{{- if not (eq (toString $clusterReceiver.k8sEventsEnabled) "<nil>") }}
+[WARNING] "clusterReceiver.k8sEventsEnabled" parameter is deprecated. Please use clusterReceiver.eventsEnabled and splunkObservability.infrastructureMonitoringEventsEnabled.
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0532-to-0540
+{{ end }}
+{{- $crEventsEnabled := toString $clusterReceiver.eventsEnabled }}
+{{- if not (or (eq $crEventsEnabled "<nil>") (eq $crEventsEnabled "false")) }}
+[WARNING] "clusterReceiver.eventsEnabled" parameter is deprecated. Soon it will be replaced with "clusterReceiver.k8sObjects".
+          Upgrade guidelines: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/UPGRADING.md#0670-to-0680
+{{ end }}
+{{- if .Values.operator.enabled }}
+[INFO] You've enabled the operator's auto-instrumentation feature (operator.enabled=true)! The operator can automatically instrument Kubernetes hosted applications.
+  - Status: Instrumentation language maturity varies. See `operator.instrumentation.spec` and documentation for utilized instrumentation details.
+  - Splunk Support: We offer full support for Splunk distributions and best-effort support for native OpenTelemetry distributions of auto-instrumentation libraries.
+{{- end }}
