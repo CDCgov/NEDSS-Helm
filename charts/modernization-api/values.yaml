@@ -118,6 +118,7 @@ oidc:
   # specifies the uri for the OIDC issuer, defaults to https://ingressHost/auth/realms/nbs-users
   uri: ""
 
+# feature flag configurations for modernized ui
 ui:
   smarty:
     key: ""
@@ -127,4 +128,9 @@ ui:
     view:
       enabled: true
       table:
+        enabled: true
+  patient:
+    add:
+      # when enabled, allows user to create a patient with all available demographic data
+      extended:
         enabled: true
