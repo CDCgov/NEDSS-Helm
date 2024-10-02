@@ -45,6 +45,8 @@ spec:
               liquibase --changelog-file="{{ .Values.changelog.odse }}" --searchPath="./" --url="{{ .Values.jdbc.odse_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
               echo "Executing changelog in DB : {{ .Values.jdbc.rdb_db_url }}"
               liquibase --changelog-file="{{ .Values.changelog.rdb }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
+              echo "Executing changelog in DB : {{ .Values.jdbc.rdb_modern_db_url }}"
+              liquibase --changelog-file="{{ .Values.changelog.rdb_modern }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_modern_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
               echo "Liquibase Update Complete"
               echo "Sleep infinitely"
               sleep infinity
