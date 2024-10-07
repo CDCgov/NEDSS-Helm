@@ -4,7 +4,7 @@ env: "prod"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/organization-reporting-service"
-  tag: "v1.0.4"
+  tag: "v1.0.5"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
