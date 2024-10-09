@@ -30,14 +30,6 @@ service:
   port: 8081
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: nndservice.test.nbspreview.com
-    hosts:
-    - nndservice.test.nbspreview.com
-
 resources: {}
 
 autoscaling:

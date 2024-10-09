@@ -31,14 +31,6 @@ service:
   port: 8080
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName:
-    hosts:
-    -
-
 resources: {}
 
 autoscaling:

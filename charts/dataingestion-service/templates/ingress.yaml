@@ -17,10 +17,72 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:
-          - path: "/"
+          - path: "/ingestion/"
             pathType: Prefix
             backend:
               service:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
+          {{- if eq .Values.reportingService.enabled "true" }}
+          - path: "/reporting/person-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: person-reporting-service
+                port:
+                  number: {{ .Values.reportingService.personReportingServicePort }}
+          - path: "/reporting/organization-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: organization-reporting-service
+                port:
+                  number: {{ .Values.reportingService.organizationReportingServicePort }}
+          - path: "/reporting/investigation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: investigation-reporting-service
+                port:
+                  number: {{ .Values.reportingService.investigationReportingServicePort }}
+          - path: "/reporting/observation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: observation-reporting-service
+                port:
+                  number: {{ .Values.reportingService.observationReportingServicePort }}
+          - path: "/reporting/post-processing-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: post-processing-reporting-service
+                port:
+                  number: {{ .Values.reportingService.postProcessingReportingServicePort }}
+          - path: "/reporting/ldfdata-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: ldfdata-reporting-service
+                port:
+                  number: {{ .Values.reportingService.ldfdataReportingServicePort }}
+         {{- end }}
+         {{- if eq .Values.dataprocessingService.enabled "true" }}
+          - path: "/data-processing-svc/rti/"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-processing-service
+                port:
+                  number: {{ .Values.dataprocessingService.port }}
+          {{- end }} 
+          {{- if eq .Values.nndService.enabled "true" }}
+          - path: "/data-sync/"
+            pathType: Prefix
+            backend:
+              service:
+                name: nnd-service
+                port:
+                  number: {{ .Values.nndService.port }}
+          {{- end }}  

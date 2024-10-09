@@ -30,14 +30,6 @@ service:
   port: 8081
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: nndservice.feature.nbspreview.com
-    hosts:
-    - nndservice.feature.nbspreview.com
-
 # Kubernetes resource limits
 resources: {}
 

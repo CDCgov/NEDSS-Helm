@@ -31,13 +31,6 @@ service:
   port: 8081
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: "nndservice.EXAMPLE_DOMAIN"
-    hosts:
-    - "nndservice.EXAMPLE_DOMAIN"
 
 resources: {}
 
