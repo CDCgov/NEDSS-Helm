@@ -60,12 +60,14 @@ ingressHost: "app.EXAMPLE_DOMAIN"
 changelog:
   odse: "db.odse.changelog-16.1.yaml"
   rdb: "db.rdb.changelog-16.1.yaml"
+  rdb_modern: "db.rdb_modern.changelog-16.1.yaml"
   master: "db.master.changelog-16.1.yaml"
 
 jdbc:
   master_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   odse_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  rdb_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  rdb_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  rdb_modern_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   username: "EXAMPLE_DB_USER"
   password: "EXAMPLE_DB_USER_PASSWORD"
 
