@@ -27,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8098
+  port: 8081
   httpsPort: 443
 
 # Kubernetes resource limits
