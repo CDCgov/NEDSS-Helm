@@ -46,7 +46,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "nndservice.EXAMPLE_DOMAIN"
+ingressHost: "dataingestion.EXAMPLE_DOMAIN"
 
 
 # dbserver is passed in as an environment variable. It is just the database endpoint

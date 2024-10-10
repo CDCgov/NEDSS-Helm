@@ -31,6 +31,7 @@ service:
   port: 8080
   httpsPort: 443
 
+
 resources: {}
 
 autoscaling:
@@ -45,7 +46,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "nndservice.demo.nbspreview.com"
+ingressHost: "dataingestion.demo.nbspreview.com"
 
 jdbc:
   dbserver: "cdc-nbs-legacy-rds-mssql.c1yhzcwwxisa.us-east-1.rds.amazonaws.com"

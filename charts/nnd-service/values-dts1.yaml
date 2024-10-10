@@ -47,7 +47,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "nndservice.dts1.nbspreview.com"
+ingressHost: "dataingestion.dts1.nbspreview.com"
 
 jdbc:
   dbserver: ""
