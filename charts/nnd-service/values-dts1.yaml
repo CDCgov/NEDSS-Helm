@@ -30,14 +30,6 @@ service:
   port: 8081
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: nndservice.dts1.nbspreview.com
-    hosts:
-    - nndservice.dts1.nbspreview.com
-
 # Kubernetes resource limits
 #resources:
 #  limits:
@@ -55,7 +47,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "nndservice.dts1.nbspreview.com"
+ingressHost: "dataingestion.dts1.nbspreview.com"
 
 jdbc:
   dbserver: ""

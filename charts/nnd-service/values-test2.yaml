@@ -19,7 +19,7 @@ serviceAccount:
 podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
-  prometheus.io/port: "8081"
+  prometheus.io/port: "8098"
 
 podSecurityContext: {}
 
@@ -29,14 +29,6 @@ service:
   type: ClusterIP
   port: 8081
   httpsPort: 443
-
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: nndservice.test.nbspreview.com
-    hosts:
-    - nndservice.test.nbspreview.com
 
 resources: {}
 
@@ -52,7 +44,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "nndservice.test.nbspreview.com"
+ingressHost: "dataingestion.test.nbspreview.com"
 
 jdbc:
   dbserver: ""

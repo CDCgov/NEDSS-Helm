@@ -20,7 +20,7 @@ serviceAccount:
 podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
-  prometheus.io/port: "8081"
+  prometheus.io/port: "8098"
 
 podSecurityContext: {}
 
@@ -31,13 +31,6 @@ service:
   port: 8081
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: "nndservice.EXAMPLE_DOMAIN"
-    hosts:
-    - "nndservice.EXAMPLE_DOMAIN"
 
 resources: {}
 
@@ -53,7 +46,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "nndservice.EXAMPLE_DOMAIN"
+ingressHost: "dataingestion.EXAMPLE_DOMAIN"
 
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
