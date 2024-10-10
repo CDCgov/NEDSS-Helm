@@ -53,7 +53,7 @@ dataprocessingService:
 
 nndService:
   enabled: "false"
-  port: 8098
+  port: 8081
 
 # Kubernetes resource limits
 resources: {}
