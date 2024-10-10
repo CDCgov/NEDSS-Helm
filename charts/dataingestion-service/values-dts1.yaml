@@ -45,7 +45,7 @@ dataprocessingService:
 
 nndService:
   enabled: "true"
-  port: 8098
+  port: 8081
 
 ingress:
   enabled: true
