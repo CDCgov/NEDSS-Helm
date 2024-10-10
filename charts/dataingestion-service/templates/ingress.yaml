@@ -69,7 +69,7 @@ spec:
                   number: {{ .Values.reportingService.ldfdataReportingServicePort }}
          {{- end }}
          {{- if eq .Values.dataprocessingService.enabled "true" }}
-          - path: "/data-processing-svc/rti/"
+          - path: "/rti/"
             pathType: Prefix
             backend:
               service:
