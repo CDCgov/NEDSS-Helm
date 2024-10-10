@@ -46,19 +46,6 @@ pageBuilder:
       edit:
         enabled: "true"
 
-reportingService:
-  enabled: "true"
-  personReportingServicePort: 8091
-  organizationReportingServicePort: 8092
-  investigationReportingServicePort: 8093
-  observationReportingServicePort: 8094
-  postProcessingReportingServicePort: 8095
-  ldfdataReportingServicePort: 8097
-
-dataprocessingService:
-  enabled: "true"
-  port: 8082
-
 # nginx-ingress
 ingress:
   enabled: true
