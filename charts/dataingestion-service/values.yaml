@@ -41,11 +41,11 @@ reportingService:
   ldfdataReportingServicePort: 8097
 
 dataprocessingService:
-  enabled: "false"
+  enabled: "true"
   port: 8082
 
 nndService:
-  enabled: "false"
+  enabled: "true"
   port: 8081
 
 ingress:
