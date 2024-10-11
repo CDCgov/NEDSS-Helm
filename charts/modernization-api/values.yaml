@@ -29,7 +29,6 @@ service:
   gatewayPort: 8000
   pageBuilderPort: 8095
 
-
 pageBuilder:
   enabled: "true"
   page:
@@ -106,13 +105,27 @@ oidc:
   # specifies the uri for the OIDC issuer, defaults to https://ingressHost/auth/realms/nbs-users
   uri: ""
 
-# feature flag configurations for modernized ui
 ui:
+  # settings for modernized ui
   smarty:
-    key: ""
+    # The embedded API key, when blank the Smarty API will not be invoked.
+    key:
   analytics:
-    key: ""
+    # The host name of the PostHog server to send analytics to, when blank it will default to https://us.posthog.com
+    host:
+    # The PostHog project key to associate frontend analytics with, when blank analytics will not be enabled
+    key:
+  # feature flag configurations for modernized ui
   search:
+    events:
+      # Enables access to NBS6 Event Search
+      enabled: true
+    investigations:
+      # Enables access to modernized Investigation search
+      enabled: false
+    laboratoryReports:
+      # Enables access to modernized Laboratory search
+      enabled: false
     view:
       enabled: true
       table:

@@ -105,6 +105,12 @@ ui:
   analytics:
     key: ""
   search:
+    events:
+      enabled: true
+    investigations:
+      enabled: true
+    laboratoryReports:
+      enabled: true
     view:
       enabled: true
       table:
