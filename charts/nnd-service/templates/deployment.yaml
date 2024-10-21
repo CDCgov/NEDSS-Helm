@@ -44,8 +44,6 @@ spec:
               value: {{ .Values.jdbc.username }}
             - name: NBS_DBPASSWORD
               value: {{ .Values.jdbc.password }}
-            - name: BOOTSTRAP_SERVERS
-              value: {{ .Values.kafka.cluster }}
             - name: NND_SERVER_HOST
               value: {{ .Values.ingressHost }}
             - name: NND_AUTH_URI
