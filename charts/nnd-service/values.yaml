@@ -55,9 +55,6 @@ jdbc:
   username: "EXAMPLE_DB_USER"
   password: "EXAMPLE_DB_USER_PASSWORD"
 
-kafka:
-  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-
 #authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
 authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 

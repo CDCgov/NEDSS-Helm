@@ -5,7 +5,7 @@ env: "test"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.c3ff449
+  tag: 1.0.1-SNAPSHOT.1ceb3c3
 
 imagePullSecrets: []
 nameOverride: ""
@@ -50,9 +50,6 @@ jdbc:
   dbserver: ""
   username: ""
   password: ""
-
-kafka:
-  cluster: ""
 
 authUri: ""
 
