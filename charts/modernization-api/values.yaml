@@ -121,4 +121,4 @@ ui:
     add:
       # when enabled, allows user to create a patient with all available demographic data
       extended:
-        enabled: false
+        enabled: true
