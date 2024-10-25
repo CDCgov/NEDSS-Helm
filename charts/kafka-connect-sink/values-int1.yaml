@@ -63,6 +63,8 @@ sqlServerConnector: {
     "dialect.name": "SqlServerDatabaseDialect",
     "errors.deadletterqueue.topic.name": "nrt-nbs-dlq-1",
     "errors.deadletterqueue.topic.replication.factor": "2",
+    "errors.deadletterqueue.context.headers.enable": "true",
+    "errors.tolerance": "all",
     "errors.log.enable": "true",
     "errors.log.include.messages": "true"
   }
