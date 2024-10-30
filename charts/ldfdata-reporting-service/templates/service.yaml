@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "ldfdata-reporting-service.fullname" . }}
+  name: {{ include "ldfdata-reporting-service.name" . }}
   labels:
     {{- include "ldfdata-reporting-service.labels" . | nindent 4 }}
 spec:

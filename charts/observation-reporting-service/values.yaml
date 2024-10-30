@@ -28,7 +28,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8093
+  port: 8094
   httpsPort: 443
 
 ingress:
