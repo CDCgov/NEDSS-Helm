@@ -29,12 +29,6 @@ service:
   gatewayPort: 8000
   pageBuilderPort: 8095
 
-landing:
-  base: "/welcome"
-
-welcome:
-  enabled: "true"
-
 pageBuilder:
   enabled: "true"
   page:
@@ -66,7 +60,7 @@ istioGatewayIngress:
   certificateIssuerName: "letsencrypt-production"
 
 mTLS:
-  enabled: false
+  enabled: true
 
 resources: {}
 
