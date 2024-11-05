@@ -5,7 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.3aeb39f
+  tag: 1.0.1-SNAPSHOT.96fb4e0
 
 imagePullSecrets: []
 nameOverride: ""
@@ -63,7 +63,7 @@ nbsExternalName: app-classic.feature.nbspreview.com
 
 resources:
   limits:
-    memory: "1Gi"
+    memory: "2Gi"
 
 autoscaling:
   enabled: false
@@ -97,7 +97,7 @@ security:
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
 
 ui:
   smarty:
@@ -105,7 +105,18 @@ ui:
   analytics:
     key: ""
   search:
+    events:
+      enabled: true
+    investigations:
+      enabled: true
+    laboratoryReports:
+      enabled: true
     view:
       enabled: true
       table:
+        enabled: true
+  patient:
+    add:
+      enabled: true
+      extended:
         enabled: true

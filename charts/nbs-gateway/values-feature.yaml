@@ -6,7 +6,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.3aeb39f
+  tag: 1.0.1-SNAPSHOT.4953b94
 
 gatewayService:
   ports:
@@ -18,6 +18,12 @@ gatewayService:
       targetPort: 8000
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
+
+landing:
+  base: "/welcome"
+
+welcome:
+  enabled: "true"
 
 pageBuilder:
   enabled: "true"
@@ -44,7 +50,7 @@ pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
   client:
     id: ""
     secret: ""
