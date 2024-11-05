@@ -5,7 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.6d94b00
+  tag: "1.0.1-SNAPSHOT.aa8246c"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -19,7 +19,7 @@ serviceAccount:
 podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
-  prometheus.io/port: "8098"
+  prometheus.io/port: "8081"
 
 podSecurityContext: {}
 
@@ -27,8 +27,16 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8081
+  port: 8092
   httpsPort: 443
+
+ingress:
+  enabled: true
+  className: "nginx"
+  tls:
+  - secretName: app.feature.nbspreview.com
+    hosts:
+    - app.feature.nbspreview.com
 
 # Kubernetes resource limits
 resources: {}
@@ -45,21 +53,18 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.feature.nbspreview.com"
+ingressHost: "app.feature.nbspreview.com"
 
 jdbc:
   dbserver: ""
   username: ""
   password: ""
 
-authUri: ""
+odse:
+  dbname: "NBS_ODSE"
+
+kafka:
+  cluster: ""
 
 log:
-  path: "/usr/share/nndservice/data"
-
-pvc:
-  diPvClaim:
-    storageClass: efs-nndservice
-    storageRequest: 20Gi
-
-efsFileSystemId: ""
+  path: "/usr/share/organizationreporting/data"

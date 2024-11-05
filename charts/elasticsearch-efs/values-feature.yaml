@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-RC_20231017.846b2b8
+  tag: 1.0.1-RC_20230928.f0e3eab
 
 imagePullSecrets: []
 nameOverride: ""
@@ -35,7 +35,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "1Gi"
+    memory: "3Gi"
 
 autoscaling:
   enabled: false
@@ -53,7 +53,7 @@ cloudProvider: aws
 
 azure:
   files:
-    storageRequest: 20Gi
+    storageRequest: 100Gi
     storageAccountName: 
     resourceGroupName: 
 
@@ -62,6 +62,6 @@ azure:
 pvc:
   esPvClaim:
     storageClass: efs-es
-    storageRequest: 20Gi
+    storageRequest: 100Gi
 
 efsFileSystemId: ""
