@@ -38,20 +38,22 @@ connect:
     default_cleanup: "compact"
     sql_server_agent_override: false
     sql_server_agent_status: ""
-    bootstrap_server: "b-2.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092"
+    bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
+  # dbserver: "EXAMPLE_DB_ENDPOINT"
+  
   sqlserverconnector: {
     "name": "debezium-connector-v071524",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
-      "database.hostname": "nbs-db.private-demo.nbspreview.com",
+      "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
       "database.port": "1433",
-      "database.user": "",
-      "database.password": "",
+      "database.user": "EXAMPLE_DB_USER",
+      "database.password": "EXAMPLE_DB_USER_PASSWORD",
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
       "database.server.name": "odse",
-      "database.history.kafka.bootstrap.servers": "b-2.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092",
+      "database.history.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -63,8 +65,8 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "b-2.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092",
-      "table.include.list":"dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.state_defined_field_data",
+      "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
+      "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.state_defined_field_data, dbo.Notification",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
@@ -81,7 +83,7 @@ connect:
 
   env:
     - name: BOOTSTRAP_SERVERS
-      value: "b-2.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092"
+      value: "EXAMPLE_MSK_KAFKA_ENDPOINT"
     - name: LOG_LEVEL
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
@@ -108,6 +110,7 @@ ui:
   ingress:
     enabled: true
     router: private
+    # host: DEBEZIUM_UI_HOST_ADDRESS
     host: DEBEZIUM_UI_HOST_ADDRESS
 
   autoscaling:

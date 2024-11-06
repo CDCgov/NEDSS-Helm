@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.792edc9
+  tag: 1.0.1-SNAPSHOT.233ced5
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,19 +39,6 @@ pageBuilder:
         enabled: "true"
       edit:
         enabled: "true"
-
-reportingService:
-  enabled: "true"
-  personReportingServicePort: 8091
-  organizationReportingServicePort: 8092
-  investigationReportingServicePort: 8093
-  observationReportingServicePort: 8094
-  postProcessingReportingServicePort: 8095
-  ldfdataReportingServicePort: 8097
-
-dataprocessingService:
-  enabled: "true"
-  port: 8082
 
 ingress:
   enabled: true
@@ -118,7 +105,18 @@ ui:
   analytics:
     key: ""
   search:
+    events:
+      enabled: true
+    investigations:
+      enabled: true
+    laboratoryReports:
+      enabled: true
     view:
       enabled: true
       table:
+        enabled: true
+  patient:
+    add:
+      enabled: true
+      extended:
         enabled: true

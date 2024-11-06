@@ -4,7 +4,7 @@ env: "prod"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/post-processing-reporting-service"
-  tag: "v1.0.2"
+  tag: "v1.0.6"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -63,6 +63,9 @@ jdbc:
 
 odse:
   dbname: "EXAMPLE_DB_NAME"
+
+rdb:
+  dbname: "EXAMPLE_NBS_RDB"
 
 kafka:
   cluster: "EXAMPLE_KAFKA_CLUSTER"

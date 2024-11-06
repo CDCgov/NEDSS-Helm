@@ -82,3 +82,8 @@ ui:
     key: ""
   analytics:
     key: ""
+  search:
+    view:
+      enabled: true
+      table:
+        enabled: true

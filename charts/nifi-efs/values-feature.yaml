@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-RC_20231017.846b2b8
+  tag: 1.19.0-SNAPSHOT.7775276
 
 imagePullSecrets: []
 nameOverride: ""
@@ -50,7 +50,7 @@ ingress:
 
 resources: 
   limits:
-    memory: "2Gi"
+    memory: "3Gi"
 
 autoscaling:
   enabled: false
@@ -70,7 +70,7 @@ cloudProvider: aws
 
 azure:
   files:
-    storageRequest: 20Gi
+    storageRequest: 50Gi
     storageAccountName: 
     resourceGroupName: 
 
@@ -78,16 +78,15 @@ azure:
 
 pvc:
   nifiPvClaim:
-    storageRequest: 20Gi
-
+    storageRequest: 50Gi
 
 efsFileSystemId: ""
 
 ### Nifi Configurations ###
 
 jvmheap:
-  init: "1g"
-  max: "1g"
+  init: "2g"
+  max: "2g"
 
 jdbcConnectionString: ""
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"

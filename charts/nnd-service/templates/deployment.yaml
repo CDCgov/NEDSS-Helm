@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 8081
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
             - name: NBS_DBSERVER
@@ -44,8 +44,6 @@ spec:
               value: {{ .Values.jdbc.username }}
             - name: NBS_DBPASSWORD
               value: {{ .Values.jdbc.password }}
-            - name: BOOTSTRAP_SERVERS
-              value: {{ .Values.kafka.cluster }}
             - name: NND_SERVER_HOST
               value: {{ .Values.ingressHost }}
             - name: NND_AUTH_URI

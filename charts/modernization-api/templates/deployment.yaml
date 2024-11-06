@@ -45,12 +45,8 @@ spec:
             {{- else}}
             '--nbs.security.oidc.uri=https://{{ .Values.ingressHost }}/auth/realms/nbs-users',
             {{- end }}
-            {{- if ((.Values).security).tokenSecret }}
-            '--nbs.security.tokenSecret={{ .Values.security.tokenSecret }}',
-            {{- end }}
-            {{- if ((.Values).security).parameterSecret }}
-            '--nbs.security.parameterSecret={{ .Values.security.parameterSecret }}',
-            {{- end }}
+            '--nbs.security.tokenSecret={{ ((.Values).security).tokenSecret }}',
+            '--nbs.security.parameterSecret={{ ((.Values).security).parameterSecret }}',
             '--nbs.elasticsearch.url={{ .Values.elasticSearchHost }}', 
             '--spring.datasource.url={{ .Values.jdbc.connectionString }}', 
             '--spring.datasource.username={{ .Values.jdbc.user }}', 
@@ -62,8 +58,14 @@ spec:
             '--nbs.ui.features.pageBuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}',
             '--nbs.ui.features.search.view.enabled={{ ((((.Values).ui).search).view).enabled | default "false" }}',
             '--nbs.ui.features.search.view.table.enabled={{ (((((.Values).ui).search).view).table).enabled | default "false" }}',
-            '--nbs.ui.settings.smarty.key={{ .Values.ui.smarty.key }}',
-            '--nbs.ui.settings.analytics.key={{ .Values.ui.analytics.key }}'
+            '--nbs.ui.features.search.events.enabled={{ ((((.Values).ui).search).events).enabled | default "true" }}',
+            '--nbs.ui.features.search.investigations.enabled={{ ((((.Values).ui).search).investigations).enabled | default "false"}}',
+            '--nbs.ui.features.search.laboratoryReports.enabled={{ ((((.Values).ui).search).laboratoryReports).enabled | default "false"}}',
+            '--nbs.ui.features.patient.add.enabled={{ ((((.Values).ui).patient).add).enabled | default "false" }}',
+            '--nbs.ui.features.patient.add.extended.enabled={{ (((((.Values).ui).patient).add).extended).enabled | default "false" }}',
+            '--nbs.ui.settings.smarty.key={{ (((.Values).ui).smarty).key }}',
+            '--nbs.ui.settings.analytics.host={{ (((.Values).ui).analytics).host }}',
+            '--nbs.ui.settings.analytics.key={{ (((.Values).ui).analytics).key }}'
             ]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

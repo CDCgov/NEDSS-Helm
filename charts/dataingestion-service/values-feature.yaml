@@ -5,7 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.59445c9
+  tag: 1.0.1-SNAPSHOT.eafb51d
 
 imagePullSecrets: []
 nameOverride: ""
@@ -37,6 +37,23 @@ ingress:
   - secretName: dataingestion.feature.nbspreview.com
     hosts:
     - dataingestion.feature.nbspreview.com
+
+reportingService:
+  enabled: "true"
+  personReportingServicePort: 8091
+  organizationReportingServicePort: 8092
+  investigationReportingServicePort: 8093
+  observationReportingServicePort: 8094
+  postProcessingReportingServicePort: 8095
+  ldfdataReportingServicePort: 8097
+
+dataprocessingService:
+  enabled: "true"
+  port: 8082
+
+nndService:
+  enabled: "true"
+  port: 8081
 
 # Kubernetes resource limits
 resources: {}

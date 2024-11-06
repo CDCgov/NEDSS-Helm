@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.d67ab7f"
+  tag: "1.0.1-SNAPSHOT.aa8246c"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -27,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8091
+  port: 8097
   httpsPort: 443
 
 ingress:

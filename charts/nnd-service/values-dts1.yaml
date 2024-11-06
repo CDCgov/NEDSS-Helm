@@ -5,7 +5,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.83fedaf
+  tag: 1.0.1-SNAPSHOT.6d94b00
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,16 +30,10 @@ service:
   port: 8081
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: nndservice.dts1.nbspreview.com
-    hosts:
-    - nndservice.dts1.nbspreview.com
-
 # Kubernetes resource limits
-resources: {}
+#resources:
+#  limits:
+#    memory: "8Gi"
 
 autoscaling:
   enabled: false
@@ -53,15 +47,12 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "nndservice.dts1.nbspreview.com"
+ingressHost: "dataingestion.dts1.nbspreview.com"
 
 jdbc:
   dbserver: ""
   username: ""
   password: ""
-
-kafka:
-  cluster: ""
 
 authUri: ""
 

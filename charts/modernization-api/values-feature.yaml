@@ -5,7 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.3aeb39f
+  tag: 1.0.1-SNAPSHOT.96fb4e0
 
 imagePullSecrets: []
 nameOverride: ""
@@ -28,19 +28,6 @@ service:
   httpsPort: 443
   gatewayPort: 8000
   pageBuilderPort: 8095
-
-reportingService:
-  enabled: "false"
-  personReportingServicePort: 8091
-  organizationReportingServicePort: 8092
-  investigationReportingServicePort: 8093
-  observationReportingServicePort: 8094
-  postProcessingReportingServicePort: 8095
-  ldfdataReportingServicePort: 8097
-
-dataprocessingService:
-  enabled: "false"
-  port: 8082
 
 pageBuilder:
   enabled: "true"
@@ -70,13 +57,13 @@ istioGatewayIngress:
   certificateIssuerName: "letsencrypt-production"
 
 mTLS:
-  enabled: false
+  enabled: true
 
 nbsExternalName: app-classic.feature.nbspreview.com
 
 resources:
   limits:
-    memory: "1Gi"
+    memory: "2Gi"
 
 autoscaling:
   enabled: false
@@ -110,10 +97,26 @@ security:
 
 # OIDC settings
 oidc:
-  enabled: "false"
+  enabled: "true"
 
 ui:
   smarty:
     key: ""
   analytics:
     key: ""
+  search:
+    events:
+      enabled: true
+    investigations:
+      enabled: true
+    laboratoryReports:
+      enabled: true
+    view:
+      enabled: true
+      table:
+        enabled: true
+  patient:
+    add:
+      enabled: true
+      extended:
+        enabled: true

@@ -6,7 +6,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nnd-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-data-exchange-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.1"
+  tag: "v1.0.7"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -20,7 +20,7 @@ serviceAccount:
 podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
-  prometheus.io/port: "8081"
+  prometheus.io/port: "8098"
 
 podSecurityContext: {}
 
@@ -31,13 +31,6 @@ service:
   port: 8081
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: "nndservice.EXAMPLE_DOMAIN"
-    hosts:
-    - "nndservice.EXAMPLE_DOMAIN"
 
 resources: {}
 
@@ -53,7 +46,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "nndservice.EXAMPLE_DOMAIN"
+ingressHost: "dataingestion.EXAMPLE_DOMAIN"
 
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
@@ -61,9 +54,6 @@ jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
   username: "EXAMPLE_DB_USER"
   password: "EXAMPLE_DB_USER_PASSWORD"
-
-kafka:
-  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
 #authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
 authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
