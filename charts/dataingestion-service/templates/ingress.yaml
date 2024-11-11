@@ -78,7 +78,7 @@ spec:
                   number: {{ .Values.dataprocessingService.port }}
           {{- end }} 
           {{- if eq .Values.nndService.enabled "true" }}
-          - path: "/data-sync/"
+          - path: "/extraction/"
             pathType: Prefix
             backend:
               service:
