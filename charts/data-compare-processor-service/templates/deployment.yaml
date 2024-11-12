@@ -57,7 +57,7 @@ spec:
             - name: S3_REGION
               value: "AWS REGION"
             - name: KAFKA_BOOTSTRAP_SERVER
-              value: "KAFKA"
+              value: {{ .Values.kafka.cluster }}
 
           volumeMounts:
           - mountPath: /usr/share/datacompareservice/data

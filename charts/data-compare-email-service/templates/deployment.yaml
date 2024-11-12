@@ -38,26 +38,12 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
-            - name: NBS_DBSERVER
-              value: {{ .Values.jdbc.dbserver }}
-            - name: NBS_DBUSER
-              value: {{ .Values.jdbc.username }}
-            - name: NBS_DBPASSWORD
-              value: {{ .Values.jdbc.password }}
             - name: DC_SERVER_HOST
               value: {{ .Values.ingressHost }}
             - name: DC_AUTH_URI
               value: {{ .Values.authUri }}
-            - name: AWS_KEY_ID
-              value: "LONG RUNNING ID"
-            - name: AWS_ACCESS_KEY
-              value: "LONG RUNNING KEY"
-            - name: S3_BUCKET_NAME
-              value: "BUCKET NAME"
-            - name: S3_REGION
-              value: "AWS REGION"
             - name: KAFKA_BOOTSTRAP_SERVER
-              value: "KAFKA"
+              value: {{ .Values.kafka.cluster }}
 
           volumeMounts:
           - mountPath: /usr/share/datacompareservice/data
