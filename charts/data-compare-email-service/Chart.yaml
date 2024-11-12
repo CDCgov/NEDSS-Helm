@@ -1,6 +1,6 @@
 apiVersion: v2
 name: data-compare-email-service
-description: A Helm chart for Data ingestion service
+description: A Helm chart for Data Compare Email service
 
 # A chart can be either an 'application' or a 'library' chart.
 #

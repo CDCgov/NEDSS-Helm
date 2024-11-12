@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "data-compare-email-service.fullname" . }}-di-pvc
+  name: {{ include "data-compare-email-service.fullname" . }}-dc-email-pvc
   labels:
   {{- include "data-compare-email-service.labels" . | nindent 4 }}
 spec:
@@ -10,6 +10,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: {{ .Values.pvc.diPvClaim.storageRequest | quote }}
-  storageClassName: {{ .Values.pvc.diPvClaim.storageClass | quote }}
+      storage: {{ .Values.pvc.dcPvClaim.storageRequest | quote }}
+  storageClassName: {{ .Values.pvc.dcPvClaim.storageClass | quote }}
 {{- end }}

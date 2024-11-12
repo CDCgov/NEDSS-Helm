@@ -1,6 +1,6 @@
 apiVersion: v2
 name: data-compare-api-service
-description: A Helm chart for Data ingestion service
+description: A Helm chart for Data Compare Api service
 
 # A chart can be either an 'application' or a 'library' chart.
 #

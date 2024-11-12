@@ -59,7 +59,7 @@ log:
   path: "/usr/share/datacompareapi/data"
 
 pvc:
-  diPvClaim:
+  dcPvClaim:
     storageClass: efs-datacompareapi
     storageRequest: 20Gi
 

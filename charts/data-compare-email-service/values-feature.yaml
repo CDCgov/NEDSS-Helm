@@ -58,7 +58,7 @@ log:
   path: "/usr/share/datacompareemail/data"
 
 pvc:
-  diPvClaim:
+  dcPvClaim:
     storageClass: efs-datacompareemail
     storageRequest: 20Gi
 

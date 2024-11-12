@@ -61,7 +61,7 @@ spec:
 
           volumeMounts:
           - mountPath: /usr/share/datacompareservice/data
-            name: di-persistent-storage     
+            name: dc-api-persistent-storage     
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -77,6 +77,6 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-      - name: di-persistent-storage
+      - name: dc-api-persistent-storage
         persistentVolumeClaim:
-          claimName: {{ include "data-compare-api-service.fullname" . }}-di-pvc
+          claimName: {{ include "data-compare-api-service.fullname" . }}-dc-api-pvc
