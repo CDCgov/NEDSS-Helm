@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "data-compare-processor-service.fullname" . }}
+  labels:
+    {{- include "data-compare-processor-service.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "data-compare-processor-service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "data-compare-processor-service.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "data-compare-processor-service.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          env:
+            - name: NBS_DBSERVER
+              value: {{ .Values.jdbc.dbserver }}
+            - name: NBS_DBUSER
+              value: {{ .Values.jdbc.username }}
+            - name: NBS_DBPASSWORD
+              value: {{ .Values.jdbc.password }}
+            - name: DC_SERVER_HOST
+              value: {{ .Values.ingressHost }}
+            - name: DC_AUTH_URI
+              value: {{ .Values.authUri }}
+            - name: AWS_KEY_ID
+              value: "LONG RUNNING ID"
+            - name: AWS_ACCESS_KEY
+              value: "LONG RUNNING KEY"
+            - name: S3_BUCKET_NAME
+              value: "BUCKET NAME"
+            - name: S3_REGION
+              value: "AWS REGION"
+            - name: KAFKA_BOOTSTRAP_SERVER
+              value: "KAFKA"
+
+          volumeMounts:
+          - mountPath: /usr/share/datacompareservice/data
+            name: di-persistent-storage     
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      - name: di-persistent-storage
+        persistentVolumeClaim:
+          claimName: {{ include "data-compare-processor-service.fullname" . }}-di-pvc

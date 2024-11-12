@@ -1,0 +1,15 @@
+{{- if eq .Values.cloudProvider "aws" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "data-compare-email-service.fullname" . }}-di-pvc
+  labels:
+  {{- include "data-compare-email-service.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.pvc.diPvClaim.storageRequest | quote }}
+  storageClassName: {{ .Values.pvc.diPvClaim.storageClass | quote }}
+{{- end }}

@@ -1,0 +1,64 @@
+replicaCount: 1
+
+env: "int1"
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: 1.0.1-SNAPSHOT.4cc2338
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: "/actuator/prometheus"
+  prometheus.io/port: "8098"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8081
+  httpsPort: 443
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: "dataingestion.int1.nbspreview.com"
+
+jdbc:
+  dbserver: ""
+  username: ""
+  password: ""
+
+authUri: ""
+
+log:
+  path: "/usr/share/datacompareprocessor/data"
+
+pvc:
+  diPvClaim:
+    storageClass: efs-datacompareprocessor
+    storageRequest: 20Gi
+
+efsFileSystemId: ""
