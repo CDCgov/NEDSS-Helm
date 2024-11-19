@@ -1,0 +1,293 @@
+# This template file is used to capture all general deployment setting values and environment variables
+# from the Values<name>.yaml file and uses those values for the deployment.
+
+apiVersion: {{ template "deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ template "metabase.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "metabase.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    {{- if .Values.deploymentLabels }}
+    {{- toYaml .Values.deploymentLabels | trim | nindent 4 }}
+    {{- end }}
+  {{- if .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.deploymentAnnotations | trim | nindent 4 }}
+  {{- end }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "metabase.name" . }}
+  replicas: {{ .Values.replicaCount }}
+  {{- with .Values.strategy }}
+  strategy:
+{{ toYaml . | trim | indent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+        {{- if .Values.podAnnotations }}
+{{ toYaml .Values.podAnnotations | trim | indent 8 }}
+        {{- end }}
+      labels:
+        app: {{ template "metabase.name" . }}
+        release: {{ .Release.Name }}
+        {{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | trim | indent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.extraInitContainers }}
+      initContainers:
+        {{ toYaml .Values.extraInitContainers | nindent 8 }}
+      {{- end }}
+      {{- if gt (len .Values.image.pullSecrets) 0 }}
+      imagePullSecrets:
+        {{- range .Values.image.pullSecrets }}
+        - name: {{ . | quote }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name:  {{ template "metabase.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          {{- with .Values.image.command }}
+          command:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: MB_APPLICATION_DB_MAX_CONNECTION_POOL_SIZE
+            value: {{ .Values.extraenv.app_db_max_conn_pool | quote }}
+          - name: MB_JDBC_DATA_WAREHOUSE_MAX_CONNECTION_POOL_SIZE
+            value: {{ .Values.extraenv.jdbc_db_max_conn_pool | quote }}
+          - name: MB_JETTY_HOST
+            value: {{ .Values.listen.host | quote }}
+          - name: MB_JETTY_PORT
+            value: {{ .Values.listen.port | quote }}
+          {{- if .Values.monitoring.enabled }}
+          - name: MB_PROMETHEUS_SERVER_PORT
+            value: {{ .Values.monitoring.port  | quote }}
+          {{- end }}
+          {{- if .Values.ssl.enabled }}
+          - name: MB_JETTY_SSL
+            value: true
+          - name: MB_JETTY_SSL_Port
+            value: {{ .Values.ssl.port | quote }}
+          - name: MB_JETTY_SSL_Keystore
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "metabase.fullname" . }}-ssl
+                key: keystore
+          - name: MB_JETTY_SSL_Keystore_Password
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "metabase.fullname" . }}-ssl
+                key: password
+          {{- end }}
+          {{- if .Values.jetty }}
+            {{- range $key, $value := .Values.jetty }}
+          - name: MB_JETTY_{{ $key | upper }}
+            value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          - name: MB_DB_TYPE
+            value: {{ .Values.database.type | lower }}
+          {{- if .Values.database.file }}
+          - name: MB_DB_FILE
+            value: {{ .Values.database.file }}
+          {{- end }}
+          {{- if or .Values.database.existingSecretEncryptionKeyKey .Values.database.encryptionKey }}
+          - name: MB_ENCRYPTION_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ or .Values.database.existingSecret (printf "%s-database" (include "metabase.fullname" .))}}
+                key: {{ or .Values.database.existingSecretEncryptionKeyKey "encryptionKey" }}
+          {{- end }}
+          {{- if ne (.Values.database.type | lower) "h2" }}
+            {{- if or .Values.database.existingSecretConnectionURIKey .Values.database.connectionURI }}
+          - name: MB_DB_CONNECTION_URI
+            valueFrom:
+              secretKeyRef:
+                name: {{ or .Values.database.existingSecret (printf "%s-database" (include "metabase.fullname" .)) }}
+                key: {{ or .Values.database.existingSecretConnectionURIKey "connectionURI" }}
+            {{- else }}
+          - name: MB_DB_HOST
+            value: {{ .Values.database.host | quote }}
+          - name: MB_DB_PORT
+            value: {{ .Values.database.port | quote }}
+          - name: MB_DB_DBNAME
+            value: {{ .Values.database.dbname | quote }}
+            {{- end }}
+            {{- if or .Values.database.existingSecretUsernameKey .Values.database.username }}
+          - name: MB_DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ or .Values.database.existingSecret (printf "%s-database" (include "metabase.fullname" .)) }}
+                key: {{ or .Values.database.existingSecretUsernameKey "username" }}
+            {{- end }}
+            {{- if or .Values.database.existingSecretPasswordKey .Values.database.password }}
+          - name: MB_DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ or .Values.database.existingSecret (printf "%s-database" (include "metabase.fullname" .)) }}
+                key: {{ or .Values.database.existingSecretPasswordKey "password" }}
+            {{- end }}
+          {{- end }}
+          - name: MB_PASSWORD_COMPLEXITY
+            value: {{ .Values.password.complexity }}
+          - name: MB_PASSWORD_LENGTH
+            value: {{ .Values.password.length | quote }}
+          - name: JAVA_TIMEZONE
+            value: {{ .Values.timeZone }}
+          {{- if .Values.javaOpts }}
+          - name: JAVA_OPTS
+            value: {{ .Values.javaOpts | quote }}
+          {{- else }}
+            {{- if .Values.log4jProperties }}
+          - name: JAVA_OPTS
+            value: "-Dlog4j.configuration=file:/tmp/conf/log4j.properties"
+            {{- end }}
+            {{- if .Values.log4j2XML }}
+          - name: JAVA_OPTS
+            value: "-Dlog4j.configurationFile=file:/tmp/conf/log4j2.xml"
+            {{- end }}
+          {{- end }}
+          {{- if .Values.pluginsDirectory }}
+          - name: MB_PLUGINS_DIR
+            value: {{ .Values.pluginsDirectory | quote }}
+          {{- end }}
+          - name: MB_EMOJI_IN_LOGS
+            value: {{ .Values.emojiLogging | quote }}
+          - name: MB_COLORIZE_LOGS
+            value: {{ .Values.colorLogging | quote }}
+          # lets the site requestes to HTTPS
+          - name: MB_REDIRECT_ALL_REQUESTS_TO_HTTPS
+            value: {{ .Values.siteHTTPS | quote }}          
+          {{- if .Values.siteUrl }}
+          - name: MB_SITE_URL
+            value: {{ .Values.siteUrl | quote }}
+          {{- end }}
+          {{- if .Values.session.maxSessionAge }}
+          - name: MAX_SESSION_AGE
+            value: {{ .Values.session.maxSessionAge | quote }}
+          {{- end }}
+          {{- if .Values.session.sessionCookies }}
+          - name: MB_SESSION_COOKIES
+            value: {{ .Values.session.sessionCookies | quote }}
+          {{- end }}
+          {{- if .Values.session.cookieSameSite }}
+          - name: MB_COOKIE_SAMESITE
+            value: {{ .Values.session.cookieSameSite | quote }}
+          {{- end }}
+          {{- if gt (len .Values.extraEnv) 0 }}
+          {{- .Values.extraEnv | toYaml | nindent 10 }}
+          {{- end }}
+          ports:
+            - containerPort: {{ .Values.service.internalPort }}
+            {{- if .Values.monitoring.enabled }}
+            - containerPort: {{ .Values.monitoring.port }}
+              name: metrics
+            {{- end }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.livenessProbe.path }}
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.readinessProbe.path }}
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          {{- if or .Values.log4jProperties .Values.log4j2XML (ne (len .Values.extraVolumeMounts) 0) }}
+          volumeMounts:
+            {{- if or .Values.log4jProperties .Values.log4j2XML }}
+            - name: config
+              mountPath: /tmp/conf/
+            {{- end }}
+            {{- if ne (len .Values.extraVolumeMounts) 0 }}
+              {{ toYaml .Values.extraVolumeMounts | nindent 12 }}
+            {{- end }}
+          {{- end }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+        {{- if gt (len .Values.database.googleCloudSQL.instanceConnectionNames) 0 }}
+        - name: cloudsql-proxy
+          image: "gcr.io/cloudsql-docker/gce-proxy:{{ or .Values.database.googleCloudSQL.sidecarImageTag "latest" }}"
+          command:
+            - "/cloud_sql_proxy"
+            - "-instances={{ join "," .Values.database.googleCloudSQL.instanceConnectionNames }}"
+            - "-term_timeout=10s"
+            - "-structured_logs"
+            - "-use_http_health_check"
+            - "-enable_iam_login"
+          securityContext:
+            runAsNonRoot: true
+          livenessProbe:
+            httpGet:
+              path: /liveness
+              port: 8090
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 2
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8090
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 2
+          startupProbe:
+            httpGet:
+              path: /startup
+              port: 8090
+            periodSeconds: 1
+            timeoutSeconds: 5
+            failureThreshold: 20
+          resources:
+{{ toYaml .Values.database.googleCloudSQL.resources | indent 12 }}
+        {{- end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+      {{- if .Values.priorityClass}}
+      priorityClass: {{ .Values.priorityClass }}
+      {{- end }}
+      serviceAccountName: {{ template "metabase.serviceAccountName" . }}
+      volumes:
+        {{- if or .Values.log4jProperties .Values.log4j2XML }}
+        - name: config
+          configMap:
+            name: {{ template "metabase.fullname" . }}-config
+            items:
+            {{- if .Values.log4jProperties }}
+            - key: log4j.properties
+              path: log4j.properties
+            {{- end }}
+            {{- if .Values.log4j2XML}}
+            - key: log4j2.xml
+              path: log4j2.xml
+            {{- end }}
+        {{- end }}
+        {{- if ne (len .Values.extraVolumes) 0 }}
+          {{ toYaml .Values.extraVolumes | nindent 8 }}
+        {{- end }}
