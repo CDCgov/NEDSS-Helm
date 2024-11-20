@@ -21,10 +21,17 @@ gatewayService:
 kubernetesClusterDomain: cluster.local
 
 landing:
+  # Specifies the path the user is redirected to when navigating to the root
   base: "/welcome"
 
 welcome:
+  # Enables routing to the NBS7 welcome page
   enabled: "true"
+
+patient:
+  profile:
+    # Enables routing from NBS6 pages to the Patient Profile
+    enabled: false
 
 pageBuilder:
   enabled: "true"
