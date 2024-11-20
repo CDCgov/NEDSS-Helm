@@ -41,6 +41,10 @@ ingress:
 # Kubernetes resource limits
 resources: {}
 
+jvmheap:
+  init: "2g"
+  max: "2g"
+
 autoscaling:
   enabled: false
   minReplicas: 1

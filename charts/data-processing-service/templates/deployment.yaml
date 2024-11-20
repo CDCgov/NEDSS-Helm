@@ -48,6 +48,10 @@ spec:
               value: {{ .Values.nbs.authuser }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
+            - name: JVM_HEAP_INIT
+              value: {{ .Values.jvmheap.init }}
+            - name: JVM_HEAP_MAX
+              value: {{ .Values.jvmheap.max }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
