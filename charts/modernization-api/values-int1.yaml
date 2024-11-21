@@ -116,6 +116,8 @@ ui:
       table:
         enabled: true
   patient:
+    profile:
+      enabled: true
     add:
       enabled: true
       extended:
