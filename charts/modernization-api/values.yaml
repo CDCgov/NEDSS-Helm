@@ -131,9 +131,12 @@ ui:
       table:
         enabled: true
   patient:
-    add:
-      # when enabled, allows access to the modernized New patient feature to create a patient with basic demographic data
+    profile:
+      # Enables access to the modernized patient profile
       enabled: false
-      # when enabled, allows access to the modernized New patient - extended feature to create a patient with all available demographic data
+    add:
+      # Enables access to the modernized New patient feature to create a patient with basic demographic data
+      enabled: false
+      # Enables access to the modernized New patient - extended feature to create a patient with all available demographic data
       extended:
         enabled: true
