@@ -6,7 +6,7 @@ name: metabase
 # Update this value everytime, we change anything in the repo
 version: 2.7.3
 # This is the version value from the official metabase repo
-appVersion: v0.46.4
+appVersion: v0.51.4
 home: http://www.metabase.com/
 icon: http://www.metabase.com/images/logo.svg
 sources:

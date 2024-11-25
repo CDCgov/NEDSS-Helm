@@ -25,6 +25,34 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 
 {{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "metabase.chart" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{/*
+Selector labels
+*/}}
+{{- define "metabase.selectorLabels" -}}
+app: NBS
+type: Data
+app.kubernetes.io/name: {{ include "metabase.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{- define "metabase.labels" -}}
+app: NBS
+type: Data
+helm.sh/chart: {{ include "metabase.chart" . }}
+{{ include "metabase.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
 Return the apiVersion of deployment.
 */}}
 {{- define "deployment.apiVersion" -}}

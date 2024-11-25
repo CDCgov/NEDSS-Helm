@@ -1,7 +1,7 @@
 # This template file is used to capture all general deployment setting values and environment variables
 # from the Values<name>.yaml file and uses those values for the deployment.
 
-apiVersion: {{ template "deployment.apiVersion" . }}
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "metabase.fullname" . }}
@@ -215,6 +215,8 @@ spec:
             {{- if ne (len .Values.extraVolumeMounts) 0 }}
               {{ toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
+            - mountPath: /usr/share/metabase/data
+              name: mb-persistent-storage
           {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
@@ -269,9 +271,9 @@ spec:
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
-      {{- if .Values.priorityClass}}
-      priorityClass: {{ .Values.priorityClass }}
-      {{- end }}
+{{/*      {{- if .Values.priorityClass}}*/}}
+{{/*      priorityClass: {{ .Values.priorityClass }}*/}}
+{{/*      {{- end }}*/}}
       serviceAccountName: {{ template "metabase.serviceAccountName" . }}
       volumes:
         {{- if or .Values.log4jProperties .Values.log4j2XML }}
@@ -290,4 +292,9 @@ spec:
         {{- end }}
         {{- if ne (len .Values.extraVolumes) 0 }}
           {{ toYaml .Values.extraVolumes | nindent 8 }}
+        {{- end }}
+        {{- if ne (len .Values.pvc.mbPvClaim.storageClass) 0 }}
+        - name: mb-persistent-storage
+          persistentVolumeClaim:
+            claimName: {{ include "metabase.fullname" . }}-mb-pvc
         {{- end }}

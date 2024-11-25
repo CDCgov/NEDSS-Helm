@@ -2,6 +2,7 @@
 # If you would like to make changes to the Sandbox env, please update here and proceed to deploying as required.
 
 replicaCount: 1
+nameOverride: ""
 
 pdb:
   create: false
@@ -52,9 +53,9 @@ jetty:
 # Backend database
 database:
   # Database type (h2 / mysql / postgres), default: h2
-  type: postgres
+  type: h2 #postgres
   ## Specify file to store H2 database.  You will also have to back this with a volume (cf. extraVolume and extraVolumeMounts)!
-  # file:
+  file: /usr/share/metabase/data
   # encryptionKey: << YOUR ENCRYPTION KEY OR LEAVE BLANK AND USE EXISTING SECRET >>
   ## Only need when you use mysql / postgres
   # host:
@@ -134,6 +135,15 @@ extraVolumeMounts: []
 extraVolumes: []
 #  - name: plugins
 #    emptyDir: {}
+
+pvc:
+  mbPvClaim:
+    storageClass: efs-metabase
+    storageRequest: 20Gi
+
+efsFileSystemId: ""
+
+cloudProvider: aws
 
 livenessProbe:
   path: /api/health

@@ -1,0 +1,15 @@
+{{- if eq .Values.cloudProvider "aws" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "metabase.fullname" . }}-mb-pvc
+  labels:
+  {{- include "metabase.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.pvc.mbPvClaim.storageRequest | quote }}
+  storageClassName: {{ .Values.pvc.mbPvClaim.storageClass | quote }}
+{{- end }}
