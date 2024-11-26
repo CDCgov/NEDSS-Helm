@@ -25,6 +25,10 @@ landing:
 welcome:
   enabled: "true"
 
+patient:
+  profile:
+    enabled: true
+
 pageBuilder:
   enabled: "true"
   page:
