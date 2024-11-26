@@ -48,6 +48,10 @@ spec:
               value: {{ .Values.nbs.authuser }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
+            - name: JAVA_XMS
+              value: {{ .Values.java.memory.xms }}
+            - name: JAVA_XMX
+              value: {{ .Values.java.memory.xmx }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
