@@ -74,7 +74,7 @@ spec:
           {{- end }}
           {{- if .Values.ssl.enabled }}
           - name: MB_JETTY_SSL
-            value: true
+            value: "true"
           - name: MB_JETTY_SSL_Port
             value: {{ .Values.ssl.port | quote }}
           - name: MB_JETTY_SSL_Keystore
@@ -293,8 +293,8 @@ spec:
         {{- if ne (len .Values.extraVolumes) 0 }}
           {{ toYaml .Values.extraVolumes | nindent 8 }}
         {{- end }}
-        {{- if ne (len .Values.pvc.mbPvClaim.storageClass) 0 }}
+{{/*        {{- if ne (len .Values.pvc.mbPvClaim.storageClass) 0 }}*/}}
         - name: mb-persistent-storage
           persistentVolumeClaim:
             claimName: {{ include "metabase.fullname" . }}-mb-pvc
-        {{- end }}
+{{/*        {{- end }}*/}}
