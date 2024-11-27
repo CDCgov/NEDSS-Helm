@@ -209,7 +209,7 @@ spec:
           {{- if or .Values.log4jProperties .Values.log4j2XML (ne (len .Values.extraVolumeMounts) 0) }}
           volumeMounts:
             - name: mb-persistent-storage
-              mountPath: /opt/metabase/data/
+              mountPath: /usr/share/metabase/data
             {{- if or .Values.log4jProperties .Values.log4j2XML }}
             - name: config
               mountPath: /tmp/conf/
