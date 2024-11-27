@@ -110,7 +110,6 @@ ui:
   ingress:
     enabled: true
     router: private
-    # host: DEBEZIUM_UI_HOST_ADDRESS
     host: DEBEZIUM_UI_HOST_ADDRESS
 
   autoscaling:
