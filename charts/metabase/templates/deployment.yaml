@@ -296,5 +296,5 @@ spec:
 {{/*        {{- if ne (len .Values.pvc.mbPvClaim.storageClass) 0 }}*/}}
         - name: mb-persistent-storage
           persistentVolumeClaim:
-            claimName: {{ include "metabase.fullname" . }}-mb-pv-claim
+            claimName: {{ include "metabase.fullname" . }}-mb-pvc
 {{/*        {{- end }}*/}}
