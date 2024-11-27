@@ -147,7 +147,7 @@ cloudProvider: aws
 
 livenessProbe:
   path: /api/health
-  initialDelaySeconds: 120
+  initialDelaySeconds: 300
   timeoutSeconds: 30
   failureThreshold: 6
 

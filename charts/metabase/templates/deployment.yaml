@@ -236,17 +236,17 @@ spec:
             httpGet:
               path: /liveness
               port: 8090
-            initialDelaySeconds: 0
+            initialDelaySeconds: 300
             periodSeconds: 10
-            timeoutSeconds: 5
+            timeoutSeconds: 50
             failureThreshold: 2
           readinessProbe:
             httpGet:
               path: /readiness
               port: 8090
-            initialDelaySeconds: 0
+            initialDelaySeconds: 300
             periodSeconds: 10
-            timeoutSeconds: 5
+            timeoutSeconds: 50
             successThreshold: 1
             failureThreshold: 2
           startupProbe:
@@ -254,7 +254,7 @@ spec:
               path: /startup
               port: 8090
             periodSeconds: 1
-            timeoutSeconds: 5
+            timeoutSeconds: 300
             failureThreshold: 20
           resources:
 {{ toYaml .Values.database.googleCloudSQL.resources | indent 12 }}
