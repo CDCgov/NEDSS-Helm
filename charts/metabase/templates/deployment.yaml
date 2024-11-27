@@ -208,8 +208,8 @@ spec:
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           {{- if or .Values.log4jProperties .Values.log4j2XML (ne (len .Values.extraVolumeMounts) 0) }}
           volumeMounts:
-            - name: mb-persistent-storage
-              mountPath: /usr/share/metabase/data
+            - mountPath: /usr/share/metabase/data
+              name: mb-persistent-storage
             {{- if or .Values.log4jProperties .Values.log4j2XML }}
             - name: config
               mountPath: /tmp/conf/
