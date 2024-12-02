@@ -3,9 +3,9 @@ replicaCount: 1
 env: "demo"
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-reporting-service/organization-reporting-service"
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.3"
+  tag: "v1.0.0"
 
 imagePullSecrets: []
 nameOverride: ""
