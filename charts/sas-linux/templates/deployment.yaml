@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-sas-linux
+  labels:
+    app: {{ .Release.Name }}-sas-linux
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-sas-linux
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-sas-linux
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: sas-linux-container
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        env:
+        {{- range $key, $value := .Values.env }}
+        - name: {{ $key }}
+          value: "{{ $value }}"
+        {{- end }}

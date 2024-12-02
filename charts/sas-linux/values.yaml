@@ -1,0 +1,23 @@
+replicaCount: 1
+
+image:
+  repository: 
+  tag: ""
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 2323
+
+env:
+  rdb_user: ""
+  db_host: ""
+  odse_user: ""
+  update_database: "false"
+  PHCMartETL_cron_schedule: "0 0 * * *"
+  db_trace_on: "no"
+  MasterEtl_cron_schedule: "0 0 * * *"
+  ADDITIONAL_SAS_FLAGS: "-TRACE"
+  rdb_pass: ""
+  sas_user_pass: ""
+  odse_pass: ""
