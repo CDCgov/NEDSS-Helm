@@ -1,4 +1,4 @@
-{{- if eq .Values.cloudProvider "aws" }}
+{{- if .Values.pvc.enabled  eq .Values.cloudProvider "aws" }}
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:

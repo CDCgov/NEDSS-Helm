@@ -208,8 +208,10 @@ spec:
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           {{- if or .Values.log4jProperties .Values.log4j2XML (ne (len .Values.extraVolumeMounts) 0) }}
           volumeMounts:
+            {{- if .Values.pvc.enabled }}
             - mountPath: /usr/share/metabase
               name: mb-persistent-storage
+            {{end}}
             {{- if or .Values.log4jProperties .Values.log4j2XML }}
             - name: config
               mountPath: /tmp/conf/
@@ -293,8 +295,8 @@ spec:
         {{- if ne (len .Values.extraVolumes) 0 }}
           {{ toYaml .Values.extraVolumes | nindent 8 }}
         {{- end }}
-{{/*        {{- if ne (len .Values.pvc.mbPvClaim.storageClass) 0 }}*/}}
+        {{- if .Values.pvc.enabled }}
         - name: mb-persistent-storage
           persistentVolumeClaim:
             claimName: {{ include "metabase.fullname" . }}-mb-pvc
-{{/*        {{- end }}*/}}
+        {{- end }}
