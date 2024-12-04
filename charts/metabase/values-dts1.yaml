@@ -144,7 +144,7 @@ pvc:
 
 efsFileSystemId: ""
 
-cloudProvider: aws
+cloudProvider: ""
 
 livenessProbe:
   path: /api/health
