@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "sas-linux.name" . }}
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ include "sas-linux.name" . }}-etl
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/bash
+            - su SAS
+            - cd 
+            - date; echo Running PHCMartETL.sh
+            - $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/BatchFiles/PHCMartETL.sh
+            - date; echo Running MasterEtl.sh
+            - $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/BatchFiles/MasterEtl.sh
+          restartPolicy: Never
