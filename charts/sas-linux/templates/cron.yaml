@@ -8,9 +8,6 @@ spec:
     spec:
       template:
         spec:
-          # security-context:
-          #   runAsUser: 1000
-          #   runAsGroup: 1001
           containers:
           - name: '{{ include "sas-linux.name" . }}-cron-etl'
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
