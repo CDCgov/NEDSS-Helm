@@ -20,9 +20,19 @@ spec:
             command:
             - /bin/bash
             - -c 
-            - su SAS; cd;
-              export PATH="$PATH:/opt/mssql-tools18/bin";              
-              date;
+            - cd;               
+              export PATH="$PATH:/opt/mssql-tools18/bin";
+              echo "Updating DB connections";
+              sed -i -e "s/<TRACE_Yes_No>/$db_trace_on/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<DB_HOST>/$db_host/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<NBS_ODSE_USER>/$odse_user/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<NBS_ODSE_PASS>/$odse_pass/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<NBS_RDB_USER>/$rdb_user/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<NBS_RDB_PASS>/$rdb_pass/g" /home/SAS/.odbc.ini;
+              cp /home/SAS/.odbc.ini /etc/odbc.ini;
+              chmod 766 /etc/odbc.ini;
+              export ODBCINI=/etc/odbc.ini       
+              date;              
               echo 'Running PHCMartETL.sh';
               $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/BatchFiles/PHCMartETL.sh;
               ls -ltr $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log;
