@@ -77,16 +77,16 @@ spec:
                 port:
                   number: {{ .Values.dataprocessingService.port }}
           {{- end }} 
-          {{- if eq .Values.rticacheService.enabled "true" }}
+          {{- if eq .Values.srtedataService.enabled "true" }}
           - path: "/rti/"
             pathType: Prefix
             backend:
               service:
-                name: data-rti-service
+                name: srte-data-service
                 port:
-                  number: {{ .Values.rticacheService.port }}
+                  number: {{ .Values.srtedataService.port }}
           {{- end }} 
-          {{- if eq .Values.rticacheService.enabled "true" }}
+          {{- if eq .Values.srtedataService.enabled "true" }}
           - path: "/extraction/"
             pathType: Prefix
             backend:

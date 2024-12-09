@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "rti-cache-service.fullname" . }}
+  name: {{ include "srte-data-service.fullname" . }}
   labels:
-    {{- include "rti-cache-service.labels" . | nindent 4 }}
+    {{- include "srte-data-service.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "rti-cache-service.fullname" . }}
+    name: {{ include "srte-data-service.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

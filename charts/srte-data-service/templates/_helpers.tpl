@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "rti-cache-service.name" -}}
+{{- define "srte-data-service.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "rti-cache-service.fullname" -}}
+{{- define "srte-data-service.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,18 +26,18 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "rti-cache-service.chart" -}}
+{{- define "srte-data-service.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "rti-cache-service.labels" -}}
+{{- define "srte-data-service.labels" -}}
 app: NBS
 type: Data
-helm.sh/chart: {{ include "rti-cache-service.chart" . }}
-{{ include "rti-cache-service.selectorLabels" . }}
+helm.sh/chart: {{ include "srte-data-service.chart" . }}
+{{ include "srte-data-service.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -47,19 +47,19 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "rti-cache-service.selectorLabels" -}}
+{{- define "srte-data-service.selectorLabels" -}}
 app: NBS
 type: Data
-app.kubernetes.io/name: {{ include "rti-cache-service.name" . }}
+app.kubernetes.io/name: {{ include "srte-data-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "rti-cache-service.serviceAccountName" -}}
+{{- define "srte-data-service.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "rti-cache-service.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "srte-data-service.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
