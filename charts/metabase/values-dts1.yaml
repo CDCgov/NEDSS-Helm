@@ -59,14 +59,14 @@ database:
   # encryptionKey: << YOUR ENCRYPTION KEY OR LEAVE BLANK AND USE EXISTING SECRET >>
   ## Only need when you use mysql / postgres
 
-  #  host: ""
-  #  port: ""
-  #  dbname: ""
-  #  username: ""
-  #  password: ""
+  # host: ""
+  # port: ""
+  # dbname: ""
+  # username: ""
+  # password: ""
 
   ## Alternatively, use a connection URI for full configurability. Example for SSL enabled Postgres.
-  # connectionURI: #postgres://<YourHost>:5432/<YourMetabaseDBname>?user=<YourUser>&password=<YourPassword>&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+  connectionURI: #postgres://<YourHost>:5432/<YourMetabaseDBname>?user=<YourUser>&password=<YourPassword>&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
   # connectionURI: postgres://<host>:<port>/<database>?user=<username>&password=<password>&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
   ## If a secret with the database credentials already exists, use the following values:
   # existingSecret:
