@@ -104,6 +104,7 @@ ui:
     key: ""
   analytics:
     key: ""
+    host: "https://us.i.posthog.com"
   search:
     events:
       enabled: true
