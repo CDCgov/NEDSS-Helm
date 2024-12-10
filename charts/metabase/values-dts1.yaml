@@ -104,8 +104,8 @@ emojiLogging: true
 colorLogging: true
 # javaOpts:
 # pluginsDirectory: /plugins
-siteHTTPS: true
-siteUrl: https://metabase.datateam-cdc-nbs.eqsandbox.com
+#siteHTTPS: true
+#siteUrl: https://metabase.datateam-cdc-nbs.eqsandbox.com
 
 session:
   {}
@@ -174,27 +174,26 @@ service:
 ingress:
   enabled: false
   # The ingress class name, if you use multiple ingress controllers:
-  className: "nginx"
+  # className: "nginx"
   # Used to create Ingress record (should used with service.type: ClusterIP).
   hosts:
-    - metabase.datateam-cdc-nbs.eqsandbox.com
+    # - metabase.datateam-cdc-nbs.eqsandbox.com
     # - metabase.domain.com
   # The ingress path. Useful to host metabase on a subpath, such as `/metabase`.
   path: /
-  pathType: Prefix
   labels:
     # Used to add custom labels to the Ingress
     # Useful if for example you have multiple Ingress controllers and 
     # want your Ingress controllers to bind to specific Ingresses
     # traffic: internal
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  annotations: {}
+#    cert-manager.io/cluster-issuer: "letsencrypt-production"
     
   tls:
     # Secrets must be manually created in the namespace.
-    - secretName: metabase.datateam-cdc-nbs.eqsandbox.com
-      hosts:
-        - metabase.datateam-cdc-nbs.eqsandbox.com
+#    - secretName: metabase.datateam-cdc-nbs.eqsandbox.com
+#      hosts:
+#        - metabase.datateam-cdc-nbs.eqsandbox.com
     #     - metabase.domain.com
 
 route:
