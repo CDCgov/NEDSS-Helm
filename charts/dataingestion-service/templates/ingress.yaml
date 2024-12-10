@@ -73,7 +73,7 @@ spec:
               service:
                 name: metabase
                 port:
-                  number: {{ .Values.reportingService.ldfdataReportingServicePort }}
+                  number: {{ .Values.reportingService.metabase }}
          {{- end }}
          {{- if eq .Values.dataprocessingService.enabled "true" }}
           - path: "/rti/"
