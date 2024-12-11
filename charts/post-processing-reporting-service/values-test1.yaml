@@ -56,15 +56,14 @@ affinity: {}
 ingressHost: "app.test.nbspreview.com"
 
 jdbc:
-  dbserver: ""
   username: ""
   password: ""
 
 odse:
-  dbname: "NBS_ODSE"
+  dburl: ""
 
 rdb:
-  dbname: "NBS_RDB"
+  dburl: ""
 
 kafka:
   cluster: ""
