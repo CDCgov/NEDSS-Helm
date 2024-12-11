@@ -1,11 +1,11 @@
-replicaCount: 3
+replicaCount: 1
 
 env: "feature"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.af89f53
+  tag: 1.0.1-SNAPSHOT.f9cb49e
 
 imagePullSecrets: []
 nameOverride: ""
@@ -45,7 +45,7 @@ resources:
     cpu: "1000m"      
   requests:
     memory: "1Gi"  
-    cpu: "500m"    
+    cpu: "500m"      
 
 autoscaling:
   enabled: false
@@ -73,11 +73,4 @@ kafka:
   cluster: ""
 
 log:
-  path: "/usr/share/dataprocessing/data"
-
-dataingestion:
-  uri: ""
-
-keycloak:
-  clientId: ""
-  clientSecret: ""
+  path: "/usr/share/srtedataservice/data"

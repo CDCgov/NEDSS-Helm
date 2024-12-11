@@ -68,3 +68,10 @@ kafka:
 
 log:
   path: "/usr/share/dataprocessing/data"
+
+dataingestion:
+  uri: ""
+
+keycloak:
+  clientId: ""
+  clientSecret: ""
