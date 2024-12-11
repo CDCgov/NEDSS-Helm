@@ -1,6 +1,5 @@
 # This template file is used to capture the ingress rules from the Values<name>.yaml file
 # and uses those values for the deployment.
-{{- if .Values.ingress.enabled -}}
 {{- $serviceName := include "metabase.fullname" . -}}
 {{- $servicePort := .Values.service.externalPort -}}
 apiVersion: networking.k8s.io/v1
@@ -41,5 +40,4 @@ spec:
   tls:
 {{ toYaml .Values.ingress.tls | indent 4 }}
   {{- end -}}
-{{- end -}}
 
