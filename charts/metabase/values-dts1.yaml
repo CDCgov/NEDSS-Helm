@@ -191,6 +191,8 @@ ingress:
         - metabase.datateam-cdc-nbs.eqsandbox.com
     #     - metabase.domain.com
 
+ingressHost: metabase.datateam-cdc-nbs.eqsandbox.com
+
 route:
   enabled: false
   annotations:

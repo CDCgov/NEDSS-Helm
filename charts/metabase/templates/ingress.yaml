@@ -6,26 +6,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ template "metabase.fullname" . }}
-  namespace: {{ .Release.Namespace }}
-  labels:
-    app: {{ template "metabase.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
-  {{- range $key, $value := .Values.ingress.labels }}
-    {{ $key }}: {{ $value | quote }}
-  {{- end }}
   annotations:
-    {{- range $key, $value := .Values.ingress.annotations }}
-      {{ $key }}: {{ $value | quote }}
-    {{- end }}
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
-  {{- if .Values.ingress.className }}
   ingressClassName: {{ .Values.ingress.className }}
-  {{- end }}
+  tls:
+    - secretName: {{ .Values.ingressHost }}
+      hosts:
+        - {{ .Values.ingressHost }}
   rules:
-    {{- range $host := .Values.ingress.hosts }}
-    - host: {{ $host | quote }}
+    - host: {{ .Values.ingressHost }}
       http:
         paths:
           - path: "/"
@@ -35,9 +25,3 @@ spec:
                 name: {{ $serviceName }}
                 port:
                   number: {{ $servicePort }}
-    {{- end -}}
-  {{- if .Values.ingress.tls }}
-  tls:
-{{ toYaml .Values.ingress.tls | indent 4 }}
-  {{- end -}}
-
