@@ -24,3 +24,5 @@ spec:
         env:
         - name: DATABASE_ENDPOINT
           value: "{{ .Values.env.DATABASE_ENDPOINT }}"
+        - name: DISABLED_SCHEDULED_TASKS
+          value: "{{ .Values.env.DISABLED_SCHEDULED_TASKS }}"

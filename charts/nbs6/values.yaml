@@ -29,3 +29,4 @@ ingress:
 
 env:
   DATABASE_ENDPOINT: ""
+  DISABLED_SCHEDULED_TASKS: "SendAlertEMail.bat, DeDuplicationSimilarBatchProcess.bat, UserProfileUpdateProcess.bat"
