@@ -38,6 +38,7 @@ reportingService:
   observationReportingServicePort: 8094
   postProcessingReportingServicePort: 8095
   ldfdataReportingServicePort: 8097
+  metabase: 8190
 
 dataprocessingService:
   enabled: "true"
