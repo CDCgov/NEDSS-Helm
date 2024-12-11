@@ -173,19 +173,13 @@ service:
     # service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
 ingress:
   enabled: true
-  # The ingress class name, if you use multiple ingress controllers:
   className: "nginx"
-    # Used to create Ingress record (should used with service.type: ClusterIP).
   hosts:
     - metabase.datateam-cdc-nbs.eqsandbox.com
     # - metabase.domain.com
-    # The ingress path. Useful to host metabase on a subpath, such as `/metabase`.
   path: /
   pathType: Prefix
 #  labels:
-    # Used to add custom labels to the Ingress
-    # Useful if for example you have multiple Ingress controllers and
-    # want your Ingress controllers to bind to specific Ingresses
     # traffic: internal
 #  annotations: {}
     #    cert-manager.io/cluster-issuer: "letsencrypt-production"
