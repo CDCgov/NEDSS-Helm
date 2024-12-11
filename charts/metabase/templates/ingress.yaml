@@ -4,8 +4,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $serviceName := include "metabase.fullname" . -}}
 {{- $servicePort := .Values.service.externalPort -}}
-{{- $ingressPath := .Values.ingress.path -}}
-{{- $ingressPathType := .Values.ingress.pathType -}}
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -32,8 +31,8 @@ spec:
     - host: {{ $host | quote }}
       http:
         paths:
-          - path: {{ $ingressPath }}
-            pathType: {{ $ingressPathType }}
+          - path: "/"
+            pathType: Prefix
             backend:
               service:
                 name: {{ $serviceName }}
