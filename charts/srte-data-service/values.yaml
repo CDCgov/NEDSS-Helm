@@ -67,7 +67,7 @@ kafka:
   cluster: ""
 
 log:
-  path: "/usr/share/dataprocessing/data"
+  path: "/usr/share/srtedataservice/data"
 
 # max support 2g heap memory
 java:

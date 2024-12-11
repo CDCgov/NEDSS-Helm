@@ -38,6 +38,22 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
+            - name: RC_CLIENT_ID
+              value: {{ .Values.keycloak.clientId }}
+            - name: RC_CLIENT_SECRET
+              value: {{ .Values.keycloak.clientSecret }}
+            - name: RC_URL
+              value: {{ .Values.dataingestion.uri }}
+            - name: RC_EP_TOKEN
+              value: /rti/api/auth/token
+            - name: RC_EP_CACHE_STR
+              value: /rti/srte/cache/string
+            - name: RC_EP_CACHE_CONTAIN
+              value: rti/srte/cache/contain
+            - name: RC_EP_CACHE_OBJ
+              value: /rti/srte/cache/object
+            - name: EP_CACHE_LOCALID
+              value: /rti/odse/localId
             - name: NBS_DBSERVER
               value: {{ .Values.jdbc.dbserver }}
             - name: NBS_DBUSER
@@ -48,10 +64,6 @@ spec:
               value: {{ .Values.nbs.authuser }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
-            - name: JAVA_XMS
-              value: {{ .Values.java.memory.xms }}
-            - name: JAVA_XMX
-              value: {{ .Values.java.memory.xmx }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

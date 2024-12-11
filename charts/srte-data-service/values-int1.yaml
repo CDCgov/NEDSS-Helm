@@ -67,4 +67,4 @@ kafka:
   cluster: ""
 
 log:
-  path: "/usr/share/dataprocessing/data"
+  path: "/usr/share/srtedataservice/data"
