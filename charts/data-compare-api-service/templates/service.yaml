@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "data-compare-api-service.fullname" . }}
+  labels:
+    {{- include "data-compare-api-service.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      name: http
+    - port: {{ .Values.service.httpsPort }}
+      targetPort: {{ .Values.service.port }}
+      name: https
+  selector:
+    {{- include "data-compare-api-service.selectorLabels" . | nindent 4 }}
