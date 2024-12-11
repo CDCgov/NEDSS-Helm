@@ -2,7 +2,9 @@
 # and uses those values for the deployment.
 {{- $serviceName := include "metabase.fullname" . -}}
 {{- $servicePort := .Values.service.externalPort -}}
+{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
+{{- end -}}
 kind: Ingress
 metadata:
   name: {{ template "metabase.fullname" . }}
