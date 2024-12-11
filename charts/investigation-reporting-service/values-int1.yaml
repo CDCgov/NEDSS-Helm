@@ -56,15 +56,14 @@ affinity: {}
 ingressHost: "app.int1.nbspreview.com"
 
 jdbc:
-  dbserver: ""
   username: ""
   password: ""
 
 odse:
-  dbname: "NBS_ODSE"
+  dburl: ""
 
 rdb:
-  dbname: "rdb_modern"
+  dburl: ""
 
 phcDatamartEnable: "false"
 
