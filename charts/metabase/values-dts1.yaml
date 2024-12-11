@@ -172,7 +172,7 @@ service:
     # Used to add custom annotations to the Service.
     # service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
 ingress:
-  enabled: true
+  enabled: false
   # The ingress class name, if you use multiple ingress controllers:
   className: "nginx"
     # Used to create Ingress record (should used with service.type: ClusterIP).
