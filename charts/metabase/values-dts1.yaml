@@ -181,6 +181,7 @@ ingress:
     # - metabase.domain.com
     # The ingress path. Useful to host metabase on a subpath, such as `/metabase`.
   path: /
+  pathType: Prefix
 #  labels:
     # Used to add custom labels to the Ingress
     # Useful if for example you have multiple Ingress controllers and
