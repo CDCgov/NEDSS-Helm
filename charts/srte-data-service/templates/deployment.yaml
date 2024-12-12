@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "data-processing-service.fullname" . }}
+  name: {{ include "srte-data-service.fullname" . }}
   labels:
-    {{- include "data-processing-service.labels" . | nindent 4 }}
+    {{- include "srte-data-service.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "data-processing-service.selectorLabels" . | nindent 6 }}
+      {{- include "srte-data-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "data-processing-service.selectorLabels" . | nindent 8 }}
+        {{- include "srte-data-service.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "data-processing-service.serviceAccountName" . }}
+      serviceAccountName: {{ include "srte-data-service.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -38,22 +38,6 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
-            - name: RC_CLIENT_ID
-              value: {{ .Values.keycloak.clientId }}
-            - name: RC_CLIENT_SECRET
-              value: {{ .Values.keycloak.clientSecret }}
-            - name: RC_URL
-              value: {{ .Values.dataingestion.uri }}
-            - name: RC_EP_TOKEN
-              value: /rti/api/auth/token
-            - name: RC_EP_CACHE_STR
-              value: /rti/srte/cache/string
-            - name: RC_EP_CACHE_CONTAIN
-              value: rti/srte/cache/contain
-            - name: RC_EP_CACHE_OBJ
-              value: /rti/srte/cache/object
-            - name: EP_CACHE_LOCALID
-              value: /rti/odse/localId
             - name: NBS_DBSERVER
               value: {{ .Values.jdbc.dbserver }}
             - name: NBS_DBUSER
@@ -62,8 +46,10 @@ spec:
               value: {{ .Values.jdbc.password }}
             - name: NBS_AUTH_USER
               value: {{ .Values.nbs.authuser }}
-            - name: KAFKA_BOOTSTRAP_SERVER
-              value: {{ .Values.kafka.cluster }}
+            - name: RTI_CACHE_AUTH_URI
+              value: {{ .Values.authUri }}
+            - name: RTI_CACHE_SERVER_HOST
+              value: {{ .Values.ingressHost }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "dts"
+env: "feature"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.0fa1b46
+  tag: 1.0.1-SNAPSHOT.f9cb49e
 
 imagePullSecrets: []
 nameOverride: ""
@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: app.dts1.nbspreview.com
+  - secretName: app.feature.nbspreview.com
     hosts:
-    - app.dts1.nbspreview.com
+    - app.feature.nbspreview.com
 
 # Kubernetes resource limits
 resources:
@@ -45,7 +45,7 @@ resources:
     cpu: "1000m"      
   requests:
     memory: "1Gi"  
-    cpu: "500m"    
+    cpu: "500m"      
 
 autoscaling:
   enabled: false
@@ -59,7 +59,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.dts1.nbspreview.com"
+ingressHost: "app.feature.nbspreview.com"
 
 jdbc:
   dbserver: ""
@@ -73,11 +73,4 @@ kafka:
   cluster: ""
 
 log:
-  path: "/usr/share/dataprocessing/data"
-
-dataingestion:
-  uri: ""
-
-keycloak:
-  clientId: ""
-  clientSecret: ""
+  path: "/usr/share/srtedataservice/data"
