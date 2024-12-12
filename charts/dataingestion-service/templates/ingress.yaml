@@ -67,11 +67,11 @@ spec:
                 name: ldfdata-reporting-service
                 port:
                   number: {{ .Values.reportingService.ldfdataReportingServicePort }}
-          - path: "/reporting/metabase-svc/"
+          - path: "/reporting/metabase"
             pathType: Prefix
             backend:
               service:
-                name: metabase-service
+                name: metabase
                 port:
                   number: {{ .Values.reportingService.metabaseServicePort }}
          {{- end }}
