@@ -74,3 +74,5 @@ kafka:
 
 log:
   path: "/usr/share/srtedataservice/data"
+
+authUri: ""
