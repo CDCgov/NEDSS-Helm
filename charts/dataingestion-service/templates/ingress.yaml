@@ -67,6 +67,13 @@ spec:
                 name: ldfdata-reporting-service
                 port:
                   number: {{ .Values.reportingService.ldfdataReportingServicePort }}
+          - path: "/reporting/metabase-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: metabase-service
+                port:
+                  number: {{ .Values.reportingService.metabaseServicePort }}
          {{- end }}
          {{- if eq .Values.dataprocessingService.enabled "true" }}
           - path: "/rti/"
