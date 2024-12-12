@@ -71,7 +71,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: metabase
+                name: metabase-service
                 port:
                   number: {{ .Values.reportingService.metabaseServicePort }}
          {{- end }}
