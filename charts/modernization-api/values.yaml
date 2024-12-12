@@ -111,8 +111,8 @@ ui:
     # The embedded API key, when blank the Smarty API will not be invoked.
     key:
   analytics:
-    # The host name of the PostHog server to send analytics to, when blank it will default to https://us.posthog.com
-    host:
+    # The host name of the PostHog server to send analytics to
+    host: "https://us.i.posthog.com"
     # The PostHog project key to associate frontend analytics with, when blank analytics will not be enabled
     key:
   # feature flag configurations for modernized ui
