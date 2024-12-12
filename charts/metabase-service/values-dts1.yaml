@@ -19,8 +19,8 @@ image:
 
 # Override MAX Pool connections defaults
 extraenv: 
-  app_db_max_conn_pool: 100
-  jdbc_db_max_conn_pool: 100
+  app_db_max_conn_pool: 50
+  jdbc_db_max_conn_pool: 50
 
 # Config Jetty web server
 listen:
