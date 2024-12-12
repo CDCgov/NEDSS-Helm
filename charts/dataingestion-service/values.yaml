@@ -48,6 +48,10 @@ nndService:
   enabled: "true"
   port: 8081
 
+srtedataService:
+  enabled: "true"
+  port: 8084
+
 ingress:
   enabled: true
   className: "nginx"
