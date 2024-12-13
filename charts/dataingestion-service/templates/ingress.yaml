@@ -86,7 +86,7 @@ spec:
                 port:
                   number: {{ .Values.srtedataService.port }}
           {{- end }} 
-          {{- if eq .Values.srtedataService.enabled "true" }}
+          {{- if eq .Values.nndService.enabled "true" }}
           - path: "/extraction/"
             pathType: Prefix
             backend:
