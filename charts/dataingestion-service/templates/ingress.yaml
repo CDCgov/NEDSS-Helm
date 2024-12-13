@@ -78,7 +78,7 @@ spec:
                   number: {{ .Values.dataprocessingService.port }}
           {{- end }} 
           {{- if eq .Values.srtedataService.enabled "true" }}
-          - path: "/rti/"
+          - path: "/data/"
             pathType: Prefix
             backend:
               service:

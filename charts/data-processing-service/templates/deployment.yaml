@@ -45,15 +45,15 @@ spec:
             - name: RC_URL
               value: {{ .Values.dataingestion.uri }}
             - name: RC_EP_TOKEN
-              value: /rti/api/auth/token
+              value: /data/api/auth/token
             - name: RC_EP_CACHE_STR
-              value: /rti/srte/cache/string
+              value: /data/srte/cache/string
             - name: RC_EP_CACHE_CONTAIN
-              value: rti/srte/cache/contain
+              value: /data/srte/cache/contain
             - name: RC_EP_CACHE_OBJ
-              value: /rti/srte/cache/object
+              value: /data/srte/cache/object
             - name: EP_CACHE_LOCALID
-              value: /rti/odse/localId
+              value: /data/odse/localId
             - name: NBS_DBSERVER
               value: {{ .Values.jdbc.dbserver }}
             - name: NBS_DBUSER
