@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "dts"
+env: "dts1"
 
 image:
   repository: ""
