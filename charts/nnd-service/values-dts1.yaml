@@ -5,7 +5,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.4cc2338
+  tag: 1.0.1-SNAPSHOT.1ea06c9
 
 imagePullSecrets: []
 nameOverride: ""
@@ -19,7 +19,7 @@ serviceAccount:
 podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
-  prometheus.io/port: "8081"
+  prometheus.io/port: "8098"
 
 podSecurityContext: {}
 
@@ -27,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8081
+  port: 8085
   httpsPort: 443
 
 # Kubernetes resource limits

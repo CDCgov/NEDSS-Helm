@@ -27,16 +27,8 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8082
+  port: 8084
   httpsPort: 443
-
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.feature.nbspreview.com
-    hosts:
-    - app.feature.nbspreview.com
 
 # Kubernetes resource limits
 resources:
@@ -59,7 +51,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.feature.nbspreview.com"
+ingressHost: "dataingestion.feature.nbspreview.com"
 
 jdbc:
   dbserver: ""
@@ -74,3 +66,5 @@ kafka:
 
 log:
   path: "/usr/share/srtedataservice/data"
+
+authUri: ""

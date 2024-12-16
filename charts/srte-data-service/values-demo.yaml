@@ -27,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8082
+  port: 8084
   httpsPort: 443
 
 ingress:
@@ -68,3 +68,5 @@ kafka:
 
 log:
   path: "/usr/share/srtedataservice/data"
+
+authUri: ""
