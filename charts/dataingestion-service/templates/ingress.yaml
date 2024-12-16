@@ -67,8 +67,8 @@ spec:
                 name: ldfdata-reporting-service
                 port:
                   number: {{ .Values.reportingService.ldfdataReportingServicePort }}
-         {{- end }}
-         {{- if eq .Values.dataprocessingService.enabled "true" }}
+          {{- end }}
+          {{- if eq .Values.dataprocessingService.enabled "true" }}
           - path: "/rti/"
             pathType: Prefix
             backend:
@@ -76,16 +76,7 @@ spec:
                 name: data-processing-service
                 port:
                   number: {{ .Values.dataprocessingService.port }}
-          {{- end }} 
-          {{- if eq .Values.srtedataService.enabled "true" }}
-          - path: "/data/"
-            pathType: Prefix
-            backend:
-              service:
-                name: srte-data-service
-                port:
-                  number: {{ .Values.srtedataService.port }}
-          {{- end }} 
+          {{- end }}
           {{- if eq .Values.nndService.enabled "true" }}
           - path: "/extraction/"
             pathType: Prefix
