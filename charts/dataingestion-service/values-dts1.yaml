@@ -5,7 +5,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.af89f53
+  tag: 1.0.1-SNAPSHOT.4a248b6
 
 imagePullSecrets: []
 nameOverride: ""
@@ -38,7 +38,6 @@ reportingService:
   observationReportingServicePort: 8094
   postProcessingReportingServicePort: 8095
   ldfdataReportingServicePort: 8097
-  metabaseServicePort: 8190
 
 dataprocessingService:
   enabled: "true"
@@ -46,7 +45,11 @@ dataprocessingService:
 
 nndService:
   enabled: "true"
-  port: 8081
+  port: 8085
+
+srtedataService:
+  enabled: "true"
+  port: 8084
 
 ingress:
   enabled: true

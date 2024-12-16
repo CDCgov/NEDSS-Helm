@@ -6,7 +6,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
-  tag: "v1.1.8"
+  tag: "v1.1.9"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,7 +39,6 @@ reportingService:
   observationReportingServicePort: 8094
   postProcessingReportingServicePort: 8095
   ldfdataReportingServicePort: 8097
-  metabaseServicePort: 8190
 
 dataprocessingService:
   enabled: "true"
@@ -48,6 +47,10 @@ dataprocessingService:
 nndService:
   enabled: "true"
   port: 8081
+
+srtedataService:
+  enabled: "true"
+  port: 8084
 
 ingress:
   enabled: true
