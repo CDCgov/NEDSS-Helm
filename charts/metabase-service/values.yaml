@@ -156,16 +156,16 @@ ingress:
   enabled: true
   className: "nginx"
   hosts:
-    - app.dts1.nbspreview.com
+    - metabase.dts1.nbspreview.com
   path: /
   pathType: Prefix
 
   tls:
-    - secretName: app.dts1.nbspreview.com
+    - secretName: metabase.dts1.nbspreview.com
       hosts:
-        - app.dts1.nbspreview.com
+        - metabase.dts1.nbspreview.com
 
-ingressHost: app.dts1.nbspreview.com
+ingressHost: metabase.dts1.nbspreview.com
 
 route:
   enabled: false

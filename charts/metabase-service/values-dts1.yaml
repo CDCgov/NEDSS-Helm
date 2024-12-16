@@ -175,7 +175,7 @@ ingress:
   enabled: true
   className: "nginx"
   hosts:
-    - app.dts1.nbspreview.com
+    - metabase.dts1.nbspreview.com
     # - metabase.domain.com
   path: /
   pathType: Prefix
@@ -186,12 +186,12 @@ ingress:
 
   tls:
     # Secrets must be manually created in the namespace.
-    - secretName: app.dts1.nbspreview.com
+    - secretName: metabase.dts1.nbspreview.com
       hosts:
-        - app.dts1.nbspreview.com
+        - metabase.dts1.nbspreview.com
     #     - metabase.domain.com
 
-ingressHost: app.dts1.nbspreview.com
+ingressHost: metabase.dts1.nbspreview.com
 
 route:
   enabled: false
