@@ -67,8 +67,8 @@ spec:
                 name: ldfdata-reporting-service
                 port:
                   number: {{ .Values.reportingService.ldfdataReportingServicePort }}
-          {{- end }}
-          {{- if eq .Values.dataprocessingService.enabled "true" }}
+         {{- end }}
+         {{- if eq .Values.dataprocessingService.enabled "true" }}
           - path: "/rti/"
             pathType: Prefix
             backend:
