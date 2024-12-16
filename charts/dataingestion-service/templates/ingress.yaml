@@ -86,10 +86,10 @@ spec:
                 port:
                   number: {{ .Values.nndService.port }}
           {{- end }}  
-         - path: "/data/"
-           pathType: Prefix
-           backend:
-             service:
-               name: srte-data-service
-               port:
-                 number: {{ .Values.srtedataService.port }}
+          - path: "/data/"
+            pathType: Prefix
+            backend:
+              service:
+                name: srte-data-service
+                port:
+                  number: 8084
