@@ -19,7 +19,7 @@ serviceAccount:
 podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
-  prometheus.io/port: "8098"
+  prometheus.io/port: "8081"
 
 podSecurityContext: {}
 
@@ -27,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8085
+  port: 8081
   httpsPort: 443
 
 # Kubernetes resource limits
