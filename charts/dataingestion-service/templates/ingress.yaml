@@ -71,7 +71,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: metabase-service
+                name: metabase
                 port:
                   number: {{ .Values.reportingService.metabaseServicePort }}
          {{- end }}
@@ -84,21 +84,21 @@ spec:
                 port:
                   number: {{ .Values.dataprocessingService.port }}
           {{- end }} 
-{{/*          {{- if eq .Values.srtedataService.enabled "true" }}*/}}
-{{/*          - path: "/rti/"*/}}
-{{/*            pathType: Prefix*/}}
-{{/*            backend:*/}}
-{{/*              service:*/}}
-{{/*                name: srte-data-service*/}}
-{{/*                port:*/}}
-{{/*                  number: {{ .Values.srtedataService.port }}*/}}
-{{/*          {{- end }} */}}
-{{/*          {{- if eq .Values.srtedataService.enabled "true" }}*/}}
-{{/*          - path: "/extraction/"*/}}
-{{/*            pathType: Prefix*/}}
-{{/*            backend:*/}}
-{{/*              service:*/}}
-{{/*                name: nnd-service*/}}
-{{/*                port:*/}}
-{{/*                  number: {{ .Values.nndService.port }}*/}}
-{{/*          {{- end }}  */}}
+          {{- if eq .Values.srtedataService.enabled "true" }}
+          - path: "/rti/"
+            pathType: Prefix
+            backend:
+              service:
+                name: srte-data-service
+                port:
+                  number: {{ .Values.srtedataService.port }}
+          {{- end }}
+          {{- if eq .Values.srtedataService.enabled "true" }}
+          - path: "/extraction/"
+            pathType: Prefix
+            backend:
+              service:
+                name: nnd-service
+                port:
+                  number: {{ .Values.nndService.port }}
+          {{- end }}

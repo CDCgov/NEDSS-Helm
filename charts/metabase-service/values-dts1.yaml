@@ -161,7 +161,7 @@ readinessProbe:
   periodSeconds: 5
 
 service:
-  name: metabase-service
+  name: metabase
   type: ClusterIP
   externalPort: 8190
   internalPort: 3000
