@@ -79,5 +79,6 @@ dataingestion:
   uri: ""
 
 keycloak:
-  clientId: ""
-  clientSecret: ""
+  srte:
+    clientId: ""
+    clientSecret: ""
