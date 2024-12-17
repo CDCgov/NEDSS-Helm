@@ -74,5 +74,6 @@ dataingestion:
 
 
 keycloak:
-  clientId: ""
-  clientSecret: ""
+  srte:
+    clientId: ""
+    clientSecret: ""
