@@ -86,10 +86,12 @@ spec:
                 port:
                   number: {{ .Values.nndService.port }}
           {{- end }}  
+          {{- if eq .Values.srtedataService.enabled "true" }}
           - path: "/data/"
             pathType: Prefix
             backend:
               service:
                 name: srte-data-service
                 port:
-                  number: 8084
+                  number: {{ .Values.srtedataService.port }}
+          {{- end }}  
