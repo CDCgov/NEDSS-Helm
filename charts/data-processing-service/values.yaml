@@ -76,3 +76,12 @@ java:
     xms: "1024m"
     xmx: "2048m"
 
+# FIXME: the remaining values will be used in next release, not used for
+# 7.8.0 - cmoss
+dataingestion:
+  uri: "EXAMPLE_DI_URI"
+
+keycloak:
+  srte:
+    clientId: "EXAMPLE_SRTE_CLIENT_ID"
+    clientSecret: "EXAMPLE_SRTE_CLIENT_SECRET"
