@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: app.EXAMPLE_HOST
+  - secretName: "app.EXAMPLE_DOMAIN"
     hosts:
-    - app.EXAMPLE_HOST
+    - app.EXAMPLE_DOMAIN
 
 # Kubernetes resource limits
 resources: {}
@@ -53,18 +53,19 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.EXAMPLE_HOST"
+ingressHost: "app.EXAMPLE_DOMAIN"
 
 jdbc:
-  dbserver: ""
-  username: ""
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  username: "EXAMPLE_DB_USER"
+  password: "EXAMPLE_DB_USER_PASSWORD"
 
 nbs:
-  authuser: ""
+  authuser: "EXAMPLE_NBS_AUTHUSER"
 
 kafka:
-  cluster: ""
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+
 
 log:
   path: "/usr/share/dataprocessing/data"
@@ -74,6 +75,4 @@ java:
   memory:
     xms: "1024m"
     xmx: "2048m"
-
-
 
