@@ -73,7 +73,7 @@ connect:
       "transforms": "dropPrefix",
       "transforms.dropPrefix.regex": "cdc\\.NBS_SRTE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
-      "transforms.dropPrefix.replacement": "nbs_$1",
+      "transforms.dropPrefix.replacement": "nrt_srte_$1",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
       "value.converter.schemas.enable": "true",
     }
