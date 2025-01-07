@@ -28,3 +28,5 @@ spec:
           value: "{{ .Values.env.DISABLED_SCHEDULED_TASKS }}"
         - name: JAVA_MEMORY
           value: "{{ .Values.env.JAVA_MEMORY }}"
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
