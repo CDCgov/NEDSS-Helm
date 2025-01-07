@@ -26,3 +26,5 @@ spec:
           value: "{{ .Values.env.DATABASE_ENDPOINT }}"
         - name: DISABLED_SCHEDULED_TASKS
           value: "{{ .Values.env.DISABLED_SCHEDULED_TASKS }}"
+        - name: JAVA_MEMORY
+          value: "{{ .Values.env.JAVA_MEMORY }}"
