@@ -76,7 +76,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      volumes:
-      - name: dc-api-persistent-storage
-        persistentVolumeClaim:
-          claimName: {{ include "data-compare-api-service.fullname" . }}-dc-api-pvc

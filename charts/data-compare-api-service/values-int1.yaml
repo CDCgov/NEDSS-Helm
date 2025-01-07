@@ -27,10 +27,17 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8081
+  port: 8085
   httpsPort: 443
 
-resources: {}
+# Kubernetes resource limits
+resources:
+  limits:
+    memory: "2Gi"
+    cpu: "1000m"
+  requests:
+    memory: "1Gi"
+    cpu: "500m"
 
 autoscaling:
   enabled: false
@@ -55,10 +62,3 @@ authUri: ""
 
 log:
   path: "/usr/share/datacompareapi/data"
-
-pvc:
-  dcPvClaim:
-    storageClass: efs-datacompareapi
-    storageRequest: 20Gi
-
-efsFileSystemId: ""

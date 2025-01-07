@@ -27,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8081
+  port: 8086
   httpsPort: 443
 
 
@@ -45,34 +45,17 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.EXAMPLE_DOMAIN"
+ingressHost: "data.EXAMPLE_DOMAIN"
 
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
-  dbserver: "EXAMPLE_DB_ENDPOINT"
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  dbserver: ""
+  username: ""
+  password: ""
 
 #authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
-authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
+authUri: ""
 
 log:
   path: "/usr/share/datacompareprocessor/data"
-
-pvc:
-  dcPvClaim:
-    storageClass: efs-datacompareprocessor
-    storageRequest: 20Gi
-
-efsFileSystemId: "EXAMPLE_EFS_ID"
-
-cloudProvider: aws
-
-#Azure PVC Settings#
-azure:
-  files:
-    resourceGroupName: 
-    storageAccountName: 
-    storageClass: azurefile-csi-private-datacompare
-    storageRequest: 20Gi
