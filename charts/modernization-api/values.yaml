@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: "v1.2.3"
+  tag: "v1.2.6"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -111,8 +111,8 @@ ui:
     # The embedded API key, when blank the Smarty API will not be invoked.
     key:
   analytics:
-    # The host name of the PostHog server to send analytics to, when blank it will default to https://us.posthog.com
-    host:
+    # The host name of the PostHog server to send analytics to
+    host: "https://us.i.posthog.com"
     # The PostHog project key to associate frontend analytics with, when blank analytics will not be enabled
     key:
   # feature flag configurations for modernized ui
@@ -131,9 +131,12 @@ ui:
       table:
         enabled: true
   patient:
-    add:
-      # when enabled, allows access to the modernized New patient feature to create a patient with basic demographic data
+    profile:
+      # Enables access to the modernized patient profile
       enabled: false
-      # when enabled, allows access to the modernized New patient - extended feature to create a patient with all available demographic data
+    add:
+      # Enables access to the modernized New patient feature to create a patient with basic demographic data
+      enabled: false
+      # Enables access to the modernized New patient - extended feature to create a patient with all available demographic data
       extended:
         enabled: true

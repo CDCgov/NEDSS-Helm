@@ -38,8 +38,6 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
-            - name: DB_URL
-              value: {{ .Values.jdbc.dbserver }}
             - name: DB_USERNAME
               value: {{ .Values.jdbc.username }}
             - name: DB_PASSWORD
@@ -48,10 +46,10 @@ spec:
               value: {{ .Values.kafka.cluster }}
             - name: DA_LOG_PATH
               value: {{ .Values.log.path }}
-            - name: DB_ODSE
-              value: {{ .Values.odse.dbname }}
-            - name: DB_RDB
-              value: {{ .Values.rdb.dbname }}
+            - name: DB_ODSE_URL
+              value: {{ .Values.odse.dburl }}
+            - name: DB_RDB_URL
+              value: {{ .Values.rdb.dburl }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

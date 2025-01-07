@@ -3,9 +3,9 @@ replicaCount: 1
 env: "demo"
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-reporting-service/organization-reporting-service"
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.3"
+  tag: "v1.0.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: app.EXAMPLE_HOST
+  - secretName: "app.EXAMPLE_DOMAIN"
     hosts:
-    - app.EXAMPLE_HOST
+    - app.EXAMPLE_DOMAIN
 
 # Kubernetes resource limits
 resources: {}
@@ -53,20 +53,35 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.EXAMPLE_HOST"
+ingressHost: "app.EXAMPLE_DOMAIN"
 
 jdbc:
-  dbserver: ""
-  username: ""
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  username: "EXAMPLE_DB_USER"
+  password: "EXAMPLE_DB_USER_PASSWORD"
 
 nbs:
-  authuser: ""
+  authuser: "EXAMPLE_NBS_AUTHUSER"
 
 kafka:
-  cluster: ""
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+
 
 log:
   path: "/usr/share/dataprocessing/data"
 
+# max support 2g heap memory
+java:
+  memory:
+    xms: "1024m"
+    xmx: "2048m"
 
+# FIXME: the remaining values will be used in next release, not used for
+# 7.8.0 - cmoss
+dataingestion:
+  uri: "EXAMPLE_DI_URI"
+
+keycloak:
+  srte:
+    clientId: "EXAMPLE_SRTE_CLIENT_ID"
+    clientSecret: "EXAMPLE_SRTE_CLIENT_SECRET"

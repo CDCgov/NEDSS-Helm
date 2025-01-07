@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.945deb7
+  tag: 1.0.1-SNAPSHOT.5f79e0d
 
 imagePullSecrets: []
 nameOverride: ""
@@ -116,6 +116,8 @@ ui:
       table:
         enabled: true
   patient:
+    profile:
+      enabled: true
     add:
       enabled: true
       extended:

@@ -1,0 +1,64 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: '{{ include "sas-linux.name" . }}-cron-etl'
+spec:
+  schedule: '{{ .Values.etl.schedule }}'
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: '{{ include "sas-linux.name" . }}-cron-etl'
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: IfNotPresent
+            env:
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+            command:
+            - /bin/bash
+            - -c 
+            - cd;               
+              export PATH="$PATH:/opt/mssql-tools18/bin";
+              echo "Updating DB connections";
+              sed -i -e "s/<TRACE_Yes_No>/$db_trace_on/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<DB_HOST>/$db_host/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<NBS_ODSE_USER>/$odse_user/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<NBS_ODSE_PASS>/$odse_pass/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<NBS_RDB_USER>/$rdb_user/g" /home/SAS/.odbc.ini;
+              sed -i -e "s/<NBS_RDB_PASS>/$rdb_pass/g" /home/SAS/.odbc.ini;
+              cp /home/SAS/.odbc.ini /etc/odbc.ini;
+              chmod 766 /etc/odbc.ini;
+              export ODBCINI=/etc/odbc.ini       
+              date;              
+              echo 'Running PHCMartETL.sh';
+              $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/BatchFiles/PHCMartETL.sh;
+              ls -ltr $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log;
+              echo '---- START PHCMartETL.log ERRORS ----';
+              cat $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log/PHCMartETL.log | grep -i "error";
+              echo '---- END PHCMartETL.log ERRORS ----';            
+              date;
+              echo 'Running MasterEtl.sh';
+              $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/BatchFiles/MasterEtl.sh;
+              ls -ltr $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log;
+              echo '---- START MasterETL1.lst ERRORS ----';
+              cat $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log/MasterETL1.lst | grep -i "error";
+              echo '---- END MasterETL1.lst ERRORS ----';
+              echo '---- START Drop_Create_Tables.log ERRORS ----';
+              cat $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log/Drop_Create_Tables.log | grep -i "error";
+              echo '---- END Drop_Create_Tables.log ERRORS ----';
+              echo '---- START MasterETL1.log ERRORS ----'; 
+              cat $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log/MasterETL1.log | grep -i "error";
+              echo '---- END MasterETL1.log ERRORS ----';
+              echo '---- START MasterEtl2.log ERRORS ----'; 
+              cat $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log/MasterEtl2.log | grep -i "error";
+              echo '---- END MasterEtl2.log ERRORS ----';
+              echo '---- START SSIS.log ERRORS ----'; 
+              cat $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log/SSIS.log | grep -i "error";
+              echo '---- END SSIS.log ERRORS ----';
+              echo '---- START DynamicDatamart.log ERRORS ----';
+              cat $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log/DynamicDatamart.log | grep -i "error";
+              echo '---- END DynamicDatamart.log ERRORS ----';  
+          restartPolicy: Never

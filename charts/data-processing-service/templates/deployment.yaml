@@ -38,6 +38,22 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
+            - name: RC_CLIENT_ID
+              value: {{ .Values.keycloak.srte.clientId }}
+            - name: RC_CLIENT_SECRET
+              value: {{ .Values.keycloak.srte.clientSecret }}
+            - name: RC_URL
+              value: {{ .Values.dataingestion.uri }}
+            - name: RC_EP_TOKEN
+              value: /data/api/auth/token
+            - name: RC_EP_CACHE_STR
+              value: /data/srte/cache/string
+            - name: RC_EP_CACHE_CONTAIN
+              value: /data/srte/cache/contain
+            - name: RC_EP_CACHE_OBJ
+              value: /data/srte/cache/object
+            - name: EP_CACHE_LOCALID
+              value: /data/odse/localId
             - name: NBS_DBSERVER
               value: {{ .Values.jdbc.dbserver }}
             - name: NBS_DBUSER

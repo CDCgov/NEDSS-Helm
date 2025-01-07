@@ -5,7 +5,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.98e1233
+  tag: 1.0.1-SNAPSHOT.d54ef47
 
 imagePullSecrets: []
 nameOverride: ""
@@ -56,15 +56,14 @@ affinity: {}
 ingressHost: "app.dts1.nbspreview.com"
 
 jdbc:
-  dbserver: ""
   username: ""
   password: ""
 
 odse:
-  dbname: "NBS_ODSE"
+  dburl: ""
 
 rdb:
-  dbname: "NBS_RDB"
+  dburl: ""
 
 kafka:
   cluster: ""

@@ -6,7 +6,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.945deb7
+  tag: 1.0.1-SNAPSHOT.1f9fbb2
 
 gatewayService:
   ports:
@@ -24,6 +24,10 @@ landing:
 
 welcome:
   enabled: "true"
+
+patient:
+  profile:
+    enabled: true
 
 pageBuilder:
   enabled: "true"

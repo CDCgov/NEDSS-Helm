@@ -4,7 +4,7 @@ env: "prod"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/organization-reporting-service"
-  tag: "v1.0.6"
+  tag: "v1.0.8"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -54,15 +54,12 @@ affinity: {}
 
 ingressHost: "app.EXAMPLE_DOMAIN"
 
-
-# dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
-  dbserver: "EXAMPLE_DB_ENDPOINT"
   username: "EXAMPLE_DB_USER"
   password: "EXAMPLE_DB_USER_PASSWORD"
 
 odse:
-  dbname: "EXAMPLE_DB_NAME"
+  dburl: "EXAMPLE_DB_URL"
 
 kafka:
   cluster: "EXAMPLE_KAFKA_CLUSTER"
