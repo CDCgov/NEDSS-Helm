@@ -1,0 +1,60 @@
+replicaCount: 1
+
+env: "prod"
+
+image:
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-compare-api-service"
+  pullPolicy: IfNotPresent
+  tag: "v1.0.7"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: "/actuator/prometheus"
+  prometheus.io/port: "8098"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8085
+  httpsPort: 443
+
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: "app.EXAMPLE_DOMAIN"
+
+jdbc:
+  dbserver: ""
+  username: ""
+  password: ""
+
+authUri: ""
+
+log:
+  path: "/usr/share/datacompareapi/data"
+
+
