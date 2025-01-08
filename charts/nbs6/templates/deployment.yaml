@@ -18,6 +18,8 @@ spec:
       containers:
       - name: {{ .Release.Name }}-app
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        lifecycle:
+          {{- toYaml .Values.lifecycle | nindent 12 }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.targetPort }}
