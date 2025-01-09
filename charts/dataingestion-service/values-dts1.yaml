@@ -51,6 +51,10 @@ srtedataService:
   enabled: "true"
   port: 8084
 
+dataCompareService:
+  enabled: "true"
+  apiPort: 8085
+
 ingress:
   enabled: true
   className: "nginx"

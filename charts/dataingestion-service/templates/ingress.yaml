@@ -94,4 +94,13 @@ spec:
                 name: srte-data-service
                 port:
                   number: {{ .Values.srtedataService.port }}
-          {{- end }}  
+          {{- end }}
+          {{- if eq .Values.dataCompareService.enabled "true" }}
+          - path: "/comparison/"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-compare-api-service
+                port:
+                  number: {{ .Values.dataCompareService.apiPort }}
+          {{- end }} 
