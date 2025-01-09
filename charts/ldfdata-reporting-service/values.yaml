@@ -1,6 +1,7 @@
 replicaCount: 1
 
 env: "prod"
+timezone: "UTC"
 
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-reporting-service/ldfdata-reporting-service"

@@ -1,6 +1,7 @@
 replicaCount: 1
 
 env: "test1"
+timezone: "UTC"
 
 image:
   repository: ""

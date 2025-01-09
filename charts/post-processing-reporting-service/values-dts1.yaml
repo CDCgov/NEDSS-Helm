@@ -1,6 +1,7 @@
 replicaCount: 1
 
 env: "dts1"
+timezone: "UTC"
 
 image:
   repository: ""

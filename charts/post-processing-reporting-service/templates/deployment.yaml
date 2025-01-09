@@ -50,6 +50,8 @@ spec:
               value: {{ .Values.odse.dburl }}
             - name: DB_RDB_URL
               value: {{ .Values.rdb.dburl }}
+            - name: TZ
+              value: {{ .Values.timezone }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

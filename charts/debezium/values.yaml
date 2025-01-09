@@ -31,7 +31,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-connector-v071524"
+    group_id: "debezium-connector-v010925"
     topics_basename: "debezium-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -43,7 +43,7 @@ connect:
   # dbserver: "EXAMPLE_DB_ENDPOINT"
   
   sqlserverconnector: {
-    "name": "debezium-connector-v071524",
+    "name": "debezium-connector-v010925",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -89,7 +89,9 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-connector-v071524"
+      value: "debezium-connector-v010925"
+    - name: TZ
+      value: "UTC"
 
 ui:
   enabled: false
@@ -126,4 +128,6 @@ ui:
   env:
     - name: KAFKA_CONNECT_URIS
       value: "http://debezium-connect:8083"
+    - name: TZ
+      value: "UTC"
 
