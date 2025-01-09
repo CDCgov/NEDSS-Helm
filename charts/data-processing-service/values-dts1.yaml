@@ -82,3 +82,4 @@ keycloak:
   srte:
     clientId: ""
     clientSecret: ""
+timezone: ""

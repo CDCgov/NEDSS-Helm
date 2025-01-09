@@ -60,6 +60,8 @@ spec:
               value: {{ .Values.sftp.password }}
             - name: DI_SERVER_HOST
               value: {{ .Values.ingressHost }}
+            - name: SERVICE_TZ
+              value: {{ .Values.timezone}}
           volumeMounts:
           - mountPath: /usr/share/dataingestion/data
             name: di-persistent-storage     

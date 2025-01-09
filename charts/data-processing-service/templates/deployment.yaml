@@ -64,6 +64,8 @@ spec:
               value: {{ .Values.nbs.authuser }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
+            - name: SERVICE_TZ
+              value: {{ .Values.timezone}}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
