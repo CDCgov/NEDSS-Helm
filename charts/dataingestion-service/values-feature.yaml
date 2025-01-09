@@ -59,6 +59,9 @@ srtedataService:
   enabled: "true"
   port: 8084
 
+dataCompareService:
+  enabled: "true"
+  apiPort: 8085
 
 # Kubernetes resource limits
 resources: {}
