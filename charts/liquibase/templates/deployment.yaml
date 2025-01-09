@@ -37,6 +37,9 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+            - name: TZ
+              value: {{ .Values.timezone }}
           command:
             - "bash"
             - "-c"

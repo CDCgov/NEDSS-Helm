@@ -1,7 +1,7 @@
 replicaCount: 1
 
 env: "test"
-timezone: ""
+timezone: "America/Denver"
 
 image:
   repository: ""
