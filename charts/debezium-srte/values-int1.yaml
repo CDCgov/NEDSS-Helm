@@ -87,6 +87,8 @@ connect:
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
       value: "debezium-connector-v010925"
+    - name: TZ
+      value: "UTC"
 
 ui:
   enabled: false
@@ -124,5 +126,5 @@ ui:
     - name: KAFKA_CONNECT_URIS
       value: "http://debezium-connect:8083"
     - name: TZ
-      value: "America/Denver"
+      value: "UTC"
 

@@ -90,7 +90,7 @@ connect:
     - name: NAME
       value: "debezium-connector-v010925"
     - name: TZ
-      value: "America/Denver"
+      value: "UTC"
 
 ui:
   enabled: false
@@ -128,4 +128,6 @@ ui:
   env:
     - name: KAFKA_CONNECT_URIS
       value: "http://debezium-connect:8083"
+    - name: TZ
+      value: "UTC"
 

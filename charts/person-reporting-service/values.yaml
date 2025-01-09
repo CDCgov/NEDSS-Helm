@@ -1,7 +1,7 @@
 replicaCount: 1
 
 env: "prod"
-timezone: "America/Denver"
+timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/person-reporting-service"
