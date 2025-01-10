@@ -46,7 +46,7 @@ spec:
           '--nbs.gateway.welcome.enabled={{ ((.Values).welcome).enabled | default "false" }}',
           '--nbs.gateway.landing.base={{  ((.Values).landing).base | default "/nbs/login" }}'
         ]
-        command: ['java', '-jar', 'api.jar']
+        command: ['java', '-Duser.timezone={{ (.Values).timezone | default "UTC" }}', '-jar', 'api.jar']
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         ports:
         - containerPort: 8000
