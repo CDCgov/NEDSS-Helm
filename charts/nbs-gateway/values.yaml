@@ -50,6 +50,9 @@ nbsExternalName: app-classic.EXAMPLE_DOMAIN
 
 ingressHost: app.EXAMPLE_DOMAIN
 
+# The timezone to initialize the JVM with
+timezone: "UTC"
+
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
 modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
