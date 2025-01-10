@@ -10,6 +10,13 @@ controller:
     proxy-body-size: "8m"
     compute-full-forwarded-for: "true"
     use-forwarded-headers: "true"
+    upstream-keepalive-timeout: 300
+    proxy-send-timeout: 300
+    proxy-read-timeout: 300
+    proxy-connect-timeout: 300
+    client-body-timeout: 300
+    client-header-timeout: 300
+    keep-alive: 300
     #proxy-body-size: "0"
   ingressClassResource:
     enabled: true
