@@ -61,7 +61,7 @@ spec:
             - name: DI_SERVER_HOST
               value: {{ .Values.ingressHost }}
             - name: SERVICE_TZ
-              value: {{ .Values.timezone}}
+              value: {{ .Values.timezone | default "UTC" }}
           volumeMounts:
           - mountPath: /usr/share/dataingestion/data
             name: di-persistent-storage     
