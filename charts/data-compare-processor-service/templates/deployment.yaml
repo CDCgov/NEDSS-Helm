@@ -55,11 +55,11 @@ spec:
             - name: S3_BUCKET_NAME
               value: "BUCKET NAME"
             - name: S3_REGION
-              value: "AWS REGION"
+              value: {{ .Values.aws.s3.region | default ""}}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
             - name: ARN_ROLE
-              value: {{ .Values.aws.arn | default ""}}
+              value: {{ .Values.aws.s3.arn | default ""}}
 
           volumeMounts:
           - mountPath: /usr/share/datacompareservice/data
