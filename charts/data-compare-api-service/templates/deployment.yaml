@@ -58,6 +58,8 @@ spec:
               value: "AWS REGION"
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
+            - name: ARN_ROLE
+              value: {{ .Values.aws.arn | default ""}}
 
           volumeMounts:
           - mountPath: /usr/share/datacompareservice/data
