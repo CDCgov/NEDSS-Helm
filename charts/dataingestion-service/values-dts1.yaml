@@ -117,3 +117,5 @@ sftp:
   host: ""
   username: ""
   password: ""
+
+timezone: "America/Denver"
