@@ -17,6 +17,10 @@ ingress:
   class: nginx
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: Allow";
+      more_set_headers "Cross-Origin-Opener-Policy: same-origin";
   tls:
     - secretName: app-classic.example.com
       hosts:
