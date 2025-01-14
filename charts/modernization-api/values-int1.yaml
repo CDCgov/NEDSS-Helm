@@ -122,3 +122,5 @@ ui:
       enabled: true
       extended:
         enabled: true
+  deduplication:
+    enabled: true
