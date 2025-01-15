@@ -49,8 +49,12 @@ ingress:
               number: 8443
 
 resources: 
+  requests:
+    memory: 1Gi
+    cpu: 250m
   limits:
-    memory: "6Gi"
+    memory: 2Gi
+    cpu: 500m
 
 jvmheap:
   init: "4g"
