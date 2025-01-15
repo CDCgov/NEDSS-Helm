@@ -59,5 +59,12 @@ jdbc:
 
 authUri: ""
 
+kafka:
+  cluster: ""
+
+s3BucketName: ""
+
+s3Region: ""
+
 log:
   path: "/usr/share/datacompareprocessor/data"

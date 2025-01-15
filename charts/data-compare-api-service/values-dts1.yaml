@@ -67,7 +67,5 @@ s3BucketName: ""
 
 s3Region: ""
 
-s3Arn: ""
-
 log:
   path: "/usr/share/datacompareapi/data"

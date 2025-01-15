@@ -52,8 +52,6 @@ spec:
               value: {{ .Values.s3BucketName }}
             - name: S3_REGION
               value: {{ .Values.s3Region }}
-            - name: ARN_ROLE
-              value: {{ .Values.s3Arn }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}    
           resources:
