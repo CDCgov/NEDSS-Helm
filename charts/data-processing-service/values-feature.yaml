@@ -1,11 +1,11 @@
-replicaCount: 3
+replicaCount: 1
 
 env: "feature"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.d8c8e7f
+  tag: 1.0.1-SNAPSHOT.a93581e
 
 imagePullSecrets: []
 nameOverride: ""
