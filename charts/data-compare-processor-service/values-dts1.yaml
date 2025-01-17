@@ -62,9 +62,9 @@ authUri: ""
 kafka:
   cluster: ""
 
-s3BucketName: ""
-
-s3Region: ""
+s3:
+  region: ""
+  bucketName: ""
 
 log:
   path: "/usr/share/datacompareprocessor/data"

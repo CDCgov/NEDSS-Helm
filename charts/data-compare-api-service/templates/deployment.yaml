@@ -49,9 +49,9 @@ spec:
             - name: DC_AUTH_URI
               value: {{ .Values.authUri }}
             - name: S3_BUCKET_NAME
-              value: {{ .Values.s3BucketName }}
+              value: {{ .Values.s3.bucketName }}
             - name: S3_REGION
-              value: {{ .Values.s3Region }}
+              value: {{ .Values.s3.region }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}    
           resources:
