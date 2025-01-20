@@ -44,13 +44,27 @@ spec:
             - "bash"
             - "-c"
             - |
+              echo "Executing changelog in DB : {{ .Values.jdbc.data_ingest_url }}"
+              liquibase --changelog-file="{{ .Values.changelog.data_ingest }}" --searchPath="./" --url="{{ .Values.jdbc.data_ingest_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
+              echo "{{ .Values.changelog.data_ingest }} scripts : execution success!"
+
+              echo "Executing changelog in DB : {{ .Values.jdbc.msgoute_url }}"
+              liquibase --changelog-file="{{ .Values.changelog.msgoute }}" --searchPath="./" --url="{{ .Values.jdbc.msgoute_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
+              echo "{{ .Values.changelog.msgoute }} scripts : execution success!"
+
               echo "Executing changelog in DB : {{ .Values.jdbc.odse_db_url }}"
               liquibase --changelog-file="{{ .Values.changelog.odse }}" --searchPath="./" --url="{{ .Values.jdbc.odse_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
+              echo "{{ .Values.changelog.odse }} scripts : execution success!"
+
               echo "Executing changelog in DB : {{ .Values.jdbc.rdb_db_url }}"
               liquibase --changelog-file="{{ .Values.changelog.rdb }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
+              echo "{{ .Values.changelog.rdb }} scripts : execution success!"
+
               echo "Executing changelog in DB : {{ .Values.jdbc.rdb_modern_db_url }}"
               liquibase --changelog-file="{{ .Values.changelog.rdb_modern }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_modern_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
-              echo "Liquibase Update Complete"
+              echo "{{ .Values.changelog.rdb_modern }} scripts : execution success!"
+
+              echo "Liquibase Update Complete. All scripts: execution success! "
               echo "Sleep infinitely"
               sleep infinity
           resources:
