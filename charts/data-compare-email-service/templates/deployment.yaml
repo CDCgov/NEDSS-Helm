@@ -47,11 +47,7 @@ spec:
             - name: S3_BUCKET_NAME
               value: {{ .Values.s3.bucketName }}
             - name: S3_REGION
-              value: {{ .Values.s3.region }}              
-
-          volumeMounts:
-          - mountPath: /usr/share/datacompareservice/data
-            name: dc-email-persistent-storage     
+              value: {{ .Values.s3.region }}   
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
