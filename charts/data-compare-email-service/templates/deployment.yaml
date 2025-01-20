@@ -44,6 +44,10 @@ spec:
               value: {{ .Values.authUri }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
+            - name: S3_BUCKET_NAME
+              value: {{ .Values.s3.bucketName }}
+            - name: S3_REGION
+              value: {{ .Values.s3.region }}              
 
           volumeMounts:
           - mountPath: /usr/share/datacompareservice/data

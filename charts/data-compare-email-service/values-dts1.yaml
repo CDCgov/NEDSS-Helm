@@ -5,7 +5,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.4cc2338
+  tag: 1.0.1-SNAPSHOT.409219b
 
 imagePullSecrets: []
 nameOverride: ""
@@ -53,12 +53,14 @@ affinity: {}
 
 ingressHost: "dataingestion.dts1.nbspreview.com"
 
-jdbc:
-  dbserver: ""
-  username: ""
-  password: ""
-
 authUri: ""
+
+kafka:
+  cluster: ""
+
+s3:
+  region: ""
+  bucketName: ""
 
 log:
   path: "/usr/share/datacompareemail/data"
