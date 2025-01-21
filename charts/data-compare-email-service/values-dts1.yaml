@@ -64,3 +64,10 @@ s3:
 
 log:
   path: "/usr/share/datacompareemail/data"
+
+
+ses:
+  recipients: 
+    - ndduc1856@gmail.com
+    - uut6@cdc.gov
+    - mansi.shah@cdwg.com 

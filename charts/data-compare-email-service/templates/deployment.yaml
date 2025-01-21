@@ -48,6 +48,8 @@ spec:
               value: {{ .Values.s3.bucketName }}
             - name: S3_REGION
               value: {{ .Values.s3.region }}   
+            - name: RECIPIENT_EMAILS
+              value: {{ .Values.ses.recipients | join \",\" }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
