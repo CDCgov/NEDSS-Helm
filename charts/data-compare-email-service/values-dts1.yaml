@@ -1,11 +1,11 @@
-replicaCount: 0
+replicaCount: 1
 
 env: "dts1"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.cae7906
+  tag: 1.0.1-SNAPSHOT.28b2420
 
 imagePullSecrets: []
 nameOverride: ""
