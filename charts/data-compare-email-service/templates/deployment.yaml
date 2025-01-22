@@ -49,7 +49,7 @@ spec:
             - name: S3_REGION
               value: {{ .Values.s3.region }}   
             - name: RECIPIENT_EMAILS
-              value: {{ .Values.ses.recipients | join \",\" }}
+              value: {{ .Values.ses.recipients }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
