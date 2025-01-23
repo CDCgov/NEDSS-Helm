@@ -21,6 +21,7 @@ ingress:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Frame-Options: Allow";
       more_set_headers "Cross-Origin-Opener-Policy: same-origin";
+      more_set_headers "Cache-Control: max-age=1209600, immutable";
   tls:
     - secretName: app-classic.example.com
       hosts:
