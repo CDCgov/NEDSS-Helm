@@ -11,7 +11,10 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Frame-Options: Allow";
       more_set_headers "Cross-Origin-Opener-Policy: same-origin";
-      more_set_headers "Cache-Control: max-age=1209600, immutable";
+    nginx.ingress.kubernetes.io/location-snippet: |
+      location ~* \.(js|css|jpg|jpeg|png|gif|js|css|ico|swf)$ {
+                add_header Cache-Control "max-age=1209600, immutable";
+            }
     # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     # nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     # nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
@@ -27,34 +30,34 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:                 
-          # - path: "/auth/realms/nbs-users/"
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: keycloak
-          #       port:
-          #         name: http
-          # - path: "/auth/robots.txt"
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #       name: keycloak
-          #       port:
-          #         name: http         
-          # - path: "/auth/js/"
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: keycloak
-          #       port:
-          #         name: http  
-          # - path: "/auth/resources/"
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: keycloak
-          #       port:
-          #         name: http  
+          - path: "/auth/realms/nbs-users/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          - path: "/auth/robots.txt"
+            pathType: Exact
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http         
+          - path: "/auth/js/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http  
+          - path: "/auth/resources/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http  
           - path: /favicon.ico
             pathType: ImplementationSpecific
             backend:
