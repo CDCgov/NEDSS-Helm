@@ -61,6 +61,13 @@ spec:
           #       name: nbs-gateway-svc  #nbs-gateway-ext
           #       port:
           #         number: {{ .Values.service.gatewayPort }} #443
+          - path: "/nbs/login"
+            pathType: Exact
+            backend:
+              service:
+                name: nbs-gateway-svc
+                port:
+                  number: {{ .Values.service.gatewayPort }} #443
           - path: "/nbs/logged-out"
             pathType: Exact
             backend:
