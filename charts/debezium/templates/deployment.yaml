@@ -44,6 +44,9 @@ spec:
               mountPath: /etc/debezium/connector.json
               subPath: connector.json
             - name: config
+              mountPath: /etc/debezium/connector1.json
+              subPath: connector1.json
+            - name: config
               mountPath: /kafka/config/log4j.properties
               subPath: log4j.properties
             - name: config

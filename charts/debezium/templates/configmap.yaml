@@ -7,6 +7,8 @@ metadata:
 data:
   connector.json: |-
       {{- .Values.connect.sqlserverconnector| toPrettyJson | nindent 4 }}
+  connector1.json: |-
+      {{- .Values.connect.sqlserverconnector1| toPrettyJson | nindent 4 }}
 
   connect-distributed.properties: |
     group.id={{ .Values.connect.properties.group_id }}
