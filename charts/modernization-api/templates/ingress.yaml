@@ -27,34 +27,34 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:                 
-          - path: "/auth/realms/nbs-users/"
-            pathType: Prefix
-            backend:
-              service:
-                name: keycloak
-                port:
-                  name: http
-          - path: "/auth/robots.txt"
-            pathType: Exact
-            backend:
-              service:
-                name: keycloak
-                port:
-                  name: http         
-          - path: "/auth/js/"
-            pathType: Prefix
-            backend:
-              service:
-                name: keycloak
-                port:
-                  name: http  
-          - path: "/auth/resources/"
-            pathType: Prefix
-            backend:
-              service:
-                name: keycloak
-                port:
-                  name: http  
+          # - path: "/auth/realms/nbs-users/"
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: keycloak
+          #       port:
+          #         name: http
+          # - path: "/auth/robots.txt"
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name: keycloak
+          #       port:
+          #         name: http         
+          # - path: "/auth/js/"
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: keycloak
+          #       port:
+          #         name: http  
+          # - path: "/auth/resources/"
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: keycloak
+          #       port:
+          #         name: http  
           - path: /favicon.ico
             pathType: ImplementationSpecific
             backend:

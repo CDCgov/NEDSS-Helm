@@ -26,6 +26,13 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:
+          - path: "/auth/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
           - path: "/nbs/HomePage.do?method=loadHomePage"
             pathType: Exact
             backend:
