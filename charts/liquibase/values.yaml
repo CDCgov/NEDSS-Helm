@@ -77,6 +77,8 @@ jdbc:
   msgoute_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_msgoute;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   username: "EXAMPLE_DB_USER"
   password: "EXAMPLE_DB_USER_PASSWORD"
+  srte_username: ""
+  srte_password: ""
 
 odse:
   dbname: "NBS_ODSE"
