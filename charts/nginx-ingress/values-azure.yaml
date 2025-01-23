@@ -7,9 +7,10 @@ controller:
     prometheus.io/port: "10254"
     prometheus.io/path: /metrics
   config:
-    proxy-body-size: "8m"
+    proxy-body-size: "12m"
     compute-full-forwarded-for: "true"
     use-forwarded-headers: "true"
+    allow-snippet-annotations: "true"
     upstream-keepalive-timeout: 300
     proxy-send-timeout: 300
     proxy-read-timeout: 300
@@ -17,7 +18,7 @@ controller:
     client-body-timeout: 300
     client-header-timeout: 300
     keep-alive: 300
-    #proxy-body-size: "0"
+    client-body-buffer-size: 10m
   ingressClassResource:
     enabled: true
     default: false
