@@ -26,6 +26,13 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:
+          - path: "/nbs/HomePage.do?method=loadHomePage"
+            pathType: Exact
+            backend:
+              service:
+                name: nbs-gateway-svc
+                port:
+                  number: {{ .Values.service.gatewayPort }} #443
           - path: "/login?logout"
             pathType: Exact
             backend:
