@@ -29,7 +29,7 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:          
-          - path: "/.+\.(css)$"
+          - path: '/.+\.(css)$'
             pathType: ImplementationSpecific
             backend:
               service:
