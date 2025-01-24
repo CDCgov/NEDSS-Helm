@@ -81,7 +81,8 @@ spec:
             name: kc-persistent-storage      
         ports:
         - containerPort: 8080
-        resources: {}
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
 #      - name: file-transfer-sidecar
 #        image: alpine:latest
 #        command: ["sh", "-c", "sleep infinity"]
