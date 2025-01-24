@@ -13,8 +13,7 @@ metadata:
       more_set_headers "X-Frame-Options: Allow";
       more_set_headers "Cross-Origin-Opener-Policy: same-origin";       
       location ~ /.+\.(css)$ {
-        add_header Cache-Control "max-age=1209600, immutable";
-        set $proxy_host $proxy_upstream_name;
+        add_header Cache-Control "max-age=1209600, immutable";        
         set $service_name "nbs-gateway-svc";
       }
     # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
