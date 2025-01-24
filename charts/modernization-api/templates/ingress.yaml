@@ -13,7 +13,7 @@ metadata:
       more_set_headers "X-Frame-Options: Allow";
       more_set_headers "Cross-Origin-Opener-Policy: same-origin";       
       location ~ /.+\.css$ {
-                add_header Cache-Control "max-age=1209600, immutable";
+                add_header Cache-Control: "max-age=1209600, immutable";
             }
     # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     # nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
