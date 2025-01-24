@@ -12,7 +12,7 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Frame-Options: Allow";
       more_set_headers "Cross-Origin-Opener-Policy: same-origin";       
-      location ~* /\.(css)$/ {
+      location ~* /\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$/ {
                 add_header Cache-Control "max-age=1209600, immutable";
             }
     # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
