@@ -11,7 +11,8 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Frame-Options: Allow";
-      more_set_headers "Cross-Origin-Opener-Policy: same-origin";    
+      more_set_headers "Cross-Origin-Opener-Policy: same-origin";
+      more_set_headers "Sec-Fetch-Mode: same-origin";    
       location ~ /(.+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2))$ {
                 add_header Cache-Control "max-age=1209600, immutable";
             }
