@@ -30,7 +30,7 @@ spec:
       http:
         paths:
           - path: "/.(nbs).+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$"
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: nbs-gateway-svc
