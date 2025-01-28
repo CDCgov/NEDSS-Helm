@@ -1,0 +1,66 @@
+replicaCount: 1
+
+env: "fts1"
+
+image:
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/deduplication-api"
+  pullPolicy: IfNotPresent
+  tag: "v1.2.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podSecurityContext: {}
+
+podAnnotations: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8083
+  httpsPort: 443
+
+ingress:
+  enabled: true
+  className: "nginx"
+  tls:
+    - secretName: dataingestion.fts1.nbspreview.com
+      hosts:
+        - dataingestion.fts1.nbspreview.com
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: dataingestion.fts1.nbspreview.com
+
+jdbc:
+  deduplication:
+    dbserver: # jdbc:sqlserver://localhost:2433;database=deduplication;
+    username:
+    password:
+  nbs:
+    dbserver: # jdbc:sqlserver://localhost:2433;database=nbs_odse;
+    username:
+    password:
+  mpi:
+    dbserver: # jdbc:sqlserver://localhost:2433;database=mpi;
+    username:
+    password:

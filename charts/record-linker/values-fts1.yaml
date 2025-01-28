@@ -1,0 +1,55 @@
+replicaCount: 1
+
+env: "fts1"
+
+image:
+  repository: "ghcr.io/cdcgov/recordlinker:v25.1.0"
+  pullPolicy: IfNotPresent
+  tag: "v1.2.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podSecurityContext: {}
+
+podAnnotations: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+  httpsPort: 443
+
+ingress:
+  enabled: true
+  className: "nginx"
+  tls:
+    - secretName: dataingestion.fts1.nbspreview.com
+      hosts:
+        - dataingestion.fts1.nbspreview.com
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: dataingestion.fts1.nbspreview.com
+
+jdbc:
+  mpi: # "mssql+pyodbc://user:password@host:port/mpi?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes"

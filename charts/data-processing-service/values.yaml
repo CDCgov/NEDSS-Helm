@@ -34,9 +34,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: "app.EXAMPLE_DOMAIN"
-    hosts:
-    - app.EXAMPLE_DOMAIN
+    - secretName: "app.EXAMPLE_DOMAIN"
+      hosts:
+        - app.EXAMPLE_DOMAIN
 
 # Kubernetes resource limits
 resources: {}
@@ -66,6 +66,10 @@ nbs:
 kafka:
   cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
+features:
+  modernizedMatching:
+    enabled: false
+    url:
 
 log:
   path: "/usr/share/dataprocessing/data"
