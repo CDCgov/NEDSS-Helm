@@ -69,12 +69,12 @@ spec:
                     curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
-                      --data '@/etc/debezium/connector1.json' \
+                      --data '@/etc/debezium/connector.json' \
                       "http://127.0.0.1:8083/connectors/";
                     curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
-                      --data '@/etc/debezium/connector2.json' \
+                      --data '@/etc/debezium/connector1.json' \
                       "http://127.0.0.1:8083/connectors/";
 
 
