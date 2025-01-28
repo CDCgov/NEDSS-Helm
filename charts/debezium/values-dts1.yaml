@@ -82,7 +82,7 @@ connect:
   }
 
   sqlserverconnector1: {
-    "name": "debezium-connector-v012825",
+    "name": "debezium-connector-srte-v012825",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
