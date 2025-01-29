@@ -104,6 +104,8 @@ ui:
     key: ""
   analytics:
     key: ""
+  defaults:
+    sizing: "small"
   search:
     events:
       enabled: true

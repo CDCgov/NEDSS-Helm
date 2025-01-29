@@ -118,6 +118,9 @@ ui:
     host: "https://us.i.posthog.com"
     # The PostHog project key to associate frontend analytics with, when blank analytics will not be enabled
     key:
+  defaults:
+    # The default sizing of components
+    sizing: "medium"
   # feature flag configurations for modernized ui
   search:
     events:

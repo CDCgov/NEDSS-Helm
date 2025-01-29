@@ -67,7 +67,8 @@ spec:
             '--nbs.ui.features.deduplication.enabled={{ (((.Values).ui).deduplication).enabled | default "false" }}',
             '--nbs.ui.settings.smarty.key={{ (((.Values).ui).smarty).key }}',
             '--nbs.ui.settings.analytics.host={{ (((.Values).ui).analytics).host }}',
-            '--nbs.ui.settings.analytics.key={{ (((.Values).ui).analytics).key }}'
+            '--nbs.ui.settings.analytics.key={{ (((.Values).ui).analytics).key }}',
+            '--nbs.ui.settings.defaults.sizing={{ (((.Values).ui).defaults).sizing | default "medium" }}'
             ]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
