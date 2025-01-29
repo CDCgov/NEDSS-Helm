@@ -118,6 +118,10 @@ connect:
       "transforms.convertTimezone.converted.timezone": "UTC",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
       "value.converter.schemas.enable": "true",
+      "errors.tolerance": "all",
+      "errors.log.enable": "true",
+      "errors.deadletterqueue.topic.name": "debezium-deadletter",
+      "errors.deadletterqueue.context.headers.enable": "true"
     }
   }
 
