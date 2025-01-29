@@ -58,6 +58,9 @@ spec:
               value: {{ .Values.jdbc.mpi.username }}
             - name: MPI_DB_PASSWORD
               value: {{ .Values.jdbc.mpi.password }}
+            
+            - name: RECORD_LINKER_URL
+              value: {{ .Values.recordLinker.url }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

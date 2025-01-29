@@ -64,3 +64,5 @@ jdbc:
     dbserver: # jdbc:sqlserver://localhost:2433;database=mpi;
     username:
     password:
+recordLinker:
+  url: # http://localhost:8080
