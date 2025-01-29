@@ -106,6 +106,7 @@ connect:
       "schema.history.internal.kafka.topic": "srte-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092",
       "tasks.max": "1",
+      "offset.storage.cleanup.policy": "compact",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
       "topic.creation.default.partitions": 10,
