@@ -41,7 +41,7 @@ connect:
     bootstrap_server: "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector: {
-    "name": "debezium-connector-v013025",
+    "name": "debezium-odse-connector-v013025",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -82,7 +82,7 @@ connect:
   }
 
   sqlserverconnector1: {
-    "name": "debezium-connector-v013025",
+    "name": "debezium-srte-connector-v013025",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
