@@ -1,11 +1,13 @@
 replicaCount: 1
 
-env: "demo"
+env: "prod"
 
 image:
-  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-cache"
+  #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/srte-data-service"
+  #repository: "quay.io/us-cdcgov/cdc-nbs-modernization/srte-data-service"
+  repository: ""
   pullPolicy: IfNotPresent
-  tag: "v1.0.0"
+  tag: 1.0.1-SNAPSHOT.f646f56
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,16 +32,14 @@ service:
   port: 8084
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.EXAMPLE_HOST
-    hosts:
-    - app.EXAMPLE_HOST
-
 # Kubernetes resource limits
-resources: {}
+resources:
+  limits:
+    memory: "2Gi"
+    cpu: "1000m"
+  requests:
+    memory: "1Gi"
+    cpu: "500m"
 
 autoscaling:
   enabled: false
@@ -53,27 +53,21 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.EXAMPLE_HOST"
+ingressHost: "data.EXAMPLE_DOMAIN"
 
+# dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
-  dbserver: ""
-  username: ""
-  password: ""
-
-nbs:
-  authuser: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  username: "EXAMPLE_DB_USER"
+  password: "EXAMPLE_DB_USER_PASSWORD"
 
 kafka:
-  cluster: ""
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+
+nbs:
+  authuser: "EXAMPLE_NBS_AUTHUSER"
 
 log:
   path: "/usr/share/srtedataservice/data"
 
-# max support 2g heap memory
-java:
-  memory:
-    xms: "1024m"
-    xmx: "2048m"
-
-
-
+authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
