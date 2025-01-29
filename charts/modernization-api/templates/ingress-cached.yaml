@@ -13,12 +13,6 @@ metadata:
       more_set_headers "X-Frame-Options: Allow";
       more_set_headers "Cross-Origin-Opener-Policy: same-origin";       
       more_set_headers "Cache-Control: max-age=1209600, immutable";  
-
-    # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    # nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-    # nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
-    # nginx.ingress.kubernetes.io/use-regex: "true"
-    #nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
@@ -29,7 +23,7 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:          
-          - path: '/.+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$'
+          - path: '/(?!auth).+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$'
             pathType: ImplementationSpecific
             backend:
               service:
@@ -37,4 +31,3 @@ spec:
                 port:
                   number: {{ .Values.service.gatewayPort }} #443
 {{- end }}
-
