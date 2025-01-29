@@ -31,14 +31,14 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-connector-v013025"
-    topics_basename: "debezium-connector"
+    group_id: "debezium-odse-srte-connector-v013025"
+    topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
     sql_server_agent_override: false
     sql_server_agent_status: ""
-    bootstrap_server: "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092"
+    bootstrap_server: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector: {
     "name": "debezium-odse-connector-v013025",
@@ -51,7 +51,7 @@ connect:
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
       "database.server.name": "odse",
-      "database.history.kafka.bootstrap.servers": "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092",
+      "database.history.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -63,7 +63,7 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092",
+      "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out",
       "tasks.max": "1",
       "topic.prefix": "cdc",
@@ -92,7 +92,7 @@ connect:
       "database.dbname": "nbs_srte",
       "database.names": "nbs_srte",
       "database.server.name": "srte",
-      "database.history.kafka.bootstrap.servers": "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092",
+      "database.history.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -104,7 +104,7 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "initial",
       "schema.history.internal.kafka.topic": "srte-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092",
+      "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
       "tasks.max": "1",
       "offset.storage.cleanup.policy": "compact",
       "topic.prefix": "cdc",
@@ -124,13 +124,13 @@ connect:
 
   env:
     - name: BOOTSTRAP_SERVERS
-      value: "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092"
+      value: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
     - name: LOG_LEVEL
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-connector-v013025"
+      value: "debezium-odse-srte-connector-v013025"
     - name: TZ
       value: "UTC"
 
