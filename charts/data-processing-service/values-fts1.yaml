@@ -72,6 +72,11 @@ nbs:
 kafka:
   cluster: ""
 
+features:
+  modernizedMatching:
+    enabled: true
+    url: http://deduplication-api.default.svc.cluster.local:8083
+
 log:
   path: "/usr/share/dataprocessing/data"
 
