@@ -82,3 +82,6 @@ keycloak:
   srte:
     clientId: ""
     clientSecret: ""
+
+
+kafkaThread: "1"
