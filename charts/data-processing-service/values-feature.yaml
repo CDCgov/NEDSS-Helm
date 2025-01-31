@@ -1,4 +1,4 @@
-replicaCount: 5
+replicaCount: 1
 
 env: "feature"
 
@@ -82,5 +82,3 @@ keycloak:
   srte:
     clientId: ""
     clientSecret: ""
-
-kafkaThread: "10"
