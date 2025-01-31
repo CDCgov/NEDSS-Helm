@@ -66,6 +66,8 @@ spec:
               value: {{ .Values.kafka.cluster }}
             - name: SERVICE_TZ
               value: {{ .Values.timezone | default "UTC"}}
+            - name: KAFKA_THREAD
+              value: "{{ .Values.kafkaThread}}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

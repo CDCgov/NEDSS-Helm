@@ -1,11 +1,11 @@
-replicaCount: 10
+replicaCount: 5
 
 env: "feature"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT-RTI-PERFORM-1.0.2.511598c
+  tag: 1.0.1-SNAPSHOT-RTI-PERFORM-1.0.3.976e50f
 
 imagePullSecrets: []
 nameOverride: ""
@@ -82,3 +82,5 @@ keycloak:
   srte:
     clientId: ""
     clientSecret: ""
+
+kafkaThread: "10"
