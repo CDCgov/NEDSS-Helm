@@ -82,8 +82,5 @@ keycloak:
   srte:
     clientId: ""
     clientSecret: ""
-<<<<<<< HEAD
 
 kafkaThread: 10
-=======
->>>>>>> origin
