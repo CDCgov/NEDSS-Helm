@@ -41,8 +41,11 @@ spec:
             {{- toYaml .Values.connect.resources | nindent 12 }}
           volumeMounts:
             - name: config
-              mountPath: /etc/debezium/connector.json
-              subPath: connector.json
+              mountPath: /etc/debezium/connector-odse.json
+              subPath: connector-odse.json
+            - name: config
+              mountPath: /etc/debezium/connector-srte.json
+              subPath: connector-srte.json
             - name: config
               mountPath: /kafka/config/log4j.properties
               subPath: log4j.properties
@@ -57,7 +60,23 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: [ '/bin/sh', '-c', 'sleep 60; curl --request POST --header "Accept:application/json" --header "Content-Type:application/json" "http://127.0.0.1:8083/connectors/" --data "@/etc/debezium/connector.json"' ]
+                #command: [ '/bin/sh', '-c', 'sleep 60; curl --request POST --header "Accept:application/json" --header "Content-Type:application/json" "http://127.0.0.1:8083/connectors/" --data "@/etc/debezium/connector.json"' ]
+                command:
+                  - "/bin/sh"
+                  - "-c"
+                  - |
+                    sleep 60;
+                    curl --request POST \
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-odse.json' \
+                      "http://127.0.0.1:8083/connectors/";
+                    curl --request POST \
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-srte.json' \
+                      "http://127.0.0.1:8083/connectors/";
+
 
       {{- with .Values.connect.nodeSelector }}
       nodeSelector:
