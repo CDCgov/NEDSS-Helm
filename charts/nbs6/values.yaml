@@ -30,7 +30,26 @@ ingress:
     - host: app-classic.example.com
       paths:
         - path: /
-          pathType: Prefix
+          pathType: Prefix  
+  annotationsCached:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: Allow";
+      more_set_headers "Cross-Origin-Opener-Policy: same-origin";
+      more_set_headers "Cache-Content: max-age=1209600, immutable";
+  tlsCached:
+    - secretName: app-classic.example.com
+      hosts:
+        - app-classic.example.com
+  rulesCached:
+    - host: app-classic.example.com
+      paths:
+        - path: '/(?!auth).+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$'
+          pathType: ImplementationSpecific
+
+
 
 resources:
   requests:
