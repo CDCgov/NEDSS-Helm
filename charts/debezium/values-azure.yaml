@@ -42,7 +42,7 @@ connect:
     sql_server_agent_status: "select dbo.IsSqlAgentRunning()"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-srte-connector-v013125",
+    "name": "debezium-odse-connector-v013125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net",
@@ -81,7 +81,7 @@ connect:
     }
   }
   sqlserverconnector_srte: {
-    "name": "debezium-odse-srte-connector-v013125",
+    "name": "debezium-srte-connector-v013125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net",

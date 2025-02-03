@@ -41,7 +41,7 @@ connect:
     bootstrap_server: "b-1.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092,b-2.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-srte-connector-v013125",
+    "name": "debezium-odse-connector-v013125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-test.nbspreview.com",
@@ -82,7 +82,7 @@ connect:
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-odse-srte-connector-v013125",
+    "name": "debezium-srte-connector-v013125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-test.nbspreview.com",
