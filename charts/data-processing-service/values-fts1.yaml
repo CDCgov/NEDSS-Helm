@@ -34,18 +34,18 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: app.fts1.nbspreview.com
-    hosts:
-    - app.fts1.nbspreview.com
+    - secretName: app.fts1.nbspreview.com
+      hosts:
+        - app.fts1.nbspreview.com
 
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "2Gi"  
-    cpu: "1000m"      
+    memory: "2Gi"
+    cpu: "1000m"
   requests:
-    memory: "1Gi"  
-    cpu: "500m"    
+    memory: "1Gi"
+    cpu: "500m"
 
 autoscaling:
   enabled: false
@@ -75,7 +75,7 @@ kafka:
 features:
   modernizedMatching:
     enabled: true
-    url: http://deduplication-api.default.svc.cluster.local:8083
+    url: http://deduplication-api.default.svc.cluster.local:8083/api/deduplication
 
 log:
   path: "/usr/share/dataprocessing/data"
