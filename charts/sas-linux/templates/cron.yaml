@@ -12,6 +12,7 @@ spec:
           - name: '{{ include "sas-linux.name" . }}-cron-etl'
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
             imagePullPolicy: IfNotPresent
+            concurrencyPolicy: Forbid
             env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
