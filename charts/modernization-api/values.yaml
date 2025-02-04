@@ -146,6 +146,10 @@ ui:
       # Enables access to the modernized New patient - extended feature to create a patient with all available demographic data
       extended:
         enabled: true
+    search:
+      filters:
+        # Enables access to modernized Patient search filters
+        enabled: false
   deduplication:
     # Enable access to Deduplication screens
     enabled: false
