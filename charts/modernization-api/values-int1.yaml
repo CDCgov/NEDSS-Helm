@@ -128,4 +128,4 @@ ui:
       filters:
         enabled: true
   deduplication:
-    enabled: true
+    enabled: false
