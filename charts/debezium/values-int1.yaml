@@ -38,7 +38,8 @@ connect:
     default_cleanup: "compact"
     sql_server_agent_override: false
     sql_server_agent_status: ""
-    bootstrap_server: "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092"
+    bootstrap_server: "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,
+                       b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v013125",
@@ -63,8 +64,11 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092",
-      "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out",
+      "schema.history.internal.kafka.bootstrap.servers": "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,
+                                                          b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092",
+      "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, 
+                             dbo.state_defined_field_data, dbo.Notification, dbo.Interview, 
+                             dbo.CN_transportq_out, dbo.Place",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
@@ -92,7 +96,8 @@ connect:
       "database.dbname": "nbs_srte",
       "database.names": "nbs_srte",
       "database.server.name": "srte",
-      "database.history.kafka.bootstrap.servers": "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092",
+      "database.history.kafka.bootstrap.servers": "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,
+                                                   b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -104,8 +109,19 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "initial",
       "schema.history.internal.kafka.topic": "srte-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092",
-      "table.include.list": "dbo.Anatomic_site_code, dbo.City_code_value, dbo.Cntycity_code_value, dbo.Code_value_clinical, dbo.Code_value_general, dbo.Codeset, dbo.Codeset_Group_Metadata, dbo.Country_code, dbo.Country_Code_ISO, dbo.Country_XREF, dbo.ELR_XREF, dbo.IMRDBMapping, dbo.Investigation_code, dbo.Jurisdiction_code, dbo.Jurisdiction_participation, dbo.Lab_coding_system, dbo.Lab_result, dbo.Lab_result_Snomed, dbo.Lab_test, dbo.Labtest_loinc, dbo.Labtest_Progarea_Mapping, dbo.Language_code, dbo.LDF_page_set, dbo.LOINC_code, dbo.Loinc_condition, dbo.Loinc_snomed_condition, dbo.NAICS_Industry_code, dbo.Occupation_code, dbo.Participation_type, dbo.Program_area_code, dbo.Race_code, dbo.Snomed_code, dbo.Specimen_source_code, dbo.Standard_XREF, dbo.State_code, dbo.State_county_code_value, dbo.State_model, dbo.TotalIDM, dbo.Treatment_code, dbo.Unit_code, dbo.Zip_code_value, dbo.Zipcnty_code_value",
+      "schema.history.internal.kafka.bootstrap.servers": "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,
+                                                          b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092",
+      "table.include.list": "dbo.Anatomic_site_code, dbo.City_code_value, dbo.Cntycity_code_value, 
+                             dbo.Code_value_clinical, dbo.Code_value_general, dbo.Codeset, dbo.Codeset_Group_Metadata, 
+                             dbo.Country_code, dbo.Country_Code_ISO, dbo.Country_XREF, dbo.ELR_XREF, dbo.IMRDBMapping,
+                             dbo.Investigation_code,  dbo.Jurisdiction_code, dbo.Jurisdiction_participation,
+                             dbo.Lab_coding_system, dbo.Lab_result, dbo.Lab_result_Snomed, dbo.Lab_test, dbo.Labtest_loinc, 
+                             dbo.Labtest_Progarea_Mapping, dbo.Language_code, dbo.LDF_page_set, dbo.LOINC_code,
+                             dbo.Loinc_condition, dbo.Loinc_snomed_condition, dbo.NAICS_Industry_code, dbo.Occupation_code, 
+                             dbo.Participation_type, dbo.Program_area_code, dbo.Race_code, dbo.Snomed_code, 
+                             dbo.Specimen_source_code, dbo.Standard_XREF, dbo.State_code, dbo.State_county_code_value,
+                             dbo.State_model, dbo.TotalIDM, dbo.Treatment_code, dbo.Unit_code, dbo.Zip_code_value,
+                             dbo.Zipcnty_code_value",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
@@ -118,13 +134,14 @@ connect:
       "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
       "transforms.convertTimezone.converted.timezone": "UTC",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-      "value.converter.schemas.enable": "true",
+      "value.converter.schemas.enable": "false",
     }
   }
 
   env:
     - name: BOOTSTRAP_SERVERS
-      value: "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092"
+      value: "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,
+              b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092"
     - name: LOG_LEVEL
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
