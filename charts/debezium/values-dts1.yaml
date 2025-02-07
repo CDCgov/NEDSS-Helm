@@ -135,13 +135,13 @@ connect:
       "transforms.dropPrefix.replacement": "nrt_srte_$1",
       "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
       "transforms.convertTimezone.converted.timezone": "UTC",
-      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-      "value.converter.schemas.enable": "true",
       "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
       "transforms.convertTimestamps.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
       "transforms.convertTimestamps.target.type": "string",
       "transforms.convertTimestamps.format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
       "transforms.convertTimestamps.unix.precision": "milliseconds",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "true",
     }
   }
 
