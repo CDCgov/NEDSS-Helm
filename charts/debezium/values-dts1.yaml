@@ -128,8 +128,8 @@ connect:
       "topic.creation.default.replication.factor": 2,
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
-      "time.precision.mode": "connect",
-      "transforms": "dropPrefix, convertTimezone",
+#      "time.precision.mode": "connect",
+      "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps",
       "transforms.dropPrefix.regex": "cdc\\.NBS_SRTE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nrt_srte_$1",
@@ -137,6 +137,11 @@ connect:
       "transforms.convertTimezone.converted.timezone": "UTC",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
       "value.converter.schemas.enable": "true",
+      "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+      "transforms.convertTimestamps.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+      "transforms.convertTimestamps.target.type": "string",
+      "transforms.convertTimestamps.format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+      "transforms.convertTimestamps.unix.precision": "milliseconds",
     }
   }
 
