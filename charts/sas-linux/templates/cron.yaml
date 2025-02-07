@@ -4,15 +4,15 @@ metadata:
   name: '{{ include "sas-linux.name" . }}-cron-etl'
 spec:
   schedule: '{{ .Values.etl.schedule }}'
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
-        spec:
+        spec:          
           containers:
           - name: '{{ include "sas-linux.name" . }}-cron-etl'
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-            imagePullPolicy: IfNotPresent
-            concurrencyPolicy: Forbid
+            imagePullPolicy: IfNotPresent            
             env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
