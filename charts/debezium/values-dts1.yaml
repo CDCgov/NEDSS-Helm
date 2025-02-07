@@ -1,6 +1,6 @@
 nameOverride: ""
 fullnameOverride: ""
-log_level: DEBUG
+log_level: INFO
 connect:
   replicaCount: 1
   imagePullSecrets: [ ]
@@ -150,7 +150,7 @@ connect:
       value: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
               b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
     - name: LOG_LEVEL
-      value: "DEBUG"
+      value: "INFO"
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
