@@ -135,7 +135,7 @@ connect:
       "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
       "transforms.convertTimezone.converted.timezone": "UTC",
       "transforms.ReplaceField.type": "org.apache.kafka.connect.transforms.ReplaceField$Value",
-      "transforms.ReplaceField.exclude":"source",
+      "transforms.ReplaceField.exclude":"source,transaction,op,ts_ms,ts_us,ts_ns",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
       "value.converter.schemas.enable": "true",
     }
