@@ -66,8 +66,7 @@ sqlServerConnector: {
     "errors.deadletterqueue.context.headers.enable": "true",
     "errors.tolerance": "all",
     "errors.log.enable": "true",
-    "errors.log.include.messages": "true",
-    "db.timezone": "UTC"
+    "errors.log.include.messages": "true"
   }
 }
 
