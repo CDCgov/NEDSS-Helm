@@ -75,10 +75,21 @@ connect:
       "topic.creation.default.replication.factor": 2,
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
-      "transforms": "dropPrefix, convertTimezone",
+      "transforms": "dropPrefix, convertTimezone, unwrapConfig",
+      "predicates": "isConfigTable",
+
       "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nbs_$1",
+
+      "transforms.unwrapConfig.type": "io.debezium.transforms.ExtractNewRecordState",
+      "transforms.unwrapConfig.predicate": "isConfigTable",
+      "transforms.unwrapConfig.drop.tombstones": "false",
+
+      "predicates.isConfigTable.type": "org.apache.kafka.connect.transforms.predicates.TopicNameMatches",
+      "predicates.isConfigTable.pattern": "nbs_NBS_configuration",
+
+
       "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
       "transforms.convertTimezone.converted.timezone": "UTC",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
