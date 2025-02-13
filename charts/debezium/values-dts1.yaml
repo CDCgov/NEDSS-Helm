@@ -31,7 +31,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v013125"
+    group_id: "debezium-odse-srte-connector-v021325"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -42,7 +42,7 @@ connect:
                        b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v013125",
+    "name": "debezium-odse-connector-v021325",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -84,8 +84,8 @@ connect:
       "transforms.dropPrefixConfig.regex": "cdc\\.NBS_ODSE\\.dbo\\.NBS_configuration",
       "transforms.dropPrefixConfig.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefixConfig.replacement": "nrt_NBS_configuration",
-      "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
-      "transforms.unwrap.predicate": "isConfigTable",
+      "transforms.unwrapConfig.type": "io.debezium.transforms.ExtractNewRecordState",
+      "transforms.unwrapConfig.predicate": "isConfigTable",
       "transforms.convertTimestampsConfig_add_time.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
       "transforms.convertTimestampsConfig_add_time.target.type": "string",
       "transforms.convertTimestampsConfig_add_time.format": "yyyy-MM-dd HH:mm:ss.SSS",
@@ -111,7 +111,7 @@ connect:
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v013125",
+    "name": "debezium-srte-connector-v021325",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -172,7 +172,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v013125"
+      value: "debezium-odse-srte-connector-v021325"
     - name: TZ
       value: "UTC"
 
