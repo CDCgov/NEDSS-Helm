@@ -72,3 +72,5 @@ kafka:
 log:
   path: "/usr/share/postprocessingreporting/data"
 
+featureFlag:
+  eventMetricEnable: "false"

@@ -66,7 +66,10 @@ odse:
 rdb:
   dburl: "EXAMPLE_DB_URL"
 
-phcDatamartEnable: "false"
+featureFlag:
+  phcDatamartEnable: "false"
+  bmirdCaseEnable: "false"
+  contactRecordEnable: "false"
 
 kafka:
   cluster: "EXAMPLE_KAFKA_CLUSTER"
