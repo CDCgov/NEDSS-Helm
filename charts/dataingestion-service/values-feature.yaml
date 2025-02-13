@@ -1,11 +1,11 @@
-replicaCount: 1
+replicaCount: 2
 
 env: "feature"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.f646f56
+  tag: 1.0.1-SNAPSHOT-DI-PERFORM-1.0.2.55af263
 
 imagePullSecrets: []
 nameOverride: ""
@@ -61,7 +61,14 @@ srtedataService:
 
 
 # Kubernetes resource limits
-resources: {}
+resources:
+  limits:
+    memory: "800Mi"  
+    cpu: "1000m"      
+  requests:
+    memory: "600Mi"  
+    cpu: "500m"    
+
 
 autoscaling:
   enabled: false
@@ -114,3 +121,5 @@ sftp:
   host: ""
   username: ""
   password: ""
+
+kafkaConcurrency: "10"
