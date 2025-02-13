@@ -110,5 +110,6 @@ ui:
         enabled: true
   patient:
     add:
+      enabled: true
       extended:
         enabled: true
