@@ -63,11 +63,11 @@ srtedataService:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "700Mi"  
-    cpu: "600m"      
+    memory: "1200Mi"  
+    cpu: "1200m"      
   requests:
-    memory: "600Mi"  
-    cpu: "500m"    
+    memory: "1000Mi"  
+    cpu: "1000m"    
 
 
 autoscaling:
@@ -122,4 +122,4 @@ sftp:
   username: ""
   password: ""
 
-kafkaConcurrency: "10"
+kafkaConcurrency: "20"
