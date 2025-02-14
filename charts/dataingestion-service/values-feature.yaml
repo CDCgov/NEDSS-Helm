@@ -63,8 +63,8 @@ srtedataService:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "800Mi"  
-    cpu: "1000m"      
+    memory: "700Mi"  
+    cpu: "600m"      
   requests:
     memory: "600Mi"  
     cpu: "500m"    
