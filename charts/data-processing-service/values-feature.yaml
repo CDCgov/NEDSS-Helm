@@ -40,9 +40,9 @@ ingress:
 
 # Kubernetes resource limits
 resources:
-  limits:
-    memory: "800Mi"  
-    cpu: "1000m"      
+  # limits:
+  #   memory: "800Mi"  
+  #   cpu: "1000m"      
   requests:
     memory: "600Mi"  
     cpu: "500m"    
