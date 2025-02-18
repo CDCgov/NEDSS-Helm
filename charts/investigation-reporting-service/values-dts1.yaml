@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.9a69bf2
+  tag: 1.0.1-SNAPSHOT.a603820
 
 imagePullSecrets: []
 nameOverride: ""
@@ -66,7 +66,10 @@ odse:
 rdb:
   dburl: ""
 
-phcDatamartEnable: "true"
+featureFlag:
+  phcDatamartEnable: "true"
+  bmirdCaseEnable: "true"
+  contactRecordEnable: "true"
 
 kafka:
   cluster: ""
