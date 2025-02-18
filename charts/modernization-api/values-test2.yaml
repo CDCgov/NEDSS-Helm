@@ -113,3 +113,6 @@ ui:
       enabled: true
       extended:
         enabled: true
+    search:
+      filters:
+        enabled: true
