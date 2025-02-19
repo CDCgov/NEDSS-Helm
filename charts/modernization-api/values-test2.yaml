@@ -115,4 +115,4 @@ ui:
         enabled: true
     search:
       filters:
-        enabled: true
+        enabled: false
