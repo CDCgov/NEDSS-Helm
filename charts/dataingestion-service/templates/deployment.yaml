@@ -62,6 +62,8 @@ spec:
               value: {{ .Values.ingressHost }}
             - name: SERVICE_TZ
               value: {{ .Values.timezone | default "UTC" }}
+            - name: KAFKA_CONCURRENCY
+              value: "{{ .Values.kafkaConcurrency}}"
           volumeMounts:
           - mountPath: /usr/share/dataingestion/data
             name: di-persistent-storage     
