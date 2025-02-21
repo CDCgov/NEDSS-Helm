@@ -114,3 +114,5 @@ sftp:
   username: ""
   password: ""
 
+
+kafkaConcurrency: "1"
