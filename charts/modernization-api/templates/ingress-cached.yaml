@@ -23,7 +23,7 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:          
-          - path: '/(?!auth).+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$'
+          - path: '/(?!auth|ecr-viewer|orchestration).+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$'   #|!orchestration|!ecr-viewer
             pathType: ImplementationSpecific
             backend:
               service:
