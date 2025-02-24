@@ -69,7 +69,8 @@ connect:
                                                           b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, 
                              dbo.state_defined_field_data, dbo.Notification, dbo.Interview, 
-                             dbo.CN_transportq_out, dbo.Place, dbo.NBS_configuration",
+                             dbo.CN_transportq_out, dbo.Place, dbo.NBS_configuration, dbo.CT_contact, dbo.Auth_user",
+
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
