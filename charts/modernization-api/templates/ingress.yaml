@@ -28,6 +28,13 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:                 
+          - path: "/ecr-viewer/"
+            pathType: Prefix
+            backend:
+              service:
+                name: dibbs-ecr-viewer
+                port:
+                  number: 3000
           - path: "/auth/realms/nbs-users/"
             pathType: Prefix
             backend:
