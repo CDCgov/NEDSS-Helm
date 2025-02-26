@@ -7,16 +7,16 @@ This repository contains helm chart to deploy ArgoCD applications related to the
 ### Install ArgoCD Applications
 
 - If deploying in Azure, move Azure folder in templates directory
-- helm install nbs .\argocd -f .\argocd\<ADD-VALUES-FILE>.yaml --debug
+- `helm install nbs .\argocd -f .\argocd\<ADD-VALUES-FILE>.yaml --debug`
 
 ### Upgrade ArgoCD Applications
 
-- helm upgrade nbs .\argocd-7.8.2 -f .\argocd\<ADD-VALUES-FILE>.yaml --debug
+- `helm upgrade nbs .\argocd-7.8.2 -f .\argocd\<ADD-VALUES-FILE>.yaml --debug`
 
 ### Delete ArgoCD Applications
 
-- helm uninstall nbs
-- kubectl delete applications --all -n argocd
+- `helm uninstall nbs`
+- `kubectl delete applications --all -n argocd`
 
 
 ## Notes
