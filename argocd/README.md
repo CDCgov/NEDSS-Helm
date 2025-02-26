@@ -20,6 +20,7 @@ This repository contains helm chart to deploy ArgoCD applications related to the
 
 
 ## Notes
+- Update Chart.yaml version, matching release tag when committing according to a release
 - Deleting helm will not delete ArgoCD Applications.
     - If helm upgrade is failing or stuck, delete and deploy helm. Since ArgoCD Application are not deleted, previous Application will be updated.
 - job-wait.yaml adds a sleep in order to orchestrate service deployment
