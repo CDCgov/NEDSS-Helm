@@ -1,0 +1,70 @@
+### NOTE ###
+# This Values file should contain redundant variables, secrets, environment related changes. 
+# Any release related parameters should stay in service template
+
+### Deployment Process ###
+# Pull from specific NEDS-HELM release
+# Add this values files in ArgoCD Helm Chart folder
+# Verify you are one level up Helm Chart folder
+# Command for new deployment:  helm install nbs .\<RELEASE-VERSION> -f .\<RELEASE-VERSION>\values.yaml
+# Command for updating deployment: helm upgrade nbs .\<RELEASE-VERSION> -f .\<RELEASE-VERSION>\values.yaml
+# NOTES
+
+
+env:
+  appUrl: <UPDATE>
+  dataUrl: <UPDATE>
+  classicAppUrl: <UPDATE>
+  dbEndpoint: <UPDATE>
+  kafkaMultiClusterEndpoints: <UPDATE>
+  kafkaClusterEndpoint: <UPDATE>
+  ODSUsername: <UPDATE>
+  ODSPassword: <UPDATE>
+  SRTEUsername: <UPDATE>
+  SRTEPassword: <UPDATE>
+  cloudProvider: <UPDATE>
+  azureResourceGroup: <UPDATE>
+  azureFileStorageName: <UPDATE>
+  timezone: <UPDATE>
+  waitTime: <UPDATE>
+
+elasticsearch:
+  memoryLimits: <UPDATE>
+  memoryRequests: <UPDATE>
+
+modernizationApi:
+  smartKey: <UPDATE>
+  analyticsKey: <UPDATE>
+  securityTokenSecret: <UPDATE>
+  securityParameterSecret: <UPDATE>
+
+nbsGateway:
+  clientSecret: <UPDATE>
+  welcomePage: <UPDATE>
+
+nifi:
+  adminUsername: <UPDATE>
+  adminPassword: <UPDATE>
+  sensitivePropsKey: <UPDATE>
+  memoryRequest: <UPDATE>
+  memoryLimit: <UPDATE>
+  ephemeralStorageRequest: <UPDATE>
+  ephemeralStorageLimit: <UPDATE>
+
+pageBuilderApi:
+  securityTokenSecret: <UPDATE>
+  memoryLimit: <UPDATE>
+
+dataProcessingService:
+  authUsername: <UPDATE>
+
+keycloak:
+  dbPassword: <UPDATE>
+  adminPassword: <UPDATE>
+
+splunk:
+  clusterName: <UPDATE>
+  ingex: <UPDATE>
+  metricsIndex: <UPDATE>
+  endpoint: <UPDATE>
+  token: <UPDATE>

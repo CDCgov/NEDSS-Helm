@@ -1,0 +1,45 @@
+# Manifest for deploying app with argocd
+# You must provide the following
+# 1. Correct values.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "4"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/keycloak
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: deployment.keycloak.env.kcDbPassword
+          value: {{ .Values.keycloak.dbPassword }}
+        - name: deployment.keycloak.env.kcDbUrl
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;'
+        - name: deployment.keycloak.env.kcHostname
+          value: '{{ .Values.env.appUrl }}'
+        - name: deployment.keycloak.env.keycloakAdminPassword
+          value: {{ .Values.keycloak.adminPassword }}
+        - name: cloudProvider
+          value: {{ .Values.env.cloudProvider }}
+        - name: azure.files.resourceGroupName
+          value: {{ .Values.env.azureResourceGroup }}
+        - name: azure.files.storageAccountName
+          value: {{ .Values.env.azureFileStorageName }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true 
+  sources: []
+  project: default

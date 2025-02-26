@@ -1,0 +1,55 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: liquibase-service
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "4"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/liquibase
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: image.repository
+          value: 'public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/liquibase-service'
+        - name: image.tag
+          value: 'v1.0.1'
+        - name: jdbc.master_db_url
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
+        - name: jdbc.odse_db_url
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
+        - name: jdbc.rdb_db_url
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
+        - name: jdbc.rdb_modern_db_url
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
+        - name: jdbc.srte_db_url
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=nbs_srte;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
+        - name: jdbc.data_ingest_url
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=nbs_dataingest;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
+        - name: jdbc.msgoute_url
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=nbs_msgoute;integratedSecurity=false;encrypt=true;trustServerCertificate=true'          
+        - name: jdbc.username
+          value: {{ .Values.env.ODSUsername }}
+        - name: jdbc.password
+          value: {{ .Values.env.ODSPassword }}
+        - name: jdbc.srte_username
+          value: {{ .Values.env.SRTEUsername }}
+        - name: jdbc.srte_password
+          value: {{ .Values.env.SRTEPassword }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  project: default
+
+

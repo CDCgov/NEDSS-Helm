@@ -1,10 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nj-app1
+  name: investigation-reporting-service
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "4"
 spec:
   destination:
     name: ''
@@ -12,28 +13,30 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
-    path: charts/post-processing-reporting-service
+    path: charts/investigation-reporting-service
     targetRevision: {{ .Chart.AppVersion | quote }}
     helm:
       valueFiles:
         - values.yaml
       parameters:
+        - name: phcDatamartEnable
+          value: '''true'''
         - name: ingressHost
           value: {{ .Values.env.appUrl }}
         - name: 'ingress.tls[0].secretName'
           value: {{ .Values.env.appUrl }}
         - name: 'ingress.tls[0].hosts[0]'
           value: {{ .Values.env.appUrl }}
+        - name: odse.dburl
+          value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
+        - name: rdb.dburl
+          value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;
         - name: kafka.cluster
           value: {{ .Values.env.kafkaMultiClusterEndpoints }}
         - name: jdbc.username
           value: {{ .Values.env.ODSUsername }}
         - name: jdbc.password
           value: {{ .Values.env.ODSPassword }}
-        - name: odse.dburl
-          value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
-        - name: rdb.dburl
-          value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;
   syncPolicy:
     automated:
       prune: true

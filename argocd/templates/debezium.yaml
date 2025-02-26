@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: debezium-service
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "4"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    path: charts/debezium
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: image.repository
+          value: quay.io/debezium/connect
+        - name: image.tag
+          value: '2.7'
+        - name: 'connect.env[3].value'
+          value: debezium-connector-v2
+        - name: connect.properties.group_id
+          value: debezium-connector-v2
+        - name: connect.sqlserverconnector.name
+          value: debezium-connector-v2
+        - name: connect.properties.topics_basename
+          value: debezium-connector
+        - name: connect.sqlserverconnector_odse.config.table\.include\.list
+          value: 'dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out, dbo.Place'
+        - name: connect.sqlserverconnector.config.database\.user
+          value: {{ .Values.env.ODSUsername }}
+        - name: connect.sqlserverconnector.config.database\.password
+          value: {{ .Values.env.ODSPassword }}
+        - name: connect.properties.bootstrap_server
+          value: {{ .Values.env.kafkaMultiClusterEndpoints }}
+        - name: connect.sqlserverconnector.config.database\.hostname
+          value: {{ .Values.env.dbEndpoint }}
+        - name: connect.sqlserverconnector.config.database\.history\.kafka\.bootstrap\.servers
+          value: {{ .Values.env.kafkaMultiClusterEndpoints }}
+        - name: connect.sqlserverconnector.config.schema\.history\.internal\.kafka\.bootstrap\.servers
+          value: {{ .Values.env.kafkaMultiClusterEndpoints }}
+        - name: connect.env[0].BOOTSTRAP_SERVERS
+          value:  {{ .Values.env.kafkaMultiClusterEndpoints }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  project: default
+
+
+ 
+
