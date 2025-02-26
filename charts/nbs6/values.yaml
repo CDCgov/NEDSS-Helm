@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: quay.io/us-cdcgov/cdc-nbs-modernization/nbs6
-  tag: "6.0.16.1"
+  tag: "6.0.16.2"
   pullPolicy: IfNotPresent
 
 service:
@@ -49,8 +49,6 @@ ingress:
       paths:
         - path: '/(?!auth).+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$'
           pathType: ImplementationSpecific
-
-
 
 resources:
   requests:
