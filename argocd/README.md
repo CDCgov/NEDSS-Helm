@@ -6,7 +6,7 @@ This repository contains helm chart to deploy ArgoCD applications related to the
 
 ### Install ArgoCD Applications
 
-- If deploying in Azure, move Azure folder in templates directory
+- If deploying in **Azure**, move Azure folder in templates directory
 - `helm install nbs .\argocd -f .\argocd\<ADD-VALUES-FILE>.yaml --debug`
 
 ### Upgrade ArgoCD Applications
@@ -22,7 +22,7 @@ This repository contains helm chart to deploy ArgoCD applications related to the
 ## Notes
 - Deleting helm will not delete ArgoCD Applications.
     - If helm upgrade is failing or stuck, delete and deploy helm. Since ArgoCD Application are not deleted, previous Application will be updated.
-- job-wait.yaml is adds a sleep in order to orchestrate service deployment
+- job-wait.yaml adds a sleep in order to orchestrate service deployment
 - Following annotation are required allow helm orchestration (https://argo-cd.readthedocs.io/en/stable/user-guide/helm/#helm-hooks)
     - helm.sh/hook: post-install, post-upgrade = This annotation specifies that the associated resource should be executed after the installation (post-install) and after an upgrade (post-upgrade) of the Helm release.
     - helm.sh/hook-weight: "4" = This annotation assigns a weight to the hook, determining the order in which hooks are executed when multiple hooks of the same type are defined. Helm executes hooks with lower weights first. Weights can be positive or negative numbers but must be represented as strings.
