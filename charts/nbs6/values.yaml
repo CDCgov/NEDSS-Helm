@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: quay.io/us-cdcgov/cdc-nbs-modernization/nbs6
-  tag: "6.0.16.2"
+  tag: "6.0.16.2-3"
   pullPolicy: IfNotPresent
 
 service:
