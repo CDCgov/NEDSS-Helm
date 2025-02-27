@@ -1,9 +1,12 @@
 # NEDSS ArgoCD Application Deployment
 
 ## Overview
+**NOT PRODUCTION READY SOLUTION** This repository contains helm chart to deploy ArgoCD Applications related to the NBS7. The purpose is to deploy or upgrade a version of NBS7 services in bulk, keeping ArgoCD configurations consistent across environments and maintaining only values file. Once deployed, users can manage each application using ArgoCD UI.
 
-This repository contains helm chart to deploy ArgoCD applications related to the NBS7. The purpose is to deploy or upgrade a version of NBS7 services in bulk. Once deployed, users can manage each application using ArgoCD UI.
-
+```mermaid
+flowchart LR
+    a[ArgoCD Helm] -- local --> b[ArgoCD Application Deployments] --> c[ArgoCD Application] -- GitHub --> d[NBS Helm] --> e[NBS Service Deployments]
+```
 ### Install ArgoCD Applications
 
 - If deploying in **Azure**, move Azure folder in templates directory
