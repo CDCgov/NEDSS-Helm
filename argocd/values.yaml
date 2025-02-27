@@ -1,15 +1,6 @@
 ### NOTE ###
-# This Values file should contain redundant variables, secrets, environment related changes. 
+# This Values file should contain redundant variables, secrets and environment related parameters. 
 # Any release related parameters should stay in service template
-
-### Deployment Process ###
-# Pull from specific NEDS-HELM release
-# Add this values files in ArgoCD Helm Chart folder
-# Verify you are one level up Helm Chart folder
-# Command for new deployment:  helm install nbs .\<RELEASE-VERSION> -f .\<RELEASE-VERSION>\values.yaml
-# Command for updating deployment: helm upgrade nbs .\<RELEASE-VERSION> -f .\<RELEASE-VERSION>\values.yaml
-# NOTES
-
 
 env:
   appUrl: <UPDATE>
