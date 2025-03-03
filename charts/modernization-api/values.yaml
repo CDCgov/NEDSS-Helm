@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: "v1.2.8"
+  tag: "v1.2.9"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -118,6 +118,9 @@ ui:
     host: "https://us.i.posthog.com"
     # The PostHog project key to associate frontend analytics with, when blank analytics will not be enabled
     key:
+  defaults:
+    # The default sizing of components
+    sizing: "medium"
   # feature flag configurations for modernized ui
   search:
     events:
@@ -143,6 +146,10 @@ ui:
       # Enables access to the modernized New patient - extended feature to create a patient with all available demographic data
       extended:
         enabled: true
+    search:
+      filters:
+        # Enables access to modernized Patient search filters
+        enabled: false
   deduplication:
     # Enable access to Deduplication screens
     enabled: false

@@ -52,6 +52,8 @@ spec:
               value: {{ .Values.rdb.dburl }}
             - name: TZ
               value: {{ .Values.timezone }}
+            - name: FF_EVENT_METRIC_ENABLE
+              value: {{ .Values.featureFlag.eventMetricEnable }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

@@ -75,7 +75,7 @@ kafka:
 features:
   modernizedMatching:
     enabled: true
-    url: http://deduplication-api.default.svc.cluster.local:8083
+    url: http://deduplication-api.default.svc.cluster.local:8083/api/deduplication
 
 log:
   path: "/usr/share/dataprocessing/data"

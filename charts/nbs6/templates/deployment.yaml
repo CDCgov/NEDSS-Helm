@@ -24,11 +24,9 @@ spec:
         ports:
         - containerPort: {{ .Values.service.targetPort }}
         env:
-        - name: DATABASE_ENDPOINT
-          value: "{{ .Values.env.DATABASE_ENDPOINT }}"
-        - name: DISABLED_SCHEDULED_TASKS
-          value: "{{ .Values.env.DISABLED_SCHEDULED_TASKS }}"
-        - name: JAVA_MEMORY
-          value: "{{ .Values.env.JAVA_MEMORY }}"
+        {{- range $key, $value := .Values.env }}
+        - name: {{ $key }}
+          value: "{{ $value }}"
+        {{- end }}
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
