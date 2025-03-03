@@ -1,0 +1,16 @@
+# templates/service.yaml
+
+{{- range .Values.deployments }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}
+spec:
+  selector:
+    app: {{ .name }}
+  ports:
+    - protocol: TCP
+      port: {{ .servicePort }}
+      targetPort: {{ .port }}
+---
+{{- end }}
