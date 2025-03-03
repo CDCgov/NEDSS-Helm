@@ -25,8 +25,6 @@ spec:
       valueFiles:
         - values.yaml
       parameters:
-        - name: resources.requests.memory
-          value: {{ .Values.nifi.memoryRequest }}
         - name: resources.requests.ephemeral-storage
           value: {{ .Values.nifi.ephemeralStorageRequest }}
         - name: resources.limits.memory
@@ -42,11 +40,13 @@ spec:
         - name: nifiSensitivePropsKey
           value: {{ .Values.nifi.sensitivePropsKey }}   
         - name: cloudProvider
-          value: {{ .Values.env.cloudProvider }}
+          value: {{ .Values.aws.cloudProvider }}
         - name: azure.files.storageAccountName
-          value: {{ .Values.env.azureFileStorageName }}
+          value: {{ .Values.azure.FileStorageName }}
         - name: azure.files.resourceGroupName
-          value: {{ .Values.env.azureResourceGroup }}
+          value: {{ .Values.azure.ResourceGroup }}
+        - name: efsFileSystemId
+          value: {{ .Values.env.efsId }}          
   syncPolicy:
     automated:
       prune: true 

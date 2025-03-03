@@ -13,15 +13,25 @@ env:
   ODSPassword: <UPDATE>
   SRTEUsername: <UPDATE>
   SRTEPassword: <UPDATE>
-  cloudProvider: <UPDATE>
-  azureResourceGroup: <UPDATE>
-  azureFileStorageName: <UPDATE>
   timezone: <UPDATE>
   waitTime: <UPDATE>
+  efsId: <UPDATE>
+
+aws:
+  cloudProvider: <UPDATE>
+
+azure:
+  ResourceGroup: <UPDATE>
+  FileStorageName: <UPDATE>
 
 elasticsearch:
   memoryLimits: <UPDATE>
   memoryRequests: <UPDATE>
+
+investigation:
+  phcDatamartEnable: <UPDATE>
+  bmirdCaseEnable: <UPDATE>
+  contactRecordEnable: <UPDATE>
 
 modernizationApi:
   smartKey: <UPDATE>
@@ -32,6 +42,7 @@ modernizationApi:
 nbsGateway:
   clientSecret: <UPDATE>
   welcomePage: <UPDATE>
+  landingBase: <UPDATE>
 
 nifi:
   adminUsername: <UPDATE>
@@ -45,6 +56,9 @@ nifi:
 pageBuilderApi:
   securityTokenSecret: <UPDATE>
   memoryLimit: <UPDATE>
+
+post-processing:
+  eventMetricEnable: <UPDATE>
 
 dataProcessingService:
   authUsername: <UPDATE>

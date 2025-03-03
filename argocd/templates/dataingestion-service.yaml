@@ -36,11 +36,13 @@ spec:
       - name: jdbc.password
         value: {{ .Values.env.ODSPassword }}
       - name: cloudProvider
-        value: {{ .Values.env.cloudProvider }}
+        value: {{ .Values.aws.cloudProvider }}
       - name: azure.files.resourceGroupName
-        value:  {{ .Values.env.azureResourceGroup }}
+        value:  {{ .Values.azure.ResourceGroup }}
       - name: azure.files.storageAccountName
-        value: {{ .Values.env.azureFileStorageName }}
+        value: {{ .Values.azure.FileStorageName }}
+      - name: efsFileSystemId
+        value: {{ .Values.env.efsId }}
   syncPolicy:
     automated:
       prune: true

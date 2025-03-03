@@ -20,10 +20,6 @@ spec:
       valueFiles:
         - values.yaml
       parameters:
-        - name: image.repository
-          value: 'public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/liquibase-service'
-        - name: image.tag
-          value: 'v1.0.1'
         - name: jdbc.master_db_url
           value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
         - name: jdbc.odse_db_url

@@ -19,8 +19,6 @@ spec:
       valueFiles:
         - values.yaml
       parameters:
-        - name: phcDatamartEnable
-          value: '''true'''
         - name: ingressHost
           value: {{ .Values.env.appUrl }}
         - name: 'ingress.tls[0].secretName'
@@ -37,6 +35,12 @@ spec:
           value: {{ .Values.env.ODSUsername }}
         - name: jdbc.password
           value: {{ .Values.env.ODSPassword }}
+        - name: featureFlag.phcDatamartEnable
+          value: {{ .Values.investigation.phcDatamartEnable }}
+        - name: featureFlag.bmirdCaseEnable
+          value: {{ .Values.investigation.bmirdCaseEnable }}
+        - name: featureFlag.contactRecordEnable
+          value: {{ .Values.investigation.contactRecordEnable }}                   
   syncPolicy:
     automated:
       prune: true

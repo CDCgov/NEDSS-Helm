@@ -24,6 +24,9 @@ spec:
         - values.yaml
       parameters:
         - name: landing.base
+          value: {{ .Values.nbsGateway.landingBase }}
+        - name: welcome.enabled
+          value: {{ .Values.nbsGateway.welcomePage | quote }}          
         - name: pageBuilder.enabled
           value: 'false'
         - name: pageBuilder.page.library.enabled
@@ -38,8 +41,6 @@ spec:
           value: {{ .Values.env.appUrl }}
         - name: oidc.client.secret
           value: {{ .Values.nbsGateway.clientSecret }}
-        - name: welcome.enabled
-          value: {{ .Values.nbsGateway.welcomePage | quote }}
   syncPolicy:
     automated:
       prune: true

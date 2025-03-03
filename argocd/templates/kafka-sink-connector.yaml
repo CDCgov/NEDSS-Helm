@@ -23,8 +23,6 @@ spec:
           value: {{ .Values.env.ODSUsername }}
         - name: sqlServerConnector.config.connection\.password
           value: {{ .Values.env.ODSPassword }}
-        - name: sqlServerConnector.config.connection.url
-          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;'
         - name: kafka.bootstrapServers
           value: {{ .Values.env.kafkaMultiClusterEndpoints }}
         - name: sqlServerConnector.config.connection\.url
