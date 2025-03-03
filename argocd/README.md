@@ -1,7 +1,7 @@
 # NEDSS ArgoCD Application Deployment
 
 ## Overview
-We recommend deploying this project using [Helm](https://helm.sh/), a robust package manager for Kubernetes that streamlines application deployment and management.
+We recommend deploying NBS services using [Helm](https://helm.sh/](https://github.com/CDCgov/NEDSS-Helm/tree/nj-orgocd-testing/charts), a robust package manager for Kubernetes that streamlines application deployment and management.
 
 For teams utilizing [Argo CD](https://argo-cd.readthedocs.io/en/stable/), Helm chart in this repository facilitates seamless configuration of ArgoCD Applications. [ArgoCD natively supports Helm charts](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/), enabling declarative application definitions and synchronization of application states. This integration enhances continuous delivery workflows by ensuring that the deployed applications align with the desired configurations stored in your version control system.
 
