@@ -1,0 +1,33 @@
+# templates/deployment.yaml
+
+{{- range .Values.deployments }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}
+spec:
+  replicas: {{ $.Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+    spec:
+      containers:
+      - name: {{ .containerName }}
+        image: "{{ $.Values.image.repository }}/{{ .containerName }}:{{ $.Values.image.tag }}"
+        resources:
+          {{- toYaml (.resources | default $.Values.defaultResources) | nindent 10 }}
+        ports:
+        - containerPort: {{ .port }}
+        {{- if .env }}
+        env:
+        {{- range $key, $value := .env }}
+          - name: {{ $key }}
+            value: {{ $value | quote }}
+        {{- end }}
+        {{- end }}
+---
+{{- end }}

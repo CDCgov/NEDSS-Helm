@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: quay.io/us-cdcgov/cdc-nbs-modernization/nbs6
-  tag: "6.0.16.1"
+  tag: "6.0.16.2-3"
   pullPolicy: IfNotPresent
 
 service:
@@ -12,6 +12,7 @@ service:
     https: 443
   targetPort: 7001
 
+# Default kubernetes ingress rules
 ingress:
   enabled: true
   class: nginx
@@ -20,8 +21,7 @@ ingress:
     nginx.ingress.kubernetes.io/service-upstream: "true"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Frame-Options: Allow";
-      more_set_headers "Cross-Origin-Opener-Policy: same-origin";
-      more_set_headers "Cache-Control: max-age=1209600, immutable";
+      more_set_headers "Cross-Origin-Opener-Policy: same-origin";      
   tls:
     - secretName: app-classic.example.com
       hosts:
@@ -30,7 +30,8 @@ ingress:
     - host: app-classic.example.com
       paths:
         - path: /
-          pathType: Prefix  
+          pathType: Prefix
+  # Seceond ingress rules used for caching static objects
   annotationsCached:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/service-upstream: "true"
@@ -49,8 +50,6 @@ ingress:
         - path: '/(?!auth).+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$'
           pathType: ImplementationSpecific
 
-
-
 resources:
   requests:
     memory: "15Gi"   
@@ -58,8 +57,28 @@ resources:
     memory: "15Gi"
     
 env:
+  # Endpoint connection for database containing the endpoint only (e.g. dbendpointurl.com)
   DATABASE_ENDPOINT: ""
+  # Connection details
+  # ODSE user/pass
+  odse_user: ""
+  odse_pass: ""
+  # RDB user/pass
+  rdb_user: ""
+  rdb_pass: ""
+  # SRTE user/pass
+  srte_user: ""
+  srte_pass: ""
+  # Comma Separated list of tasks to be disabled.
+  # Available tasks to disable: ELRImporter.bat, MsgOutProcessor.bat, UserProfileUpdateProcess.bat, SendAlertEMail.bat, DeDuplicationSimilarBatchProcess.bat, covid19ETL.bat 
   DISABLED_SCHEDULED_TASKS: "SendAlertEMail.bat, DeDuplicationSimilarBatchProcess.bat, UserProfileUpdateProcess.bat"
-  JAVA_MEMORY: "14000m"
+  # Memory allocated to JVM, needs to be offset from container requests by 4g-8g or more
+  JAVA_MEMORY: "10g"
+
+  # Additional environment variables with names starting with updateScheduledTask_ are available to update 
+  # existing scheduled task. (e.g. updateScheduledTask_ELRImporter)
+  # Format is csv that contains values correspond to columns: filename, scriptPathFromWorkDir, startTime, frequencyDays, frequencyHours, frequencyMinutes
+  ## If a column contains an empty value you should include that like: ELRImporter.bat,, 6am, 0, 0, 2
+
 
 lifecycle: {}
