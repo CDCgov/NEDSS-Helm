@@ -1,8 +1,10 @@
 ### NOTE ###
 # This Values file should contain redundant variables, secrets and environment related parameters. 
 # Any release related parameters should stay in service template
+# IMPORTANT: appVersion parameter should identify version of values file
 
 env:
+  appVersion: "v7.8.3"
   appUrl: <UPDATE>
   dataUrl: <UPDATE>
   classicAppUrl: <UPDATE>
@@ -15,11 +17,13 @@ env:
   SRTEPassword: <UPDATE>
   timezone: <UPDATE>
   waitTime: <UPDATE>
-  efsId: <UPDATE>
-
-aws:
   cloudProvider: <UPDATE>
 
+#Remove Parameters if using Azure
+aws:
+  efsId: <UPDATE>
+
+#Remove Parameters if using AWS
 azure:
   ResourceGroup: <UPDATE>
   FileStorageName: <UPDATE>

@@ -40,13 +40,13 @@ spec:
         - name: nifiSensitivePropsKey
           value: {{ .Values.nifi.sensitivePropsKey }}   
         - name: cloudProvider
-          value: {{ .Values.aws.cloudProvider }}
+          value: {{ .Values.env.cloudProvider }}
         - name: azure.files.storageAccountName
           value: {{ .Values.azure.FileStorageName }}
         - name: azure.files.resourceGroupName
           value: {{ .Values.azure.ResourceGroup }}
         - name: efsFileSystemId
-          value: {{ .Values.env.efsId }}          
+          value: {{ .Values.aws.efsId }}          
   syncPolicy:
     automated:
       prune: true 

@@ -22,13 +22,13 @@ spec:
         - name: resources.limits.memory
           value: {{ .Values.elasticsearch.memoryLimits }}
         - name: cloudProvider
-          value: {{ .Values.aws.cloudProvider }}
+          value: {{ .Values.env.cloudProvider }}
         - name: azure.files.resourceGroupName
           value:  {{ .Values.azure.ResourceGroup }}
         - name: azure.files.storageAccountName
           value: {{ .Values.azure.FileStorageName }}
         - name: efsFileSystemId
-          value: {{ .Values.env.efsId }}
+          value: {{ .Values.aws.efsId }}
   syncPolicy:
     automated:
       prune: true
