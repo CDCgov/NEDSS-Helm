@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   annotations:
     helm.sh/hook: post-install, post-upgrade
-    helm.sh/hook-weight: "4"
+    helm.sh/hook-weight: "6"
 spec:
   destination:
     name: ''
@@ -36,7 +36,7 @@ spec:
         - name: rdb.dburl
           value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;
         - name: featureFlag.eventMetricEnable
-          value: {{ .Values.post-processing.eventMetricEnable }}          
+          value: {{ .Values.postProcessing.eventMetricEnable }}
   syncPolicy:
     automated:
       prune: true

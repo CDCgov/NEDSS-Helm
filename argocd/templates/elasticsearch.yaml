@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   annotations:
     helm.sh/hook: post-install, post-upgrade
-    helm.sh/hook-weight: "0"
+    helm.sh/hook-weight: "1"
 spec:
   destination:
     name: ''

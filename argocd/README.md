@@ -18,7 +18,7 @@ flowchart LR
 
 ### Upgrade ArgoCD Applications
 
-- `helm upgrade nbs .\argocd-7.8.2 -f .\argocd\<ADD-VALUES-FILE>.yaml --debug`
+- `helm upgrade nbs .\argocd -f .\argocd\<ADD-VALUES-FILE>.yaml --debug`
 
 ### Delete ArgoCD Applications
 

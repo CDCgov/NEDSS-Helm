@@ -61,7 +61,7 @@ pageBuilderApi:
   securityTokenSecret: <UPDATE>
   memoryLimit: <UPDATE>
 
-post-processing:
+postProcessing:
   eventMetricEnable: <UPDATE>
 
 dataProcessingService:
