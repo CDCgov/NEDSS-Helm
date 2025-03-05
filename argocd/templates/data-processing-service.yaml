@@ -28,6 +28,8 @@ spec:
           value: {{ .Values.env.kafkaClusterEndpoint }}
         - name: nbs.authuser
           value: {{ .Values.dataProcessingService.authUsername }}
+        - name: features.modernizedMatching.enabled
+          value: {{ .Values.dataProcessingService.modernizedMatchingEnabled }}
   syncPolicy:
     automated:
       prune: true

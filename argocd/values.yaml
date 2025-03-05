@@ -66,6 +66,7 @@ postProcessing:
 
 dataProcessingService:
   authUsername: <UPDATE>
+  modernizedMatchingEnabled: <UPDATE>
 
 keycloak:
   dbPassword: <UPDATE>
