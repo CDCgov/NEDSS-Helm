@@ -45,7 +45,8 @@ spec:
             - "-c"
             - |
               echo "Executing changelog in DB : {{ .Values.jdbc.srte_db_url }}"
-              liquibase --changelog-file="{{ .Values.changelog.srte }}" --searchPath="./" --url="{{ .Values.jdbc.srte_db_url }}" --username={{ .Values.jdbc.srte_username }} --password={{ .Values.jdbc.srte_password }} update
+              liquibase --changelog-file="{{ .Values.changelog.srte }}" --searchPath="./" --url="{{ .Values.jdbc.srte_db_url }}" --username={{ .Values.jdbc.srte_username }} --password={{ .Values.jdbc.srte_password }} update >> logs
+
               echo "{{ .Values.changelog.srte }} scripts : execution success!"
 
               echo "Executing changelog in DB : {{ .Values.jdbc.data_ingest_url }}"
