@@ -25,10 +25,10 @@ spec:
           value: {{ .Values.splunk.token | quote }}
         - name: splunkPlatform.metricsIndex
           value: {{ .Values.splunk.metricsIndex | quote }}
-        - name: splunkPlatform.index
-          value: {{ .Values.splunk.index | quote }}
         - name: clusterName
           value: {{ .Values.splunk.clusterName | quote }}
+        - name: splunkPlatform.index
+          value: kubernetes_logs
         - name: agent.hostNetwork 
           value: 'false'
         - name: logsCollection.containers.multilineConfigs[0].namespaceName.value
