@@ -1,0 +1,55 @@
+# Manifest for deploying app with argocd
+# You must provide the following
+# 1. Correct values.yaml
+# 2. jdbcConnectionString as parameter
+# 3. singleUserCredentialsPassword as parameter
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nifi
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "3"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/nifi-efs
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: resources.requests.ephemeral-storage
+          value: {{ .Values.nifi.ephemeralStorageRequest }}
+        - name: resources.limits.memory
+          value: {{ .Values.nifi.memoryLimit }}
+        - name: resources.limits.ephemeral-storage
+          value: {{ .Values.nifi.ephemeralStorageLimit }}
+        - name: jdbcConnectionString
+          value: "jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;user={{ .Values.env.ODSUsername }};password={{ .Values.env.ODSPassword }};encrypt=true;trustServerCertificate=true;"
+        - name: singleUserCredentialsPassword
+          value: {{ .Values.nifi.adminPassword }}
+        - name: singleUserCredentialsUsername
+          value: {{ .Values.nifi.adminUsername }}
+        - name: nifiSensitivePropsKey
+          value: {{ .Values.nifi.sensitivePropsKey }}   
+        - name: cloudProvider
+          value: {{ .Values.env.cloudProvider }}
+        - name: azure.files.storageAccountName
+          value: {{ .Values.azure.FileStorageName }}
+        - name: azure.files.resourceGroupName
+          value: {{ .Values.azure.ResourceGroup }}
+        - name: efsFileSystemId
+          value: {{ .Values.aws.efsId }}          
+  syncPolicy:
+    automated:
+      prune: true 
+      selfHeal: true
+  sources: []
+  project: default

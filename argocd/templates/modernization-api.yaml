@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: modernization-api
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "2"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/modernization-api
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: pageBuilder.enabled
+          value: "false"
+        - name: pageBuilder.page.library.enabled
+          value: "false"
+        - name: pageBuilder.page.management.create.enabled
+          value: "false"
+        - name: pageBuilder.page.management.edit.enabled
+          value: "false"
+        - name: jdbc.connectionString
+          value: "jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;user={{ .Values.env.ODSUsername }};password={{ .Values.env.ODSPassword }};encrypt=true;trustServerCertificate=true;"
+        - name: jdbc.user
+          value: {{ .Values.env.ODSUsername }}
+        - name: jdbc.password
+          value: {{ .Values.env.ODSPassword }}
+        - name: nbsExternalName
+          value: {{ .Values.env.classicAppUrl }}
+        - name: ingressHost
+          value: {{ .Values.env.appUrl }}
+        - name: 'ingress.tls[0].secretName'
+          value: {{ .Values.env.appUrl }}
+        - name: 'ingress.tls[0].hosts[0]'
+          value: {{ .Values.env.appUrl }}
+        - name: timezone
+          value: {{ .Values.env.timezone }}
+        - name: ui.smarty.key
+          value: {{ .Values.modernizationApi.smartKey | quote}}
+        - name: ui.analytics.key
+          value: {{ .Values.modernizationApi.analyticsKey }}
+        - name: security.tokenSecret
+          value: {{ .Values.modernizationApi.securityTokenSecret }}
+        - name: security.parameterSecret
+          value: {{ .Values.modernizationApi.securityParameterSecret }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true         
+  sources: []
+  project: default

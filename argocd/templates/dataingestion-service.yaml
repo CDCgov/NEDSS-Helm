@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dataingestion-service
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "4"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/dataingestion-service
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+      - name: sftp.enabled
+        value: disabled
+      - name: ingressHost
+        value: {{ .Values.env.dataUrl }}
+      - name: 'ingress.tls[0].secretName'
+        value: {{ .Values.env.dataUrl }}
+      - name: 'ingress.tls[0].hosts[0]'
+        value: {{ .Values.env.dataUrl }}
+      - name: jdbc.dbserver
+        value: {{ .Values.env.dbEndpoint }}
+      - name: kafka.cluster
+        value: {{ .Values.env.kafkaClusterEndpoint }}
+      - name: jdbc.username
+        value: {{ .Values.env.ODSUsername }}
+      - name: jdbc.password
+        value: {{ .Values.env.ODSPassword }}
+      - name: cloudProvider
+        value: {{ .Values.env.cloudProvider }}
+      - name: azure.files.resourceGroupName
+        value:  {{ .Values.azure.ResourceGroup }}
+      - name: azure.files.storageAccountName
+        value: {{ .Values.azure.FileStorageName }}
+      - name: efsFileSystemId
+        value: {{ .Values.aws.efsId }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true 
+  project: default
+
+
