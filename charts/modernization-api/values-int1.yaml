@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.d7abfd7
+  tag: 1.0.1-SNAPSHOT.634b3b0
 
 imagePullSecrets: []
 nameOverride: ""
