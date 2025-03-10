@@ -6,7 +6,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
-  tag: "v1.1.9"
+  tag: "v1.2.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -56,9 +56,9 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-  - secretName: "dataingestion.EXAMPLE_DOMAIN"
+  - secretName: "data.EXAMPLE_DOMAIN"
     hosts:
-    - "dataingestion.EXAMPLE_DOMAIN"
+    - "data.EXAMPLE_DOMAIN"
 
 resources: {}
 
@@ -74,8 +74,7 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.EXAMPLE_DOMAIN"
-
+ingressHost: "data.EXAMPLE_DOMAIN"
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:

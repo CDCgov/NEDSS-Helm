@@ -3,12 +3,19 @@ controller:
   podAnnotations:
     linkerd.io/inject: enabled
   config:
-    proxy-body-size: "8m"
+    proxy-body-size: "12m"
     compute-full-forwarded-for: "true"
     use-forwarded-headers: "true"
     allow-snippet-annotations: "true"
+    upstream-keepalive-timeout: 300
+    proxy-send-timeout: 300
+    proxy-read-timeout: 300
+    proxy-connect-timeout: 300
+    client-body-timeout: 300
+    client-header-timeout: 300
+    keep-alive: 300
+    client-body-buffer-size: 10m
     #whitelist-source-range: ""         # VPC/VNET CIDR to be passed at run runtime to restrict traffic allowed to nodes to that of the VPC cidr
-    #proxy-body-size: "0"
   ingressClassResource:
     enabled: true
     default: false

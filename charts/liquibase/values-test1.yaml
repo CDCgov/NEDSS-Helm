@@ -1,11 +1,12 @@
 replicaCount: 1
 
 env: "test"
+timezone: "UTC"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.65da511"
+  tag: "1.0.1-SNAPSHOT.61ad2a3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -56,18 +57,26 @@ affinity: {}
 ingressHost: "app.test.nbspreview.com"
 
 changelog:
+  srte: "db.srte.changelog-16.1.yaml"
   odse: "db.odse.changelog-16.1.yaml"
   rdb: "db.rdb.changelog-16.1.yaml"
   rdb_modern: "db.rdb_modern.changelog-16.1.yaml"
   master: "db.master.changelog-16.1.yaml"
+  data_ingest: "db.data_ingest.changelog-16.1.yaml"
+  msgoute: "db.msgoute.changelog-16.1.yaml"
 
 jdbc:
   master_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  srte_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_srte;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   odse_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   rdb_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   rdb_modern_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  data_ingest_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_dataingest;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  msgoute_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_msgoute;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   username: ""
   password: ""
+  srte_username: ""
+  srte_password: ""
 
 odse:
   dbname: "NBS_ODSE"

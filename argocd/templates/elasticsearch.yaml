@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: elasticsearch
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "1"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/elasticsearch-efs
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: resources.limits.memory
+          value: {{ .Values.elasticsearch.memoryLimits }}
+        - name: cloudProvider
+          value: {{ .Values.env.cloudProvider }}
+        - name: azure.files.resourceGroupName
+          value:  {{ .Values.azure.ResourceGroup }}
+        - name: azure.files.storageAccountName
+          value: {{ .Values.azure.FileStorageName }}
+        - name: efsFileSystemId
+          value: {{ .Values.aws.efsId }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true  
+  sources: []
+  project: default
+

@@ -7,7 +7,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nbs-gateway"
   pullPolicy: IfNotPresent
-  tag: "v1.2.6"
+  tag: "v1.3.0"
 
 gatewayService:
   ports:
@@ -49,6 +49,9 @@ resources: {}
 nbsExternalName: app-classic.EXAMPLE_DOMAIN
 
 ingressHost: app.EXAMPLE_DOMAIN
+
+# The timezone to initialize the JVM with
+timezone: "UTC"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 

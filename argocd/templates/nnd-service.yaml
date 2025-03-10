@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nnd-service
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "6"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/nnd-service
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: jdbc.dbserver
+          value: '{{ .Values.env.dbEndpoint }}'
+        - name: jdbc.username
+          value: {{ .Values.env.ODSUsername }}
+        - name: jdbc.password
+          value: {{ .Values.env.ODSPassword }}
+        - name: cloudProvider
+          value: {{ .Values.env.cloudProvider }}
+        - name: azure.files.resourceGroupName
+          value: {{ .Values.azure.ResourceGroup }}
+        - name: azure.files.storageAccountName
+          value: {{ .Values.azure.FileStorageName }}
+        - name: ingressHost
+          value: {{ .Values.env.dataUrl }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true 
+  project: default

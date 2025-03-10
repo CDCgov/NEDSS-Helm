@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.51201d8
+  tag: 1.0.1-SNAPSHOT.eca060f
 
 imagePullSecrets: []
 nameOverride: ""
@@ -104,6 +104,8 @@ ui:
     key: ""
   analytics:
     key: ""
+  defaults:
+    sizing: "small"
   search:
     events:
       enabled: true
@@ -122,3 +124,8 @@ ui:
       enabled: true
       extended:
         enabled: true
+    search:
+      filters:
+        enabled: true
+  deduplication:
+    enabled: false

@@ -1,11 +1,12 @@
 replicaCount: 1
 
 env: "test1"
+timezone: "UTC"
 
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.65da511"
+  tag: "1.0.1-SNAPSHOT.61ad2a3"
 
 imagePullSecrets: []
 nameOverride: ""

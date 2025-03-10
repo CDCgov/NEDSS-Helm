@@ -5,7 +5,7 @@ env: "test2"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.06df80b
+  tag: 1.0.1-TEST.0bb1c51
 
 imagePullSecrets: []
 nameOverride: ""
@@ -110,5 +110,9 @@ ui:
         enabled: true
   patient:
     add:
+      enabled: true
       extended:
         enabled: true
+    search:
+      filters:
+        enabled: false

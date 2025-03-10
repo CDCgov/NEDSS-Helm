@@ -31,8 +31,8 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-connector-v071524"
-    topics_basename: "debezium-connector"
+    group_id: "debezium-odse-srte-connector-v013125"
+    topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
@@ -42,8 +42,8 @@ connect:
 
   # dbserver: "EXAMPLE_DB_ENDPOINT"
   
-  sqlserverconnector: {
-    "name": "debezium-connector-v071524",
+  sqlserverconnector_odse: {
+    "name": "debezium-odse-connector-v013125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -66,16 +66,61 @@ connect:
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
-      "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out",
+      "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, 
+                             dbo.state_defined_field_data, dbo.Notification, dbo.Interview, 
+                             dbo.CN_transportq_out, dbo.Place, dbo.CT_contact, dbo.Auth_user",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
-      "transforms": "dropPrefix",
+      "transforms": "dropPrefix, convertTimezone",
       "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nbs_$1",
+      "transforms.convertTimezone.type" : "io.debezium.transforms.TimezoneConverter",
+      "transforms.convertTimezone.converted.timezone" : "UTC",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "true",
+    }
+  }
+
+  sqlserverconnector_srte: {
+    "name": "debezium-srte-connector-v013125",
+    "config": {
+      "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
+      "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
+      "database.port": "1433",
+      "database.user": "EXAMPLE_DB_USER",
+      "database.password": "EXAMPLE_DB_USER_PASSWORD",
+      "database.dbname": "nbs_srte",
+      "database.names": "nbs_srte",
+      "database.server.name": "srte",
+      "database.history.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
+      "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
+      # Uncomment following to manually bypass the sqlserver agent status query results
+      #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
+      "database.trustServerCertificate": "true",
+      "include.schema.changes": "true",
+      "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "key.converter.schemas.enable": "true",
+      "producer.max.request.size": "10000000", #10MB
+      "producer.message.max.bytes": "10000000", #10MB
+      "snapshot.mode": "initial",
+      "schema.history.internal.kafka.topic": "srte-schema-history",
+      "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
+      "table.include.list": "dbo.EXAMPLE_TABLES",
+      "tasks.max": "1",
+      "topic.prefix": "cdc",
+      "topic.creation.default.replication.factor": 2,
+      "topic.creation.default.partitions": 10,
+      "topic.creation.default.cleanup.policy": "compact",
+      "transforms": "dropPrefix, convertTimezone",
+      "transforms.dropPrefix.regex": "cdc\\.NBS_SRTE\\.dbo\\.(.+)",
+      "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
+      "transforms.dropPrefix.replacement": "nrt_srte_$1",
+      "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
+      "transforms.convertTimezone.converted.timezone": "UTC",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
       "value.converter.schemas.enable": "true",
     }
@@ -89,7 +134,9 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-connector-v071524"
+      value: "debezium-odse-srte-connector-v013125"
+    - name: TZ
+      value: "UTC"
 
 ui:
   enabled: false
@@ -126,4 +173,6 @@ ui:
   env:
     - name: KAFKA_CONNECT_URIS
       value: "http://debezium-connect:8083"
+    - name: TZ
+      value: "UTC"
 

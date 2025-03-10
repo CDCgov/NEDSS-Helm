@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: splunk-otel-collector
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "0"
+spec:
+  destination:
+    namespace: observability
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    repoURL: 'https://github.com/signalfx/splunk-otel-collector-chart.git'
+    targetRevision: splunk-otel-collector-0.109.0
+    path: 'helm-charts/splunk-otel-collector' 
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: splunkPlatform.endpoint
+          value: {{ .Values.splunk.endpoint | quote }}
+        - name: splunkPlatform.token
+          value: {{ .Values.splunk.token | quote }}
+        - name: splunkPlatform.metricsIndex
+          value: {{ .Values.splunk.metricsIndex | quote }}
+        - name: clusterName
+          value: {{ .Values.splunk.clusterName | quote }}
+        - name: splunkPlatform.index
+          value: kubernetes_logs
+        - name: agent.hostNetwork 
+          value: 'false'
+        - name: logsCollection.containers.multilineConfigs[0].namespaceName.value
+          value: kube-system
+        - name: logsCollection.containers.multilineConfigs[0].podName.value
+          value: 'csi-azurefile-node-.*'
+        - name: logsCollection.containers.multilineConfigs[0].podName.useRegexp
+          value: 'true'
+        - name: logsCollection.containers.multilineConfigs[0].containerName.value
+          value: azurefile
+        - name: logsCollection.containers.multilineConfigs[0].firstEntryRegex
+          value: '[IE]\\d+\\s\\d+:\\d+:\\d+\\.\\d+'
+        - name: logsCollection.containers.multilineConfigs[0].combineWith
+          value: ''
+        - name: logsCollection.containers.excludePaths[0]
+          value: '/var/log/pods/kube-system_coredns-*/coredns/*.log'
+        - name: logsCollection.containers.excludePaths[1]
+          value: '/var/log/pods/cattle-fleet-system_fleet-agent-*/fleet-agent/*.log'
+        - name: logsCollection.containers.excludePaths[2]
+          value: '/var/log/pods/calico-system_calico-node-*/flexvol-driver/*.log'
+        - name: logsCollection.containers.excludePaths[3]
+          value: '/var/log/pods/kube-system_ama-metrics-operator-targets-*/targetallocator/*.log'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

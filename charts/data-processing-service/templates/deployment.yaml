@@ -64,6 +64,12 @@ spec:
               value: {{ .Values.nbs.authuser }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
+            - name: SERVICE_TZ
+              value: {{ .Values.timezone | default "UTC"}}
+            - name: MODERNIZED_MATCHING_ENABLED
+              value: {{ .Values.features.modernizedMatching.enabled | default false | quote }}
+            - name: MODERNIZED_MATCHING_URL
+              value: {{ .Values.features.modernizedMatching.url | default "" }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

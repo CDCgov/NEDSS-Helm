@@ -1,0 +1,79 @@
+### NOTE ###
+# This Values file should contain redundant variables, secrets and environment related parameters. 
+# Any release related parameters should stay in service template
+# IMPORTANT: appVersion parameter should identify version of values file
+
+env:
+  appUrl: <UPDATE>
+  dataUrl: <UPDATE>
+  classicAppUrl: <UPDATE>
+  dbEndpoint: <UPDATE>
+  kafkaMultiClusterEndpoints: <UPDATE>
+  kafkaClusterEndpoint: <UPDATE>
+  ODSUsername: <UPDATE>
+  ODSPassword: <UPDATE>
+  SRTEUsername: <UPDATE>
+  SRTEPassword: <UPDATE>
+  timezone: <UPDATE>
+  waitTime: <UPDATE>
+  cloudProvider: <UPDATE>
+
+#Remove Parameters if using Azure
+aws:
+  efsId: <UPDATE>
+
+#Remove Parameters if using AWS
+azure:
+  ResourceGroup: <UPDATE>
+  FileStorageName: <UPDATE>
+
+elasticsearch:
+  memoryLimits: <UPDATE>
+  memoryRequests: <UPDATE>
+
+investigation:
+  phcDatamartEnable: <UPDATE>
+  bmirdCaseEnable: <UPDATE>
+  contactRecordEnable: <UPDATE>
+
+modernizationApi:
+  smartKey: <UPDATE>
+  analyticsKey: <UPDATE>
+  securityTokenSecret: <UPDATE>
+  securityParameterSecret: <UPDATE>
+
+nbsGateway:
+  clientSecret: <UPDATE>
+  welcomePage: <UPDATE>
+  landingBase: <UPDATE>
+
+nifi:
+  adminUsername: <UPDATE>
+  adminPassword: <UPDATE>
+  sensitivePropsKey: <UPDATE>
+  memoryRequest: <UPDATE>
+  memoryLimit: <UPDATE>
+  ephemeralStorageRequest: <UPDATE>
+  ephemeralStorageLimit: <UPDATE>
+
+pageBuilderApi:
+  securityTokenSecret: <UPDATE>
+  memoryLimit: <UPDATE>
+
+postProcessing:
+  eventMetricEnable: <UPDATE>
+
+dataProcessingService:
+  authUsername: <UPDATE>
+  modernizedMatchingEnabled: <UPDATE>
+
+keycloak:
+  dbPassword: <UPDATE>
+  adminPassword: <UPDATE>
+
+splunk:
+  clusterName: <UPDATE>
+  ingex: <UPDATE>
+  metricsIndex: <UPDATE>
+  endpoint: <UPDATE>
+  token: <UPDATE>

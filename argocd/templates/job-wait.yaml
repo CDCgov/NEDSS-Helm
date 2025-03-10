@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sleep-30s-waiting-for-elasticsearch
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "0"
+    helm.sh/hook-delete-policy: "hook-succeeded,hook-failed"
+spec:
+  template:
+    spec:
+      containers:
+      - name: job
+        image: busybox
+        command: ["sh", "-c", "sleep {{ .Values.env.waitTime }} && echo Running job in wave 0"]
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sleep-30s-waiting-for-modernization-api
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "1"
+    helm.sh/hook-delete-policy: "hook-succeeded,hook-failed"
+spec:
+  template:
+    spec:
+      containers:
+      - name: job
+        image: busybox
+        command: ["sh", "-c", "sleep {{ .Values.env.waitTime }} && echo Running job in wave 1"]
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sleep-30s-waiting-for-nifi
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "2"
+    helm.sh/hook-delete-policy: "hook-succeeded,hook-failed"
+spec:
+  template:
+    spec:
+      containers:
+      - name: job
+        image: busybox
+        command: ["sh", "-c", "sleep {{ .Values.env.waitTime }} && echo Running job in wave 2"]
+      restartPolicy: Never

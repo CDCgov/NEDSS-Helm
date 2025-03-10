@@ -5,13 +5,16 @@ env: "prod"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/page-builder-api"
   pullPolicy: IfNotPresent
-  tag: "v1.2.6"
+  tag: "v1.2.9"
 
 # Host URL for application
 ingressHost: "app.EXAMPLE_DOMAIN"
 
 # URL for access to classic application
 nbsExternalName: app-classic.EXAMPLE_DOMAIN
+
+# The timezone to initialize the JVM with
+timezone: "UTC"
 
 #Database access credentials
 jdbc:

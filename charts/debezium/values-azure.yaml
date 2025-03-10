@@ -32,8 +32,8 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-connector-v071524"
-    topics_basename: "debezium-connector"
+    group_id: "debezium-odse-srte-connector-v013125"
+    topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
@@ -41,8 +41,8 @@ connect:
     sql_server_agent_override: true
     sql_server_agent_status: "select dbo.IsSqlAgentRunning()"
 
-  sqlserverconnector: {
-    "name": "debezium-connector-v071524",
+  sqlserverconnector_odse: {
+    "name": "debezium-odse-connector-v013125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net",
@@ -70,10 +70,52 @@ connect:
       "topic.creation.default.replication.factor": 2,
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
-      "transforms": "dropPrefix",
+      "transforms": "dropPrefix, convertTimezone",
       "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nbs_$1",
+      "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
+      "transforms.convertTimezone.converted.timezone": "UTC",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "true",
+    }
+  }
+  sqlserverconnector_srte: {
+    "name": "debezium-srte-connector-v013125",
+    "config": {
+      "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
+      "database.hostname": "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net",
+      "database.port": "1433",
+      "database.user": "nbs_ods",
+      "database.password": "ods",
+      "database.dbname": "nbs_srte",
+      "database.names": "nbs_srte",
+      "database.server.name": "srte",
+      "database.history.kafka.bootstrap.servers": "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092",
+      "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
+      #      manually bypass the sqlserver agent status query
+      "database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
+      "database.trustServerCertificate": "true",
+      "include.schema.changes": "true",
+      "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "key.converter.schemas.enable": "true",
+      "producer.max.request.size": "10000000", #10MB
+      "producer.message.max.bytes": "10000000", #10MB
+      "snapshot.mode": "initial",
+      "schema.history.internal.kafka.topic": "srte-schema-history",
+      "schema.history.internal.kafka.bootstrap.servers": "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092",
+      "table.include.list": "dbo.Anatomic_site_code, dbo.City_code_value, dbo.Cntycity_code_value, dbo.Code_value_clinical, dbo.Code_value_general, dbo.Codeset, dbo.Codeset_Group_Metadata, dbo.Country_code, dbo.Country_Code_ISO, dbo.Country_XREF, dbo.ELR_XREF, dbo.IMRDBMapping, dbo.Investigation_code, dbo.Jurisdiction_code, dbo.Jurisdiction_participation, dbo.Lab_coding_system, dbo.Lab_result, dbo.Lab_result_Snomed, dbo.Lab_test, dbo.Labtest_loinc, dbo.Labtest_Progarea_Mapping, dbo.Language_code, dbo.LDF_page_set, dbo.LOINC_code, dbo.Loinc_condition, dbo.Loinc_snomed_condition, dbo.NAICS_Industry_code, dbo.Occupation_code, dbo.Participation_type, dbo.Program_area_code, dbo.Race_code, dbo.Snomed_code, dbo.Specimen_source_code, dbo.Standard_XREF, dbo.State_code, dbo.State_county_code_value, dbo.State_model, dbo.TotalIDM, dbo.Treatment_code, dbo.Unit_code, dbo.Zip_code_value, dbo.Zipcnty_code_value",
+      "tasks.max": "1",
+      "topic.prefix": "cdc",
+      "topic.creation.default.replication.factor": 2,
+      "topic.creation.default.partitions": 10,
+      "topic.creation.default.cleanup.policy": "compact",
+      "transforms": "dropPrefix, convertTimezone",
+      "transforms.dropPrefix.regex": "cdc\\.NBS_SRTE\\.dbo\\.(.+)",
+      "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
+      "transforms.dropPrefix.replacement": "nrt_srte_$1",
+      "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
+      "transforms.convertTimezone.converted.timezone": "UTC",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
       "value.converter.schemas.enable": "true",
     }
@@ -87,7 +129,9 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-connector-v071524"
+      value: "debezium-odse-srte-connector-v013125"
+    - name: TZ
+      value: "UTC"
 
 ui:
   enabled: false
@@ -124,4 +168,6 @@ ui:
   env:
     - name: KAFKA_CONNECT_URIS
       value: "http://debezium-connect:8083"
+    - name: TZ
+      value: "UTC"
 

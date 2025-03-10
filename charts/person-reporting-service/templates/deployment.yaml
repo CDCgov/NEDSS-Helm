@@ -48,6 +48,8 @@ spec:
               value: {{ .Values.log.path }}
             - name: DB_ODSE_URL
               value: {{ .Values.odse.dburl }}
+            - name: TZ
+              value: {{ .Values.timezone }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

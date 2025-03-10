@@ -1,0 +1,49 @@
+# Manifest for deploying app with argocd
+# You must provide the following
+# 1. Correct values.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nbs-gateway
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "4"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/nbs-gateway
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: landing.base
+          value: {{ .Values.nbsGateway.landingBase }}
+        - name: welcome.enabled
+          value: {{ .Values.nbsGateway.welcomePage | quote }}          
+        - name: pageBuilder.enabled
+          value: 'false'
+        - name: pageBuilder.page.library.enabled
+          value: 'false'
+        - name: pageBuilder.page.management.create.enabled
+          value: 'false'
+        - name: pageBuilder.page.management.edit.enabled
+          value: 'false'
+        - name: nbsExternalName
+          value: {{ .Values.env.classicAppUrl }}
+        - name: ingressHost
+          value: {{ .Values.env.appUrl }}
+        - name: oidc.client.secret
+          value: {{ .Values.nbsGateway.clientSecret }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true  
+  sources: []
+  project: default

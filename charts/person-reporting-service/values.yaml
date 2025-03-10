@@ -1,10 +1,11 @@
 replicaCount: 1
 
 env: "prod"
+timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/person-reporting-service"
-  tag: "v1.0.8"
+  tag: "v1.1.0"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
