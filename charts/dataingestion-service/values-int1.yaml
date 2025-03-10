@@ -115,3 +115,4 @@ sftp:
   password: ""
 
 kafkaConcurrency: "1"
+apiPayloadMaxSize: "100MB"

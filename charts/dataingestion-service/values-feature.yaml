@@ -114,3 +114,6 @@ sftp:
   host: ""
   username: ""
   password: ""
+
+
+apiPayloadMaxSize: "100MB"

@@ -64,6 +64,8 @@ spec:
               value: {{ .Values.timezone | default "UTC" }}
             - name: KAFKA_CONCURRENCY
               value: "{{ .Values.kafkaConcurrency}}"
+            - name: API_PAYLOAD_MAX_SIZE
+              value: "{{ .Values.apiPayloadMaxSize}}"
           volumeMounts:
           - mountPath: /usr/share/dataingestion/data
             name: di-persistent-storage     
