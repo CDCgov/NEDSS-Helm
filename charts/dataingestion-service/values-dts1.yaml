@@ -116,3 +116,6 @@ sftp:
 
 
 kafkaConcurrency: "1"
+
+
+apiPayloadMaxSize: "100MB"

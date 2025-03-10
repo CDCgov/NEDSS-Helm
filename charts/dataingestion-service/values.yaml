@@ -117,3 +117,5 @@ sftp:
   password: "EXAMPLE_SFTP_PASS"
 
 ##################################
+
+apiPayloadMaxSize: "100MB"

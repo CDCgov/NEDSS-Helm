@@ -3,7 +3,7 @@ controller:
   podAnnotations:
     linkerd.io/inject: enabled
   config:
-    proxy-body-size: "12m"
+    proxy-body-size: "100m"
     compute-full-forwarded-for: "true"
     use-forwarded-headers: "true"
     allow-snippet-annotations: "true"
