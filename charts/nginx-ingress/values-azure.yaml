@@ -7,7 +7,7 @@ controller:
     prometheus.io/port: "10254"
     prometheus.io/path: /metrics
   config:
-    proxy-body-size: "12m"
+    proxy-body-size: "100m"
     compute-full-forwarded-for: "true"
     use-forwarded-headers: "true"
     allow-snippet-annotations: "true"
