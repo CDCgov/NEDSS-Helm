@@ -104,7 +104,7 @@ connect:
       "snapshot.mode": "initial",
       "schema.history.internal.kafka.topic": "srte-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092",
-      "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, 
+      "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.Treatment, 
                         dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out,
                          dbo.Place, dbo.NBS_configuration, dbo.CT_contact, dbo.Auth_user, dbo.Intervention",
       "tasks.max": "1",

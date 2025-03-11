@@ -64,7 +64,7 @@ connect:
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-2.cdcnbsfeaturedevelopme.f4c8vq.c9.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsfeaturedevelopme.f4c8vq.c9.kafka.us-east-1.amazonaws.com:9092",
-      "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, 
+      "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.Treatment, 
                              dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out,
                               dbo.Place, dbo.NBS_configuration, dbo.CT_contact, dbo.Auth_user, dbo.Intervention",
       "tasks.max": "1",
