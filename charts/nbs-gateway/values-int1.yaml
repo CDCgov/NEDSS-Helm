@@ -30,15 +30,7 @@ patient:
     enabled: true
 
 pageBuilder:
-  enabled: "true"
-  page:
-    library:
-      enabled: "true"
-    management:
-      create:
-        enabled: "true"
-      edit:
-        enabled: "true"
+  enabled: "false"
 
 resources: {}
 
