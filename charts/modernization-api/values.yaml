@@ -121,6 +121,14 @@ ui:
   defaults:
     # The default sizing of components
     sizing: "medium"
+  # The session configuration settings are meant for a user interface to be able to alert a user that a session is
+  # going to expire and do not actually control the session timeout. The warning, and expiration settings should
+  # correspond to the session expiration configuration on the OIDC provider.
+  session:
+    # A duration that defines the amount of time to wait while the user is idle before warning of session timeout.
+    warning: 28m
+    # A duration that defines the amount of time to wait while the user is idle before navigating the user to the expired session page.
+    expiration: 30m
   # feature flag configurations for modernized ui
   search:
     events:
