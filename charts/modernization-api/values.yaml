@@ -62,8 +62,12 @@ mTLS:
 nbsExternalName: app-classic.EXAMPLE_DOMAIN
 
 resources:
+  requests:
+    memory: 512Mi
+    cpu: 250m
   limits:
-    memory: "4Gi"
+    memory: 1Gi
+    cpu: 500m
 
 autoscaling:
   enabled: false
