@@ -149,7 +149,7 @@ ui:
     search:
       filters:
         # Enables access to modernized Patient search filters
-        enabled: false
+        enabled: true
   deduplication:
     # Enable access to Deduplication screens
     enabled: false
