@@ -108,11 +108,3 @@ ui:
       enabled: true
       table:
         enabled: true
-  patient:
-    add:
-      enabled: true
-      extended:
-        enabled: true
-    search:
-      filters:
-        enabled: false
