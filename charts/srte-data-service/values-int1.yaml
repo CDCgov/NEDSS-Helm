@@ -33,11 +33,11 @@ service:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "2Gi"
-    cpu: "1000m"
+    memory: "1Gi"  
+    cpu: "500m"      
   requests:
-    memory: "1Gi"
-    cpu: "500m"
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
