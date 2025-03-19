@@ -31,7 +31,7 @@ spec:
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
 
-        {{- if .Values.probes.readiness.enabled }}
+        {{- if .Values.probes.readiness.enabled | default "true"  }}
         readinessProbe:
           httpGet:
             path: {{ .Values.probes.readiness.path | default "/nbs/login" }}
@@ -41,7 +41,7 @@ spec:
           failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
         {{- end }}
 
-        {{- if .Values.probes.liveness.enabled }}
+        {{- if .Values.probes.liveness.enabled | default "true" }}
         livenessProbe:
           httpGet:
             path: {{ .Values.probes.liveness.path | default "/nbs/login" }}

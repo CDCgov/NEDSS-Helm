@@ -28,7 +28,7 @@ spec:
           value: "{{ $value }}"
         {{- end }}
 
-        {{- if .Values.probes.readiness.enabled }}
+        {{- if .Values.probes.readiness.enabled | default "true"  }}
         readinessProbe:
           tcpSocket:
             port: {{ .Values.probes.readiness.port | default "2323" }}
@@ -37,7 +37,7 @@ spec:
           failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
         {{- end }}
 
-        {{- if .Values.probes.liveness.enabled }}
+        {{- if .Values.probes.liveness.enabled | default "true"  }}
         livenessProbe:
           tcpSocket:
             port: {{ .Values.probes.readiness.port | default "2323" }}
