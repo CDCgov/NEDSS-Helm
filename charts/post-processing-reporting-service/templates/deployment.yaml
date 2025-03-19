@@ -64,10 +64,10 @@ spec:
               value: {{ .Values.featureFlag.summaryReportEnable }}
             - name: FF_AGGREGATE_REPORT_ENABLE
               value: {{ .Values.featureFlag.aggregateReportEnable }}
-            - name: FIXED_DELAY_ID
-              value: {{ .Values.service.fixedDelay.cachedIds }}
-            - name: FIXED_DELAY_DM
-              value: {{ .Values.service.fixedDelay.datamart }}
+{{/*            - name: FIXED_DELAY_ID*/}}
+{{/*              value: {{ .Values.service.fixedDelay.cachedIds }}*/}}
+{{/*            - name: FIXED_DELAY_DM*/}}
+{{/*              value: {{ .Values.service.fixedDelay.datamart }}*/}}
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
