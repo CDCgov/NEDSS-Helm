@@ -30,6 +30,9 @@ service:
   type: ClusterIP
   port: 8095
   httpsPort: 443
+  fixedDelay:
+    cachedIds: 20000 # Time in millis
+    datamart: 60000 # Time in millis
 
 ingress:
   enabled: true
@@ -72,4 +75,10 @@ log:
   path: "/usr/share/post-processing-reporting/data"
 
 featureFlag:
-  eventMetricEnable: "false"
+  eventMetricEnable: "true"
+  dTbHivEnable: "false"
+  morbReportDmEnable: "false"
+  invSummaryDmEnable: "false"
+  summaryReportEnable: "false"
+  aggregateReportEnable: "false"
+
