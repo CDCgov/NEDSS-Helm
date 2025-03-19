@@ -68,7 +68,6 @@ spec:
 {{/*              value: {{ .Values.service.fixedDelay.cachedIds }}*/}}
 {{/*            - name: FIXED_DELAY_DM*/}}
 {{/*              value: {{ .Values.service.fixedDelay.datamart }}*/}}
-
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
