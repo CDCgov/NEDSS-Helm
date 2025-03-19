@@ -48,6 +48,23 @@ spec:
         ]
         command: ['java', '-Duser.timezone={{ (.Values).timezone | default "UTC" }}', '-jar', 'api.jar']
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        {{- if .Values.probes.readiness.enabled | default "true" }}
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.probes.readiness.port | default "8000" }}
+          initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
+          periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "30" }}
+          failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
+        {{- end }}
+
+        {{- if .Values.probes.liveness.enabled | default "true" }}
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.probes.readiness.port | default "8000" }}
+          initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "120" }}
+          periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "60" }}
+          failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
+        {{- end }}
         ports:
         - containerPort: 8000
         resources:
@@ -63,22 +80,4 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
-      {{- end }}
-
-      {{- if .Values.probes.readiness.enabled | default "true" }}
-      readinessProbe:
-        tcpSocket:
-          port: {{ .Values.probes.readiness.port | default "8000" }}
-        initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
-        periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "30" }}
-        failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
-      {{- end }}
-
-      {{- if .Values.probes.liveness.enabled | default "true" }}
-      livenessProbe:
-        tcpSocket:
-          port: {{ .Values.probes.readiness.port | default "8000" }}
-        initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "120" }}
-        periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "60" }}
-        failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
       {{- end }}
