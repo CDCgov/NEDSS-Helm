@@ -15,6 +15,9 @@ spec:
       labels:
         app: {{ .name }}
     spec:
+      {{- if .serviceAccountName }}
+      {{- end }}
+      serviceAccountName: {{ .serviceAccountName }}
       containers:
       - name: {{ .containerName }}
         image: "{{ $.Values.image.repository }}/{{ .containerName }}:{{ $.Values.image.tag }}"
