@@ -35,8 +35,13 @@ pageBuilder:
         enabled: "true"
       edit:
         enabled: "true"
-
-resources: {}
+resources:
+  limits:
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 nbsExternalName: app-classic.test.nbspreview.com
 
