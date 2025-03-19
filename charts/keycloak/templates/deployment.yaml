@@ -40,6 +40,27 @@ spec:
         - start-dev
         command:
         - /opt/keycloak/bin/kc.sh
+
+        {{- if .Values.probes.readiness.enabled }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.probes.readiness.path | default "/auth" }}
+            port: {{ .Values.probes.readiness.port | default "8080" }}
+          initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
+          periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "30" }}
+          failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
+        {{- end }}
+
+        {{- if .Values.probes.liveness.enabled }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.probes.liveness.path | default "/auth" }}
+            port: {{ .Values.probes.liveness.port | default "8080" }}
+          initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "120" }}
+          periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "60" }}
+          failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
+        {{- end }}  
+
         env:
         - name: KEYCLOAK_ADMIN
           value: {{ quote .Values.deployment.keycloak.env.keycloakAdmin }}
