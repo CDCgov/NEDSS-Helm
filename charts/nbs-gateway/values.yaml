@@ -44,7 +44,13 @@ pageBuilder:
       edit:
         enabled: "true"
 
-resources: {}
+resources:
+  limits:
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 nbsExternalName: app-classic.EXAMPLE_DOMAIN
 

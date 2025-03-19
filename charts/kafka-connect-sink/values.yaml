@@ -81,7 +81,13 @@ customEnv: { }
 SQL_SERVER_CONNECTOR_CONFIG: /etc/sqlServerConnector.json
 JDBC_CONNECTOR_CONFIG: /etc/jdbcConnector.sh
 
-resources: { }
+resources:
+  limits:
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following

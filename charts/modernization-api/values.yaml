@@ -63,7 +63,11 @@ nbsExternalName: app-classic.EXAMPLE_DOMAIN
 
 resources:
   limits:
-    memory: "4Gi"
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
