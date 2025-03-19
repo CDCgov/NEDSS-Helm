@@ -48,9 +48,13 @@ ingress:
             port:
               number: 8443
 
-resources: 
+resources:
   limits:
-    memory: "3Gi"
+    memory: "2Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "1Gi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false

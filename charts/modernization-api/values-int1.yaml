@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.396c86d
+  tag: 1.0.1-SNAPSHOT.3371e97
 
 imagePullSecrets: []
 nameOverride: ""
@@ -63,7 +63,11 @@ nbsExternalName: app-classic.int1.nbspreview.com
 
 resources:
   limits:
-    memory: "2Gi"
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
