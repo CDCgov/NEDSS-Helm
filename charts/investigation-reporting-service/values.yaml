@@ -67,9 +67,10 @@ rdb:
   dburl: "EXAMPLE_DB_URL"
 
 featureFlag:
-  phcDatamartEnable: "false"
-  bmirdCaseEnable: "false"
-  contactRecordEnable: "false"
+  phcDatamartEnable: "true"
+  bmirdCaseEnable: "true"
+  contactRecordEnable: "true"
+  treatmentEnable: "true"
 
 kafka:
   cluster: "EXAMPLE_KAFKA_CLUSTER"
