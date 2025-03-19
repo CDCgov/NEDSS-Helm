@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.61ad2a3"
+  tag: "1.0.1-SNAPSHOT.e170979"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -40,7 +40,13 @@ ingress:
     - app.int1.nbspreview.com
 
 # Kubernetes resource limits
-resources: {}
+resources:
+  limits:
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
@@ -67,9 +73,10 @@ rdb:
   dburl: ""
 
 featureFlag:
-  phcDatamartEnable: "false"
-  bmirdCaseEnable: "false"
-  contactRecordEnable: "false"
+  phcDatamartEnable: "true"
+  bmirdCaseEnable: "true"
+  contactRecordEnable: "true"
+  treatmentEnable: "false"
 
 kafka:
   cluster: ""

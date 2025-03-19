@@ -33,9 +33,13 @@ ingress:
   annotations: {}
   tls: []
 
-resources: 
+resources:
   limits:
-    memory: "3Gi"
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
