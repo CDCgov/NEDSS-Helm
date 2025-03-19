@@ -27,3 +27,21 @@ spec:
         - name: {{ $key }}
           value: "{{ $value }}"
         {{- end }}
+
+        {{- if .Values.probes.liveness.enabled }}
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.probes.readiness.port }}
+          initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
+          periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+          failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+        {{- end }}
+
+        {{- if .Values.probes.readiness.enabled }}
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.probes.readiness.port }}
+          initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
+          periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+          failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+        {{- end }}
