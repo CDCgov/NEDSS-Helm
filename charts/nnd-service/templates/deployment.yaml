@@ -50,7 +50,20 @@ spec:
               value: {{ .Values.authUri }}
             - name: NND_LOG_PATH
               value: {{ .Values.log.path }}
-
+          livenessProbe:
+            httpGet:
+              path: extraction/actuator/info
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 45
+            periodSeconds: 10
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              path: extraction/actuator/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 45
+            periodSeconds: 10
+            failureThreshold: 10
           volumeMounts:
           - mountPath: /usr/share/nndservice/data
             name: di-persistent-storage     
