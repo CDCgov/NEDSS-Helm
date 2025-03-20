@@ -36,8 +36,7 @@ spec:
 
           {{- if .Values.probes.readiness.enabled | default "true"  }}
           readinessProbe:
-            httpGet:
-              path: {{ .Values.probes.readiness.path | default "/extraction" }}
+            tcpSocket:
               port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "30" }}
             periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "10" }}
@@ -46,8 +45,7 @@ spec:
 
           {{- if .Values.probes.liveness.enabled | default "true" }}
           livenessProbe:
-            httpGet:
-              path: {{ .Values.probes.liveness.path | default "/extraction" }}
+            tcpSocket:
               port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
             periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "30" }}
