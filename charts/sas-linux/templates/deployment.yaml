@@ -31,7 +31,7 @@ spec:
         {{- if .Values.probes.readiness.enabled | default "true"  }}
         readinessProbe:
           tcpSocket:
-            port: {{ .Values.probes.readiness.port | default "2323" }}
+            port: {{ .Values.service.port }}
           initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
           periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "30" }}
           failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
@@ -40,7 +40,7 @@ spec:
         {{- if .Values.probes.liveness.enabled | default "true"  }}
         livenessProbe:
           tcpSocket:
-            port: {{ .Values.probes.readiness.port | default "2323" }}
+            port: {{ .Values.service.port }}
           initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "120" }}
           periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "60" }}
           failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
