@@ -34,7 +34,8 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
-          {{- if (ne .Values.probes.readiness.enabled false) }}
+          {{- $readinessProbeEnabled := default true .Values.probes.readiness.enabled}}
+          {{- if $readinessProbeEnabled }}
           readinessProbe:
             tcpSocket:
               port: {{ .Values.service.port }}
@@ -43,7 +44,8 @@ spec:
             failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
           {{- end }}
 
-          {{- if  (ne .Values.probes.liveness.enabled false) }}
+          {{- $livenessProbeEnabled := default true .Values.probes.liveness.enabled}}
+          {{- if $livenessProbeEnabled }}
           livenessProbe:
             tcpSocket:
               port: {{ .Values.service.port }}
