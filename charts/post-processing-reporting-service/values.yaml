@@ -82,3 +82,9 @@ featureFlag:
   summaryReportEnable: "false"
   aggregateReportEnable: "false"
 
+# Overide available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
