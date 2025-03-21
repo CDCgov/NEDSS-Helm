@@ -50,6 +50,8 @@ spec:
               value: {{ .Values.authUri }}
             - name: NND_LOG_PATH
               value: {{ .Values.log.path }}
+            - name: JAVA_TOOL_OPTIONS
+              value: {{ .Values.java.jvmOptions}}
           livenessProbe:
             httpGet:
               path: extraction/actuator/info
