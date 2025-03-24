@@ -23,6 +23,7 @@ data:
     message.max.bytes=10000000
     offset.flush.timeout.ms=30000
     snapshot.mode=no_data
+    snapshot.lock.timeout.ms=60000
     value.converter=org.apache.kafka.connect.json.JsonConverter
     value.converter.schemas.enable=false
     include.schema.changes=true
