@@ -80,8 +80,8 @@ azure:
 
 
 # Overide available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
-# probes:
-#   readiness:
-#     enabled: true
-#   liveness:
-#     enabled: true
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
