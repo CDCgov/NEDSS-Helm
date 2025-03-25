@@ -73,7 +73,7 @@ log:
 authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
 
-# Overide available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
     enabled: true
