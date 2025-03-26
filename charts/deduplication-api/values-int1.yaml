@@ -1,0 +1,76 @@
+replicaCount: 1
+
+env: "int1"
+
+image:
+  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
+  pullPolicy: IfNotPresent
+  tag: 1.0.1-SNAPSHOT.b2bd972
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podSecurityContext: {}
+
+podAnnotations: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8083
+  httpsPort: 443
+
+ingress:
+  enabled: true
+  className: "nginx"
+  tls:
+    - secretName: dataingestion.fts1.nbspreview.com
+      hosts:
+        - dataingestion.fts1.nbspreview.com
+
+ingressHost: dataingestion.fts1.nbspreview.com
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+jdbc:
+  deduplication:
+    dbserver:
+    username:
+    password:
+  nbs:
+    dbserver:
+    username:
+    password:
+  mpi:
+    dbserver:
+    username:
+    password:
+
+deduplication:
+  # url for Record Linker API
+  recordLinker:
+    url: http://record-linker-api.default.svc.cluster.local:8080
+  algorithm:
+    # should data elements and algorithm updates be pushed to Record Linker API
+    updateRecordLinker: false
+  sync:
+    enabled: false

@@ -1,0 +1,38 @@
+{{- $fullName := include "deduplication-api.fullname" . -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "deduplication-api.fullname" . }}
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  tls:
+    - secretName: {{ .Values.ingressHost }}
+      hosts:
+        - {{ .Values.ingressHost }}
+  rules:
+    - host: {{ .Values.ingressHost }}
+      http:
+        paths:
+          - path: "/swagger-ui/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: https
+          - path: "/v3/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: https
+          - path: "/api/deduplication/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: https

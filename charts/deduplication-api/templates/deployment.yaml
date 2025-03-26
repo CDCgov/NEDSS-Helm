@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "deduplication-api.fullname" . }}
+  labels:
+    {{- include "deduplication-api.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "deduplication-api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "deduplication-api.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "deduplication-api.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          env:
+            - name: DEDUPLICATION_DB_URL
+              value:  {{ .Values.jdbc.deduplication.dbserver }}
+            - name: DEDUPLICATION_DB_USERNAME
+              value: {{ .Values.jdbc.deduplication.username }}
+            - name: DEDUPLICATION_DB_PASSWORD
+              value: {{ .Values.jdbc.deduplication.password }}
+            
+            - name: NBS_DB_URL
+              value:  {{ .Values.jdbc.nbs.dbserver }}
+            - name: NBS_DB_USERNAME
+              value: {{ .Values.jdbc.nbs.username }}
+            - name: NBS_DB_PASSWORD
+              value: {{ .Values.jdbc.nbs.password }}
+
+            - name: MPI_DB_URL
+              value:  {{ .Values.jdbc.mpi.dbserver }}
+            - name: MPI_DB_USERNAME
+              value: {{ .Values.jdbc.mpi.username }}
+            - name: MPI_DB_PASSWORD
+              value: {{ .Values.jdbc.mpi.password }}
+            
+            - name: RECORD_LINKER_URL
+              value: {{ .Values.deduplication.recordLinker.url }}
+            - name: ALGORITHM_UPDATE_RL
+              value: {{ .Values.deduplication.algorithm.updateRecordLinker }}
+            - name: SYNC_ENABLED
+              value: {{ .Values.deduplication.sync.enabled }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}0
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
