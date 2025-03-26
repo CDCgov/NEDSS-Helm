@@ -39,7 +39,13 @@ ingress:
     - app.EXAMPLE_DOMAIN
 
 # Kubernetes resource limits
-resources: {}
+resources:
+  limits:
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
