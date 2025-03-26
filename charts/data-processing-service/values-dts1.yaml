@@ -83,4 +83,4 @@ keycloak:
     clientId: ""
     clientSecret: ""
 
-kafkaThread: "10"
+kafkaThread: "1"
