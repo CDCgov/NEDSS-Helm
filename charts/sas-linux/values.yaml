@@ -26,6 +26,7 @@ etl:
   schedule: "0 0 * * *"
 
 
+
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:

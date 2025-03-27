@@ -83,7 +83,6 @@ env:
 
 lifecycle: {}
 
-
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:

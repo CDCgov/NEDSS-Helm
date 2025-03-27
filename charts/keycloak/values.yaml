@@ -52,7 +52,8 @@ pvc:
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
-# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+
+# Overide available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
     enabled: true
