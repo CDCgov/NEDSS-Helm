@@ -84,3 +84,9 @@ featureFlag:
   aggregateReportEnable: "false"
 
 
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

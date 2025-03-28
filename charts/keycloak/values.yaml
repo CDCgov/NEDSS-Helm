@@ -52,6 +52,7 @@ pvc:
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
+
 # Overide available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:

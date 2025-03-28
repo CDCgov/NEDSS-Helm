@@ -85,3 +85,10 @@ keycloak:
   srte:
     clientId: "EXAMPLE_SRTE_CLIENT_ID"
     clientSecret: "EXAMPLE_SRTE_CLIENT_SECRET"
+
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

@@ -84,3 +84,10 @@ security:
 oidc:
   enabled: "true"
   issuerUri: "https://app.fts2.nbspreview.com/auth/realms/nbs-users"
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
