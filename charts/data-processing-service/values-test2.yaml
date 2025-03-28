@@ -84,3 +84,8 @@ keycloak:
     clientSecret: ""
     
 kafkaThread: "1"
+
+features:
+  modernizedMatching:
+    enabled: false
+    url: ""
