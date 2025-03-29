@@ -66,3 +66,18 @@ pvc:
 
 efsFileSystemId: ""
 
+java:
+  jvmOptions: "-Xms1g -Xmx2g -XX:+ExitOnOutOfMemoryError"
+
+# resources:
+#   requests:
+#     memory: "2Gi"
+#     cpu: "500m"
+#   limits:
+#     memory: "4Gi"
+#     cpu: "1"
+# autoscaling:
+#   enabled: true
+#   minReplicas: 2
+#   maxReplicas: 5
+#   targetCPUUtilizationPercentage: 75
