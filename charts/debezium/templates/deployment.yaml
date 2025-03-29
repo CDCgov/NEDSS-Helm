@@ -39,6 +39,24 @@ spec:
               protocol: {{ .Values.connect.service.protocol }}
           resources:
             {{- toYaml .Values.connect.resources | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probes.readiness.path | default "/connectors/debezium-connector-v2/status" }}
+              port: {{ .Values.probes.readiness.port | default "8083" }}
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "30" }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
+          {{- end }}
+
+          {{- if .Values.probes.liveness.enabled | default "true"  }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.liveness.path | default "/connectors/debezium-connector-v2/status" }}
+              port: {{ .Values.probes.liveness.port | default "8083" }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "30" }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
+          {{- end }}  
           volumeMounts:
             - name: config
               mountPath: /etc/debezium/connector-odse.json
