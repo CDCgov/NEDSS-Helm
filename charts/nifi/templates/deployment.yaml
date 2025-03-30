@@ -48,7 +48,7 @@ spec:
               value: {{ .Values.jvmheap.init }}
             - name: NIFI_JVM_HEAP_MAX
               value: {{ .Values.jvmheap.max }}
-                  {{- if .Values.probes.readiness.enabled | default "true"  }}
+          {{- if .Values.probes.readiness.enabled | default "true"  }}
           readinessProbe:
             tcpSocket:
               port: {{ .Values.probes.readiness.port | default "8443" }}
