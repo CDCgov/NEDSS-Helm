@@ -31,7 +31,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.probes.readiness.enabled | default "true"  }}
+        {{- if .Values.probes.readiness.enabled | default "true"  }}
           readinessProbe:
           httpGet:
             path: {{ .Values.probes.readiness.path | default "/_cluster/health" }}
@@ -40,16 +40,6 @@ spec:
           periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "10" }}
           failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "3" }}
         {{- end }}
-
-        {{- if .Values.probes.readiness.enabled | default "true"  }}
-          readinessProbe:
-            httpGet:
-              path: {{ .Values.probes.readiness.path | default "/_cluster/health" }}
-              port: {{ .Values.probes.readiness.port | default "9200" }}
-            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "30" }}
-            periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "10" }}
-            failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "3" }}
-          {{- end }}
 
         {{- if .Values.probes.liveness.enabled | default "true"  }}
           livenessProbe:
