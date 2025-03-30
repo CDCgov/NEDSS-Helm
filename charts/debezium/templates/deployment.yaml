@@ -39,6 +39,8 @@ spec:
               protocol: {{ .Values.connect.service.protocol }}
           resources:
             {{- toYaml .Values.connect.resources | nindent 12 }}
+            
+          {{- if .Values.probes.readiness.enabled | default "true"  }}
           readinessProbe:
             httpGet:
               path: {{ .Values.probes.readiness.path | default "/connectors/debezium-connector-v2/status" }}
