@@ -15,21 +15,7 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:
-          - path: "/swagger-ui/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  name: https
-          - path: "/v3/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  name: https
-          - path: "/api/deduplication/"
+          - path: "/nbs/deduplication/"
             pathType: Prefix
             backend:
               service:
