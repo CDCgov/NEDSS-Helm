@@ -31,11 +31,11 @@ ingress:
   enabled: true
   className: "nginx"
   tls:
-    - secretName: dataingestion.fts1.nbspreview.com
+    - secretName: app.int1.nbspreview.com
       hosts:
-        - dataingestion.fts1.nbspreview.com
+        - app.int1.nbspreview.com
 
-ingressHost: dataingestion.fts1.nbspreview.com
+ingressHost: "app.int1.nbspreview.com"
 
 resources: {}
 
@@ -68,7 +68,7 @@ jdbc:
 deduplication:
   # url for Record Linker API
   recordLinker:
-    url: http://record-linker-api.default.svc.cluster.local:8080
+    url:
   algorithm:
     # should data elements and algorithm updates be pushed to Record Linker API
     updateRecordLinker: false

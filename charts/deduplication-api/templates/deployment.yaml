@@ -37,6 +37,12 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          command: ['java', '-jar', 'api.jar']
+          args: [   
+            '--deduplication.algorithm.updateRecordLinker={{ (((.Values).deduplication).algorithm).updateRecordLinker | default "false" }}',
+            '--deduplication.recordLinker.url={{ (((.Values).deduplication).recordLinker).url | default "" }}',
+            '--deduplication.sync.enabled={{ (((.Values).deduplication).sync).enabled | default "false" }}'
+          ]
           env:
             - name: DEDUPLICATION_DB_URL
               value:  {{ .Values.jdbc.deduplication.dbserver }}
@@ -58,13 +64,6 @@ spec:
               value: {{ .Values.jdbc.mpi.username }}
             - name: MPI_DB_PASSWORD
               value: {{ .Values.jdbc.mpi.password }}
-            
-            - name: RECORD_LINKER_URL
-              value: {{ .Values.deduplication.recordLinker.url }}
-            - name: ALGORITHM_UPDATE_RL
-              value: {{ .Values.deduplication.algorithm.updateRecordLinker }}
-            - name: SYNC_ENABLED
-              value: {{ .Values.deduplication.sync.enabled }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
