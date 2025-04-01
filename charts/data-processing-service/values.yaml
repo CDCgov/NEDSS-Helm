@@ -92,3 +92,8 @@ probes:
     enabled: true
   liveness:
     enabled: true
+
+features:
+  modernizedMatching:
+    enabled: false
+    url: ""
