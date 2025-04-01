@@ -82,6 +82,14 @@ keycloak:
   srte:
     clientId: ""
     clientSecret: ""
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
+
     
 kafkaThread: "1"
 
@@ -89,3 +97,4 @@ features:
   modernizedMatching:
     enabled: false
     url: ""
+
