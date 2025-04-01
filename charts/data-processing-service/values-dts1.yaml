@@ -89,3 +89,11 @@ probes:
     enabled: true
   liveness:
     enabled: true
+
+kafkaThread: "1"
+
+features:
+  modernizedMatching:
+    enabled: false
+    url: ""
+
