@@ -6,7 +6,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nnd-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-data-exchange-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.9"
+  tag: "v1.1.1"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -77,3 +77,11 @@ azure:
     storageAccountName: 
     storageClass: azurefile-csi-private-nnd
     storageRequest: 20Gi
+
+
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

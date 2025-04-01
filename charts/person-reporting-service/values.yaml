@@ -5,7 +5,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/person-reporting-service"
-  tag: "v1.1.0"
+  tag: "v1.1.1"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -67,3 +67,11 @@ kafka:
 
 log:
   path: "/usr/share/person-reporting/data"
+
+
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

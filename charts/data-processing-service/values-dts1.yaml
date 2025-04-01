@@ -5,7 +5,7 @@ env: "dts"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.84a8d0c
+  tag: 1.0.1-SNAPSHOT.27cb3bc
 
 imagePullSecrets: []
 nameOverride: ""
@@ -82,3 +82,18 @@ keycloak:
   srte:
     clientId: ""
     clientSecret: ""
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
+
+kafkaThread: "1"
+
+features:
+  modernizedMatching:
+    enabled: false
+    url: ""
+

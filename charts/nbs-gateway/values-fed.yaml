@@ -26,3 +26,10 @@ nbsExternalName: app-classic.fed.nbspreview.com
 ingressHost: "app.fed.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

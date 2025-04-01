@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: "v1.2.9"
+  tag: "v1.3.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -153,3 +153,11 @@ ui:
   deduplication:
     # Enable access to Deduplication screens
     enabled: false
+
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

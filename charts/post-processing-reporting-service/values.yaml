@@ -5,7 +5,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/post-processing-reporting-service"
-  tag: "v1.1.0"
+  tag: "v1.1.1"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -82,3 +82,9 @@ featureFlag:
   summaryReportEnable: "false"
   aggregateReportEnable: "false"
 
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
