@@ -36,4 +36,5 @@ Values for nbs-gateway charts.
 | nbsExternalName | string | app-classic.example.com | Defines DNS record of the legacy application. Change this to point to legacy NBS host name |
 | resources | object | {} | Enable default resources. Can be used to setup resource limits if necessary |
 | ingressHost | string | "app.example.com" | configure ingress hostname. This is not required at this point |
-| modernizationApiHost | string | "modernization-api.default.svc.cluster.local:8080" | Elastic search host. Default values should work, no changes needed unless there is a change in the elastic search deployment name. |
+| modernizationApiHost | string | "modernization-api.default.svc.cluster.local:8080" | Modernization Api host. Default values should work, no changes needed unless there is a change in the modernization deployment. |
+| deduplicationApiHost | string | "deduplication-api.default.svc.cluster.local:8083" | Deduplication Api host. Default values should work, no changes needed unless there is a change in the deduplication deployment. |

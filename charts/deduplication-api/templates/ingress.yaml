@@ -15,7 +15,7 @@ spec:
     - host: {{ .Values.ingressHost }}
       http:
         paths:
-          - path: "/nbs/deduplication/"
+          - path: "/nbs/api/deduplication/"
             pathType: Prefix
             backend:
               service:
