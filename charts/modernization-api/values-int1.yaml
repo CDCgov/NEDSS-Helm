@@ -125,4 +125,4 @@ ui:
     profile:
       enabled: true
   deduplication:
-    enabled: false
+    enabled: true
