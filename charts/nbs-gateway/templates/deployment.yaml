@@ -43,6 +43,8 @@ spec:
           '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}',
           '--nbs.gateway.pagebuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', 
           '--nbs.gateway.pagebuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}',
+          '--nbs.gateway.deduplication.enabled={{ ((.Values).deduplication).enabled | default "false" }}', 
+          '--nbs.gateway.deduplication.service={{ .Values.deduplicationApiHost }}', 
           '--nbs.gateway.welcome.enabled={{ ((.Values).welcome).enabled | default "false" }}',
           '--nbs.gateway.landing.base={{  ((.Values).landing).base | default "/nbs/login" }}'
         ]

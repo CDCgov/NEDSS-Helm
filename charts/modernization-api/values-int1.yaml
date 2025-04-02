@@ -63,10 +63,10 @@ nbsExternalName: app-classic.int1.nbspreview.com
 
 resources:
   limits:
-    memory: "1Gi"  
-    cpu: "500m"      
+    memory: "1Gi"
+    cpu: "500m"
   requests:
-    memory: "512Mi"  
+    memory: "512Mi"
     cpu: "250m"
 
 autoscaling:
@@ -125,11 +125,10 @@ ui:
     profile:
       enabled: true
   deduplication:
-    enabled: false
+    enabled: true
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
     enabled: true
   liveness:
-    enabled: true

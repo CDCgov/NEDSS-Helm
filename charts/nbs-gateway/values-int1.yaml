@@ -40,6 +40,9 @@ pageBuilder:
       edit:
         enabled: "true"
 
+deduplication:
+  enabled: "true"
+
 resources:
   limits:
     memory: "1Gi"  
@@ -57,6 +60,8 @@ modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
 
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+deduplicationApiHost: "deduplication-api.default.svc.cluster.local:8083"
 
 # OIDC settings
 oidc:
