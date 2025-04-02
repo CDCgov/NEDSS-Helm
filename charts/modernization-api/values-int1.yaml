@@ -132,3 +132,4 @@ probes:
   readiness:
     enabled: true
   liveness:
+    enabled: true
