@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "int1"
+env: "demo"
 
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
@@ -27,13 +27,7 @@ service:
   port: 8083
   httpsPort: 443
 
-resources:
-  limits:
-    memory: "1Gi"
-    cpu: "500m"
-  requests:
-    memory: "512Mi"
-    cpu: "250m"
+resources: {}
 
 autoscaling:
   enabled: false
@@ -69,7 +63,6 @@ deduplication:
     # should data elements and algorithm updates be pushed to Record Linker API
     updateRecordLinker: false
   sync:
-    # should the deduplication service connect to kafka a replicate changes into the Record Linker MPI
     enabled: false
 
 # Override available for readiness and liveness probes: path, initialDelaySeconds, periodSeconds, failureThreshold

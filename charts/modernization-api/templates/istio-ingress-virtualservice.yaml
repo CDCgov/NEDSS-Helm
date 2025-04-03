@@ -11,7 +11,7 @@ spec:
   gateways:
   - {{ include "modernization-api.istioIngressGatewayName" . }}
   http:
-  - match:    
+  - match:
     - uri:
         prefix: /nbs/redirect/
     - uri:
