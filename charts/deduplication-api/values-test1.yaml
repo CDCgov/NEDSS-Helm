@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "test2"
+env: "test1"
 
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
@@ -26,16 +26,6 @@ service:
   type: ClusterIP
   port: 8083
   httpsPort: 443
-
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-    - secretName: app.test-cdc-nbs.eqsandbox.com
-      hosts:
-        - app.test-cdc-nbs.eqsandbox.com
-
-ingressHost: "app.test-cdc-nbs.eqsandbox.com"
 
 resources: {}
 

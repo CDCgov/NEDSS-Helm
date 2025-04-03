@@ -27,16 +27,6 @@ service:
   port: 8083
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-    - secretName: app.int1.nbspreview.com
-      hosts:
-        - app.int1.nbspreview.com
-
-ingressHost: "app.int1.nbspreview.com"
-
 resources: {}
 
 autoscaling:
