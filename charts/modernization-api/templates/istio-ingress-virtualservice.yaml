@@ -13,14 +13,6 @@ spec:
   http:
   - match:
     - uri:
-        prefix: "/nbs/api/deduplication/"
-    route:
-    - destination:
-        host: deduplication-api
-        port:
-          number: 8083
-  - match:
-    - uri:
         prefix: /nbs/redirect/
     - uri:
         prefix: /nbs/api/

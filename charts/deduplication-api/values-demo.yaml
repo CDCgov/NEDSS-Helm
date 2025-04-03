@@ -27,16 +27,6 @@ service:
   port: 8083
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-    - secretName: app.demo-cdc-nbs.eqsandbox.com
-      hosts:
-        - app.demo-cdc-nbs.eqsandbox.com
-
-ingressHost: "app.demo-cdc-nbs.eqsandbox.com"
-
 resources: {}
 
 autoscaling:
