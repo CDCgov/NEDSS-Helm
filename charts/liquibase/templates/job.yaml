@@ -10,8 +10,7 @@ spec:
   {{- end }}
   # allow only a single instance of liquibase to run, no retries
   backoffLimit: 0
-  template:
-    
+  template:    
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
