@@ -64,10 +64,10 @@ mTLS:
 
 resources:
   limits:
-    memory: "1Gi"  
-    cpu: "500m"      
+    memory: "1Gi"
+    cpu: "500m"
   requests:
-    memory: "512Mi"  
+    memory: "512Mi"
     cpu: "250m"
 
 autoscaling:
@@ -109,6 +109,8 @@ ui:
     key: ""
   analytics:
     key: ""
+  defaults:
+    sizing: "small"
   search:
     view:
       enabled: true
