@@ -77,7 +77,7 @@ log:
 
 featureFlag:
   eventMetricEnable: "true"
-  dTbHivEnable: "false"
+  dTbHivEnable: "true"
   morbReportDmEnable: "false"
   invSummaryDmEnable: "false"
   summaryReportEnable: "false"
