@@ -4,10 +4,7 @@ metadata:
   name: {{ include "liquibase.fullname" . }}
   labels:
     {{- include "liquibase.labels" . | nindent 4 }}
-spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+spec:  
   # allow only a single instance of liquibase to run, no retries
   backoffLimit: 0
   template:    
@@ -19,9 +16,8 @@ spec:
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "liquibase.serviceAccountName" . }}
+        {{- toYaml . | nindent 8 }}      {{- end }}
+      
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       restartPolicy: Never      
@@ -30,11 +26,7 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
+          imagePullPolicy: {{ .Values.image.pullPolicy }}          
           env:
             - name: TZ
               value: {{ .Values.timezone }}
