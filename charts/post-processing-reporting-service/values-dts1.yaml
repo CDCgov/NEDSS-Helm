@@ -82,6 +82,8 @@ featureFlag:
   invSummaryDmEnable: "false"
   summaryReportEnable: "false"
   aggregateReportEnable: "false"
+  dymDMEnable: "true"
+
 
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold

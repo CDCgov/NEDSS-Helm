@@ -85,6 +85,8 @@ spec:
               value: {{ .Values.featureFlag.summaryReportEnable }}
             - name: FF_AGGREGATE_REPORT_ENABLE
               value: {{ .Values.featureFlag.aggregateReportEnable }}
+            - name: FF_DYM_DM_ENABLE
+              value: {{ .Values.featureFlag.dymDMEnable }}
 {{/*            - name: FIXED_DELAY_ID*/}}
 {{/*              value: {{ .Values.service.fixedDelay.cachedIds }}*/}}
 {{/*            - name: FIXED_DELAY_DM*/}}
