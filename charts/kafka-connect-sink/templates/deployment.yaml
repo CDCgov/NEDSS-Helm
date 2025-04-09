@@ -85,7 +85,7 @@ spec:
                 else
                   exit 1  # Connector state is not RUNNING
                 fi
-            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "30" }}
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
             periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "20" }}
             failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "3" }}
           {{- end }}
@@ -108,7 +108,7 @@ spec:
                 else
                   exit 1  # Connector state is not RUNNING
                 fi
-            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "30" }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
             periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "20" }}
             failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "3" }}
           {{- end }}  
