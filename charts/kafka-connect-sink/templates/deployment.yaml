@@ -72,7 +72,7 @@ spec:
             exec:
               command:
               - /bin/bash
-              - c
+              - -c
               - |
                 response=$(curl -s localhost:8083/connectors/Kafka-Connect-SqlServer-Sink-V2/status)
                 if echo "$response" | grep -q '"connector":{[^}]*"state":"RUNNING"'; then
@@ -95,7 +95,7 @@ spec:
             exec:
               command:
               - /bin/bash
-              - c
+              - -c
               - |
                 response=$(curl -s localhost:8083/connectors/Kafka-Connect-SqlServer-Sink-V2/status)
                 if echo "$response" | grep -q '"connector":{[^}]*"state":"RUNNING"'; then
