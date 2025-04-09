@@ -74,7 +74,8 @@ spec:
               - /bin/bash
               - -c
               - |
-                response=$(curl -s localhost:8083/connectors/Kafka-Connect-SqlServer-Sink-V2/status)
+                connector_name="{{ .Values.sqlServerConnector.name }}"
+                response=$(curl -s localhost:8083/connectors/$connector_name/status)
                 if echo "$response" | grep -q '"connector":{[^}]*"state":"RUNNING"'; then
                   task_states=$(echo "$response" | grep -o '"state": "[^"]*"' | grep -v '"state": "RUNNING"')
                   if [[ -z "$task_states" ]]; then
@@ -97,7 +98,8 @@ spec:
               - /bin/bash
               - -c
               - |
-                response=$(curl -s localhost:8083/connectors/Kafka-Connect-SqlServer-Sink-V2/status)
+                connector_name="{{ .Values.sqlServerConnector.name }}"
+                response=$(curl -s localhost:8083/connectors/$connector_name/status)
                 if echo "$response" | grep -q '"connector":{[^}]*"state":"RUNNING"'; then
                   task_states=$(echo "$response" | grep -o '"state": "[^"]*"' | grep -v '"state": "RUNNING"')
                   if [[ -z "$task_states" ]]; then
