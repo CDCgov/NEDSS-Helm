@@ -35,7 +35,7 @@ spec:
             - "-c"
             - |
               # SRTE Database
-              if [ {{ lower .Values.enabled_databases.srte }} == "true"  ]; then 
+              if [ {{ lower .Values.enabled_databases.srte }} == "1"  ]; then
                 echo "Executing changelog {{ .Values.changelog.srte }} in DB : {{ .Values.jdbc.srte_db_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.srte }}" --searchPath="./" --url="{{ .Values.jdbc.srte_db_url }}" --username={{ .Values.jdbc.srte_username }} --password={{ .Values.jdbc.srte_password }} update >> logs
                 # Returns non-zero code if failed
@@ -46,7 +46,7 @@ spec:
               fi
              
               # DataIngest Database
-              if [ {{ lower .Values.enabled_databases.data_ingest }} == "true" ]; then 
+              if [ {{ lower .Values.enabled_databases.data_ingest }} == "1" ]; then
                 echo "Executing changelog {{ .Values.changelog.data_ingest }} in DB : {{ .Values.jdbc.data_ingest_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.data_ingest }}" --searchPath="./" --url="{{ .Values.jdbc.data_ingest_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
                 # Returns non-zero code if failed
@@ -57,7 +57,7 @@ spec:
               fi
 
               # NBS_MSGOUTE Database
-              if [ {{ lower .Values.enabled_databases.msgoute }} == "true" ]; then 
+              if [ {{ lower .Values.enabled_databases.msgoute }} == "1" ]; then
                 echo "Executing changelog {{ .Values.changelog.msgoute }} in DB : {{ .Values.jdbc.msgoute_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.msgoute }}" --searchPath="./" --url="{{ .Values.jdbc.msgoute_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update              
                 # Returns non-zero code if failed
@@ -68,7 +68,7 @@ spec:
               fi
 
               # NBS_ODSE Database
-              if [ {{ lower .Values.enabled_databases.odse }} == "true" ]; then 
+              if [ {{ lower .Values.enabled_databases.odse }} == "1" ]; then
                 echo "Executing changelog {{ .Values.changelog.odse }} in DB : {{ .Values.jdbc.odse_db_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.odse }}" --searchPath="./" --url="{{ .Values.jdbc.odse_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
                 # Returns non-zero code if failed
@@ -79,7 +79,7 @@ spec:
               fi
 
               # RDB Database
-              if [ {{ lower .Values.enabled_databases.rdb }} == "true" ]; then 
+              if [ {{ lower .Values.enabled_databases.rdb }} == "1" ]; then
                 echo "Executing changelog {{ .Values.changelog.rdb }} in DB : {{ .Values.jdbc.rdb_db_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.rdb }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
                 # Returns non-zero code if failed
@@ -90,7 +90,7 @@ spec:
               fi
 
               # RDB_MODERN Database
-              if [ {{ lower .Values.enabled_databases.rdb_modern }} == "true" ]; then 
+              if [ {{ lower .Values.enabled_databases.rdb_modern }} == "1" ]; then
                 echo "Executing changelog {{ .Values.changelog.rdb_modern }} in DB : {{ .Values.jdbc.rdb_modern_db_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.rdb_modern }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_modern_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
                 # Returns non-zero code if failed
