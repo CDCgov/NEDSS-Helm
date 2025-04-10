@@ -78,10 +78,10 @@ log:
 featureFlag:
   eventMetricEnable: "true"
   dTbHivEnable: "true"
-  morbReportDmEnable: "false"
-  invSummaryDmEnable: "false"
-  summaryReportEnable: "false"
-  aggregateReportEnable: "false"
+  morbReportDmEnable: "true"
+  invSummaryDmEnable: "true"
+  summaryReportEnable: "true"
+  aggregateReportEnable: "true"
   dymDMEnable: "true"
 
 

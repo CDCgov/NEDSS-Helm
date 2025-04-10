@@ -84,11 +84,11 @@ log:
 featureFlag:
   eventMetricEnable: "true"
   dTbHivEnable: "true"
-  morbReportDmEnable: "false"
-  invSummaryDmEnable: "false"
-  summaryReportEnable: "false"
-  aggregateReportEnable: "false"
-  dymDMEnable: "false"
+  morbReportDmEnable: "true"
+  invSummaryDmEnable: "true"
+  summaryReportEnable: "true"
+  aggregateReportEnable: "true"
+  dymDMEnable: "true"
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
