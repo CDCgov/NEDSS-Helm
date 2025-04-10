@@ -47,7 +47,7 @@ spec:
               - /bin/bash
               - -c
               - |
-                connector_name="{{ .Values.properties.group_id }}"
+                connector_name="{{ .Values.connect.properties.group_id }}"
                 response=$(curl -s localhost:8083/connectors/$connector_name/status)
                 if echo "$response" | grep -q '"connector":{[^}]*"state":"RUNNING"'; then
                   task_states=$(echo "$response" | grep -o '"state": "[^"]*"' | grep -v '"state": "RUNNING"')
@@ -71,7 +71,7 @@ spec:
               - /bin/bash
               - -c
               - |
-                connector_name="{{ .Values.properties.group_id }}"
+                connector_name="{{ .Values.connect.properties.group_id }}"
                 response=$(curl -s localhost:8083/connectors/$connector_name/status)
                 if echo "$response" | grep -q '"connector":{[^}]*"state":"RUNNING"'; then
                   task_states=$(echo "$response" | grep -o '"state": "[^"]*"' | grep -v '"state": "RUNNING"')
