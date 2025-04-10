@@ -74,3 +74,10 @@ containerPort: 8443
 jdbcConnectionString: ""
 singleUserCredentialsPassword: ""
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
+
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

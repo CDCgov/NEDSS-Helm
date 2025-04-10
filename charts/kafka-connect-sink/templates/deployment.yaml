@@ -67,6 +67,53 @@ spec:
             - containerPort: {{ .Values.jmx.port }}
               name: jmx
             {{- end }}
+          {{- if .Values.probes.readiness.enabled | default "true"  }}
+          readinessProbe:
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - |
+                connector_name="{{ .Values.sqlServerConnector.name }}"
+                response=$(curl -s localhost:8083/connectors/$connector_name/status)
+                if echo "$response" | grep -q '"connector":{[^}]*"state":"RUNNING"'; then
+                  task_states=$(echo "$response" | grep -o '"state": "[^"]*"' | grep -v '"state": "RUNNING"')
+                  if [[ -z "$task_states" ]]; then
+                    exit 0  # All tasks are running
+                  else
+                    exit 1  # One or more tasks are not running
+                  fi
+                else
+                  exit 1  # Connector state is not RUNNING
+                fi
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "20" }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "3" }}
+          {{- end }}
+
+          {{- if .Values.probes.liveness.enabled | default "true"  }}
+          livenessProbe:
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - |
+                connector_name="{{ .Values.sqlServerConnector.name }}"
+                response=$(curl -s localhost:8083/connectors/$connector_name/status)
+                if echo "$response" | grep -q '"connector":{[^}]*"state":"RUNNING"'; then
+                  task_states=$(echo "$response" | grep -o '"state": "[^"]*"' | grep -v '"state": "RUNNING"')
+                  if [[ -z "$task_states" ]]; then
+                    exit 0  # All tasks are running
+                  else
+                    exit 1  # One or more tasks are not running
+                  fi
+                else
+                  exit 1  # Connector state is not RUNNING
+                fi
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "20" }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "3" }}
+          {{- end }}  
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           env:
