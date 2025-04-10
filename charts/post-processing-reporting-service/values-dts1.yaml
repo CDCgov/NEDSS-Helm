@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.67bec73
+  tag: 1.0.1-SNAPSHOT.5e66167
 
 imagePullSecrets: [ ]
 nameOverride: ""
@@ -82,6 +82,8 @@ featureFlag:
   invSummaryDmEnable: "false"
   summaryReportEnable: "false"
   aggregateReportEnable: "false"
+  dymDMEnable: "true"
+
 
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
