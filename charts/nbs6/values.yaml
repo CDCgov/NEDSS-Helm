@@ -74,6 +74,13 @@ env:
   DISABLED_SCHEDULED_TASKS: "SendAlertEMail.bat, DeDuplicationSimilarBatchProcess.bat, UserProfileUpdateProcess.bat"
   # Memory allocated to JVM, needs to be offset from container requests by 4g-8g or more
   JAVA_MEMORY: "10g"
+  # Updates nndmConfig.propterties file, works by updating entire line. 4 commonly changed lines have been included
+  # PUBLIC_KEY_LDAP_ADDRESS=, PUBLIC_KEY_LDAP_BASE_DN=,PUBLIC_KEY_LDAP_DN=,CERTIFICATE_URL=
+  NNDM_CONFIG_PUBLIC_KEY_LDAP_ADDRESS: "PUBLIC_KEY_LDAP_ADDRESS="
+  NNDM_CONFIG_PUBLIC_KEY_LDAP_BASE_DN: "PUBLIC_KEY_LDAP_BASE_DN="
+  NNDM_CONFIG_PUBLIC_KEY_LDAP_DN: "PUBLIC_KEY_LDAP_DN="
+  NNDM_CONFIG_CERTIFICATE_URL: "CERTIFICATE_URL="
+
 
   # Additional environment variables with names starting with updateScheduledTask_ are available to update 
   # existing scheduled task. (e.g. updateScheduledTask_ELRImporter)
