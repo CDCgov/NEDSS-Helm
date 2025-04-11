@@ -1,7 +1,8 @@
 ### NOTE ###
 # This Values file should contain redundant variables, secrets and environment related parameters. 
 # Any release related parameters should stay in service template
-# IMPORTANT: appVersion parameter should identify version of values file
+
+### IMPORTANT: appVersion in Chart.yaml is used as targetRevision value in each service deployment  ###
 
 env:
   appUrl: <UPDATE>
