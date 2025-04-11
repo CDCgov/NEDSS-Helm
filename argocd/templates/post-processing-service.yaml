@@ -37,6 +37,16 @@ spec:
           value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;
         - name: featureFlag.eventMetricEnable
           value: {{ .Values.postProcessing.eventMetricEnable }}
+        - name: featureFlag.dTbHivEnable
+          value: {{ .Values.postProcessing.dTbHivEnable }}
+        - name: featureFlag.morbReportDmEnable
+          value: {{ .Values.postProcessing.morbReportDmEnable }}
+        - name: featureFlag.invSummaryDmEnable
+          value: {{ .Values.postProcessing.invSummaryDmEnable }}
+        - name: featureFlag.summaryReportEnable
+          value: {{ .Values.postProcessing.summaryReportEnable }}
+        - name: featureFlag.aggregateReportEnable
+          value: {{ .Values.postProcessing.aggregateReportEnable }}
   syncPolicy:
     automated:
       prune: true

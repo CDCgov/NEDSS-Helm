@@ -40,7 +40,9 @@ spec:
         - name: featureFlag.bmirdCaseEnable
           value: {{ .Values.investigation.bmirdCaseEnable }}
         - name: featureFlag.contactRecordEnable
-          value: {{ .Values.investigation.contactRecordEnable }}                   
+          value: {{ .Values.investigation.contactRecordEnable }}
+        - name: featureFlag.treatmentEnable
+          value: {{ .Values.investigation.treatmentEnable }}             
   syncPolicy:
     automated:
       prune: true
