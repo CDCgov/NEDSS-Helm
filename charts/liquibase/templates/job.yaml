@@ -79,8 +79,7 @@ spec:
               fi
 
               echo "Liquibase Update Complete. All scripts: execution success! Exiting"
-              echo "Sleep infinitely"
-              sleep infinity
+
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           
