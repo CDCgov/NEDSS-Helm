@@ -66,13 +66,11 @@ ingressHost: "app.test.nbspreview.com"
 # Corresponds to changelogs to run below. Note, they run in the order they appear in this list
 # Going down the list if any updates fail, the container errors and the rest are not run
 enabled_databases:
-  srte: "true"
-  data_ingest: "true"
-  msgoute: "true"
-  odse: "true"
-  rdb: "true"
-  rdb_modern: "true"
-  master: "true"   
+  srte: "enabled"
+  odse: "enabled"
+  rdb: "enabled"
+  rdb_modern: "enabled"
+  master: "enabled"
 
 changelog:
   srte: "db.srte.changelog-16.1.yaml"
