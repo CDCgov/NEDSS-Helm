@@ -37,7 +37,7 @@ spec:
               # SRTE Database
               if [ {{ lower .Values.enabled_databases.srte }} == "enabled"  ]; then
                 echo "Executing changelog {{ .Values.changelog.srte }} in DB : {{ .Values.jdbc.srte_db_url }}"
-                liquibase --changelog-file="{{ .Values.changelog.srte }}" --searchPath="./" --url="{{ .Values.jdbc.srte_db_url }}" --username={{ .Values.jdbc.srte_username }} --password={{ .Values.jdbc.srte_password }} update >> logs
+                liquibase --changelog-file="{{ .Values.changelog.srte }}" --searchPath="./" --url="{{ .Values.jdbc.srte_db_url }}" --username={{ .Values.jdbc.srte_username }} --password={{ .Values.jdbc.srte_password }} update
                 # Returns non-zero code if failed
                 status=$?
                 ## Log and exit if failed
