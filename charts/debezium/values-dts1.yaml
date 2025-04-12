@@ -196,7 +196,7 @@ connect:
       "schema.history.internal.kafka.topic": "srte-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                                                           b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
-      "table.include.list": "dbo.TotalIDM,dbo.IMRDBMapping,dbo.Program_area_code,dbo.Code_value_general,dbo.Codeset,dbo.Codeset_Group_Metadata, dbo.State_county_code_value,dbo.Country_code,dbo.Jurisdiction_code,dbo.Condition_code",
+      "table.include.list": "dbo.TotalIDM,dbo.IMRDBMapping,dbo.Program_area_code,dbo.Code_value_general,dbo.Codeset,dbo.Codeset_Group_Metadata, dbo.State_county_code_value,dbo.Country_code,dbo.Jurisdiction_code,dbo.Condition_code,dbo.Code_value_clinical,dbo.State_code",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,

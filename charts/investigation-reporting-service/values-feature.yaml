@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.72fc3e7"
+  tag: "1.0.1-SNAPSHOT.1b950d5"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -70,7 +70,7 @@ featureFlag:
   phcDatamartEnable: "true"
   bmirdCaseEnable: "true"
   contactRecordEnable: "true"
-  treatmentEnable: "false"
+  treatmentEnable: "true"
 
 kafka:
   cluster: ""
