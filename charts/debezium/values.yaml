@@ -48,8 +48,8 @@ connect:
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
       "database.port": "1433",
-      "database.user": "EXAMPLE_DB_USER",
-      "database.password": "EXAMPLE_DB_USER_PASSWORD",
+      "database.user": "EXAMPLE_ODSE_DB_USER",
+      "database.password": "EXAMPLE_ODSE_DB_USER_PASSWORD",
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
       "database.server.name": "odse",
@@ -91,8 +91,8 @@ connect:
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
       "database.port": "1433",
-      "database.user": "EXAMPLE_DB_USER",
-      "database.password": "EXAMPLE_DB_USER_PASSWORD",
+      "database.user": "EXAMPLE_ODSE_DB_USER",
+      "database.password": "EXAMPLE_ODSE_DB_USER_PASSWORD",
       "database.dbname": "nbs_srte",
       "database.names": "nbs_srte",
       "database.server.name": "srte",
@@ -181,7 +181,7 @@ ui:
   ingress:
     enabled: true
     router: private
-    host: DEBEZIUM_UI_HOST_ADDRESS
+    host: EXAMPLE_FIXME_DEBEZIUM_UI_HOST_ADDRESS
 
   autoscaling:
     enabled: false

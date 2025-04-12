@@ -79,8 +79,8 @@ ingressHost: "data.EXAMPLE_DOMAIN"
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 kafka:
   cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
