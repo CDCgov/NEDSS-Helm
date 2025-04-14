@@ -57,14 +57,14 @@ affinity: {}
 ingressHost: "app.EXAMPLE_DOMAIN"
 
 jdbc:
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 odse:
-  dburl: "EXAMPLE_DB_URL"
+  dburl: "EXAMPLE_FIXME_DB_URL"
 
 rdb:
-  dburl: "EXAMPLE_DB_URL"
+  dburl: "EXAMPLE_FIXME_DB_URL"
 
 featureFlag:
   phcDatamartEnable: "true"
@@ -73,7 +73,7 @@ featureFlag:
   treatmentEnable: "false"
 
 kafka:
-  cluster: "EXAMPLE_KAFKA_CLUSTER"
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
 log:
   path: "/usr/share/investigation-reporting/data"
