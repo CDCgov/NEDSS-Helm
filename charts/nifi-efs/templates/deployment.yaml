@@ -61,7 +61,7 @@ spec:
           livenessProbe:
             tcpSocket:
               port: {{ .Values.probes.readiness.port | default "8443" }}
-            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "30" }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
             periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "10" }}
             failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "3" }}
           {{- end }}  
