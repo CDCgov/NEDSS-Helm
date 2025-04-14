@@ -12,7 +12,7 @@ spec:
     namespace: default
     server: 'https://kubernetes.default.svc'
   source:
-    path: charts/elasticsearch-efs
+    path: 'feature/azizk-health-check'
     repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
     targetRevision: {{ .Chart.AppVersion | quote }}
     helm:
