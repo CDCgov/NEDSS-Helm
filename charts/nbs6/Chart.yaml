@@ -2,4 +2,4 @@ apiVersion: v2
 name: nbs6
 description: Helm chart for NBS6 container deployment
 version: 0.1.0
-appVersion: "6.0.16.1"
+appVersion: "6.0.16.2"
