@@ -48,8 +48,8 @@ connect:
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
       "database.port": "1433",
-      "database.user": "EXAMPLE_DB_USER",
-      "database.password": "EXAMPLE_DB_USER_PASSWORD",
+      "database.user": "EXAMPLE_ODSE_DB_USER",
+      "database.password": "EXAMPLE_ODSE_DB_USER_PASSWORD",
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
       "database.server.name": "odse",
@@ -91,8 +91,8 @@ connect:
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
       "database.port": "1433",
-      "database.user": "EXAMPLE_DB_USER",
-      "database.password": "EXAMPLE_DB_USER_PASSWORD",
+      "database.user": "EXAMPLE_ODSE_DB_USER",
+      "database.password": "EXAMPLE_ODSE_DB_USER_PASSWORD",
       "database.dbname": "nbs_srte",
       "database.names": "nbs_srte",
       "database.server.name": "srte",
@@ -109,7 +109,13 @@ connect:
       "snapshot.mode": "initial",
       "schema.history.internal.kafka.topic": "srte-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
-      "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps_add_time, convertTimestamps_concept_status_time, convertTimestamps_effective_from_time, convertTimestamps_effective_to_time, convertTimestamps_status_time, convertTimestamps_status_to_time, convertTimestamps_value_set_status_time",
+      "table.include.list": "dbo.TotalIDM,dbo.IMRDBMapping,dbo.Program_area_code,dbo.Code_value_general,
+                             dbo.Codeset,dbo.Codeset_Group_Metadata,dbo.State_county_code_value,dbo.Country_code,
+                             dbo.Jurisdiction_code,dbo.Condition_code,dbo.Code_value_clinical,dbo.State_code
+                             dbo.Snomed_condition,dbo.Loinc_condition,dbo.Labtest_loinc",
+      "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps_add_time, convertTimestamps_concept_status_time, 
+                     convertTimestamps_effective_from_time, convertTimestamps_effective_to_time, convertTimestamps_status_time, 
+                     convertTimestamps_status_to_time, convertTimestamps_value_set_status_time",
       "transforms.dropPrefix.regex": "cdc\\.NBS_SRTE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nrt_srte_$1",
@@ -180,7 +186,7 @@ ui:
   ingress:
     enabled: true
     router: private
-    host: DEBEZIUM_UI_HOST_ADDRESS
+    host: EXAMPLE_FIXME_DEBEZIUM_UI_HOST_ADDRESS
 
   autoscaling:
     enabled: false
