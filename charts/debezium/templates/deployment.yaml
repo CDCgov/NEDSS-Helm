@@ -66,6 +66,19 @@ spec:
                   - "-c"
                   - |
                     sleep 60;
+                    #1. Get the running connectors
+                    connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
+
+                    #2. Clean the array string
+                    cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
+
+                    # 3. Iterate and delete running debezium connector tasks
+                    IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
+                    for task in "${my_array[@]}"; do
+                      echo "Deleting Connector task : $task"
+                      curl --request DELETE  "http://127.0.0.1:8083/connectors/$task"
+                    done
+
                     curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
