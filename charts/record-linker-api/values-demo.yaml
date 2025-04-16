@@ -1,0 +1,39 @@
+replicaCount: 1
+
+env: "demo"
+
+image:
+  repository: "ghcr.io/cdcgov/recordlinker"
+  pullPolicy: IfNotPresent
+  tag: "v25.4.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podSecurityContext: {}
+
+podAnnotations: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8070
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+jdbc:
+  mpi:
