@@ -66,11 +66,13 @@ spec:
                   - "-c"
                   - |
                     sleep 60;
+                    echo "Executing /etc/debezium/connector-odse.json "
                     curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
                       --data '@/etc/debezium/connector-odse.json' \
                       "http://127.0.0.1:8083/connectors/";
+                    echo "Executing /etc/debezium/connector-srte.json "
                     curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
