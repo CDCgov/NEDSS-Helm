@@ -47,6 +47,9 @@ spec:
               mountPath: /etc/debezium/connector-srte.json
               subPath: connector-srte.json
             - name: config
+              mountPath: /etc/debezium/connector-meta.json
+              subPath: connector-meta.json
+            - name: config
               mountPath: /kafka/config/log4j.properties
               subPath: log4j.properties
             - name: config
@@ -75,6 +78,11 @@ spec:
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
                       --data '@/etc/debezium/connector-srte.json' \
+                      "http://127.0.0.1:8083/connectors/";
+                    curl --request POST \
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-meta.json' \
                       "http://127.0.0.1:8083/connectors/";
 
 
