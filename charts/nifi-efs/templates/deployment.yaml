@@ -54,7 +54,7 @@ spec:
           readinessProbe:
             tcpSocket:
               port: {{ .Values.probes.readiness.port | default "8443" }}
-            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "120" }}
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
             periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "20" }}
             failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "3" }}
           {{- end }}
@@ -63,7 +63,7 @@ spec:
           livenessProbe:
             tcpSocket:
               port: {{ .Values.probes.readiness.port | default "8443" }}
-            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "120" }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
             periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "10" }}
             failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "3" }}
           {{- end }}  
