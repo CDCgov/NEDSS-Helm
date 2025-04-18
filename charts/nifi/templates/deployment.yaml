@@ -49,23 +49,6 @@ spec:
             - name: NIFI_JVM_HEAP_MAX
               value: {{ .Values.jvmheap.max }}
           {{- if .Values.probes.readiness.enabled | default "true"  }}
-          readinessProbe:
-            tcpSocket:
-              port: {{ .Values.probes.readiness.port | default "8443" }}
-            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
-            periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "20" }}
-            failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "3" }}
-          {{- end }}
-
-          {{- if .Values.probes.liveness.enabled | default "true"  }}
-          livenessProbe:
-            tcpSocket:
-              port: {{ .Values.probes.readiness.port | default "8443" }}
-            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "30" }}
-            periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "10" }}
-            failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "3" }}
-          {{- end }}  
-
           ports:
             - containerPort: {{ .Values.containerPort }}
           resources:
