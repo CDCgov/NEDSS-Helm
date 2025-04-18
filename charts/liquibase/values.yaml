@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/liquibase-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/liquibase-service"
-  tag: "v1.1.2"
+  tag: "v1.1.4"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -58,14 +58,25 @@ affinity: {}
 
 ingressHost: "app.EXAMPLE_DOMAIN"
 
+#################################################################################################
+# Corresponds to changelogs to run below. Note, they run in the order they appear in this list
+# Going down the list if any updates fail, the container errors and the rest are not run
+enabled_databases:
+  srte: "enabled"
+  odse: "enabled"
+  rdb: "enabled"
+  rdb_modern: "enabled"
+  master: "enabled"
+
 changelog:
   srte: "db.srte.changelog-16.1.yaml"
+  data_ingest: "db.data_ingest.changelog-16.1.yaml"
+  msgoute: "db.msgoute.changelog-16.1.yaml"
   odse: "db.odse.changelog-16.1.yaml"
   rdb: "db.rdb.changelog-16.1.yaml"
   rdb_modern: "db.rdb_modern.changelog-16.1.yaml"
-  master: "db.master.changelog-16.1.yaml"
-  data_ingest: "db.data_ingest.changelog-16.1.yaml"
-  msgoute: "db.msgoute.changelog-16.1.yaml"
+  master: "db.master.changelog-16.1.yaml"   
+#################################################################################################
 
 jdbc:
   master_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
@@ -75,10 +86,10 @@ jdbc:
   rdb_modern_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   data_ingest_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_dataingest;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   msgoute_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_msgoute;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
-  srte_username: ""
-  srte_password: ""
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "<EXAMPLE_ODSE_DB_USER_PASSWORD>"
+  srte_username: "EXAMPLE_SRTE_DB_USER"
+  srte_password: "<EXAMPLE_SRTE_DB_USER_PASSWORD>"
 
 odse:
   dbname: "NBS_ODSE"
@@ -86,9 +97,3 @@ odse:
 rdb:
   dbname: "rdb_modern"
 
-# mossc - is this used????
-# volumeMounts:
-# 
-# volumes:
-# 
-# efsFileSystemId: ""

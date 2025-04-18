@@ -5,7 +5,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/organization-reporting-service"
-  tag: "v1.1.2"
+  tag: "v1.1.4"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -56,11 +56,11 @@ affinity: {}
 ingressHost: "app.EXAMPLE_DOMAIN"
 
 jdbc:
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 odse:
-  dburl: "EXAMPLE_DB_URL"
+  dburl: "EXAMPLE_FIXME_DB_URL"
 
 kafka:
   cluster: "EXAMPLE_KAFKA_CLUSTER"

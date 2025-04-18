@@ -45,12 +45,12 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.EXAMPLE_DOMAIN"
+ingressHost: "data.EXAMPLE_DOMAIN"
 
 jdbc:
-  dbserver: ""
-  username: ""
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "<EXAMPLE_ODSE_DB_USER_PASSWORD>"
 
 authUri: ""
 
