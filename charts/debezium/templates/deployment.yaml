@@ -103,6 +103,8 @@ spec:
                       --data '@/etc/debezium/connector-meta.json' \
                       "http://127.0.0.1:8083/connectors/";
 
+                    connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
+                    echo "Successfully running connectors: $connectors"
 
       {{- with .Values.connect.nodeSelector }}
       nodeSelector:
