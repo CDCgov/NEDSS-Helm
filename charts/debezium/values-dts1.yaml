@@ -31,7 +31,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v021325"
+    group_id: "debezium-odse-srte-connector-v041825"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -42,7 +42,7 @@ connect:
                        b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v021325",
+    "name": "debezium-odse-connector-v041825",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -78,9 +78,7 @@ connect:
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
       "time.precision.mode": "connect",
-      "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps_add_time, convertTimestamps_concept_status_time, 
-                     convertTimestamps_effective_from_time, convertTimestamps_effective_to_time, convertTimestamps_status_time, 
-                     convertTimestamps_status_to_time, convertTimestamps_value_set_status_time",
+      "transforms": "dropPrefixConfig, dropPrefix, convertTimezone, unwrapConfig, convertTimestampsConfig_add_time, convertTimestampsConfig_last_chg_time, convertTimestampsConfig_status_time",
       "predicates": "isConfigTable",
       "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
@@ -114,8 +112,8 @@ connect:
     }
   }
 
-  sqlserverconnector_odse_meta: {
-    "name": "debezium-odse-connector-v021325",
+  sqlserverconnector_meta: {
+    "name": "debezium-odse-meta-tables-connector-v041825",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -147,8 +145,8 @@ connect:
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
       "time.precision.mode": "connect",
-      "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps_add_time, convertTimestampsConfig_last_chg_time, convertTimestamps_record_status_time",
-      "predicates": "isConfigTable",
+      "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestampsConfig_add_time,
+                     convertTimestampsConfig_last_chg_time, convertTimestampsConfig_record_status_time",
       "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nrt_odse_$1",
@@ -166,14 +164,14 @@ connect:
       "transforms.convertTimestampsConfig_record_status_time.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
       "transforms.convertTimestampsConfig_record_status_time.target.type": "string",
       "transforms.convertTimestampsConfig_record_status_time.format": "yyyy-MM-dd HH:mm:ss.SSS",
-      "transforms.convertTimestampsConfig_record_status_time.field": "record_status_time",
+      "transforms.convertTimestampsConfig_record_status_time.field": "status_time",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
       "value.converter.schemas.enable": "true",
     }
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v021325",
+    "name": "debezium-srte-connector-v041825",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -208,7 +206,9 @@ connect:
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
       "time.precision.mode": "connect",
-      "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps_add_time, convertTimestamps_concept_status_time, convertTimestamps_effective_from_time, convertTimestamps_effective_to_time, convertTimestamps_status_time, convertTimestamps_status_to_time, convertTimestamps_value_set_status_time",
+      "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps_add_time, convertTimestamps_concept_status_time, 
+                     convertTimestamps_effective_from_time, convertTimestamps_effective_to_time, convertTimestamps_status_time, 
+                     convertTimestamps_status_to_time, convertTimestamps_value_set_status_time",
       "transforms.dropPrefix.regex": "cdc\\.NBS_SRTE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nrt_srte_$1",
@@ -257,7 +257,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v021325"
+      value: "debezium-odse-srte-connector-v041825"
     - name: TZ
       value: "UTC"
 
