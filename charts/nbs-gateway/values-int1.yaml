@@ -27,7 +27,7 @@ welcome:
 
 patient:
   profile:
-    enabled: true
+    enabled: false
 
 pageBuilder:
   enabled: "true"
@@ -45,10 +45,10 @@ deduplication:
 
 resources:
   limits:
-    memory: "1Gi"  
-    cpu: "500m"      
+    memory: "1Gi"
+    cpu: "500m"
   requests:
-    memory: "512Mi"  
+    memory: "512Mi"
     cpu: "250m"
 
 nbsExternalName: app-classic.int1.nbspreview.com
