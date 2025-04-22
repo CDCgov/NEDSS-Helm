@@ -113,6 +113,9 @@ sftp:
   host: ""
   username: ""
   password: ""
+  elrFileExtns: "txt,hl7"
+  phcrImporterVersion: "1"
+  filePaths: "/"
 
 
 kafkaConcurrency: "1"
