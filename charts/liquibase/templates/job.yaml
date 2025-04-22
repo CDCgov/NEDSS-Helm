@@ -48,7 +48,7 @@ spec:
 
               # NBS_ODSE Database
               echo "Checking ODSE enabled flag {{ .Values.enabled_databases.odse }} in DB : {{ .Values.jdbc.odse_db_url }}"
-              if [ eq {{ lower .Values.enabled_databases.odse }} == "enabled" ]; then
+              if [ {{ lower .Values.enabled_databases.odse }} == "enabled" ]; then
                 echo "Executing changelog {{ .Values.changelog.odse }} in DB : {{ .Values.jdbc.odse_db_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.odse }}" --searchPath="./" --url="{{ .Values.jdbc.odse_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
                 # Returns non-zero code if failed
