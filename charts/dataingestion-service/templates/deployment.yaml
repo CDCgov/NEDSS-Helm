@@ -77,14 +77,14 @@ spec:
               value: {{ .Values.sftp.username }}
             - name: DI_SFTP_PWD
               value: {{ .Values.sftp.password }}
+            - name: DI_SFTP_ELR_FILE_EXTNS
+              value: {{ .Values.sftp.elrFileExtns }}
+            - name: DI_PHCR_IMPORTER_VERSION
+              value: {{ .Values.sftp.phcrImporterVersion }}
+            - name: DI_SFTP_FILEPATHS
+              value: {{ .Values.sftp.filePaths }}
             - name: DI_SERVER_HOST
               value: {{ .Values.ingressHost }}
-            - name: DI_SFTP_ELR_FILE_EXTNS
-              value: {{ .Values.elrFileExtns }}
-            - name: DI_PHCR_IMPORTER_VERSION
-              value: {{ .Values.phcrImporterVersion }}
-            - name: DI_SFTP_FILEPATHS
-              value: {{ .Values.filePaths }}
             - name: SERVICE_TZ
               value: {{ .Values.timezone | default "UTC" }}
             - name: KAFKA_CONCURRENCY
