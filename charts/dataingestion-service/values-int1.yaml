@@ -86,9 +86,9 @@ jdbc:
   dbserver: ""
   username: ""
   password: ""
-  elrFileExtns: ""
-  phcrImporterVersion: ""
-  filePaths: ""
+  elrFileExtns: "txt,hl7"
+  phcrImporterVersion: "1"
+  filePaths: "/"
 
 kafka:
   cluster: ""
