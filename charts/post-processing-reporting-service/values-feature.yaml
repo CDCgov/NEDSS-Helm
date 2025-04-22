@@ -83,6 +83,7 @@ featureFlag:
   summaryReportEnable: "true"
   aggregateReportEnable: "true"
   dymDMEnable: "true"
+  ldfEnable: "true"
 
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
