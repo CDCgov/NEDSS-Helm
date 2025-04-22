@@ -35,7 +35,7 @@ spec:
             - "-c"
             - |
               # SRTE Database
-              echo "Checking ODSE enabled flag {{ .Values.enabled_databases.srte }} in DB : {{ .Values.jdbc.srte_db_url }}"
+              echo "Checking SRTE enabled flag {{ .Values.enabled_databases.srte }} in DB : {{ .Values.jdbc.srte_db_url }}"
               if [ {{ lower .Values.enabled_databases.srte }} == "enabled"  ]; then
                 echo "Executing changelog {{ .Values.changelog.srte }} in DB : {{ .Values.jdbc.srte_db_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.srte }}" --searchPath="./" --url="{{ .Values.jdbc.srte_db_url }}" --username={{ .Values.jdbc.srte_username }} --password={{ .Values.jdbc.srte_password }} update
@@ -59,7 +59,7 @@ spec:
               fi
 
               # RDB Database
-              echo "Checking ODSE enabled flag {{ .Values.enabled_databases.rdb }} in DB : {{ .Values.jdbc.rdb_db_url }}"
+              echo "Checking RDB enabled flag {{ .Values.enabled_databases.rdb }} in DB : {{ .Values.jdbc.rdb_db_url }}"
               if [ {{ lower .Values.enabled_databases.rdb }} == "enabled" ]; then
                 echo "Executing changelog {{ .Values.changelog.rdb }} in DB : {{ .Values.jdbc.rdb_db_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.rdb }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
@@ -71,7 +71,7 @@ spec:
               fi
 
               # RDB_MODERN Database
-              echo "Checking ODSE enabled flag {{ .Values.enabled_databases.rdb_modern }} in DB : {{ .Values.jdbc.rdb_modern_db_url }}"
+              echo "Checking RDB_MODERN enabled flag {{ .Values.enabled_databases.rdb_modern }} in DB : {{ .Values.jdbc.rdb_modern_db_url }}"
               if [ {{ lower .Values.enabled_databases.rdb_modern }} == "enabled" ]; then
                 echo "Executing changelog {{ .Values.changelog.rdb_modern }} in DB : {{ .Values.jdbc.rdb_modern_db_url }}"
                 liquibase --changelog-file="{{ .Values.changelog.rdb_modern }}" --searchPath="./" --url="{{ .Values.jdbc.rdb_modern_db_url }}" --username={{ .Values.jdbc.username }} --password={{ .Values.jdbc.password }} update
