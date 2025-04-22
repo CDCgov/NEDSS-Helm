@@ -116,7 +116,7 @@ sftp:
   elrFileExtns: "txt,hl7"
   phcrImporterVersion: "1"
   filePaths: "/"
-
+# filePaths value should be comma seperated like "/,/LAB-1,/lab-2, /lab-2/lab2-sub-folder"
 
 kafkaConcurrency: "1"
 
