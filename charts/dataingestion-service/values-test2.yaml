@@ -119,6 +119,9 @@ sftp:
   host: ""
   username: ""
   password: ""
+  elrFileExtns: ""
+  phcrImporterVersion: ""
+  filePaths: ""
 
 kafkaConcurrency: "1"
 apiPayloadMaxSize: "100MB"

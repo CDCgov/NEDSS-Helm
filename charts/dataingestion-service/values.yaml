@@ -115,6 +115,9 @@ sftp:
   host: "EXAMPLE_SFTP_HOST"
   username: "EXAMPLE_SFTP_USER"
   password: "EXAMPLE_SFTP_PASS"
+  elrFileExtns: "EXAMPLE_FILE_EXTNS"
+  phcrImporterVersion: "EXAMPLE_VERSION"
+  filePaths: "EXAMPLE_FILE_PATHS"
 
 ##################################
 
