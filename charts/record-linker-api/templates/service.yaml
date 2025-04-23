@@ -9,9 +9,6 @@ spec:
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.port }}
-      name: http
-    - port: {{ .Values.service.httpsPort }}
-      targetPort: {{ .Values.service.port }}
-      name: https
+      name: record-linker-port
   selector:
     {{- include "record-linker-api.selectorLabels" . | nindent 4 }}
