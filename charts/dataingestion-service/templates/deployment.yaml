@@ -79,8 +79,6 @@ spec:
               value: {{ .Values.sftp.password }}
             - name: DI_SFTP_ELR_FILE_EXTNS
               value: {{ .Values.sftp.elrFileExtns }}
-            - name: DI_PHCR_IMPORTER_VERSION
-              value: {{ .Values.sftp.phcrImporterVersion }}
             - name: DI_SFTP_FILEPATHS
               value: {{ .Values.sftp.filePaths }}
             - name: DI_SERVER_HOST

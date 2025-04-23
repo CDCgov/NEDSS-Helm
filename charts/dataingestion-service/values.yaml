@@ -116,7 +116,6 @@ sftp:
   username: "EXAMPLE_SFTP_USER"
   password: "EXAMPLE_SFTP_PASS"
   elrFileExtns: "EXAMPLE_FILE_EXTNS"
-  phcrImporterVersion: "EXAMPLE_VERSION"
   filePaths: "EXAMPLE_FILE_PATHS"
 # filePaths value should be comma seperated like "/,/LAB-1,/lab-2,/lab-2/lab2-sub-folder"
 ##################################
