@@ -115,7 +115,6 @@ sftp:
   username: ""
   password: ""
   elrFileExtns: "txt,hl7"
-  phcrImporterVersion: "1"
   filePaths: "/"
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
