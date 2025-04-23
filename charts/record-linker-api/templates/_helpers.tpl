@@ -53,38 +53,3 @@ type: App
 app.kubernetes.io/name: {{ include "record-linker-api.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "record-linker-api.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "record-linker-api.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
-
-{{/*
-Create the name of the cert-manager credential to use
-*/}}
-{{- define "record-linker-api.certificateSecretName" -}}
-{{- if .Values.istioGatewayIngress.enabled }}
-{{- default (include "record-linker-api.fullname" .) .Values.istioGatewayIngress.certificateSecretName }}
-{{- else }}
-{{- default "default" .Values.ingress.certificateSecretName }}
-{{- end }}
-{{- end }}
-
-{{/*
-Create the name of the istio-ingress-gateway to use
-*/}}
-{{- define "record-linker-api.istioIngressGatewayName" -}}
-{{- if .Values.istioGatewayIngress.enabled }}
-{{- default (include "record-linker-api.fullname" .) .Values.istioGatewayIngress.istioIngressGatewayName }}
-{{- else }}
-{{- default "default" .Values.ingress.istioIngressGatewayName }}
-{{- end }}
-{{- end }}
-
-
