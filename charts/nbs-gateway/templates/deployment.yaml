@@ -22,8 +22,8 @@ spec:
       - name: {{ .Chart.Name }}
         args: [
           #'--spring.cloud.gateway.httpclient.ssl.useInsecureTrustManager=true',
-          '-Dspring.cloud.gateway.httpclient.response-timeout=300',
-          '-Dspring.cloud.gateway.httpclient.connect-timeout=300',
+          '--spring.cloud.gateway.httpclient.response-timeout=300000',
+          '--spring.cloud.gateway.httpclient.connect-timeout=300000',
           {{- if eq .Values.oidc.enabled "true" }}        
           '--spring.profiles.include=oidc',
           {{- if ((.Values).oidc).uri}}
