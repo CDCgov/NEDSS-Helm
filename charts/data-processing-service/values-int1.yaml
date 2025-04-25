@@ -95,5 +95,5 @@ kafkaThread: "1"
 
 features:
   modernizedMatching:
-    enabled: false
-    url: ""
+    enabled: true
+    url: "http://deduplication-api.default.svc.cluster.local:8083/nbs/api/deduplication/"
