@@ -126,6 +126,8 @@ ui:
       enabled: true
   deduplication:
     enabled: true
+    merge:
+      enabled: true
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:

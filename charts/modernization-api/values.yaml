@@ -156,6 +156,9 @@ ui:
   deduplication:
     # Enable access to Deduplication screens
     enabled: false
+    merge:
+      # Enable acces to Deduplication merge screens
+      enabled: false
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:

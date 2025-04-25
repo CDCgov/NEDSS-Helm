@@ -58,10 +58,10 @@ jdbc:
 deduplication:
   # url for Record Linker API
   recordLinker:
-    url:
+    url: http://record-linker-api.default.svc.cluster.local:8070
   algorithm:
     # should data elements and algorithm updates be pushed to Record Linker API
-    updateRecordLinker: false
+    updateRecordLinker: true
   sync:
     enabled: false
 
