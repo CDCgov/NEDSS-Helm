@@ -115,8 +115,11 @@ sftp:
   host: "EXAMPLE_SFTP_HOST"
   username: "EXAMPLE_SFTP_USER"
   password: "EXAMPLE_SFTP_PASS"
-  elrFileExtns: "EXAMPLE_FILE_EXTNS"
-  filePaths: "EXAMPLE_FILE_PATHS"
+  # need to fix search and replace for both these examples <<EXAMPLE_FIXME_SFTP_SEARCH_AND_REPLACE>>
+  #elrFileExtns: "EXAMPLE_SFTP_FILE_EXTNS"
+  #filePaths: "EXAMPLE_SFTP_FILE_PATHS"
+  elrFileExtns: "hl7,txt"
+  filePaths: "/"  
 # filePaths value should be comma seperated like "/,/LAB-1,/lab-2,/lab-2/lab2-sub-folder"
 ##################################
 

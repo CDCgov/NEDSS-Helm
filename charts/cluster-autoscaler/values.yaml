@@ -14,7 +14,7 @@ autoDiscovery:
   # Enable autodiscovery for `cloudProvider=clusterapi`, for groups matching `autoDiscovery.labels`.
   # Enable autodiscovery for `cloudProvider=gce`, but no MIG tagging required.
   # Enable autodiscovery for `cloudProvider=magnum`, for groups matching `autoDiscovery.roles`.
-  clusterName:  # cluster.local
+  clusterName: <<EXAMPLE_EKS_CLUSTER_NAME>> # cluster.local
 
   # autoDiscovery.namespace -- Enable autodiscovery via cluster namespace for for `cloudProvider=clusterapi`
   namespace:  # default
@@ -48,6 +48,9 @@ autoDiscovery:
 #   region: FSN1
 # </pre>
 autoscalingGroups: []
+  - name: <<EXAMPLE_AUTOSCALING_GROUP_NAME>>
+    maxSize: 5
+    minSize: 3
 # - name: asg1
 #   maxSize: 2
 #   minSize: 1
@@ -73,6 +76,7 @@ autoscalingGroupsnamePrefix: []
 awsAccessKeyID: ""
 
 # awsRegion -- AWS region (required if `cloudProvider=aws`)
+# awsRegion -- <<EXAMPLE_AWS_REGION_FIXME>>
 awsRegion: us-east-1
 
 # awsSecretAccessKey -- AWS access secret key ([if AWS user keys used](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md#using-aws-credentials))
