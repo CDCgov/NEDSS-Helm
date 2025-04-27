@@ -258,7 +258,6 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
       "redirectUris": [
         "/login/oauth2/code/nbs-users",
         "https://oauth.pstmn.io/v1/callback"
@@ -314,7 +313,6 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
       "redirectUris": [
         "/login/oauth2/code/nbs-users"
       ],
