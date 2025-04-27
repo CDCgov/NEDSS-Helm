@@ -12,7 +12,7 @@ deployment:
       kcMetricsEnabled: "true"
       kcTransactionXaEnabled: "false"
       keycloakAdmin: admin
-      keycloakAdminPassword: "EXAMPLE_KC_PASS8675309"
+      keycloakAdminPassword: "<<EXAMPLE_KC_PASSWORD>>"
       kcProxyHeaders: xforwarded
     image:
       repository: quay.io/keycloak/keycloak
@@ -23,7 +23,7 @@ deployment:
 initContainers:
   enabled: true
   image: "alpine:3.12"
-  sleepDuration: 300  # Default is 5 minutes (300 seconds). Use "infinite" for infinite sleep.
+  sleepDuration: 30  # Default is 5 minutes (300 seconds). Use "infinite" for infinite sleep.
   #sleepDuration: "infinite"  # Default is 5 minutes (300 seconds). Use "infinite" for infinite sleep.
 keycloak:
   ports:

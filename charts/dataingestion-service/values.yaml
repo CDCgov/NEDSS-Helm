@@ -115,8 +115,8 @@ sftp:
   host: "EXAMPLE_SFTP_HOST"
   username: "EXAMPLE_SFTP_USER"
   password: "EXAMPLE_SFTP_PASS"
-  elrFileExtns: "EXAMPLE_FILE_EXTNS"
-  filePaths: "EXAMPLE_FILE_PATHS"
+  elrFileExtns: "EXAMPLE_SFTP_FILE_EXTNS"
+  filePaths: "EXAMPLE_SFTP_FILE_PATHS"
 # filePaths value should be comma seperated like "/,/LAB-1,/lab-2,/lab-2/lab2-sub-folder"
 ##################################
 

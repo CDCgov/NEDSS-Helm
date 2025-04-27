@@ -64,7 +64,7 @@ odse:
   dburl: "EXAMPLE_FIXME_DB_URL"
 
 kafka:
-  cluster: "EXAMPLE_KAFKA_CLUSTER"
+  cluster: "EXAMPLE_MSK_KAFKA_CLUSTER"
 
 log:
   path: "/usr/share/ldfdata-reporting/data"
