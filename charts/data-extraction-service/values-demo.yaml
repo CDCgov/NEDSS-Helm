@@ -49,8 +49,8 @@ affinity: {}
 #ingressHost: "hl7service.demo.nbspreview.com"
 
 jdbc:
-  dbserver: "cdc-nbs-legacy-rds-mssql.c1yhzcwwxisa.us-east-1.rds.amazonaws.com"
-  username: "admin"
+  dbserver: ""
+  username: ""
   password: ""
 
 
