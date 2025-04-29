@@ -135,7 +135,7 @@ prometheus:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
   # this may not be right: bootstrapServers: "EXAMPLE_FIXME_KAFKA_ENDPOINT"
-  bootstrapServers: "EXAMPLE_KAFKA_ENDPOINT"
+  bootstrapServers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
   default_replication_factor: 2
   default_partitions: 10
   default_cleanup: "compact"

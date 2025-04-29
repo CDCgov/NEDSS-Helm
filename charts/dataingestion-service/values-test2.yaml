@@ -5,7 +5,7 @@ env: "test"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.3998b71
+  tag: 1.0.1-SNAPSHOT.34fa7f9
 
 imagePullSecrets: []
 nameOverride: ""
@@ -119,6 +119,8 @@ sftp:
   host: ""
   username: ""
   password: ""
+  elrFileExtns: "txt,hl7"
+  filePaths: "/"
 
 kafkaConcurrency: "1"
 apiPayloadMaxSize: "100MB"

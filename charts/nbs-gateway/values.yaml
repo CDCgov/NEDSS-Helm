@@ -7,7 +7,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nbs-gateway"
   pullPolicy: IfNotPresent
-  tag: "v1.3.1"
+  tag: "v1.3.3"
 
 gatewayService:
   ports:
@@ -29,8 +29,11 @@ welcome:
   enabled: "true"
 
 patient:
+  file:
+    # Enables routing from NBS6 pages to the modernized Patient File
+    enabled: false
   profile:
-    # Enables routing from NBS6 pages to the Patient Profile
+    # [deprecated] Enables routing from NBS6 pages to the Patient Profile (marked for removal)
     enabled: false
 
 pageBuilder:
@@ -85,11 +88,9 @@ tolerations: []
 
 affinity: {}
 
-
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
     enabled: true
   liveness:
     enabled: true
-

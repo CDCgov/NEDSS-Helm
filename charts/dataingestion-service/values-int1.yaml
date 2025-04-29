@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.3998b71
+  tag: 1.0.1-SNAPSHOT.34fa7f9
 
 imagePullSecrets: []
 nameOverride: ""
@@ -86,6 +86,8 @@ jdbc:
   dbserver: ""
   username: ""
   password: ""
+  elrFileExtns: "txt,hl7"
+  filePaths: "/"
 
 kafka:
   cluster: ""

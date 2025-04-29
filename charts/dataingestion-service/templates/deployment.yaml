@@ -77,6 +77,10 @@ spec:
               value: {{ .Values.sftp.username }}
             - name: DI_SFTP_PWD
               value: {{ .Values.sftp.password }}
+            - name: DI_SFTP_ELR_FILE_EXTNS
+              value: {{ .Values.sftp.elrFileExtns }}
+            - name: DI_SFTP_FILEPATHS
+              value: {{ .Values.sftp.filePaths }}
             - name: DI_SERVER_HOST
               value: {{ .Values.ingressHost }}
             - name: SERVICE_TZ

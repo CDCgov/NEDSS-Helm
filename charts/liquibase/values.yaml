@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/liquibase-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/liquibase-service"
-  tag: "v1.1.2"
+  tag: "v1.1.5"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -87,9 +87,9 @@ jdbc:
   data_ingest_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_dataingest;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   msgoute_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_msgoute;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   username: "EXAMPLE_ODSE_DB_USER"
-  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
-  srte_username: ""
-  srte_password: ""
+  password: "<<EXAMPLE_ODSE_DB_USER_PASSWORD>>"
+  srte_username: "EXAMPLE_SRTE_DB_USER"
+  srte_password: "<<EXAMPLE_SRTE_DB_USER_PASSWORD>>"
 
 odse:
   dbname: "NBS_ODSE"
@@ -97,9 +97,3 @@ odse:
 rdb:
   dbname: "rdb_modern"
 
-# mossc - is this used????
-# volumeMounts:
-# 
-# volumes:
-# 
-# efsFileSystemId: ""
