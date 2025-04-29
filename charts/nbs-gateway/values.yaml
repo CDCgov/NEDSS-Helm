@@ -79,3 +79,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# NBS filename from "logos" folder (WARNING: Size of logo image must be smaller than 1 MB)
+nbsLogoFilename: "nedssLogo.jpg"
