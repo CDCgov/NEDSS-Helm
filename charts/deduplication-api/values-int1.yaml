@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.9f5c86f
+  tag: 1.0.1-SNAPSHOT.fb3a3fc
 
 imagePullSecrets: []
 nameOverride: ""
@@ -64,6 +64,16 @@ deduplication:
     updateRecordLinker: true
   sync:
     enabled: false
+  batch:
+    schedule:
+      enabled: false
+      cron: "0 0 1 * * ?" # run daily at 1 AM
+    processing:
+      total: 10 # how many records to process per job execution
+      chunk: 5 # how many are processed at a time
+  seed:
+    mpiInsertSize: 100 # how many records to insert into MPI at a time (max 100)
+    deduplicationInsertSize: 1000 # how many records to insert into deduplication db at a time
 
 # Override available for readiness and liveness probes: path, initialDelaySeconds, periodSeconds, failureThreshold
 probes:

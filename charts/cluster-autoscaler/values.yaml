@@ -17,7 +17,7 @@ autoDiscovery:
   clusterName: <<EXAMPLE_EKS_CLUSTER_NAME>> # cluster.local
 
   # autoDiscovery.namespace -- Enable autodiscovery via cluster namespace for for `cloudProvider=clusterapi`
-  namespace:  # default
+  namespace: default
 
   # autoDiscovery.tags -- ASG tags to match, run through `tpl`.
   tags:
@@ -47,13 +47,10 @@ autoDiscovery:
 #   instanceType: CPX21<br />
 #   region: FSN1
 # </pre>
-autoscalingGroups: []
-  - name: <<EXAMPLE_AUTOSCALING_GROUP_NAME>>
+autoscalingGroups:
+  - name: <<EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>>
     maxSize: 5
     minSize: 3
-# - name: asg1
-#   maxSize: 2
-#   minSize: 1
 # - name: asg2
 #   maxSize: 2
 #   minSize: 1

@@ -1,0 +1,9 @@
+# templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "nbs-gateway.fullname" . }}-configmap
+binaryData:
+  nbsLogo: |
+    {{ (.Files.Get (include "nbs-gateway.logoPath" .)) | b64enc }}
+    
