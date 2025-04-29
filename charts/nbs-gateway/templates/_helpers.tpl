@@ -65,9 +65,6 @@ Create the name of the service account to use
 {{- end }}
 {{- end }}
 
-
-
-
 {{/*
 Create the path to logo for configmap reference
 */}}
