@@ -5,10 +5,13 @@ metadata:
   labels:
     {{- include "liquibase.labels" . | nindent 4 }}
 spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "liquibase.selectorLabels" . | nindent 6 }}
-  template:    
+  template:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
@@ -19,11 +22,11 @@ spec:
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}      {{- end }}
-      
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "liquibase.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      restartPolicy: Always
       containers:
         - name: {{ .Chart.Name }}          
           securityContext:
