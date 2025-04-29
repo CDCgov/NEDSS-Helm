@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.79d8fa7
+  tag: 1.0.1-SNAPSHOT.3427223
 
 imagePullSecrets: []
 nameOverride: ""
