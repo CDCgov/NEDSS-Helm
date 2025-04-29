@@ -94,3 +94,6 @@ probes:
     enabled: true
   liveness:
     enabled: true
+
+# NBS filename from "logos" folder (WARNING: Size of logo image must be smaller than 1 MB)
+nbsLogoFilename: "nedssLogo.jpg"
