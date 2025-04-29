@@ -1,12 +1,13 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ include "liquibase.fullname" . }}
   labels:
     {{- include "liquibase.labels" . | nindent 4 }}
-spec:  
-  # allow only a single instance of liquibase to run, no retries
-  backoffLimit: 0
+spec:
+  selector:
+    matchLabels:
+      {{- include "liquibase.labels" . | nindent 6 }}
   template:    
     metadata:
       {{- with .Values.podAnnotations }}
