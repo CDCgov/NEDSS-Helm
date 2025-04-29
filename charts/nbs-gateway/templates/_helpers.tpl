@@ -64,3 +64,17 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+
+
+
+{{/*
+Create the path to logo for configmap reference
+*/}}
+{{- define "nbs-gateway.logoPath" -}}
+{{- if .Values.nbsLogoFilename }}
+{{- printf "%s%s" "logos/" .Values.nbsLogoFilename }}
+{{- else }}
+{{- default "logos/nedssLogo.jpg" }}
+{{- end }}
+{{- end }}
