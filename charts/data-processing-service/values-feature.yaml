@@ -42,11 +42,11 @@ ingress:
 # Kubernetes resource limits
 resources:
   requests:
+    cpu: "700m"
+    memory: "2Gi"
+  limits:
     cpu: "1000m"
     memory: "2Gi"
-  # limits:
-  #   cpu: "1000m"
-  #   memory: "2Gi"
 
 autoscaling:
   enabled: false
