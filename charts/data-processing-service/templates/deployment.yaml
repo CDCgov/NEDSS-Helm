@@ -68,6 +68,14 @@ spec:
               value: {{ .Values.timezone | default "UTC"}}
             - name: KAFKA_THREAD
               value: "{{ .Values.kafkaThread}}"
+            - name: KAFKA_MAX_POLL_RECORD
+              value: "{{ .Values.max-poll-record}}"
+            - name: JDBC_FLAG
+              value: {{ .Values.feature.jdbc-flag | default "true"}}
+            - name: THREAD_POOL_SIZE
+              value: "{{ .Values.feature.thread-pool-size}}"
+            - name: THREAD_QUEUE_SIZE
+              value: "{{ .Values.feature.thread-queue-size}}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
