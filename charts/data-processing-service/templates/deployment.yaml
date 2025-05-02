@@ -71,7 +71,7 @@ spec:
             - name: KAFKA_MAX_POLL_RECORD
               value: "{{ .Values.maxPollRecord}}"
             - name: JDBC_FLAG
-              value: {{ .Values.jdbcFlag | default "true"}}
+              value: "{{ .Values.jdbcFlag}}"
             - name: THREAD_POOL_SIZE
               value: "{{ .Values.threadPoolSize}}"
             - name: THREAD_QUEUE_SIZE
