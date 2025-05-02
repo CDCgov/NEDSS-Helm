@@ -76,6 +76,8 @@ spec:
               value: "{{ .Values.threadPoolSize}}"
             - name: THREAD_QUEUE_SIZE
               value: "{{ .Values.threadQueueSize}}"
+            - name: THREAD_FLAG
+              value: "{{ .Values.threadFlag}}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
