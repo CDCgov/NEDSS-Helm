@@ -93,7 +93,7 @@ keycloak:
     clientSecret: ""
 
 kafkaThread: "10"
-maxPollRecord: "100"
+maxPollRecord: "20"
 jdbcFlag: "true"
 threadPoolSize: "5"
 threadQueueSize: "100"
