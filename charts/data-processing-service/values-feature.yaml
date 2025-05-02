@@ -92,7 +92,7 @@ keycloak:
     clientId: ""
     clientSecret: ""
 
-kafkaThread: "1"
+kafkaThread: "10"
 maxPollRecord: "100"
 jdbcFlag: "true"
 threadPoolSize: "5"
