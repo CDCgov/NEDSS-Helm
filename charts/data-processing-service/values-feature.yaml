@@ -85,7 +85,7 @@ keycloak:
     clientSecret: ""
 
 kafkaThread: "1"
-max-poll-record: "100"
-jdbc-flag: "true"
-thread-pool-size: "5"
-thread-queue-size: "100"
+maxPollRecord: "100"
+jdbcFlag: "true"
+threadPoolSize: "5"
+threadQueueSize: "100"

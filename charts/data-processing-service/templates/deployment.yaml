@@ -69,13 +69,13 @@ spec:
             - name: KAFKA_THREAD
               value: "{{ .Values.kafkaThread}}"
             - name: KAFKA_MAX_POLL_RECORD
-              value: "{{ .Values.max-poll-record}}"
+              value: "{{ .Values.maxPollRecord}}"
             - name: JDBC_FLAG
-              value: {{ .Values.feature.jdbc-flag | default "true"}}
+              value: {{ .Values.jdbcFlag | default "true"}}
             - name: THREAD_POOL_SIZE
-              value: "{{ .Values.feature.thread-pool-size}}"
+              value: "{{ .Values.threadPoolSize}}"
             - name: THREAD_QUEUE_SIZE
-              value: "{{ .Values.feature.thread-queue-size}}"
+              value: "{{ .Values.threadQueueSize}}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
