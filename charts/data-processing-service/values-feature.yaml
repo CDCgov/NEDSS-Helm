@@ -41,12 +41,12 @@ ingress:
 
 # Kubernetes resource limits
 resources:
-  # limits:
-  #   memory: "800Mi"  
-  #   cpu: "1000m"      
   requests:
-    memory: "1000Mi"  
-    cpu: "350m"    
+    cpu: "1000m"
+    memory: "2Gi"
+  # limits:
+  #   cpu: "1000m"
+  #   memory: "2Gi"
 
 autoscaling:
   enabled: false
@@ -58,7 +58,16 @@ nodeSelector: {}
 
 tolerations: []
 
-affinity: {}
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - data-processing-service
+        topologyKey: "kubernetes.io/hostname"
 
 ingressHost: "app.feature.nbspreview.com"
 
