@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "deduplication-api.fullname" . }}
+  labels:
+    {{- include "deduplication-api.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "deduplication-api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "deduplication-api.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "deduplication-api.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          {{- if .Values.probes.readiness.enabled | default "true"  }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probes.readiness.path }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "30" }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "10" }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
+          {{- end }}
+
+          {{- if .Values.probes.liveness.enabled | default "true" }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.liveness.path }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "30" }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
+          {{- end }}
+
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          command: ['java', '-jar', 'api.jar']
+          args: [   
+            '--deduplication.algorithm.updateRecordLinker={{ (((.Values).deduplication).algorithm).updateRecordLinker | default "false" }}',
+            '--deduplication.recordLinker.url={{ (((.Values).deduplication).recordLinker).url | default "" }}',
+            '--deduplication.sync.enabled={{ (((.Values).deduplication).sync).enabled | default "false" }}',
+            '--deduplication.batch.schedule.enabled={{ ((((.Values).deduplication).batch).schedule).enabled | default "false" }}',
+            '--deduplication.batch.schedule.cron={{ ((((.Values).deduplication).batch).schedule).cron | default "0 0 1 * * ?" }}',
+            '--deduplication.batch.processing.total={{ ((((.Values).deduplication).batch).processing).total | default 10000 }}',
+            '--deduplication.batch.processing.chunk={{ ((((.Values).deduplication).batch).processing).chunk | default 100 }}',
+            '--deduplication.batch.seed.mpiInsertSize={{ (((.Values).deduplication).seed).mpiInsertSize | default 100 }}',
+            '--deduplication.batch.seed.deduplicationInsertSize={{ (((.Values).deduplication).seed).deduplicationInsertSize | default 1000 }}'
+          ]
+          env:
+            - name: DEDUPLICATION_DB_URL
+              value:  {{ .Values.jdbc.deduplication.dbserver }}
+            - name: DEDUPLICATION_DB_USERNAME
+              value: {{ .Values.jdbc.deduplication.username }}
+            - name: DEDUPLICATION_DB_PASSWORD
+              value: {{ .Values.jdbc.deduplication.password }}
+            
+            - name: NBS_DB_URL
+              value:  {{ .Values.jdbc.nbs.dbserver }}
+            - name: NBS_DB_USERNAME
+              value: {{ .Values.jdbc.nbs.username }}
+            - name: NBS_DB_PASSWORD
+              value: {{ .Values.jdbc.nbs.password }}
+
+            - name: MPI_DB_URL
+              value:  {{ .Values.jdbc.mpi.dbserver }}
+            - name: MPI_DB_USERNAME
+              value: {{ .Values.jdbc.mpi.username }}
+            - name: MPI_DB_PASSWORD
+              value: {{ .Values.jdbc.mpi.password }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}0
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

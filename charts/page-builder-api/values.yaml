@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/page-builder-api"
   pullPolicy: IfNotPresent
-  tag: "v1.2.9"
+  tag: "v1.3.2"
 
 # Host URL for application
 ingressHost: "app.EXAMPLE_DOMAIN"
@@ -18,9 +18,9 @@ timezone: "UTC"
 
 #Database access credentials
 jdbc:
-  connectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_DB_USER;password=EXAMPLE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
-  user: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  connectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
+  user: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -89,3 +89,10 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

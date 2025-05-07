@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.19.0-SNAPSHOT.ea08b45
+  tag: 1.19.0-SNAPSHOT.d1ef963
 
 imagePullSecrets: []
 nameOverride: ""
@@ -48,9 +48,13 @@ ingress:
             port:
               number: 8443
 
-resources: 
+resources:
   limits:
-    memory: "3Gi"
+    memory: "2Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "1Gi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false

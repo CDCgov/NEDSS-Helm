@@ -4,9 +4,9 @@ deployment:
 env: "auto"
 
 image:
-  repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nbs-gateway"
   pullPolicy: IfNotPresent
-  tag: v1.0.9
+  tag: "v1.3.0"
 
 gatewayService:
   ports:
@@ -25,8 +25,29 @@ podSecurityContext: {}
 
 securityContext: {}
 
+landing:
+  # Specifies the path the user is redirected to when navigating to the root
+  base: "/welcome"
+
+welcome:
+  # Enables routing to the NBS7 welcome page
+  enabled: "true"
+
+patient:
+  profile:
+    # Enables routing from NBS6 pages to the Patient Profile
+    enabled: false
+
 pageBuilder:
-  enabled: "false"
+  enabled: "true"
+  page:
+    library:
+      enabled: "true"
+    management:
+      create:
+        enabled: "true"
+      edit:
+        enabled: "true"
 
 resources: {}
   # requests:
@@ -47,5 +68,16 @@ oidc:
   enabled: "true"
   issuerUri: "https://app.fts1.nbspreview.com/auth/realms/nbs-users"
   client:
-    id: ""
-    secret: ""
+    id: "nbs-modernization"
+    secret: "EXAMPLE_OIDC_SECRET"
+
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
+
+# NBS filename from "logos" folder (WARNING: Size of logo image must be smaller than 1 MB)
+nbsLogoFilename: "nedssLogo.jpg"

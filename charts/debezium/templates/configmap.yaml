@@ -9,6 +9,8 @@ data:
       {{- .Values.connect.sqlserverconnector_odse| toPrettyJson | nindent 4 }}
   connector-srte.json: |-
       {{- .Values.connect.sqlserverconnector_srte| toPrettyJson | nindent 4 }}
+  connector-meta.json: |-
+      {{- .Values.connect.sqlserverconnector_meta| toPrettyJson | nindent 4 }}
 
   connect-distributed.properties: |
     group.id={{ .Values.connect.properties.group_id }}
@@ -23,6 +25,7 @@ data:
     message.max.bytes=10000000
     offset.flush.timeout.ms=30000
     snapshot.mode=no_data
+    snapshot.lock.timeout.ms=60000
     value.converter=org.apache.kafka.connect.json.JsonConverter
     value.converter.schemas.enable=false
     include.schema.changes=true

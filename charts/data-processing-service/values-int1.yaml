@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.d8c8e7f
+  tag: 1.0.1-SNAPSHOT.db44fc6
 
 imagePullSecrets: []
 nameOverride: ""
@@ -41,11 +41,11 @@ ingress:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "2Gi"  
-    cpu: "1000m"      
-  requests:
     memory: "1Gi"  
-    cpu: "500m"    
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
@@ -82,3 +82,18 @@ keycloak:
   srte:
     clientId: ""
     clientSecret: ""
+
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
+
+kafkaThread: "1"
+
+features:
+  modernizedMatching:
+    enabled: true
+    url: "http://deduplication-api.default.svc.cluster.local:8083/nbs/api/deduplication/"

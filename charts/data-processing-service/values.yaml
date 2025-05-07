@@ -5,7 +5,7 @@ env: "demo"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.0"
+  tag: "v1.0.2"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -57,8 +57,8 @@ ingressHost: "app.EXAMPLE_DOMAIN"
 
 jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 nbs:
   authuser: "EXAMPLE_NBS_AUTHUSER"
@@ -79,9 +79,21 @@ java:
 # FIXME: the remaining values will be used in next release, not used for
 # 7.8.0 - cmoss
 dataingestion:
-  uri: "EXAMPLE_DI_URI"
+  uri: "EXAMPLE_FIXME_DI_URI"
 
 keycloak:
   srte:
     clientId: "EXAMPLE_SRTE_CLIENT_ID"
     clientSecret: "EXAMPLE_SRTE_CLIENT_SECRET"
+
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
+
+features:
+  modernizedMatching:
+    enabled: false
+    url: ""

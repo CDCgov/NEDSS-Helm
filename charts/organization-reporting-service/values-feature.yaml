@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.61ad2a3"
+  tag: "1.0.1-SNAPSHOT.9eb581d"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -68,3 +68,10 @@ kafka:
 
 log:
   path: "/usr/share/organizationreporting/data"
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

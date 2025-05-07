@@ -5,7 +5,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.ef2a82b
+  tag: 1.0.1-SNAPSHOT.5723def
 
 imagePullSecrets: []
 nameOverride: ""
@@ -68,3 +68,10 @@ log:
   path: "/usr/share/srtedataservice/data"
 
 authUri: ""
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

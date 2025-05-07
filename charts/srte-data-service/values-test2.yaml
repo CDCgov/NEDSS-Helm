@@ -5,7 +5,7 @@ env: "test"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.d8c8e7f
+  tag: 1.0.1-SNAPSHOT.abdb8df
 
 imagePullSecrets: []
 nameOverride: ""
@@ -33,11 +33,11 @@ service:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "2Gi"
-    cpu: "1000m"
+    memory: "1Gi"  
+    cpu: "500m"      
   requests:
-    memory: "1Gi"
-    cpu: "500m"
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
@@ -68,3 +68,11 @@ log:
   path: "/usr/share/srtedataservice/data"
 
 authUri: ""
+
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

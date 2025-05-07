@@ -33,6 +33,25 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          {{- if .Values.probes.readiness.enabled | default "true"  }}
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.probes.readiness.port | default "8081" }}
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "30" }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "10" }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
+          {{- end }}
+
+          {{- if .Values.probes.liveness.enabled | default "true" }}
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.probes.readiness.port | default "8081" }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "30" }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
+          {{- end }}
+
           ports:
             - name: http
               containerPort: 8081
@@ -58,12 +77,18 @@ spec:
               value: {{ .Values.sftp.username }}
             - name: DI_SFTP_PWD
               value: {{ .Values.sftp.password }}
+            - name: DI_SFTP_ELR_FILE_EXTNS
+              value: {{ .Values.sftp.elrFileExtns }}
+            - name: DI_SFTP_FILEPATHS
+              value: {{ .Values.sftp.filePaths }}
             - name: DI_SERVER_HOST
               value: {{ .Values.ingressHost }}
             - name: SERVICE_TZ
               value: {{ .Values.timezone | default "UTC" }}
             - name: KAFKA_CONCURRENCY
               value: "{{ .Values.kafkaConcurrency}}"
+            - name: API_PAYLOAD_MAX_SIZE
+              value: "{{ .Values.apiPayloadMaxSize}}"
           volumeMounts:
           - mountPath: /usr/share/dataingestion/data
             name: di-persistent-storage     

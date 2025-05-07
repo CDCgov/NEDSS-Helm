@@ -6,7 +6,7 @@ env: "test2"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.0bb1c51
+  tag: 1.0.1-TEST.b9bff8a
 
 gatewayService:
   ports:
@@ -35,8 +35,13 @@ pageBuilder:
         enabled: "true"
       edit:
         enabled: "true"
-
-resources: {}
+resources:
+  limits:
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 nbsExternalName: app-classic.test.nbspreview.com
 
@@ -64,3 +69,11 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

@@ -5,7 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT-SRTE-1.0.0.17a3348
+  tag: 1.0.1-SNAPSHOT.abdb8df
 
 imagePullSecrets: []
 nameOverride: ""
@@ -68,3 +68,10 @@ log:
   path: "/usr/share/srtedataservice/data"
 
 authUri: ""
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

@@ -41,9 +41,9 @@ sqlServerConnector: {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
     "offset.flush.interval.ms": "2000",
-    "connection.url": "jdbc:sqlserver://nbs-db.EXAMPLE_FIXME.nbspreview.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;",
-    "connection.user": "",
-    "connection.password": "",
+    "connection.url": "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;",
+    "connection.user": "EXAMPLE_FIXME",
+    "connection.password": "EXAMPLE_FIXME",
     "connection.pool.min_size": "5",
     "connection.pool.max_size": "32",
     "connection.pool.acquire_increment": "32",
@@ -134,7 +134,8 @@ prometheus:
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
-  bootstrapServers: "EXAMPLE_FIXME"
+  # this may not be right: bootstrapServers: "EXAMPLE_FIXME_KAFKA_ENDPOINT"
+  bootstrapServers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
   default_replication_factor: 2
   default_partitions: 10
   default_cleanup: "compact"

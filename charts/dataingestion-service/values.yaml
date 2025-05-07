@@ -6,7 +6,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
-  tag: "v1.2.0"
+  tag: "v1.2.5"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -79,8 +79,8 @@ ingressHost: "data.EXAMPLE_DOMAIN"
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 kafka:
   cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
@@ -115,5 +115,20 @@ sftp:
   host: "EXAMPLE_SFTP_HOST"
   username: "EXAMPLE_SFTP_USER"
   password: "EXAMPLE_SFTP_PASS"
-
+  # need to fix search and replace for both these examples <<EXAMPLE_FIXME_SFTP_SEARCH_AND_REPLACE>>
+  #elrFileExtns: "EXAMPLE_SFTP_FILE_EXTNS"
+  #filePaths: "EXAMPLE_SFTP_FILE_PATHS"
+  elrFileExtns: "hl7,txt"
+  filePaths: "/"  
+# filePaths value should be comma seperated like "/,/LAB-1,/lab-2,/lab-2/lab2-sub-folder"
 ##################################
+
+apiPayloadMaxSize: "100MB"
+
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
+

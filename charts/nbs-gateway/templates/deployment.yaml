@@ -35,23 +35,54 @@ spec:
           '--nbs.gateway.classic=https://{{ .Values.nbsExternalName }}',
           '--nbs.gateway.ui.service={{ .Values.modernizationUIHost }}',
           '--nbs.gateway.modernization.service={{ .Values.modernizationApiHost }}',
-          '--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}',
+          '--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}',          
           '--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}',
           '--nbs.gateway.patient.profile.enabled={{ (((.Values).patient).profile).enabled | default "false" }}',
+          '--nbs.gateway.patient.file.service={{ .Values.modernizationApiHost }}',
+          '--nbs.gateway.patient.file.enabled={{ (((.Values).patient).file).enabled | default "false" }}',
           '--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}', 
           '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}', 
           '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}',
           '--nbs.gateway.pagebuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', 
           '--nbs.gateway.pagebuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}',
+          '--nbs.gateway.deduplication.enabled={{ ((.Values).deduplication).enabled | default "false" }}', 
+          '--nbs.gateway.deduplication.service={{ .Values.deduplicationApiHost }}', 
           '--nbs.gateway.welcome.enabled={{ ((.Values).welcome).enabled | default "false" }}',
-          '--nbs.gateway.landing.base={{  ((.Values).landing).base | default "/nbs/login" }}'
+          '--nbs.gateway.landing.base={{  ((.Values).landing).base | default "/nbs/login" }}',          
+          '--nbs.gateway.logo.file=/logos/nbsLogo'
         ]
         command: ['java', '-Duser.timezone={{ (.Values).timezone | default "UTC" }}', '-jar', 'api.jar']
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        volumeMounts:
+        - name: {{ include "nbs-gateway.fullname" . }}-configmap
+          mountPath: /logos/nbsLogo
+          subPath: nbsLogo
+        {{- if .Values.probes.readiness.enabled | default "true" }}
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.probes.readiness.port | default "8000" }}
+          initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "30" }}
+          periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "10" }}
+          failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
+        {{- end }}
+
+        {{- if .Values.probes.liveness.enabled | default "true" }}
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.probes.readiness.port | default "8000" }}
+          initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
+          periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "30" }}
+          failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
+        {{- end }}
         ports:
         - containerPort: 8000
         resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: {{ include "nbs-gateway.fullname" . }}-configmap
+        configMap:
+          name: {{ include "nbs-gateway.fullname" . }}-configmap
+          defaultMode: 0777
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -64,5 +95,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
-     

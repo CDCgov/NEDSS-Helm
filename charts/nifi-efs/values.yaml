@@ -4,7 +4,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nifi"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nifi"
   pullPolicy: IfNotPresent
-  tag: "v1.0.4"
+  tag: "v1.0.5"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -93,7 +93,7 @@ jvmheap:
 # jdbcConnectionString is passed in as an override and all values must be supplied. 
 # Replace <db_endpoint>, <database>, <username>, and <password> in the following:
 # "jdbc:sqlserver://<db_endpoint>:1433;databaseName=<database>;user=<username>;password=<password>;encrypt=true;trustServerCertificate=true;"
-jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_DB_USER;password=EXAMPLE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
+jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
 # Default NiFi Admin Username and Password. Password must be minimum of 12 characters

@@ -114,3 +114,12 @@ sftp:
   host: ""
   username: ""
   password: ""
+  elrFileExtns: "txt,hl7"
+  filePaths: "/"
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

@@ -5,7 +5,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/post-processing-reporting-service"
-  tag: "v1.1.0"
+  tag: "v1.1.5"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -30,6 +30,9 @@ service:
   type: ClusterIP
   port: 8095
   httpsPort: 443
+  fixedDelay:
+    cachedIds: 20000 # Time in millis
+    datamart: 60000 # Time in millis
 
 ingress:
   enabled: true
@@ -56,20 +59,33 @@ affinity: {}
 ingressHost: "app.EXAMPLE_DOMAIN"
 
 jdbc:
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "<<EXAMPLE_ODSE_DB_USER_PASSWORD>>"
 
 odse:
-  dburl: "EXAMPLE_DB_URL"
+  dburl: "EXAMPLE_FIXME_DB_URL"
 
 rdb:
-  dburl: "EXAMPLE_RDB_URL"
+  dburl: "EXAMPLE_FIXME_RDB_URL"
 
 kafka:
-  cluster: "EXAMPLE_KAFKA_CLUSTER"
+  cluster: "<<EXAMPLE_MSK_KAFKA_ENDPOINT>>"
 
 log:
   path: "/usr/share/post-processing-reporting/data"
 
 featureFlag:
-  eventMetricEnable: "false"
+  eventMetricEnable: "true"
+  dTbHivEnable: "true"
+  morbReportDmEnable: "true"
+  invSummaryDmEnable: "true"
+  summaryReportEnable: "true"
+  aggregateReportEnable: "true"
+  dymDMEnable: "true"
+  ldfEnable: "true"
+# Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

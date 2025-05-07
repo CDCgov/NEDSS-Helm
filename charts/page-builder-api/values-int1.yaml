@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.2b98222
+  tag: 1.0.1-SNAPSHOT.440b9c4
 
 # Host URL for application
 ingressHost: app.int1.nbspreview.com
@@ -60,7 +60,11 @@ istioGatewayIngress:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "2Gi"
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
@@ -84,3 +88,11 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true

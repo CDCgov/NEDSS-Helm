@@ -1,0 +1,98 @@
+replicaCount: 1
+
+env: "int1"
+
+image:
+  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
+  pullPolicy: IfNotPresent
+  tag: 1.0.1-SNAPSHOT.c8a107e
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: false
+  annotations: {}
+  name: ""
+
+podSecurityContext: {}
+
+podAnnotations: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8083
+  httpsPort: 443
+
+resources:
+  limits:
+    memory: "1Gi"
+    cpu: "500m"
+  requests:
+    memory: "512Mi"
+    cpu: "250m"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+jdbc:
+  nbs:
+    dbserver:
+    username:
+    password:
+  deduplication:
+    dbserver:
+    username:
+    password:
+  mpi:
+    dbserver:
+    username:
+    password:
+
+deduplication:
+  # url for Record Linker API
+  recordLinker:
+    url:
+  algorithm:
+    # should data elements and algorithm updates be pushed to Record Linker API
+    updateRecordLinker: false
+  sync:
+    # should the deduplication service connect to kafka a replicate changes into the Record Linker MPI
+    enabled: false
+  batch:
+    schedule:
+      enabled: false
+      cron: "0 0 1 * * ?" # run daily at 1 AM
+    processing:
+      total: 10000 # how many records to process per job execution
+      chunk: 100 # how many are processed at a time
+  seed:
+    mpiInsertSize: 100 # how many records to insert into MPI at a time (max 100)
+    deduplicationInsertSize: 1000 # how many records to insert into deduplication db at a time
+
+# Override available for readiness and liveness probes: path, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+    path: /nbs/api/deduplication/health
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    failureThreshold: 5
+  liveness:
+    enabled: true
+    path: /nbs/api/deduplication/health
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    failureThreshold: 5

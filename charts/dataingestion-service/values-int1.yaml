@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.ef2a82b
+  tag: 1.0.1-SNAPSHOT.5723def
 
 imagePullSecrets: []
 nameOverride: ""
@@ -60,7 +60,13 @@ ingress:
     hosts:
     - dataingestion.int1.nbspreview.com
 
-resources: {}
+resources:
+  limits:
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
@@ -80,6 +86,8 @@ jdbc:
   dbserver: ""
   username: ""
   password: ""
+  elrFileExtns: "txt,hl7"
+  filePaths: "/"
 
 kafka:
   cluster: ""
@@ -115,3 +123,11 @@ sftp:
   password: ""
 
 kafkaConcurrency: "1"
+apiPayloadMaxSize: "100MB"
+
+# Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
+probes:
+  readiness:
+    enabled: true
+  liveness:
+    enabled: true
