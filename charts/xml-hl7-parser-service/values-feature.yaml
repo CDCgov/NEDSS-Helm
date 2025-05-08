@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "demo"
+env: "feature"
 
 image:
-  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-extraction-service
+  repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-1.1.1.RELTAG.22635ba
+  tag: 1.0.1-SNAPSHOT.6d94b00
 
 imagePullSecrets: []
 nameOverride: ""
@@ -20,7 +20,6 @@ podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
   prometheus.io/port: "8098"
-  #prometheus.io/scheme: "https"
 
 podSecurityContext: {}
 
@@ -28,11 +27,18 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8081
+  port: 8086
   httpsPort: 443
 
+# Kubernetes resource limits
+resources:
+  limits:
+    memory: "2Gi"
+    cpu: "1000m"
+  requests:
+    memory: "1Gi"
+    cpu: "500m"
 
-resources: {}
 
 autoscaling:
   enabled: false
@@ -46,11 +52,9 @@ tolerations: []
 
 affinity: {}
 
-#ingressHost: "hl7service.demo.nbspreview.com"
+#ingressHost: "hl7service.feature.nbspreview.com"
 
 jdbc:
   dbserver: ""
   username: ""
   password: ""
-
-

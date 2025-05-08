@@ -1,11 +1,11 @@
 replicaCount: 1
 
-env: "demo"
+env: "prod"
 
 image:
-  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-extraction-service
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/case-notification-service"
   pullPolicy: IfNotPresent
-  tag: 1.0.1-1.1.1.RELTAG.22635ba
+  tag: "v1.0.7"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -20,7 +20,6 @@ podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
   prometheus.io/port: "8098"
-  #prometheus.io/scheme: "https"
 
 podSecurityContext: {}
 
@@ -28,7 +27,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8081
+  port: 8086
   httpsPort: 443
 
 
@@ -46,11 +45,10 @@ tolerations: []
 
 affinity: {}
 
-#ingressHost: "hl7service.demo.nbspreview.com"
+#ingressHost: "data.EXAMPLE_DOMAIN"
 
+# dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: ""
   username: ""
   password: ""
-
-
