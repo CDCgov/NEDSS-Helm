@@ -21,6 +21,7 @@ podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
   prometheus.io/port: "8081"
+  linkerd.io/inject: "disabled"
 
 podSecurityContext: {}
 
