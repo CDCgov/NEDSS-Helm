@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.da6f56d
+  tag: 1.0.1-SNAPSHOT.4a1f341
 
 imagePullSecrets: []
 nameOverride: ""
