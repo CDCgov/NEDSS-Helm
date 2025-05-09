@@ -2,6 +2,9 @@ replicaCount: 1
 
 env: "dts1"
 
+authUri: ""
+
+
 image:
   repository: ""
   pullPolicy: IfNotPresent

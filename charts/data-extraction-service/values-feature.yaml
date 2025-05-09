@@ -2,6 +2,9 @@ replicaCount: 1
 
 env: "feature"
 
+authUri: ""
+
+
 image:
   repository: ""
   pullPolicy: IfNotPresent

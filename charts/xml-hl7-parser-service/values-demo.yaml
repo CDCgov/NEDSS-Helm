@@ -2,6 +2,9 @@ replicaCount: 1
 
 env: "demo"
 
+authUri: ""
+
+
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/nnd-case-notification-service/xml-hl7-parser-service
   pullPolicy: IfNotPresent
