@@ -3,7 +3,7 @@ replicaCount: 1
 env: "demo"
 
 image:
-  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/xml-hl7-parser-service
+  repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/nnd-case-notification-service/xml-hl7-parser-service
   pullPolicy: IfNotPresent
   tag: 1.0.1-1.1.1.RELTAG.22635ba
 
