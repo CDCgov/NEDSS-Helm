@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "data-extraction-service.fullname" . }}
+  labels:
+    {{- include "data-extraction-service.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "data-extraction-service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "data-extraction-service.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "data-extraction-service.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          env:
+            - name: CN_AUTH_URI
+              value: {{ .Values.authUri }}
+            - name: NBS_DBSERVER
+              value: {{ .Values.jdbc.dbserver }}
+            - name: NBS_DBUSER
+              value: {{ .Values.jdbc.username }}
+            - name: NBS_DBPASSWORD
+              value: {{ .Values.jdbc.password }}
+            - name: CN_SERVER_HOST
+              value: {{ .Values.ingressHost }}
+            - name: KAFKA_BOOTSTRAP_SERVER
+              value: {{ .Values.kafka.cluster }}

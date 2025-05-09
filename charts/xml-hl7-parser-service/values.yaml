@@ -1,0 +1,57 @@
+replicaCount: 1
+
+env: "prod"
+
+authUri: ""
+
+
+image:
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-case-notification-service/xml-hl7-parser-service"
+  pullPolicy: IfNotPresent
+  tag: "v1.0.7"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: "/actuator/prometheus"
+  prometheus.io/port: "8098"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8092
+  httpsPort: 443
+
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingressHost: ""
+
+# dbserver is passed in as an environment variable. It is just the database endpoint
+jdbc:
+  dbserver: ""
+  username: ""
+  password: ""
