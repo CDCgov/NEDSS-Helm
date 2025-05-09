@@ -46,7 +46,7 @@ tolerations: []
 
 affinity: {}
 
-#ingressHost: "hl7service.demo.nbspreview.com"
+ingressHost: "dataingestion.demo.nbspreview.com"
 
 jdbc:
   dbserver: ""

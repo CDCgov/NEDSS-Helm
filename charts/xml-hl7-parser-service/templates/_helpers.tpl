@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "data-extraction-service.name" -}}
+{{- define "xml-hl7-parser-service.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "data-extraction-service.fullname" -}}
+{{- define "xml-hl7-parser-service.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,18 +26,18 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "data-extraction-service.chart" -}}
+{{- define "xml-hl7-parser-service.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "data-extraction-service.labels" -}}
+{{- define "xml-hl7-parser-service.labels" -}}
 app: NBS
 type: Data
-helm.sh/chart: {{ include "data-extraction-service.chart" . }}
-{{ include "data-extraction-service.selectorLabels" . }}
+helm.sh/chart: {{ include "xml-hl7-parser-service.chart" . }}
+{{ include "xml-hl7-parser-service.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -47,19 +47,19 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "data-extraction-service.selectorLabels" -}}
+{{- define "xml-hl7-parser-service.selectorLabels" -}}
 app: NBS
 type: Data
-app.kubernetes.io/name: {{ include "data-extraction-service.name" . }}
+app.kubernetes.io/name: {{ include "xml-hl7-parser-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "data-extraction-service.serviceAccountName" -}}
+{{- define "xml-hl7-parser-service.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "data-extraction-service.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "xml-hl7-parser-service.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

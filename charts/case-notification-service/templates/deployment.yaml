@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "data-extraction-service.fullname" . }}
+  name: {{ include "case-notification-service.fullname" . }}
   labels:
-    {{- include "data-extraction-service.labels" . | nindent 4 }}
+    {{- include "case-notification-service.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "data-extraction-service.selectorLabels" . | nindent 6 }}
+      {{- include "case-notification-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "data-extraction-service.selectorLabels" . | nindent 8 }}
+        {{- include "case-notification-service.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "data-extraction-service.serviceAccountName" . }}
+      serviceAccountName: {{ include "case-notification-service.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -38,13 +38,13 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
+            - name: CN_AUTH_URI
+              value: {{ .Values.authUri }}
             - name: NBS_DBSERVER
               value: {{ .Values.jdbc.dbserver }}
             - name: NBS_DBUSER
               value: {{ .Values.jdbc.username }}
             - name: NBS_DBPASSWORD
               value: {{ .Values.jdbc.password }}
-            - name: DC_SERVER_HOST
+            - name: CN_SERVER_HOST
               value: {{ .Values.ingressHost }}
-            - name: KAFKA_BOOTSTRAP_SERVER
-              value: {{ .Values.kafka.cluster }}

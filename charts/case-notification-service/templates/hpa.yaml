@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "data-extraction-service.fullname" . }}
+  name: {{ include "case-notification-service.fullname" . }}
   labels:
-    {{- include "data-extraction-service.labels" . | nindent 4 }}
+    {{- include "case-notification-service.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "data-extraction-service.fullname" . }}
+    name: {{ include "case-notification-service.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
