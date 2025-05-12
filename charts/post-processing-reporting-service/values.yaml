@@ -5,7 +5,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/post-processing-reporting-service"
-  tag: "v1.1.5"
+  tag: "v1.1.6"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -76,13 +76,13 @@ log:
 
 featureFlag:
   eventMetricEnable: "true"
-  dTbHivEnable: "false"
-  morbReportDmEnable: "false"
-  invSummaryDmEnable: "false"
-  summaryReportEnable: "false"
-  aggregateReportEnable: "false"
-  dymDMEnable: "false"
-  ldfEnable: "false"
+  dTbHivEnable: "true"
+  morbReportDmEnable: "true"
+  invSummaryDmEnable: "true"
+  summaryReportEnable: "true"
+  aggregateReportEnable: "true"
+  dymDMEnable: "true"
+  ldfEnable: "true"
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
