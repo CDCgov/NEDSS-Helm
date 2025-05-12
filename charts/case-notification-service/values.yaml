@@ -49,6 +49,9 @@ affinity: {}
 
 ingressHost: ""
 
+kafka:
+  cluster: ""
+
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: ""

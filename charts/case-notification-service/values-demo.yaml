@@ -51,6 +51,9 @@ affinity: {}
 
 ingressHost: "dataingestion.demo.nbspreview.com"
 
+kafka:
+  cluster: ""
+
 jdbc:
   dbserver: ""
   username: ""
