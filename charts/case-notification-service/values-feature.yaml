@@ -64,3 +64,6 @@ jdbc:
   dbserver: ""
   username: ""
   password: ""
+
+api:
+  host: ""
