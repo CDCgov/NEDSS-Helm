@@ -101,7 +101,7 @@ spec:
             - name: MODERNIZED_MATCHING_URL
               value: {{ .Values.features.modernizedMatching.url | default "" }}
             - name: THREAD_FLAG
-              value: {{ .Values.thread.enabled | default false | quote }}
+              value: {{ .Values.thread.enabled }}
             - name: THREAD_POOL_SIZE
               value: "{{ .Values.thread.size }}""
           resources:
