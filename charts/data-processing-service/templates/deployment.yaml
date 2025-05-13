@@ -103,7 +103,7 @@ spec:
             - name: THREAD_FLAG
               value: {{ .Values.thread.enabled }}
             - name: THREAD_POOL_SIZE
-              value: "{{ .Values.thread.size }}""
+              value: "{{ .Values.thread.size }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
