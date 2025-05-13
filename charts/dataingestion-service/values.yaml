@@ -58,7 +58,7 @@ dataExtraction:
 
 caseNotification:
   enabled: "true"
-  port: 8092
+  port: 8093
 
 xmlHl7Parser:
   enabled: "true"
