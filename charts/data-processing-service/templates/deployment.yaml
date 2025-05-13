@@ -22,7 +22,7 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
+          preferredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: {{ include "data-processing-service.name" . }}
