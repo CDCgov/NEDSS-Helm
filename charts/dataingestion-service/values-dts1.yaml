@@ -51,6 +51,18 @@ srtedataService:
   enabled: "true"
   port: 8084
 
+dataExtraction:
+  enabled: "true"
+  port: 8090
+
+caseNotification:
+  enabled: "true"
+  port: 8092
+
+xmlHl7Parser:
+  enabled: "true"
+  port: 8088
+
 ingress:
   enabled: true
   className: "nginx"
