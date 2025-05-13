@@ -63,6 +63,10 @@ xmlHl7Parser:
   enabled: "true"
   port: 8088
 
+compare:
+  enabled: "true"
+  port: 8085
+
 ingress:
   enabled: true
   className: "nginx"

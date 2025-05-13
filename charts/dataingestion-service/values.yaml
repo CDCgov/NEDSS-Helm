@@ -58,12 +58,15 @@ dataExtraction:
 
 caseNotification:
   enabled: "true"
-  port: 8093
+  port: 8093 
 
 xmlHl7Parser:
   enabled: "true"
   port: 8088
 
+compare:
+  enabled: "false"
+  port: 8085
 
 ingress:
   enabled: true

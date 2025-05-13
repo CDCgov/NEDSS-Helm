@@ -122,3 +122,12 @@ spec:
                 port:
                   number: {{ .Values.xmlHl7Parser.port }}
           {{- end }} 
+          {{- if eq .Values.compare.enabled "true" }}
+          - path: "/comparison/"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-compare-api-service
+                port:
+                  number: {{ .Values.compare.port }}
+          {{- end }} 
