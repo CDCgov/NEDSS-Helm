@@ -100,6 +100,10 @@ spec:
               value: {{ .Values.features.modernizedMatching.enabled | default false | quote }}
             - name: MODERNIZED_MATCHING_URL
               value: {{ .Values.features.modernizedMatching.url | default "" }}
+            - name: THREAD_FLAG
+              value: {{ .Values.thread.enabled | default false | quote }}
+            - name: THREAD_POOL_SIZE
+              value: "{{ .Values.thread.size }}""
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

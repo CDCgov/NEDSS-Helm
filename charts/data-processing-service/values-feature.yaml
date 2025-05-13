@@ -42,10 +42,10 @@ ingress:
 resources:
   requests:
     memory: "1Gi"  
-    cpu: "1000m"
-  # limits:
-  #   memory: "1Gi"  
-  #   cpu: "500m"      
+    cpu: "800m"
+  limits:
+    memory: "1Gi"  
+    cpu: "1500m"      
   # requests:
   #   memory: "512Mi"  
   #   cpu: "250m"
@@ -100,4 +100,8 @@ features:
   modernizedMatching:
     enabled: false
     url: ""
+
+thread:
+  enabled: false
+  size: "5"
 
