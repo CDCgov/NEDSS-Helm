@@ -30,7 +30,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8086
+  port: 8090
   httpsPort: 443
 
 resources:
@@ -55,6 +55,9 @@ tolerations: []
 affinity: {}
 
 ingressHost: "dataingestion.int1.nbspreview.com"
+
+kafka:
+  cluster: ""
 
 jdbc:
   dbserver: ""

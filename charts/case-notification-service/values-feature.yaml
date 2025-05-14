@@ -30,7 +30,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8086
+  port: 8093
   httpsPort: 443
 
 # Kubernetes resource limits
@@ -57,7 +57,13 @@ affinity: {}
 
 ingressHost: "dataingestion.feature.nbspreview.com"
 
+kafka:
+  cluster: ""
+
 jdbc:
   dbserver: ""
   username: ""
   password: ""
+
+api:
+  host: ""
