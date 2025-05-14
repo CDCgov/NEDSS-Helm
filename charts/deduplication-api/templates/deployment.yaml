@@ -69,7 +69,7 @@ spec:
             '--deduplication.batch.processing.chunk={{ ((((.Values).deduplication).batch).processing).chunk | default 100 }}',
             '--deduplication.batch.seed.mpiInsertSize={{ (((.Values).deduplication).seed).mpiInsertSize | default 100 }}',
             '--deduplication.batch.seed.deduplicationInsertSize={{ (((.Values).deduplication).seed).deduplicationInsertSize | default 1000 }}',
-            '--spring.kafka.bootstrap-servers={{{ (((.Values).deduplication).sync).bootstrap-server | default "localhost:9092" }}'
+            '--spring.kafka.bootstrap-servers={{ (((.Values).deduplication).sync).bootstrap-server | default "localhost:9092" }}'
           ]
           env:
             - name: DEDUPLICATION_DB_URL
