@@ -64,6 +64,7 @@ deduplication:
     updateRecordLinker: true
   sync:
     enabled: true
+    bootstrapServer:
   batch:
     schedule:
       enabled: true
