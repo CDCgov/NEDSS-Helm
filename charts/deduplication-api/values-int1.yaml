@@ -63,10 +63,10 @@ deduplication:
     # should data elements and algorithm updates be pushed to Record Linker API
     updateRecordLinker: true
   sync:
-    enabled: false
+    enabled: true
   batch:
     schedule:
-      enabled: false
+      enabled: true
       cron: "0 0 1 * * ?" # run daily at 1 AM
     processing:
       total: 10 # how many records to process per job execution
