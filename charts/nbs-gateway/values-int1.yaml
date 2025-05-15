@@ -41,7 +41,10 @@ pageBuilder:
         enabled: "true"
 
 deduplication:
-  enabled: "true"
+  api:
+    enabled: "true"
+  merge:
+    enabled: "true"
 
 resources:
   limits:

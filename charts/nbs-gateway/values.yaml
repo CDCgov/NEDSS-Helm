@@ -48,7 +48,12 @@ pageBuilder:
         enabled: "true"
 
 deduplication:
-  enabled: "false"
+  # allows routing to the deduplication-api
+  api:
+    enabled: "false"
+  # controls UI routing to modernized system identified merge queue
+  merge:
+    enabled: "false"
 
 resources: {}
 
