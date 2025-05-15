@@ -8,7 +8,7 @@ authUri: ""
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.af8d15a
+  tag: 1.0.1-SNAPSHOT.def72fd
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,7 +30,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8086
+  port: 8090
   httpsPort: 443
 
 resources:
@@ -54,6 +54,9 @@ tolerations: []
 affinity: {}
 
 ingressHost: "dataingestion.dts1.nbspreview.com"
+
+kafka:
+  cluster: ""
 
 jdbc:
   dbserver: ""

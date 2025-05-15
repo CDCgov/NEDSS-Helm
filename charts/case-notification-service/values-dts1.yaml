@@ -8,7 +8,7 @@ authUri: ""
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.af8d15a
+  tag: 1.0.1-SNAPSHOT-5132025-WIRE-CASE-3.dc8f47a
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,7 +30,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8086
+  port: 8093
   httpsPort: 443
 
 resources:
@@ -55,8 +55,13 @@ affinity: {}
 
 ingressHost: "dataingestion.dts1.nbspreview.com"
 
+kafka:
+  cluster: ""
+
 jdbc:
   dbserver: ""
   username: ""
   password: ""
 
+api:
+  host: "https://dataingestion.dts1.nbspreview.com/hl7-parser"

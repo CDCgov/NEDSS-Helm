@@ -30,7 +30,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8092
+  port: 8090
   httpsPort: 443
 
 
@@ -49,6 +49,9 @@ tolerations: []
 affinity: {}
 
 ingressHost: ""
+
+kafka:
+  cluster: ""
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:

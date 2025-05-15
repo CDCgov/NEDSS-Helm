@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.f3fb985
+  tag: 1.0.1-SNAPSHOT.db77316
 
 imagePullSecrets: []
 nameOverride: ""
@@ -63,10 +63,11 @@ deduplication:
     # should data elements and algorithm updates be pushed to Record Linker API
     updateRecordLinker: true
   sync:
-    enabled: false
+    enabled: true
+    bootstrapServer:
   batch:
     schedule:
-      enabled: false
+      enabled: true
       cron: "0 0 1 * * ?" # run daily at 1 AM
     processing:
       total: 10 # how many records to process per job execution

@@ -71,6 +71,8 @@ deduplication:
   sync:
     # should the deduplication service connect to kafka a replicate changes into the Record Linker MPI
     enabled: false
+    # url of kafka bootstrap server
+    bootstrapServer:
   batch:
     schedule:
       enabled: false

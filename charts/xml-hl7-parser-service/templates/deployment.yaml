@@ -48,5 +48,3 @@ spec:
               value: {{ .Values.jdbc.password }}
             - name: CN_SERVER_HOST
               value: {{ .Values.ingressHost }}
-            - name: KAFKA_BOOTSTRAP_SERVER
-              value: {{ .Values.kafka.cluster }}
