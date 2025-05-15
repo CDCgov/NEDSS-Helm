@@ -79,7 +79,7 @@ spec:
                 status=$?
                 ## Log and exit if failed
                 [ $status -eq 0 ] && echo "{{ .Values.changelog.rdb_modern }} scripts : execution success!" || echo "ERROR: {{ .Values.changelog.rdb_modern }} failed with exit code $status"
-{{/*                [ $status -eq 0 ]  || exit 1*/}}
+                [ $status -eq 0 ]  || exit 1
               fi
 
               echo "Liquibase Update Complete. All scripts: execution success! Exiting"
