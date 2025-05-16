@@ -41,6 +41,11 @@ connect:
     sql_server_agent_override: true
     sql_server_agent_status: "select dbo.IsSqlAgentRunning()"
 
+  connector_enable:
+    nbs_odse: "enabled"
+    nbs_srte: "enabled"
+    nbs_odse_meta: "disabled"
+
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v013125",
     "config": {

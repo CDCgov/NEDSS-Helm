@@ -41,6 +41,11 @@ connect:
     bootstrap_server: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                        b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
 
+  connector_enable:
+   nbs_odse: "enabled"
+   nbs_srte: "enabled"
+   nbs_odse_meta: "enabled"
+
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v041825",
     "config": {
@@ -138,7 +143,7 @@ connect:
       "schema.history.internal.kafka.topic": "odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                                                           b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
-      "table.include.list": "dbo.Page_cond_mapping, dbo.NBS_page, dbo.NBS_ui_metadata, dbo.NBS_rdb_metadata",
+      "table.include.list": "dbo.Page_cond_mapping, dbo.NBS_page, dbo.NBS_ui_metadata, dbo.NBS_rdb_metadata, dbo.state_defined_field_metadata",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
