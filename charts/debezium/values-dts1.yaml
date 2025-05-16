@@ -41,6 +41,11 @@ connect:
     bootstrap_server: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                        b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
 
+  connector_enable:
+   nbs_odse: "enabled"
+   nbs_srte: "enabled"
+   nbs_odse_meta: "enabled"
+
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v041825",
     "config": {
