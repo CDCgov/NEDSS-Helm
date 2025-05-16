@@ -41,8 +41,7 @@ pageBuilder:
         enabled: "true"
 
 deduplication:
-  api:
-    enabled: "true"
+  enabled: "true"
   merge:
     enabled: "true"
 
