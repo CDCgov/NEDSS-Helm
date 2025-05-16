@@ -40,6 +40,11 @@ connect:
     sql_server_agent_status: ""
     bootstrap_server: "b-2.cdcnbsfeaturedevelopme.f4c8vq.c9.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsfeaturedevelopme.f4c8vq.c9.kafka.us-east-1.amazonaws.com:9092"
 
+  connector_enable:
+    nbs_odse: "enabled"
+    nbs_srte: "enabled"
+    nbs_odse_meta: "disabled"
+
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v013125",
     "config": {
