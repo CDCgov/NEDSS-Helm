@@ -41,7 +41,12 @@ connect:
     bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
   # dbserver: "EXAMPLE_DB_ENDPOINT"
-  
+
+  connector_enable:
+    nbs_odse: "enabled"
+    nbs_srte: "enabled"
+    nbs_odse_meta: "disabled"
+
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v013125",
     "config": {

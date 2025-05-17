@@ -95,3 +95,39 @@ spec:
                 port:
                   number: {{ .Values.srtedataService.port }}
           {{- end }}  
+          {{- if eq .Values.dataExtraction.enabled "true" }}
+          - path: "/data-extraction/"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-extraction-service
+                port:
+                  number: {{ .Values.dataExtraction.port }}
+          {{- end }}  
+          {{- if eq .Values.caseNotification.enabled "true" }}
+          - path: "/case-notification/"
+            pathType: Prefix
+            backend:
+              service:
+                name: case-notification-service
+                port:
+                  number: {{ .Values.caseNotification.port }}
+          {{- end }} 
+          {{- if eq .Values.xmlHl7Parser.enabled "true" }}
+          - path: "/hl7-parser/"
+            pathType: Prefix
+            backend:
+              service:
+                name: xml-hl7-parser-service
+                port:
+                  number: {{ .Values.xmlHl7Parser.port }}
+          {{- end }} 
+          {{- if eq .Values.compare.enabled "true" }}
+          - path: "/comparison/"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-compare-api-service
+                port:
+                  number: {{ .Values.compare.port }}
+          {{- end }} 
