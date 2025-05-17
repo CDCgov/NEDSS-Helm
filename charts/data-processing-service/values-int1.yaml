@@ -97,3 +97,10 @@ features:
   modernizedMatching:
     enabled: true
     url: "http://deduplication-api.default.svc.cluster.local:8083/nbs/api/deduplication/"
+
+hikari:
+  poolSize: "20"
+  minIdle: "5"
+  conTimeout: "30000"
+  maxLifeTime: "5000"
+  leakDetectThresHold: "10000"

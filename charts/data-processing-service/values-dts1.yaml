@@ -97,3 +97,9 @@ features:
     enabled: false
     url: ""
 
+hikari:
+  poolSize: "20"
+  minIdle: "5"
+  conTimeout: "30000"
+  maxLifeTime: "5000"
+  leakDetectThresHold: "10000"
