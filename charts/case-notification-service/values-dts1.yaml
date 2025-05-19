@@ -8,7 +8,7 @@ authUri: ""
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT-5192025-4.2e1dfda
+  tag: 1.0.1-SNAPSHOT-5192025-5.04044af
 
 imagePullSecrets: []
 nameOverride: ""
