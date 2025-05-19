@@ -74,6 +74,12 @@ postProcessing:
 dataProcessingService:
   authUsername: <UPDATE>
   modernizedMatchingEnabled: <UPDATE>
+  
+dataIngestionService:
+  sftpEnabled: <UPDATE>
+  sftpHost: <UPDATE>
+  sftpUserName: <UPDATE>
+  sftpPassword: <UPDATE>
 
 keycloak:
   dbPassword: <UPDATE>
