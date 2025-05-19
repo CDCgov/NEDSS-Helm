@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "data-extraction-service.fullname" . }}
+  labels:
+    {{- include "data-extraction-service.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      name: http
+    - port: {{ .Values.service.httpsPort }}
+      targetPort: {{ .Values.service.port }}
+      name: https
+  selector:
+    {{- include "data-extraction-service.selectorLabels" . | nindent 4 }}

@@ -41,7 +41,12 @@ connect:
     bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
   # dbserver: "EXAMPLE_DB_ENDPOINT"
-  
+
+  connector_enable:
+    nbs_odse: "enabled"
+    nbs_srte: "enabled"
+    nbs_odse_meta: "disabled"
+
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v013125",
     "config": {
@@ -136,7 +141,7 @@ connect:
       "table.include.list": "dbo.TotalIDM,dbo.IMRDBMapping,dbo.Program_area_code,dbo.Code_value_general,
                              dbo.Codeset,dbo.Codeset_Group_Metadata,dbo.State_county_code_value,dbo.Country_code,
                              dbo.Jurisdiction_code,dbo.Condition_code,dbo.Code_value_clinical,dbo.State_code
-                             dbo.Snomed_condition,dbo.Loinc_condition,dbo.Labtest_loinc",
+                             dbo.Snomed_condition,dbo.Loinc_condition,dbo.Labtest_loinc,dbo.LDF_page_set",
       "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps_add_time, convertTimestamps_concept_status_time, 
                      convertTimestamps_effective_from_time, convertTimestamps_effective_to_time, convertTimestamps_status_time, 
                      convertTimestamps_status_to_time, convertTimestamps_value_set_status_time",

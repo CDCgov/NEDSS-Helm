@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: "v1.3.1"
+  tag: "v1.3.3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -138,12 +138,15 @@ ui:
         enabled: true
   patient:
     profile:
-      # Enables access to the modernized patient profile
+      # [deprecated] Enables access to the modernized patient profile. (marked for removal)
+      enabled: false
+    file:
+      # Enables access to the modernized Patient File
       enabled: false
     add:
-      # Enables access to the modernized New patient feature to create a patient with basic demographic data
+      # [deprecated] Enables access to the modernized New patient feature to create a patient with basic demographic data. (marked for removal)
       enabled: true
-      # Enables access to the modernized New patient - extended feature to create a patient with all available demographic data
+      # [deprecated] Enables access to the modernized New patient - extended feature to create a patient with all available demographic data. (marked for removal)
       extended:
         enabled: true
     search:
@@ -153,7 +156,9 @@ ui:
   deduplication:
     # Enable access to Deduplication screens
     enabled: false
-
+    merge:
+      # Enable acces to Deduplication merge screens
+      enabled: false
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:

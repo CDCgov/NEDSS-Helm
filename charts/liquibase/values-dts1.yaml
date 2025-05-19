@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.48ba84f
+  tag: 1.0.1-SNAPSHOT.fdc00c3
 
 imagePullSecrets: []
 nameOverride: ""
@@ -21,6 +21,7 @@ podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
   prometheus.io/port: "8081"
+  linkerd.io/inject: "disabled"
 
 podSecurityContext: {}
 

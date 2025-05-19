@@ -82,13 +82,6 @@ spec:
                       curl --request DELETE  "http://127.0.0.1:8083/connectors/$task"
                     done
 
-                    echo "Starting ODSE task with config: $(cat /etc/debezium/connector-srte.json)"
-                    curl --request POST \
-                      --header "Accept:application/json" \
-                      --header "Content-Type:application/json" \
-                      --data '@/etc/debezium/connector-odse.json' \
-                      "http://127.0.0.1:8083/connectors/";
-
                     echo "Starting SRTE task with config: $(cat /etc/debezium/connector-srte.json)"
                     curl --request POST \
                       --header "Accept:application/json" \
@@ -96,12 +89,21 @@ spec:
                       --data '@/etc/debezium/connector-srte.json' \
                       "http://127.0.0.1:8083/connectors/";
 
+                    echo "Starting ODSE task with config: $(cat /etc/debezium/connector-srte.json)"
+                    curl --request POST \
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-odse.json' \
+                      "http://127.0.0.1:8083/connectors/";
+
+                    if [ {{ lower .Values.connect.connector_enable.nbs_odse_meta }} == "enabled" ]; then
                     echo "Starting ODSE-META task with config: $(cat /etc/debezium/connector-meta.json)"
                     curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
                       --data '@/etc/debezium/connector-meta.json' \
                       "http://127.0.0.1:8083/connectors/";
+                    fi
 
                     connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
                     echo "Successfully running connectors: $connectors"

@@ -6,7 +6,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
-  tag: "v1.2.4"
+  tag: "v1.2.6"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -51,6 +51,22 @@ nndService:
 srtedataService:
   enabled: "true"
   port: 8084
+
+dataExtraction:
+  enabled: "true"
+  port: 8090
+
+caseNotification:
+  enabled: "true"
+  port: 8093 
+
+xmlHl7Parser:
+  enabled: "true"
+  port: 8088
+
+compare:
+  enabled: "false"
+  port: 8085
 
 ingress:
   enabled: true
@@ -115,7 +131,12 @@ sftp:
   host: "EXAMPLE_SFTP_HOST"
   username: "EXAMPLE_SFTP_USER"
   password: "EXAMPLE_SFTP_PASS"
-
+  # need to fix search and replace for both these examples <<EXAMPLE_FIXME_SFTP_SEARCH_AND_REPLACE>>
+  #elrFileExtns: "EXAMPLE_SFTP_FILE_EXTNS"
+  #filePaths: "EXAMPLE_SFTP_FILE_PATHS"
+  elrFileExtns: "hl7,txt"
+  filePaths: "/"  
+# filePaths value should be comma seperated like "/,/LAB-1,/lab-2,/lab-2/lab2-sub-folder"
 ##################################
 
 apiPayloadMaxSize: "100MB"

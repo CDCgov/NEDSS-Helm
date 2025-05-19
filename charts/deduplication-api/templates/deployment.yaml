@@ -59,10 +59,19 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           command: ['java', '-jar', 'api.jar']
-          args: [   
+          args: [
+            {{- if (((.Values).deduplication).sync).bootstrapServer }}
+            '--spring.kafka.bootstrap-servers={{ (((.Values).deduplication).sync).bootstrapServer }}',
+            {{- end }}
             '--deduplication.algorithm.updateRecordLinker={{ (((.Values).deduplication).algorithm).updateRecordLinker | default "false" }}',
             '--deduplication.recordLinker.url={{ (((.Values).deduplication).recordLinker).url | default "" }}',
-            '--deduplication.sync.enabled={{ (((.Values).deduplication).sync).enabled | default "false" }}'
+            '--deduplication.sync.enabled={{ (((.Values).deduplication).sync).enabled | default "false" }}',
+            '--deduplication.batch.schedule.enabled={{ ((((.Values).deduplication).batch).schedule).enabled | default "false" }}',
+            '--deduplication.batch.schedule.cron={{ ((((.Values).deduplication).batch).schedule).cron | default "0 0 1 * * ?" }}',
+            '--deduplication.batch.processing.total={{ ((((.Values).deduplication).batch).processing).total | default 10000 }}',
+            '--deduplication.batch.processing.chunk={{ ((((.Values).deduplication).batch).processing).chunk | default 100 }}',
+            '--deduplication.batch.seed.mpiInsertSize={{ (((.Values).deduplication).seed).mpiInsertSize | default 100 }}',
+            '--deduplication.batch.seed.deduplicationInsertSize={{ (((.Values).deduplication).seed).deduplicationInsertSize | default 1000 }}'
           ]
           env:
             - name: DEDUPLICATION_DB_URL

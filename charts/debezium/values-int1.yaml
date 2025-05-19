@@ -40,6 +40,10 @@ connect:
     sql_server_agent_status: ""
     bootstrap_server: "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,
                        b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092"
+  connector_enable:
+    nbs_odse: "enabled"
+    nbs_srte: "enabled"
+    nbs_odse_meta: "disabled"
 
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v013125",
@@ -138,7 +142,7 @@ connect:
       "table.include.list": "dbo.TotalIDM,dbo.IMRDBMapping,dbo.Program_area_code,dbo.Code_value_general,
                              dbo.Codeset,dbo.Codeset_Group_Metadata,dbo.State_county_code_value,dbo.Country_code,
                              dbo.Jurisdiction_code,dbo.Condition_code,dbo.Code_value_clinical,dbo.State_code
-                             dbo.Snomed_condition,dbo.Loinc_condition,dbo.Labtest_loinc",
+                             dbo.Snomed_condition,dbo.Loinc_condition,dbo.Labtest_loinc,dbo.LDF_page_set",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
