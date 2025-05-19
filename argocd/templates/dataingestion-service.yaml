@@ -20,7 +20,15 @@ spec:
         - values.yaml
       parameters:
       - name: sftp.enabled
-        value: disabled
+        value: {{ .Values.dataProcessingService.sftpEnabled }}
+      - name: sftp.host
+        value: {{ .Values.dataProcessingService.sftpHost }}
+      - name: sftp.username
+        value: {{ .Values.dataProcessingService.sftpUserName }}
+      - name: sftp.password
+        value: {{ .Values.dataProcessingService.sftpPassword }}
+      - name: authUri
+        value: 'http://keycloak.default.svc.cluster.local/auth/realms/NBS'
       - name: ingressHost
         value: {{ .Values.env.dataUrl }}
       - name: 'ingress.tls[0].secretName'
@@ -37,10 +45,6 @@ spec:
         value: {{ .Values.env.ODSPassword }}
       - name: cloudProvider
         value: {{ .Values.env.cloudProvider }}
-      - name: azure.files.resourceGroupName
-        value:  {{ .Values.azure.ResourceGroup }}
-      - name: azure.files.storageAccountName
-        value: {{ .Values.azure.FileStorageName }}
       - name: efsFileSystemId
         value: {{ .Values.aws.efsId }}
   syncPolicy:
@@ -48,5 +52,3 @@ spec:
       prune: true
       selfHeal: true 
   project: default
-
-
