@@ -81,6 +81,12 @@ dataIngestionService:
   sftpUserName: <UPDATE>
   sftpPassword: <UPDATE>
 
+pageBuilder:
+  enabled: <UPDATE>
+  pageLibraryEnabled: <UPDATE>
+  pageManagementCreateEnabled: <UPDATE>
+  pageManagementEditEnabled: <UPDATE>
+
 keycloak:
   dbPassword: <UPDATE>
   adminPassword: <UPDATE>
