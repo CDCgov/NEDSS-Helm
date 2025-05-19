@@ -64,4 +64,4 @@ jdbc:
   password: ""
 
 api:
-  host: "dataingestion.dts1.nbspreview.com"
+  host: "https://dataingestion.dts1.nbspreview.com/hl7-parser"

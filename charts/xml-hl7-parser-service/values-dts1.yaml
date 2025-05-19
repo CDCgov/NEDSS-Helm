@@ -59,7 +59,3 @@ jdbc:
   dbserver: ""
   username: ""
   password: ""
-
-
-api:
-  host: "dataingestion.dts1.nbspreview.com"
