@@ -62,6 +62,14 @@ pageBuilderApi:
 
 postProcessing:
   eventMetricEnable: <UPDATE>
+  eventMetricEnable: <UPDATE>
+  dTbHivEnable: <UPDATE>
+  morbReportDmEnable: <UPDATE>
+  invSummaryDmEnable: <UPDATE>
+  summaryReportEnable: <UPDATE>
+  aggregateReportEnable: <UPDATE>
+  dymDMEnable: <UPDATE>
+  ldfEnable: <UPDATE>
 
 dataProcessingService:
   authUsername: <UPDATE>
