@@ -23,6 +23,10 @@ spec:
       valueFiles:
         - values.yaml
       parameters:
+        - name: landing.base
+          value: {{ .Values.nbsGateway.landingBase }}
+        - name: welcome.enabled
+          value: {{ .Values.nbsGateway.welcomePage | quote }}
         - name: pageBuilder.enabled
           value: {{ .Values.env.pageBuilder.enabled }}
         - name: pageBuilder.page.library.enabled
