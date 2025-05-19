@@ -35,6 +35,7 @@ investigation:
   phcDatamartEnable: <UPDATE>
   bmirdCaseEnable: <UPDATE>
   contactRecordEnable: <UPDATE>
+  treatmentEnable: <UPDATE>
 
 modernizationApi:
   smartKey: <UPDATE>
@@ -74,6 +75,8 @@ postProcessing:
 dataProcessingService:
   authUsername: <UPDATE>
   modernizedMatchingEnabled: <UPDATE>
+  keyCloakSRTEClientId: <UPDATE>
+  keyCloakSRTEClientSecret: <UPDATE>
   
 dataIngestionService:
   sftpEnabled: <UPDATE>
