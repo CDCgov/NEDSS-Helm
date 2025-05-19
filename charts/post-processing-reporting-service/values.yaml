@@ -75,13 +75,8 @@ log:
   path: "/usr/share/post-processing-reporting/data"
 
 featureFlag:
-  eventMetricEnable: "true"
-  dTbHivEnable: "false"
-  morbReportDmEnable: "false"
-  invSummaryDmEnable: "false"
-  summaryReportEnable: "false"
-  aggregateReportEnable: "false"
-  dymDMEnable: "false"
+  covidDmEnable: "false"
+
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:

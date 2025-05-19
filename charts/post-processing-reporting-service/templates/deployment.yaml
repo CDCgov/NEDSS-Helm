@@ -73,20 +73,8 @@ spec:
               value: {{ .Values.rdb.dburl }}
             - name: TZ
               value: {{ .Values.timezone }}
-            - name: FF_EVENT_METRIC_ENABLE
-              value: {{ .Values.featureFlag.eventMetricEnable }}
-            - name: FF_D_TB_HIV_ENABLE
-              value: {{ .Values.featureFlag.dTbHivEnable }}
-            - name: FF_MORB_REPORT_DM_ENABLE
-              value: {{ .Values.featureFlag.morbReportDmEnable }}
-            - name: FF_INV_SUMMARY_DM_ENABLE
-              value: {{ .Values.featureFlag.invSummaryDmEnable }}
-            - name: FF_SUMMARY_REPORT_ENABLE
-              value: {{ .Values.featureFlag.summaryReportEnable }}
-            - name: FF_AGGREGATE_REPORT_ENABLE
-              value: {{ .Values.featureFlag.aggregateReportEnable }}
-            - name: FF_DYM_DM_ENABLE
-              value: {{ .Values.featureFlag.dymDMEnable }}
+            - name: FF_COVID_DM_ENABLE
+              value: {{ .Values.featureFlag.covidDmEnable }}
 {{/*            - name: FIXED_DELAY_ID*/}}
 {{/*              value: {{ .Values.service.fixedDelay.cachedIds }}*/}}
 {{/*            - name: FIXED_DELAY_DM*/}}
