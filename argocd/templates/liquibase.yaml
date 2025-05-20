@@ -1,4 +1,3 @@
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -29,11 +28,7 @@ spec:
         - name: jdbc.rdb_modern_db_url
           value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
         - name: jdbc.srte_db_url
-          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=nbs_srte;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
-        - name: jdbc.data_ingest_url
-          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=nbs_dataingest;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
-        - name: jdbc.msgoute_url
-          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=nbs_msgoute;integratedSecurity=false;encrypt=true;trustServerCertificate=true'          
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=nbs_srte;integratedSecurity=false;encrypt=true;trustServerCertificate=true'          
         - name: jdbc.username
           value: {{ .Values.env.ODSUsername }}
         - name: jdbc.password
@@ -47,5 +42,3 @@ spec:
       prune: true
       selfHeal: true
   project: default
-
-
