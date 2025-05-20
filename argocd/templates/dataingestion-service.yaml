@@ -45,8 +45,13 @@ spec:
         value: {{ .Values.env.ODSPassword }}
       - name: cloudProvider
         value: {{ .Values.env.cloudProvider }}
+      - name: azure.files.resourceGroupName
+        value: {{ .Values.azure.ResourceGroup }}
+      - name: azure.files.storageAccountName
+        value: {{ .Values.azure.FileStorageName }}
       - name: efsFileSystemId
         value: {{ .Values.aws.efsId }}
+
   syncPolicy:
     automated:
       prune: true
