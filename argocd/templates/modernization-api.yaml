@@ -20,13 +20,13 @@ spec:
         - values.yaml
       parameters:
         - name: pageBuilder.enabled
-          value: "false"
+          value: {{ .Values.env.pageBuilderEnabled }}
         - name: pageBuilder.page.library.enabled
-          value: "false"
+          value: {{ .Values.env.pageBuilderLibraryEnabled }}
         - name: pageBuilder.page.management.create.enabled
-          value: "false"
+          value: {{ .Values.env.pageBuilderManagementCreateEnabled }}
         - name: pageBuilder.page.management.edit.enabled
-          value: "false"
+          value: {{ .Values.env.pageBuilderManagementEditEnabled }}
         - name: jdbc.connectionString
           value: "jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;user={{ .Values.env.ODSUsername }};password={{ .Values.env.ODSPassword }};encrypt=true;trustServerCertificate=true;"
         - name: jdbc.user

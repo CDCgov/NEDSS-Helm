@@ -26,15 +26,15 @@ spec:
         - name: landing.base
           value: {{ .Values.nbsGateway.landingBase }}
         - name: welcome.enabled
-          value: {{ .Values.nbsGateway.welcomePage | quote }}
+          value: {{ .Values.nbsGateway.welcomePage }}
         - name: pageBuilder.enabled
-          value: {{ .Values.env.pageBuilder.enabled }}
+          value: {{ .Values.env.pageBuilderEnabled }}
         - name: pageBuilder.page.library.enabled
-          value: {{ .Values.env.pageBuilder.pageLibraryEnabled }}
+          value: {{ .Values.env.pageBuilderLibraryEnabled }}
         - name: pageBuilder.page.management.create.enabled
-          value: {{ .Values.env.pageBuilder.pageManagementCreateEnabled }}
+          value: {{ .Values.env.pageBuilderManagementCreateEnabled }}
         - name: pageBuilder.page.management.edit.enabled
-          value: {{ .Values.env.pageBuilder.pageManagementEditEnabled }}
+          value: {{ .Values.env.pageBuilderManagementEditEnabled }}
         - name: nbsExternalName
           value: {{ .Values.env.classicAppUrl }}
         - name: ingressHost
