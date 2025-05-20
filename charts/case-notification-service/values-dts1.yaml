@@ -8,7 +8,7 @@ authUri: ""
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT-5192025-6.af0956e
+  tag: 1.0.1-SNAPSHOT.829340b
 
 imagePullSecrets: []
 nameOverride: ""
@@ -63,5 +63,9 @@ jdbc:
   username: ""
   password: ""
 
+
+timezone: "UTC"
 api:
   host: "https://dataingestion.dts1.nbspreview.com/hl7-parser"
+  clientId: ""
+  secret: ""

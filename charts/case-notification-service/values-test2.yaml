@@ -63,3 +63,9 @@ jdbc:
   dbserver: ""
   username: ""
   password: ""
+
+timezone: "UTC"
+api:
+  host: ""
+  clientId: ""
+  secret: ""
