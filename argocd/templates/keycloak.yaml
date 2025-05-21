@@ -38,7 +38,15 @@ spec:
         - name: azure.files.storageAccountName
           value: {{ .Values.azure.FileStorageName }}
         - name: efsFileSystemId
-          value: {{ .Values.aws.efsId }}          
+          value: {{ .Values.aws.efsId }}
+        - name: resources.requests.cpu
+          value: {{ .Values.keycloak.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.keycloak.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.keycloak.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.keycloak.podLimitMemory }}           
   syncPolicy:
     automated:
       prune: true

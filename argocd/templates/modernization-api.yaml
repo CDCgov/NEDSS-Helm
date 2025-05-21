@@ -51,6 +51,14 @@ spec:
           value: {{ .Values.modernizationApi.securityTokenSecret }}
         - name: security.parameterSecret
           value: {{ .Values.modernizationApi.securityParameterSecret }}
+        - name: resources.requests.cpu
+          value: {{ .Values.modernizationApi.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.modernizationApi.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.modernizationApi.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.modernizationApi.podLimitMemory }}  
   syncPolicy:
     automated:
       prune: true

@@ -27,8 +27,6 @@ spec:
       parameters:
         - name: resources.requests.ephemeral-storage
           value: {{ .Values.nifi.ephemeralStorageRequest }}
-        - name: resources.limits.memory
-          value: {{ .Values.nifi.memoryLimit }}
         - name: resources.limits.ephemeral-storage
           value: {{ .Values.nifi.ephemeralStorageLimit }}
         - name: jdbcConnectionString
@@ -46,7 +44,15 @@ spec:
         - name: azure.files.resourceGroupName
           value: {{ .Values.azure.ResourceGroup }}
         - name: efsFileSystemId
-          value: {{ .Values.aws.efsId }}          
+          value: {{ .Values.aws.efsId }}
+        - name: resources.requests.cpu
+          value: {{ .Values.nifi.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.nifi.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.nifi.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.nifi.podLimitMemory }}       
   syncPolicy:
     automated:
       prune: true 

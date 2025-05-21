@@ -57,6 +57,14 @@ spec:
           value: {{ .Values.env.kafkaMultiClusterEndpoints }}
         - name: connect.sqlserverconnector_srte.config.schema\.history\.internal\.kafka\.bootstrap\.servers
           value: {{ .Values.env.kafkaMultiClusterEndpoints }}
+        - name: connect.resources.requests.cpu
+          value: {{ .Values.debezium.podRequestCPU }}
+        - name: connect.resources.limits.cpu
+          value: {{ .Values.debezium.podLimitCPU }}
+        - name: connect.resources.requests.memory
+          value: {{ .Values.debezium.podRequestMemory }}
+        - name: connect.resources.limits.memory
+          value: {{ .Values.debezium.podLimitMemory }}
   syncPolicy:
     automated:
       prune: true
