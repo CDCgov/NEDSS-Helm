@@ -33,6 +33,8 @@ spec:
           value: {{ .Values.azure.FileStorageName }}
         - name: ingressHost
           value: {{ .Values.env.dataUrl }}
+        - name: efsFileSystemId
+          value: {{ .Values.aws.efsId }}
   syncPolicy:
     automated:
       prune: true

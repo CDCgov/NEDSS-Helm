@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: "v1.3.0"
+  tag: "v1.3.3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -88,9 +88,9 @@ jdbc:
   # jdbc.connectionString is passed in as an override and all values must be supplied.
   # Replace <db_endpoint>, <database>, <username>, and <password> in the following:
   # "jdbc:sqlserver://<db_endpoint>:1433;databaseName=<database>;user=<username>;password=<password>;encrypt=true;trustServerCertificate=true;"
-  connectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_DB_USER;password=EXAMPLE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
-  user: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  connectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
+  user: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 security:
   # Used to encrypt JWT, needs to match between page builder and modernization-api
@@ -138,12 +138,15 @@ ui:
         enabled: true
   patient:
     profile:
-      # Enables access to the modernized patient profile
+      # [deprecated] Enables access to the modernized patient profile. (marked for removal)
+      enabled: false
+    file:
+      # Enables access to the modernized Patient File
       enabled: false
     add:
-      # Enables access to the modernized New patient feature to create a patient with basic demographic data
+      # [deprecated] Enables access to the modernized New patient feature to create a patient with basic demographic data. (marked for removal)
       enabled: true
-      # Enables access to the modernized New patient - extended feature to create a patient with all available demographic data
+      # [deprecated] Enables access to the modernized New patient - extended feature to create a patient with all available demographic data. (marked for removal)
       extended:
         enabled: true
     search:
@@ -153,7 +156,9 @@ ui:
   deduplication:
     # Enable access to Deduplication screens
     enabled: false
-
+    merge:
+      # Enable acces to Deduplication merge screens
+      enabled: false
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:

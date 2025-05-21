@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.72fc3e7"
+  tag: "1.0.1-SNAPSHOT.fdc00c3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -82,12 +82,7 @@ log:
   path: "/usr/share/postprocessingreporting/data"
 
 featureFlag:
-  eventMetricEnable: "true"
-  dTbHivEnable: "true"
-  morbReportDmEnable: "false"
-  invSummaryDmEnable: "false"
-  summaryReportEnable: "false"
-  aggregateReportEnable: "false"
+  covidDmEnable: "false"
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:

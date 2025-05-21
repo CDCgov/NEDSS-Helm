@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.c8a107e
+  tag: 1.0.1-SNAPSHOT.af1242d
 
 imagePullSecrets: []
 nameOverride: ""
@@ -58,12 +58,23 @@ jdbc:
 deduplication:
   # url for Record Linker API
   recordLinker:
-    url:
+    url: http://record-linker-api.default.svc.cluster.local:8070
   algorithm:
     # should data elements and algorithm updates be pushed to Record Linker API
-    updateRecordLinker: false
+    updateRecordLinker: true
   sync:
-    enabled: false
+    enabled: true
+    bootstrapServer:
+  batch:
+    schedule:
+      enabled: true
+      cron: "0 0 1 * * ?" # run daily at 1 AM
+    processing:
+      total: 10 # how many records to process per job execution
+      chunk: 5 # how many are processed at a time
+  seed:
+    mpiInsertSize: 100 # how many records to insert into MPI at a time (max 100)
+    deduplicationInsertSize: 1000 # how many records to insert into deduplication db at a time
 
 # Override available for readiness and liveness probes: path, initialDelaySeconds, periodSeconds, failureThreshold
 probes:

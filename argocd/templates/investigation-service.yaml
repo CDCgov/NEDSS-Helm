@@ -35,6 +35,8 @@ spec:
           value: {{ .Values.env.ODSUsername }}
         - name: jdbc.password
           value: {{ .Values.env.ODSPassword }}
+        - name: featureFlag.treatmentEnable
+          value: {{ .Values.investigation.treatmentEnable }}
         - name: featureFlag.phcDatamartEnable
           value: {{ .Values.investigation.phcDatamartEnable }}
         - name: featureFlag.bmirdCaseEnable
@@ -46,5 +48,3 @@ spec:
       prune: true
       selfHeal: true
   project: default
-
-

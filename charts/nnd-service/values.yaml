@@ -6,7 +6,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nnd-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-data-exchange-service"
   pullPolicy: IfNotPresent
-  tag: "v1.1.2"
+  tag: "v1.1.3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -46,14 +46,14 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "dataingestion.EXAMPLE_DOMAIN"
+ingressHost: "data.EXAMPLE_DOMAIN"
 
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
-  username: "EXAMPLE_DB_USER"
-  password: "EXAMPLE_DB_USER_PASSWORD"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 #authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
 authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"

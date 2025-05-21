@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "xml-hl7-parser-service.fullname" . }}
+  labels:
+    {{- include "xml-hl7-parser-service.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      name: http
+    - port: {{ .Values.service.httpsPort }}
+      targetPort: {{ .Values.service.port }}
+      name: https
+  selector:
+    {{- include "xml-hl7-parser-service.selectorLabels" . | nindent 4 }}

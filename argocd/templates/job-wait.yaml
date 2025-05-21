@@ -1,50 +1,59 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: sleep-30s-waiting-for-elasticsearch
+  name: wave0-wait
   annotations:
     helm.sh/hook: post-install, post-upgrade
     helm.sh/hook-weight: "0"
     helm.sh/hook-delete-policy: "hook-succeeded,hook-failed"
 spec:
   template:
+    metadata:
+      annotations:
+        linkerd.io/inject: disabled
     spec:
       containers:
       - name: job
         image: busybox
-        command: ["sh", "-c", "sleep {{ .Values.env.waitTime }} && echo Running job in wave 0"]
+        command: ["sh", "-c", "sleep {{ .Values.env.waitTime }} && echo Waiting for healthy pods in wave 0"]
       restartPolicy: Never
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: sleep-30s-waiting-for-modernization-api
+  name: wave1-wait
   annotations:
     helm.sh/hook: post-install, post-upgrade
     helm.sh/hook-weight: "1"
     helm.sh/hook-delete-policy: "hook-succeeded,hook-failed"
 spec:
   template:
+    metadata:
+      annotations:
+        linkerd.io/inject: disabled
     spec:
       containers:
       - name: job
         image: busybox
-        command: ["sh", "-c", "sleep {{ .Values.env.waitTime }} && echo Running job in wave 1"]
+        command: ["sh", "-c", "sleep {{ .Values.env.waitTime }} && echo Waiting for healthy pods in wave 1"]
       restartPolicy: Never
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: sleep-30s-waiting-for-nifi
+  name: wave2-wait
   annotations:
     helm.sh/hook: post-install, post-upgrade
     helm.sh/hook-weight: "2"
     helm.sh/hook-delete-policy: "hook-succeeded,hook-failed"
 spec:
   template:
+    metadata:
+      annotations:
+        linkerd.io/inject: disabled
     spec:
       containers:
       - name: job
         image: busybox
-        command: ["sh", "-c", "sleep {{ .Values.env.waitTime }} && echo Running job in wave 2"]
+        command: ["sh", "-c", "sleep {{ .Values.env.waitTime }} && echo Waiting for healthy pods in wave 2"]
       restartPolicy: Never

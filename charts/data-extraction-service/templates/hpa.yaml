@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "liquibase.fullname" . }}
+  name: {{ include "data-extraction-service.fullname" . }}
   labels:
-    {{- include "liquibase.labels" . | nindent 4 }}
+    {{- include "data-extraction-service.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "liquibase.fullname" . }}
+    name: {{ include "data-extraction-service.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

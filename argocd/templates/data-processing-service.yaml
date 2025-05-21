@@ -30,6 +30,12 @@ spec:
           value: {{ .Values.dataProcessingService.authUsername }}
         - name: features.modernizedMatching.enabled
           value: {{ .Values.dataProcessingService.modernizedMatchingEnabled }}
+        - name: dataingestion.uri
+          value: {{ .Values.env.dataUrl }}
+        - name: keycloak.srte.clientId
+          value: {{ .Values.dataProcessingService.keyCloakSRTEClientId }}
+        - name: keycloak.srte.clientSecret
+          value: {{ .Values.dataProcessingService.keyCloakSRTEClientSecret }}
   syncPolicy:
     automated:
       prune: true

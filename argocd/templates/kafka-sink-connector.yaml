@@ -28,11 +28,9 @@ spec:
         - name: sqlServerConnector.config.connection\.url
           value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;'
         - name: sqlServerConnector.name
-          value: Kafka-Connect-SqlServer-Sink-V2
+          value: Kafka-Connect-SqlServer-Sink-040425
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
   project: default
-
-
