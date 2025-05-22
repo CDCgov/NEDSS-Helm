@@ -58,7 +58,7 @@ spec:
         - name: resources.requests.memory
           value: {{ .Values.postProcessing.podRequestMemory }}
         - name: resources.limits.memory
-          value: {{ .Values.postProcessing.podLimitMemory }}  
+          value: {{ .Values.postProcessing.podLimitMemory }}
   syncPolicy:
     automated:
       prune: true
