@@ -29,48 +29,164 @@ env:
   pageBuilderManagementCreateEnabled: <UPDATE_PAGEBUILDER_MANAGEMENT_CREATE_ENABLED>
   pageBuilderManagementEditEnabled: <UPDATE_PAGEBUILDER_MANAGEMENT_EDIT_ENABLED>
 
+
 #Update parameters only if using AWS, do NOT Delete
 aws:
   efsId: <UPDATE_EFS_ID>
+
 
 #Update parameters only if using Azure, do NOT Delete
 azure:
   ResourceGroup: <UPDATE_RESOURCE_GROUP>
   FileStorageName: <UPDATE_FILE_STORAGE_NAME>
 
+
+dataProcessingService:
+  authUsername: <UPDATE_AUTH_USERNAME>
+  modernizedMatchingEnabled: <UPDATE_MODERNIZED_MATCHING_ENABLED>
+  keyCloakSRTEClientId: <UPDATE_KEY_CLOAK_SRTE_CLIENT_ID>
+  keyCloakSRTEClientSecret: <UPDATE_KEY_CLOAK_SRTE_CLIENT_SECRET>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+dataIngestionService:
+  sftpEnabled: <UPDATE_SFTP_ENABLED>
+  sftpHost: <UPDATE_SFTP_HOST>
+  sftpUserName: <UPDATE_SFTP_USERNAME>
+  sftpPassword: <UPDATE_SFTP_PASSWORD>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+debezium:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
 elasticsearch:
-  memoryLimits: <UPDATE_MEMORY_LIMITS>
-  memoryRequests: <UPDATE_MEMORY_REQUESTS>
- 
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
 investigation:
   phcDatamartEnable: <UPDATE_PHC_DATAMART_ENABLE>
   bmirdCaseEnable: <UPDATE_BMIRD_CASE_ENABLE>
   contactRecordEnable: <UPDATE_CONTACT_RECORD_ENABLE>
   treatmentEnable: <UPDATE_TREATMENT_ENABLE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+kafka:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+keycloak:
+  dbPassword: <UPDATE_DB_PASSWORD>
+  adminPassword: <UPDATE_ADMIN_PASSWORD>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+ldf:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+liquibase:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 modernizationApi:
   smartKey: <UPDATE_SMART_KEY>
   analyticsKey: <UPDATE_ANALYTICS_KEY>
   securityTokenSecret: <UPDATE_SECURITY_TOKEN_SECRET>
   securityParameterSecret: <UPDATE_SECURITY_PARAMETER_SECRET>
- 
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
 nbsGateway:
   clientSecret: <UPDATE_CLIENT_SECRET>
   welcomePage: <UPDATE_WELCOME_PAGE>
   landingBase: <UPDATE_LANDING_BASE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 nifi:
   adminUsername: <UPDATE_ADMIN_USERNAME>
   adminPassword: <UPDATE_ADMIN_PASSWORD>
   sensitivePropsKey: <UPDATE_SENSITIVE_PROPS_KEY>
-  memoryRequest: <UPDATE_MEMORY_REQUEST>
-  memoryLimit: <UPDATE_MEMORY_LIMIT>
   ephemeralStorageRequest: <UPDATE_EPHEMERAL_STORAGE_REQUEST>
   ephemeralStorageLimit: <UPDATE_EPHEMERAL_STORAGE_LIMIT>
- 
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+nnd:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+observation:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+organization:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
 pageBuilderApi:
   securityTokenSecret: <UPDATE_SECURITY_TOKEN_SECRET>
   memoryLimit: <UPDATE_MEMORY_LIMIT>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+person:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
  
 postProcessing:
   eventMetricEnable: <UPDATE_EVENT_METRIC_ENABLE>
@@ -81,22 +197,11 @@ postProcessing:
   aggregateReportEnable: <UPDATE_AGGREGATE_REPORT_ENABLE>
   dymDMEnable: <UPDATE_DYM_DM_ENABLE>
   ldfEnable: <UPDATE_LDF_ENABLE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
-dataProcessingService:
-  authUsername: <UPDATE_AUTH_USERNAME>
-  modernizedMatchingEnabled: <UPDATE_MODERNIZED_MATCHING_ENABLED>
-  keyCloakSRTEClientId: <UPDATE_KEY_CLOAK_SRTE_CLIENT_ID>
-  keyCloakSRTEClientSecret: <UPDATE_KEY_CLOAK_SRTE_CLIENT_SECRET>
- 
-dataIngestionService:
-  sftpEnabled: <UPDATE_SFTP_ENABLED>
-  sftpHost: <UPDATE_SFTP_HOST>
-  sftpUserName: <UPDATE_SFTP_USERNAME>
-  sftpPassword: <UPDATE_SFTP_PASSWORD>
-
-keycloak:
-  dbPassword: <UPDATE_DB_PASSWORD>
-  adminPassword: <UPDATE_ADMIN_PASSWORD>
 
 splunk:
   clusterName: <UPDATE_CLUSTER_NAME>
