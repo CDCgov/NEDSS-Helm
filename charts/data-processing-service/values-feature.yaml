@@ -101,9 +101,13 @@ features:
     enabled: false
     url: ""
 
+
 thread:
-  enabled: false
+  enabled: true
   size: "5"
+  batchSize: "50"
+  processorDelay: "30000"
+
 
 hikari:
   poolSize: "20"

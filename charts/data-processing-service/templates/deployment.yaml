@@ -104,6 +104,10 @@ spec:
               value: {{ .Values.thread.enabled  | quote}}
             - name: THREAD_POOL_SIZE
               value: "{{ .Values.thread.size }}"
+            - name: THREAD_BATCH_SIZE
+              value: "{{ .Values.thread.batchSize }}"
+            - name: PROCESSOR_DELAY
+              value: "{{ .Values.thread.processorDelay }}"
             - name: HIKARI_POOL_SIZE
               value: "{{ .Values.hikari.poolSize }}"
             - name: HIKARI_MINIMUM_IDLE

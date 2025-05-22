@@ -101,6 +101,8 @@ features:
 thread:
   enabled: false
   size: "5"
+  batchSize: "50"
+  processorDelay: "30000"
 
 
 hikari:
