@@ -29,6 +29,14 @@ spec:
           value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;'
         - name: sqlServerConnector.name
           value: Kafka-Connect-SqlServer-Sink-040425
+        - name: resources.requests.cpu
+          value: {{ .Values.kafka.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.kafka.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.kafka.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.kafka.podLimitMemory }}  
   syncPolicy:
     automated:
       prune: true

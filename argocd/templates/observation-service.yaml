@@ -36,6 +36,14 @@ spec:
           value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
         - name: rdb.dburl
           value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;
+        - name: resources.requests.cpu
+          value: {{ .Values.observation.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.observation.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.observation.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.observation.podLimitMemory }}  
   syncPolicy:
     automated:
       prune: true

@@ -19,10 +19,6 @@ spec:
       valueFiles:
         - values.yaml
       parameters:
-        - name: image.repository
-          value: quay.io/debezium/connect
-        - name: image.tag
-          value: '2.7'
         - name: 'connect.env[3].value'
           value: debezium-odse-srte-connector-v04172025
         - name: connect.properties.group_id
@@ -31,7 +27,7 @@ spec:
           value: debezium-connector
         - name: connect.properties.bootstrap_server
           value: {{ .Values.env.kafkaMultiClusterEndpoints }}
-        - name: connect.env[0].BOOTSTRAP_SERVERS
+        - name: connect.env[0].value
           value:  {{ .Values.env.kafkaMultiClusterEndpoints }}
         - name: connect.sqlserverconnector_odse.name
           value: debezium-odse-connector-v04172025
@@ -61,6 +57,14 @@ spec:
           value: {{ .Values.env.kafkaMultiClusterEndpoints }}
         - name: connect.sqlserverconnector_srte.config.schema\.history\.internal\.kafka\.bootstrap\.servers
           value: {{ .Values.env.kafkaMultiClusterEndpoints }}
+        - name: connect.resources.requests.cpu
+          value: {{ .Values.debezium.podRequestCPU }}
+        - name: connect.resources.limits.cpu
+          value: {{ .Values.debezium.podLimitCPU }}
+        - name: connect.resources.requests.memory
+          value: {{ .Values.debezium.podRequestMemory }}
+        - name: connect.resources.limits.memory
+          value: {{ .Values.debezium.podLimitMemory }}
   syncPolicy:
     automated:
       prune: true

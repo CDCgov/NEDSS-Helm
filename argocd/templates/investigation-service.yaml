@@ -42,7 +42,15 @@ spec:
         - name: featureFlag.bmirdCaseEnable
           value: {{ .Values.investigation.bmirdCaseEnable }}
         - name: featureFlag.contactRecordEnable
-          value: {{ .Values.investigation.contactRecordEnable }}                   
+          value: {{ .Values.investigation.contactRecordEnable }}
+        - name: resources.requests.cpu
+          value: {{ .Values.investigation.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.investigation.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.investigation.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.investigation.podLimitMemory }}           
   syncPolicy:
     automated:
       prune: true

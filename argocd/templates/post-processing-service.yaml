@@ -51,6 +51,14 @@ spec:
           value: {{ .Values.postProcessing.dymDMEnable }}
         - name: featureFlag.ldfEnable
           value: {{ .Values.postProcessing.ldfEnable }}
+        - name: resources.requests.cpu
+          value: {{ .Values.postProcessing.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.postProcessing.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.postProcessing.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.postProcessing.podLimitMemory }}
   syncPolicy:
     automated:
       prune: true
