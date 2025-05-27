@@ -116,7 +116,7 @@ connect:
     "name": "debezium-odse-meta-tables-connector-v052325",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
-      "database.hostname": "nbs-db.private-dts1.nbspreview.com",
+      "database.hostname": "nbs-db.private-test.nbspreview.com",
       "database.port": "1433",
       "database.user": "",
       "database.password": "",
