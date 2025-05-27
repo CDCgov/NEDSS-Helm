@@ -56,7 +56,8 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
 
-nodeSelector: {}
+nodeSelector: 
+  nodegroup: high-cpu
 
 tolerations: []
 
