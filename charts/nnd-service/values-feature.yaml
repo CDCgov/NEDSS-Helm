@@ -30,8 +30,13 @@ service:
   port: 8081
   httpsPort: 443
 
-# Kubernetes resource limits
-resources: {}
+resources:
+  limits:
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
