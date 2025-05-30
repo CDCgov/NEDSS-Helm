@@ -91,6 +91,24 @@ spec:
               value: {{ .Values.features.modernizedMatching.enabled | default false | quote }}
             - name: MODERNIZED_MATCHING_URL
               value: {{ .Values.features.modernizedMatching.url | default "" }}
+            - name: THREAD_FLAG
+              value: {{ .Values.thread.enabled  | quote}}
+            - name: THREAD_POOL_SIZE
+              value: "{{ .Values.thread.size }}"
+            - name: THREAD_BATCH_SIZE
+              value: "{{ .Values.thread.batchSize }}"
+            - name: PROCESSOR_DELAY
+              value: "{{ .Values.thread.processorDelay }}"
+            - name: HIKARI_POOL_SIZE
+              value: "{{ .Values.hikari.poolSize }}"
+            - name: HIKARI_MINIMUM_IDLE
+              value: "{{ .Values.hikari.minIdle }}"
+            - name: HIKARI_CON_TIMEOUT
+              value: "{{ .Values.hikari.conTimeout }}"
+            - name: HIKARI_MAX_LIFETIME
+              value: "{{ .Values.hikari.maxLifeTime }}"
+            - name: LEAK_DETECTION_THRESHOLD
+              value: "{{ .Values.hikari.leakDetectThresHold }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
