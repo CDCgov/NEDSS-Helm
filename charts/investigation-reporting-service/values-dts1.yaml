@@ -68,9 +68,6 @@ rdb:
 
 featureFlag:
   phcDatamartEnable: "true"
-  bmirdCaseEnable: "true"
-  contactRecordEnable: "true"
-  treatmentEnable: "true"
 
 kafka:
   cluster: ""
