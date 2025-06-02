@@ -54,7 +54,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
 
 nodeSelector: 
-  nodegroup: high-cpu
+  nodegroup: test_grou_high_cpu
 
 
 tolerations: []
