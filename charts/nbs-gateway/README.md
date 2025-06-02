@@ -26,15 +26,16 @@ helm uninstall nbs-gateway
 # Values
 Values for nbs-gateway charts.
 
-| Key | Type | Default | Description |
-| -------------- | -------------- | -------------- | -------------- |
-| deployment.replicas | int | 1 | Number of Pods maintained. Defaulted to 1 |
-| env | string | "prod" | Environment information. This can be any environment string |
-| image | string |  | nbs-gateway container image. Needs to point to the latest image from the public repository |
-| tag | string |  | Point to release tag that needs to be installed with NBS. This is required  |
-| gatewayService | object | Defaults to clusterIP with http port 8000, httpsport to 443 | Configures service ClusterIP with some ports |
-| nbsExternalName | string | app-classic.example.com | Defines DNS record of the legacy application. Change this to point to legacy NBS host name |
-| resources | object | {} | Enable default resources. Can be used to setup resource limits if necessary |
-| ingressHost | string | "app.example.com" | configure ingress hostname. This is not required at this point |
-| modernizationApiHost | string | "modernization-api.default.svc.cluster.local:8080" | Modernization Api host. Default values should work, no changes needed unless there is a change in the modernization deployment. |
-| deduplicationApiHost | string | "deduplication-api.default.svc.cluster.local:8083" | Deduplication Api host. Default values should work, no changes needed unless there is a change in the deduplication deployment. |
+| Key | Type | Default | Description | Required |
+| -------------- | -------------- | -------------- | -------------- | -------------- |
+| deployment.replicas | int | 1 | Number of Pods maintained. Defaulted to 1 | N |
+| env | string | "prod" | Environment information. This can be any environment string | N |
+| image | string |  | nbs-gateway container image. Needs to point to the latest image from the public repository | N |
+| tag | string |  | Point to release tag that needs to be installed with NBS. This is required  | N |
+| gatewayService | object | Defaults to clusterIP with http port 8000, httpsport to 443 | Configures service ClusterIP with some ports | N |
+| nbsExternalName | string | app-classic.example.com | Defines DNS record of the legacy application. Change this to point to legacy NBS host name | Y |
+| resources | object | {} | Enable default resources. Can be used to setup resource limits if necessary | N |
+| ingressHost | string | "app.example.com" | configure ingress hostname. This is not required at this point | Y |
+| modernizationApiHost | string | "modernization-api.default.svc.cluster.local:8080" | Modernization Api host. Default values should work, no changes needed unless there is a change in the modernization deployment. | N |
+| deduplicationApiHost | string | "deduplication-api.default.svc.cluster.local:8083" | Deduplication Api host. Default values should work, no changes needed unless there is a change in the deduplication deployment. | N |
+| oidc | object | {} | Update client secret from Keycloak webui | Y |
