@@ -32,7 +32,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v013125"
+    group_id: "debezium-odse-srte-connector-v060225"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -47,7 +47,7 @@ connect:
     nbs_odse_meta: "disabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v013125",
+    "name": "debezium-odse-connector-v060225",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net",
@@ -72,7 +72,7 @@ connect:
       "schema.history.internal.kafka.bootstrap.servers": "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092",
       "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.Treatment,
                                    dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out,
-                                   dbo.Place, dbo.CT_contact, dbo.Auth_user, dbo.Intervention",
+                                   dbo.Place, dbo.CT_contact, dbo.Auth_user, dbo.Intervention, dbo.Act_relationship",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
@@ -113,7 +113,7 @@ connect:
     }
   }
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v013125",
+    "name": "debezium-srte-connector-v060225",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net",
@@ -142,11 +142,10 @@ connect:
                              dbo.Zipcnty_code_value,dbo.Lab_result_Snomed,dbo.Investigation_code,dbo.TotalIDM,
                              dbo.IMRDBMapping,dbo.Anatomic_site_code,dbo.Jurisdiction_code,dbo.Lab_coding_system,
                              dbo.City_code_value,dbo.LDF_page_set,dbo.LOINC_code,dbo.NAICS_Industry_code,
-                             dbo.Codeset_Group_Metadata,dbo.Country_Code_ISO,dbo.DATABASECHANGELOGLOCK,
-                             dbo.Occupation_code,dbo.Country_XREF,dbo.Standard_XREF,dbo.Code_value_clinical,
-                             dbo.Code_value_general,dbo.Race_code,dbo.Participation_type,dbo.Specimen_source_code,
-                             dbo.Snomed_code,dbo.State_county_code_value,dbo.State_model,dbo.Codeset,dbo.Program_area_code,
-                             dbo.Labtest_Progarea_Mapping,dbo.Treatment_code,dbo.Condition_code",
+                             dbo.Codeset_Group_Metadata,dbo.Country_Code_ISO,dbo.Occupation_code,dbo.Country_XREF,
+                             dbo.Standard_XREF,dbo.Code_value_clinical,dbo.Code_value_general,dbo.Race_code,dbo.Participation_type,
+                             dbo.Specimen_source_code,dbo.Snomed_code,dbo.State_county_code_value,dbo.State_model,dbo.Codeset,
+                             dbo.Program_area_code,dbo.Labtest_Progarea_Mapping,dbo.Treatment_code,dbo.Condition_code",
       "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps_add_time, convertTimestamps_concept_status_time, 
                      convertTimestamps_effective_from_time, convertTimestamps_effective_to_time, convertTimestamps_status_time, 
                      convertTimestamps_status_to_time, convertTimestamps_value_set_status_time",
@@ -197,7 +196,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v013125"
+      value: "debezium-odse-srte-connector-v060225"
     - name: TZ
       value: "UTC"
 

@@ -31,7 +31,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v052325"
+    group_id: "debezium-odse-srte-connector-v060225"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -46,7 +46,7 @@ connect:
     nbs_odse_meta: "enabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v052325",
+    "name": "debezium-odse-connector-v060225",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-int1.nbspreview.com",
@@ -72,7 +72,7 @@ connect:
                                                           b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.Treatment,
                              dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out,
-                             dbo.Place, dbo.CT_contact, dbo.Auth_user, dbo.Intervention",
+                             dbo.Place, dbo.CT_contact, dbo.Auth_user, dbo.Intervention, dbo.Act_relationship",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
@@ -114,7 +114,7 @@ connect:
   }
 
   sqlserverconnector_meta: {
-    "name": "debezium-odse-meta-tables-connector-v052325",
+    "name": "debezium-odse-meta-tables-connector-v060225",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-int1.nbspreview.com",
@@ -172,7 +172,7 @@ connect:
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v052325",
+    "name": "debezium-srte-connector-v060225",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-int1.nbspreview.com",
@@ -203,11 +203,10 @@ connect:
                              dbo.Zipcnty_code_value,dbo.Lab_result_Snomed,dbo.Investigation_code,dbo.TotalIDM,
                              dbo.IMRDBMapping,dbo.Anatomic_site_code,dbo.Jurisdiction_code,dbo.Lab_coding_system,
                              dbo.City_code_value,dbo.LDF_page_set,dbo.LOINC_code,dbo.NAICS_Industry_code,
-                             dbo.Codeset_Group_Metadata,dbo.Country_Code_ISO,dbo.DATABASECHANGELOGLOCK,
-                             dbo.Occupation_code,dbo.Country_XREF,dbo.Standard_XREF,dbo.Code_value_clinical,
-                             dbo.Code_value_general,dbo.Race_code,dbo.Participation_type,dbo.Specimen_source_code,
-                             dbo.Snomed_code,dbo.State_county_code_value,dbo.State_model,dbo.Codeset,dbo.Program_area_code,
-                             dbo.Labtest_Progarea_Mapping,dbo.Treatment_code,dbo.Condition_code",
+                             dbo.Codeset_Group_Metadata,dbo.Country_Code_ISO,dbo.Occupation_code,dbo.Country_XREF,
+                             dbo.Standard_XREF,dbo.Code_value_clinical,dbo.Code_value_general,dbo.Race_code,dbo.Participation_type,
+                             dbo.Specimen_source_code,dbo.Snomed_code,dbo.State_county_code_value,dbo.State_model,dbo.Codeset,
+                             dbo.Program_area_code,dbo.Labtest_Progarea_Mapping,dbo.Treatment_code,dbo.Condition_code",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
@@ -265,7 +264,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v052325"
+      value: "debezium-odse-srte-connector-v060225"
     - name: TZ
       value: "UTC"
 
