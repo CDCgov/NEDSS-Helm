@@ -8,7 +8,7 @@ authUri: ""
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.6d94b00
+  tag: 1.0.1-SNAPSHOT.d31d1cd
 
 imagePullSecrets: []
 nameOverride: ""
@@ -22,7 +22,7 @@ serviceAccount:
 podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: "/actuator/prometheus"
-  prometheus.io/port: "8098"
+  prometheus.io/port: "8081"
 
 podSecurityContext: {}
 
