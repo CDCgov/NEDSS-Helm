@@ -25,6 +25,17 @@ flowchart LR
 - `helm uninstall nbs`
 - `kubectl delete applications --all -n argocd`
 
+### Other Commands
+#### View status of deployed ArgoCD deployed applications
+- `kubectl get application -n argocd`
+
+#### Edit ArgoCD Applications
+- `kubectl edit application -n argocd`
+- `kubectl edit application <SERVICE-NAME> -n argocd`
+
+#### Upgrade and install helm
+- `helm upgrade --install nbs .\argocd -f .\argocd\<ADD-VALUES-FILE>.yaml --debug`
+
 
 ## Notes
 - Update Chart.yaml version, matching release tag when committing according to a release

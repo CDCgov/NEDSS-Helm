@@ -19,8 +19,6 @@ spec:
       valueFiles:
         - values.yaml
       parameters:
-        - name: resources.limits.memory
-          value: {{ .Values.elasticsearch.memoryLimits }}
         - name: cloudProvider
           value: {{ .Values.env.cloudProvider }}
         - name: azure.files.resourceGroupName
@@ -29,6 +27,14 @@ spec:
           value: {{ .Values.azure.FileStorageName }}
         - name: efsFileSystemId
           value: {{ .Values.aws.efsId }}
+        - name: resources.requests.cpu
+          value: {{ .Values.elasticsearch.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.elasticsearch.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.elasticsearch.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.elasticsearch.podLimitMemory }}
   syncPolicy:
     automated:
       prune: true

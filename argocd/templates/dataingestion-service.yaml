@@ -20,13 +20,13 @@ spec:
         - values.yaml
       parameters:
       - name: sftp.enabled
-        value: {{ .Values.dataProcessingService.sftpEnabled }}
+        value: {{ .Values.dataIngestionService.sftpEnabled }}
       - name: sftp.host
-        value: {{ .Values.dataProcessingService.sftpHost }}
+        value: {{ .Values.dataIngestionService.sftpHost }}
       - name: sftp.username
-        value: {{ .Values.dataProcessingService.sftpUserName }}
+        value: {{ .Values.dataIngestionService.sftpUserName }}
       - name: sftp.password
-        value: {{ .Values.dataProcessingService.sftpPassword }}
+        value: {{ .Values.dataIngestionService.sftpPassword }}
       - name: authUri
         value: 'http://keycloak.default.svc.cluster.local/auth/realms/NBS'
       - name: ingressHost
@@ -45,8 +45,20 @@ spec:
         value: {{ .Values.env.ODSPassword }}
       - name: cloudProvider
         value: {{ .Values.env.cloudProvider }}
+      - name: azure.files.resourceGroupName
+        value: {{ .Values.azure.ResourceGroup }}
+      - name: azure.files.storageAccountName
+        value: {{ .Values.azure.FileStorageName }}
       - name: efsFileSystemId
         value: {{ .Values.aws.efsId }}
+      - name: resources.requests.cpu
+        value: {{ .Values.dataIngestionService.podRequestCPU }}
+      - name: resources.limits.cpu
+        value: {{ .Values.dataIngestionService.podLimitCPU }}
+      - name: resources.requests.memory
+        value: {{ .Values.dataIngestionService.podRequestMemory }}
+      - name: resources.limits.memory
+        value: {{ .Values.dataIngestionService.podLimitMemory }}
   syncPolicy:
     automated:
       prune: true

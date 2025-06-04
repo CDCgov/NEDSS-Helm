@@ -37,8 +37,15 @@ spec:
           value: {{ .Values.env.classicAppUrl }}
         - name: security.tokenSecret
           value: {{ .Values.pageBuilderApi.securityTokenSecret }}
+        - name: resources.requests.cpu
+          value: {{ .Values.pageBuilderApi.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.pageBuilderApi.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.pageBuilderApi.podRequestMemory }}
         - name: resources.limits.memory
-          value: {{ .Values.pageBuilderApi.memoryLimit }}
+          value: {{ .Values.pageBuilderApi.podLimitMemory }}
+
   syncPolicy:
     automated:
       prune: true

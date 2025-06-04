@@ -30,14 +30,6 @@ service:
   port: 8081
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: dataingestion.feature.nbspreview.com
-    hosts:
-    - dataingestion.feature.nbspreview.com
-
 reportingService:
   enabled: "true"
   personReportingServicePort: 8091
@@ -75,8 +67,22 @@ compare:
   enabled: "false"
   port: 8085
 
-# Kubernetes resource limits
-resources: {}
+
+ingress:
+  enabled: true
+  className: "nginx"
+  tls:
+  - secretName: dataingestion.feature.nbspreview.com
+    hosts:
+    - dataingestion.feature.nbspreview.com
+
+resources:
+  limits:
+    memory: "1Gi"  
+    cpu: "500m"      
+  requests:
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false

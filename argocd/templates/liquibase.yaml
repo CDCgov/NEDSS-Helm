@@ -37,6 +37,15 @@ spec:
           value: {{ .Values.env.SRTEUsername }}
         - name: jdbc.srte_password
           value: {{ .Values.env.SRTEPassword }}
+        # Uncomment once added in helm
+        # - name: resources.requests.cpu
+        #   value: {{ .Values.liquibase.podRequestCPU }}
+        # - name: resources.limits.cpu
+        #   value: {{ .Values.liquibase.podLimitCPU }}
+        # - name: resources.requests.memory
+        #   value: {{ .Values.liquibase.podRequestMemory }}
+        # - name: resources.limits.memory
+        #   value: {{ .Values.liquibase.podLimitMemory }}  
   syncPolicy:
     automated:
       prune: true

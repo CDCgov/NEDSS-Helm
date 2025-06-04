@@ -1,102 +1,211 @@
+#########################
+### Values for 7.9.3 ####
+#########################
+
 ### NOTE ###
-# This Values file should contain redundant variables, secrets and environment related parameters. 
+# This Values file should contain redundant variables, secrets and environment related parameters.
 # Any release related parameters should stay in service template
-# IMPORTANT: appVersion parameter should identify version of values file
+
+### IMPORTANT ###
+# Please update Chart.yaml with specific Version 
+# Do NOT delete parameter if it does not apply per environment
 
 env:
-  appUrl: <UPDATE>
-  dataUrl: <UPDATE>
-  classicAppUrl: <UPDATE>
-  dbEndpoint: <UPDATE>
-  kafkaMultiClusterEndpoints: <UPDATE>
-  kafkaClusterEndpoint: <UPDATE>
-  ODSUsername: <UPDATE>
-  ODSPassword: <UPDATE>
-  SRTEUsername: <UPDATE>
-  SRTEPassword: <UPDATE>
-  timezone: <UPDATE>
-  waitTime: <UPDATE>
-  cloudProvider: <UPDATE>
+  cloudProvider: <UPDATE_CLOUD_PROVIDER>
+  betweenWavesJobWaitTime: <UPDATE_WAIT_TIME>
+  timezone: <UPDATE_TIMEZONE>
+  appUrl: <UPDATE_APP_URL>
+  dataUrl: <UPDATE_DATA_URL>
+  classicAppUrl: <UPDATE_CLASSIC_APP_URL>
+  dbEndpoint: <UPDATE_DB_ENDPOINT>
+  kafkaMultiClusterEndpoints: <UPDATE_KAFKA_MULTI_CLUSTER_ENDPOINTS>
+  kafkaClusterEndpoint: <UPDATE_KAFKA_CLUSTER_ENDPOINT>
+  ODSUsername: <UPDATE_ODS_USERNAME>
+  ODSPassword: <UPDATE_ODS_PASSWORD>
+  SRTEUsername: <UPDATE_SRTE_USERNAME>
+  SRTEPassword: <UPDATE_SRTE_PASSWORD>
+  pageBuilderEnabled: <UPDATE_PAGEBUILDER_ENABLED>
+  pageBuilderLibraryEnabled: <UPDATE_PAGEBUILDER_LIBRARY_ENABLED>
+  pageBuilderManagementCreateEnabled: <UPDATE_PAGEBUILDER_MANAGEMENT_CREATE_ENABLED>
+  pageBuilderManagementEditEnabled: <UPDATE_PAGEBUILDER_MANAGEMENT_EDIT_ENABLED>
 
-#Remove Parameters if using Azure
+
+#Update parameters only if using AWS, do NOT Delete
 aws:
-  efsId: <UPDATE>
+  efsId: <UPDATE_EFS_ID>
 
-#Remove Parameters if using AWS
+
+#Update parameters only if using Azure, do NOT Delete
 azure:
-  ResourceGroup: <UPDATE>
-  FileStorageName: <UPDATE>
+  ResourceGroup: <UPDATE_RESOURCE_GROUP>
+  FileStorageName: <UPDATE_FILE_STORAGE_NAME>
 
-elasticsearch:
-  memoryLimits: <UPDATE>
-  memoryRequests: <UPDATE>
-
-investigation:
-  phcDatamartEnable: <UPDATE>
-  bmirdCaseEnable: <UPDATE>
-  contactRecordEnable: <UPDATE>
-  treatmentEnable: <UPDATE>
-
-modernizationApi:
-  smartKey: <UPDATE>
-  analyticsKey: <UPDATE>
-  securityTokenSecret: <UPDATE>
-  securityParameterSecret: <UPDATE>
-
-nbsGateway:
-  clientSecret: <UPDATE>
-  welcomePage: <UPDATE>
-  landingBase: <UPDATE>
-
-nifi:
-  adminUsername: <UPDATE>
-  adminPassword: <UPDATE>
-  sensitivePropsKey: <UPDATE>
-  memoryRequest: <UPDATE>
-  memoryLimit: <UPDATE>
-  ephemeralStorageRequest: <UPDATE>
-  ephemeralStorageLimit: <UPDATE>
-
-pageBuilderApi:
-  securityTokenSecret: <UPDATE>
-  memoryLimit: <UPDATE>
-
-postProcessing:
-  eventMetricEnable: <UPDATE>
-  eventMetricEnable: <UPDATE>
-  dTbHivEnable: <UPDATE>
-  morbReportDmEnable: <UPDATE>
-  invSummaryDmEnable: <UPDATE>
-  summaryReportEnable: <UPDATE>
-  aggregateReportEnable: <UPDATE>
-  dymDMEnable: <UPDATE>
-  ldfEnable: <UPDATE>
 
 dataProcessingService:
-  authUsername: <UPDATE>
-  modernizedMatchingEnabled: <UPDATE>
-  keyCloakSRTEClientId: <UPDATE>
-  keyCloakSRTEClientSecret: <UPDATE>
-  
-dataIngestionService:
-  sftpEnabled: <UPDATE>
-  sftpHost: <UPDATE>
-  sftpUserName: <UPDATE>
-  sftpPassword: <UPDATE>
+  authUsername: <UPDATE_AUTH_USERNAME>
+  modernizedMatchingEnabled: <UPDATE_MODERNIZED_MATCHING_ENABLED>
+  keyCloakSRTEClientId: <UPDATE_KEY_CLOAK_SRTE_CLIENT_ID>
+  keyCloakSRTEClientSecret: <UPDATE_KEY_CLOAK_SRTE_CLIENT_SECRET>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
-pageBuilder:
-  enabled: <UPDATE>
-  pageLibraryEnabled: <UPDATE>
-  pageManagementCreateEnabled: <UPDATE>
-  pageManagementEditEnabled: <UPDATE>
+
+dataIngestionService:
+  sftpEnabled: <UPDATE_SFTP_ENABLED>
+  sftpHost: <UPDATE_SFTP_HOST>
+  sftpUserName: <UPDATE_SFTP_USERNAME>
+  sftpPassword: <UPDATE_SFTP_PASSWORD>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+debezium:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+elasticsearch:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+investigation:
+  phcDatamartEnable: <UPDATE_PHC_DATAMART_ENABLE>
+  bmirdCaseEnable: <UPDATE_BMIRD_CASE_ENABLE>
+  contactRecordEnable: <UPDATE_CONTACT_RECORD_ENABLE>
+  treatmentEnable: <UPDATE_TREATMENT_ENABLE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+kafka:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 keycloak:
-  dbPassword: <UPDATE>
-  adminPassword: <UPDATE>
+  dbPassword: <UPDATE_DB_PASSWORD>
+  adminPassword: <UPDATE_ADMIN_PASSWORD>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+ldf:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+liquibase:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+modernizationApi:
+  smartKey: <UPDATE_SMART_KEY>
+  analyticsKey: <UPDATE_ANALYTICS_KEY>
+  securityTokenSecret: <UPDATE_SECURITY_TOKEN_SECRET>
+  securityParameterSecret: <UPDATE_SECURITY_PARAMETER_SECRET>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+nbsGateway:
+  clientSecret: <UPDATE_CLIENT_SECRET>
+  welcomePage: <UPDATE_WELCOME_PAGE>
+  landingBase: <UPDATE_LANDING_BASE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+nifi:
+  adminUsername: <UPDATE_ADMIN_USERNAME>
+  adminPassword: <UPDATE_ADMIN_PASSWORD>
+  sensitivePropsKey: <UPDATE_SENSITIVE_PROPS_KEY>
+  ephemeralStorageRequest: <UPDATE_EPHEMERAL_STORAGE_REQUEST>
+  ephemeralStorageLimit: <UPDATE_EPHEMERAL_STORAGE_LIMIT>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+nnd:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+observation:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+organization:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+pageBuilderApi:
+  securityTokenSecret: <UPDATE_SECURITY_TOKEN_SECRET>
+  memoryLimit: <UPDATE_MEMORY_LIMIT>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+
+person:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+ 
+postProcessing:
+  eventMetricEnable: <UPDATE_EVENT_METRIC_ENABLE>
+  dTbHivEnable: <UPDATE_DTB_HIV_ENABLE>
+  morbReportDmEnable: <UPDATE_MORB_REPORT_DM_ENABLE>
+  invSummaryDmEnable: <UPDATE_INV_SUMMARY_DM_ENABLE>
+  summaryReportEnable: <UPDATE_SUMMARY_REPORT_ENABLE>
+  aggregateReportEnable: <UPDATE_AGGREGATE_REPORT_ENABLE>
+  dymDMEnable: <UPDATE_DYM_DM_ENABLE>
+  ldfEnable: <UPDATE_LDF_ENABLE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 splunk:
-  clusterName: <UPDATE>
-  ingex: <UPDATE>
-  metricsIndex: <UPDATE>
-  endpoint: <UPDATE>
-  token: <UPDATE>
+  clusterName: <UPDATE_CLUSTER_NAME>
+  ingex: <UPDATE_INGEX>
+  metricsIndex: <UPDATE_METRICS_INDEX>
+  endpoint: <UPDATE_ENDPOINT>
+  token: <UPDATE_TOKEN>

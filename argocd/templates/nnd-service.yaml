@@ -35,6 +35,14 @@ spec:
           value: {{ .Values.env.dataUrl }}
         - name: efsFileSystemId
           value: {{ .Values.aws.efsId }}
+        - name: resources.requests.cpu
+          value: {{ .Values.nnd.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.nnd.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.nnd.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.nnd.podLimitMemory }}  
   syncPolicy:
     automated:
       prune: true

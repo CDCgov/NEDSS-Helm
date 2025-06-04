@@ -36,6 +36,14 @@ spec:
           value: {{ .Values.dataProcessingService.keyCloakSRTEClientId }}
         - name: keycloak.srte.clientSecret
           value: {{ .Values.dataProcessingService.keyCloakSRTEClientSecret }}
+        - name: resources.requests.cpu
+          value: {{ .Values.dataProcessingService.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.dataProcessingService.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.dataProcessingService.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.dataProcessingService.podLimitMemory }}
   syncPolicy:
     automated:
       prune: true
