@@ -159,6 +159,10 @@ ui:
     merge:
       # Enable acces to Deduplication merge screens
       enabled: false
+  system:
+    management:
+      # Enable access to System Management screen
+      enabled: false
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
