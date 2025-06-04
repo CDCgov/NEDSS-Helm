@@ -63,5 +63,9 @@ jdbc:
   username: ""
   password: ""
 
+
+timezone: "UTC"
 api:
   host: "https://dataingestion.dts1.nbspreview.com/hl7-parser"
+  clientId: ""
+  secret: ""

@@ -60,3 +60,8 @@ jdbc:
   password: ""
 
 
+timezone: "UTC"
+api:
+  host: ""
+  clientId: ""
+  secret: ""
