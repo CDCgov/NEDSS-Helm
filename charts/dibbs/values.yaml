@@ -30,7 +30,6 @@ deployments:
     resources: {}
     port: 8080
     servicePort: 8080
-    servicePort: 8080
   - name: dibbs-orchestration
     containerName: orchestration
     resources: {}
