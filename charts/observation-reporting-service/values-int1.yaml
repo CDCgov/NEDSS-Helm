@@ -31,14 +31,6 @@ service:
   port: 8094
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.int1.nbspreview.com
-    hosts:
-    - app.int1.nbspreview.com
-
 # Kubernetes resource limits
 resources:
   limits:
@@ -59,8 +51,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.int1.nbspreview.com"
 
 jdbc:
   username: ""

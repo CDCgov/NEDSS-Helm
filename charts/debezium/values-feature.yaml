@@ -31,7 +31,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v060225"
+    group_id: "debezium-odse-srte-connector-v061125"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -46,7 +46,7 @@ connect:
     nbs_odse_meta: "enabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v060225",
+    "name": "debezium-odse-connector-v061125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-feature.nbspreview.com",
@@ -113,7 +113,7 @@ connect:
   }
 
   sqlserverconnector_meta: {
-    "name": "debezium-odse-meta-tables-connector-v060225",
+    "name": "debezium-odse-meta-tables-connector-v061125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-feature.nbspreview.com",
@@ -133,7 +133,7 @@ connect:
       "key.converter.schemas.enable": "true",
       "producer.max.request.size": "10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
-      "snapshot.mode": "initial",
+      "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-2.cdcnbsfeaturedevelopme.f4c8vq.c9.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsfeaturedevelopme.f4c8vq.c9.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Page_cond_mapping, dbo.NBS_page, dbo.NBS_ui_metadata, dbo.NBS_rdb_metadata, dbo.state_defined_field_metadata",
@@ -169,7 +169,7 @@ connect:
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v060225",
+    "name": "debezium-srte-connector-v061125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-feature.nbspreview.com",
@@ -189,7 +189,7 @@ connect:
       "key.converter.schemas.enable": "true",
       "producer.max.request.size": "10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
-      "snapshot.mode": "initial",
+      "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "srte-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-2.cdcnbsfeaturedevelopme.f4c8vq.c9.kafka.us-east-1.amazonaws.com:9092,b-1.cdcnbsfeaturedevelopme.f4c8vq.c9.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Jurisdiction_participation,dbo.Language_code,dbo.State_code,dbo.Unit_code,
@@ -258,7 +258,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v060225"
+      value: "debezium-odse-srte-connector-v061125"
     - name: TZ
       value: "UTC"
 

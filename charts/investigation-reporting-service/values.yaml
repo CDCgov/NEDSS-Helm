@@ -32,14 +32,6 @@ service:
   port: 8093
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: "app.EXAMPLE_DOMAIN"
-    hosts:
-    - "app.EXAMPLE_DOMAIN"
-
 resources: {}
 
 autoscaling:
@@ -53,8 +45,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.EXAMPLE_DOMAIN"
 
 jdbc:
   username: "EXAMPLE_ODSE_DB_USER"

@@ -34,14 +34,6 @@ service:
     cachedIds: 20000 # Time in millis
     datamart: 60000 # Time in millis
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.test.nbspreview.com
-    hosts:
-    - app.test.nbspreview.com
-
 # Kubernetes resource limits
 resources:
   limits:
@@ -62,8 +54,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.test.nbspreview.com"
 
 jdbc:
   username: ""
