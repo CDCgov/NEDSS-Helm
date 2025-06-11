@@ -102,12 +102,16 @@ thread:
   enabled: false
   size: "5"
   batchSize: "50"
-  processorDelay: "30000"
-
+  processorDelay: "1000"
 
 hikari:
-  poolSize: "20"
-  minIdle: "5"
-  conTimeout: "30000"
-  maxLifeTime: "5000"
-  leakDetectThresHold: "10000"
+  poolSize: "30"
+  minIdle: "10"
+  conIdleTimeout: "60000"
+  conTimeout: "10000"
+  maxLifeTime: "900000"
+  leakDetectThresHold: "15000"
+
+uid:
+  poolSize: "100000"
+  minPoolSize: "5000"

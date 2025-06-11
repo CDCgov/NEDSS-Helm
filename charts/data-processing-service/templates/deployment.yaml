@@ -108,10 +108,16 @@ spec:
               value: "{{ .Values.thread.batchSize }}"
             - name: PROCESSOR_DELAY
               value: "{{ .Values.thread.processorDelay }}"
+            - name: UID_POOL_SIZE
+              value: "{{ .Values.uid.poolSize }}"
+            - name: UID_MIN_POOL_SIZE
+              value: "{{ .Values.uid.minPoolSize }}"
             - name: HIKARI_POOL_SIZE
               value: "{{ .Values.hikari.poolSize }}"
             - name: HIKARI_MINIMUM_IDLE
               value: "{{ .Values.hikari.minIdle }}"
+            - name: HIKARI_IDLE_TIMEOUT
+              value: "{{ .Values.hikari.conIdleTimeout }}"
             - name: HIKARI_CON_TIMEOUT
               value: "{{ .Values.hikari.conTimeout }}"
             - name: HIKARI_MAX_LIFETIME
