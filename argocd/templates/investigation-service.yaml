@@ -35,14 +35,8 @@ spec:
           value: {{ .Values.env.ODSUsername }}
         - name: jdbc.password
           value: {{ .Values.env.ODSPassword }}
-        - name: featureFlag.treatmentEnable
-          value: {{ .Values.investigation.treatmentEnable }}
         - name: featureFlag.phcDatamartEnable
           value: {{ .Values.investigation.phcDatamartEnable }}
-        - name: featureFlag.bmirdCaseEnable
-          value: {{ .Values.investigation.bmirdCaseEnable }}
-        - name: featureFlag.contactRecordEnable
-          value: {{ .Values.investigation.contactRecordEnable }}
         - name: resources.requests.cpu
           value: {{ .Values.investigation.podRequestCPU }}
         - name: resources.limits.cpu
