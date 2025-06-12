@@ -79,9 +79,6 @@ elasticsearch:
 
 investigation:
   phcDatamartEnable: <UPDATE_PHC_DATAMART_ENABLE>
-  bmirdCaseEnable: <UPDATE_BMIRD_CASE_ENABLE>
-  contactRecordEnable: <UPDATE_CONTACT_RECORD_ENABLE>
-  treatmentEnable: <UPDATE_TREATMENT_ENABLE>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
@@ -189,14 +186,6 @@ person:
 
  
 postProcessing:
-  eventMetricEnable: <UPDATE_EVENT_METRIC_ENABLE>
-  dTbHivEnable: <UPDATE_DTB_HIV_ENABLE>
-  morbReportDmEnable: <UPDATE_MORB_REPORT_DM_ENABLE>
-  invSummaryDmEnable: <UPDATE_INV_SUMMARY_DM_ENABLE>
-  summaryReportEnable: <UPDATE_SUMMARY_REPORT_ENABLE>
-  aggregateReportEnable: <UPDATE_AGGREGATE_REPORT_ENABLE>
-  dymDMEnable: <UPDATE_DYM_DM_ENABLE>
-  ldfEnable: <UPDATE_LDF_ENABLE>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>

@@ -58,9 +58,6 @@ rdb:
 
 featureFlag:
   phcDatamartEnable: "true"
-  bmirdCaseEnable: "true"
-  contactRecordEnable: "true"
-  treatmentEnable: "false"
 
 kafka:
   cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
