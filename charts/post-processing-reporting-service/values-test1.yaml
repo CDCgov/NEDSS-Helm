@@ -71,8 +71,7 @@ kafka:
 log:
   path: "/usr/share/postprocessingreporting/data"
 
-featureFlag:
-  covidDmEnable: "false"
+featureFlag:"snapshot.mode": "no_data"
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
