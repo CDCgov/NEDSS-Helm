@@ -43,6 +43,8 @@ spec:
           value: {{ .Values.postProcessing.podRequestMemory }}
         - name: resources.limits.memory
           value: {{ .Values.postProcessing.podLimitMemory }}
+        - name: featureFlag.covidDmEnable
+          value: {{ .Values.postProcessing.covidDmEnable }}
   syncPolicy:
     automated:
       prune: true
