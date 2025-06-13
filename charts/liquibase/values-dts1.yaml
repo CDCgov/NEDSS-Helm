@@ -32,14 +32,6 @@ service:
   port: 8091
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.dts1.nbspreview.com
-    hosts:
-    - app.dts1.nbspreview.com
-
 # Kubernetes resource limits
 resources: {}
 
@@ -54,8 +46,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.dts1.nbspreview.com"
 
 #################################################################################################
 # Corresponds to changelogs to run below. Note, they run in the order they appear in this list

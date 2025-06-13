@@ -57,8 +57,6 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.EXAMPLE_DOMAIN"
-
 #################################################################################################
 # Corresponds to changelogs to run below. Note, they run in the order they appear in this list
 # Going down the list if any updates fail, the container errors and the rest are not run

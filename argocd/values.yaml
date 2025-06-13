@@ -185,8 +185,6 @@ person:
 
  
 postProcessing:
-  eventMetricEnable: <UPDATE_EVENT_METRIC_ENABLE>
-  covidDmEnable: <UPDATE_DTB_HIV_ENABLE>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>

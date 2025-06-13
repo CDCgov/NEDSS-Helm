@@ -35,10 +35,6 @@ spec:
           value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
         - name: rdb.dburl
           value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;
-        - name: featureFlag.eventMetricEnable
-          value: {{ .Values.postProcessing.eventMetricEnable }}
-        - name: featureFlag.covidDmEnable
-          value: {{ .Values.postProcessing.covidDmEnable }}
         - name: resources.requests.cpu
           value: {{ .Values.postProcessing.podRequestCPU }}
         - name: resources.limits.cpu

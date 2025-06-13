@@ -34,14 +34,6 @@ service:
     cachedIds: 20000 # Time in millis
     datamart: 60000 # Time in millis
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.feature.nbspreview.com
-    hosts:
-    - app.feature.nbspreview.com
-
 # Kubernetes resource limits
 resources:
   limits:
@@ -63,8 +55,6 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.feature.nbspreview.com"
-
 jdbc:
   username: ""
   password: ""
@@ -81,8 +71,7 @@ kafka:
 log:
   path: "/usr/share/postprocessingreporting/data"
 
-featureFlag:
-  covidDmEnable: "false"
+featureFlag:"snapshot.mode": "no_data"
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
