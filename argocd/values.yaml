@@ -171,7 +171,6 @@ organization:
 
 pageBuilderApi:
   securityTokenSecret: <UPDATE_SECURITY_TOKEN_SECRET>
-  memoryLimit: <UPDATE_MEMORY_LIMIT>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
