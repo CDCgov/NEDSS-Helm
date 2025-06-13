@@ -185,6 +185,7 @@ person:
 
  
 postProcessing:
+  covidDmEnable: <UPDATE_COVID_DM_ENABLE>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
