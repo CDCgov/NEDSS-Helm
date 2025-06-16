@@ -75,7 +75,7 @@ connect:
       "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.Treatment,
                              dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out,
                              dbo.Place, dbo.NBS_configuration, dbo.CT_contact, dbo.Auth_user, dbo.Intervention, 
-                             dbo.Act_relationship",
+                             dbo.Act_relationship, dbo.nrt_odse_lookup_question",
 
       "tasks.max": "1",
       "topic.prefix": "cdc",
