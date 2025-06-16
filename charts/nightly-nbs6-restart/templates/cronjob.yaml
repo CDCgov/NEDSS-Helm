@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nightly-nbs6-restart
+  namespace: {{ .Values.namespace }}
+spec:
+  timeZone: "{{ .Values.timeZone }}"
+  schedule: "{{ .Values.schedule }}"
+  concurrencyPolicy: Forbid
+  nodeSelector:
+    kubernetes.io/os: linux
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        spec:
+          serviceAccountName: rollout-restart-sa
+          restartPolicy: Never
+          containers:
+            - name: kubectl
+              image: "{{ .Values.kubectlImage.repository }}:{{ .Values.kubectlImage.tag }}"
+              imagePullPolicy: {{ .Values.imagePullPolicy }}
+              command:
+                - "kubectl"
+                - "rollout"
+                - "restart"
+                - "deployment/nbs6-deployment"
+                - "-n"
+                - "default"
