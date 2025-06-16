@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rollout-restart-sa
+  namespace: {{ .Values.namespace }}
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: rollout-restart-role
+  namespace: {{ .Values.namespace }}
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    resourceNames:
+      - "{{ .Values.deploymentName }}"
+    verbs: ["get", "patch"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rollout-restart-rb
+  namespace: {{ .Values.namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: rollout-restart-sa
+    namespace: {{ .Values.namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rollout-restart-role
