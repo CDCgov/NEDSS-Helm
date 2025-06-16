@@ -59,7 +59,9 @@ spec:
               protocol: TCP
           env:
             - name: DB_URI
-              value:  {{ .Values.jdbc.mpi }}
+              value:  {{ .Values.recordLinker.jdbc.mpi }}
+            - name: API_ROOT_PATH
+              value:  {{ .Values.recordLinker.basePath | default "/api/record-linker" }}
             - name: PORT
               value: {{ .Values.service.port | quote }}
           resources:
