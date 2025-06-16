@@ -112,3 +112,6 @@ hikari:
   maxLifeTime: "5000"
   leakDetectThresHold: "10000"
 
+uid:
+  poolSize: "5000"
+  minPoolSize: "1000"
