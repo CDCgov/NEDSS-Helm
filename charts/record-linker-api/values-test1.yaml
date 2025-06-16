@@ -41,5 +41,7 @@ tolerations: []
 
 affinity: {}
 
-jdbc:
-  mpi:
+recordLinker:
+  basePath: /api/record-linker
+  jdbc:
+    mpi:
