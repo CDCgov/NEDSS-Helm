@@ -73,8 +73,8 @@ spec:
               value: {{ .Values.rdb.dburl }}
             - name: TZ
               value: {{ .Values.timezone }}
-            - name: FF_COVID_DM_ENABLE
-              value: {{ .Values.featureFlag.covidDmEnable }}
+{{/*            - name: FF_COVID_DM_ENABLE*/}}
+{{/*              value: {{ .Values.featureFlag.covidDmEnable }}*/}}
 {{/*            - name: FIXED_DELAY_ID*/}}
 {{/*              value: {{ .Values.service.fixedDelay.cachedIds }}*/}}
 {{/*            - name: FIXED_DELAY_DM*/}}

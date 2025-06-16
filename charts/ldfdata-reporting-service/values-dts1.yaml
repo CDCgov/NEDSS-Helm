@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.04a2a96
+  tag: 1.0.1-SNAPSHOT.35ecbb0
 
 imagePullSecrets: []
 nameOverride: ""
@@ -31,14 +31,6 @@ service:
   port: 8097
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.dts1.nbspreview.com
-    hosts:
-    - app.dts1.nbspreview.com
-
 # Kubernetes resource limits
 resources: {}
 
@@ -53,8 +45,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.dts1.nbspreview.com"
 
 jdbc:
   username: ""

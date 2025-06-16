@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.fdc00c3"
+  tag: "1.0.1-SNAPSHOT.fe31357"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,14 +30,6 @@ service:
   type: ClusterIP
   port: 8091
   httpsPort: 443
-
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.feature.nbspreview.com
-    hosts:
-    - app.feature.nbspreview.com
 
 # Kubernetes resource limits
 resources:

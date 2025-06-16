@@ -31,7 +31,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v052325"
+    group_id: "debezium-odse-srte-connector-v061125"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -47,7 +47,7 @@ connect:
    nbs_odse_meta: "enabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v052325",
+    "name": "debezium-odse-connector-v061125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -118,7 +118,7 @@ connect:
   }
 
   sqlserverconnector_meta: {
-    "name": "debezium-odse-meta-tables-connector-v052325",
+    "name": "debezium-odse-meta-tables-connector-v061125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -176,7 +176,7 @@ connect:
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v052325",
+    "name": "debezium-srte-connector-v061125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -201,10 +201,16 @@ connect:
       "schema.history.internal.kafka.topic": "srte-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                                                           b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
-      "table.include.list": "dbo.TotalIDM,dbo.IMRDBMapping,dbo.Program_area_code,dbo.Code_value_general,
-                             dbo.Codeset,dbo.Codeset_Group_Metadata,dbo.State_county_code_value,dbo.Country_code,
-                             dbo.Jurisdiction_code,dbo.Condition_code,dbo.Code_value_clinical,dbo.State_code
-                             dbo.Snomed_condition,dbo.Loinc_condition,dbo.Labtest_loinc,dbo.LDF_page_set",
+      "table.include.list": "dbo.Jurisdiction_participation,dbo.Language_code,dbo.State_code,dbo.Unit_code,
+                             dbo.Cntycity_code_value,dbo.Lab_result,dbo.Country_code,dbo.Labtest_loinc,dbo.ELR_XREF,
+                             dbo.Loinc_condition,dbo.Loinc_snomed_condition,dbo.Lab_test,dbo.Zip_code_value,
+                             dbo.Zipcnty_code_value,dbo.Lab_result_Snomed,dbo.Investigation_code,dbo.TotalIDM,
+                             dbo.IMRDBMapping,dbo.Anatomic_site_code,dbo.Jurisdiction_code,dbo.Lab_coding_system,
+                             dbo.City_code_value,dbo.LDF_page_set,dbo.LOINC_code,dbo.NAICS_Industry_code,
+                             dbo.Codeset_Group_Metadata,dbo.Country_Code_ISO,dbo.Occupation_code,dbo.Country_XREF,
+                             dbo.Standard_XREF,dbo.Code_value_clinical,dbo.Code_value_general,dbo.Race_code,dbo.Participation_type,
+                             dbo.Specimen_source_code,dbo.Snomed_code,dbo.State_county_code_value,dbo.State_model,dbo.Codeset,
+                             dbo.Program_area_code,dbo.Labtest_Progarea_Mapping,dbo.Treatment_code,dbo.Condition_code",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
@@ -262,7 +268,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v052325"
+      value: "debezium-odse-srte-connector-v061125"
     - name: TZ
       value: "UTC"
 

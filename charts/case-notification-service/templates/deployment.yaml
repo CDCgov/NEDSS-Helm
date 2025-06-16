@@ -52,3 +52,11 @@ spec:
               value: {{ .Values.kafka.cluster }}
             - name: NND_DE_URL
               value: {{ .Values.api.host}}
+            - name: SERVICE_TZ
+              value: {{ .Values.timezone }}
+            - name: NND_DE_CLIENT_ID
+              value: {{ .Values.api.clientId}}
+            - name: NND_DE_SECRET
+              value: {{ .Values.api.secret}}
+            - name: NND_DE_URL
+              value: {{ .Values.api.host}}

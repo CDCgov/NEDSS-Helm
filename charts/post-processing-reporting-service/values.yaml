@@ -5,7 +5,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/post-processing-reporting-service"
-  tag: "v1.1.6"
+  tag: "v1.1.8"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -34,14 +34,6 @@ service:
     cachedIds: 20000 # Time in millis
     datamart: 60000 # Time in millis
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: "app.EXAMPLE_DOMAIN"
-    hosts:
-    - "app.EXAMPLE_DOMAIN"
-
 resources: {}
 
 autoscaling:
@@ -55,8 +47,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.EXAMPLE_DOMAIN"
 
 jdbc:
   username: "EXAMPLE_ODSE_DB_USER"
@@ -74,8 +64,7 @@ kafka:
 log:
   path: "/usr/share/post-processing-reporting/data"
 
-featureFlag:
-  covidDmEnable: "false"
+featureFlag:"snapshot.mode": "no_data"
 
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
