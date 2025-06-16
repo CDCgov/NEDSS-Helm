@@ -24,6 +24,6 @@ spec:
                 - "kubectl"
                 - "rollout"
                 - "restart"
-                - "deployment/nbs6-deployment"
+                - "deployment/{{ .Values.deploymentName }}"
                 - "-n"
-                - "default"
+                - "{{ .Values.namespace }}"
