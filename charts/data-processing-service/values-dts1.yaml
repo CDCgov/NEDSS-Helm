@@ -97,3 +97,21 @@ features:
     enabled: false
     url: ""
 
+
+thread:
+  enabled: false
+  size: "5"
+  batchSize: "50"
+  processorDelay: "1000"
+
+hikari:
+  poolSize: "30"
+  minIdle: "10"
+  conIdleTimeout: "60000"
+  conTimeout: "10000"
+  maxLifeTime: "900000"
+  leakDetectThresHold: "15000"
+
+uid:
+  poolSize: "5000"
+  minPoolSize: "1000"
