@@ -31,7 +31,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v061725"
+    group_id: "debezium-odse-srte-connector-v061725-1"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -49,7 +49,7 @@ connect:
     nbs_case_notification: "enabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v061725",
+    "name": "debezium-odse-connector-v061725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -116,7 +116,7 @@ connect:
   }
 
   sqlserverconnector_case_notification: {
-    "name": "debezium-case-notification-connector-v061725",
+    "name": "debezium-case-notification-connector-v061725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-dts1.nbspreview.com",
@@ -183,7 +183,7 @@ connect:
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v061725",
+    "name": "debezium-srte-connector-v061725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -259,7 +259,7 @@ connect:
   }
 
   sqlserverconnector_meta: {
-    "name": "debezium-odse-meta-tables-connector-v061725",
+    "name": "debezium-odse-meta-tables-connector-v061725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -324,7 +324,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v061725"
+      value: "debezium-odse-srte-connector-v061725-1"
     - name: TZ
       value: "UTC"
 
