@@ -70,6 +70,8 @@ spec:
               value: {{ .Values.odse.dburl }}
             - name: TZ
               value: {{ .Values.timezone }}
+            - name: FF_ES_ENABLE
+              value: {{ .Values.featureFlag.elasticSearchEnable }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

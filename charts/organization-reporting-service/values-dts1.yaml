@@ -53,6 +53,9 @@ jdbc:
 odse:
   dburl: ""
 
+featureFlag:
+  elasticSearchEnable: "false"
+
 kafka:
   cluster: ""
 

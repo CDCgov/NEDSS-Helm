@@ -52,6 +52,9 @@ jdbc:
 odse:
   dburl: "<<EXAMPLE_FIXME_ODSE_DB_URL>>"
 
+featureFlag:
+  elasticSearchEnable: "false"
+
 kafka:
   cluster: "<<EXAMPLE_MSK_KAFKA_ENDPOINT>>"
 
