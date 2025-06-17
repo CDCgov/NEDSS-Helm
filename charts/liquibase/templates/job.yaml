@@ -94,6 +94,18 @@ spec:
                 [ $status -eq 0 ]  || exit 1
               fi
 
+              # SRTE Admin Tasks
+              echo "Checking SRTE Admin Tasks  enabled flag {{ .Values.enabled_databases.srteAdminTasks }} in DB : {{ .Values.jdbc.srte_db_url }}"
+              if [ {{ lower .Values.enabled_databases.srteAdminTasks }} == "enabled" ]; then
+                echo "Executing changelog {{ .Values.changelog.srteAdminTasks }} in DB : {{ .Values.jdbc.srte_db_url }}"
+                liquibase --changelog-file="{{ .Values.changelog.srteAdminTasks }}" --searchPath="./" --url="{{ .Values.jdbc.srte_db_url }}" --username={{ .Values.jdbc.srte_username }} --password={{ .Values.jdbc.srte_password }} update
+                # Returns non-zero code if failed
+                status=$?
+                ## Log and exit if failed
+                [ $status -eq 0 ] && echo "{{ .Values.changelog.srteAdminTasks }} scripts : execution success!" || echo "ERROR: {{ .Values.changelog.srteAdminTasks }} failed with exit code $status"
+                [ $status -eq 0 ]  || exit 1
+              fi
+
               echo "Liquibase Update Complete. All scripts: execution success! Exiting"
 {{/*              echo "Sleep infinitely"*/}}
 {{/*              sleep infinity*/}}

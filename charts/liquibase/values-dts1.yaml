@@ -57,6 +57,7 @@ enabled_databases:
   rdb_modern: "enabled"
   master: "enabled"
   odseAdminTasks: "enabled"
+  srteAdminTasks: "enabled"
 
 changelog:
   srte: "db.srte.changelog-16.1.yaml"
@@ -65,6 +66,7 @@ changelog:
   rdb_modern: "db.rdb_modern.changelog-16.1.yaml"
   master: "db.master.changelog-16.1.yaml"
   odseAdminTasks: "db.odse.admin.tasks.changelog-16.1.yaml"
+  srteAdminTasks: "db.srte.changelog-16.1.yaml"
 #################################################################################################
 
 jdbc:
