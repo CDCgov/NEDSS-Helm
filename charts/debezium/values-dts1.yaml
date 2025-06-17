@@ -45,7 +45,7 @@ connect:
    nbs_odse: "enabled"
    nbs_srte: "enabled"
    nbs_odse_meta: "enabled"
-   nbs_case-notification: "enabled"
+   nbs_case_notification: "enabled"
 
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v061725",
@@ -156,7 +156,6 @@ connect:
       "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nbs_$1",
-      "transforms.dropPrefixConfig.regex": "cdc\\.NBS_ODSE\\.dbo\\.NBS_configuration",
       "transforms.dropPrefixConfig.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefixConfig.replacement": "nrt_NBS_configuration",
       "transforms.unwrapConfig.type": "io.debezium.transforms.ExtractNewRecordState",
