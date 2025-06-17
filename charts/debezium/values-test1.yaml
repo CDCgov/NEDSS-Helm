@@ -123,7 +123,7 @@ connect:
       "database.password": "",
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
-      "database.server.name": "odse",
+      "database.server.name": "odse-case-notification",
       "database.history.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                                                    b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
@@ -190,7 +190,7 @@ connect:
       "database.password": "",
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
-      "database.server.name": "odse",
+      "database.server.name": "odse-meta",
       "database.history.kafka.bootstrap.servers": "b-1.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092,b-2.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
