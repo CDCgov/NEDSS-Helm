@@ -5,12 +5,8 @@ metadata:
   labels:
     {{- include "debezium.labels.connect" . | nindent 4 }}
 data:
-  connector-odse.json: |-
-      {{- .Values.connect.sqlserverconnector_odse| toPrettyJson | nindent 4 }}
-  connector-srte.json: |-
-      {{- .Values.connect.sqlserverconnector_srte| toPrettyJson | nindent 4 }}
-  connector-meta.json: |-
-      {{- .Values.connect.sqlserverconnector_meta| toPrettyJson | nindent 4 }}
+  connector-case-notification.json: |-
+      {{- .Values.connect.sqlserverconnector_case_notification| toPrettyJson | nindent 4 }}
   connect-distributed.properties: |
     group.id={{ .Values.connect.properties.group_id }}
     plugin.path=/kafka/connect
