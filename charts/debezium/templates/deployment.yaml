@@ -68,6 +68,8 @@ spec:
                   - "/bin/sh"
                   - "-c"
                   - |
+                    #0. Sleeping for 1 min
+                    echo "Sleeping for 1 min"
                     sleep 60;
                     #1. Get the running connectors
                     echo "Get the running connectors"
@@ -85,8 +87,9 @@ spec:
                       curl --request DELETE  "http://127.0.0.1:8083/connectors/$task"
                     done
 
-                    echo "Starting SRTE task with config: $(cat /etc/debezium/connector-srte.json)"
+                    #4. Starting SRTE task if enabled
                     if [ {{ lower .Values.connect.connector_enable.nbs_srte }} == "enabled" ]; then
+                    echo "Starting SRTE task with config: $(cat /etc/debezium/connector-srte.json)"
                     curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
@@ -94,8 +97,9 @@ spec:
                       "http://127.0.0.1:8083/connectors/";
                     fi
 
-                    echo "Starting ODSE task with config: $(cat /etc/debezium/connector-srte.json)"
+                    #5. Starting ODSE task if enabled
                     if [ {{ lower .Values.connect.connector_enable.nbs_odse }} == "enabled" ]; then
+                    echo "Starting ODSE task with config: $(cat /etc/debezium/connector-srte.json)"
                     curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
@@ -103,6 +107,7 @@ spec:
                       "http://127.0.0.1:8083/connectors/";
                     fi
 
+                    #6. Starting ODSE_META task if enabled
                     if [ {{ lower .Values.connect.connector_enable.nbs_odse_meta }} == "enabled" ]; then
                     echo "Starting ODSE-META task with config: $(cat /etc/debezium/connector-meta.json)"
                     curl --request POST \
@@ -112,6 +117,7 @@ spec:
                       "http://127.0.0.1:8083/connectors/";
                     fi
 
+                    #6. Starting case-notification task if enabled
                     if [ {{ lower .Values.connect.connector_enable.nbs_case_notification }} == "enabled" ]; then
                     echo "Starting nbs_case_notification task with config: $(cat /etc/debezium/connector-case-notification.json)"
                     curl --request POST \
