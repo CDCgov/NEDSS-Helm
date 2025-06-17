@@ -31,7 +31,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v061125"
+    group_id: "debezium-odse-srte-connector-v061725"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -44,9 +44,10 @@ connect:
     nbs_odse: "enabled"
     nbs_srte: "enabled"
     nbs_odse_meta: "enabled"
+    nbs_case-notification: "enabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v061125",
+    "name": "debezium-odse-connector-v061725",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-test.nbspreview.com",
@@ -70,7 +71,7 @@ connect:
       "schema.history.internal.kafka.topic": "odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092,b-2.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.Treatment,
-                             dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out,
+                             dbo.state_defined_field_data, dbo.Notification, dbo.Interview,
                              dbo.Place, dbo.CT_contact, dbo.Auth_user, dbo.Intervention, dbo.Act_relationship",
       "tasks.max": "1",
       "topic.prefix": "cdc",
@@ -112,8 +113,75 @@ connect:
     }
   }
 
+  sqlserverconnector_case_notification: {
+    "name": "debezium-case-notification-connector-v061725",
+    "config": {
+      "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
+      "database.hostname": "nbs-db.private-dts1.nbspreview.com",
+      "database.port": "1433",
+      "database.user": "",
+      "database.password": "",
+      "database.dbname": "nbs_odse",
+      "database.names": "nbs_odse",
+      "database.server.name": "odse",
+      "database.history.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
+                                                   b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
+      "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
+      # Uncomment following to manually bypass the sqlserver agent status query results
+      #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
+      "database.trustServerCertificate": "true",
+      "include.schema.changes": "true",
+      "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "key.converter.schemas.enable": "true",
+      "producer.max.request.size": "10000000", #10MB
+      "producer.message.max.bytes": "10000000", #10MB
+      "snapshot.mode": "no_data",
+      "schema.history.internal.kafka.topic": "odse-schema-history",
+      "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
+                                                          b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
+      "table.include.list": "dbo.CN_transportq_out",
+      "tasks.max": "1",
+      "topic.prefix": "cdc",
+      "topic.creation.default.replication.factor": 2,
+      "topic.creation.default.partitions": 10,
+      "topic.creation.default.cleanup.policy": "compact",
+      "time.precision.mode": "connect",
+      "transforms": "dropPrefixConfig, dropPrefix, convertTimezone, unwrapConfig, convertTimestampsConfig_add_time, convertTimestampsConfig_last_chg_time, convertTimestampsConfig_status_time",
+      "predicates": "isConfigTable",
+      "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
+      "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
+      "transforms.dropPrefix.replacement": "nbs_$1",
+      "transforms.dropPrefixConfig.regex": "cdc\\.NBS_ODSE\\.dbo\\.NBS_configuration",
+      "transforms.dropPrefixConfig.type": "org.apache.kafka.connect.transforms.RegexRouter",
+      "transforms.dropPrefixConfig.replacement": "nrt_NBS_configuration",
+      "transforms.unwrapConfig.type": "io.debezium.transforms.ExtractNewRecordState",
+      "transforms.unwrapConfig.predicate": "isConfigTable",
+      "transforms.convertTimestampsConfig_add_time.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+      "transforms.convertTimestampsConfig_add_time.target.type": "string",
+      "transforms.convertTimestampsConfig_add_time.format": "yyyy-MM-dd HH:mm:ss.SSS",
+      "transforms.convertTimestampsConfig_add_time.field": "add_time",
+      "transforms.convertTimestampsConfig_add_time.predicate": "isConfigTable",
+      "transforms.convertTimestampsConfig_last_chg_time.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+      "transforms.convertTimestampsConfig_last_chg_time.target.type": "string",
+      "transforms.convertTimestampsConfig_last_chg_time.format": "yyyy-MM-dd HH:mm:ss.SSS",
+      "transforms.convertTimestampsConfig_last_chg_time.field": "last_chg_time",
+      "transforms.convertTimestampsConfig_last_chg_time.predicate": "isConfigTable",
+      "transforms.convertTimestampsConfig_status_time.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+      "transforms.convertTimestampsConfig_status_time.target.type": "string",
+      "transforms.convertTimestampsConfig_status_time.format": "yyyy-MM-dd HH:mm:ss.SSS",
+      "transforms.convertTimestampsConfig_status_time.field": "status_time",
+      "transforms.convertTimestampsConfig_status_time.predicate": "isConfigTable",
+      "predicates.isConfigTable.type": "org.apache.kafka.connect.transforms.predicates.TopicNameMatches",
+      "predicates.isConfigTable.pattern": "nrt_NBS_configuration",
+      "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
+      "transforms.convertTimezone.converted.timezone": "UTC",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "true",
+    }
+  }
+
   sqlserverconnector_meta: {
-    "name": "debezium-odse-meta-tables-connector-v061125",
+    "name": "debezium-odse-meta-tables-connector-v061725",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-test.nbspreview.com",
@@ -169,7 +237,7 @@ connect:
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v061125",
+    "name": "debezium-srte-connector-v061725",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-test.nbspreview.com",
@@ -258,7 +326,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v061125"
+      value: "debezium-odse-srte-connector-v061725"
     - name: TZ
       value: "UTC"
 
