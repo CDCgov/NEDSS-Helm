@@ -61,5 +61,19 @@ spec:
               echo '---- END SSIS.log ERRORS ----';
               echo '---- START DynamicDatamart.log ERRORS ----';
               cat $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/report/log/DynamicDatamart.log | grep -i "error";
-              echo '---- END DynamicDatamart.log ERRORS ----';  
+              echo '---- END DynamicDatamart.log ERRORS ----';
+              echo '---- START Checking rdb.dbo.job_batch_log for logged ERRORS ----'; 
+              sqlcmd -S $db_host -U $rdb_user -P $rdb_pass -Q "select * from rdb.dbo.job_batch_log jbl where status_type <>'complete';"
+              error_check_job_batch=$(sqlcmd -S $db_host -U $rdb_user -P $rdb_pass -Q "SET NOCOUNT ON; select * from rdb.dbo.job_batch_log jbl where status_type = 'error';" -W -h -1)
+              if [[ $error_check_job_batch != "" ]]; then
+                  echo "ERROR: Found errors in rdb.dbo.job_batch_log"
+                  echo $error_check_job_batch
+              fi
+              echo '---- END Checking rdb.dbo.job_batch_log for logged ERRORS ----';
+              sqlcmd -S $db_host -U $rdb_user -P $rdb_pass -Q "select * from rdb.dbo.job_flow_log jfl where Error_Description is not null;"
+              error_check_job_flow=$(sqlcmd -S $db_host -U $rdb_user -P $rdb_pass -Q "SET NOCOUNT ON; select * from rdb.dbo.job_flow_log jfl where Error_Description is not null;" -W -h -1) 
+              if [[ $error_check_job_flow != "" ]]; then
+                  echo "ERROR: Found errors in rdb.dbo.job_flow_log"
+                  echo $error_check_job_flow
+              fi               
           restartPolicy: Never
