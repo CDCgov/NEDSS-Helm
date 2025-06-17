@@ -31,8 +31,8 @@ connect:
       memory: 500m
 
   properties:
-    group_id: "debezium-odse-srte-connector-v061725-2"
-    topics_basename: "debezium-odse-srte-connector"
+    group_id: "debezium-odse-case-notifications-connector-v061725-2"
+    topics_basename: "debezium-odse-case-notifications-connector"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
@@ -120,7 +120,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v061725-2"
+      value: "debezium-odse-case-notifications-connector-v061725-2"
     - name: TZ
       value: "UTC"
 
