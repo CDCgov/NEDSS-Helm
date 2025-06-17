@@ -1,4 +1,4 @@
-nameOverride: ""
+nameOverride: "case-notification"
 fullnameOverride: ""
 log_level: INFO
 connect:
@@ -158,7 +158,7 @@ ui:
 
   env:
     - name: KAFKA_CONNECT_URIS
-      value: "http://debezium-connect:8083"
+      value: "http://debezium-case-notifications-connect:8083"
     - name: TZ
       value: "UTC"
 
