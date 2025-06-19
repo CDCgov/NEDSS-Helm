@@ -41,14 +41,8 @@ spec:
             {{- toYaml .Values.connect.resources | nindent 12 }}
           volumeMounts:
             - name: config
-              mountPath: /etc/debezium/connector-odse.json
-              subPath: connector-odse.json
-            - name: config
-              mountPath: /etc/debezium/connector-srte.json
-              subPath: connector-srte.json
-            - name: config
-              mountPath: /etc/debezium/connector-meta.json
-              subPath: connector-meta.json
+              mountPath: /etc/debezium/connector-case-notification.json
+              subPath: connector-case-notification.json
             - name: config
               mountPath: /kafka/config/log4j.properties
               subPath: log4j.properties
@@ -87,33 +81,13 @@ spec:
                       curl --request DELETE  "http://127.0.0.1:8083/connectors/$task"
                     done
 
-                    #4. Starting SRTE task if enabled
-                    if [ {{ lower .Values.connect.connector_enable.nbs_srte }} == "enabled" ]; then
-                    echo "Starting SRTE task with config: $(cat /etc/debezium/connector-srte.json)"
+                    #4. Starting case-notification task if enabled
+                    if [ {{ lower .Values.connect.connector_enable.nbs_case_notification }} == "enabled" ]; then
+                    echo "Starting nbs_case_notification task with config: $(cat /etc/debezium/connector-case-notification.json)"
                     curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
-                      --data '@/etc/debezium/connector-srte.json' \
-                      "http://127.0.0.1:8083/connectors/";
-                    fi
-
-                    #5. Starting ODSE task if enabled
-                    if [ {{ lower .Values.connect.connector_enable.nbs_odse }} == "enabled" ]; then
-                    echo "Starting ODSE task with config: $(cat /etc/debezium/connector-srte.json)"
-                    curl --request POST \
-                      --header "Accept:application/json" \
-                      --header "Content-Type:application/json" \
-                      --data '@/etc/debezium/connector-odse.json' \
-                      "http://127.0.0.1:8083/connectors/";
-                    fi
-
-                    #6. Starting ODSE_META task if enabled
-                    if [ {{ lower .Values.connect.connector_enable.nbs_odse_meta }} == "enabled" ]; then
-                    echo "Starting ODSE-META task with config: $(cat /etc/debezium/connector-meta.json)"
-                    curl --request POST \
-                      --header "Accept:application/json" \
-                      --header "Content-Type:application/json" \
-                      --data '@/etc/debezium/connector-meta.json' \
+                      --data '@/etc/debezium/connector-case-notification.json' \
                       "http://127.0.0.1:8083/connectors/";
                     fi
 

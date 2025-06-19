@@ -64,7 +64,7 @@ kafka:
 log:
   path: "/usr/share/post-processing-reporting/data"
 
-featureFlag:"snapshot.mode": "no_data"
+featureFlag:
 
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
