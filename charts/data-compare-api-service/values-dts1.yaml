@@ -12,7 +12,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  create: true
+  create: false
   annotations: {}
   name: ""
 
@@ -60,5 +60,12 @@ jdbc:
 
 authUri: ""
 
+kafka:
+  cluster: ""
+
+s3:
+  region: ""
+  bucketName: ""
+  
 log:
   path: "/usr/share/datacompareapi/data"

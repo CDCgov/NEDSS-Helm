@@ -12,7 +12,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  create: true
+  create: false
   annotations: {}
   name: ""
 
@@ -60,5 +60,15 @@ jdbc:
 
 authUri: ""
 
+kafka:
+  cluster: ""
+
+s3:
+  region: ""
+  bucketName: ""
+
 log:
   path: "/usr/share/datacompareemail/data"
+
+ses:
+  recipients: "ndduc1856@gmail.com, uut6@cdc.gov, mansi.shah@cdwg.com"
