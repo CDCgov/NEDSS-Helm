@@ -87,9 +87,9 @@ keycloak:
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
-    enabled: false
+    enabled: true
   liveness:
-    enabled: false
+    enabled: true
 
 kafkaThread: "1"
 
