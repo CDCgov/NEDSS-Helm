@@ -83,9 +83,9 @@ keycloak:
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
-    enabled: true
+    enabled: false
   liveness:
-    enabled: true
+    enabled: false
 
 features:
   modernizedMatching:
