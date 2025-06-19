@@ -54,10 +54,6 @@ spec:
               value: {{ .Values.s3.region }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}  
-
-          volumeMounts:
-          - mountPath: /usr/share/datacompareservice/data
-            name: dc-api-persistent-storage     
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
