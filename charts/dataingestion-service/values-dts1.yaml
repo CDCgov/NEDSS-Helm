@@ -5,7 +5,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.eca3418
+  tag: 1.0.1-SNAPSHOT-flag.c2cca31
 
 imagePullSecrets: []
 nameOverride: ""
@@ -132,6 +132,10 @@ sftp:
   elrFileExtns: "txt,hl7"
   filePaths: "/"
 # filePaths value should be comma seperated like "/,/LAB-1,/lab-2, /lab-2/lab2-sub-folder"
+
+features:
+  obrSpliting:
+    enabled: "false"
 
 kafkaConcurrency: "1"
 
