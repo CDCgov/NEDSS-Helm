@@ -70,12 +70,6 @@ kafka:
 log:
   path: "/usr/share/dataprocessing/data"
 
-# max support 2g heap memory
-java:
-  memory:
-    xms: "1024m"
-    xmx: "2048m"
-
 # FIXME: the remaining values will be used in next release, not used for
 # 7.8.0 - cmoss
 dataingestion:
@@ -113,5 +107,5 @@ hikari:
   leakDetectThresHold: "15000"
 
 uid:
-  poolSize: "100000"
-  minPoolSize: "5000"
+  poolSize: "5000"
+  minPoolSize: "1000"

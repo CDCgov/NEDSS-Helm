@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/liquibase-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/liquibase-service"
-  tag: "v1.1.6"
+  tag: "v1.1.8"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -57,8 +57,6 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.EXAMPLE_DOMAIN"
-
 #################################################################################################
 # Corresponds to changelogs to run below. Note, they run in the order they appear in this list
 # Going down the list if any updates fail, the container errors and the rest are not run
@@ -68,6 +66,8 @@ enabled_databases:
   rdb: "enabled"
   rdb_modern: "enabled"
   master: "enabled"
+  odseAdminTasks: "disabled"
+  srteAdminTasks: "disabled"
 
 changelog:
   srte: "db.srte.changelog-16.1.yaml"
@@ -76,7 +76,9 @@ changelog:
   odse: "db.odse.changelog-16.1.yaml"
   rdb: "db.rdb.changelog-16.1.yaml"
   rdb_modern: "db.rdb_modern.changelog-16.1.yaml"
-  master: "db.master.changelog-16.1.yaml"   
+  master: "db.master.changelog-16.1.yaml"
+  odseAdminTasks: "db.odse.admin.tasks.changelog-16.1.yaml"
+  srteAdminTasks: "db.srte.admin.tasks.changelog-16.1.yaml"
 #################################################################################################
 
 jdbc:

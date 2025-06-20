@@ -44,10 +44,12 @@ spec:
               value: {{ .Values.authUri }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}
-
-          volumeMounts:
-          - mountPath: /usr/share/datacompareservice/data
-            name: dc-email-persistent-storage     
+            - name: S3_BUCKET_NAME
+              value: {{ .Values.s3.bucketName }}
+            - name: S3_REGION
+              value: {{ .Values.s3.region }}   
+            - name: RECIPIENT_EMAILS
+              value: {{ .Values.ses.recipients }} 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

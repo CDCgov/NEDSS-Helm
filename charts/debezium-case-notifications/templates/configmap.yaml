@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "debezium.name" . }}-connect
+  labels:
+    {{- include "debezium.labels.connect" . | nindent 4 }}
+data:
+  connector-case-notification.json: |-
+      {{- .Values.connect.sqlserverconnector_case_notification| toPrettyJson | nindent 4 }}
+  connect-distributed.properties: |
+    group.id={{ .Values.connect.properties.group_id }}
+    plugin.path=/kafka/connect
+    producer.acks=1
+    bootstrap.servers={{ .Values.connect.properties.bootstrap_server }}
+    #client.config.override.policy=all
+    key.converter=org.apache.kafka.connect.json.JsonConverter
+    key.converter.schemas.enable=false
+    min.in.sync.replicas=2
+    max.request.size=10000000
+    message.max.bytes=10000000
+    offset.flush.timeout.ms=30000
+    snapshot.mode=no_data
+    snapshot.lock.timeout.ms=60000
+    value.converter=org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable=false
+    include.schema.changes=true
+
+    config.storage.topic={{ .Values.connect.properties.topics_basename }}_config
+    config.storage.replication.factor={{ .Values.connect.properties.default_replication_factor }}
+
+    status.storage.topic={{ .Values.connect.properties.topics_basename }}_status
+    status.storage.replication.factor={{ .Values.connect.properties.default_replication_factor }}
+
+    offset.storage.topic={{ .Values.connect.properties.topics_basename }}_offset
+    offset.storage.replication.factor={{ .Values.connect.properties.default_replication_factor }}
+
+    topic.creation.default.replication.factor={{ .Values.connect.properties.default_replication_factor }}
+    topic.creation.default.partitions={{ .Values.connect.properties.default_partitions }}
+    topic.creation.default.cleanup.policy={{ .Values.connect.properties.default_cleanup }}
+    {{- if .Values.connect.properties.sql_server_agent_override }}
+    database.sqlserver.agent.status.query={{ .Values.connect.properties.sql_server_agent_status }}
+    {{end}}
+
+  log4j.properties: |
+    log4j.rootLogger={{ .Values.log_level }}, stdout
+    log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+    log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+    log4j.appender.stdout.layout.ConversionPattern=[%d] %p %m (%c:%L)%n

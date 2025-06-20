@@ -7,7 +7,7 @@ authUri: ""
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-case-notification-service/case-notification-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.7"
+  tag: "v1.0.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -58,5 +58,8 @@ jdbc:
   username: ""
   password: ""
 
+timezone: "UTC"
 api:
   host: ""
+  clientId: ""
+  secret: ""

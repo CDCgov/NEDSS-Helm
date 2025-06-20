@@ -5,7 +5,7 @@ env: "dts"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.46e4464
+  tag: 1.0.1-SNAPSHOT.c865591
 
 imagePullSecrets: []
 nameOverride: ""
@@ -86,9 +86,9 @@ keycloak:
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
-    enabled: true
+    enabled: false
   liveness:
-    enabled: true
+    enabled: false
 
 kafkaThread: "1"
 
@@ -113,5 +113,5 @@ hikari:
   leakDetectThresHold: "15000"
 
 uid:
-  poolSize: "100000"
-  minPoolSize: "5000"
+  poolSize: "5000"
+  minPoolSize: "1000"

@@ -5,14 +5,14 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.ce1f185
+  tag: 1.0.1-SNAPSHOT.f65fe51
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  create: true
+  create: false
   annotations: {}
   name: ""
 
@@ -60,5 +60,12 @@ jdbc:
 
 authUri: ""
 
+kafka:
+  cluster: ""
+
+s3:
+  region: ""
+  bucketName: ""
+  
 log:
   path: "/usr/share/datacompareapi/data"

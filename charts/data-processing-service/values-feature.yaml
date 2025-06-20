@@ -5,7 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT-DP-06102025-02.7d294e4
+  tag: 1.0.1-SNAPSHOT-DP-06202025-01.e0748fe
   # 1.0.1-SNAPSHOT-DP-06032025-3.8fd1fed
 
 imagePullSecrets: []
@@ -90,9 +90,9 @@ keycloak:
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
-    enabled: true
+    enabled: false
   liveness:
-    enabled: true
+    enabled: false
 
 kafkaThread: "1"
 
@@ -116,5 +116,5 @@ hikari:
   leakDetectThresHold: "15000"
 
 uid:
-  poolSize: "100000"
-  minPoolSize: "5000"
+  poolSize: "5000"
+  minPoolSize: "1000"

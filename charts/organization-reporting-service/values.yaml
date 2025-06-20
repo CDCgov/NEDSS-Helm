@@ -5,7 +5,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/organization-reporting-service"
-  tag: "v1.1.6"
+  tag: "v1.1.9"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -31,14 +31,6 @@ service:
   port: 8092
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: "app.EXAMPLE_DOMAIN"
-    hosts:
-    - "app.EXAMPLE_DOMAIN"
-
 resources: {}
 
 autoscaling:
@@ -53,14 +45,15 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.EXAMPLE_DOMAIN"
-
 jdbc:
   username: "EXAMPLE_ODSE_DB_USER"
   password: "<<EXAMPLE_ODSE_DB_USER_PASSWORD>>"
 
 odse:
   dburl: "EXAMPLE_FIXME_DB_URL"
+
+featureFlag:
+  elasticSearchEnable: "false"
 
 kafka:
   cluster: "<<EXAMPLE_MSK_KAFKA_ENDPOINT>>"

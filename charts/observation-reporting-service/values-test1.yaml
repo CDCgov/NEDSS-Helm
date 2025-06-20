@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.fdc00c3"
+  tag: "1.0.1-SNAPSHOT.780120b"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -31,14 +31,6 @@ service:
   port: 8094
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.test.nbspreview.com
-    hosts:
-    - app.test.nbspreview.com
-
 # Kubernetes resource limits
 resources:
   limits:
@@ -59,8 +51,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.test.nbspreview.com"
 
 jdbc:
   username: ""

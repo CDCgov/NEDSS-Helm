@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-reporting-service/observation-reporting-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/observation-reporting-service"
-  tag: "v1.1.6"
+  tag: "v1.1.9"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -32,14 +32,6 @@ service:
   port: 8094
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: "app.EXAMPLE_DOMAIN"
-    hosts:
-    - "app.EXAMPLE_DOMAIN"
-
 resources: {}
 
 autoscaling:
@@ -53,8 +45,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.EXAMPLE_DOMAIN"
 
 
 jdbc:

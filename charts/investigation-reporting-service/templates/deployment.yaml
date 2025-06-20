@@ -73,12 +73,6 @@ spec:
               value: {{ .Values.rdb.dburl }}
             - name: FF_PHC_DM_ENABLE
               value: {{ .Values.featureFlag.phcDatamartEnable }}
-            - name: FF_BMIRD_CASE_ENABLE
-              value: {{ .Values.featureFlag.bmirdCaseEnable }}
-            - name: FF_CONTACT_RECORD_ENABLE
-              value: {{ .Values.featureFlag.contactRecordEnable }}
-            - name: FF_TREATMENT_ENABLE
-              value: {{ .Values.featureFlag.treatmentEnable }}
             - name: TZ
               value: {{ .Values.timezone }}
           resources:
