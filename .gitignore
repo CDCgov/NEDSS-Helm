@@ -1,2 +1,5 @@
 /.idea/
 *values*-az-*.yaml
+mt-*-argocd-*.yaml
+internal-*-argocd-*.yaml
+mt-*-values-*.yaml
