@@ -2,3 +2,6 @@
 *values*-az-*.yaml
 *-argocd-*.yaml
 *.DS_STORE
+mt-*-argocd-*.yaml
+internal-*-argocd-*.yaml
+mt-*-values-*.yaml
