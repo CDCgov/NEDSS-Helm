@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: "{{ $serviceName }}"
     app.kubernetes.io/instance: "{{ $.Release.Name }}"
-    app.kubernetes.io/version: "{{ $service.tag | default "latest" }}"
+    app.kubernetes.io/version: "{{ $service.image.tag | default "latest" }}"
     app.kubernetes.io/managed-by: "{{ $.Release.Service }}"
 spec:
   replicas: {{ $service.replicaCount | default $.Values.replicaCount | default 1 }}
@@ -28,8 +28,8 @@ spec:
       serviceAccountName: {{- if $service.serviceAccount.name }} {{ $service.serviceAccount.name | quote }} {{- else }} {{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" | quote }} {{- end }}
       containers:
         - name: {{ $serviceName }}
-          image: "{{ $.Values.image.repository }}/{{ $serviceName }}-service:{{ $.Values.image.tag }}"
-          imagePullPolicy: {{- if and (hasKey $service "image") (hasKey $service.image "pullPolicy") }} {{ $service.image.pullPolicy }}{{- else }} {{ $.Values.image.pullPolicy | default "IfNotPresent" }}{{- end }}
+          image: "{{ $service.image.repository }}/{{ $service.image.name }}:{{ $service.image.tag }}"
+          imagePullPolicy: "{{ $service.image.pullPolicy | default "IfNotPresent" }}"
           ports:
             - containerPort: {{ $service.service.port | default 8080 }}
 
