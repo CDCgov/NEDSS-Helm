@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: data-extraction-service
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "6"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    path: charts/data-extraction-service
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: ingressHost
+          value: {{ .Values.env.appUrl }}
+        - name: jdbc.username
+          value: {{ .Values.env.ODSUsername }}
+        - name: jdbc.password
+          value: {{ .Values.env.ODSPassword }}
+        - name: jdbc.dbserver
+          value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
+        - name: resources.requests.cpu
+          value: {{ .Values.dataExtractionService.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.dataExtractionService.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.dataExtractionService.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.dataExtractionService.podLimitMemory }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  project: default
