@@ -21,6 +21,10 @@ spec:
       parameters:
         - name: ingressHost
           value: {{ .Values.env.appUrl }}
+        - name: kafka.cluster
+          value: {{ .Values.env.kafkaClusterEndpoint }}
+        - name: authUri
+          value: 'http://keycloak.default.svc.cluster.local/auth/realms/NBS'
         - name: jdbc.username
           value: {{ .Values.env.ODSUsername }}
         - name: jdbc.password

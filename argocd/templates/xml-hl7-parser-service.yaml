@@ -21,6 +21,8 @@ spec:
       parameters:
         - name: ingressHost
           value: {{ .Values.env.appUrl }}
+        - name: authUri
+          value: 'http://keycloak.default.svc.cluster.local/auth/realms/NBS'
         - name: jdbc.username
           value: {{ .Values.env.ODSUsername }}
         - name: jdbc.password

@@ -42,6 +42,9 @@ azure:
 
 
 caseNotificationService:
+  apiClientId: <UPDATE_API_CLIENTID>
+  apiHost: <UPDATE_API_HOST>
+  apiSecret: <UPDATE_API_SECRET>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
