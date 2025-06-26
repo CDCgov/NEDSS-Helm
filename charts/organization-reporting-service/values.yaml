@@ -5,7 +5,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/organization-reporting-service"
-  tag: "v1.1.8"
+  tag: "v1.1.9"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -51,6 +51,9 @@ jdbc:
 
 odse:
   dburl: "EXAMPLE_FIXME_DB_URL"
+
+featureFlag:
+  elasticSearchEnable: "false"
 
 kafka:
   cluster: "<<EXAMPLE_MSK_KAFKA_ENDPOINT>>"

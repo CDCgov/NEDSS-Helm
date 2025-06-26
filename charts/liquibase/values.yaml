@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/liquibase-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/liquibase-service"
-  tag: "v1.1.7"
+  tag: "v1.1.8"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -66,6 +66,8 @@ enabled_databases:
   rdb: "enabled"
   rdb_modern: "enabled"
   master: "enabled"
+  odseAdminTasks: "disabled"
+  srteAdminTasks: "disabled"
 
 changelog:
   srte: "db.srte.changelog-16.1.yaml"
@@ -74,7 +76,9 @@ changelog:
   odse: "db.odse.changelog-16.1.yaml"
   rdb: "db.rdb.changelog-16.1.yaml"
   rdb_modern: "db.rdb_modern.changelog-16.1.yaml"
-  master: "db.master.changelog-16.1.yaml"   
+  master: "db.master.changelog-16.1.yaml"
+  odseAdminTasks: "db.odse.admin.tasks.changelog-16.1.yaml"
+  srteAdminTasks: "db.srte.admin.tasks.changelog-16.1.yaml"
 #################################################################################################
 
 jdbc:

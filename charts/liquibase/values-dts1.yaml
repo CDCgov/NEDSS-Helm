@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.780120b
+  tag: 1.0.1-SNAPSHOT.ce28940
 
 imagePullSecrets: []
 nameOverride: ""
@@ -56,13 +56,17 @@ enabled_databases:
   rdb: "enabled"
   rdb_modern: "enabled"
   master: "enabled"
+  odseAdminTasks: "enabled"
+  srteAdminTasks: "enabled"
 
 changelog:
   srte: "db.srte.changelog-16.1.yaml"
   odse: "db.odse.changelog-16.1.yaml"
   rdb: "db.rdb.changelog-16.1.yaml"
   rdb_modern: "db.rdb_modern.changelog-16.1.yaml"
-  master: "db.master.changelog-16.1.yaml"   
+  master: "db.master.changelog-16.1.yaml"
+  odseAdminTasks: "db.odse.admin.tasks.changelog-16.1.yaml"
+  srteAdminTasks: "db.srte.admin.tasks.changelog-16.1.yaml"
 #################################################################################################
 
 jdbc:
