@@ -43,8 +43,7 @@ spec:
 
         {{- if .Values.probes.readiness.enabled | default "false"  }}
         readinessProbe:
-          httpGet:
-            path: {{ .Values.probes.readiness.path | default "/auth" }}
+          tcpSocket:
             port: {{ .Values.probes.readiness.port | default "8080" }}
           initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "60" }}
           periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "30" }}
@@ -53,8 +52,7 @@ spec:
 
         {{- if .Values.probes.liveness.enabled | default "false"  }}
         livenessProbe:
-          httpGet:
-            path: {{ .Values.probes.liveness.path | default "/auth" }}
+          tcpSocket:
             port: {{ .Values.probes.liveness.port | default "8080" }}
           initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "120" }}
           periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "60" }}
