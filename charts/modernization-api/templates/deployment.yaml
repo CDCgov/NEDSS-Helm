@@ -91,7 +91,9 @@ spec:
             '--nbs.ui.settings.smarty.key={{ (((.Values).ui).smarty).key }}',
             '--nbs.ui.settings.analytics.host={{ (((.Values).ui).analytics).host }}',
             '--nbs.ui.settings.analytics.key={{ (((.Values).ui).analytics).key }}',
-            '--nbs.ui.settings.defaults.sizing={{ (((.Values).ui).defaults).sizing | default "medium" }}'
+            '--nbs.ui.settings.defaults.sizing={{ (((.Values).ui).defaults).sizing | default "medium" }}',
+            '--nbs.ui.settings.session.warning={{ (((.Values).ui).session).warning | default "28m" }}',
+            '--nbs.ui.settings.session.expiration={{ (((.Values).ui).session).expiration | default "30m" }}'
             ]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
