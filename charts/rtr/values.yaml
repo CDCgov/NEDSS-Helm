@@ -215,3 +215,4 @@ services:
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
     featureFlag:
+      covidDmEnable: 'false'
