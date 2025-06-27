@@ -77,8 +77,6 @@ spec:
               value: {{- if and (hasKey $service "kafka") (hasKey $service.kafka "cluster") }} {{ $service.kafka.cluster | quote }} {{- else }} {{ $.Values.kafka.cluster | quote }} {{- end }}
             - name: DA_LOG_PATH
               value: {{- if and (hasKey $service "log") (hasKey $service.log "path") }} {{ $service.log.path | quote }} {{- else }} {{ $.Values.log.path | quote }} {{- end }}
-            - name: FF_COVID_DM_ENABLE
-              value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "covidDmEnable") }} {{ $service.featureFlag.covidDmEnable | quote }} {{- else }} "false" {{- end }}
             - name: FF_PHC_DM_ENABLE
               value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "phcDatamartEnable") }} {{ $service.featureFlag.phcDatamartEnable | quote }} {{- else }} "false" {{- end }}
             - name: FF_ES_ENABLE
