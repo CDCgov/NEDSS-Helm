@@ -5,7 +5,7 @@ jdbc:
   username: 'nbs_ods'
   password: 'ods'
 odse:
-  dburl: 'jdbc:sqlserver://nbs-db.private-dts1.nbspreview.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true'
+  dburl: 'jdbc:sqlserver://nbs-db.private-dts1.nbspreview.com:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true'
 kafka:
   cluster: 'b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092'
 serviceAccount:
@@ -193,7 +193,7 @@ services:
       name: ''
       annotations: {}
     rdb:
-      dburl: ''
+      dburl: 'jdbc:sqlserver://nbs-db.private-dts1.nbspreview.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;'
     log:
       path: /usr/share/post-processing-reporting/data
     probes:
