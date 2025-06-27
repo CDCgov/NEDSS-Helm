@@ -48,20 +48,12 @@ spec:
               value: {{ .Values.ingressHost }}
             - name: DC_AUTH_URI
               value: {{ .Values.authUri }}
-            - name: AWS_KEY_ID
-              value: "LONG RUNNING ID"
-            - name: AWS_ACCESS_KEY
-              value: "LONG RUNNING KEY"
             - name: S3_BUCKET_NAME
-              value: "BUCKET NAME"
+              value: {{ .Values.s3.bucketName }}
             - name: S3_REGION
-              value: "AWS REGION"
+              value: {{ .Values.s3.region }}
             - name: KAFKA_BOOTSTRAP_SERVER
-              value: {{ .Values.kafka.cluster }}
-
-          volumeMounts:
-          - mountPath: /usr/share/datacompareservice/data
-            name: dc-api-persistent-storage     
+              value: {{ .Values.kafka.cluster }}  
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

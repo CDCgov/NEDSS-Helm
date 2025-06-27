@@ -5,7 +5,8 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.3998b71
+  tag: 1.0.1-SNAPSHOT-DP-06102025-02.7d294e4
+  # 1.0.1-SNAPSHOT-DP-06032025-3.8fd1fed
 
 imagePullSecrets: []
 nameOverride: ""
@@ -41,11 +42,11 @@ ingress:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "1Gi"  
-    cpu: "500m"      
+    memory: "3Gi"  
+    cpu: "4000m"      
   requests:
-    memory: "512Mi"  
-    cpu: "250m"
+    memory: "2Gi"  
+    cpu: "3000m"
 
 autoscaling:
   enabled: false
@@ -53,7 +54,9 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
 
-nodeSelector: {}
+nodeSelector:
+  eks.amazonaws.com/nodegroup: test_grou_high_cpu
+
 
 tolerations: []
 
@@ -87,9 +90,9 @@ keycloak:
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
-    enabled: true
+    enabled: false
   liveness:
-    enabled: true
+    enabled: false
 
 kafkaThread: "1"
 
@@ -98,3 +101,20 @@ features:
     enabled: false
     url: ""
 
+thread:
+  enabled: true
+  size: "5"
+  batchSize: "50"
+  processorDelay: "10000"
+
+hikari:
+  poolSize: "30"
+  minIdle: "10"
+  conIdleTimeout: "60000"
+  conTimeout: "10000"
+  maxLifeTime: "900000"
+  leakDetectThresHold: "15000"
+
+uid:
+  poolSize: "5000"
+  minPoolSize: "1000"

@@ -1,0 +1,8 @@
+namespace: default
+deploymentName: nbs6-deployment
+timeZone: "America/New_York"
+schedule: "0 1 * * *" # 1:00 AM
+kubectlImage:
+  repository: nbsdevacr.azurecr.io/kubectl
+  tag: v1.30.0
+imagePullPolicy: IfNotPresent

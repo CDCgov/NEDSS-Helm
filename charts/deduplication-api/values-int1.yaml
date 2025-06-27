@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.14abb1c
+  tag: 1.0.1-SNAPSHOT.3e7f6d7
 
 imagePullSecrets: []
 nameOverride: ""
@@ -58,7 +58,7 @@ jdbc:
 deduplication:
   # url for Record Linker API
   recordLinker:
-    url: http://record-linker-api.default.svc.cluster.local:8070
+    url: http://record-linker-api.default.svc.cluster.local:8070/api/record-linker
   algorithm:
     # should data elements and algorithm updates be pushed to Record Linker API
     updateRecordLinker: true

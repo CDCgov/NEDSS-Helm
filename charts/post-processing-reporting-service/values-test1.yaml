@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: "1.0.1-SNAPSHOT.fe31357"
+  tag: "1.0.1-SNAPSHOT.0b9187f"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -34,14 +34,6 @@ service:
     cachedIds: 20000 # Time in millis
     datamart: 60000 # Time in millis
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: app.test.nbspreview.com
-    hosts:
-    - app.test.nbspreview.com
-
 # Kubernetes resource limits
 resources:
   limits:
@@ -63,8 +55,6 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "app.test.nbspreview.com"
-
 jdbc:
   username: ""
   password: ""
@@ -82,7 +72,6 @@ log:
   path: "/usr/share/postprocessingreporting/data"
 
 featureFlag:
-  covidDmEnable: "false"
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:

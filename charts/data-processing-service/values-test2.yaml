@@ -86,9 +86,9 @@ keycloak:
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
-    enabled: true
+    enabled: false
   liveness:
-    enabled: true
+    enabled: false
 
     
 kafkaThread: "1"
@@ -98,3 +98,20 @@ features:
     enabled: false
     url: ""
 
+thread:
+  enabled: false
+  size: "5"
+  batchSize: "50"
+  processorDelay: "30000"
+
+
+hikari:
+  poolSize: "20"
+  minIdle: "5"
+  conTimeout: "30000"
+  maxLifeTime: "5000"
+  leakDetectThresHold: "10000"
+
+uid:
+  poolSize: "5000"
+  minPoolSize: "1000"
