@@ -196,10 +196,6 @@ services:
       dburl: ''
     log:
       path: /usr/share/post-processing-reporting/data
-<<<<<<< HEAD
-    featureFlag:
-=======
->>>>>>> dc749740 (updated deployment yaml with feature flag)
     probes:
       readiness:
         enabled: true
@@ -219,4 +215,3 @@ services:
       tag: v1.1.8
       pullPolicy: IfNotPresent
     featureFlag:
-      covidDmEnable: 'false'
