@@ -65,7 +65,7 @@ services:
     image:
       repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
       name: investigation-reporting-service
-      tag: v1.1.8
+      tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
   ldfdata-reporting:
     service:
@@ -93,7 +93,7 @@ services:
     image:
       repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
       name: ldfdata-reporting-service
-      tag: v1.1.8
+      tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
   observation-reporting:
     service:
@@ -121,7 +121,7 @@ services:
     image:
       repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
       name: observation-reporting-service
-      tag: v1.1.8
+      tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
   organization-reporting:
     service:
@@ -149,7 +149,7 @@ services:
     image:
       repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
       name: organization-reporting-service
-      tag: v1.1.8
+      tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
   person-reporting:
     service:
@@ -177,7 +177,7 @@ services:
     image:
       repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
       name: person-reporting-service
-      tag: v1.1.8
+      tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
     featureFlag:
       elasticSearchEnable: 'true'
@@ -212,6 +212,6 @@ services:
     image:
       repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
       name: post-processing-reporting-service
-      tag: v1.1.8
+      tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
     featureFlag:
