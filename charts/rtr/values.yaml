@@ -63,7 +63,7 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
+      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com//cdc-nbs-modernization/data-reporting-service
       name: investigation-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
@@ -91,7 +91,7 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
+      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
       name: ldfdata-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
@@ -119,7 +119,7 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
+      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
       name: observation-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
@@ -147,7 +147,7 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
+      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
       name: organization-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
@@ -175,7 +175,7 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
+      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
       name: person-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
@@ -210,7 +210,7 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service
+      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
       name: post-processing-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
