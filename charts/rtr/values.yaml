@@ -179,6 +179,9 @@ services:
       name: person-reporting-service
       tag: v1.1.8
       pullPolicy: IfNotPresent
+    featureFlag:
+      elasticSearchEnable: 'true'
+      covidDmEnable: 'false'
   post-processing-reporting:
     service:
       port: 8095
@@ -193,7 +196,10 @@ services:
       dburl: ''
     log:
       path: /usr/share/post-processing-reporting/data
+<<<<<<< HEAD
     featureFlag:
+=======
+>>>>>>> dc749740 (updated deployment yaml with feature flag)
     probes:
       readiness:
         enabled: true
@@ -212,3 +218,5 @@ services:
       name: post-processing-reporting-service
       tag: v1.1.8
       pullPolicy: IfNotPresent
+    featureFlag:
+      covidDmEnable: 'false'
