@@ -2,12 +2,12 @@ replicaCount: 1
 env: prod
 timezone: UTC
 jdbc:
-  username: ''
-  password: ''
+  username: 'nbs_ods'
+  password: 'ods'
 odse:
-  dburl: ''
+  dburl: 'jdbc:sqlserver://nbs-db.private-dts1.nbspreview.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true'
 kafka:
-  cluster: ''
+  cluster: 'b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092'
 serviceAccount:
   create: true
   annotations: {}
@@ -18,11 +18,11 @@ podAnnotations:
   prometheus.io/port: '8081'
 resources:
   limits:
+    memory: 1Gi
+    cpu: 500m
+  requests:
     memory: 512Mi
     cpu: 250m
-  requests:
-    memory: 256Mi
-    cpu: 125m
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -47,9 +47,6 @@ services:
       annotations: {}
     featureFlag:
       phcDatamartEnable: 'true'
-      bmirdCaseEnable: 'true'
-      contactRecordEnable: 'true'
-      treatmentEnable: 'false'
     log:
       path: /usr/share/investigation-reporting/data
     probes:
@@ -197,7 +194,6 @@ services:
     log:
       path: /usr/share/post-processing-reporting/data
     featureFlag:
-      covidDmEnable: 'false'
     probes:
       readiness:
         enabled: true
