@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: xml-hl7-parser-service
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "6"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    path: charts/xml-hl7-parser-service
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: ingressHost
+          value: {{ .Values.env.appUrl }}
+        - name: authUri
+          value: 'http://keycloak.default.svc.cluster.local/auth/realms/NBS'
+        - name: jdbc.username
+          value: {{ .Values.env.ODSUsername }}
+        - name: jdbc.password
+          value: {{ .Values.env.ODSPassword }}
+        - name: jdbc.dbserver
+          value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
+        - name: resources.requests.cpu
+          value: {{ .Values.xmlHl7ParserService.podRequestCPU }}
+        - name: resources.limits.cpu
+          value: {{ .Values.xmlHl7ParserService.podLimitCPU }}
+        - name: resources.requests.memory
+          value: {{ .Values.xmlHl7ParserService.podRequestMemory }}
+        - name: resources.limits.memory
+          value: {{ .Values.xmlHl7ParserService.podLimitMemory }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  project: default
