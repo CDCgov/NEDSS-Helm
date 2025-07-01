@@ -7,14 +7,14 @@ env: prod              # Environment indicator
 timezone: UTC          # Container timezone
 
 jdbc:
-  username: ''         # DB username (should be set in secrets)
-  password: ''         # DB password (should be set in secrets)
+  username: "nbs_ods"
+  password: "ods"
 
 odse:
-  dburl: ''            # ODSE DB URL
+  dburl: "jdbc:sqlserver://cdc-nbs-fts3-rds-mssql.czklgy8jnptr.us-east-1.rds.amazonaws.com:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;"
 
 kafka:
-  cluster: ''          # Kafka cluster bootstrap servers
+  cluster: "b-2.cdcnbsfts3development.fm0nf5.c12.kafka.us-east-1.amazonaws.com:9094,b-1.cdcnbsfts3development.fm0nf5.c12.kafka.us-east-1.amazonaws.com:9094"
 
 serviceAccount:
   create: true
@@ -46,9 +46,9 @@ affinity: {}
 
 probes:
   readiness:
-    enabled: true      # Enable readiness probe
+    enabled: true
   liveness:
-    enabled: true      # Enable liveness probe
+    enabled: true
 
 # ================================================
 # Service-specific configurations
@@ -66,7 +66,8 @@ services:
       name: ''
       annotations: {}
     featureFlag:
-      phcDatamartEnable: 'true'
+      phcDatamartEnable: "true"
+      covidDmEnable: "false"
     log:
       path: /usr/share/investigation-reporting/data
     probes:
@@ -83,9 +84,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: ''
-      name: ''
-      tag: ''
+      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+      name: "investigation-reporting-service"
+      tag: "v1.1.9"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -114,9 +115,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: ''
-      name: ''
-      tag: ''
+      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+      name: "ldfdata-reporting-service"
+      tag: "v1.1.9"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -145,9 +146,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: ''
-      name: ''
-      tag: ''
+      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+      name: "observation-reporting-service"
+      tag: "v1.1.9"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -176,9 +177,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: ''
-      name: ''
-      tag: ''
+      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+      name: "organization-reporting-service"
+      tag: "v1.1.9"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -192,8 +193,8 @@ services:
       name: ''
       annotations: {}
     featureFlag:
-      elasticSearchEnable: 'true'
-      covidDmEnable: 'false'
+      elasticSearchEnable: "true"
+      covidDmEnable: "false"
     log:
       path: /usr/share/person-reporting/data
     probes:
@@ -210,9 +211,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: ''
-      name: ''
-      tag: ''
+      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+      name: "person-reporting-service"
+      tag: "v1.1.9"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -228,7 +229,7 @@ services:
       name: ''
       annotations: {}
     rdb:
-      dburl: ''
+      dburl: "jdbc:sqlserver://cdc-nbs-fts3-rds-mssql.czklgy8jnptr.us-east-1.rds.amazonaws.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;"
     log:
       path: /usr/share/post-processing-reporting/data
     probes:
@@ -245,9 +246,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: ''
-      name: ''
-      tag: ''
+      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+      name: "post-processing-reporting-service"
+      tag: "v1.1.9"
       pullPolicy: IfNotPresent
     featureFlag:
-      covidDmEnable: 'false'
+      covidDmEnable: "false"
