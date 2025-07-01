@@ -20,15 +20,6 @@ spec:
       labels:
         {{- include "data-processing-service.selectorLabels" . | nindent 8 }}
     spec:
-      # affinity:
-      #   podAntiAffinity:
-      #     preferredDuringSchedulingIgnoredDuringExecution:
-      #       - weight: 100
-      #         podAffinityTerm:
-      #           labelSelector:
-      #             matchLabels:
-      #               app.kubernetes.io/name: {{ include "data-processing-service.name" . }}
-      #           topologyKey: "kubernetes.io/hostname"
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -112,6 +103,8 @@ spec:
               value: "{{ .Values.uid.poolSize }}"
             - name: UID_MIN_POOL_SIZE
               value: "{{ .Values.uid.minPoolSize }}"
+            - name: UID_USE_STORE_PROC
+              value: {{ .Values.uid.stordProcApplied  | quote}}
             - name: HIKARI_POOL_SIZE
               value: "{{ .Values.hikari.poolSize }}"
             - name: HIKARI_MINIMUM_IDLE
@@ -124,6 +117,10 @@ spec:
               value: "{{ .Values.hikari.maxLifeTime }}"
             - name: LEAK_DETECTION_THRESHOLD
               value: "{{ .Values.hikari.leakDetectThresHold }}"
+            - name: DI_AUTH_URI
+              value: {{ .Values.authUri }}
+            - name: DI_SERVER_HOST
+              value: {{ .Values.ingressHost }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
