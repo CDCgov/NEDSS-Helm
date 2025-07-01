@@ -117,9 +117,9 @@ spec:
               value: "{{ .Values.hikari.maxLifeTime }}"
             - name: LEAK_DETECTION_THRESHOLD
               value: "{{ .Values.hikari.leakDetectThresHold }}"
-            - name: DI_AUTH_URI
+            - name: DP_AUTH_URI
               value: {{ .Values.authUri }}
-            - name: DI_SERVER_HOST
+            - name: DP_SERVER_HOST
               value: {{ .Values.ingressHost }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
