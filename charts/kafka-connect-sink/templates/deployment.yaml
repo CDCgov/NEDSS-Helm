@@ -79,11 +79,11 @@ spec:
             - name: CONNECT_GROUP_ID
               value: {{ template "cp-kafka-connect.groupId" . }}
             - name: CONNECT_CONFIG_STORAGE_TOPIC
-              value: {{ template "cp-kafka-connect.fullname" . }}-config
+              value: {{ .Values.configurationOverrides.topics_basename }}-config
             - name: CONNECT_OFFSET_STORAGE_TOPIC
-              value: {{ template "cp-kafka-connect.fullname" . }}-offset
+              value: {{ .Values.configurationOverrides.topics_basename }}-offset
             - name: CONNECT_STATUS_STORAGE_TOPIC
-              value: {{ template "cp-kafka-connect.fullname" . }}-status
+              value: {{ .Values.configurationOverrides.topics_basename }}-status
             - name: CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL
               value: {{ template "cp-kafka-connect.cp-schema-registry.service-name" .}}
             - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL
