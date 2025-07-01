@@ -1,0 +1,37 @@
+{{- range $serviceName, $service := .Values.services }}
+  {{- if and (hasKey $service "autoscaling") $service.autoscaling.enabled }}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" }}
+  labels:
+    app.kubernetes.io/name: {{ $serviceName }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" }}
+  minReplicas: {{ $service.autoscaling.minReplicas | default 1 }}
+  maxReplicas: {{ $service.autoscaling.maxReplicas | default 100 }}
+  metrics:
+    {{- if $service.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ $service.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if $service.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: {{ $service.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}
+{{- end }}

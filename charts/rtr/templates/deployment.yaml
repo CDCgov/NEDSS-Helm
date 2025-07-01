@@ -1,0 +1,116 @@
+{{- range $serviceName, $service := .Values.services }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" }}"
+  labels:
+    app.kubernetes.io/name: "{{ $serviceName }}"
+    app.kubernetes.io/instance: "{{ $.Release.Name }}"
+    app.kubernetes.io/version: "{{ $service.image.tag | default "latest" }}"
+    app.kubernetes.io/managed-by: "{{ $.Release.Service }}"
+spec:
+  replicas: {{ $service.replicaCount | default $.Values.replicaCount | default 1 }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "{{ $serviceName }}"
+      app.kubernetes.io/instance: "{{ $.Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "{{ $serviceName }}"
+        app.kubernetes.io/instance: "{{ $.Release.Name }}"
+      {{- with $service.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      serviceAccountName: {{- if $service.serviceAccount.name }} {{ $service.serviceAccount.name | quote }} {{- else }} {{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" | quote }} {{- end }}
+      containers:
+        - name: {{ $serviceName }}
+          image: "{{ $service.image.repository }}/{{ $service.image.name }}:{{ $service.image.tag }}"
+          imagePullPolicy: "{{ $service.image.pullPolicy | default "IfNotPresent" }}"
+          ports:
+            - containerPort: {{ $service.service.port | default 8080 }}
+
+          {{- if and (hasKey $service "probes") (hasKey $service.probes "readiness") (get $service.probes.readiness "enabled") }}
+          readinessProbe:
+            httpGet:
+              path: {{ $service.probes.readiness.path | default (printf "/reporting/%s-svc/status" $serviceName) | quote }}
+              port: {{ $service.service.port | default 8080 }}
+            initialDelaySeconds: {{ $service.probes.readiness.initialDelaySeconds | default 30 }}
+            periodSeconds: {{ $service.probes.readiness.periodSeconds | default 10 }}
+            failureThreshold: {{ $service.probes.readiness.failureThreshold | default 5 }}
+          {{- end }}
+
+          {{- if and (hasKey $service "probes") (hasKey $service.probes "liveness") (get $service.probes.liveness "enabled") }}
+          livenessProbe:
+            httpGet:
+              path: {{ $service.probes.liveness.path | default (printf "/reporting/%s-svc/status" $serviceName) | quote }}
+              port: {{ $service.service.port | default 8080 }}
+            initialDelaySeconds: {{ $service.probes.liveness.initialDelaySeconds | default 60 }}
+            periodSeconds: {{ $service.probes.liveness.periodSeconds | default 30 }}
+            failureThreshold: {{ $service.probes.liveness.failureThreshold | default 5 }}
+          {{- end }}
+
+          resources:
+            {{- if $service.resources }}
+            {{- toYaml $service.resources | nindent 12 }}
+            {{- else }}
+            {{- toYaml $.Values.resources | nindent 12 }}
+            {{- end }}
+
+          env:
+            - name: ENV
+              value: {{ $service.env | default $.Values.env | quote }}
+            - name: TZ
+              value: {{ $service.timezone | default $.Values.timezone | quote }}
+            - name: DB_USERNAME
+              value: {{- if and (hasKey $service "jdbc") (hasKey $service.jdbc "username") }} {{ $service.jdbc.username | quote }} {{- else }} {{ $.Values.jdbc.username | quote }} {{- end }}
+            - name: DB_PASSWORD
+              value: {{- if and (hasKey $service "jdbc") (hasKey $service.jdbc "password") }} {{ $service.jdbc.password | quote }} {{- else }} {{ $.Values.jdbc.password | quote }} {{- end }}
+            - name: DB_ODSE_URL
+              value: {{- if and (hasKey $service "odse") (hasKey $service.odse "dburl") }} {{ $service.odse.dburl | quote }} {{- else }} {{ $.Values.odse.dburl | quote }} {{- end }}
+            - name: DB_RDB_URL
+              value: {{- if and (hasKey $service "rdb") (hasKey $service.rdb "dburl") }} {{ $service.rdb.dburl | quote }} {{- else }} "" {{- end }}
+            - name: KAFKA_BOOTSTRAP_SERVER
+              value: {{- if and (hasKey $service "kafka") (hasKey $service.kafka "cluster") }} {{ $service.kafka.cluster | quote }} {{- else }} {{ $.Values.kafka.cluster | quote }} {{- end }}
+            - name: DA_LOG_PATH
+              value: {{- if and (hasKey $service "log") (hasKey $service.log "path") }} {{ $service.log.path | quote }} {{- else }} {{ $.Values.log.path | quote }} {{- end }}
+            - name: FF_COVID_DM_ENABLE
+              value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "covidDmEnable") }} {{ $service.featureFlag.covidDmEnable | quote }} {{- else }} "false" {{- end }}
+            - name: FF_PHC_DM_ENABLE
+              value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "phcDatamartEnable") }} {{ $service.featureFlag.phcDatamartEnable | quote }} {{- else }} "false" {{- end }}
+            - name: FF_ES_ENABLE
+              value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "elasticSearchEnable") }} {{ $service.featureFlag.elasticSearchEnable | quote }} {{- else }} "false" {{- end }}
+
+      {{- if $service.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $service.nodeSelector | nindent 8 }}
+      {{- else if $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $.Values.nodeSelector | nindent 8 }}
+      {{- end }}
+
+      {{- if $service.affinity }}
+      affinity:
+        {{- toYaml $service.affinity | nindent 8 }}
+      {{- else if $.Values.affinity }}
+      affinity:
+        {{- toYaml $.Values.affinity | nindent 8 }}
+      {{- end }}
+
+      {{- if $service.tolerations }}
+      tolerations:
+        {{- toYaml $service.tolerations | nindent 8 }}
+      {{- else if $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $.Values.tolerations | nindent 8 }}
+      {{- end }}
+
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+---
+{{- end }}

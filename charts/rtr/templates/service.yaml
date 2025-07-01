@@ -1,0 +1,23 @@
+{{- range $serviceName, $service := .Values.services }}
+  {{- if $service.service }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-service" $serviceName | trunc 63 | trimSuffix "-" }}
+  labels:
+    app.kubernetes.io/name: {{ $serviceName }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+spec:
+  type: {{ $service.service.type | default "ClusterIP" }}
+  ports:
+    - port: {{ $service.service.port | default 8080 }}
+      targetPort: {{ $service.service.port | default 8080 }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ $serviceName }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+{{- end }}
+{{- end }}
