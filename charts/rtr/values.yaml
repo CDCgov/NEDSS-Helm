@@ -1,42 +1,63 @@
+# ================================================
+# Global configuration
+# ================================================
+
 replicaCount: 1
-env: prod
-timezone: UTC
+env: prod              # Environment indicator
+timezone: UTC          # Container timezone
+
 jdbc:
-  username: ''
-  password: ''
+  username: ''         # DB username (should be set in secrets)
+  password: ''         # DB password (should be set in secrets)
+
 odse:
-  dburl: ''
+  dburl: ''            # ODSE DB URL
+
 kafka:
-  cluster: ''
+  cluster: ''          # Kafka cluster bootstrap servers
+
 serviceAccount:
   create: true
   annotations: {}
   name: ''
+
 podAnnotations:
   prometheus.io/scrape: 'true'
   prometheus.io/path: /actuator/prometheus
   prometheus.io/port: '8081'
+
 resources:
   limits:
-    memory: 1Gi
-    cpu: 500m
+    memory: 1Gi        # Memory limit per pod
+    cpu: 500m          # CPU limit per pod
   requests:
-    memory: 512Mi
-    cpu: 250m
+    memory: 512Mi      # Memory request per pod
+    cpu: 250m          # CPU request per pod
+
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
+
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
 probes:
   readiness:
-    enabled: true
+    enabled: true      # Enable readiness probe
   liveness:
-    enabled: true
+    enabled: true      # Enable liveness probe
+
+# ================================================
+# Service-specific configurations
+# ================================================
 services:
+
+  # ----------------------------------------
+  # Investigation Reporting Service
+  # ----------------------------------------
   investigation-reporting:
     service:
       port: 8093
@@ -67,6 +88,10 @@ services:
       name: investigation-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
+
+  # ----------------------------------------
+  # LDF Data Reporting Service
+  # ----------------------------------------
   ldfdata-reporting:
     service:
       port: 8097
@@ -95,6 +120,10 @@ services:
       name: ldfdata-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
+
+  # ----------------------------------------
+  # Observation Reporting Service
+  # ----------------------------------------
   observation-reporting:
     service:
       port: 8094
@@ -123,6 +152,10 @@ services:
       name: observation-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
+
+  # ----------------------------------------
+  # Organization Reporting Service
+  # ----------------------------------------
   organization-reporting:
     service:
       port: 8092
@@ -151,6 +184,10 @@ services:
       name: organization-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
+
+  # ----------------------------------------
+  # Person Reporting Service
+  # ----------------------------------------
   person-reporting:
     service:
       port: 8091
@@ -159,6 +196,9 @@ services:
       create: true
       name: ''
       annotations: {}
+    featureFlag:
+      elasticSearchEnable: 'true'
+      covidDmEnable: 'false'
     log:
       path: /usr/share/person-reporting/data
     probes:
@@ -179,9 +219,10 @@ services:
       name: person-reporting-service
       tag: 1.0.1-SNAPSHOT.9459a0c
       pullPolicy: IfNotPresent
-    featureFlag:
-      elasticSearchEnable: 'true'
-      covidDmEnable: 'false'
+
+  # ----------------------------------------
+  # Post-Processing Reporting Service
+  # ----------------------------------------
   post-processing-reporting:
     service:
       port: 8095
