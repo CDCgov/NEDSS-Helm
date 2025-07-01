@@ -7,14 +7,14 @@ env: prod              # Environment indicator
 timezone: UTC          # Container timezone
 
 jdbc:
-  username: "nbs_ods"
-  password: "ods"
+  username: ""
+  password: ""
 
 odse:
-  dburl: "jdbc:sqlserver://cdc-nbs-fts3-rds-mssql.czklgy8jnptr.us-east-1.rds.amazonaws.com:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;"
+  dburl: ""
 
 kafka:
-  cluster: "b-2.cdcnbsfts3development.fm0nf5.c12.kafka.us-east-1.amazonaws.com:9094,b-1.cdcnbsfts3development.fm0nf5.c12.kafka.us-east-1.amazonaws.com:9094"
+  cluster: ""
 
 serviceAccount:
   create: true
@@ -229,7 +229,7 @@ services:
       name: ''
       annotations: {}
     rdb:
-      dburl: "jdbc:sqlserver://cdc-nbs-fts3-rds-mssql.czklgy8jnptr.us-east-1.rds.amazonaws.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;"
+      dburl: ""
     log:
       path: /usr/share/post-processing-reporting/data
     probes:
