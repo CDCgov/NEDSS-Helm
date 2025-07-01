@@ -28,11 +28,11 @@ podAnnotations:
 
 resources:
   limits:
-    memory: 1Gi        # Memory limit per pod
-    cpu: 500m          # CPU limit per pod
+    memory: ''         # User should set
+    cpu: ''            # User should set
   requests:
-    memory: 512Mi      # Memory request per pod
-    cpu: 250m          # CPU request per pod
+    memory: ''         # User should set
+    cpu: ''            # User should set
 
 autoscaling:
   enabled: false
@@ -63,7 +63,6 @@ services:
       port: 8093
       httpsPort: 443
     serviceAccount:
-      create: true
       name: ''
       annotations: {}
     featureFlag:
@@ -84,9 +83,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
-      name: investigation-reporting-service
-      tag: 1.0.1-SNAPSHOT.9459a0c
+      repository: ''
+      name: ''
+      tag: ''
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -97,7 +96,6 @@ services:
       port: 8097
       httpsPort: 443
     serviceAccount:
-      create: true
       name: ''
       annotations: {}
     log:
@@ -116,9 +114,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
-      name: ldfdata-reporting-service
-      tag: 1.0.1-SNAPSHOT.9459a0c
+      repository: ''
+      name: ''
+      tag: ''
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -129,7 +127,6 @@ services:
       port: 8094
       httpsPort: 443
     serviceAccount:
-      create: true
       name: ''
       annotations: {}
     log:
@@ -148,9 +145,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
-      name: observation-reporting-service
-      tag: 1.0.1-SNAPSHOT.9459a0c
+      repository: ''
+      name: ''
+      tag: ''
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -161,7 +158,6 @@ services:
       port: 8092
       httpsPort: 443
     serviceAccount:
-      create: true
       name: ''
       annotations: {}
     log:
@@ -180,9 +176,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
-      name: organization-reporting-service
-      tag: 1.0.1-SNAPSHOT.9459a0c
+      repository: ''
+      name: ''
+      tag: ''
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -193,7 +189,6 @@ services:
       port: 8091
       httpsPort: 443
     serviceAccount:
-      create: true
       name: ''
       annotations: {}
     featureFlag:
@@ -215,9 +210,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
-      name: person-reporting-service
-      tag: 1.0.1-SNAPSHOT.9459a0c
+      repository: ''
+      name: ''
+      tag: ''
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -230,7 +225,6 @@ services:
       fixedDelay:
         cachedIds: 2
     serviceAccount:
-      create: true
       name: ''
       annotations: {}
     rdb:
@@ -251,9 +245,9 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service
-      name: post-processing-reporting-service
-      tag: 1.0.1-SNAPSHOT.9459a0c
+      repository: ''
+      name: ''
+      tag: ''
       pullPolicy: IfNotPresent
     featureFlag:
       covidDmEnable: 'false'
