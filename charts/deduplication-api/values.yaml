@@ -61,6 +61,16 @@ jdbc:
     username:
     password:
 
+nbs:
+  security:
+    oidc:
+      enabled: false # flag that controls use of either OIDC or local JWT for auth
+      issuerUri: # keycloak url with realm. Ex: http://localhost:8100/realms/nbs-users
+    token:
+      # If oidc.enabled = false, a token secret and issuer must be provided
+      secret: # key used to encrypt JWT
+      issuer: # JWT issuer
+
 deduplication:
   # url for Record Linker API
   recordLinker:

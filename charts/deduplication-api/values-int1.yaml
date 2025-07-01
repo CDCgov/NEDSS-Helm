@@ -55,6 +55,12 @@ jdbc:
     username:
     password:
 
+nbs:
+  security:
+    oidc:
+      enabled: true
+      issuerUri: https://app.int1.nbspreview.com/auth/realms/nbs-users
+
 deduplication:
   # url for Record Linker API
   recordLinker:
