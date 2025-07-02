@@ -25,14 +25,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
-      serviceAccountName: {{- if and (hasKey $service "serviceAccount") (hasKey $service.serviceAccount "create") (eq $service.serviceAccount.create true) }}
-        {{- if $service.serviceAccount.name }}{{ $service.serviceAccount.name | quote }}{{ else }}{{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" | quote }}{{ end }}
-      {{- else if and (hasKey $.Values "serviceAccount") (hasKey $.Values.serviceAccount "create") (eq $.Values.serviceAccount.create true) }}
-        {{- if $.Values.serviceAccount.name }}{{ $.Values.serviceAccount.name | quote }}{{ else }}{{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" | quote }}{{ end }}
-      {{- else }}
-        ""
-      {{- end }}
-
+      serviceAccountName: {{- if $service.serviceAccount.name }} {{ $service.serviceAccount.name | quote }} {{- else }} {{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" | quote }} {{- end }}
       containers:
         - name: {{ $serviceName }}
           image: "{{ $service.image.repository }}/{{ $service.image.name }}:{{ $service.image.tag }}"
