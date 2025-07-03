@@ -132,6 +132,11 @@ sftp:
   elrFileExtns: "txt,hl7"
   filePaths: "/"
 
+features:
+  obrSplitting:
+    enabled: "false"
+  hl7BatchSplitting:
+    enabled: "false"
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
