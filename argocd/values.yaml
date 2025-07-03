@@ -86,6 +86,12 @@ debezium:
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
+debezium-case-notifications:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 elasticsearch:
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
@@ -180,6 +186,7 @@ observation:
 
 
 organization:
+  elasticSearchEnable: <UPDATE_ELASTIC_SEARCH_ENABLE>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
@@ -195,6 +202,7 @@ pageBuilderApi:
 
 
 person:
+  elasticSearchEnable: <UPDATE_ELASTIC_SEARCH_ENABLE>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>

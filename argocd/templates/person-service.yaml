@@ -35,6 +35,8 @@ spec:
           value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
         - name: rdb.dburl
           value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;
+        - name: featureFlag.elasticSearchEnable
+          value: {{ .Values.person.elasticSearchEnable }}
         - name: resources.requests.cpu
           value: {{ .Values.person.podRequestCPU }}
         - name: resources.limits.cpu
