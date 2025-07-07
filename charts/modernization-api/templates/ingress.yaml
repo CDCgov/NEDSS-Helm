@@ -63,13 +63,6 @@ spec:
                 name: nbs-gateway-svc  #nbs-gateway-ext
                 port:
                   number: {{ .Values.service.gatewayPort }} #443
-          - path: "/nbs/api/deduplication/"
-            pathType: Prefix
-            backend:
-              service:
-                name: deduplication-api
-                port:
-                  name: https
           - path: "/"
             pathType: Prefix
             backend:
