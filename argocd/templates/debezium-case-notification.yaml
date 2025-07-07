@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: debezium-case-notifications
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "4"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    path: charts/debezium-case-notifications
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: image.repository
+          value: quay.io/debezium/connect
+        - name: image.tag
+          value: '2.7'
+        - name: connect.sqlserverconnector_case_notification.config.database\.user
+          value: {{ .Values.env.ODSUsername }}
+        - name: connect.sqlserverconnector_case_notification.config.database\.password
+          value: {{ .Values.env.ODSPassword }}
+        - name: connect.env[0].value
+          value: {{ .Values.env.kafkaMultiClusterEndpoints }}
+        - name: connect.properties.bootstrap_server
+          value: {{ .Values.env.kafkaMultiClusterEndpoints }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  project: default

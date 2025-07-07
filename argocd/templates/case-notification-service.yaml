@@ -36,7 +36,7 @@ spec:
         - name: jdbc.password
           value: {{ .Values.env.ODSPassword }}
         - name: jdbc.dbserver
-          value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
+          value: {{ .Values.env.dbEndpoint }}
         - name: resources.requests.cpu
           value: {{ .Values.caseNotificationService.podRequestCPU }}
         - name: resources.limits.cpu
