@@ -63,6 +63,7 @@ services:
       port: 8093
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     featureFlag:
@@ -97,6 +98,7 @@ services:
       port: 8097
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     log:
@@ -128,6 +130,7 @@ services:
       port: 8094
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     log:
@@ -159,6 +162,7 @@ services:
       port: 8092
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     log:
@@ -190,6 +194,7 @@ services:
       port: 8091
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     featureFlag:
@@ -226,6 +231,7 @@ services:
       fixedDelay:
         cachedIds: 2
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     rdb:
