@@ -90,9 +90,9 @@ spec:
             - name: API_PAYLOAD_MAX_SIZE
               value: "{{ .Values.apiPayloadMaxSize}}"
             - name: OBR_SPLITTING_ENABLED
-              value: {{ .Values.features.obrSplitting.enabled | default "false"}}
+              value: {{ .Values.features.obrSplitting.enabled | default false | quote}}
             - name: HL7_BATCH_SPLITTING_ENABLED
-              value: {{ .Values.features.hl7BatchSplitting.enabled | default "false"}}
+              value: {{ .Values.features.hl7BatchSplitting.enabled | default false | quote}}
           volumeMounts:
           - mountPath: /usr/share/dataingestion/data
             name: di-persistent-storage     

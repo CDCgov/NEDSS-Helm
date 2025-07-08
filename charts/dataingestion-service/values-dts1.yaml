@@ -134,9 +134,9 @@ sftp:
 # filePaths value should be comma seperated like "/,/LAB-1,/lab-2, /lab-2/lab2-sub-folder"
 features:
   obrSplitting:
-    enabled: "false"
+    enabled: false
   hl7BatchSplitting:
-    enabled: "false"
+    enabled: false
 
 kafkaConcurrency: "1"
 
