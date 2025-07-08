@@ -24,7 +24,7 @@ servicePort: 8083
 ## ref: https://docs.confluent.io/current/connect/userguide.html#configuring-workers
 configurationOverrides:
   "plugin.path": "/usr/share/confluent-hub-components,/usr/share/java"
-  "topics_basename": "kafka-sink-connector-062725"
+  "topics_basename": "kafka-sink-connector-070825"
   "key.converter": "org.apache.kafka.connect.json.JsonConverter"
   "value.converter": "org.apache.kafka.connect.json.JsonConverter"
   "key.converter.schemas.enable": "false"
@@ -37,18 +37,19 @@ configurationOverrides:
 
 sqlServerConnectorEnabled: true
 sqlServerConnector: {
-  "name": "Kafka-Connect-SqlServer-Sink-V1",
+  "name": "Kafka-Connect-SqlServer-Sink-070825",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
-    "offset.flush.interval.ms": "2000",
+    "offset.flush.interval.ms": "60000",
+    "batch.size": "200",
     "connection.url": "jdbc:sqlserver://nbs-db.EXAMPLE_FIXME.nbspreview.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;",
     "connection.user": "",
     "connection.password": "",
     "connection.pool.min_size": "5",
     "connection.pool.max_size": "32",
     "connection.pool.acquire_increment": "32",
-    "connection.pool.timeout": "1800",
+    "connection.pool.timeout": "60000",
     "insert.mode": "upsert",
     "delete.enabled": "true",
     "pk.mode": "record_key",
@@ -82,17 +83,18 @@ customEnv: { }
 SQL_SERVER_CONNECTOR_CONFIG: /etc/sqlServerConnector.json
 JDBC_CONNECTOR_CONFIG: /etc/jdbcConnector.sh
 
-resources: { }
+
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
-  # requests:
-#  cpu: 100m
-#  memory: 128Mi
+resources:
+#  limits:
+#    memory: "2Gi"
+#    cpu: "1000m"
+#  requests:
+#    memory: "1Gi"
+#    cpu: "500m"
 
 ## Custom pod annotations
 podAnnotations: { }
