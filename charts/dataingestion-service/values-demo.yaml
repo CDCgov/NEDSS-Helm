@@ -134,9 +134,9 @@ sftp:
 
 features:
   obrSplitting:
-    enabled: "false"
+    enabled: false
   hl7BatchSplitting:
-    enabled: "false"
+    enabled: false
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:

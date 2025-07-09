@@ -142,9 +142,9 @@ sftp:
 
 features:
   obrSplitting:
-    enabled: "false"
+    enabled: false
   hl7BatchSplitting:
-    enabled: "false"
+    enabled: false
 
 kafkaConcurrency: "1"
 apiPayloadMaxSize: "100MB"
