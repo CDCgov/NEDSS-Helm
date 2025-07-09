@@ -132,6 +132,11 @@ sftp:
   elrFileExtns: "txt,hl7"
   filePaths: "/"
 # filePaths value should be comma seperated like "/,/LAB-1,/lab-2, /lab-2/lab2-sub-folder"
+features:
+  obrSplitting:
+    enabled: false
+  hl7BatchSplitting:
+    enabled: false
 
 kafkaConcurrency: "1"
 

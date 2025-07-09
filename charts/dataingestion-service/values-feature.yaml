@@ -135,7 +135,14 @@ sftp:
   host: ""
   username: ""
   password: ""
+  elrFileExtns: "txt,hl7"
+  filePaths: "/"
 
+features:
+  obrSplitting:
+    enabled: false
+  hl7BatchSplitting:
+    enabled: false
 
 apiPayloadMaxSize: "100MB"
 
