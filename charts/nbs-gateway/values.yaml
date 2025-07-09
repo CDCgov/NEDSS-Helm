@@ -54,6 +54,10 @@ deduplication:
   merge:
     enabled: "false"
 
+system:
+  management:
+    enabled: "false"
+
 resources: {}
 
 nbsExternalName: app-classic.EXAMPLE_DOMAIN
