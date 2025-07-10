@@ -103,6 +103,8 @@ spec:
               value: "{{ .Values.uid.poolSize }}"
             - name: UID_MIN_POOL_SIZE
               value: "{{ .Values.uid.minPoolSize }}"
+            - name: UID_USE_STORE_PROC
+              value: {{ .Values.uid.stordProcApplied  | quote}}
             - name: HIKARI_POOL_SIZE
               value: "{{ .Values.hikari.poolSize }}"
             - name: HIKARI_MINIMUM_IDLE
@@ -115,6 +117,10 @@ spec:
               value: "{{ .Values.hikari.maxLifeTime }}"
             - name: LEAK_DETECTION_THRESHOLD
               value: "{{ .Values.hikari.leakDetectThresHold }}"
+            - name: DP_AUTH_URI
+              value: {{ .Values.authUri }}
+            - name: DP_SERVER_HOST
+              value: {{ .Values.ingressHost }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

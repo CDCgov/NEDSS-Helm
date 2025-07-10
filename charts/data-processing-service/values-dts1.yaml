@@ -5,7 +5,7 @@ env: "dts"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.962d59b
+  tag: 1.0.1-SNAPSHOT-DP-07102025-1.04d7fa9
 
 imagePullSecrets: []
 nameOverride: ""
@@ -115,3 +115,7 @@ hikari:
 uid:
   poolSize: "5000"
   minPoolSize: "1000"
+  stordProcApplied: true
+
+authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
+ingressHost: "dataingestion.dts1.nbspreview.com"

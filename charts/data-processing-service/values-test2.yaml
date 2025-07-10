@@ -115,3 +115,7 @@ hikari:
 uid:
   poolSize: "5000"
   minPoolSize: "1000"
+  stordProcApplied: true
+
+authUri: ""
+ingressHost: "dataingestion.dts1.nbspreview.com"
