@@ -37,7 +37,7 @@ configurationOverrides:
 
 sqlServerConnectorEnabled: true
 sqlServerConnector: {
-  "name": "Kafka-Connect-SqlServer-Sink-070825",
+  "name": "Kafka-Connect-SqlServer-Sink-071025",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
