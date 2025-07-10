@@ -6,7 +6,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
-  tag: "v1.2.9"
+  tag: "v1.2.11"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -138,6 +138,11 @@ sftp:
   filePaths: "/"  
 # filePaths value should be comma seperated like "/,/LAB-1,/lab-2,/lab-2/lab2-sub-folder"
 ##################################
+features:
+  obrSplitting:
+    enabled: false
+  hl7BatchSplitting:
+    enabled: false
 
 apiPayloadMaxSize: "100MB"
 

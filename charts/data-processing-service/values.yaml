@@ -5,7 +5,7 @@ env: "demo"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.2"
+  tag: "v1.0.3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -58,7 +58,7 @@ ingressHost: "app.EXAMPLE_DOMAIN"
 jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
   username: "EXAMPLE_ODSE_DB_USER"
-  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
+  password: "<<EXAMPLE_ODSE_DB_USER_PASSWORD>>"
 
 nbs:
   authuser: "EXAMPLE_NBS_AUTHUSER"
@@ -78,7 +78,7 @@ dataingestion:
 keycloak:
   srte:
     clientId: "EXAMPLE_SRTE_CLIENT_ID"
-    clientSecret: "EXAMPLE_SRTE_CLIENT_SECRET"
+    clientSecret: "<<EXAMPLE_SRTE_CLIENT_SECRET>>"
 
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
@@ -109,7 +109,3 @@ hikari:
 uid:
   poolSize: "5000"
   minPoolSize: "1000"
-  stordProcApplied: true
-
-authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
-ingressHost: "data.EXAMPLE_DOMAIN"

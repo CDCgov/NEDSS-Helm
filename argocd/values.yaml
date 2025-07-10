@@ -21,9 +21,9 @@ env:
   kafkaMultiClusterEndpoints: <UPDATE_KAFKA_MULTI_CLUSTER_ENDPOINTS>
   kafkaClusterEndpoint: <UPDATE_KAFKA_CLUSTER_ENDPOINT>
   ODSUsername: <UPDATE_ODS_USERNAME>
-  ODSPassword: <UPDATE_ODS_PASSWORD>
+  ODSPassword: <<UPDATE_ODS_PASSWORD>>
   SRTEUsername: <UPDATE_SRTE_USERNAME>
-  SRTEPassword: <UPDATE_SRTE_PASSWORD>
+  SRTEPassword: <<UPDATE_SRTE_PASSWORD>>
   pageBuilderEnabled: <UPDATE_PAGEBUILDER_ENABLED>
   pageBuilderLibraryEnabled: <UPDATE_PAGEBUILDER_LIBRARY_ENABLED>
   pageBuilderManagementCreateEnabled: <UPDATE_PAGEBUILDER_MANAGEMENT_CREATE_ENABLED>
@@ -44,7 +44,7 @@ azure:
 caseNotificationService:
   apiClientId: <UPDATE_API_CLIENTID>
   apiHost: <UPDATE_API_HOST>
-  apiSecret: <UPDATE_API_SECRET>
+  apiSecret: <<UPDATE_API_SECRET>>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
@@ -62,7 +62,7 @@ dataProcessingService:
   authUsername: <UPDATE_AUTH_USERNAME>
   modernizedMatchingEnabled: <UPDATE_MODERNIZED_MATCHING_ENABLED>
   keyCloakSRTEClientId: <UPDATE_KEY_CLOAK_SRTE_CLIENT_ID>
-  keyCloakSRTEClientSecret: <UPDATE_KEY_CLOAK_SRTE_CLIENT_SECRET>
+  keyCloakSRTEClientSecret: <<UPDATE_KEY_CLOAK_SRTE_CLIENT_SECRET>>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
@@ -73,7 +73,7 @@ dataIngestionService:
   sftpEnabled: <UPDATE_SFTP_ENABLED>
   sftpHost: <UPDATE_SFTP_HOST>
   sftpUserName: <UPDATE_SFTP_USERNAME>
-  sftpPassword: <UPDATE_SFTP_PASSWORD>
+  sftpPassword: <<UPDATE_SFTP_PASSWORD>>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
@@ -81,6 +81,12 @@ dataIngestionService:
 
 
 debezium:
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
+debezium-case-notifications:
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
@@ -110,8 +116,8 @@ kafka:
 
 
 keycloak:
-  dbPassword: <UPDATE_DB_PASSWORD>
-  adminPassword: <UPDATE_ADMIN_PASSWORD>
+  dbPassword: <<UPDATE_DB_PASSWORD>>
+  adminPassword: <<UPDATE_ADMIN_PASSWORD>>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
@@ -144,7 +150,7 @@ modernizationApi:
 
 
 nbsGateway:
-  clientSecret: <UPDATE_CLIENT_SECRET>
+  clientSecret: <<UPDATE_CLIENT_SECRET>>
   welcomePage: <UPDATE_WELCOME_PAGE>
   landingBase: <UPDATE_LANDING_BASE>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
@@ -155,7 +161,7 @@ nbsGateway:
 
 nifi:
   adminUsername: <UPDATE_ADMIN_USERNAME>
-  adminPassword: <UPDATE_ADMIN_PASSWORD>
+  adminPassword: <<UPDATE_ADMIN_PASSWORD>>
   sensitivePropsKey: <UPDATE_SENSITIVE_PROPS_KEY>
   ephemeralStorageRequest: <UPDATE_EPHEMERAL_STORAGE_REQUEST>
   ephemeralStorageLimit: <UPDATE_EPHEMERAL_STORAGE_LIMIT>
@@ -180,6 +186,7 @@ observation:
 
 
 organization:
+  elasticSearchEnable: <UPDATE_ELASTIC_SEARCH_ENABLE>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
@@ -195,6 +202,7 @@ pageBuilderApi:
 
 
 person:
+  elasticSearchEnable: <UPDATE_ELASTIC_SEARCH_ENABLE>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>

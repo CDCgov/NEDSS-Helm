@@ -1,4 +1,4 @@
-{{- if .Values.env.cloudProvider "azure" }}
+{{- if eq .Values.env.cloudProvider "azure" }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

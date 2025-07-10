@@ -84,8 +84,8 @@ env:
 
   # Additional environment variables with names starting with updateScheduledTask_ are available to update 
   # existing scheduled task. (e.g. updateScheduledTask_ELRImporter)
-  # Format is csv that contains values correspond to columns: filename, scriptPathFromWorkDir, startTime, frequencyDays, frequencyHours, frequencyMinutes
-  ## If a column contains an empty value you should include that like: ELRImporter.bat,, 6am, 0, 0, 2
+  # Format is csv that contains values correspond to columns: filename, scriptPathFromWorkDir, dailyStartTime, dailyStopTime, frequencyDays, frequencyHours, frequencyMinutes;
+  ## If a column contains an empty value you should include that like (note trailing semicolon): ELRImporter.bat,, 6:00:00am, 6:00:00pm, 0, 0, 2;
 
 
 lifecycle: {}

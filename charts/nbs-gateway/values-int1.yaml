@@ -6,7 +6,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.c4b4136
+  tag: 1.0.1-SNAPSHOT.920db34
 
 gatewayService:
   ports:
@@ -43,6 +43,10 @@ pageBuilder:
 deduplication:
   enabled: "true"
   merge:
+    enabled: "true"
+
+system:
+  management:
     enabled: "true"
 
 resources:
