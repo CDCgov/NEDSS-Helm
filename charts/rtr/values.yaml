@@ -89,6 +89,9 @@ services:
       name: "investigation-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
+    jdbc:
+      username: ""
+      password: ""
 
   # ----------------------------------------
   # LDF Data Reporting Service
@@ -121,6 +124,9 @@ services:
       name: "ldfdata-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
+    jdbc:
+      username: ""
+      password: ""
 
   # ----------------------------------------
   # Observation Reporting Service
@@ -153,6 +159,9 @@ services:
       name: "observation-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
+    jdbc:
+      username: ""
+      password: ""
 
   # ----------------------------------------
   # Organization Reporting Service
@@ -185,6 +194,9 @@ services:
       name: "organization-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
+    jdbc:
+      username: ""
+      password: ""
 
   # ----------------------------------------
   # Person Reporting Service
@@ -220,6 +232,9 @@ services:
       name: "person-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
+    jdbc:
+      username: ""
+      password: ""
 
   # ----------------------------------------
   # Post-Processing Reporting Service
@@ -256,5 +271,6 @@ services:
       name: "post-processing-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-    featureFlag:
-      covidDmEnable: "false"
+    jdbc:
+      username: ""
+      password: ""
