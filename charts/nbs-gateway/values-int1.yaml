@@ -45,6 +45,10 @@ deduplication:
   merge:
     enabled: "true"
 
+system:
+  management:
+    enabled: "true"
+
 resources:
   limits:
     memory: "1Gi"
