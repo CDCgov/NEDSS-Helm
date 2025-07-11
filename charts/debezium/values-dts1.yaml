@@ -74,7 +74,7 @@ connect:
                                                           b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.Treatment,
                              dbo.state_defined_field_data, dbo.Notification, dbo.Interview, 
-                             dbo.Place, dbo.NBS_configuration, dbo.CT_contact, dbo.Auth_user, dbo.Intervention, 
+                             dbo.Place, dbo.CT_contact, dbo.Auth_user, dbo.Intervention, 
                              dbo.Act_relationship",
 
       "tasks.max": "1",
@@ -143,7 +143,8 @@ connect:
       "schema.history.internal.kafka.topic": "odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                                                           b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
-      "table.include.list": "dbo.Page_cond_mapping, dbo.NBS_page, dbo.NBS_ui_metadata, dbo.NBS_rdb_metadata, dbo.state_defined_field_metadata",
+      "table.include.list": "dbo.Page_cond_mapping, dbo.NBS_page, dbo.NBS_ui_metadata, dbo.NBS_rdb_metadata,
+                             dbo.state_defined_field_metadata, dbo.NBS_configuration",
       "tasks.max": "1",
       "topic.prefix": "cdc",
       "topic.creation.default.replication.factor": 2,
