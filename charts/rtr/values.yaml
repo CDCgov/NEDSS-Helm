@@ -6,9 +6,9 @@ replicaCount: 1
 env: prod              # Environment indicator
 timezone: UTC          # Container timezone
 
-jdbc:
-  username: ""
-  password: ""
+# jdbc:
+#   username: ""
+#   password: ""
 
 odse:
   dburl: ""
@@ -59,6 +59,9 @@ services:
   # Investigation Reporting Service
   # ----------------------------------------
   investigation-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8093
       httpsPort: 443
@@ -89,14 +92,14 @@ services:
       name: "investigation-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-    jdbc:
-      username: ""
-      password: ""
 
   # ----------------------------------------
   # LDF Data Reporting Service
   # ----------------------------------------
   ldfdata-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8097
       httpsPort: 443
@@ -124,14 +127,15 @@ services:
       name: "ldfdata-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-    jdbc:
-      username: ""
-      password: ""
+
 
   # ----------------------------------------
   # Observation Reporting Service
   # ----------------------------------------
   observation-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8094
       httpsPort: 443
@@ -159,14 +163,14 @@ services:
       name: "observation-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-    jdbc:
-      username: ""
-      password: ""
 
   # ----------------------------------------
   # Organization Reporting Service
   # ----------------------------------------
   organization-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8092
       httpsPort: 443
@@ -194,14 +198,14 @@ services:
       name: "organization-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-    jdbc:
-      username: ""
-      password: ""
 
   # ----------------------------------------
   # Person Reporting Service
   # ----------------------------------------
   person-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8091
       httpsPort: 443
@@ -232,14 +236,14 @@ services:
       name: "person-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-    jdbc:
-      username: ""
-      password: ""
 
   # ----------------------------------------
   # Post-Processing Reporting Service
   # ----------------------------------------
   post-processing-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8095
       httpsPort: 443
@@ -271,6 +275,3 @@ services:
       name: "post-processing-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-    jdbc:
-      username: ""
-      password: ""

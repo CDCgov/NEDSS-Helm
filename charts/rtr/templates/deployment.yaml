@@ -66,9 +66,9 @@ spec:
             - name: TZ
               value: {{ $service.timezone | default $.Values.timezone | quote }}
             - name: DB_USERNAME
-              value: {{- if and (hasKey $service "jdbc") (hasKey $service.jdbc "username") }} {{ $service.jdbc.username | quote }} {{- else }} {{ $.Values.jdbc.username | quote }} {{- end }}
+              value: {{ $service.jdbc.username | quote }}
             - name: DB_PASSWORD
-              value: {{- if and (hasKey $service "jdbc") (hasKey $service.jdbc "password") }} {{ $service.jdbc.password | quote }} {{- else }} {{ $.Values.jdbc.password | quote }} {{- end }}
+              value: {{ $service.jdbc.password | quote }}
             - name: DB_ODSE_URL
               value: {{- if and (hasKey $service "odse") (hasKey $service.odse "dburl") }} {{ $service.odse.dburl | quote }} {{- else }} {{ $.Values.odse.dburl | quote }} {{- end }}
             - name: DB_RDB_URL
