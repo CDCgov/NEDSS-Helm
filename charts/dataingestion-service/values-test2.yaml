@@ -138,6 +138,12 @@ sftp:
   elrFileExtns: "txt,hl7"
   filePaths: "/"
 
+features:
+  obrSplitting:
+    enabled: false
+  hl7BatchSplitting:
+    enabled: false
+
 kafkaConcurrency: "1"
 apiPayloadMaxSize: "100MB"
 
