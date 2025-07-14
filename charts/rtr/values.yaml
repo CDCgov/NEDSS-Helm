@@ -71,7 +71,6 @@ services:
       annotations: {}
     featureFlag:
       phcDatamartEnable: "true"
-      covidDmEnable: "false"
     log:
       path: /usr/share/investigation-reporting/data
     probes:
@@ -215,7 +214,6 @@ services:
       annotations: {}
     featureFlag:
       elasticSearchEnable: "true"
-      covidDmEnable: "false"
     log:
       path: /usr/share/person-reporting/data
     probes:
