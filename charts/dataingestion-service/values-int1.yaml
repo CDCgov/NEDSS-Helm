@@ -149,6 +149,8 @@ features:
 kafkaConcurrency: "1"
 apiPayloadMaxSize: "100MB"
 
+springBootProfile: "dev"
+
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:

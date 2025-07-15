@@ -89,6 +89,8 @@ spec:
               value: "{{ .Values.kafkaConcurrency}}"
             - name: API_PAYLOAD_MAX_SIZE
               value: "{{ .Values.apiPayloadMaxSize}}"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "{{ .Values.springBootProfile}}"
             - name: OBR_SPLITTING_ENABLED
               value: {{ .Values.features.obrSplitting.enabled | default false | quote}}
             - name: HL7_BATCH_SPLITTING_ENABLED

@@ -146,6 +146,8 @@ features:
 
 apiPayloadMaxSize: "100MB"
 
+springBootProfile: "dev"
+
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
