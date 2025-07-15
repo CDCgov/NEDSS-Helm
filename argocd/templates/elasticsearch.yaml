@@ -35,6 +35,10 @@ spec:
           value: {{ .Values.elasticsearch.podRequestMemory }}
         - name: resources.limits.memory
           value: {{ .Values.elasticsearch.podLimitMemory }}
+        - name: azure.files.storageRequest
+          value: {{ .Values.elasticsearch.storageRequest }}
+        - name: pvc.esPvClaim.storageRequest
+          value: {{ .Values.elasticsearch.storageRequest }}
   syncPolicy:
     automated:
       prune: true
