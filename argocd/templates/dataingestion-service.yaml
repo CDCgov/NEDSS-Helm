@@ -62,7 +62,7 @@ spec:
       - name: features.obrSplitting.enabled
         value: {{ .Values.dataIngestionService.obrSplittingEnabled }}
       - name: features.hl7BatchSplitting.enabled
-        value: {{ .Values.dataIngestionService.hl7BatchSplitting.Enabled }}
+        value: {{ .Values.dataIngestionService.hl7BatchSplittingEnabled }}
   syncPolicy:
     automated:
       prune: true

@@ -79,7 +79,7 @@ dataIngestionService:
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
   obrSplittingEnabled: <UPDATE_DI_OBRSPLITTINGENABLE>
-  hl7BatchSplitting.Enabled: <UPDATE_DI_HL7VBATCHSPLITTINGENABLE>
+  hl7BatchSplittingEnabled: <UPDATE_DI_HL7VBATCHSPLITTINGENABLE>
 
 
 debezium:
