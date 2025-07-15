@@ -6,12 +6,9 @@ replicaCount: 1
 env: prod              # Environment indicator
 timezone: UTC          # Container timezone
 
-# jdbc:
-#   username: ""
-#   password: ""
-
-odse:
-  dburl: ""
+dburl:
+  odse: ""
+  rdb: ""
 
 kafka:
   cluster: ""
@@ -62,6 +59,7 @@ services:
     jdbc:
       username: ""
       password: ""
+      url: ""
     service:
       port: 8093
       httpsPort: 443
@@ -251,8 +249,6 @@ services:
       create: true
       name: ''
       annotations: {}
-    rdb:
-      dburl: ""
     log:
       path: /usr/share/post-processing-reporting/data
     probes:

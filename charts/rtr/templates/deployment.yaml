@@ -70,9 +70,9 @@ spec:
             - name: DB_PASSWORD
               value: {{ $service.jdbc.password | quote }}
             - name: DB_ODSE_URL
-              value: {{- if and (hasKey $service "odse") (hasKey $service.odse "dburl") }} {{ $service.odse.dburl | quote }} {{- else }} {{ $.Values.odse.dburl | quote }} {{- end }}
+              value: {{ $.Values.dburl.odse | quote }}
             - name: DB_RDB_URL
-              value: {{- if and (hasKey $service "rdb") (hasKey $service.rdb "dburl") }} {{ $service.rdb.dburl | quote }} {{- else }} "" {{- end }}
+              value: {{ $.Values.dburl.rdb | quote }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{- if and (hasKey $service "kafka") (hasKey $service.kafka "cluster") }} {{ $service.kafka.cluster | quote }} {{- else }} {{ $.Values.kafka.cluster | quote }} {{- end }}
             - name: DA_LOG_PATH
