@@ -96,6 +96,7 @@ debezium-case-notifications:
 
 
 elasticsearch:
+  storageRequest: <UPDATE_STORAGE_REQUEST>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
@@ -167,6 +168,8 @@ nifi:
   sensitivePropsKey: <UPDATE_SENSITIVE_PROPS_KEY>
   ephemeralStorageRequest: <UPDATE_EPHEMERAL_STORAGE_REQUEST>
   ephemeralStorageLimit: <UPDATE_EPHEMERAL_STORAGE_LIMIT>
+  jvmheapInit: <UPDATE_JVM_HEAP_INIT>
+  jvmheapMax: <UPDATE_JVM_HEAP_MAX>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
