@@ -52,7 +52,11 @@ spec:
         - name: resources.requests.memory
           value: {{ .Values.nifi.podRequestMemory }}
         - name: resources.limits.memory
-          value: {{ .Values.nifi.podLimitMemory }}       
+          value: {{ .Values.nifi.podLimitMemory }}
+        - name: jvmheap.init
+          value: {{ .Values.nifi.jvmheapInit }}    
+        - name: jvmheap.max
+          value: {{ .Values.nifi.jvmheapMax }}         
   syncPolicy:
     automated:
       prune: true 
