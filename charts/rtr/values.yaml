@@ -59,7 +59,6 @@ services:
     jdbc:
       username: ""
       password: ""
-      url: ""
     service:
       port: 8093
       httpsPort: 443
