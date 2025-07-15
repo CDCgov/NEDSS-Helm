@@ -59,6 +59,10 @@ spec:
         value: {{ .Values.dataIngestionService.podRequestMemory }}
       - name: resources.limits.memory
         value: {{ .Values.dataIngestionService.podLimitMemory }}
+      - name: features.obrSplitting.enabled
+        value: {{ .Values.dataIngestionService.obrSplittingEnabled }}
+      - name: features.hl7BatchSplitting.enabled
+        value: {{ .Values.dataIngestionService.hl7BatchSplitting.Enabled }}
   syncPolicy:
     automated:
       prune: true
