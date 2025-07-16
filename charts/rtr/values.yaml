@@ -74,7 +74,7 @@ services:
       readiness:
         enabled: true
         path: /reporting/investigation-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
