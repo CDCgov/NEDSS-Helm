@@ -73,6 +73,8 @@ spec:
               value: {{ .Values.authUri }}
             - name: NND_LOG_PATH
               value: {{ .Values.log.path }}
+            - name: SPRING_PROFILES_ACTIVE
+              value: "{{ .Values.springBootProfile}}"
 
           volumeMounts:
           - mountPath: /usr/share/nndservice/data
