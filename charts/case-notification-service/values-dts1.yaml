@@ -55,6 +55,8 @@ affinity: {}
 
 ingressHost: "dataingestion.dts1.nbspreview.com"
 
+springBootProfile: "dev"
+
 kafka:
   cluster: ""
 

@@ -60,3 +60,5 @@ spec:
               value: {{ .Values.api.secret}}
             - name: NND_DE_URL
               value: {{ .Values.api.host}}
+            - name: SPRING_PROFILES_ACTIVE
+              value: "{{ .Values.springBootProfile}}"
