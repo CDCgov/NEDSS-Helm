@@ -59,6 +59,8 @@ jdbc:
 
 authUri: ""
 
+springBootProfile: "dev"
+
 log:
   path: "/usr/share/nndservice/data"
 
