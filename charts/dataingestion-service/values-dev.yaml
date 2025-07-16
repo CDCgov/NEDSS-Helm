@@ -123,6 +123,8 @@ efsFileSystemId: "EXAMPLE_EFS_ID"
 
 authUri: ""
 
+springBootProfile: "dev"
+
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
