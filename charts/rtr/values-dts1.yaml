@@ -6,12 +6,10 @@ replicaCount: 1
 env: prod              # Environment indicator
 timezone: UTC          # Container timezone
 
-jdbc:
-  username: ""
-  password: ""
 
-odse:
-  dburl: ""
+dburl:
+  odse: ""
+  rdb: ""
 
 kafka:
   cluster: ""
@@ -63,6 +61,7 @@ services:
       port: 8093
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     featureFlag:
@@ -74,7 +73,7 @@ services:
       readiness:
         enabled: true
         path: /reporting/investigation-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -84,10 +83,13 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service/investigation-reporting-service"
+      repository: ""
       name: "investigation-reporting-service"
       tag: "1.0.1-SNAPSHOT.439f4d3"
       pullPolicy: IfNotPresent
+    jdbc:
+      username: ""
+      password: ""
 
   # ----------------------------------------
   # LDF Data Reporting Service
@@ -97,6 +99,7 @@ services:
       port: 8097
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     log:
@@ -105,7 +108,7 @@ services:
       readiness:
         enabled: true
         path: /reporting/ldfdata-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -115,10 +118,13 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service/ldfdata-reporting-service"
+      repository: ""
       name: "ldfdata-reporting-service"
       tag: "1.0.1-SNAPSHOT.439f4d3"
       pullPolicy: IfNotPresent
+    jdbc:
+      username: ""
+      password: ""
 
   # ----------------------------------------
   # Observation Reporting Service
@@ -128,6 +134,7 @@ services:
       port: 8094
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     log:
@@ -136,7 +143,7 @@ services:
       readiness:
         enabled: true
         path: /reporting/observation-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -146,19 +153,26 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service/observation-reporting-service"
+      repository: ""
       name: "observation-reporting-service"
       tag: "1.0.1-SNAPSHOT.439f4d3"
       pullPolicy: IfNotPresent
+    jdbc:
+      username: ""
+      password: ""
 
   # ----------------------------------------
   # Organization Reporting Service
   # ----------------------------------------
   organization-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8092
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     log:
@@ -167,7 +181,7 @@ services:
       readiness:
         enabled: true
         path: /reporting/organization-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -177,7 +191,7 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service/organization-reporting-service"
+      repository: ""
       name: "organization-reporting-service"
       tag: "1.0.1-SNAPSHOT.439f4d3"
       pullPolicy: IfNotPresent
@@ -186,10 +200,14 @@ services:
   # Person Reporting Service
   # ----------------------------------------
   person-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8091
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     featureFlag:
@@ -201,7 +219,7 @@ services:
       readiness:
         enabled: true
         path: /reporting/person-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -211,7 +229,7 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service/person-reporting-service"
+      repository: ""
       name: "person-reporting-service"
       tag: "1.0.1-SNAPSHOT.439f4d3"
       pullPolicy: IfNotPresent
@@ -220,23 +238,25 @@ services:
   # Post-Processing Reporting Service
   # ----------------------------------------
   post-processing-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8095
       httpsPort: 443
       fixedDelay:
         cachedIds: 2
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
-    rdb:
-      dburl: ""
     log:
       path: /usr/share/post-processing-reporting/data
     probes:
       readiness:
         enabled: true
         path: /reporting/post-processing-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -246,9 +266,8 @@ services:
         periodSeconds: 30
         failureThreshold: 5
     image:
-      repository: "501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-reporting-service/post-processing-reporting-service"
+      repository: ""
       name: "post-processing-reporting-service"
       tag: "1.0.1-SNAPSHOT.439f4d3"
       pullPolicy: IfNotPresent
-    featureFlag:
-      covidDmEnable: "false"
+

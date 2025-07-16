@@ -8,7 +8,7 @@ authUri: ""
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.000fb9c
+  tag: 2.0.0-SNAPSHOT.97ecd13
 
 imagePullSecrets: []
 nameOverride: ""
@@ -56,6 +56,8 @@ tolerations: []
 affinity: {}
 
 ingressHost: "dataingestion.feature.nbspreview.com"
+
+springBootProfile: "dev"
 
 jdbc:
   dbserver: ""

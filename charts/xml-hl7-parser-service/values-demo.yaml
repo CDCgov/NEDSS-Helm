@@ -51,6 +51,8 @@ affinity: {}
 
 ingressHost: "dataingestion.demo.nbspreview.com"
 
+springBootProfile: "dev"
+
 jdbc:
   dbserver: ""
   username: ""

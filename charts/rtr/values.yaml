@@ -6,12 +6,9 @@ replicaCount: 1
 env: prod              # Environment indicator
 timezone: UTC          # Container timezone
 
-jdbc:
-  username: ""
-  password: ""
-
-odse:
-  dburl: ""
+dburl:
+  odse: ""
+  rdb: ""
 
 kafka:
   cluster: ""
@@ -59,22 +56,25 @@ services:
   # Investigation Reporting Service
   # ----------------------------------------
   investigation-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8093
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     featureFlag:
       phcDatamartEnable: "true"
-      covidDmEnable: "false"
     log:
       path: /usr/share/investigation-reporting/data
     probes:
       readiness:
         enabled: true
         path: /reporting/investigation-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -93,10 +93,14 @@ services:
   # LDF Data Reporting Service
   # ----------------------------------------
   ldfdata-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8097
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     log:
@@ -105,7 +109,7 @@ services:
       readiness:
         enabled: true
         path: /reporting/ldfdata-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -120,14 +124,19 @@ services:
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
 
+
   # ----------------------------------------
   # Observation Reporting Service
   # ----------------------------------------
   observation-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8094
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     log:
@@ -136,7 +145,7 @@ services:
       readiness:
         enabled: true
         path: /reporting/observation-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -155,10 +164,14 @@ services:
   # Organization Reporting Service
   # ----------------------------------------
   organization-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8092
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     log:
@@ -167,7 +180,7 @@ services:
       readiness:
         enabled: true
         path: /reporting/organization-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -186,22 +199,25 @@ services:
   # Person Reporting Service
   # ----------------------------------------
   person-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8091
       httpsPort: 443
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
     featureFlag:
       elasticSearchEnable: "true"
-      covidDmEnable: "false"
     log:
       path: /usr/share/person-reporting/data
     probes:
       readiness:
         enabled: true
         path: /reporting/person-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -220,23 +236,25 @@ services:
   # Post-Processing Reporting Service
   # ----------------------------------------
   post-processing-reporting:
+    jdbc:
+      username: ""
+      password: ""
     service:
       port: 8095
       httpsPort: 443
       fixedDelay:
         cachedIds: 2
     serviceAccount:
+      create: true
       name: ''
       annotations: {}
-    rdb:
-      dburl: ""
     log:
       path: /usr/share/post-processing-reporting/data
     probes:
       readiness:
         enabled: true
         path: /reporting/post-processing-svc/status
-        initialDelaySeconds: 30
+        initialDelaySeconds: 60
         periodSeconds: 10
         failureThreshold: 5
       liveness:
@@ -250,5 +268,3 @@ services:
       name: "post-processing-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-    featureFlag:
-      covidDmEnable: "false"

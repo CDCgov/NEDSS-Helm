@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.5b4fe8f
+  tag: 1.0.1-SNAPSHOT.dbc8ee1
 
 imagePullSecrets: []
 nameOverride: ""
@@ -58,6 +58,8 @@ jdbc:
   password: ""
 
 authUri: ""
+
+springBootProfile: "dev"
 
 log:
   path: "/usr/share/nndservice/data"
