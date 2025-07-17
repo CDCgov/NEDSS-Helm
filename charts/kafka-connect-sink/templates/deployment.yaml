@@ -108,9 +108,33 @@ spec:
             - "bash"
             - "-c"
             - |
+              #0. Sleeping for 1 min
+              echo "Sleeping for 1 min"
+              sleep 60;
+
+              #1. Get the running connectors
+              echo "Get the running connectors"
+              connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
+
+              #2. Clean the array string
+              echo "Clean the array string"
+              cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
+
+              # 3. Iterate and delete running debezium connector tasks
+              echo "Iterate and delete running debezium connector tasks"
+              IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
+              for task in "${my_array[@]}"; do
+                echo "Deleting Connector task : $task"
+                curl --request DELETE  "http://127.0.0.1:8083/connectors/$task"
+              done
+
+              #4. Installing and running JDBC Connector
               echo "Installing Connector"
               confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.7.6
               /etc/confluent/docker/run &
+
+              # 5. Waiting for Kafka Connect to start
+              echo "Waiting for Kafka Connect to start"
               while : ; do
                 curl_status=$$(curl -s -o /dev/null -w %{http_code} http://localhost:8083/connectors)
                 echo -e $$(date) " Kafka Connect listener HTTP state: " $$curl_status " (waiting for 200)"
@@ -119,8 +143,13 @@ spec:
                 fi
                 sleep 10
               done
+
+              #6. Starting sqlServerConnector task if enabled
               echo "Starting sqlServerConnector"
               curl --request POST --header "Accept:application/json" --header "Content-Type:application/json" "http://127.0.0.1:8083/connectors/" --data "@/etc/sqlServerConnector.json"
+
+              #7. Sleeping infinitely
+              echo "Sleeping infinitely"
               sleep infinity
         {{- end }}
         {{- if .Values.volumeMounts }}

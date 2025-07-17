@@ -31,7 +31,7 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v061825-2"
+    group_id: "debezium-odse-srte-connector-v070925"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
@@ -48,7 +48,7 @@ connect:
     nbs_odse_meta: "disabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v061825-2",
+    "name": "debezium-odse-connector-v070925",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -115,7 +115,7 @@ connect:
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v061825-2",
+    "name": "debezium-srte-connector-v070925",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -146,7 +146,7 @@ connect:
                              dbo.City_code_value,dbo.LDF_page_set,dbo.LOINC_code,dbo.NAICS_Industry_code,
                              dbo.Codeset_Group_Metadata,dbo.Country_Code_ISO,dbo.Occupation_code,dbo.Country_XREF,
                              dbo.Standard_XREF,dbo.Code_value_clinical,dbo.Code_value_general,dbo.Race_code,dbo.Participation_type,
-                             dbo.Specimen_source_code,dbo.Snomed_code,dbo.State_county_code_value,dbo.State_model,dbo.Codeset,
+                             dbo.Specimen_source_code,dbo.Snomed_code,dbo.Snomed_condition,dbo.State_county_code_value,dbo.State_model,dbo.Codeset,
                              dbo.Jurisdiction_participation,dbo.Labtest_Progarea_Mapping,dbo.Treatment_code",
       "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestamps_add_time, convertTimestamps_concept_status_time, 
                      convertTimestamps_effective_from_time, convertTimestamps_effective_to_time, convertTimestamps_status_time, 
@@ -191,7 +191,7 @@ connect:
   }
 
   sqlserverconnector_meta: {
-    "name": "debezium-odse-meta-tables-connector-v061825-2",
+    "name": "debezium-odse-meta-tables-connector-v070925",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -256,7 +256,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v061825-2"
+      value: "debezium-odse-srte-connector-v070925"
     - name: TZ
       value: "UTC"
 
