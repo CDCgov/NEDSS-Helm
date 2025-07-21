@@ -80,3 +80,33 @@ DECLARE @IsRunning BIT = 1;
 
 END;
 ```
+
+
+
+## Kubernetes Health Probes for Debezium Connect
+
+The Debezium Connect deployment includes custom `livenessProbe` and `readinessProbe` scripts to ensure the connector is fully operational. These probes query the Kafka Connect REST API exposed on port `8083` inside the container.
+
+### 🔍 What the Probes Do
+
+Both probes:
+- Query the list of active connectors (`/connectors`)
+- For each connector:
+  - Ensure the **connector state** is `"RUNNING"`
+  - Ensure **all task states** are `"RUNNING"`
+
+If any connector or task is in a failed or unassigned state, the probe will fail, which causes:
+- **Liveness probe**: The container is restarted by Kubernetes
+- **Readiness probe**: The pod is marked **NotReady** and traffic is withheld until it becomes healthy
+
+This ensures that:
+- The container is not only up, but the Debezium Kafka Connect service is fully initialized
+- The connectors are configured, running, and streaming properly
+
+### 💡 Troubleshooting Tips
+
+To debug the probe manually, exec into the pod and run:
+
+```bash
+curl http://localhost:8083/connectors
+curl http://localhost:8083/connectors/<your-connector-name>/status
