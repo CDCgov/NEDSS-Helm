@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: {{ .Values.connect.image.pullPolicy }}
           livenessProbe:
             initialDelaySeconds: 60
-            periodSeconds: 20
+            periodSeconds: 60
             timeoutSeconds: 5
             failureThreshold: 3
             exec:
@@ -67,7 +67,7 @@ spec:
 
           readinessProbe:
             initialDelaySeconds: 60
-            periodSeconds: 20
+            periodSeconds: 60
             timeoutSeconds: 5
             failureThreshold: 3
             exec:
