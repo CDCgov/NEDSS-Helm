@@ -6,7 +6,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.920db34
+  tag: 1.0.1-SNAPSHOT.529255a
 
 gatewayService:
   ports:
