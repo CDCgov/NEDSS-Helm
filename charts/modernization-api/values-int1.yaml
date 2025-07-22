@@ -124,7 +124,7 @@ ui:
   patient:
     file:
       enabled: true
-      mergeHistory:
+      merge-history:
         enabled: true
   deduplication:
     enabled: true
