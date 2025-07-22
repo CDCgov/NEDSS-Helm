@@ -28,7 +28,7 @@ welcome:
 patient:
   profile:
     enabled: false
-  files:
+  file:
     mergeHistory: false
 
 pageBuilder:
