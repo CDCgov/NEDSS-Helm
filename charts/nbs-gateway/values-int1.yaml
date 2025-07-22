@@ -29,7 +29,7 @@ patient:
   profile:
     enabled: false
   file:
-    mergeHistory: false
+    mergeHistory: true
 
 pageBuilder:
   enabled: "true"
