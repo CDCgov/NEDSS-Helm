@@ -84,6 +84,7 @@ spec:
             '--nbs.ui.features.patient.add.extended.enabled={{ (((((.Values).ui).patient).add).extended).enabled | default "false" }}',
             '--nbs.ui.features.patient.profile.enabled={{ ((((.Values).ui).patient).file).profile | default "false" }}',
             '--nbs.ui.features.patient.file.enabled={{ ((((.Values).ui).patient).file).enabled | default "false" }}',
+            '--nbs.ui.features.patient.file.merge-history.enabled={{ ((((.Values).ui).patient).file.mergeHistory).enabled | default "false" }}',
             '--nbs.ui.features.patient.search.filters.enabled={{ (((((.Values).ui).patient).search).filters).enabled | default "false" }}',
             '--nbs.ui.features.deduplication.enabled={{ (((.Values).ui).deduplication).enabled | default "false" }}',
             '--nbs.ui.features.deduplication.merge.enabled={{ ((((.Values).ui).deduplication).merge).enabled | default "false" }}',

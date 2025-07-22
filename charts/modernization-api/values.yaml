@@ -143,6 +143,9 @@ ui:
     file:
       # Enables access to the modernized Patient File
       enabled: false
+      # Enables presence of Merge History card in Patient File
+      mergeHistory:
+        enabled: false
     add:
       # [deprecated] Enables access to the modernized New patient feature to create a patient with basic demographic data. (marked for removal)
       enabled: true
@@ -157,7 +160,7 @@ ui:
     # Enable access to Deduplication screens
     enabled: false
     merge:
-      # Enable acces to Deduplication merge screens
+      # Enable access to Deduplication merge screens
       enabled: false
   system:
     management:
