@@ -32,9 +32,6 @@ patient:
   file:
     # Enables routing from NBS6 pages to the modernized Patient File
     enabled: false
-    # Enables the Merge History Card in Patient File
-    mergeHistory:
-      enabled: false
   profile:
     # [deprecated] Enables routing from NBS6 pages to the Patient Profile (marked for removal)
     enabled: false
