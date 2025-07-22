@@ -6,7 +6,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
-  tag: "v1.2.11"
+  tag: "v1.2.12"
 
 imagePullSecrets: []
 nameOverride: ""
