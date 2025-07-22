@@ -28,6 +28,8 @@ welcome:
 patient:
   profile:
     enabled: false
+  files:
+    mergeHistory: false
 
 pageBuilder:
   enabled: "true"
