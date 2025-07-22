@@ -40,7 +40,7 @@ spec:
           '--nbs.gateway.patient.profile.enabled={{ (((.Values).patient).profile).enabled | default "false" }}',
           '--nbs.gateway.patient.file.service={{ .Values.modernizationApiHost }}',
           '--nbs.gateway.patient.file.enabled={{ (((.Values).patient).file).enabled | default "false" }}',
-          '--nbs.gateway.patient.file.mergeHistory.enabled={{ ((((.Values).patient).file).mergeHistory).enabled | default "false" }}',
+          '--nbs.gateway.patient.file.mergeHistory.enabled={{ (((.Values).patient).file.mergeHistory).enabled | default "false" }}',
           '--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}', 
           '--nbs.gateway.pagebuilder.enabled={{ .Values.pageBuilder.enabled }}', 
           '--nbs.gateway.pagebuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}',
