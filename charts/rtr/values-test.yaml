@@ -26,11 +26,11 @@ podAnnotations:
 
 resources:
   limits:
-    memory: ''         # User should set
-    cpu: ''            # User should set
+    memory: '250m'         # User should set
+    cpu: '512Mi'            # User should set
   requests:
-    memory: ''         # User should set
-    cpu: ''            # User should set
+    memory: '250m'         # User should set
+    cpu: '512Mi'            # User should set
 
 autoscaling:
   enabled: false
