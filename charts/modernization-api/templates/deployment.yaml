@@ -75,14 +75,9 @@ spec:
             '--nbs.ui.features.pageBuilder.page.library.enabled={{ .Values.pageBuilder.page.library.enabled }}', 
             '--nbs.ui.features.pageBuilder.page.management.create.enabled={{ .Values.pageBuilder.page.management.create.enabled }}', 
             '--nbs.ui.features.pageBuilder.page.management.edit.enabled={{ .Values.pageBuilder.page.management.edit.enabled }}',
-            '--nbs.ui.features.search.view.enabled={{ ((((.Values).ui).search).view).enabled | default "false" }}',
-            '--nbs.ui.features.search.view.table.enabled={{ (((((.Values).ui).search).view).table).enabled | default "false" }}',
             '--nbs.ui.features.search.events.enabled={{ ((((.Values).ui).search).events).enabled | default "true" }}',
             '--nbs.ui.features.search.investigations.enabled={{ ((((.Values).ui).search).investigations).enabled | default "false"}}',
-            '--nbs.ui.features.search.laboratoryReports.enabled={{ ((((.Values).ui).search).laboratoryReports).enabled | default "false"}}',            
-            '--nbs.ui.features.patient.add.enabled={{ ((((.Values).ui).patient).add).enabled | default "false" }}',
-            '--nbs.ui.features.patient.add.extended.enabled={{ (((((.Values).ui).patient).add).extended).enabled | default "false" }}',
-            '--nbs.ui.features.patient.profile.enabled={{ ((((.Values).ui).patient).file).profile | default "false" }}',
+            '--nbs.ui.features.search.laboratoryReports.enabled={{ ((((.Values).ui).search).laboratoryReports).enabled | default "false"}}',                        
             '--nbs.ui.features.patient.file.enabled={{ ((((.Values).ui).patient).file).enabled | default "false" }}',
             '--nbs.ui.features.patient.file.merge-history.enabled={{ ((((.Values).ui).patient).file.mergeHistory).enabled | default "false" }}',
             '--nbs.ui.features.patient.search.filters.enabled={{ (((((.Values).ui).patient).search).filters).enabled | default "false" }}',
@@ -92,7 +87,7 @@ spec:
             '--nbs.ui.settings.smarty.key={{ (((.Values).ui).smarty).key }}',
             '--nbs.ui.settings.analytics.host={{ (((.Values).ui).analytics).host }}',
             '--nbs.ui.settings.analytics.key={{ (((.Values).ui).analytics).key }}',
-            '--nbs.ui.settings.defaults.sizing={{ (((.Values).ui).defaults).sizing | default "medium" }}'
+            '--nbs.ui.settings.defaults.sizing={{ (((.Values).ui).defaults).sizing | default "small" }}'
             ]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

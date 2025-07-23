@@ -104,23 +104,11 @@ oidc:
   enabled: "true"
 
 ui:
-  smarty:
-    key: ""
-  analytics:
-    key: ""
-  defaults:
-    sizing: "small"
   search:
-    events:
-      enabled: true
     investigations:
       enabled: true
     laboratoryReports:
       enabled: true
-    view:
-      enabled: true
-      table:
-        enabled: true
   patient:
     file:
       enabled: true

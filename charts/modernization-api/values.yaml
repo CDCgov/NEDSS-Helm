@@ -120,7 +120,7 @@ ui:
     key:
   defaults:
     # The default sizing of components
-    sizing: "medium"
+    sizing: "small"
   # feature flag configurations for modernized ui
   search:
     events:
@@ -132,29 +132,16 @@ ui:
     laboratoryReports:
       # Enables access to modernized Laboratory search
       enabled: false
-    view:
-      enabled: true
-      table:
-        enabled: true
   patient:
-    profile:
-      # [deprecated] Enables access to the modernized patient profile. (marked for removal)
-      enabled: false
     file:
       # Enables access to the modernized Patient File
       enabled: false
       # Enables presence of Merge History card in Patient File
       mergeHistory:
         enabled: false
-    add:
-      # [deprecated] Enables access to the modernized New patient feature to create a patient with basic demographic data. (marked for removal)
-      enabled: true
-      # [deprecated] Enables access to the modernized New patient - extended feature to create a patient with all available demographic data. (marked for removal)
-      extended:
-        enabled: true
     search:
       filters:
-        # Enables access to modernized Patient search filters
+        # [deprecated]  Enables access to modernized Patient search filters. (marked for removal)
         enabled: true
   deduplication:
     # Enable access to Deduplication screens
