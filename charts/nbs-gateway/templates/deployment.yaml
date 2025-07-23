@@ -36,8 +36,6 @@ spec:
           '--nbs.gateway.ui.service={{ .Values.modernizationUIHost }}',
           '--nbs.gateway.modernization.service={{ .Values.modernizationApiHost }}',
           '--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}',          
-          '--nbs.gateway.patient.profile.service={{ .Values.modernizationApiHost }}',
-          '--nbs.gateway.patient.profile.enabled={{ (((.Values).patient).profile).enabled | default "false" }}',
           '--nbs.gateway.patient.file.service={{ .Values.modernizationApiHost }}',
           '--nbs.gateway.patient.file.enabled={{ (((.Values).patient).file).enabled | default "false" }}',
           '--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}',
