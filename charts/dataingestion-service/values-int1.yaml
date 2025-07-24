@@ -157,3 +157,5 @@ probes:
     enabled: true
   liveness:
     enabled: true
+
+timezone: "UTC"

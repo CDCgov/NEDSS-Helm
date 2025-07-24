@@ -109,3 +109,5 @@ hikari:
 uid:
   poolSize: "5000"
   minPoolSize: "1000"
+
+timezone: "UTC"
