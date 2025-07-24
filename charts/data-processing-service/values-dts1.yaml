@@ -99,7 +99,7 @@ features:
 
 
 thread:
-  enabled: false
+  enabled: true
   size: "5"
   batchSize: "50"
   processorDelay: "1000"
@@ -115,3 +115,5 @@ hikari:
 uid:
   poolSize: "5000"
   minPoolSize: "1000"
+
+timezone: "UTC"
