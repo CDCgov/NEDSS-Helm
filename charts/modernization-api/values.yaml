@@ -30,15 +30,15 @@ service:
   pageBuilderPort: 8095
 
 pageBuilder:
-  enabled: "true"
+  enabled: "false"
   page:
     library:
-      enabled: "true"
+      enabled: "false"
     management:
       create:
-        enabled: "true"
+        enabled: "false"
       edit:
-        enabled: "true"
+        enabled: "false"
 
 ingress:
   enabled: true
