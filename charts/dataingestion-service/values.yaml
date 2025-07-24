@@ -153,3 +153,4 @@ probes:
   liveness:
     enabled: true
 
+timezone: "UTC"
