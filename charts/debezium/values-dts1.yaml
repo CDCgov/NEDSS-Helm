@@ -44,7 +44,6 @@ connect:
   connector_enable:
     nbs_odse: "enabled"
     nbs_srte: "enabled"
-    nbs_odse_meta: "enabled"
 
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v072425",

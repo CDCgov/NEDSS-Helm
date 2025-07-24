@@ -33,7 +33,7 @@ connect:
 
   properties:
     group_id: "debezium-odse-srte-connector-v072425"
-    topics_basename: "debezium-odse-srte-connector"
+    topics_basename: "debezium-odse-srte-connector-v072425"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
@@ -44,7 +44,6 @@ connect:
   connector_enable:
     nbs_odse: "enabled"
     nbs_srte: "enabled"
-    nbs_odse_meta: "disabled"
 
   sqlserverconnector_odse: {
     "name": "debezium-odse-connector-v072425",
