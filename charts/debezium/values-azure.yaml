@@ -112,7 +112,7 @@ connect:
       "key.converter.schemas.enable": "true",
       "producer.max.request.size": "10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
-      "snapshot.mode": "initial",
+      "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "srte-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092",
       "table.include.list": "dbo.Condition_code,dbo.Program_area_code,dbo.Language_code,dbo.State_code,dbo.Unit_code,
@@ -235,7 +235,7 @@ connect:
       "key.converter.schemas.enable": "true",
       "producer.max.request.size": "10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
-      "snapshot.mode": "initial",
+      "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-2.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092,
                                                           b-1.cdcnbsint1developmentm.8u6ipl.c2.kafka.us-east-1.amazonaws.com:9092",

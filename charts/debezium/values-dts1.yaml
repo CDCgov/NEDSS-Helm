@@ -139,7 +139,7 @@ connect:
       "key.converter.schemas.enable": "true",
       "producer.max.request.size": "10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
-      "snapshot.mode": "initial",
+      "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                                                           b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
@@ -198,7 +198,7 @@ connect:
       "key.converter.schemas.enable": "true",
       "producer.max.request.size": "10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
-      "snapshot.mode": "initial",
+      "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "srte-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                                                           b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",

@@ -111,7 +111,7 @@ connect:
       "key.converter.schemas.enable": "true",
       "producer.max.request.size": "10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
-      "snapshot.mode": "initial",
+      "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092,b-2.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Page_cond_mapping, dbo.NBS_page, dbo.NBS_ui_metadata, dbo.NBS_rdb_metadata,
@@ -168,7 +168,7 @@ connect:
       "key.converter.schemas.enable": "true",
       "producer.max.request.size": "10000000", #10MB
       "producer.message.max.bytes": "10000000", #10MB
-      "snapshot.mode": "initial",
+      "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "srte-schema-history",
       "schema.history.internal.kafka.bootstrap.servers": "b-1.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092,b-2.cdcnbstestdevelopment.toyoo7.c10.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Condition_code,dbo.Program_area_code,dbo.Language_code,dbo.State_code,dbo.Unit_code,
