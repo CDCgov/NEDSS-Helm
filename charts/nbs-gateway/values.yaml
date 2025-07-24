@@ -34,15 +34,15 @@ patient:
     enabled: false
 
 pageBuilder:
-  enabled: "true"
+  enabled: "false"
   page:
     library:
-      enabled: "true"
+      enabled: "false"
     management:
       create:
-        enabled: "true"
+        enabled: "false"
       edit:
-        enabled: "true"
+        enabled: "false"
 
 deduplication:
   # allows routing to the deduplication-api
