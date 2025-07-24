@@ -9,8 +9,6 @@ data:
       {{- .Values.connect.sqlserverconnector_odse| toPrettyJson | nindent 4 }}
   connector-srte.json: |-
       {{- .Values.connect.sqlserverconnector_srte| toPrettyJson | nindent 4 }}
-  connector-meta.json: |-
-      {{- .Values.connect.sqlserverconnector_meta| toPrettyJson | nindent 4 }}
   connect-distributed.properties: |
     group.id={{ .Values.connect.properties.group_id }}
     plugin.path=/kafka/connect
