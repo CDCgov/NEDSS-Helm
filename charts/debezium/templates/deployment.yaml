@@ -88,23 +88,23 @@ spec:
                     done
 
                     #4. Starting SRTE task if enabled
-                    if [ {{ lower .Values.connect.connector_enable.nbs_srte }} == "enabled" ]; then
-                    echo "Starting SRTE task with config: $(cat /etc/debezium/connector-srte.json)"
-                    curl --request POST \
+                    if [ "{{ lower .Values.connect.connector_enable.nbs_srte }}" == "enabled" ]; then
+                      echo "Starting SRTE task with SRTE configuration"
+                      curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
                       --data '@/etc/debezium/connector-srte.json' \
-                      "http://127.0.0.1:8083/connectors/";
+                      "http://127.0.0.1:8083/connectors/" || echo "Failed to start SRTE connector";
                     fi
 
                     #5. Starting ODSE task if enabled
-                    if [ {{ lower .Values.connect.connector_enable.nbs_odse }} == "enabled" ]; then
-                    echo "Starting ODSE task with config: $(cat /etc/debezium/connector-odse.json)"
-                    curl --request POST \
+                    if [ "{{ lower .Values.connect.connector_enable.nbs_odse }}" == "enabled" ]; then
+                      echo "Starting ODSE task with ODSE configuration"
+                      curl --request POST \
                       --header "Accept:application/json" \
                       --header "Content-Type:application/json" \
                       --data '@/etc/debezium/connector-odse.json' \
-                      "http://127.0.0.1:8083/connectors/";
+                      "http://127.0.0.1:8083/connectors/" || echo "Failed to start ODSE connector";
                     fi
 
                     connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
