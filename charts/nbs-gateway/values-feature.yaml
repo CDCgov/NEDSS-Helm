@@ -6,7 +6,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.4953b94
+  tag: 1.0.1-SNAPSHOT.529255a
 
 gatewayService:
   ports:
@@ -25,6 +25,10 @@ landing:
 welcome:
   enabled: "true"
 
+patient:
+  file:
+    enabled: false
+
 pageBuilder:
   enabled: "true"
   page:
@@ -35,6 +39,16 @@ pageBuilder:
         enabled: "true"
       edit:
         enabled: "true"
+
+deduplication:
+  enabled: "true"
+  merge:
+    enabled: "true"
+
+system:
+  management:
+    enabled: "true"
+
 resources:
   limits:
     memory: "1Gi"  
@@ -52,6 +66,8 @@ modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
 
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
+
+deduplicationApiHost: "deduplication-api.default.svc.cluster.local:8083"
 
 # OIDC settings
 oidc:

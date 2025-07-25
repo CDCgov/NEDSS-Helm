@@ -5,7 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.4949aeb
+  tag: 1.0.1-SNAPSHOT.0b9bc68
 
 imagePullSecrets: []
 nameOverride: ""
@@ -115,15 +115,18 @@ ui:
       enabled: true
     laboratoryReports:
       enabled: true
-    view:
-      enabled: true
-      table:
-        enabled: true
   patient:
-    add:
+    file:
       enabled: true
-      extended:
+      mergeHistory:
         enabled: true
+  deduplication:
+    enabled: true
+    merge:
+      enabled: true
+  system:
+    management:
+      enabled: true
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
