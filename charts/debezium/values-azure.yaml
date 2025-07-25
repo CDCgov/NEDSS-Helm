@@ -80,7 +80,7 @@ connect:
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
       "time.precision.mode": "connect",
-      "transforms": "dropPrefix, convertTimezone, unwrapConfig, convertTimestampsConfig_add_time, convertTimestampsConfig_last_chg_time, convertTimestampsConfig_status_time",
+      "transforms": "dropPrefix, convertTimezone",
       "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nbs_$1",
