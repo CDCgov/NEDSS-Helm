@@ -31,8 +31,8 @@ connect:
       memory: 1Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v072425"
-    topics_basename: "debezium-odse-srte-connector-v072425"
+    group_id: "debezium-odse-srte-connector-v072525"
+    topics_basename: "debezium-odse-srte-connector-v072525"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
@@ -47,7 +47,7 @@ connect:
     nbs_srte: "enabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v072425",
+    "name": "debezium-odse-connector-v072525",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -81,7 +81,7 @@ connect:
       "topic.creation.default.partitions": 10,
       "topic.creation.default.cleanup.policy": "compact",
       "time.precision.mode": "connect",
-      "transforms": "dropPrefix, convertTimezone, unwrapConfig, convertTimestampsConfig_add_time, convertTimestampsConfig_last_chg_time, convertTimestampsConfig_status_time",
+      "transforms": "dropPrefix, convertTimezone",
       "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nbs_$1",
@@ -93,7 +93,7 @@ connect:
   }
 
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v072425",
+    "name": "debezium-srte-connector-v072525",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "nbs-db.private-EXAMPLE_DOMAIN",
@@ -222,7 +222,7 @@ connect:
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v072425"
+      value: "debezium-odse-srte-connector-v072525"
     - name: TZ
       value: "UTC"
 
