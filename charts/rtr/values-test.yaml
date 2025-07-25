@@ -85,7 +85,7 @@ services:
     image:
       repository: ""
       name: "investigation-reporting-service"
-      tag: "1.0.1-SNAPSHOT.7666d38"
+      tag: "1.0.1-SNAPSHOT.e19995d"
       pullPolicy: IfNotPresent
     jdbc:
       username: ""
@@ -120,7 +120,7 @@ services:
     image:
       repository: ""
       name: "ldfdata-reporting-service"
-      tag: "1.0.1-SNAPSHOT.7666d38"
+      tag: "1.0.1-SNAPSHOT.e19995d"
       pullPolicy: IfNotPresent
     jdbc:
       username: ""
@@ -155,7 +155,7 @@ services:
     image:
       repository: ""
       name: "observation-reporting-service"
-      tag: "1.0.1-SNAPSHOT.7666d38"
+      tag: "1.0.1-SNAPSHOT.e19995d"
       pullPolicy: IfNotPresent
     jdbc:
       username: ""
@@ -193,7 +193,7 @@ services:
     image:
       repository: ""
       name: "organization-reporting-service"
-      tag: "1.0.1-SNAPSHOT.7666d38"
+      tag: "1.0.1-SNAPSHOT.e19995d"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -231,7 +231,7 @@ services:
     image:
       repository: ""
       name: "person-reporting-service"
-      tag: "1.0.1-SNAPSHOT.7666d38"
+      tag: "1.0.1-SNAPSHOT.e19995d"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -268,6 +268,6 @@ services:
     image:
       repository: ""
       name: "post-processing-reporting-service"
-      tag: "1.0.1-SNAPSHOT.7666d38"
+      tag: "1.0.1-SNAPSHOT.e19995d"
       pullPolicy: IfNotPresent
 
