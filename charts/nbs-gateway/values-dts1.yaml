@@ -6,7 +6,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.3aeb39f #1.0.1-SNAPSHOT.05cb44e
+  tag: 1.0.1-TEST.df3e111
 
 gatewayService:
   ports:
@@ -44,16 +44,27 @@ ingressHost: "app.dts1.nbspreview.com"
 
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
 
-modernizationUIHost: "modernization-api.default.svc.cluster.local:8080"
-
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
 
 # OIDC settings
 oidc:
   enabled: "true"
   client:
-    id: ""
+    id: "nbs-modernization"
     secret: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
