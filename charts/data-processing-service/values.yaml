@@ -70,10 +70,8 @@ kafka:
 log:
   path: "/usr/share/dataprocessing/data"
 
-# FIXME: the remaining values will be used in next release, not used for
-# 7.8.0 - cmoss
 dataingestion:
-  uri: "EXAMPLE_FIXME_DI_URI"
+  uri: "data.EXAMPLE_DOMAIN"
 
 keycloak:
   srte:
