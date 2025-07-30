@@ -5,7 +5,7 @@ env: "int1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.0a4d350
+  tag: 7.11.0-SNAPSHOT-0002.c61ca0c
 
 imagePullSecrets: []
 nameOverride: ""
@@ -41,11 +41,11 @@ ingress:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "1Gi"  
-    cpu: "500m"      
+    memory: "2Gi"  
+    cpu: "1800m"      
   requests:
-    memory: "512Mi"  
-    cpu: "250m"
+    memory: "1Gi"  
+    cpu: "1000m"
 
 autoscaling:
   enabled: false
@@ -99,10 +99,10 @@ features:
     url: "http://deduplication-api.default.svc.cluster.local:8083/nbs/api/deduplication/"
 
 thread:
-  enabled: false
+  enabled: true
   size: "5"
   batchSize: "50"
-  processorDelay: "1000"
+  processorDelay: "10000"
 
 hikari:
   poolSize: "30"
