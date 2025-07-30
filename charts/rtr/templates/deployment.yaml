@@ -66,13 +66,25 @@ spec:
             - name: TZ
               value: {{ $service.timezone | default $.Values.timezone | quote }}
             - name: DB_USERNAME
-              value: {{ $service.jdbc.username | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $service.secrets.jdbc.secretName | quote }}
+                  key: {{ $service.secrets.jdbc.username | quote }} 
             - name: DB_PASSWORD
-              value: {{ $service.jdbc.password | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $service.secrets.jdbc.secretName | quote }}
+                  key: {{ $service.secrets.jdbc.password | quote }}
             - name: DB_ODSE_URL
-              value: {{ $.Values.dburl.odse | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.secrets.dburl.secretName | quote }}
+                  key: {{ $.Values.secrets.dburl.odse | quote }}              
             - name: DB_RDB_URL
-              value: {{ $.Values.dburl.rdb | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.secrets.dburl.secretName | quote }}
+                  key: {{ $.Values.secrets.dburl.rdb | quote }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{- if and (hasKey $service "kafka") (hasKey $service.kafka "cluster") }} {{ $service.kafka.cluster | quote }} {{- else }} {{ $.Values.kafka.cluster | quote }} {{- end }}
             - name: DA_LOG_PATH

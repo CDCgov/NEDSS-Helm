@@ -6,10 +6,11 @@ replicaCount: 1
 env: prod              # Environment indicator
 timezone: UTC          # Container timezone
 
-
-dburl:
-  odse: ""
-  rdb: ""
+secrets:  
+  dburl:
+    secretName: "database-access"
+    odse: "odse_url"
+    rdb: "rdb_url"
 
 kafka:
   cluster: ""
@@ -26,11 +27,11 @@ podAnnotations:
 
 resources:
   limits:
-    memory: ''         # User should set
-    cpu: ''            # User should set
+    memory: "1Gi"  
+    cpu: "500m"      
   requests:
-    memory: ''         # User should set
-    cpu: ''            # User should set
+    memory: "512Mi"  
+    cpu: "250m"
 
 autoscaling:
   enabled: false
@@ -57,6 +58,11 @@ services:
   # Investigation Reporting Service
   # ----------------------------------------
   investigation-reporting:
+    secrets:      
+      jdbc:
+        secretName: "database-access"
+        username: "investigation_reporting_user"
+        password: "investigation_reporting_pass"
     service:
       port: 8093
       httpsPort: 443
@@ -87,14 +93,16 @@ services:
       name: "investigation-reporting-service"
       tag: "1.0.1-SNAPSHOT.e19995d"
       pullPolicy: IfNotPresent
-    jdbc:
-      username: ""
-      password: ""
-
+    
   # ----------------------------------------
   # LDF Data Reporting Service
   # ----------------------------------------
   ldfdata-reporting:
+    secrets:      
+      jdbc:
+        secretName: "database-access"
+        username: "ldfdata_reporting_user"
+        password: "ldfdata_reporting_pass"
     service:
       port: 8097
       httpsPort: 443
@@ -122,14 +130,16 @@ services:
       name: "ldfdata-reporting-service"
       tag: "1.0.1-SNAPSHOT.e19995d"
       pullPolicy: IfNotPresent
-    jdbc:
-      username: ""
-      password: ""
 
   # ----------------------------------------
   # Observation Reporting Service
   # ----------------------------------------
   observation-reporting:
+    secrets:      
+      jdbc:
+        secretName: "database-access"
+        username: "observation_reporting_user"
+        password: "observation_reporting_pass"
     service:
       port: 8094
       httpsPort: 443
@@ -157,17 +167,17 @@ services:
       name: "observation-reporting-service"
       tag: "1.0.1-SNAPSHOT.e19995d"
       pullPolicy: IfNotPresent
-    jdbc:
-      username: ""
-      password: ""
+    
 
   # ----------------------------------------
   # Organization Reporting Service
   # ----------------------------------------
   organization-reporting:
-    jdbc:
-      username: ""
-      password: ""
+    secrets:      
+      jdbc:
+        secretName: "database-access"
+        username: "organization_reporting_user"
+        password: "organization_reporting_pass"
     service:
       port: 8092
       httpsPort: 443
@@ -200,9 +210,11 @@ services:
   # Person Reporting Service
   # ----------------------------------------
   person-reporting:
-    jdbc:
-      username: ""
-      password: ""
+    secrets:      
+      jdbc:
+        secretName: "database-access"
+        username: "person_reporting_user"
+        password: "person_reporting_pass"
     service:
       port: 8091
       httpsPort: 443
@@ -238,9 +250,11 @@ services:
   # Post-Processing Reporting Service
   # ----------------------------------------
   post-processing-reporting:
-    jdbc:
-      username: ""
-      password: ""
+    secrets:      
+      jdbc:
+        secretName: "database-access"
+        username: "post_processing_reporting_user"
+        password: "post_processing_reporting_pass"
     service:
       port: 8095
       httpsPort: 443

@@ -15,7 +15,7 @@ spec:
         app: {{ .Release.Name }}-sas-linux
     spec:
       nodeSelector:
-        "kubernetes.io/os": linux
+        kubernetes.io/os: linux
       containers:
       - name: sas-linux-container
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
