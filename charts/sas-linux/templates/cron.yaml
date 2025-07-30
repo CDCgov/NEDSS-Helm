@@ -8,7 +8,9 @@ spec:
   jobTemplate:
     spec:
       template:
-        spec:          
+        spec:
+          nodeSelector:
+            kubernetes.io/os: linux           
           containers:
           - name: '{{ include "sas-linux.name" . }}-cron-etl'
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
