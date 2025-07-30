@@ -5,8 +5,7 @@ env: "feature"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT-DP-06102025-02.7d294e4
-  # 1.0.1-SNAPSHOT-DP-06032025-3.8fd1fed
+  tag: 7.11.0-SNAPSHOT-0002.c61ca0c
 
 imagePullSecrets: []
 nameOverride: ""
@@ -42,11 +41,11 @@ ingress:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "3Gi"  
-    cpu: "4000m"      
-  requests:
     memory: "2Gi"  
-    cpu: "3000m"
+    cpu: "1800m"      
+  requests:
+    memory: "1Gi"  
+    cpu: "1000m"
 
 autoscaling:
   enabled: false

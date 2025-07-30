@@ -5,7 +5,7 @@ env: "test"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.3998b71
+  tag: 7.11.0-SNAPSHOT-0002.c61ca0c
 
 imagePullSecrets: []
 nameOverride: ""
@@ -41,11 +41,11 @@ ingress:
 # Kubernetes resource limits
 resources:
   limits:
-    memory: "1Gi"  
-    cpu: "500m"      
+    memory: "2Gi"  
+    cpu: "1800m"      
   requests:
-    memory: "512Mi"  
-    cpu: "250m"
+    memory: "1Gi"  
+    cpu: "1000m"
 
 autoscaling:
   enabled: false
@@ -99,18 +99,18 @@ features:
     url: ""
 
 thread:
-  enabled: false
+  enabled: true
   size: "5"
   batchSize: "50"
-  processorDelay: "30000"
-
+  processorDelay: "10000"
 
 hikari:
-  poolSize: "20"
-  minIdle: "5"
-  conTimeout: "30000"
-  maxLifeTime: "5000"
-  leakDetectThresHold: "10000"
+  poolSize: "30"
+  minIdle: "10"
+  conIdleTimeout: "60000"
+  conTimeout: "10000"
+  maxLifeTime: "900000"
+  leakDetectThresHold: "15000"
 
 uid:
   poolSize: "5000"
