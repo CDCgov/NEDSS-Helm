@@ -91,7 +91,7 @@ services:
     image:
       repository: ""
       name: "investigation-reporting-service"
-      tag: "1.0.1-SNAPSHOT.c3d2909"
+      tag: "1.0.1-SNAPSHOT.5674531"
       pullPolicy: IfNotPresent
     
   # ----------------------------------------
@@ -128,7 +128,7 @@ services:
     image:
       repository: ""
       name: "ldfdata-reporting-service"
-      tag: "1.0.1-SNAPSHOT.c3d2909"
+      tag: "1.0.1-SNAPSHOT.5674531"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -165,7 +165,7 @@ services:
     image:
       repository: ""
       name: "observation-reporting-service"
-      tag: "1.0.1-SNAPSHOT.c3d2909"
+      tag: "1.0.1-SNAPSHOT.5674531"
       pullPolicy: IfNotPresent
     
 
@@ -203,7 +203,7 @@ services:
     image:
       repository: ""
       name: "organization-reporting-service"
-      tag: "1.0.1-SNAPSHOT.c3d2909"
+      tag: "1.0.1-SNAPSHOT.5674531"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -243,7 +243,7 @@ services:
     image:
       repository: ""
       name: "person-reporting-service"
-      tag: "1.0.1-SNAPSHOT.c3d2909"
+      tag: "1.0.1-SNAPSHOT.5674531"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -282,6 +282,6 @@ services:
     image:
       repository: ""
       name: "post-processing-reporting-service"
-      tag: "1.0.1-SNAPSHOT.c3d2909"
+      tag: "1.0.1-SNAPSHOT.5674531"
       pullPolicy: IfNotPresent
 
