@@ -1,40 +1,57 @@
 {{- range $serviceName, $service := .Values.services }}
 ---
+# Kubernetes Deployment template for services defined in Helm values.
+# This template dynamically generates Deployment resources for each service
+# specified in the `services` section of the Helm values file.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  # The name of the Deployment is generated dynamically based on the release name and service name.
   name: "{{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" }}"
   labels:
+    # Standard Kubernetes labels for identifying the application and its version.
     app.kubernetes.io/name: "{{ $serviceName }}"
     app.kubernetes.io/instance: "{{ $.Release.Name }}"
     app.kubernetes.io/version: "{{ $service.image.tag | default "latest" }}"
     app.kubernetes.io/managed-by: "{{ $.Release.Service }}"
 spec:
-  replicas: {{ $service.replicaCount | default $.Values.replicaCount | default 1 }}
+  # Number of replicas for the Deployment, defaulting to global replica count if not specified.
+  replicas: {{ $service.replicaCount | default $.Values.global.replicaCount | default 1 }}
   selector:
     matchLabels:
+      # Labels used to match pods created by this Deployment.
       app.kubernetes.io/name: "{{ $serviceName }}"
       app.kubernetes.io/instance: "{{ $.Release.Name }}"
   template:
     metadata:
       labels:
+        # Labels applied to the pod template for identification.
         app.kubernetes.io/name: "{{ $serviceName }}"
         app.kubernetes.io/instance: "{{ $.Release.Name }}"
       {{- with $service.podAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
+      # Additional annotations for the pod, if specified in the service configuration.
+        {{ toYaml . | nindent 8 }}
       {{- end }}
     spec:
+      # Service account name for the pod, dynamically generated or explicitly specified.
       serviceAccountName: {{- if $service.serviceAccount.name }} {{ $service.serviceAccount.name | quote }} {{- else }} {{ printf "%s-%s" $.Release.Name $serviceName | trunc 63 | trimSuffix "-" | quote }} {{- end }}
       containers:
         - name: {{ $serviceName }}
-          image: "{{ $service.image.repository }}/{{ $service.image.name }}:{{ $service.image.tag }}"
+          # Container image and tag, defaulting to global values if not specified.
+          image: {{ if $service.image.repository }}
+                 {{$service.image.repository}}/{{ $service.image.name }}:{{ $service.image.tag }}"
+                 {{- else }}
+                 {{ $.Values.global.image.repository}}/{{ $service.image.name }}:{{ $.Values.global.image.tag }}"
+                 {{- end }}
           imagePullPolicy: "{{ $service.image.pullPolicy | default "IfNotPresent" }}"
           ports:
             - containerPort: {{ $service.service.port | default 8080 }}
 
           {{- if and (hasKey $service "probes") (hasKey $service.probes "readiness") (get $service.probes.readiness "enabled") }}
           readinessProbe:
+            # Readiness probe configuration for the container.
             httpGet:
               path: {{ $service.probes.readiness.path | default (printf "/reporting/%s-svc/status" $serviceName) | quote }}
               port: {{ $service.service.port | default 8080 }}
@@ -45,6 +62,7 @@ spec:
 
           {{- if and (hasKey $service "probes") (hasKey $service.probes "liveness") (get $service.probes.liveness "enabled") }}
           livenessProbe:
+            # Liveness probe configuration for the container.
             httpGet:
               path: {{ $service.probes.liveness.path | default (printf "/reporting/%s-svc/status" $serviceName) | quote }}
               port: {{ $service.service.port | default 8080 }}
@@ -54,22 +72,24 @@ spec:
           {{- end }}
 
           resources:
+          # Resource limits and requests for the container, defaulting to global values if not specified.
             {{- if $service.resources }}
-            {{- toYaml $service.resources | nindent 12 }}
+            {{ toYaml $service.resources | nindent 12 }}
             {{- else }}
-            {{- toYaml $.Values.resources | nindent 12 }}
+            {{ toYaml $.Values.global.resources | nindent 12 }}
             {{- end }}
 
           env:
+            # Environment variables for the container, including database credentials and feature flags.
             - name: ENV
-              value: {{ $service.env | default $.Values.env | quote }}
+              value: {{ $service.env | default $.Values.global.env | quote }}
             - name: TZ
-              value: {{ $service.timezone | default $.Values.timezone | quote }}
+              value: {{ $service.timezone | default $.Values.global.timezone | quote }}
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: {{ $service.secrets.jdbc.secretName | quote }}
-                  key: {{ $service.secrets.jdbc.username | quote }} 
+                  key: {{ $service.secrets.jdbc.username | quote }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -78,17 +98,17 @@ spec:
             - name: DB_ODSE_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ $.Values.secrets.dburl.secretName | quote }}
-                  key: {{ $.Values.secrets.dburl.odse | quote }}              
+                  name: {{ $.Values.global.secrets.dburl.secretName | quote }}
+                  key: {{ $.Values.global.secrets.dburl.odse | quote }}
             - name: DB_RDB_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ $.Values.secrets.dburl.secretName | quote }}
-                  key: {{ $.Values.secrets.dburl.rdb | quote }}
+                  name: {{ $.Values.global.secrets.dburl.secretName | quote }}
+                  key: {{ $.Values.global.secrets.dburl.rdb | quote }}
             - name: KAFKA_BOOTSTRAP_SERVER
-              value: {{- if and (hasKey $service "kafka") (hasKey $service.kafka "cluster") }} {{ $service.kafka.cluster | quote }} {{- else }} {{ $.Values.kafka.cluster | quote }} {{- end }}
+              value: {{- if and (hasKey $service "kafka") (hasKey $service.kafka "cluster") }} {{ $service.kafka.cluster | quote }} {{- else }} {{ $.Values.global.kafka.cluster | quote }} {{- end }}
             - name: DA_LOG_PATH
-              value: {{- if and (hasKey $service "log") (hasKey $service.log "path") }} {{ $service.log.path | quote }} {{- else }} {{ $.Values.log.path | quote }} {{- end }}
+              value: {{- if and (hasKey $service "log") (hasKey $service.log "path") }} {{ $service.log.path | quote }} {{- else }} {{ $.Values.global.log.path | quote }} {{- end }}
             - name: FF_PHC_DM_ENABLE
               value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "phcDatamartEnable") }} {{ $service.featureFlag.phcDatamartEnable | quote }} {{- else }} "false" {{- end }}
             - name: FF_ES_ENABLE
@@ -96,31 +116,35 @@ spec:
 
       {{- if $service.nodeSelector }}
       nodeSelector:
-        {{- toYaml $service.nodeSelector | nindent 8 }}
-      {{- else if $.Values.nodeSelector }}
+      # Node selector for scheduling the pod on specific nodes.
+        {{ toYaml $service.nodeSelector | nindent 8 }}
+      {{- else if $.Values.global.nodeSelector }}
       nodeSelector:
-        {{- toYaml $.Values.nodeSelector | nindent 8 }}
+        {{ toYaml $.Values.nodeSelector | nindent 8 }}
       {{- end }}
 
       {{- if $service.affinity }}
       affinity:
-        {{- toYaml $service.affinity | nindent 8 }}
+      # Affinity rules for scheduling the pod.
+        {{ toYaml $service.affinity | nindent 8 }}
       {{- else if $.Values.affinity }}
       affinity:
-        {{- toYaml $.Values.affinity | nindent 8 }}
+        {{ toYaml $.Values.global.affinity | nindent 8 }}
       {{- end }}
 
       {{- if $service.tolerations }}
       tolerations:
-        {{- toYaml $service.tolerations | nindent 8 }}
+      # Tolerations for scheduling the pod on tainted nodes.
+        {{ toYaml $service.tolerations | nindent 8 }}
       {{- else if $.Values.tolerations }}
       tolerations:
-        {{- toYaml $.Values.tolerations | nindent 8 }}
+        {{ toYaml $.Values.global.tolerations | nindent 8 }}
       {{- end }}
 
-      {{- with $.Values.imagePullSecrets }}
+      {{- with $.Values.global.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
+      # Image pull secrets for accessing private container registries.
+        {{ toYaml . | nindent 8 }}
       {{- end }}
 ---
 {{- end }}

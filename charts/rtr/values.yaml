@@ -1,58 +1,62 @@
 # ================================================
 # Global configuration
 # ================================================
+global:
+  replicaCount: 1
+  env: prod              # Environment indicator
+  timezone: UTC          # Container timezone
 
-replicaCount: 1
-env: prod              # Environment indicator
-timezone: UTC          # Container timezone
+  imagePullSecrets: [ ]
 
-imagePullSecrets: []
+  # Secrets must be set before containers are deployed using. We suggest filling out /k8-manifests/nbs-secrets.yaml manifest
+  # Referencing secrets requires using the secret name and key separately.
+  # Under the secrets block provide the secret name and the keys
+  secrets:
+    dburl:
+      secretName: "database-access"
+      odse: "odse_url"
+      rdb: "rdb_url"
 
-# Secrets must be set before containers are deployed using. We suggest filling out /k8-manifests/nbs-secrets.yaml manifest
-# Referencing secrets requires using the secret name and key separately. 
-# Under the secrets block provide the secret name and the keys
-secrets:  
-  dburl:
-    secretName: "database-access"
-    odse: "odse_url"
-    rdb: "rdb_url"
+  image:
+    repository: ""
+    tag: "1.0.1-SNAPSHOT.5674531"
 
-kafka:
-  cluster: ""
+  kafka:
+    cluster: ""
 
-serviceAccount:
-  create: true
-  annotations: {}
-  name: ''
+  serviceAccount:
+    create: true
+    annotations: { }
+    name: ''
 
-podAnnotations:
-  prometheus.io/scrape: 'true'
-  prometheus.io/path: /actuator/prometheus
-  prometheus.io/port: '8081'
+  podAnnotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/port: '8081'
 
-resources:
-  limits:
-    memory: "1Gi"  
-    cpu: "500m"      
-  requests:
-    memory: "512Mi"  
-    cpu: "250m"
+  resources:
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
 
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
 
-nodeSelector: {}
-tolerations: []
-affinity: {}
+  nodeSelector: { }
+  tolerations: [ ]
+  affinity: { }
 
-probes:
-  readiness:
-    enabled: true
-  liveness:
-    enabled: true
+  probes:
+    readiness:
+      enabled: true
+    liveness:
+      enabled: true
 
 # ================================================
 # Service-specific configurations
@@ -63,7 +67,7 @@ services:
   # Investigation Reporting Service
   # ----------------------------------------
   investigation-reporting:
-    secrets:      
+    secrets:
       jdbc:
         secretName: "database-access"
         username: "investigation_reporting_user"
@@ -74,7 +78,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     featureFlag:
       phcDatamartEnable: "true"
     log:
@@ -102,7 +106,7 @@ services:
   # LDF Data Reporting Service
   # ----------------------------------------
   ldfdata-reporting:
-    secrets:      
+    secrets:
       jdbc:
         secretName: "database-access"
         username: "ldfdata_reporting_user"
@@ -113,7 +117,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     log:
       path: /usr/share/ldfdata-reporting/data
     probes:
@@ -140,7 +144,7 @@ services:
   # Observation Reporting Service
   # ----------------------------------------
   observation-reporting:
-    secrets:      
+    secrets:
       jdbc:
         secretName: "database-access"
         username: "observation_reporting_user"
@@ -151,7 +155,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     log:
       path: /usr/share/observation-reporting/data
     probes:
@@ -177,7 +181,7 @@ services:
   # Organization Reporting Service
   # ----------------------------------------
   organization-reporting:
-    secrets:      
+    secrets:
       jdbc:
         secretName: "database-access"
         username: "organization_reporting_user"
@@ -188,7 +192,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     log:
       path: /usr/share/organization-reporting/data
     probes:
@@ -214,7 +218,7 @@ services:
   # Person Reporting Service
   # ----------------------------------------
   person-reporting:
-    secrets:      
+    secrets:
       jdbc:
         secretName: "database-access"
         username: "person_reporting_user"
@@ -225,7 +229,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     featureFlag:
       elasticSearchEnable: "true"
     log:
@@ -253,7 +257,7 @@ services:
   # Post-Processing Reporting Service
   # ----------------------------------------
   post-processing-reporting:
-    secrets:      
+    secrets:
       jdbc:
         secretName: "database-access"
         username: "post_processing_reporting_user"
@@ -266,7 +270,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     log:
       path: /usr/share/post-processing-reporting/data
     probes:
