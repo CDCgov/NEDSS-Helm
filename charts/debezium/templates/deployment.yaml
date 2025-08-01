@@ -108,7 +108,7 @@ spec:
                     fi
 
                     #6. Starting ODSE_META task if enabled
-                    if [ {{ lower .Values.connect.connector_enable.nbs_odse_meta }} == "enabled" ]; then
+                    if [ "{{ lower .Values.connect.connector_enable.nbs_odse_meta }}" == "enabled" ]; then
                     echo "Starting ODSE-META task with config: $(cat /etc/debezium/connector-meta.json)"
                     curl --request POST \
                       --header "Accept:application/json" \
