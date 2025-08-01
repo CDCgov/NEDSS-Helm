@@ -92,7 +92,7 @@ connect:
     }
   }
 
-  sqlserverconnector_meta: {
+  sqlserverconnector_odse_meta: {
     "name": "debezium-odse-meta-tables-connector-v073125",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
