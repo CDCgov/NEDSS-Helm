@@ -89,12 +89,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ $service.secrets.jdbc.secretName | quote }}
-                  key: {{ $service.secrets.jdbc.username | quote }}
+                  key: {{ $service.secrets.jdbc.username | trim | quote }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ $service.secrets.jdbc.secretName | quote }}
-                  key: {{ $service.secrets.jdbc.password | quote }}
+                  key: {{ $service.secrets.jdbc.password | trim | quote }}
             - name: DB_ODSE_URL
               valueFrom:
                 secretKeyRef:
