@@ -18,7 +18,7 @@ global:
 
   image:
     repository: ""
-    tag: "1.0.1-SNAPSHOT.165bc00"
+    tag: "1.0.1-SNAPSHOT.ea4914e"
 
   kafka:
     cluster: ""
@@ -99,7 +99,7 @@ services:
     image:
       repository: ""
       name: "investigation-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.ea4914e"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -136,7 +136,7 @@ services:
     image:
       repository: ""
       name: "ldfdata-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.ea4914e"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -173,7 +173,7 @@ services:
     image:
       repository: ""
       name: "observation-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.ea4914e"
       pullPolicy: IfNotPresent
 
 
@@ -211,7 +211,7 @@ services:
     image:
       repository: ""
       name: "organization-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.ea4914e"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -251,7 +251,7 @@ services:
     image:
       repository: ""
       name: "person-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.ea4914e"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -290,6 +290,6 @@ services:
     image:
       repository: ""
       name: "post-processing-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.ea4914e"
       pullPolicy: IfNotPresent
 
