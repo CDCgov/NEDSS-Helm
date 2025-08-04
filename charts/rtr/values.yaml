@@ -192,8 +192,8 @@ services:
         secretName: "database-access"
         username: "organization_reporting_user"
         password: "organization_reporting_pass"
-  jdbc:
-    username: organization_service_rdb
+    jdbc:
+      username: organization_service_rdb
     service:
       port: 8092
       httpsPort: 443
