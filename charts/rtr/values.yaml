@@ -74,6 +74,7 @@ services:
         password: "investigation_reporting_pass"
     jdbc:
       username: investigation_service_rdb
+      password:
     service:
       port: 8093
       httpsPort: 443
@@ -115,6 +116,7 @@ services:
         password: "ldfdata_reporting_pass"
     jdbc:
       username: ldf_service_rdb
+      password:
     service:
       port: 8097
       httpsPort: 443
@@ -155,6 +157,7 @@ services:
         password: "observation_reporting_pass"
     jdbc:
       username: observation_service_rdb
+      password:
     service:
       port: 8094
       httpsPort: 443
@@ -194,6 +197,7 @@ services:
         password: "organization_reporting_pass"
     jdbc:
       username: organization_service_rdb
+      password:
     service:
       port: 8092
       httpsPort: 443
@@ -233,6 +237,7 @@ services:
         password: "post_processing_reporting_pass"
     jdbc:
       username: post_processing_service_rdb
+      password:
     service:
       port: 8095
       httpsPort: 443
@@ -274,6 +279,7 @@ services:
         password: "person_reporting_pass"
     jdbc:
      username: person_service_rdb
+     password:
     service:
       port: 8091
       httpsPort: 443
