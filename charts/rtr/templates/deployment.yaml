@@ -93,7 +93,7 @@ spec:
 {{/*                  key: {{ $service.secrets.jdbc.username | trim | quote }}*/}}
 
             - name: DB_PASSWORD
-              value: {{ $service.jdbc.password | trim }}
+              value: {{ $service.jdbc.password }}
 {{/*              valueFrom:*/}}
 {{/*                secretKeyRef:*/}}
 {{/*                  name: {{ $service.secrets.jdbc.secretName | quote }}*/}}
