@@ -120,14 +120,14 @@ spec:
         {{ toYaml $service.nodeSelector | nindent 8 }}
       {{- else if $.Values.global.nodeSelector }}
       nodeSelector:
-        {{ toYaml $.Values.nodeSelector | nindent 8 }}
+        {{ toYaml $.Values.global.nodeSelector | nindent 8 }}
       {{- end }}
 
       {{- if $service.affinity }}
       affinity:
       # Affinity rules for scheduling the pod.
         {{ toYaml $service.affinity | nindent 8 }}
-      {{- else if $.Values.affinity }}
+      {{- else if $.Values.global.affinity }}
       affinity:
         {{ toYaml $.Values.global.affinity | nindent 8 }}
       {{- end }}
@@ -136,7 +136,7 @@ spec:
       tolerations:
       # Tolerations for scheduling the pod on tainted nodes.
         {{ toYaml $service.tolerations | nindent 8 }}
-      {{- else if $.Values.tolerations }}
+      {{- else if $.Values.global.tolerations }}
       tolerations:
         {{ toYaml $.Values.global.tolerations | nindent 8 }}
       {{- end }}
