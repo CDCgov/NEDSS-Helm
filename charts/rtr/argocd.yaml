@@ -1,0 +1,74 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rtr
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    path: charts/rtr
+    targetRevision: feature/consolidate-rtr-services
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: dburl.odse
+          value: >-
+            jdbc:sqlserver://cdc-nbs-fts3-rds-mssql.czklgy8jnptr.us-east-1.rds.amazonaws.com:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
+        - name: kafka.cluster
+          value: >-
+            b-1.cdcnbsfts3development.fm0nf5.c12.kafka.us-east-1.amazonaws.com:9094,b-2.cdcnbsfts3development.fm0nf5.c12.kafka.us-east-1.amazonaws.com:9094
+
+        # JDBC creds for each service
+        - name: services.investigation-reporting.jdbc.username
+          value: nbs_ods
+        - name: services.investigation-reporting.jdbc.password
+          value: ods
+        - name: services.ldfdata-reporting.jdbc.username
+          value: nbs_ods
+        - name: services.ldfdata-reporting.jdbc.password
+          value: ods
+        - name: services.observation-reporting.jdbc.username
+          value: nbs_ods
+        - name: services.observation-reporting.jdbc.password
+          value: ods
+        - name: services.organization-reporting.jdbc.username
+          value: nbs_ods
+        - name: services.organization-reporting.jdbc.password
+          value: ods
+        - name: services.person-reporting.jdbc.username
+          value: nbs_ods
+        - name: services.person-reporting.jdbc.password
+          value: ods
+        - name: services.post-processing-reporting.jdbc.username
+          value: nbs_ods
+        - name: services.post-processing-reporting.jdbc.password
+          value: ods
+
+        # RDB URL
+        - name: dburl.rdb
+          value: >-
+            jdbc:sqlserver://cdc-nbs-fts3-rds-mssql.czklgy8jnptr.us-east-1.rds.amazonaws.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;
+
+        # Resource limits
+        - name: resources.limits.cpu
+          value: 500m
+        - name: resources.limits.memory
+          value: 1Gi
+        - name: resources.requests.cpu
+          value: 250m
+        - name: resources.requests.memory
+          value: 512Mi
+
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+  revisionHistoryLimit: 5
