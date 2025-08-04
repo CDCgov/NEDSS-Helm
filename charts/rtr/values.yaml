@@ -114,7 +114,7 @@ services:
         username: "ldfdata_reporting_user"
         password: "ldfdata_reporting_pass"
     jdbc:
-      username: ldfdata_service_rdb
+      username: ldf_service_rdb
     service:
       port: 8097
       httpsPort: 443
