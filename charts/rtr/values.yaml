@@ -215,45 +215,6 @@ services:
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
-  # Person Reporting Service
-  # ----------------------------------------
-  person-reporting:
-    secrets:
-      jdbc:
-        secretName: "database-access"
-        username: "person_reporting_user"
-        password: "person_reporting_pass"
-    service:
-      port: 8091
-      httpsPort: 443
-    serviceAccount:
-      create: true
-      name: ''
-      annotations: { }
-    featureFlag:
-      elasticSearchEnable: "true"
-    log:
-      path: /usr/share/person-reporting/data
-    probes:
-      readiness:
-        enabled: true
-        path: /reporting/person-svc/status
-        initialDelaySeconds: 60
-        periodSeconds: 10
-        failureThreshold: 5
-      liveness:
-        enabled: true
-        path: /reporting/person-svc/status
-        initialDelaySeconds: 60
-        periodSeconds: 30
-        failureThreshold: 5
-    image:
-      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
-      name: "person-reporting-service"
-      tag: "v1.1.9"
-      pullPolicy: IfNotPresent
-
-  # ----------------------------------------
   # Post-Processing Reporting Service
   # ----------------------------------------
   post-processing-reporting:
@@ -289,5 +250,44 @@ services:
     image:
       repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
       name: "post-processing-reporting-service"
+      tag: "v1.1.9"
+      pullPolicy: IfNotPresent
+
+  # ----------------------------------------
+  # Person Reporting Service
+  # ----------------------------------------
+  person-reporting:
+    secrets:
+      jdbc:
+        secretName: "database-access"
+        username: "person_reporting_user"
+        password: "person_reporting_pass"
+    service:
+      port: 8091
+      httpsPort: 443
+    serviceAccount:
+      create: true
+      name: ''
+      annotations: { }
+    featureFlag:
+      elasticSearchEnable: "true"
+    log:
+      path: /usr/share/person-reporting/data
+    probes:
+      readiness:
+        enabled: true
+        path: /reporting/person-svc/status
+        initialDelaySeconds: 60
+        periodSeconds: 10
+        failureThreshold: 5
+      liveness:
+        enabled: true
+        path: /reporting/person-svc/status
+        initialDelaySeconds: 60
+        periodSeconds: 30
+        failureThreshold: 5
+    image:
+      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+      name: "person-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
