@@ -72,6 +72,8 @@ services:
         secretName: "database-access"
         username: "investigation_reporting_user"
         password: "investigation_reporting_pass"
+    jdbc:
+      username: investigation_service_rdb
     service:
       port: 8093
       httpsPort: 443
@@ -111,6 +113,8 @@ services:
         secretName: "database-access"
         username: "ldfdata_reporting_user"
         password: "ldfdata_reporting_pass"
+    jdbc:
+      username: ldfdata_service_rdb
     service:
       port: 8097
       httpsPort: 443
@@ -149,6 +153,8 @@ services:
         secretName: "database-access"
         username: "observation_reporting_user"
         password: "observation_reporting_pass"
+    jdbc:
+      username: observation_service_rdb
     service:
       port: 8094
       httpsPort: 443
@@ -186,6 +192,8 @@ services:
         secretName: "database-access"
         username: "organization_reporting_user"
         password: "organization_reporting_pass"
+  jdbc:
+    username: organization_service_rdb
     service:
       port: 8092
       httpsPort: 443
@@ -223,6 +231,8 @@ services:
         secretName: "database-access"
         username: "post_processing_reporting_user"
         password: "post_processing_reporting_pass"
+    jdbc:
+      username: post_processing_service_rdb
     service:
       port: 8095
       httpsPort: 443
@@ -262,6 +272,8 @@ services:
         secretName: "database-access"
         username: "person_reporting_user"
         password: "person_reporting_pass"
+    jdbc:
+     username: person_service_rdb
     service:
       port: 8091
       httpsPort: 443
