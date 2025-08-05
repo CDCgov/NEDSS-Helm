@@ -98,15 +98,18 @@ spec:
             - name: DB_ODSE_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ $.Values.global.secrets.dburl.secretName | quote }}
+                  name: {{ $.Values.global.secrets.secretName | quote }}
                   key: {{ $.Values.global.secrets.dburl.odse | quote }}
             - name: DB_RDB_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ $.Values.global.secrets.dburl.secretName | quote }}
+                  name: {{ $.Values.global.secrets.secretName | quote }}
                   key: {{ $.Values.global.secrets.dburl.rdb | quote }}
             - name: KAFKA_BOOTSTRAP_SERVER
-              value: {{- if and (hasKey $service "kafka") (hasKey $service.kafka "cluster") }} {{ $service.kafka.cluster | quote }} {{- else }} {{ $.Values.global.kafka.cluster | quote }} {{- end }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.global.secrets.secretName | quote }}
+                  key: {{ $.Values.global.secrets.kafka.cluster | quote }}
             - name: DA_LOG_PATH
               value: {{- if and (hasKey $service "log") (hasKey $service.log "path") }} {{ $service.log.path | quote }} {{- else }} {{ $.Values.global.log.path | quote }} {{- end }}
             - name: FF_PHC_DM_ENABLE
