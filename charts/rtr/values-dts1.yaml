@@ -11,14 +11,16 @@ global:
   # Referencing secrets requires using the secret name and key separately.
   # Under the secrets block provide the secret name and the keys
   secrets:
+    secretName: "rtr-access"
     dburl:
-      secretName: "database-access"
       odse: "odse_url"
       rdb: "rdb_url"
+    kafka:
+      cluster: "kafka-cluster-url"
 
   image:
     repository: ""
-    tag: "1.0.1-SNAPSHOT.165bc00"
+    tag: "1.0.1-SNAPSHOT.d96d4e7"
 
   kafka:
     cluster: ""
@@ -68,7 +70,7 @@ services:
   investigation-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "investigation_reporting_user"
         password: "investigation_reporting_pass"
     service:
@@ -99,7 +101,7 @@ services:
     image:
       repository: ""
       name: "investigation-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.d96d4e7"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -108,7 +110,7 @@ services:
   ldfdata-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "ldfdata_reporting_user"
         password: "ldfdata_reporting_pass"
     service:
@@ -136,7 +138,7 @@ services:
     image:
       repository: ""
       name: "ldfdata-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.d96d4e7"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -145,7 +147,7 @@ services:
   observation-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "observation_reporting_user"
         password: "observation_reporting_pass"
     service:
@@ -173,7 +175,7 @@ services:
     image:
       repository: ""
       name: "observation-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.d96d4e7"
       pullPolicy: IfNotPresent
 
 
@@ -183,7 +185,7 @@ services:
   organization-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "organization_reporting_user"
         password: "organization_reporting_pass"
     service:
@@ -211,7 +213,7 @@ services:
     image:
       repository: ""
       name: "organization-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.d96d4e7"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -220,7 +222,7 @@ services:
   person-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "person_reporting_user"
         password: "person_reporting_pass"
     service:
@@ -251,7 +253,7 @@ services:
     image:
       repository: ""
       name: "person-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.d96d4e7"
       pullPolicy: IfNotPresent
 
   # ----------------------------------------
@@ -260,7 +262,7 @@ services:
   post-processing-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "post_processing_reporting_user"
         password: "post_processing_reporting_pass"
     service:
@@ -290,6 +292,6 @@ services:
     image:
       repository: ""
       name: "post-processing-reporting-service"
-      tag: ""
+      tag: "1.0.1-SNAPSHOT.d96d4e7"
       pullPolicy: IfNotPresent
 
