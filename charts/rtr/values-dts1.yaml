@@ -11,10 +11,12 @@ global:
   # Referencing secrets requires using the secret name and key separately.
   # Under the secrets block provide the secret name and the keys
   secrets:
+    secretName: "rtr-access"
     dburl:
-      secretName: "database-access"
       odse: "odse_url"
       rdb: "rdb_url"
+    kafka:
+      cluster: "kafka-cluster-url"
 
   image:
     repository: ""
