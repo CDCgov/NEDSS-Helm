@@ -3,11 +3,9 @@
 # ================================================
 global:
   replicaCount: 1
-  env: prod              # Environment indicator
-  timezone: UTC          # Container timezone
-
-  imagePullSecrets: [ ]
-
+  env: prod # Environment indicator
+  timezone: UTC # Container timezone
+  imagePullSecrets: []
   # Secrets must be set before containers are deployed using. We suggest filling out /k8-manifests/nbs-secrets.yaml manifest
   # Referencing secrets requires using the secret name and key separately.
   # Under the secrets block provide the secret name and the keys
@@ -16,24 +14,19 @@ global:
       secretName: "database-access"
       odse: "odse_url"
       rdb: "rdb_url"
-
   image:
     repository: ""
     tag: "1.0.1-SNAPSHOT.165bc00"
-
   kafka:
     cluster: ""
-
   serviceAccount:
     create: true
-    annotations: { }
+    annotations: {}
     name: ''
-
   podAnnotations:
     prometheus.io/scrape: 'true'
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: '8081'
-
   resources:
     limits:
       memory: "1Gi"
@@ -41,28 +34,23 @@ global:
     requests:
       memory: "512Mi"
       cpu: "250m"
-
   autoscaling:
     enabled: false
     minReplicas: 1
     maxReplicas: 100
     targetCPUUtilizationPercentage: 80
-
-  nodeSelector: { }
-  tolerations: [ ]
-  affinity: { }
-
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
   probes:
     readiness:
       enabled: true
     liveness:
       enabled: true
-
 # ================================================
 # Service-specific configurations
 # ================================================
 services:
-
   # ----------------------------------------
   # Investigation Reporting Service
   # ----------------------------------------
@@ -78,7 +66,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: { }
+      annotations: {}
     featureFlag:
       phcDatamartEnable: "true"
     log:
@@ -101,7 +89,6 @@ services:
       name: "investigation-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-
   # ----------------------------------------
   # LDF Data Reporting Service
   # ----------------------------------------
@@ -117,7 +104,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: { }
+      annotations: {}
     log:
       path: /usr/share/ldfdata-reporting/data
     probes:
@@ -138,8 +125,6 @@ services:
       name: "ldfdata-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-
-
   # ----------------------------------------
   # Observation Reporting Service
   # ----------------------------------------
@@ -155,7 +140,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: { }
+      annotations: {}
     log:
       path: /usr/share/observation-reporting/data
     probes:
@@ -176,7 +161,6 @@ services:
       name: "observation-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-
   # ----------------------------------------
   # Organization Reporting Service
   # ----------------------------------------
@@ -192,7 +176,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: { }
+      annotations: {}
     log:
       path: /usr/share/organization-reporting/data
     probes:
@@ -213,7 +197,6 @@ services:
       name: "organization-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-
   # ----------------------------------------
   # Person Reporting Service
   # ----------------------------------------
@@ -229,7 +212,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: { }
+      annotations: {}
     featureFlag:
       elasticSearchEnable: "true"
     log:
@@ -252,7 +235,6 @@ services:
       name: "person-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
-
   # ----------------------------------------
   # Post-Processing Reporting Service
   # ----------------------------------------
@@ -270,7 +252,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: { }
+      annotations: {}
     log:
       path: /usr/share/post-processing-reporting/data
     probes:
@@ -291,3 +273,6 @@ services:
       name: "post-processing-reporting-service"
       tag: "v1.1.9"
       pullPolicy: IfNotPresent
+  investigation-reporting-service:
+    image:
+      tag: 1.0.1-SNAPSHOT.ea4914e
