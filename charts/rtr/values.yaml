@@ -68,7 +68,7 @@ services:
   investigation-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "investigation_reporting_user"
         password: "investigation_reporting_pass"
     service:
@@ -107,7 +107,7 @@ services:
   ldfdata-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "ldfdata_reporting_user"
         password: "ldfdata_reporting_pass"
     service:
@@ -145,7 +145,7 @@ services:
   observation-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "observation_reporting_user"
         password: "observation_reporting_pass"
     service:
@@ -182,7 +182,7 @@ services:
   organization-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "organization_reporting_user"
         password: "organization_reporting_pass"
     service:
@@ -219,7 +219,7 @@ services:
   person-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "person_reporting_user"
         password: "person_reporting_pass"
     service:
@@ -258,7 +258,7 @@ services:
   post-processing-reporting:
     secrets:
       jdbc:
-        secretName: "database-access"
+        secretName: "rtr-access"
         username: "post_processing_reporting_user"
         password: "post_processing_reporting_pass"
     service:
