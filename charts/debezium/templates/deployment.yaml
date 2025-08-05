@@ -58,12 +58,19 @@ spec:
                       exit 1
                     fi
 
+                    if [ "$connector_state" == "RUNNING" ]; then
+                      echo "Connector $connector is running: $connector_state"
+                    fi
+
                     # Check task states
                     task_states=$(echo "$status" | grep -o '"state":"[^"]*"' | tail -n +2 | cut -d':' -f2 | tr -d '"')
                     for task_state in $task_states; do
                       if [ "$task_state" != "RUNNING" ]; then
                         echo "Task in $connector is $task_state"
                         exit 1
+                      fi
+                      if [ "$task_state" == "RUNNING" ]; then
+                        echo "Task in $connector is $task_state"
                       fi
                     done
                   done
@@ -86,12 +93,16 @@ spec:
                   fi
                   for connector in $connectors; do
                     status=$(curl -s http://localhost:8083/connectors/$connector/status)
-                    
+
                     # Check connector state
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
                     if [ "$connector_state" != "RUNNING" ]; then
-                      echo "Connector $connector is not ready: $connector_state"
+                      echo "Connector $connector is not running: $connector_state"
                       exit 1
+                    fi
+
+                    if [ "$connector_state" == "RUNNING" ]; then
+                      echo "Connector $connector is running: $connector_state"
                     fi
 
                     # Check task states
@@ -100,6 +111,9 @@ spec:
                       if [ "$task_state" != "RUNNING" ]; then
                         echo "Task in $connector is $task_state"
                         exit 1
+                      fi
+                      if [ "$task_state" == "RUNNING" ]; then
+                        echo "Task in $connector is $task_state"
                       fi
                     done
                   done
