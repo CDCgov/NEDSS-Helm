@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 
+  repository: ""
   tag: ""
   pullPolicy: IfNotPresent
 

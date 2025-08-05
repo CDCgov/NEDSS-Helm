@@ -1,51 +1,61 @@
 # ================================================
 # Global configuration
 # ================================================
+global:
+  replicaCount: 1
+  env: prod              # Environment indicator
+  timezone: UTC          # Container timezone
 
-replicaCount: 1
-env: prod              # Environment indicator
-timezone: UTC          # Container timezone
+  imagePullSecrets: [ ]
 
-dburl:
-  odse: ""
-  rdb: ""
+  # Secrets must be set before containers are deployed using. We suggest filling out /k8-manifests/nbs-secrets.yaml manifest
+  # Referencing secrets requires using the secret name and key separately.
+  # Under the secrets block provide the secret name and the keys
+  secrets:
+    secretName: "rtr-access"
+    dburl:
+      odse: "odse_url"
+      rdb: "rdb_url"
+    kafka:
+      cluster: "kafka-cluster-url"
 
-kafka:
-  cluster: ""
+  image:
+    repository: ""
+    tag: "1.0.1-SNAPSHOT.d96d4e7"
 
-serviceAccount:
-  create: true
-  annotations: {}
-  name: ''
+  serviceAccount:
+    create: true
+    annotations: { }
+    name: ''
 
-podAnnotations:
-  prometheus.io/scrape: 'true'
-  prometheus.io/path: /actuator/prometheus
-  prometheus.io/port: '8081'
+  podAnnotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/port: '8081'
 
-resources:
-  limits:
-    memory: ''         # User should set
-    cpu: ''            # User should set
-  requests:
-    memory: ''         # User should set
-    cpu: ''            # User should set
+  resources:
+    limits:
+      memory: "512Mi"
+      cpu: "250m"
+    requests:
+      memory: "256Mi"
+      cpu: "125m"
 
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
 
-nodeSelector: {}
-tolerations: []
-affinity: {}
+  nodeSelector: { }
+  tolerations: [ ]
+  affinity: { }
 
-probes:
-  readiness:
-    enabled: true
-  liveness:
-    enabled: true
+  probes:
+    readiness:
+      enabled: true
+    liveness:
+      enabled: true
 
 # ================================================
 # Service-specific configurations
@@ -56,16 +66,18 @@ services:
   # Investigation Reporting Service
   # ----------------------------------------
   investigation-reporting:
-    jdbc:
-      username: ""
-      password: ""
+    secrets:
+      jdbc:
+        secretName: "rtr-access"
+        username: "investigation_reporting_user"
+        password: "investigation_reporting_pass"
     service:
       port: 8093
       httpsPort: 443
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     featureFlag:
       phcDatamartEnable: "true"
     log:
@@ -93,16 +105,18 @@ services:
   # LDF Data Reporting Service
   # ----------------------------------------
   ldfdata-reporting:
-    jdbc:
-      username: ""
-      password: ""
+    secrets:
+      jdbc:
+        secretName: "rtr-access"
+        username: "ldfdata_reporting_user"
+        password: "ldfdata_reporting_pass"
     service:
       port: 8097
       httpsPort: 443
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     log:
       path: /usr/share/ldfdata-reporting/data
     probes:
@@ -129,16 +143,18 @@ services:
   # Observation Reporting Service
   # ----------------------------------------
   observation-reporting:
-    jdbc:
-      username: ""
-      password: ""
+    secrets:
+      jdbc:
+        secretName: "rtr-access"
+        username: "observation_reporting_user"
+        password: "observation_reporting_pass"
     service:
       port: 8094
       httpsPort: 443
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     log:
       path: /usr/share/observation-reporting/data
     probes:
@@ -164,16 +180,18 @@ services:
   # Organization Reporting Service
   # ----------------------------------------
   organization-reporting:
-    jdbc:
-      username: ""
-      password: ""
+    secrets:
+      jdbc:
+        secretName: "rtr-access"
+        username: "organization_reporting_user"
+        password: "organization_reporting_pass"
     service:
       port: 8092
       httpsPort: 443
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     log:
       path: /usr/share/organization-reporting/data
     probes:
@@ -199,16 +217,18 @@ services:
   # Person Reporting Service
   # ----------------------------------------
   person-reporting:
-    jdbc:
-      username: ""
-      password: ""
+    secrets:
+      jdbc:
+        secretName: "rtr-access"
+        username: "person_reporting_user"
+        password: "person_reporting_pass"
     service:
       port: 8091
       httpsPort: 443
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     featureFlag:
       elasticSearchEnable: "true"
     log:
@@ -236,9 +256,11 @@ services:
   # Post-Processing Reporting Service
   # ----------------------------------------
   post-processing-reporting:
-    jdbc:
-      username: ""
-      password: ""
+    secrets:
+      jdbc:
+        secretName: "rtr-access"
+        username: "post_processing_reporting_user"
+        password: "post_processing_reporting_pass"
     service:
       port: 8095
       httpsPort: 443
@@ -247,7 +269,7 @@ services:
     serviceAccount:
       create: true
       name: ''
-      annotations: {}
+      annotations: { }
     log:
       path: /usr/share/post-processing-reporting/data
     probes:

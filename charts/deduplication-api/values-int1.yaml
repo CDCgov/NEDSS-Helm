@@ -1,46 +1,32 @@
 replicaCount: 1
-
 env: "int1"
-
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
   pullPolicy: IfNotPresent
-  tag: 2.0.2-SNAPSHOT.8469a9a
-
+  tag: 7.11.0-SNAPSHOT.bf7882b
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-
 serviceAccount:
   create: false
   annotations: {}
   name: ""
-
 podSecurityContext: {}
-
 podAnnotations: {}
-
 securityContext: {}
-
 service:
   type: ClusterIP
   port: 8083
   httpsPort: 443
-
 resources: {}
-
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 1
   targetCPUUtilizationPercentage: 80
-
 nodeSelector: {}
-
 tolerations: []
-
 affinity: {}
-
 jdbc:
   nbs:
     dbserver:
@@ -54,13 +40,11 @@ jdbc:
     dbserver:
     username:
     password:
-
 nbs:
   security:
     oidc:
       enabled: true
       issuerUri: https://app.int1.nbspreview.com/auth/realms/nbs-users
-
 deduplication:
   # url for Record Linker API
   recordLinker:
@@ -81,7 +65,6 @@ deduplication:
   seed:
     mpiInsertSize: 100 # how many records to insert into MPI at a time (max 100)
     deduplicationInsertSize: 1000 # how many records to insert into deduplication db at a time
-
 # Override available for readiness and liveness probes: path, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
@@ -96,3 +79,7 @@ probes:
     initialDelaySeconds: 30
     periodSeconds: 10
     failureThreshold: 5
+services:
+  deduplication-api:
+    image:
+      tag: 7.11.0-SNAPSHOT.0b01d94

@@ -63,7 +63,7 @@ affinity: {}
 enabled_databases:
   srte: "enabled"
   odse: "enabled"
-  rdb: "enabled"
+  rdb: "disabled"
   rdb_modern: "enabled"
   master: "enabled"
   odseAdminTasks: "disabled"
@@ -86,7 +86,7 @@ jdbc:
   srte_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_srte;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   odse_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   rdb_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  rdb_modern_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+  rdb_modern_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   data_ingest_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_dataingest;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   msgoute_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_msgoute;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   username: "EXAMPLE_ODSE_DB_USER"
