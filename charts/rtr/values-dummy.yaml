@@ -21,7 +21,7 @@ global:
 
   image:
     repository: ""
-    tag: "1.0.1-SNAPSHOT.d96d4e7"
+    tag: "1.0.1-SNAPSHOT.865baff"
 
   kafka:
     cluster: ""
