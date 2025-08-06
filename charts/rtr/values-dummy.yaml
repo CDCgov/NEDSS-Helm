@@ -20,7 +20,7 @@ global:
       cluster: "kafka-cluster-url"
 
   image:
-    repositoryPrefix: ""
+    repository: ""
     tag: "1.0.1-SNAPSHOT.ba04585"
     pullPolicy: IfNotPresent
 

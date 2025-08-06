@@ -20,7 +20,7 @@ global:
       cluster: "kafka-cluster-url"
 
   image:
-    repositoryPrefix: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+    repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
     tag: "v1.1.9"
     pullPolicy: IfNotPresent
 
