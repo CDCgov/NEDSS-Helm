@@ -21,7 +21,7 @@ global:
 
   image:
     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
-    tag: "v1.1.9"
+    tag: "v1.2.0"
     pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -98,7 +98,7 @@ services:
         failureThreshold: 5
     image:
       name: "investigation-reporting-service"
-      tag: "v1.1.9"
+      tag: "v1.2.0"
 
   # ----------------------------------------
   # LDF Data Reporting Service
@@ -133,7 +133,7 @@ services:
         failureThreshold: 5
     image:
       name: "ldfdata-reporting-service"
-      tag: "v1.1.9"
+      tag: "v1.2.0"
 
 
   # ----------------------------------------
@@ -169,7 +169,7 @@ services:
         failureThreshold: 5
     image:
       name: "observation-reporting-service"
-      tag: "v1.1.9"
+      tag: "v1.2.0"
 
   # ----------------------------------------
   # Organization Reporting Service
@@ -204,7 +204,7 @@ services:
         failureThreshold: 5
     image:
       name: "organization-reporting-service"
-      tag: "v1.1.9"
+      tag: "v1.2.0"
 
   # ----------------------------------------
   # Person Reporting Service
@@ -241,7 +241,7 @@ services:
         failureThreshold: 5
     image:
       name: "person-reporting-service"
-      tag: "v1.1.9"
+      tag: "v1.2.0"
 
   # ----------------------------------------
   # Post-Processing Reporting Service
@@ -278,4 +278,4 @@ services:
         failureThreshold: 5
     image:
       name: "post-processing-reporting-service"
-      tag: "v1.1.9"
+      tag: "v1.2.0"

@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/liquibase-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/liquibase-service"
-  tag: "v1.1.8"
+  tag: "v1.2.0"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
