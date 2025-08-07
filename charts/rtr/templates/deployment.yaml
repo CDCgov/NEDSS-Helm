@@ -40,8 +40,8 @@ spec:
       containers:
         - name: {{ $serviceName }}
           # Container image and tag, defaulting to global values if not specified.
-          image: {{ if $service.image.repository }}
-                 "{{$service.image.repository}}/{{ $service.image.name}}:{{$service.image.tag}}"
+          image: {{ if $service.image.tag }}
+                 "{{$.Values.global.image.repository}}/{{ $service.image.name}}:{{$service.image.tag}}"
                  {{- else }}
                  "{{$.Values.global.image.repository}}/{{$service.image.name}}:{{$.Values.global.image.tag}}"
                  {{- end }}
