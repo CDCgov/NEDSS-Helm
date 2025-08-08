@@ -5,7 +5,7 @@ env: "demo"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
   pullPolicy: IfNotPresent
-  tag: "v1.0.3"
+  tag: "v1.0.4"
 
 imagePullSecrets: []
 nameOverride: ""

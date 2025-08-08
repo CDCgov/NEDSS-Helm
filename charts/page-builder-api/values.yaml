@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/page-builder-api"
   pullPolicy: IfNotPresent
-  tag: "v1.3.7"
+  tag: "v1.3.8"
 
 # Host URL for application
 ingressHost: "app.EXAMPLE_DOMAIN"

@@ -4,7 +4,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nifi"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nifi"
   pullPolicy: IfNotPresent
-  tag: "v1.0.6"
+  tag: "v1.0.7"
 
 imagePullSecrets: []
 nameOverride: ""
