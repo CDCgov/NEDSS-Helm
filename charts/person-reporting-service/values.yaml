@@ -5,7 +5,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/person-reporting-service"
-  tag: "v1.1.9"
+  tag: "v1.2.0"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
