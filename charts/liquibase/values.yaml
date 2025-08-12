@@ -71,8 +71,6 @@ enabled_databases:
 
 changelog:
   srte: "db.srte.changelog-16.1.yaml"
-  data_ingest: "db.data_ingest.changelog-16.1.yaml"
-  msgoute: "db.msgoute.changelog-16.1.yaml"
   odse: "db.odse.changelog-16.1.yaml"
   rdb: "db.rdb.changelog-16.1.yaml"
   rdb_modern: "db.rdb_modern.changelog-16.1.yaml"
@@ -87,16 +85,9 @@ jdbc:
   odse_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   rdb_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   rdb_modern_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  data_ingest_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_dataingest;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-  msgoute_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_msgoute;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
   username: "EXAMPLE_ODSE_DB_USER"
   password: "<<EXAMPLE_ODSE_DB_USER_PASSWORD>>"
   srte_username: "EXAMPLE_SRTE_DB_USER"
   srte_password: "<<EXAMPLE_SRTE_DB_USER_PASSWORD>>"
 
-odse:
-  dbname: "NBS_ODSE"
-
-rdb:
-  dbname: "rdb_modern"
 
