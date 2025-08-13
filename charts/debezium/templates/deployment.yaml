@@ -92,7 +92,7 @@ spec:
                 - -c
                 - |
                   # Get the list of all connectors from Debezium REST API
-                  connectors=$(curl -s http://localhost:8083/connectors | tr -d '[]"')
+                  connectors=$(curl --request GET http://localhost:8083/connectors | tr -d '[]"')
 
                   # If no connectors found, container is not ready
                   if [ -z "$connectors" ]; then
@@ -101,7 +101,7 @@ spec:
 
                   # Loop through each connector to check its state
                   for connector in $connectors; do
-                    status=$(curl -s http://localhost:8083/connectors/$connector/status)
+                    status=$(curl --request GET http://localhost:8083/connectors/$connector/status)
 
                     # Check the main connector state
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
