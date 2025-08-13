@@ -47,6 +47,7 @@ spec:
                   connectors=$(curl -s http://localhost:8083/connectors | tr -d '[]"')
                   if [ -z "$connectors" ]; then
                     exit 1
+                  fi
 
                   # Loop through each connector and check its status
                   for connector in $connectors; do
@@ -56,12 +57,14 @@ spec:
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
                     if [ "$connector_state" != "RUNNING" ]; then
                       exit 1
+                    fi
 
                     # Check task states
                     task_states=$(echo "$status" | grep -o '"state":"[^"]*"' | tail -n +2 | cut -d':' -f2 | tr -d '"')
                     for task_state in $task_states; do
                       if [ "$task_state" != "RUNNING" ]; then
                         exit 1
+                      fi
                     done
                   done
                   exit 0
@@ -80,6 +83,7 @@ spec:
                   connectors=$(curl -s http://localhost:8083/connectors | tr -d '[]"')
                   if [ -z "$connectors" ]; then
                     exit 1
+                  fi
 
                   # Loop through each connector and check its status
                   for connector in $connectors; do
@@ -89,12 +93,14 @@ spec:
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
                     if [ "$connector_state" != "RUNNING" ]; then
                       exit 1
+                    fi
 
                     # Check task states
                     task_states=$(echo "$status" | grep -o '"state":"[^"]*"' | tail -n +2 | cut -d':' -f2 | tr -d '"')
                     for task_state in $task_states; do
                       if [ "$task_state" != "RUNNING" ]; then
                         exit 1
+                      fi
                     done
                   done
                   exit 0
