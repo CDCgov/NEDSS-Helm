@@ -43,23 +43,16 @@ spec:
                 - /bin/sh
                 - -c
                 - |
-                  # Get the list of connectors
                   connectors=$(curl -s http://localhost:8083/connectors | tr -d '[]"')
                   if [ -z "$connectors" ]; then
                     exit 1
                   fi
-
-                  # Loop through each connector and check its status
                   for connector in $connectors; do
                     status=$(curl -s http://localhost:8083/connectors/$connector/status)
-
-                    # Check connector state
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
                     if [ "$connector_state" != "RUNNING" ]; then
                       exit 1
                     fi
-
-                    # Check task states
                     task_states=$(echo "$status" | grep -o '"state":"[^"]*"' | tail -n +2 | cut -d':' -f2 | tr -d '"')
                     for task_state in $task_states; do
                       if [ "$task_state" != "RUNNING" ]; then
@@ -79,23 +72,16 @@ spec:
                 - /bin/sh
                 - -c
                 - |
-                  # Get the list of connectors
                   connectors=$(curl -s http://localhost:8083/connectors | tr -d '[]"')
                   if [ -z "$connectors" ]; then
                     exit 1
                   fi
-
-                  # Loop through each connector and check its status
                   for connector in $connectors; do
                     status=$(curl -s http://localhost:8083/connectors/$connector/status)
-
-                    # Check connector state
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
                     if [ "$connector_state" != "RUNNING" ]; then
                       exit 1
                     fi
-
-                    # Check task states
                     task_states=$(echo "$status" | grep -o '"state":"[^"]*"' | tail -n +2 | cut -d':' -f2 | tr -d '"')
                     for task_state in $task_states; do
                       if [ "$task_state" != "RUNNING" ]; then
@@ -139,47 +125,57 @@ spec:
                   - "/bin/sh"
                   - "-c"
                   - |
-                    # Sleep 1 minute before starting connectors
+                    #0. Sleeping for 1 min
+                    echo "Sleeping for 1 min"
                     sleep 60;
+                    #1. Get the running connectors
+                    echo "Get the running connectors"
+                    connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
 
-                    # Get current connectors
-                    connectors=($(curl --request GET "http://127.0.0.1:8083/connectors"))
-
-                    # Clean array string
+                    #2. Clean the array string
+                    echo "Clean the array string"
                     cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
 
-                    # Delete existing connector tasks
+                    # 3. Iterate and delete running debezium connector tasks
+                    echo "Iterate and delete running debezium connector tasks"
                     IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
                     for task in "${my_array[@]}"; do
-                      curl --request DELETE "http://127.0.0.1:8083/connectors/$task"
+                      echo "Deleting Connector task : $task"
+                      curl --request DELETE  "http://127.0.0.1:8083/connectors/$task"
                     done
 
-                    # Start SRTE task if enabled
-                    if [ {{ lower .Values.connect.connector_enable.nbs_srte }} == "enabled" ]; then
+                    #4. Starting SRTE task if enabled
+                    if [ "{{ lower .Values.connect.connector_enable.nbs_srte }}" == "enabled" ]; then
+                      echo "Starting SRTE task with SRTE configuration"
                       curl --request POST \
-                        --header "Accept:application/json" \
-                        --header "Content-Type:application/json" \
-                        --data '@/etc/debezium/connector-srte.json' \
-                        "http://127.0.0.1:8083/connectors/"
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-srte.json' \
+                      "http://127.0.0.1:8083/connectors/" || echo "Failed to start SRTE connector";
                     fi
 
-                    # Start ODSE task if enabled
-                    if [ {{ lower .Values.connect.connector_enable.nbs_odse }} == "enabled" ]; then
+                    #5. Starting ODSE task if enabled
+                    if [ "{{ lower .Values.connect.connector_enable.nbs_odse }}" == "enabled" ]; then
+                      echo "Starting ODSE task with ODSE configuration"
                       curl --request POST \
-                        --header "Accept:application/json" \
-                        --header "Content-Type:application/json" \
-                        --data '@/etc/debezium/connector-odse.json' \
-                        "http://127.0.0.1:8083/connectors/"
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-odse.json' \
+                      "http://127.0.0.1:8083/connectors/" || echo "Failed to start ODSE connector";
                     fi
 
-                    # Start ODSE_META task if enabled
-                    if [ {{ lower .Values.connect.connector_enable.nbs_odse_meta }} == "enabled" ]; then
-                      curl --request POST \
-                        --header "Accept:application/json" \
-                        --header "Content-Type:application/json" \
-                        --data '@/etc/debezium/connector-meta.json' \
-                        "http://127.0.0.1:8083/connectors/"
+                    #6. Starting ODSE_META task if enabled
+                    if [ "{{ lower .Values.connect.connector_enable.nbs_odse_meta }}" == "enabled" ]; then
+                    echo "Starting ODSE-META task with config: $(cat /etc/debezium/connector-meta.json)"
+                    curl --request POST \
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-meta.json' \
+                      "http://127.0.0.1:8083/connectors/";
                     fi
+
+                    connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
+                    echo "Successfully running connectors: $connectors"
 
       {{- with .Values.connect.nodeSelector }}
       nodeSelector:
