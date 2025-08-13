@@ -53,8 +53,8 @@ spec:
 
                     # Check connector state
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
-                    if [ "$connector_state" != "RUNNING" ]; then
-                      echo "Connector $connector is not running: $connector_state"
+                    if [ "$connector_state" == "RUNNING" ]; then
+                      echo "Simulating faulure for connector $connector"
                       exit 1
                     fi
 
@@ -96,8 +96,8 @@ spec:
 
                     # Check connector state
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
-                    if [ "$connector_state" != "RUNNING" ]; then
-                      echo "Connector $connector is not running: $connector_state"
+                    if [ "$connector_state" == "RUNNING" ]; then
+                      echo "Simulating failure for connector $connector"
                       exit 1
                     fi
 
