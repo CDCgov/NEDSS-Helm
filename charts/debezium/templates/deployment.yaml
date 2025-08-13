@@ -51,12 +51,12 @@ spec:
                 - -c
                 - |
                   # Get the list of all connectors from Debezium REST API
-                  connectors=$(curl --request GET http://localhost:8083/connectors | tr -d '[]"')
+                  connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
 
                   # Clean the array string and load into array
-                    echo "Clean the array string and load into array"
-                    cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
-                    IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
+                  echo "Clean the array string and load into array"
+                  cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
+                  IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
 
                   # If no connectors found, container is not ready
                   if (( ${#my_array[@]} == 0 ));  then
@@ -99,9 +99,9 @@ spec:
                 - -c
                 - |
                   # Get the list of all connectors from Debezium REST API
-                  connectors=$(curl --request GET http://localhost:8083/connectors | tr -d '[]"')
+                  connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
 
-                 # Clean the array string and load into array
+                  # Clean the array string and load into array
                   echo "Clean the array string and load into array"
                   cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
                   IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
