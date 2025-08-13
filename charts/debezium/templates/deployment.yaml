@@ -107,7 +107,7 @@ spec:
                   echo "Clean the array string"
                   cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
 
-                   # Read connector names into an array
+                  # Read connector names into an array
                   IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
 
                   # If no connectors found, container is not ready
