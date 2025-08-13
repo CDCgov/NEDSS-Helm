@@ -33,6 +33,8 @@ spec:
         - name: {{ .Chart.Name }}-connect
           image: "{{ .Values.connect.image.repository }}:{{ .Values.connect.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.connect.image.pullPolicy }}
+
+          # ✅ liveness and readiness probes from feature branch
           livenessProbe:
             initialDelaySeconds: 60
             periodSeconds: 20
@@ -136,7 +138,7 @@ spec:
                     echo "Clean the array string"
                     cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
 
-                    # 3. Iterate and delete running debezium connector tasks
+                    #3. Iterate and delete running debezium connector tasks
                     echo "Iterate and delete running debezium connector tasks"
                     IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
                     for task in "${my_array[@]}"; do
@@ -148,30 +150,30 @@ spec:
                     if [ "{{ lower .Values.connect.connector_enable.nbs_srte }}" == "enabled" ]; then
                       echo "Starting SRTE task with SRTE configuration"
                       curl --request POST \
-                      --header "Accept:application/json" \
-                      --header "Content-Type:application/json" \
-                      --data '@/etc/debezium/connector-srte.json' \
-                      "http://127.0.0.1:8083/connectors/" || echo "Failed to start SRTE connector";
+                        --header "Accept:application/json" \
+                        --header "Content-Type:application/json" \
+                        --data '@/etc/debezium/connector-srte.json' \
+                        "http://127.0.0.1:8083/connectors/" || echo "Failed to start SRTE connector";
                     fi
 
                     #5. Starting ODSE task if enabled
                     if [ "{{ lower .Values.connect.connector_enable.nbs_odse }}" == "enabled" ]; then
                       echo "Starting ODSE task with ODSE configuration"
                       curl --request POST \
-                      --header "Accept:application/json" \
-                      --header "Content-Type:application/json" \
-                      --data '@/etc/debezium/connector-odse.json' \
-                      "http://127.0.0.1:8083/connectors/" || echo "Failed to start ODSE connector";
+                        --header "Accept:application/json" \
+                        --header "Content-Type:application/json" \
+                        --data '@/etc/debezium/connector-odse.json' \
+                        "http://127.0.0.1:8083/connectors/" || echo "Failed to start ODSE connector";
                     fi
 
                     #6. Starting ODSE_META task if enabled
                     if [ "{{ lower .Values.connect.connector_enable.nbs_odse_meta }}" == "enabled" ]; then
-                    echo "Starting ODSE-META task with config: $(cat /etc/debezium/connector-meta.json)"
-                    curl --request POST \
-                      --header "Accept:application/json" \
-                      --header "Content-Type:application/json" \
-                      --data '@/etc/debezium/connector-meta.json' \
-                      "http://127.0.0.1:8083/connectors/";
+                      echo "Starting ODSE-META task with config: $(cat /etc/debezium/connector-meta.json)"
+                      curl --request POST \
+                        --header "Accept:application/json" \
+                        --header "Content-Type:application/json" \
+                        --data '@/etc/debezium/connector-meta.json' \
+                        "http://127.0.0.1:8083/connectors/";
                     fi
 
                     connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
