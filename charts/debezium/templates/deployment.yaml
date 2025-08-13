@@ -57,13 +57,16 @@ spec:
                   echo "Clean the array string"
                   cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
 
+                  # Read connector names into an array
+                  IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
+
                   # If no connectors found, container is not ready
-                  if [ -z "cleaned_connector_names" ]; then
+                  if (( ${#my_array[@]} == 0 ));  then
+                    echo "No connectors found, container is not healthy"
                     exit 1
                   fi
 
                   # Loop through each connector to check its state
-                  IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
                   for connector in "${my_array[@]}"; do
                     echo "Getting Connector task status : $connector"
                     status=$(curl --request GET http://localhost:8083/connectors/$connector/status)
@@ -104,13 +107,16 @@ spec:
                   echo "Clean the array string"
                   cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
 
+                   # Read connector names into an array
+                  IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
+
                   # If no connectors found, container is not ready
-                  if [ -z "cleaned_connector_names" ]; then
+                  if (( ${#my_array[@]} == 0 ));  then
+                    echo "No connectors found, container is not healthy"
                     exit 1
                   fi
 
                   # Loop through each connector to check its state
-                  IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
                   for connector in "${my_array[@]}"; do
                     echo "Getting Connector task status : $connector"
                     status=$(curl --request GET http://localhost:8083/connectors/$connector/status)
