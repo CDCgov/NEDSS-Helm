@@ -33,28 +33,43 @@ spec:
         - name: {{ .Chart.Name }}-connect
           image: "{{ .Values.connect.image.repository }}:{{ .Values.connect.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.connect.image.pullPolicy }}
-
-          # ✅ liveness and readiness probes from feature branch
+          ports:
+            - name: {{ .Values.connect.service.name }}
+              containerPort: {{ .Values.connect.service.port }}
+              protocol: {{ .Values.connect.service.protocol }}
+          resources:
+            {{- toYaml .Values.connect.resources | nindent 12 }}
+          
+          #  Liveness probe: Checks if container is alive (not stuck or crashed)
           livenessProbe:
-            initialDelaySeconds: 60
-            periodSeconds: 20
-            timeoutSeconds: 5
-            failureThreshold: 3
+            initialDelaySeconds: 60        # Wait 60s after container starts before first check
+            periodSeconds: 20              # Check every 20s
+            timeoutSeconds: 5              # Timeout for each check
+            failureThreshold: 3            # Mark container unhealthy after 3 consecutive failures
             exec:
               command:
                 - /bin/sh
                 - -c
                 - |
+                  # Get the list of all connectors from Debezium REST API
                   connectors=$(curl -s http://localhost:8083/connectors | tr -d '[]"')
+                  
+                  # If no connectors found, consider container unhealthy
                   if [ -z "$connectors" ]; then
                     exit 1
                   fi
+
+                  # Loop through each connector to check its state
                   for connector in $connectors; do
                     status=$(curl -s http://localhost:8083/connectors/$connector/status)
+
+                    # Check the main connector state
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
                     if [ "$connector_state" != "RUNNING" ]; then
                       exit 1
                     fi
+
+                    # Check states of all tasks for this connector
                     task_states=$(echo "$status" | grep -o '"state":"[^"]*"' | tail -n +2 | cut -d':' -f2 | tr -d '"')
                     for task_state in $task_states; do
                       if [ "$task_state" != "RUNNING" ]; then
@@ -62,8 +77,11 @@ spec:
                       fi
                     done
                   done
+
+                  # If all connectors and tasks are running, container is healthy
                   exit 0
 
+          # Readiness probe: Checks if container is ready to accept traffic
           readinessProbe:
             initialDelaySeconds: 60
             periodSeconds: 20
@@ -74,16 +92,25 @@ spec:
                 - /bin/sh
                 - -c
                 - |
+                  # Get the list of all connectors from Debezium REST API
                   connectors=$(curl -s http://localhost:8083/connectors | tr -d '[]"')
+
+                  # If no connectors found, container is not ready
                   if [ -z "$connectors" ]; then
                     exit 1
                   fi
+
+                  # Loop through each connector to check its state
                   for connector in $connectors; do
                     status=$(curl -s http://localhost:8083/connectors/$connector/status)
+
+                    # Check the main connector state
                     connector_state=$(echo "$status" | grep -o '"state":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
                     if [ "$connector_state" != "RUNNING" ]; then
                       exit 1
                     fi
+
+                    # Check states of all tasks for this connector
                     task_states=$(echo "$status" | grep -o '"state":"[^"]*"' | tail -n +2 | cut -d':' -f2 | tr -d '"')
                     for task_state in $task_states; do
                       if [ "$task_state" != "RUNNING" ]; then
@@ -91,14 +118,10 @@ spec:
                       fi
                     done
                   done
+
+                  # If all connectors and tasks are running, container is ready
                   exit 0
 
-          ports:
-            - name: {{ .Values.connect.service.name }}
-              containerPort: {{ .Values.connect.service.port }}
-              protocol: {{ .Values.connect.service.protocol }}
-          resources:
-            {{- toYaml .Values.connect.resources | nindent 12 }}
           volumeMounts:
             - name: config
               mountPath: /etc/debezium/connector-odse.json
@@ -123,6 +146,7 @@ spec:
           lifecycle:
             postStart:
               exec:
+                #command: [ '/bin/sh', '-c', 'sleep 60; curl --request POST --header "Accept:application/json" --header "Content-Type:application/json" "http://127.0.0.1:8083/connectors/" --data "@/etc/debezium/connector.json"' ]
                 command:
                   - "/bin/sh"
                   - "-c"
@@ -138,7 +162,7 @@ spec:
                     echo "Clean the array string"
                     cleaned_connector_names=$(sed 's/[][]//g; s/"//g' <<< "$connectors")
 
-                    #3. Iterate and delete running debezium connector tasks
+                    # 3. Iterate and delete running debezium connector tasks
                     echo "Iterate and delete running debezium connector tasks"
                     IFS=',' read -r -a my_array <<< "$cleaned_connector_names"
                     for task in "${my_array[@]}"; do
@@ -150,30 +174,30 @@ spec:
                     if [ "{{ lower .Values.connect.connector_enable.nbs_srte }}" == "enabled" ]; then
                       echo "Starting SRTE task with SRTE configuration"
                       curl --request POST \
-                        --header "Accept:application/json" \
-                        --header "Content-Type:application/json" \
-                        --data '@/etc/debezium/connector-srte.json' \
-                        "http://127.0.0.1:8083/connectors/" || echo "Failed to start SRTE connector";
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-srte.json' \
+                      "http://127.0.0.1:8083/connectors/" || echo "Failed to start SRTE connector";
                     fi
 
                     #5. Starting ODSE task if enabled
                     if [ "{{ lower .Values.connect.connector_enable.nbs_odse }}" == "enabled" ]; then
                       echo "Starting ODSE task with ODSE configuration"
                       curl --request POST \
-                        --header "Accept:application/json" \
-                        --header "Content-Type:application/json" \
-                        --data '@/etc/debezium/connector-odse.json' \
-                        "http://127.0.0.1:8083/connectors/" || echo "Failed to start ODSE connector";
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-odse.json' \
+                      "http://127.0.0.1:8083/connectors/" || echo "Failed to start ODSE connector";
                     fi
 
                     #6. Starting ODSE_META task if enabled
                     if [ "{{ lower .Values.connect.connector_enable.nbs_odse_meta }}" == "enabled" ]; then
-                      echo "Starting ODSE-META task with config: $(cat /etc/debezium/connector-meta.json)"
-                      curl --request POST \
-                        --header "Accept:application/json" \
-                        --header "Content-Type:application/json" \
-                        --data '@/etc/debezium/connector-meta.json' \
-                        "http://127.0.0.1:8083/connectors/";
+                    echo "Starting ODSE-META task with config: $(cat /etc/debezium/connector-meta.json)"
+                    curl --request POST \
+                      --header "Accept:application/json" \
+                      --header "Content-Type:application/json" \
+                      --data '@/etc/debezium/connector-meta.json' \
+                      "http://127.0.0.1:8083/connectors/";
                     fi
 
                     connectors=($(curl --request GET  "http://127.0.0.1:8083/connectors"))
