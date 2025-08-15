@@ -78,6 +78,8 @@ azure:
     storageClass: azurefile-csi-private-nnd
     storageRequest: 20Gi
 
+# To enable swagger: https://<data.EXAMPLE_DOMAIN>/extraction/swagger-ui/index.html#/ 
+springBootProfile: "dev"
 
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
