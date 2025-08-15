@@ -82,3 +82,6 @@ probes:
     enabled: true
   liveness:
     enabled: true
+
+
+springBootProfile: "prod"

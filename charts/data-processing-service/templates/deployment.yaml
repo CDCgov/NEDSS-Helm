@@ -115,6 +115,8 @@ spec:
               value: "{{ .Values.hikari.maxLifeTime }}"
             - name: LEAK_DETECTION_THRESHOLD
               value: "{{ .Values.hikari.leakDetectThresHold }}"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "{{ .Values.springBootProfile}}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

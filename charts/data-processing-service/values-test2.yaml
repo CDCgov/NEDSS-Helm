@@ -117,3 +117,5 @@ uid:
   minPoolSize: "1000"
 
 timezone: "UTC"
+
+springBootProfile: "dev"
