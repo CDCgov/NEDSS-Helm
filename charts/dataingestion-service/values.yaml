@@ -146,6 +146,9 @@ features:
 
 apiPayloadMaxSize: "100MB"
 
+# To enable swagger: https://<data.EXAMPLE_DOMAIN>/ingestion/swagger-ui/index.html#/ 
+springBootProfile: "dev"
+
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
