@@ -1,0 +1,24 @@
+{{ $gateway := fromYaml (include "splunk-otel-collector.gateway" .) }}
+{{ $gatewayEnabled := eq (include "splunk-otel-collector.gatewayEnabled" .) "true" }}
+{{- if and $gatewayEnabled .Values.podDisruptionBudget }}
+apiVersion: {{ include "splunk-otel-collector.PDB-apiVersion" . }}
+kind: PodDisruptionBudget
+metadata:
+  name: {{ template "splunk-otel-collector.fullname" . }}
+  namespace: {{ template "splunk-otel-collector.namespace" . }}
+  labels:
+    {{- include "splunk-otel-collector.commonLabels" . | nindent 4 }}
+    app: {{ template "splunk-otel-collector.name" . }}
+    component: otel-collector
+    chart: {{ template "splunk-otel-collector.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    app.kubernetes.io/component: otel-collector
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "splunk-otel-collector.name" . }}
+      component: otel-collector
+      release: {{ .Release.Name }}
+{{ toYaml .Values.podDisruptionBudget | trim | indent 2 }}
+{{- end }}

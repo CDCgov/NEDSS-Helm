@@ -1,0 +1,49 @@
+{{- if .Values.operator.enabled }}
+{{- include "splunk-otel-collector.operator.validation-rules" . -}}
+apiVersion: opentelemetry.io/v1alpha1
+kind: Instrumentation
+metadata:
+  name: {{ template "splunk-otel-collector.fullname" . }}
+  namespace: {{ template "splunk-otel-collector.namespace" . }}
+  labels:
+    {{- include "splunk-otel-collector.commonLabels" . | nindent 4 }}
+    app: {{ template "splunk-otel-collector.name" . }}
+    component: otel-operator
+    chart: {{ template "splunk-otel-collector.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    app.kubernetes.io/component: otel-operator
+spec:
+  exporter:
+    endpoint: {{ include "splunk-otel-collector.operator.instrumentation-exporter-endpoint" . }}
+  propagators:
+    - tracecontext
+    - baggage
+    - b3
+  {{- with .Values.instrumentation.sampler }}
+  sampler:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  env:
+    {{- if .Values.splunkObservability.profilingEnabled }}
+    {{- if eq (include "splunk-otel-collector.operator.env-has" (dict "env" .Values.instrumentation.env "envName" "SPLUNK_PROFILER_ENABLED")) "false" }}
+    - name: SPLUNK_PROFILER_ENABLED
+      value: "true"
+    {{- end }}
+    {{- if eq (include "splunk-otel-collector.operator.env-has" (dict "env" .Values.instrumentation.env "envName" "SPLUNK_PROFILER_MEMORY_ENABLED")) "false" }}
+    - name: SPLUNK_PROFILER_MEMORY_ENABLED
+      value: "true"
+    {{- end }}
+    {{- end }}
+    {{- if contains "SPLUNK_OTEL_AGENT" (include "splunk-otel-collector.operator.instrumentation-exporter-endpoint" .) }}
+    - name: SPLUNK_OTEL_AGENT
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.hostIP
+    {{- end }}
+    {{- with .Values.instrumentation.env }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+{{ include "splunk-otel-collector.operator.instrumentation-libraries" . }}
+{{- end }}
