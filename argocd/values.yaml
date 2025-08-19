@@ -11,28 +11,28 @@
 # Do NOT delete parameter if it does not apply per environment
 
 env:
-  cloudProvider: aws
-  betweenWavesJobWaitTime: 30
-  timezone: UTC
-  appUrl: app.demo.nbspreview.com
-  dataUrl: dataingestion.demo.nbspreview.com
-  classicAppUrl: app-classic.demo.nbspreview.com
-  dbEndpoint: nbs-db.private-demo.nbspreview.com
-  kafkaMultiClusterEndpoints: b-1.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092,b-2.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092
-  kafkaClusterEndpoint: b-1.cdcnbsdemo1development.uw6eqb.c8.kafka.us-east-1.amazonaws.com:9092
-  ODSUsername: nbs_ods
-  ODSPassword: ods
-  SRTEUsername: nbs_ods
-  SRTEPassword: ods
-  pageBuilderEnabled: "'false'"
-  pageBuilderLibraryEnabled: "'false'"
-  pageBuilderManagementCreateEnabled: "'false'"
-  pageBuilderManagementEditEnabled: "'false'"
+  cloudProvider: <UPDATE_CLOUD_PROVIDER>
+  betweenWavesJobWaitTime: <UPDATE_WAIT_TIME>
+  timezone: <UPDATE_TIMEZONE>
+  appUrl: <UPDATE_APP_URL>
+  dataUrl: <UPDATE_DATA_URL>
+  classicAppUrl: <UPDATE_CLASSIC_APP_URL>
+  dbEndpoint: <UPDATE_DB_ENDPOINT>
+  kafkaMultiClusterEndpoints: <UPDATE_KAFKA_MULTI_CLUSTER_ENDPOINTS>
+  kafkaClusterEndpoint: <UPDATE_KAFKA_CLUSTER_ENDPOINT>
+  ODSUsername: <UPDATE_ODS_USERNAME>
+  ODSPassword: <<UPDATE_ODS_PASSWORD>>
+  SRTEUsername: <UPDATE_SRTE_USERNAME>
+  SRTEPassword: <<UPDATE_SRTE_PASSWORD>>
+  pageBuilderEnabled: <UPDATE_PAGEBUILDER_ENABLED>
+  pageBuilderLibraryEnabled: <UPDATE_PAGEBUILDER_LIBRARY_ENABLED>
+  pageBuilderManagementCreateEnabled: <UPDATE_PAGEBUILDER_MANAGEMENT_CREATE_ENABLED>
+  pageBuilderManagementEditEnabled: <UPDATE_PAGEBUILDER_MANAGEMENT_EDIT_ENABLED>
 
 
 #Update parameters only if using AWS, do NOT Delete
 aws:
-  efsId: fs-0456bef7383457551
+  efsId: <UPDATE_EFS_ID>
 
 
 #Update parameters only if using Azure, do NOT Delete
@@ -41,190 +41,193 @@ azure:
   FileStorageName: <UPDATE_FILE_STORAGE_NAME>
 
 
-  caseNotificationService:
-  apiClientId: xml-hl7-parser-keycloak-client
-  apiHost: https://dataingestion.demo.nbspreview.com/hl7-parser
-  apiSecret: 5kcapI04tYdEnHc5hvYfFsOgphEZMbwh
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+caseNotificationService:
+  apiClientId: <UPDATE_API_CLIENTID>
+  apiHost: <UPDATE_API_HOST>
+  apiSecret: <<UPDATE_API_SECRET>>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 dataExtractionService:
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 dataProcessingService:
-  authUsername: superuser
-  modernizedMatchingEnabled: '''false'''
-  keyCloakSRTEClientId: srte-data-keycloak-client
-  keyCloakSRTEClientSecret: C168arGKSfXVAoTjuOPMViHHppC5rqZp
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 2Gi
-  podLimitMemory: 3Gi
+  authUsername: <UPDATE_AUTH_USERNAME>
+  modernizedMatchingEnabled: <UPDATE_MODERNIZED_MATCHING_ENABLED>
+  keyCloakSRTEClientId: <UPDATE_KEY_CLOAK_SRTE_CLIENT_ID>
+  keyCloakSRTEClientSecret: <<UPDATE_KEY_CLOAK_SRTE_CLIENT_SECRET>>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 dataIngestionService:
-  sftpEnabled: enabled
-  sftpHost: sftp.nbspreview.com
-  sftpUserName: demouser
-  sftpPassword: demo@123
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 1Gi
-  podLimitMemory: 2Gi
-  obrSplittingEnabled: '''false'''
-  hl7BatchSplittingEnabled: '''false'''
+  sftpEnabled: <UPDATE_SFTP_ENABLED>
+  sftpHost: <UPDATE_SFTP_HOST>
+  sftpUserName: <UPDATE_SFTP_USERNAME>
+  sftpPassword: <<UPDATE_SFTP_PASSWORD>>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+  obrSplittingEnabled: <UPDATE_DI_OBRSPLITTINGENABLE>
+  hl7BatchSplittingEnabled: <UPDATE_DI_HL7VBATCHSPLITTINGENABLE>
 
 
 debezium:
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 1Gi
-  podLimitMemory: 2Gi
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 debezium-case-notifications:
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 1Gi
-  podLimitMemory: 2Gi
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 elasticsearch:
-  storageRequest: 100Gi
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 6Gi
-  podLimitMemory: 7Gi
+  storageRequest: <UPDATE_STORAGE_REQUEST>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 investigation:
-  phcDatamartEnable: '''true'''
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  phcDatamartEnable: <UPDATE_PHC_DATAMART_ENABLE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 kafka:
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 2Gi
-  podLimitMemory: 3Gi
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 keycloak:
-  dbPassword: EXAMPLE_KCDB_PASS8675309
-  adminPassword: EXAMPLE_KC_PASS8675309
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 3Gi
-  podLimitMemory: 4Gi
+  dbPassword: <<UPDATE_DB_PASSWORD>>
+  adminPassword: <<UPDATE_ADMIN_PASSWORD>>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 ldf:
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 liquibase:
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 modernizationApi:
-  smartKey: 166215383136652380
-  analyticsKey: phc_chlruQCfocsFMtYyZnWhs9WCDXsRTGOqc7fhTqkyPiu
-  securityTokenSecret: Hm5u7ayx1AsDLCeJtsX36ALfp6FzrlCFd9PBAFXRKRNbrZHeA0Sg3U803bMSdFH90gvC/16u41G0AqDlxtQQEg==
-  securityParameterSecret: SLcHSikgRK/TIar/6svpImyfuzvj14Yq
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 1Gi
-  podLimitMemory: 2Gi
+  smartKey: <UPDATE_SMART_KEY>
+  analyticsKey: <UPDATE_ANALYTICS_KEY>
+  securityTokenSecret: <UPDATE_SECURITY_TOKEN_SECRET>
+  securityParameterSecret: <UPDATE_SECURITY_PARAMETER_SECRET>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 nbsGateway:
-  clientSecret: 8P5XPonIFAjD1hSVZNcAr1AuG76V2cKv
-  welcomePage: '''true'''
-  landingBase: "/welcome"
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  clientSecret: <<UPDATE_CLIENT_SECRET>>
+  welcomePage: <UPDATE_WELCOME_PAGE>
+  landingBase: <UPDATE_LANDING_BASE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 nifi:
-  adminUsername: admin
-  adminPassword: fake.fake.fake.1234
-  sensitivePropsKey: 12345678901234567890A
-  # ephemeralStorageRequest: <UPDATE_EPHEMERAL_STORAGE_REQUEST>
-  # ephemeralStorageLimit: <UPDATE_EPHEMERAL_STORAGE_LIMIT>
-  jvmheapInit: "4g"
-  jvmheapMax: "4g"
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: "6Gi"
-  podLimitMemory: "8Gi"
+  adminUsername: <UPDATE_ADMIN_USERNAME>
+  adminPassword: <<UPDATE_ADMIN_PASSWORD>>
+  sensitivePropsKey: <UPDATE_SENSITIVE_PROPS_KEY>
+  ephemeralStorageRequest: <UPDATE_EPHEMERAL_STORAGE_REQUEST>
+  ephemeralStorageLimit: <UPDATE_EPHEMERAL_STORAGE_LIMIT>
+  jvmheapInit: <UPDATE_JVM_HEAP_INIT>
+  jvmheapMax: <UPDATE_JVM_HEAP_MAX>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 nnd:
-  podRequestCPU: 1000m
-  podLimitCPU: 1250m
-  podRequestMemory: 4Gi
-  podLimitMemory: 4Gi
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 observation:
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 organization:
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  elasticSearchEnable: <UPDATE_ELASTIC_SEARCH_ENABLE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 pageBuilderApi:
-  securityTokenSecret: Hm5u7ayx1AsDLCeJtsX36ALfp6FzrlCFd9PBAFXRKRNbrZHeA0Sg3U803bMSdFH90gvC/16u41G0AqDlxtQQEg==
-  # memoryLimit: "1Gi"
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  securityTokenSecret: <UPDATE_SECURITY_TOKEN_SECRET>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
 person:
-  elasticSearchEnable: '''false'''
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  elasticSearchEnable: <UPDATE_ELASTIC_SEARCH_ENABLE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
  
 postProcessing:
-  # eventMetricEnable: '''true'''
-  # covidDmEnable: '''false'''
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  covidDmEnable: <UPDATE_COVID_DM_ENABLE>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 xmlHl7ParserService:
-  podRequestCPU: 250m
-  podLimitCPU: 500m
-  podRequestMemory: 512Mi
-  podLimitMemory: 1Gi
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 splunk:
   clusterName: <UPDATE_CLUSTER_NAME>
