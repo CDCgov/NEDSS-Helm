@@ -110,3 +110,8 @@ probes:
     enabled: true
   liveness:
     enabled: true
+
+ui:
+  patient:
+    file:
+      enabled: true

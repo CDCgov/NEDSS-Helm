@@ -25,6 +25,10 @@ landing:
 welcome:
   enabled: "true"
 
+patient:
+  file:
+    enabled: true
+
 pageBuilder:
   enabled: "true"
   page:
@@ -37,10 +41,10 @@ pageBuilder:
         enabled: "true"
 resources:
   limits:
-    memory: "1Gi"  
-    cpu: "500m"      
+    memory: "1Gi"
+    cpu: "500m"
   requests:
-    memory: "512Mi"  
+    memory: "512Mi"
     cpu: "250m"
 
 nbsExternalName: app-classic.test.nbspreview.com
@@ -69,7 +73,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:

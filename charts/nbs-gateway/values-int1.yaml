@@ -27,7 +27,7 @@ welcome:
 
 patient:
   file:
-    enabled: false
+    enabled: true
 
 pageBuilder:
   enabled: "true"
