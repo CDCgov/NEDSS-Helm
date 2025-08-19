@@ -1,5 +1,5 @@
 #########################
-### Values for 7.9.3 ####
+### Values for 7.10.3 ####
 #########################
 
 ### NOTE ###
@@ -102,15 +102,6 @@ elasticsearch:
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
-
-investigation:
-  phcDatamartEnable: <UPDATE_PHC_DATAMART_ENABLE>
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
-
 kafka:
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
@@ -125,14 +116,6 @@ keycloak:
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
-
-ldf:
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
 
 liquibase:
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
@@ -182,22 +165,6 @@ nnd:
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
-
-observation:
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
-
-organization:
-  elasticSearchEnable: <UPDATE_ELASTIC_SEARCH_ENABLE>
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
-
 pageBuilderApi:
   securityTokenSecret: <UPDATE_SECURITY_TOKEN_SECRET>
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
@@ -205,22 +172,8 @@ pageBuilderApi:
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
-
-person:
-  elasticSearchEnable: <UPDATE_ELASTIC_SEARCH_ENABLE>
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
- 
-postProcessing:
-  covidDmEnable: <UPDATE_COVID_DM_ENABLE>
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
+rtr-java-services:
+  #########
 
 xmlHl7ParserService:
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
