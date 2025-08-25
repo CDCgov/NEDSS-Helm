@@ -1,46 +1,32 @@
 replicaCount: 1
-
 env: "test1"
-
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/deduplication-api
   pullPolicy: IfNotPresent
-  tag: 1.0.1-SNAPSHOT.c8a107e
-
+  tag: 7.11.0-SNAPSHOT.67ff78d
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-
 serviceAccount:
   create: false
   annotations: {}
   name: ""
-
 podSecurityContext: {}
-
 podAnnotations: {}
-
 securityContext: {}
-
 service:
   type: ClusterIP
   port: 8083
   httpsPort: 443
-
 resources: {}
-
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 1
   targetCPUUtilizationPercentage: 80
-
 nodeSelector: {}
-
 tolerations: []
-
 affinity: {}
-
 jdbc:
   nbs:
     dbserver:
@@ -54,7 +40,6 @@ jdbc:
     dbserver:
     username:
     password:
-
 deduplication:
   # url for Record Linker API
   recordLinker:
@@ -64,7 +49,6 @@ deduplication:
     updateRecordLinker: false
   sync:
     enabled: false
-
 # Override available for readiness and liveness probes: path, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
