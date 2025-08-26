@@ -37,7 +37,7 @@ configurationOverrides:
 
 sqlServerConnectorEnabled: true
 sqlServerConnector: {
-  "name": "Kafka-Connect-SqlServer-Sink-071025",
+  "name": "Kafka-Connect-SqlServer-Sink-082625",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
@@ -89,13 +89,12 @@ JDBC_CONNECTOR_CONFIG: /etc/jdbcConnector.sh
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
 resources:
-#  limits:
-#    memory: "2Gi"
-#    cpu: "1000m"
-#  requests:
-#    memory: "1Gi"
-#    cpu: "500m"
-
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+  requests:
+    cpu: 2000m
+    memory: 4Gi
 ## Custom pod annotations
 podAnnotations: { }
 
