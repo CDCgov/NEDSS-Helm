@@ -90,10 +90,10 @@ JDBC_CONNECTOR_CONFIG: /etc/jdbcConnector.sh
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
 resources:
   limits:
-    cpu: 4000m
+    cpu: 2000m
     memory: 4Gi
   requests:
-    cpu: 2000m
+    cpu: 1000m
     memory: 2Gi
 ## Custom pod annotations
 podAnnotations: { }
