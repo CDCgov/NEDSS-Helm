@@ -8,11 +8,13 @@ on:
       - main
     paths:
       - "charts/**"
+      - "argocd/**"
   pull_request:
     branches:
       - main
     paths:
       - "charts/**"
+      - "argocd/**"
   workflow_dispatch:
     
 jobs:

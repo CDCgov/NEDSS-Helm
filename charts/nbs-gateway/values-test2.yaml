@@ -1,13 +1,10 @@
 deployment:
   replicas: 1
-
 env: "test2"
-
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.6a88bba
-
+  tag: 1.0.1-TEST.5b058b0
 gatewayService:
   ports:
     - name: http
@@ -18,17 +15,13 @@ gatewayService:
       targetPort: 8000
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
-
 landing:
   base: "/welcome"
-
 welcome:
   enabled: "true"
-
 patient:
   file:
     enabled: true
-
 pageBuilder:
   enabled: "true"
   page:
@@ -46,34 +39,22 @@ resources:
   requests:
     memory: "512Mi"
     cpu: "250m"
-
 nbsExternalName: app-classic.test.nbspreview.com
-
 ingressHost: "app.test.nbspreview.com"
-
 modernizationApiHost: "modernization-api.default.svc.cluster.local:8080"
-
 pagebuilderApiHost: "page-builder-api.default.svc.cluster.local:8095"
-
 # OIDC settings
 oidc:
   enabled: "true"
   client:
     id: "nbs-modernization"
     secret: ""
-
 podAnnotations: {}
-
 podSecurityContext: {}
-
 securityContext: {}
-
 nodeSelector: {}
-
 tolerations: []
-
 affinity: {}
-
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
