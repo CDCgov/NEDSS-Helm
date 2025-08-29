@@ -20,9 +20,9 @@ spec:
         - values.yaml
       parameters:
         - name: sqlServerConnector.config.connection\.user
-          value: {{ .Values.env.ODSUsername }}
+          value: {{ .Values.kafka.kafkaDBUser }}
         - name: sqlServerConnector.config.connection\.password
-          value: {{ .Values.env.ODSPassword }}
+          value: {{ .Values.kafka.kafkaDBPass }}
         - name: kafka.bootstrapServers
           value: {{ .Values.env.kafkaMultiClusterEndpoints }}
         - name: sqlServerConnector.config.connection\.url
@@ -42,3 +42,5 @@ spec:
       prune: true
       selfHeal: true
   project: default
+
+
