@@ -34,9 +34,9 @@ spec:
         - name: connect.sqlserverconnector_odse.config.table\.include\.list
           value: 'dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.state_defined_field_data, dbo.Notification, dbo.Interview, dbo.CN_transportq_out, dbo.Place'
         - name: connect.sqlserverconnector_odse.config.database\.user
-          value: {{ .Values.env.ODSUsername }}
+          value: {{ .Values.debezium.debeziumDBUser }}
         - name: connect.sqlserverconnector_odse.config.database\.password
-          value: {{ .Values.env.ODSPassword }}
+          value: {{ .Values.debezium.debeziumDBPass }}
         - name: connect.sqlserverconnector_odse.config.database\.hostname
           value: {{ .Values.env.dbEndpoint }}
         - name: connect.sqlserverconnector_odse.config.database\.history\.kafka\.bootstrap\.servers
@@ -70,3 +70,5 @@ spec:
       prune: true
       selfHeal: true
   project: default
+
+

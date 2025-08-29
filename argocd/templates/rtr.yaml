@@ -1,0 +1,33 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rtr
+  namespace: argocd
+  annotations:
+    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook-weight: "6"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
+    path: charts/rtr
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        # - name: global.secrets.dburl.odse
+        #   value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;
+        # - name: global.secrets.dburl.rdb
+        #   value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;
+        # - name: global.secrets.kafka.cluster
+        #   value: {{ .Values.env.kafkaMultiClusterEndpoints }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  project: default

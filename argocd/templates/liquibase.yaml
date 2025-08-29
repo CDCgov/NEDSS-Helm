@@ -26,17 +26,17 @@ spec:
         - name: jdbc.rdb_db_url
           value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
         - name: jdbc.rdb_modern_db_url
-          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
+          value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true'
         - name: jdbc.srte_db_url
           value: 'jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=nbs_srte;integratedSecurity=false;encrypt=true;trustServerCertificate=true'          
         - name: jdbc.username
-          value: {{ .Values.env.ODSUsername }}
+          value: {{ .Values.liquibase.LiquibaseDBUser }}
         - name: jdbc.password
-          value: {{ .Values.env.ODSPassword }}
+          value: {{ .Values.liquibase.LiquibaseDBPass }}
         - name: jdbc.srte_username
-          value: {{ .Values.env.SRTEUsername }}
+          value: {{ .Values.liquibase.LiquibaseDBUser }}
         - name: jdbc.srte_password
-          value: {{ .Values.env.SRTEPassword }}
+          value: {{ .Values.liquibase.LiquibaseDBPass }}
         # Uncomment once added in helm
         # - name: resources.requests.cpu
         #   value: {{ .Values.liquibase.podRequestCPU }}
@@ -51,3 +51,5 @@ spec:
       prune: true
       selfHeal: true
   project: default
+
+
