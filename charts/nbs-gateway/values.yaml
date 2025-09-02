@@ -31,7 +31,7 @@ welcome:
 patient:
   file:
     # Enables routing from NBS6 pages to the modernized Patient File
-    enabled: false
+    enabled: true
 
 pageBuilder:
   enabled: "false"
