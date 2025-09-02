@@ -87,7 +87,6 @@ ui:
       enabled: true
   patient:
     file:
-      enabled: true
       mergeHistory:
         enabled: true
   deduplication:
