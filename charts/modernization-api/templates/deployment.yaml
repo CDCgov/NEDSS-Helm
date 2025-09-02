@@ -78,7 +78,7 @@ spec:
             '--nbs.ui.features.search.events.enabled={{ ((((.Values).ui).search).events).enabled | default "true" }}',
             '--nbs.ui.features.search.investigations.enabled={{ ((((.Values).ui).search).investigations).enabled | default "false"}}',
             '--nbs.ui.features.search.laboratoryReports.enabled={{ ((((.Values).ui).search).laboratoryReports).enabled | default "false"}}',                        
-            '--nbs.ui.features.patient.file.enabled={{ ((((.Values).ui).patient).file).enabled | default "false" }}',
+            '--nbs.ui.features.patient.file.enabled={{ ((((.Values).ui).patient).file).enabled | default "true" }}',
             '--nbs.ui.features.patient.file.merge-history.enabled={{ ((((.Values).ui).patient).file.mergeHistory).enabled | default "false" }}',
             '--nbs.ui.features.patient.search.filters.enabled={{ (((((.Values).ui).patient).search).filters).enabled | default "false" }}',
             '--nbs.ui.features.deduplication.enabled={{ (((.Values).ui).deduplication).enabled | default "false" }}',

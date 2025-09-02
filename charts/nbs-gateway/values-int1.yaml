@@ -19,9 +19,6 @@ landing:
   base: "/welcome"
 welcome:
   enabled: "true"
-patient:
-  file:
-    enabled: true
 pageBuilder:
   enabled: "true"
   page:

@@ -37,7 +37,7 @@ spec:
           '--nbs.gateway.modernization.service={{ .Values.modernizationApiHost }}',
           '--nbs.gateway.patient.search.service={{ .Values.modernizationApiHost }}',          
           '--nbs.gateway.patient.file.service={{ .Values.modernizationApiHost }}',
-          '--nbs.gateway.patient.file.enabled={{ (((.Values).patient).file).enabled | default "false" }}',
+          '--nbs.gateway.patient.file.enabled={{ (((.Values).patient).file).enabled | default "true" }}',
           '--nbs.gateway.pagebuilder.service={{ .Values.pagebuilderApiHost }}',
           '--nbs.gateway.pagebuilder.enabled={{ ((.Values).pageBuilder).enabled | default "false" }}', 
           '--nbs.gateway.pagebuilder.page.library.enabled={{ ((((.Values).pageBuilder).page).library).enabled | default "false" }}',
