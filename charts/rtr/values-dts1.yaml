@@ -20,7 +20,7 @@ global:
 
   image:
     repository: ""
-    tag: 1.0.1-SNAPSHOT.1ff2c73 
+    tag: 1.0.1-SNAPSHOT.1ff2c73
     pullPolicy: IfNotPresent
 
   kafka:
@@ -101,7 +101,7 @@ services:
         failureThreshold: 5
     image:
       name: "investigation-reporting-service"
-      tag: 1.0.1-SNAPSHOT.1ff2c73 
+      tag: 1.0.1-SNAPSHOT.1ff2c73
 
   # ----------------------------------------
   # LDF Data Reporting Service
@@ -136,7 +136,7 @@ services:
         failureThreshold: 5
     image:
       name: "ldfdata-reporting-service"
-      tag: 1.0.1-SNAPSHOT.1ff2c73 
+      tag: 1.0.1-SNAPSHOT.1ff2c73
 
   # ----------------------------------------
   # Observation Reporting Service
@@ -171,7 +171,7 @@ services:
         failureThreshold: 5
     image:
       name: "observation-reporting-service"
-      tag: 1.0.1-SNAPSHOT.1ff2c73 
+      tag: 1.0.1-SNAPSHOT.1ff2c73
 
 
   # ----------------------------------------
@@ -207,7 +207,7 @@ services:
         failureThreshold: 5
     image:
       name: "organization-reporting-service"
-      tag: 1.0.1-SNAPSHOT.1ff2c73 
+      tag: 1.0.1-SNAPSHOT.1ff2c73
 
   # ----------------------------------------
   # Person Reporting Service
@@ -245,7 +245,7 @@ services:
         failureThreshold: 5
     image:
       name: "person-reporting-service"
-      tag: 1.0.1-SNAPSHOT.1ff2c73 
+      tag: 1.0.1-SNAPSHOT.1ff2c73
 
   # ----------------------------------------
   # Post-Processing Reporting Service
@@ -282,5 +282,5 @@ services:
         failureThreshold: 5
     image:
       name: "post-processing-reporting-service"
-      tag: 1.0.1-SNAPSHOT.1ff2c73 
+      tag: 1.0.1-SNAPSHOT.1ff2c73
 
