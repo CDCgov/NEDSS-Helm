@@ -35,7 +35,16 @@ spec:
               sed -i -e "s/<NBS_RDB_PASS>/$rdb_pass/g" /home/SAS/.odbc.ini;
               cp /home/SAS/.odbc.ini /etc/odbc.ini;
               chmod 766 /etc/odbc.ini;
-              export ODBCINI=/etc/odbc.ini       
+              export ODBCINI=/etc/odbc.ini;              
+              echo "Updating autoexec.sas";
+              autoexec_home="${WILDFLY_HOME}/wildfly-10.0.0.Final/nedssdomain/Nedss/report";
+              sed -i "s|SAS_REPORT_HOME=.*|SAS_REPORT_HOME=$autoexec_home;|g" "$autoexec_home/autoexec.sas";
+              sed -i "s|DSN=nedss1.*PASSWORD=.*s|DSN=nedss1 UID=$odse_user PASSWORD=$odse_pass|g" "$autoexec_home/autoexec.sas";
+              sed -i "s|DSN=nbs_rdb.*PASSWORD=.*b|DSN=nbs_rdb UID=$rdb_user PASSWORD=$rdb_pass|g" "$autoexec_home/autoexec.sas";
+              sed -i "s|DSN=nbs_srt.*PASSWORD=.*s|DSN=nbs_srt UID=$odse_user PASSWORD=$odse_pass|g" "$autoexec_home/autoexec.sas";
+              sed -i "s|DSN=nbs_msg.*PASSWORD=.*s|DSN=nbs_msg UID=$odse_user PASSWORD=$odse_pass|g" "$autoexec_home/autoexec.sas";
+              sed -i "s|let username=.*|let username=\"$rdb_user\";|g" "$autoexec_home/autoexec.sas";
+              sed -i "s|let password=.*|let password=\"$rdb_pass\";|g" "$autoexec_home/autoexec.sas";       
               date;              
               echo 'Running PHCMartETL.sh';
               $WILDFLY_HOME/wildfly-10.0.0.Final/nedssdomain/Nedss/BatchFiles/PHCMartETL.sh;
