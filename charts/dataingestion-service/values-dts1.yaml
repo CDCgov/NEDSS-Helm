@@ -3,7 +3,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 7.11.0-SNAPSHOT.6013cbb
+  tag: 7.11.1-SNAPSHOT.944a27b
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -114,7 +114,3 @@ probes:
   liveness:
     enabled: true
 timezone: "UTC"
-services:
-  data-ingestion-service:
-    image:
-      tag: 7.11.1-SNAPSHOT.944a27b
