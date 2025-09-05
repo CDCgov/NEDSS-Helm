@@ -264,6 +264,8 @@ services:
       create: true
       name: ''
       annotations: { }
+    featureFlag:
+      serviceDisable: "false"
     log:
       path: /usr/share/post-processing-reporting/data
     probes:
