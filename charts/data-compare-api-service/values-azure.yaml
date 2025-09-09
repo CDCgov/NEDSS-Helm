@@ -65,8 +65,6 @@ kafka:
 log:
   path: "/usr/share/datacompareapi/data"
 
-cloudProvider: azure
-
 azure:
   files:
     resourceGroupName: 
@@ -80,5 +78,10 @@ azure:
   managedIdentity:
     enabled: false
 
+#AWS PVC Settings#
+pvc:
+  dcPvClaim:
+    storageClass: efs-datacompareapi
+    storageRequest: 20Gi
 
 efsFileSystemId: "EXAMPLE_EFS_ID"

@@ -65,8 +65,6 @@ kafka:
 log:
   path: "/usr/share/datacompareprocessor/data"
 
-cloudProvider: azure
-
 #Azure PVC Settings#
 azure:
   files:
@@ -80,6 +78,12 @@ azure:
   sasToken: "AZURE_SAS_TOKEN"
   managedIdentity:
     enabled: false
+
+#AWS PVC Settings#
+pvc:
+  dcPvClaim:
+    storageClass: efs-datacompareprocessor
+    storageRequest: 20Gi
 
 ses:
   recipients: ""
