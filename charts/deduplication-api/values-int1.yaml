@@ -82,4 +82,4 @@ probes:
 services:
   deduplication-api:
     image:
-      tag: 7.11.0-SNAPSHOT.67ff78d
+      tag: 7.11.1-SNAPSHOT.6a3efa0
