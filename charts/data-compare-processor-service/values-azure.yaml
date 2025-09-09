@@ -62,10 +62,18 @@ authUri: ""
 kafka:
   cluster: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
 
-ses:
-  recipients: ""
+log:
+  path: "/usr/share/datacompareprocessor/data"
 
+cloudProvider: azure
+
+#Azure PVC Settings#
 azure:
+  files:
+    resourceGroupName: 
+    storageAccountName: 
+    storageClass: azurefile-csi-private-datacompareprocessor
+    storageRequest: 20Gi
   storageAccountName: "AZURE_STORAGE_ACCOUNT_NAME"
   containerName: "AZURE_CONTAINER_NAME"
   connectionString: "AZURE_CONNECTION_STRING"
@@ -73,12 +81,7 @@ azure:
   managedIdentity:
     enabled: false
 
-log:
-  path: "/usr/share/datacompareprocessor/data"
+ses:
+  recipients: ""
 
-pvc:
-  dcPvClaim:
-    storageClass: azurefile-csi-private-datacompareprocessor
-    storageRequest: 20Gi
-
-azureFileShareName: ""
+efsFileSystemId: "EXAMPLE_EFS_ID"
