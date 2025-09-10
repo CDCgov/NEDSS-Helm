@@ -50,17 +50,18 @@ tolerations: []
 
 affinity: {}
 
-ingressHost: "data.azure.example.com"
+ingressHost: "data.EXAMPLE_DOMAIN"
 
+# dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
-  dbserver: "tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net"
-  username: "nbs_ods"
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 authUri: ""
 
 kafka:
-  cluster: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
 log:
   path: "/usr/share/datacompareapi/data"

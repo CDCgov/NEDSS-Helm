@@ -54,8 +54,10 @@ jdbc:
   username: ""
   password: ""
 
-#authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
-authUri: ""
+authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
+
+kafka:
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
 log:
   path: "/usr/share/datacompareprocessor/data"

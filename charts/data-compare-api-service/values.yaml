@@ -54,6 +54,9 @@ jdbc:
 
 authUri: ""
 
+kafka:
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+
 log:
   path: "/usr/share/datacompareapi/data"
 
