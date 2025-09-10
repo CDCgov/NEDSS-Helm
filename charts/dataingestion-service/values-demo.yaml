@@ -5,7 +5,7 @@ env: "demo"
 image:
   repository: 501715613725.dkr.ecr.us-east-1.amazonaws.com/cdc-nbs-modernization/data-ingestion-service
   pullPolicy: IfNotPresent
-  tag: 1.0.1-1.1.1.RELTAG.22635ba
+  tag: 7.11.1-SNAPSHOT.944a27b
 
 imagePullSecrets: []
 nameOverride: ""
