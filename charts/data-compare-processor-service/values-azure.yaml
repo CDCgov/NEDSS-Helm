@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "prod"
+env: "azure"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-compare-processor-service"
@@ -30,8 +30,13 @@ service:
   port: 8086
   httpsPort: 443
 
-
-resources: {}
+resources:
+  limits:
+    memory: "2Gi"
+    cpu: "1000m"
+  requests:
+    memory: "1Gi"
+    cpu: "500m"
 
 autoscaling:
   enabled: false
@@ -47,17 +52,41 @@ affinity: {}
 
 ingressHost: "data.EXAMPLE_DOMAIN"
 
-
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
-  dbserver: ""
-  username: ""
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
-authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
+authUri: ""
 
 kafka:
   cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
 log:
   path: "/usr/share/datacompareprocessor/data"
+
+#Azure PVC Settings#
+azure:
+  files:
+    resourceGroupName: 
+    storageAccountName: 
+    storageClass: azurefile-csi-private-datacompareprocessor
+    storageRequest: 20Gi
+  storageAccountName: "AZURE_STORAGE_ACCOUNT_NAME"
+  containerName: "AZURE_CONTAINER_NAME"
+  connectionString: "AZURE_CONNECTION_STRING"
+  sasToken: "AZURE_SAS_TOKEN"
+  managedIdentity:
+    enabled: false
+
+#AWS PVC Settings#
+pvc:
+  dcPvClaim:
+    storageClass: efs-datacompareprocessor
+    storageRequest: 20Gi
+
+ses:
+  recipients: ""
+
+efsFileSystemId: "EXAMPLE_EFS_ID"

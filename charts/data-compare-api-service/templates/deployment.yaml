@@ -52,6 +52,16 @@ spec:
               value: {{ .Values.s3.bucketName }}
             - name: S3_REGION
               value: {{ .Values.s3.region }}
+            - name: AZURE_STORAGE_ACCOUNT_NAME
+              value: {{ .Values.azure.storageAccountName }}
+            - name: AZURE_CONTAINER_NAME
+              value: {{ .Values.azure.containerName }}
+            - name: AZURE_CONNECTION_STRING
+              value: {{ .Values.azure.connectionString }}
+            - name: AZURE_SAS_TOKEN
+              value: {{ .Values.azure.sasToken }}
+            - name: AZURE_MANAGED_IDENTITY
+              value: {{ .Values.azure.managedIdentity.enabled | quote }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}  
           resources:

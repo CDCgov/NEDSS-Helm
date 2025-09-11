@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "prod"
+env: "azure"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-compare-api-service"
@@ -30,8 +30,13 @@ service:
   port: 8085
   httpsPort: 443
 
-
-resources: {}
+resources:
+  limits:
+    memory: "2Gi"
+    cpu: "1000m"
+  requests:
+    memory: "1Gi"
+    cpu: "500m"
 
 autoscaling:
   enabled: false
@@ -47,10 +52,11 @@ affinity: {}
 
 ingressHost: "data.EXAMPLE_DOMAIN"
 
+# dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
   username: "EXAMPLE_ODSE_DB_USER"
-  password: "<EXAMPLE_ODSE_DB_USER_PASSWORD>"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 authUri: ""
 
@@ -60,4 +66,23 @@ kafka:
 log:
   path: "/usr/share/datacompareapi/data"
 
+azure:
+  files:
+    resourceGroupName: 
+    storageAccountName: 
+    storageClass: azurefile-csi-private-datacompareapi
+    storageRequest: 20Gi
+  storageAccountName: "AZURE_STORAGE_ACCOUNT_NAME"
+  containerName: "AZURE_CONTAINER_NAME"
+  connectionString: "AZURE_CONNECTION_STRING"
+  sasToken: "AZURE_SAS_TOKEN"
+  managedIdentity:
+    enabled: false
 
+#AWS PVC Settings#
+pvc:
+  dcPvClaim:
+    storageClass: efs-datacompareapi
+    storageRequest: 20Gi
+
+efsFileSystemId: "EXAMPLE_EFS_ID"
