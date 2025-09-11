@@ -32,11 +32,6 @@ global:
     annotations: { }
     name: ''
 
-  podAnnotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/path: /actuator/prometheus
-    prometheus.io/port: '8081'
-
   resources:
     limits:
       memory: "1Gi"
@@ -83,7 +78,7 @@ services:
       name: ''
       annotations: { }
     featureFlag:
-      phcDatamartEnable: "true"
+      phcDatamartDisable: "false"
     log:
       path: /usr/share/investigation-reporting/data
     probes:
@@ -190,6 +185,9 @@ services:
       create: true
       name: ''
       annotations: { }
+    featureFlag:
+      elasticSearchEnable: "true"
+      phcDatamartDisable: "false"
     log:
       path: /usr/share/organization-reporting/data
     probes:
@@ -227,6 +225,7 @@ services:
       annotations: { }
     featureFlag:
       elasticSearchEnable: "true"
+      phcDatamartDisable: "false"
     log:
       path: /usr/share/person-reporting/data
     probes:

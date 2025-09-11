@@ -31,11 +31,6 @@ global:
     annotations: { }
     name: ''
 
-  podAnnotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/path: /actuator/prometheus
-    prometheus.io/port: '8081'
-
   resources:
     limits:
       memory: "1Gi"
@@ -82,8 +77,7 @@ services:
       name: ''
       annotations: { }
     featureFlag:
-      phcDatamartEnable: "true"
-      covidDmEnable: "false"
+      phcDatamartDisable: "false"
     log:
       path: /usr/share/investigation-reporting/data
     probes:
@@ -102,6 +96,10 @@ services:
     image:
       name: "investigation-reporting-service"
       tag: 1.0.1-SNAPSHOT.79df56b
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8093'
 
   # ----------------------------------------
   # LDF Data Reporting Service
@@ -172,6 +170,10 @@ services:
     image:
       name: "observation-reporting-service"
       tag: 1.0.1-SNAPSHOT.79df56b
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8094'
 
 
   # ----------------------------------------
@@ -190,6 +192,9 @@ services:
       create: true
       name: ''
       annotations: { }
+    featureFlag:
+      elasticSearchEnable: "true"
+      phcDatamartDisable: "false"
     log:
       path: /usr/share/organization-reporting/data
     probes:
@@ -208,6 +213,10 @@ services:
     image:
       name: "organization-reporting-service"
       tag: 1.0.1-SNAPSHOT.79df56b
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8092'
 
   # ----------------------------------------
   # Person Reporting Service
@@ -227,7 +236,7 @@ services:
       annotations: { }
     featureFlag:
       elasticSearchEnable: "true"
-      covidDmEnable: "false"
+      phcDatamartDisable: "false"
     log:
       path: /usr/share/person-reporting/data
     probes:
@@ -246,6 +255,10 @@ services:
     image:
       name: "person-reporting-service"
       tag: 1.0.1-SNAPSHOT.79df56b
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8091'
 
   # ----------------------------------------
   # Post-Processing Reporting Service
@@ -285,4 +298,7 @@ services:
     image:
       name: "post-processing-reporting-service"
       tag: 1.0.1-SNAPSHOT.79df56b
-
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8095'
