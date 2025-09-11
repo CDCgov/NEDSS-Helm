@@ -3,7 +3,7 @@ env: "dts1"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 7.11.1-SNAPSHOT.944a27b
+  tag: 7.11.1-SNAPSHOT.91c7d14
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
