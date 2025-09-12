@@ -3,7 +3,7 @@ env: "test2"
 image:
   repository: ""
   pullPolicy: IfNotPresent
-  tag: 1.0.1-TEST.c477b13
+  tag: 1.0.1-TEST.59050d3
 # Host URL for application
 ingressHost: app.test.nbspreview.com
 # URL for access to classic application
