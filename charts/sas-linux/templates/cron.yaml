@@ -78,7 +78,7 @@ spec:
               sqlcmd -S $db_host -U $rdb_user -P $rdb_pass -Q "select * from rdb.dbo.job_batch_log jbl where status_type <>'complete' and create_dttm > DATEADD(HOUR, -{{.Values.etl.error_check_hours}}, CAST(CAST(GETDATE() AS DATE) AS DATETIME));" -W
               error_check_job_batch=$(sqlcmd -S $db_host -U $rdb_user -P $rdb_pass -Q "SET NOCOUNT ON; select * from rdb.dbo.job_batch_log jbl where status_type = 'error' and create_dttm > DATEADD(HOUR, -{{.Values.etl.error_check_hours}}, CAST(CAST(GETDATE() AS DATE) AS DATETIME));" -W -h -1)
               if [[ $error_check_job_batch != "" ]]; then
-                  echo "ERROR: Found errors in rdb.dbo.job_batch_log see log above"
+                  echo "ERROR: Found errors  for the past {{.Values.etl.error_check_hours}} hours in rdb.dbo.job_batch_log see log above"
                   echo $error_check_job_batch
               fi
               echo '---- END Checking rdb.dbo.job_batch_log for logged ERRORS ----';
@@ -86,7 +86,7 @@ spec:
               sqlcmd -S $db_host -U $rdb_user -P $rdb_pass -Q "select * from rdb.dbo.job_flow_log jfl where Error_Description is not null and create_dttm > DATEADD(HOUR, -{{.Values.etl.error_check_hours}}, CAST(CAST(GETDATE() AS DATE) AS DATETIME));" -W
               error_check_job_flow=$(sqlcmd -S $db_host -U $rdb_user -P $rdb_pass -Q "SET NOCOUNT ON; select * from rdb.dbo.job_flow_log jfl where Error_Description is not null and create_dttm > DATEADD(HOUR, -{{.Values.etl.error_check_hours}}, CAST(CAST(GETDATE() AS DATE) AS DATETIME));" -W -h -1) 
               if [[ $error_check_job_flow != "" ]]; then
-                  echo "ERROR: Found errors in rdb.dbo.job_flow_log see log above"                 
+                  echo "ERROR: Found errors the past {{.Values.etl.error_check_hours}} hours in rdb.dbo.job_flow_log see log above"                 
               fi
               echo '---- END Checking rdb.dbo.job_flow_log for logged ERRORS ----';               
           restartPolicy: Never
