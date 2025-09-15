@@ -97,6 +97,10 @@ services:
     image:
       name: "investigation-reporting-service"
       tag: "v1.1.9"
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8093'
 
   # ----------------------------------------
   # LDF Data Reporting Service
@@ -168,6 +172,10 @@ services:
     image:
       name: "observation-reporting-service"
       tag: "v1.1.9"
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8094'
 
   # ----------------------------------------
   # Organization Reporting Service
@@ -206,6 +214,10 @@ services:
     image:
       name: "organization-reporting-service"
       tag: "v1.1.9"
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8092'
 
   # ----------------------------------------
   # Person Reporting Service
@@ -244,6 +256,10 @@ services:
     image:
       name: "person-reporting-service"
       tag: "v1.1.9"
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8091'
 
   # ----------------------------------------
   # Post-Processing Reporting Service
@@ -283,3 +299,7 @@ services:
     image:
       name: "post-processing-reporting-service"
       tag: "v1.1.9"
+    podAnnotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/port: '8095'
