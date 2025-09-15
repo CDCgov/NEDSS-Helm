@@ -21,7 +21,7 @@ global:
 
   image:
     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
-    tag: "v1.2.0"
+    tag: "v1.2.1"
     pullPolicy: IfNotPresent
 
   serviceAccount:
