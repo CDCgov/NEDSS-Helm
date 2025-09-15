@@ -20,7 +20,7 @@ global:
 
   image:
     repository: ""
-    tag: 1.0.1-SNAPSHOT.79df56b
+    tag: 1.0.1-SNAPSHOT.c7a47bd
     pullPolicy: IfNotPresent
 
   kafka:
@@ -95,7 +95,7 @@ services:
         failureThreshold: 5
     image:
       name: "investigation-reporting-service"
-      tag: 1.0.1-SNAPSHOT.79df56b
+      tag: 1.0.1-SNAPSHOT.c7a47bd
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -134,7 +134,7 @@ services:
         failureThreshold: 5
     image:
       name: "ldfdata-reporting-service"
-      tag: 1.0.1-SNAPSHOT.79df56b
+      tag: 1.0.1-SNAPSHOT.c7a47bd
 
   # ----------------------------------------
   # Observation Reporting Service
@@ -169,7 +169,7 @@ services:
         failureThreshold: 5
     image:
       name: "observation-reporting-service"
-      tag: 1.0.1-SNAPSHOT.79df56b
+      tag: 1.0.1-SNAPSHOT.c7a47bd
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -212,7 +212,7 @@ services:
         failureThreshold: 5
     image:
       name: "organization-reporting-service"
-      tag: 1.0.1-SNAPSHOT.79df56b
+      tag: 1.0.1-SNAPSHOT.c7a47bd
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -254,7 +254,7 @@ services:
         failureThreshold: 5
     image:
       name: "person-reporting-service"
-      tag: 1.0.1-SNAPSHOT.79df56b
+      tag: 1.0.1-SNAPSHOT.c7a47bd
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -297,7 +297,7 @@ services:
         failureThreshold: 5
     image:
       name: "post-processing-reporting-service"
-      tag: 1.0.1-SNAPSHOT.79df56b
+      tag: 1.0.1-SNAPSHOT.c7a47bd
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
