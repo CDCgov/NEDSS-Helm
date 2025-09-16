@@ -82,7 +82,7 @@ connect:
       "topic.creation.default.cleanup.policy": "compact",
       "time.precision.mode": "connect",
       "transforms": "dropPrefix, convertTimezone",
-      "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
+      "transforms.dropPrefix.regex": "cdc\\.nbs_odse\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nbs_$1",
       "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
@@ -128,7 +128,7 @@ connect:
       "time.precision.mode": "connect",
       "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestampsConfig_add_time,
                        convertTimestampsConfig_last_chg_time, convertTimestampsConfig_record_status_time",
-      "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
+      "transforms.dropPrefix.regex": "cdc\\.nbs_odse\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nrt_odse_$1",
       "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
@@ -208,7 +208,7 @@ connect:
       "transforms.dropPrefix.replacement": "nrt_srte_$1",
       
       ### Snomed condition specific transforms
-      "transforms.dropPrefixConfig.regex": "cdc\\.NBS_SRTE\\.dbo\\.Snomed_condition",
+      "transforms.dropPrefixConfig.regex": "cdc\\.nbs_srte\\.dbo\\.Snomed_condition",
       "transforms.dropPrefixConfig.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefixConfig.replacement": "nrt_srte_Snomed_condition",
       "transforms.unwrapConfig.type": "io.debezium.transforms.ExtractNewRecordState",
