@@ -40,6 +40,7 @@ spec:
           resources:
             {{- toYaml .Values.connect.resources | nindent 12 }}
 
+          {{- if not .Values.connect.properties.probe }}
           livenessProbe:
             initialDelaySeconds: 600        # Wait 180s after container starts before first check
             periodSeconds: 20              # Check every 20s
@@ -86,8 +87,10 @@ spec:
 
                   # If all connectors and tasks are running, container is healthy
                   exit 0
+          {{- end }}
 
           # Readiness probe: Checks if container is ready to accept traffic
+          {{- if not .Values.connect.properties.probe }}
           readinessProbe:
             initialDelaySeconds: 600
             periodSeconds: 20
@@ -134,6 +137,7 @@ spec:
 
                   # If all connectors and tasks are running, container is ready
                   exit 0
+          {{- end }}
 
           volumeMounts:
             - name: config

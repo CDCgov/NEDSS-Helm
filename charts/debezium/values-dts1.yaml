@@ -40,6 +40,7 @@ connect:
     sql_server_agent_status: ""
     bootstrap_server: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
                        b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
+    probe: false
 
   connector_enable:
     nbs_odse: "enabled"
