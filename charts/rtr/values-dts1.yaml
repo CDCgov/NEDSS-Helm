@@ -106,7 +106,7 @@ services:
         cpu: "2000m"
       requests:
         memory: "4G"
-        cpu: "2000m"
+        cpu: "1500m"
 
   # ----------------------------------------
   # LDF Data Reporting Service
@@ -187,7 +187,7 @@ services:
         cpu: "2000m"
       requests:
         memory: "4G"
-        cpu: "2000m"
+        cpu: "1500m"
 
 
   # ----------------------------------------
@@ -237,7 +237,7 @@ services:
         cpu: "2000m"
       requests:
         memory: "4G"
-        cpu: "2000m"
+        cpu: "1500m"
 
   # ----------------------------------------
   # Person Reporting Service
@@ -286,7 +286,7 @@ services:
         cpu: "2000m"
       requests:
         memory: "4G"
-        cpu: "2000m"
+        cpu: "1500m"
 
   # ----------------------------------------
   # Post-Processing Reporting Service
