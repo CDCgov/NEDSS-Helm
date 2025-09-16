@@ -41,7 +41,7 @@ spec:
             {{- toYaml .Values.connect.resources | nindent 12 }}
 
           livenessProbe:
-            initialDelaySeconds: 180        # Wait 180s after container starts before first check
+            initialDelaySeconds: 600        # Wait 180s after container starts before first check
             periodSeconds: 20              # Check every 20s
             timeoutSeconds: 5              # Timeout for each check
             failureThreshold: 3            # Mark container unhealthy after 3 consecutive failures
@@ -89,7 +89,7 @@ spec:
 
           # Readiness probe: Checks if container is ready to accept traffic
           readinessProbe:
-            initialDelaySeconds: 180
+            initialDelaySeconds: 600
             periodSeconds: 20
             timeoutSeconds: 5
             failureThreshold: 3
