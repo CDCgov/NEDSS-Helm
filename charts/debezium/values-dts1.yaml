@@ -28,7 +28,7 @@ connect:
       memory: 8Gi
     requests:
       cpu: 1500m
-      memory: 8Gi
+      memory: 7Gi
 
   properties:
     group_id: "debezium-odse-srte-connector-v081525"
