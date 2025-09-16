@@ -64,6 +64,8 @@ spec:
               value: {{ .Values.azure.managedIdentity.enabled | quote }}
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster }}  
+            - name: CLOUD_PROVIDER
+              value: {{ .Values.provider}}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

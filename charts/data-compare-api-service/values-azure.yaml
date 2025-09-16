@@ -77,7 +77,7 @@ azure:
   connectionString: "AZURE_CONNECTION_STRING"
   sasToken: "AZURE_SAS_TOKEN"
   managedIdentity:
-    enabled: false
+    enabled: true
 
 #AWS PVC Settings#
 pvc:
@@ -86,3 +86,5 @@ pvc:
     storageRequest: 20Gi
 
 efsFileSystemId: "EXAMPLE_EFS_ID"
+
+provider: AZURE
