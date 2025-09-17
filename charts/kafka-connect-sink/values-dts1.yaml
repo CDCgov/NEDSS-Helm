@@ -24,7 +24,7 @@ servicePort: 8083
 ## ref: https://docs.confluent.io/current/connect/userguide.html#configuring-workers
 configurationOverrides:
   "plugin.path": "/usr/share/confluent-hub-components,/usr/share/java"
-  "topics_basename": "kafka-sink-connector-070825"
+  "topics_basename": "kafka-sink-connector-v091725-1"
   "key.converter": "org.apache.kafka.connect.json.JsonConverter"
   "value.converter": "org.apache.kafka.connect.json.JsonConverter"
   "key.converter.schemas.enable": "false"
@@ -37,12 +37,12 @@ configurationOverrides:
 
 sqlServerConnectorEnabled: true
 sqlServerConnector: {
-  "name": "Kafka-Connect-SqlServer-Sink-071025",
+  "name": "Kafka-Connect-SqlServer-Sink-v091725-1",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
-    "tasks.max": "1",
+    "tasks.max": "2",
     "offset.flush.interval.ms": "60000",
-    "batch.size": "200",
+    "batch.size": "5000",
     "connection.url": "jdbc:sqlserver://cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;",
     "connection.user": "",
     "connection.password": "",

@@ -31,15 +31,14 @@ connect:
       memory: 7Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v081525"
+    group_id: "debezium-odse-srte-connector-v091725-1"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
     sql_server_agent_override: false
     sql_server_agent_status: ""
-    bootstrap_server: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-                       b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
+    bootstrap_server: "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092"
     probe: false
 
   connector_enable:
@@ -48,7 +47,7 @@ connect:
     nbs_odse_meta: "enabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v081525",
+    "name": "debezium-odse-connector-v091725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com",
@@ -92,7 +91,7 @@ connect:
   }
 
   sqlserverconnector_odse_meta: {
-    "name": "debezium-odse-meta-tables-connector-v081525",
+    "name": "debezium-odse-meta-tables-connector-v091725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com",
@@ -149,7 +148,7 @@ connect:
   }
   
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v081525",
+    "name": "debezium-srte-connector-v091725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
       "database.hostname": "cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com",
@@ -272,14 +271,13 @@ connect:
 
   env:
     - name: BOOTSTRAP_SERVERS
-      value: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-              b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
+      value: "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092"
     - name: LOG_LEVEL
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v081525"
+      value: "debezium-odse-srte-connector-v091725-1"
     - name: TZ
       value: "UTC"
 
