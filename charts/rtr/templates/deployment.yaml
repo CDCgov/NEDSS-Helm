@@ -118,6 +118,8 @@ spec:
               value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "elasticSearchEnable") }} {{ $service.featureFlag.elasticSearchEnable | quote }} {{- else }} "false" {{- end }}
             - name: FF_SERVICE_DISABLE
               value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "serviceDisable") }} {{ $service.featureFlag.serviceDisable | quote }} {{- else }} "false" {{- end }}
+            - name: KAFKA_CONSUMER_MAX_POLL_RECS
+              value: {{- if and (hasKey $service "kafka") (hasKey $service.kafka "maxPollRecs") }} {{ $service.kafka.maxPollRecs | quote }} {{- else }} "200" {{- end }}
 
       {{- if $service.nodeSelector }}
       nodeSelector:

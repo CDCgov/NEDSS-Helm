@@ -25,6 +25,7 @@ global:
 
   kafka:
     cluster: ""
+    maxPollRecs: 5000
 
   serviceAccount:
     create: true
@@ -64,6 +65,8 @@ services:
   # Investigation Reporting Service
   # ----------------------------------------
   investigation-reporting:
+    kafka:
+      maxPollRecs: 5000
     secrets:
       jdbc:
         secretName: "rtr-access"
@@ -112,6 +115,8 @@ services:
   # LDF Data Reporting Service
   # ----------------------------------------
   ldfdata-reporting:
+    kafka:
+      maxPollRecs: 5000
     secrets:
       jdbc:
         secretName: "rtr-access"
@@ -147,6 +152,8 @@ services:
   # Observation Reporting Service
   # ----------------------------------------
   observation-reporting:
+    kafka:
+      maxPollRecs: 5000
     secrets:
       jdbc:
         secretName: "rtr-access"
@@ -194,6 +201,8 @@ services:
   # Organization Reporting Service
   # ----------------------------------------
   organization-reporting:
+    kafka:
+      maxPollRecs: 5000
     secrets:
       jdbc:
         secretName: "rtr-access"
@@ -243,6 +252,8 @@ services:
   # Person Reporting Service
   # ----------------------------------------
   person-reporting:
+    kafka:
+      maxPollRecs: 5000
     secrets:
       jdbc:
         secretName: "rtr-access"
@@ -292,6 +303,8 @@ services:
   # Post-Processing Reporting Service
   # ----------------------------------------
   post-processing-reporting:
+    kafka:
+      maxPollRecs: 5000
     secrets:
       jdbc:
         secretName: "rtr-access"
