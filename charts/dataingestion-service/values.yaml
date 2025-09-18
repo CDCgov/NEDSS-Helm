@@ -65,7 +65,7 @@ xmlHl7Parser:
   port: 8088
 
 compare:
-  enabled: "false"
+  enabled: "true"
   port: 8085
 
 ingress:
