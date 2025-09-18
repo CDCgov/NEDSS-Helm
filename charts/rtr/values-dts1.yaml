@@ -170,7 +170,7 @@ services:
     log:
       path: /usr/share/observation-reporting/data
     featureFlag:
-      threadPoolSize: "6"
+      threadPoolSize: 1
     probes:
       readiness:
         enabled: true
@@ -221,7 +221,7 @@ services:
     featureFlag:
       elasticSearchEnable: "false"
       phcDatamartDisable: "true"
-      threadPoolSize: "4"
+      threadPoolSize: 1
     log:
       path: /usr/share/organization-reporting/data
     probes:
@@ -273,7 +273,7 @@ services:
     featureFlag:
       elasticSearchEnable: "false"
       phcDatamartDisable: "false"
-      threadPoolSize: "6"
+      threadPoolSize: 1
     log:
       path: /usr/share/person-reporting/data
     probes:
