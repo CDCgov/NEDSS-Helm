@@ -221,7 +221,7 @@ services:
     featureFlag:
       elasticSearchEnable: "false"
       phcDatamartDisable: "true"
-      threadPoolSize: 1
+      threadPoolSize: 4
     log:
       path: /usr/share/organization-reporting/data
     probes:
