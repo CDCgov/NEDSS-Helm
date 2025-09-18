@@ -20,7 +20,7 @@ global:
 
   image:
     repository: ""
-    tag: 1.0.1-SNAPSHOT.c7a47bd
+    tag: 1.0.1-SNAPSHOT.27d97c3
     pullPolicy: IfNotPresent
 
   kafka:
@@ -99,7 +99,7 @@ services:
         failureThreshold: 5
     image:
       name: "investigation-reporting-service"
-      tag: 1.0.1-SNAPSHOT.c7a47bd
+      tag: 1.0.1-SNAPSHOT.27d97c3
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -147,7 +147,7 @@ services:
         failureThreshold: 5
     image:
       name: "ldfdata-reporting-service"
-      tag: 1.0.1-SNAPSHOT.c7a47bd
+      tag: 1.0.1-SNAPSHOT.27d97c3
 
   # ----------------------------------------
   # Observation Reporting Service
@@ -170,7 +170,7 @@ services:
     log:
       path: /usr/share/observation-reporting/data
     featureFlag:
-      threadPoolSize: 1
+      threadPoolSize: 6
     probes:
       readiness:
         enabled: true
@@ -186,17 +186,17 @@ services:
         failureThreshold: 5
     image:
       name: "observation-reporting-service"
-      tag: 1.0.1-SNAPSHOT.c7a47bd
+      tag: 1.0.1-SNAPSHOT.27d97c3
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
       prometheus.io/port: '8094'
     resources:
       limits:
-        memory: "4Gi"
+        memory: "6Gi"
         cpu: "1000m"
       requests:
-        memory: "4G"
+        memory: "6G"
         cpu: "1000m"
 
 
@@ -239,7 +239,7 @@ services:
         failureThreshold: 5
     image:
       name: "organization-reporting-service"
-      tag: 1.0.1-SNAPSHOT.c7a47bd
+      tag: 1.0.1-SNAPSHOT.27d97c3
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -273,7 +273,7 @@ services:
     featureFlag:
       elasticSearchEnable: "false"
       phcDatamartDisable: "false"
-      threadPoolSize: 1
+      threadPoolSize: 6
     log:
       path: /usr/share/person-reporting/data
     probes:
@@ -291,17 +291,17 @@ services:
         failureThreshold: 5
     image:
       name: "person-reporting-service"
-      tag: 1.0.1-SNAPSHOT.c7a47bd
+      tag: 1.0.1-SNAPSHOT.27d97c3
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
       prometheus.io/port: '8091'
     resources:
       limits:
-        memory: "4Gi"
+        memory: "6Gi"
         cpu: "1000m"
       requests:
-        memory: "4G"
+        memory: "6G"
         cpu: "1000m"
 
   # ----------------------------------------
@@ -343,7 +343,7 @@ services:
         failureThreshold: 5
     image:
       name: "post-processing-reporting-service"
-      tag: 1.0.1-SNAPSHOT.c7a47bd
+      tag: 1.0.1-SNAPSHOT.27d97c3
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
