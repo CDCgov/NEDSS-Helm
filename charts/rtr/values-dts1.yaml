@@ -80,7 +80,8 @@ services:
       name: ''
       annotations: { }
     featureFlag:
-      phcDatamartDisable: "true"
+      phcDatamartDisable: "false"
+      threadPoolSize: 1
     log:
       path: /usr/share/investigation-reporting/data
     probes:
@@ -168,6 +169,8 @@ services:
       annotations: { }
     log:
       path: /usr/share/observation-reporting/data
+    featureFlag:
+      threadPoolSize: 1
     probes:
       readiness:
         enabled: true
@@ -268,8 +271,9 @@ services:
       name: ''
       annotations: { }
     featureFlag:
-      elasticSearchEnable: "true"
-      phcDatamartDisable: "true"
+      elasticSearchEnable: "false"
+      phcDatamartDisable: "false"
+      threadPoolSize: 1
     log:
       path: /usr/share/person-reporting/data
     probes:
