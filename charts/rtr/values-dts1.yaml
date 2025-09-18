@@ -216,8 +216,9 @@ services:
       name: ''
       annotations: { }
     featureFlag:
-      elasticSearchEnable: "true"
+      elasticSearchEnable: "false"
       phcDatamartDisable: "true"
+      threadPoolSize: 1
     log:
       path: /usr/share/organization-reporting/data
     probes:
