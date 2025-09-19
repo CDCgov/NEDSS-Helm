@@ -194,7 +194,7 @@ services:
     resources:
       limits:
         memory: "14Gi"
-        cpu: "1000m"
+        cpu: "3000m"
       requests:
         memory: "12G"
         cpu: "2000m"
