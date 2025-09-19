@@ -193,11 +193,11 @@ services:
       prometheus.io/port: '8094'
     resources:
       limits:
-        memory: "6Gi"
+        memory: "14Gi"
         cpu: "1000m"
       requests:
-        memory: "6G"
-        cpu: "1000m"
+        memory: "12G"
+        cpu: "2000m"
 
 
   # ----------------------------------------
