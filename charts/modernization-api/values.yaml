@@ -5,7 +5,7 @@ env: "prod"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: "v1.3.9"
+  tag: "v1.4.0"
 
 imagePullSecrets: []
 nameOverride: ""

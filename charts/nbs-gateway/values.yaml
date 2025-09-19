@@ -7,7 +7,7 @@ image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nbs-gateway"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nbs-gateway"
   pullPolicy: IfNotPresent
-  tag: "v1.3.9"
+  tag: "v1.4.0"
 
 gatewayService:
   ports:
