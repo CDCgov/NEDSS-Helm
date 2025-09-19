@@ -80,7 +80,7 @@ services:
       name: ''
       annotations: { }
     featureFlag:
-      phcDatamartDisable: "false"
+      phcDatamartDisable: "true"
       threadPoolSize: 1
     log:
       path: /usr/share/investigation-reporting/data
@@ -272,7 +272,7 @@ services:
       annotations: { }
     featureFlag:
       elasticSearchEnable: "false"
-      phcDatamartDisable: "false"
+      phcDatamartDisable: "true"
       threadPoolSize: 1
     log:
       path: /usr/share/person-reporting/data
