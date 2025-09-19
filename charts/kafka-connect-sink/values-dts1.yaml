@@ -24,7 +24,7 @@ servicePort: 8083
 ## ref: https://docs.confluent.io/current/connect/userguide.html#configuring-workers
 configurationOverrides:
   "plugin.path": "/usr/share/confluent-hub-components,/usr/share/java"
-  "topics_basename": "kafka-sink-connector-070825"
+  "topics_basename": "kafka-sink-connector-v091725-1"
   "key.converter": "org.apache.kafka.connect.json.JsonConverter"
   "value.converter": "org.apache.kafka.connect.json.JsonConverter"
   "key.converter.schemas.enable": "false"
@@ -37,13 +37,13 @@ configurationOverrides:
 
 sqlServerConnectorEnabled: true
 sqlServerConnector: {
-  "name": "Kafka-Connect-SqlServer-Sink-071025",
+  "name": "Kafka-Connect-SqlServer-Sink-v091725-1",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
-    "tasks.max": "1",
+    "tasks.max": "2",
     "offset.flush.interval.ms": "60000",
-    "batch.size": "200",
-    "connection.url": "jdbc:sqlserver://nbs-db.EXAMPLE_FIXME.nbspreview.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;",
+    "batch.size": "5000",
+    "connection.url": "jdbc:sqlserver://cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;",
     "connection.user": "",
     "connection.password": "",
     "connection.pool.min_size": "5",
@@ -89,12 +89,12 @@ JDBC_CONNECTOR_CONFIG: /etc/jdbcConnector.sh
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
 resources:
-#  limits:
-#    memory: "2Gi"
-#    cpu: "1000m"
-#  requests:
-#    memory: "1Gi"
-#    cpu: "500m"
+  limits:
+    memory: "8Gi"
+    cpu: "2000m"
+  requests:
+    memory: "7Gi"
+    cpu: "1500m"
 
 ## Custom pod annotations
 podAnnotations: { }
@@ -137,7 +137,7 @@ prometheus:
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
-  bootstrapServers: "b-1.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092,b-2.nrtreporting.rx5iwx.c5.kafka.us-east-1.amazonaws.com:9092"
+  bootstrapServers: "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092"
   default_replication_factor: 2
   default_partitions: 10
   default_cleanup: "compact"

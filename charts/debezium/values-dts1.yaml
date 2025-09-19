@@ -24,22 +24,22 @@ connect:
 
   resources:
     limits:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 2000m
+      memory: 8Gi
     requests:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 1500m
+      memory: 7Gi
 
   properties:
-    group_id: "debezium-odse-srte-connector-v081525"
+    group_id: "debezium-odse-srte-connector-v091725-1"
     topics_basename: "debezium-odse-srte-connector"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
     sql_server_agent_override: false
     sql_server_agent_status: ""
-    bootstrap_server: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-                       b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
+    bootstrap_server: "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092"
+    probe: false
 
   connector_enable:
     nbs_odse: "enabled"
@@ -47,18 +47,17 @@ connect:
     nbs_odse_meta: "enabled"
 
   sqlserverconnector_odse: {
-    "name": "debezium-odse-connector-v081525",
+    "name": "debezium-odse-connector-v091725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
-      "database.hostname": "nbs-db.private-dts1.nbspreview.com",
+      "database.hostname": "cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com",
       "database.port": "1433",
       "database.user": "",
       "database.password": "",
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
       "database.server.name": "odse",
-      "database.history.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-                                                   b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
+      "database.history.kafka.bootstrap.servers": "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -70,8 +69,7 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-                                                          b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
+      "schema.history.internal.kafka.bootstrap.servers": "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.Treatment,
                              dbo.state_defined_field_data, dbo.Notification, dbo.Interview, 
                              dbo.Place, dbo.CT_contact, dbo.Auth_user, dbo.Intervention, dbo.Act_relationship",
@@ -82,7 +80,7 @@ connect:
       "topic.creation.default.cleanup.policy": "compact",
       "time.precision.mode": "connect",
       "transforms": "dropPrefix, convertTimezone",
-      "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
+      "transforms.dropPrefix.regex": "cdc\\.nbs_odse\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nbs_$1",
       "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
@@ -93,18 +91,17 @@ connect:
   }
 
   sqlserverconnector_odse_meta: {
-    "name": "debezium-odse-meta-tables-connector-v081525",
+    "name": "debezium-odse-meta-tables-connector-v091725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
-      "database.hostname": "nbs-db.private-dts1.nbspreview.com",
+      "database.hostname": "cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com",
       "database.port": "1433",
       "database.user": "",
       "database.password": "",
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
       "database.server.name": "odse-meta",
-      "database.history.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-                                                     b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
+      "database.history.kafka.bootstrap.servers": "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -116,8 +113,7 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-                                                            b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
+      "schema.history.internal.kafka.bootstrap.servers": "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Page_cond_mapping, dbo.NBS_page, dbo.NBS_ui_metadata,  dbo.NBS_rdb_metadata,
                              dbo.state_defined_field_metadata, dbo.NBS_configuration, dbo.LOOKUP_QUESTION",
       "tasks.max": "1",
@@ -128,7 +124,7 @@ connect:
       "time.precision.mode": "connect",
       "transforms": "dropPrefix, convertTimezone, unwrap, convertTimestampsConfig_add_time,
                        convertTimestampsConfig_last_chg_time, convertTimestampsConfig_record_status_time",
-      "transforms.dropPrefix.regex": "cdc\\.NBS_ODSE\\.dbo\\.(.+)",
+      "transforms.dropPrefix.regex": "cdc\\.nbs_odse\\.dbo\\.(.+)",
       "transforms.dropPrefix.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefix.replacement": "nrt_odse_$1",
       "transforms.convertTimezone.type": "io.debezium.transforms.TimezoneConverter",
@@ -152,18 +148,17 @@ connect:
   }
   
   sqlserverconnector_srte: {
-    "name": "debezium-srte-connector-v081525",
+    "name": "debezium-srte-connector-v091725-1",
     "config": {
       "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
-      "database.hostname": "nbs-db.private-dts1.nbspreview.com",
+      "database.hostname": "cdc-nbs-alabama-rds-mssql.czya31goozkz.us-east-1.rds.amazonaws.com",
       "database.port": "1433",
       "database.user": "",
       "database.password": "",
       "database.dbname": "nbs_srte",
       "database.names": "nbs_srte",
       "database.server.name": "srte",
-      "database.history.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-                                                   b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
+      "database.history.kafka.bootstrap.servers": "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -175,8 +170,7 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "srte-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-                                                          b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092",
+      "schema.history.internal.kafka.bootstrap.servers": "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092",
       "table.include.list": "dbo.Condition_code,dbo.Program_area_code,dbo.Language_code,dbo.State_code,dbo.Unit_code,
                              dbo.Cntycity_code_value,dbo.Lab_result,dbo.Country_code,dbo.Labtest_loinc,dbo.ELR_XREF,
                              dbo.Loinc_condition,dbo.Loinc_snomed_condition,dbo.Lab_test,dbo.Zip_code_value,
@@ -208,7 +202,7 @@ connect:
       "transforms.dropPrefix.replacement": "nrt_srte_$1",
       
       ### Snomed condition specific transforms
-      "transforms.dropPrefixConfig.regex": "cdc\\.NBS_SRTE\\.dbo\\.Snomed_condition",
+      "transforms.dropPrefixConfig.regex": "cdc\\.nbs_srte\\.dbo\\.Snomed_condition",
       "transforms.dropPrefixConfig.type": "org.apache.kafka.connect.transforms.RegexRouter",
       "transforms.dropPrefixConfig.replacement": "nrt_srte_Snomed_condition",
       "transforms.unwrapConfig.type": "io.debezium.transforms.ExtractNewRecordState",
@@ -277,14 +271,13 @@ connect:
 
   env:
     - name: BOOTSTRAP_SERVERS
-      value: "b-1.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092,
-              b-2.nrtreportingdebezium.89ln12.c11.kafka.us-east-1.amazonaws.com:9092"
+      value: "b-2.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092,b-1.nrtclusterv2.6bwemz.c13.kafka.us-east-1.amazonaws.com:9092"
     - name: LOG_LEVEL
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
     - name: NAME
-      value: "debezium-odse-srte-connector-v081525"
+      value: "debezium-odse-srte-connector-v091725-1"
     - name: TZ
       value: "UTC"
 
