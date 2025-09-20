@@ -6,7 +6,7 @@ timezone: "UTC"
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-reporting-service/investigation-reporting-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/investigation-reporting-service"
-  tag: "v1.2.0"
+  tag: "v1.2.1"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
