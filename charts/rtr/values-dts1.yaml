@@ -78,7 +78,7 @@ services:
       annotations: { }
     featureFlag:
       phcDatamartDisable: "false"
-      threadPoolSize: 1
+      threadPoolSize: "1"
     log:
       path: /usr/share/investigation-reporting/data
     probes:
@@ -120,6 +120,8 @@ services:
       annotations: { }
     log:
       path: /usr/share/ldfdata-reporting/data
+    featureFlag:
+      threadPoolSize: "1"
     probes:
       readiness:
         enabled: true
@@ -156,7 +158,7 @@ services:
     log:
       path: /usr/share/observation-reporting/data
     featureFlag:
-      threadPoolSize: 1
+      threadPoolSize: "1"
     probes:
       readiness:
         enabled: true
@@ -198,7 +200,7 @@ services:
     featureFlag:
       elasticSearchEnable: "false"
       phcDatamartDisable: "false"
-      threadPoolSize: 1
+      threadPoolSize: "1"
     log:
       path: /usr/share/organization-reporting/data
     probes:
@@ -241,7 +243,7 @@ services:
     featureFlag:
       elasticSearchEnable: "false"
       phcDatamartDisable: "false"
-      threadPoolSize: 1
+      threadPoolSize: "1"
     log:
       path: /usr/share/person-reporting/data
     probes:
@@ -285,6 +287,7 @@ services:
       annotations: { }
     featureFlag:
       serviceDisable: "false"
+      threadPoolSize: "1"
     log:
       path: /usr/share/post-processing-reporting/data
     probes:
