@@ -94,7 +94,7 @@ services:
         failureThreshold: 5
     image:
       name: "investigation-reporting-service"
-      tag: "1.2.1"
+      tag: "v1.2.1"
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -135,7 +135,7 @@ services:
         failureThreshold: 5
     image:
       name: "ldfdata-reporting-service"
-      tag: "1.2.1"
+      tag: "v1.2.1"
 
 
   # ----------------------------------------
@@ -173,7 +173,7 @@ services:
         failureThreshold: 5
     image:
       name: "observation-reporting-service"
-      tag: "1.2.1"
+      tag: "v1.2.1"
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -216,7 +216,7 @@ services:
         failureThreshold: 5
     image:
       name: "organization-reporting-service"
-      tag: "1.2.1"
+      tag: "v1.2.1"
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -259,7 +259,7 @@ services:
         failureThreshold: 5
     image:
       name: "person-reporting-service"
-      tag: "1.2.1"
+      tag: "v1.2.1"
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
@@ -303,7 +303,7 @@ services:
         failureThreshold: 5
     image:
       name: "post-processing-reporting-service"
-      tag: "1.2.1"
+      tag: "v1.2.1"
     podAnnotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path: /actuator/prometheus
