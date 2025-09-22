@@ -119,7 +119,7 @@ spec:
             - name: FF_SERVICE_DISABLE
               value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "serviceDisable") }} {{ $service.featureFlag.serviceDisable | quote }} {{- else }} "false" {{- end }}
             - name: FF_THREAD_POOL_SIZE
-              value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "threadPoolSize") }} {{ $service.featureFlag.threadPoolSize }} {{- else }} 1 {{- end }}
+              value: {{- if and (hasKey $service "featureFlag") (hasKey $service.featureFlag "threadPoolSize") }} {{ $service.featureFlag.threadPoolSize }} {{- else }} "1" {{- end }}
 
       {{- if $service.nodeSelector }}
       nodeSelector:
