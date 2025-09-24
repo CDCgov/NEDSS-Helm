@@ -178,7 +178,7 @@ pageBuilderApi:
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 rtr:
-  #########
+  threadPoolSize: <UPDATE_THREAD_POOL_SIZE>
 
 xmlHl7ParserService:
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
