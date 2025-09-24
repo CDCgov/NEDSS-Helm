@@ -26,6 +26,19 @@ spec:
         #   value: jdbc:sqlserver://{{ .Values.env.dbEndpoint }}:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;
         # - name: global.secrets.kafka.cluster
         #   value: {{ .Values.env.kafkaMultiClusterEndpoints }}
+        - name: services.investigation-reporting.featureFlag.threadPoolSize
+          value: {{ .Values.rtr.threadPoolSize }}
+        - name: services.observation-reporting.featureFlag.threadPoolSize
+          value: {{ .Values.rtr.threadPoolSize }}
+        - name: services.organization-reporting.featureFlag.threadPoolSize
+          value: {{ .Values.rtr.threadPoolSize }}
+        - name: services.person-reporting.featureFlag.threadPoolSize
+          value: {{ .Values.rtr.threadPoolSize }}
+        - name: services.ldfdata-reporting.featureFlag.threadPoolSize
+          value: {{ .Values.rtr.threadPoolSize }}
+        - name: services.post-processing-reporting.featureFlag.threadPoolSize
+          value: {{ .Values.rtr.threadPoolSize }}
+
   syncPolicy:
     automated:
       prune: true
