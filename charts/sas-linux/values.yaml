@@ -10,6 +10,7 @@ service:
   port: 2323
 
 env:
+  TZ: "America/Denver"
   rdb_user: ""
   db_host: ""
   odse_user: ""
@@ -21,13 +22,17 @@ env:
   rdb_pass: ""
   sas_user_pass: ""
   odse_pass: ""
-  
 
 etl:
-  schedule: "0 0 * * *" 
-  # number of integer hours (written as string) from end of ETL run which considers errors valid for notifying. 
+  # Primary schedule runs Monday-Thursday at specified time in Mountain Time
+  schedule: "0 0 * * 1-4"
+  # Alternate schedule (e.g., for Sunday-only runs) at a different time in Mountain Time
+  alternateSchedule: "0 2 * * 0"
+  # Timezone for cron schedule interpretation
+  timezone: "America/Denver"
+  # number of integer hours (written as string) from end of ETL run which considers errors valid for notifying.
   # For instance the default of "18" will show all ETL hours that occured from the past 18 hours after the completion of an ETL run
-  error_check_hours: "18" 
+  error_check_hours: "18"
 
 # Override available for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
