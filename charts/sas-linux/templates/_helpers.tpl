@@ -62,6 +62,8 @@ spec:
         image: "{{ .root.Values.image.repository }}:{{ .root.Values.image.tag }}"
         imagePullPolicy: IfNotPresent
         env:
+        - name: TZ
+          value: "{{ .root.Values.etl.timezone }}"
         {{- range $key, $value := .root.Values.env }}
         - name: {{ $key }}
           value: "{{ $value }}"

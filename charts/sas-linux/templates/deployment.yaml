@@ -23,6 +23,8 @@ spec:
         ports:
         - containerPort: {{ .Values.service.port }}
         env:
+        - name: TZ
+          value: "{{ .Values.etl.timezone }}"
         {{- range $key, $value := .Values.env }}
         - name: {{ $key }}
           value: "{{ $value }}"

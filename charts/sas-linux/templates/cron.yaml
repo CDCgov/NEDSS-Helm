@@ -8,14 +8,16 @@ spec:
   concurrencyPolicy: Forbid
   jobTemplate:
 {{- include "sas-linux.etl-cronjob" (dict "name" (printf "%s-cron-etl" (include "sas-linux.name" .)) "root" .) | indent 4 }}
+{{- if .Values.etl.alternateSchedule.enabled }}
 ---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: '{{ include "sas-linux.name" . }}-cron-etl-sunday'
 spec:
-  schedule: '{{ .Values.etl.alternateSchedule }}'
+  schedule: '{{ .Values.etl.alternateSchedule.schedule }}'
   timeZone: '{{ .Values.etl.timezone }}'
   concurrencyPolicy: Forbid
   jobTemplate:
 {{- include "sas-linux.etl-cronjob" (dict "name" (printf "%s-cron-etl-sunday" (include "sas-linux.name" .)) "root" .) | indent 4 }}
+{{- end }}
