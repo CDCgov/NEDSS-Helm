@@ -7,7 +7,7 @@ spec:
   timeZone: '{{ .Values.etl.timezone }}'
   concurrencyPolicy: Forbid
   jobTemplate:
-{{- include "sas-linux.etl-cronjob" (dict "name" (printf "%s-cron-etl" (include "sas-linux.name" .)) "root" .) | indent 4 }}
+{{ include "sas-linux.etl-cronjob" (dict "name" (printf "%s-cron-etl" (include "sas-linux.name" .)) "root" .) | indent 4 }}
 {{- if .Values.etl.alternateSchedule.enabled }}
 ---
 apiVersion: batch/v1
@@ -19,5 +19,5 @@ spec:
   timeZone: '{{ .Values.etl.timezone }}'
   concurrencyPolicy: Forbid
   jobTemplate:
-{{- include "sas-linux.etl-cronjob" (dict "name" (printf "%s-cron-etl-sunday" (include "sas-linux.name" .)) "root" .) | indent 4 }}
+{{ include "sas-linux.etl-cronjob" (dict "name" (printf "%s-cron-etl-sunday" (include "sas-linux.name" .)) "root" .) | indent 4 }}
 {{- end }}
