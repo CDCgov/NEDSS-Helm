@@ -10,6 +10,45 @@ Before contributing, we encourage you to also read or [LICENSE](https://github.c
 files, also found in this repository. If you have any inquiries or questions not
 answered by the content of this repository, feel free to [contact us](mailto:surveillanceplatform@cdc.gov).
 
+## Development Guidelines
+
+### Prerequisites
+
+To contribute to this repository, you'll need:
+- [Helm](https://helm.sh/docs/intro/install/) v3.x or later
+
+### Testing Helm Charts
+
+Before submitting a pull request with Helm chart changes, please ensure your charts pass linting:
+
+**PowerShell:**
+```powershell
+# Lint a specific chart
+helm lint charts/modernization-api
+
+# Lint all charts
+Get-ChildItem -Path charts -Directory | Where-Object { Test-Path "$($_.FullName)\Chart.yaml" } | ForEach-Object { helm lint $_.FullName }
+```
+
+**Bash/Zsh:**
+```bash
+# Lint a specific chart
+helm lint charts/modernization-api
+
+# Lint all charts
+for chart in charts/*/; do [ -f "$chart/Chart.yaml" ] && helm lint "$chart"; done
+```
+
+All pull requests will automatically run `helm lint` via GitHub Actions. Charts must pass linting before they can be merged.
+
+#### What is Helm Linting?
+
+Helm linting validates that your Helm chart follows best practices and has no template errors. It checks:
+- Valid YAML syntax
+- Required Chart.yaml fields
+- Template rendering without errors
+- Values file structure
+
 ## Public Domain
 This project is in the public domain within the United States, and copyright and
 related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
