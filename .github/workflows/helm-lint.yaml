@@ -27,24 +27,11 @@ jobs:
         run: |
           set -e
 
-          # List of charts to skip (currently failing lint)
-          # TODO: Fix these charts and remove from skip list
-          SKIP_CHARTS=(
-            "data-compare-api-service"
-            "data-compare-email-service"
-            "data-compare-processor-service"
-            "elasticsearch"
-            "hybrid-integration"
-            "kafka"
-            "patient-search"
-          )
-
           echo "Starting Helm lint for all charts"
           echo ""
 
           failed_charts=()
           passed_charts=()
-          skipped_charts=()
 
           # Find all directories with Chart.yaml
           for chart_dir in charts/*/; do
@@ -52,21 +39,6 @@ jobs:
 
             # Check if Chart.yaml exists
             if [ ! -f "${chart_dir}Chart.yaml" ]; then
-              continue
-            fi
-
-            # Check if chart should be skipped
-            skip=false
-            for skip_chart in "${SKIP_CHARTS[@]}"; do
-              if [ "$chart_name" == "$skip_chart" ]; then
-                skip=true
-                break
-              fi
-            done
-
-            if [ "$skip" = true ]; then
-              echo "SKIPPED: $chart_name (in skip list)"
-              skipped_charts+=("$chart_name")
               continue
             fi
 
@@ -86,16 +58,9 @@ jobs:
           echo "========================================"
           echo "Lint Summary"
           echo "========================================"
-          echo "Passed:  ${#passed_charts[@]}"
-          echo "Failed:  ${#failed_charts[@]}"
-          echo "Skipped: ${#skipped_charts[@]}"
+          echo "Passed: ${#passed_charts[@]}"
+          echo "Failed: ${#failed_charts[@]}"
           echo ""
-
-          if [ ${#skipped_charts[@]} -gt 0 ]; then
-            echo "Skipped charts (need fixing):"
-            printf '  - %s\n' "${skipped_charts[@]}"
-            echo ""
-          fi
 
           if [ ${#failed_charts[@]} -gt 0 ]; then
             echo "Failed charts:"
@@ -105,7 +70,7 @@ jobs:
             exit 1
           fi
 
-          echo "All active charts passed helm lint"
+          echo "All charts passed helm lint"
 
       - name: Lint ArgoCD chart
         run: |
