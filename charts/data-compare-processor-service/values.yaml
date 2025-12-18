@@ -56,6 +56,21 @@ jdbc:
 
 authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
 
+s3:
+  bucketName: ""
+  region: ""
+
+azure:
+  storageAccountName: ""
+  containerName: ""
+  connectionString: ""
+  sasToken: ""
+  managedIdentity:
+    enabled: false
+
+ses:
+  recipients: ""
+
 kafka:
   cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 

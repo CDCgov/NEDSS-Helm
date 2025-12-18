@@ -47,6 +47,17 @@ affinity: {}
 
 ingressHost: "data.EXAMPLE_DOMAIN"
 
+authUri: ""
+
+kafka:
+  cluster: ""
+
+s3:
+  bucketName: ""
+  region: ""
+
+ses:
+  recipients: ""
 
 # dbserver is passed in as an environment variable. It is just the database endpoint
 jdbc:

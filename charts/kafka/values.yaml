@@ -1,0 +1,51 @@
+kafka:
+  kafka:
+    env:
+      kafkaAdvertisedListeners: ""
+      kafkaBrokerId: "1"
+      kafkaGroupInitialRebalanceDelayMs: "0"
+      kafkaInterBrokerListenerName: ""
+      kafkaListenerSecurityProtocolMap: ""
+      kafkaListeners: ""
+      kafkaOffsetsTopicReplicationFactor: "1"
+      kafkaTransactionStateLogMinIsr: "1"
+      kafkaTransactionStateLogReplicationFactor: "1"
+      kafkaZookeeperConnect: ""
+    image:
+      repository: confluentinc/cp-kafka
+      tag: 7.3.0
+    imagePullPolicy: IfNotPresent
+  replicas: 1
+
+kubernetesClusterDomain: cluster.local
+
+pvc:
+  kafkaPvClaim:
+    storageClass: kafka-gp-kafka
+    storageRequest: 20Gi
+
+serviceKafka:
+  ports:
+  - name: external
+    port: 9092
+    protocol: TCP
+    targetPort: 9092
+  type: ClusterIP
+
+zookeeper:
+  ports:
+  - name: client
+    port: 2181
+    protocol: TCP
+    targetPort: 2181
+  replicas: 1
+  type: ClusterIP
+  zookeeper:
+    env:
+      tz: ""
+      zookeeperClientPort: "2181"
+      zookeeperServerId: "1"
+      zookeeperTickTime: "2000"
+    image:
+      repository: confluentinc/cp-zookeeper
+      tag: 7.3.0
