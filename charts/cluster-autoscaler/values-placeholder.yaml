@@ -1,4 +1,0 @@
-this file just exists so draft release workflow does not fail
-
-if there are other custom values-<name>.yaml files created it can be deleted. 
-We do not want to make workflow config non-standard until then
