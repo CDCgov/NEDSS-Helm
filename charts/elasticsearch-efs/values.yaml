@@ -2,9 +2,10 @@ replicaCount: 1
 
 image:
   #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/elasticsearch"
-  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/elasticsearch"
+  #repository: "quay.io/us-cdcgov/cdc-nbs-modernization/elasticsearch"
+  repository: "docker.elastic.co/elasticsearch/elasticsearch"
   pullPolicy: IfNotPresent
-  tag: "v1.0.1"
+  tag: "9.3.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -66,4 +67,4 @@ pvc:
     storageClass: efs-es
     storageRequest: 100Gi
 
-efsFileSystemId: "EXAMPLE_EFS_ID"
+efsFileSystemId: "fs-09a93d5f637bc7ff9" #nbs7-dev3-efs
