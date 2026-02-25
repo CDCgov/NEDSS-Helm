@@ -6,14 +6,5 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   iisconnection.txt: |
-    Connection
-    Label:{{ .Values.iisConnection.label }}
-    Type:{{ .Values.iisConnection.type }}
-    URL:{{ .Values.iisConnection.url }}
-    User Id:{{ .Values.iisConnection.userId }}
-    Password:{{ .Values.iisConnection.password }}
-    Facility Id:{{ .Values.iisConnection.facilityId }}
-    Other Id:{{ .Values.iisConnection.otherId }}
-    Transfer Type:{{ .Values.iisConnection.transferType }}
-    Custom Transformation:{{ .Values.iisConnection.customTransformation }}
+{{ .Values.iisConnection.content | indent 4 }}
 {{- end }}

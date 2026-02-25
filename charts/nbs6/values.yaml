@@ -100,14 +100,17 @@ probes:
 # IIS Connection Configuration
 # Set enabled to true to mount a custom iisconnection.txt file
 # This will override the default file in the container
+# Customize the content field with your specific configuration
 iisConnection:
   enabled: false
-  label: ""
-  type: ""
-  url: ""
-  userId: ""
-  password: ""
-  facilityId: ""
-  otherId: ""
-  transferType: ""
-  customTransformation: ""
+  content: |
+    Connection
+    Label:
+    Type:
+    URL:
+    User Id:
+    Password:
+    Facility Id:
+    Other Id:
+    Transfer Type:
+    Custom Transformation:
