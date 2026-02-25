@@ -1,0 +1,19 @@
+{{- if .Values.iisConnection.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-iisconnection
+  namespace: {{ .Release.Namespace }}
+data:
+  iisconnection.txt: |
+    Connection
+    Label:{{ .Values.iisConnection.label }}
+    Type:{{ .Values.iisConnection.type }}
+    URL:{{ .Values.iisConnection.url }}
+    User Id:{{ .Values.iisConnection.userId }}
+    Password:{{ .Values.iisConnection.password }}
+    Facility Id:{{ .Values.iisConnection.facilityId }}
+    Other Id:{{ .Values.iisConnection.otherId }}
+    Transfer Type:{{ .Values.iisConnection.transferType }}
+    Custom Transformation:{{ .Values.iisConnection.customTransformation }}
+{{- end }}
