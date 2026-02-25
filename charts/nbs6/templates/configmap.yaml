@@ -1,0 +1,10 @@
+{{- if .Values.iisConnection.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-iisconnection
+  namespace: {{ .Release.Namespace }}
+data:
+  iisconnection.txt: |
+{{ .Values.iisConnection.content | indent 4 }}
+{{- end }}

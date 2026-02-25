@@ -21,7 +21,7 @@ ingress:
     nginx.ingress.kubernetes.io/service-upstream: "true"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Frame-Options: Allow";
-      more_set_headers "Cross-Origin-Opener-Policy: same-origin";      
+      more_set_headers "Cross-Origin-Opener-Policy: same-origin";
   tls:
     - secretName: app-classic.example.com
       hosts:
@@ -52,10 +52,10 @@ ingress:
 
 resources:
   requests:
-    memory: "15Gi"   
+    memory: "15Gi"
   limits:
     memory: "15Gi"
-    
+
 env:
   # Endpoint connection for database containing the endpoint only (e.g. dbendpointurl.com)
   DATABASE_ENDPOINT: ""
@@ -70,7 +70,7 @@ env:
   srte_user: ""
   srte_pass: ""
   # Comma Separated list of tasks to be disabled.
-  # Available tasks to disable: ELRImporter.bat, MsgOutProcessor.bat, UserProfileUpdateProcess.bat, SendAlertEMail.bat, DeDuplicationSimilarBatchProcess.bat, covid19ETL.bat 
+  # Available tasks to disable: ELRImporter.bat, MsgOutProcessor.bat, UserProfileUpdateProcess.bat, SendAlertEMail.bat, DeDuplicationSimilarBatchProcess.bat, covid19ETL.bat
   DISABLED_SCHEDULED_TASKS: "SendAlertEMail.bat, DeDuplicationSimilarBatchProcess.bat, UserProfileUpdateProcess.bat"
   # Memory allocated to JVM, needs to be offset from container requests by 4g-8g or more
   JAVA_MEMORY: "10g"
@@ -82,7 +82,7 @@ env:
   NNDM_CONFIG_CERTIFICATE_URL: "CERTIFICATE_URL="
 
 
-  # Additional environment variables with names starting with updateScheduledTask_ are available to update 
+  # Additional environment variables with names starting with updateScheduledTask_ are available to update
   # existing scheduled task. (e.g. updateScheduledTask_ELRImporter)
   # Format is csv that contains values correspond to columns: filename, scriptPathFromWorkDir, dailyStartTime, dailyStopTime, frequencyDays, frequencyHours, frequencyMinutes;
   ## If a column contains an empty value you should include that like (note trailing semicolon): ELRImporter.bat,, 6:00:00am, 6:00:00pm, 0, 0, 2;
@@ -96,3 +96,21 @@ probes:
     enabled: true
   liveness:
     enabled: true
+
+# IIS Connection Configuration
+# Set enabled to true to mount a custom iisconnection.txt file
+# This will override the default file in the container
+# Customize the content field with your specific configuration
+iisConnection:
+  enabled: false
+  content: |
+    Connection
+    Label:
+    Type:
+    URL:
+    User Id:
+    Password:
+    Facility Id:
+    Other Id:
+    Transfer Type:
+    Custom Transformation:

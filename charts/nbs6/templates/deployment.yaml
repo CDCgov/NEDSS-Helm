@@ -31,6 +31,13 @@ spec:
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
 
+        {{- if .Values.iisConnection.enabled }}
+        volumeMounts:
+        - name: iisconnection-volume
+          mountPath: wildfly-10.0.0.Final\nedssodmain\Nedss\Properties\iisconnection.txt
+          subPath: iisconnection.txt
+        {{- end }}
+
         {{- if .Values.probes.readiness.enabled | default "true"  }}
         readinessProbe:
           httpGet:
@@ -50,3 +57,10 @@ spec:
           periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "60" }}
           failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
         {{- end }}
+
+      {{- if .Values.iisConnection.enabled }}
+      volumes:
+      - name: iisconnection-volume
+        configMap:
+          name: {{ .Release.Name }}-iisconnection
+      {{- end }}
