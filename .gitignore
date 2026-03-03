@@ -1,7 +1,7 @@
 /.idea/
 *values*-az-*.yaml
 *-argocd-*.yaml
-*.DS_STORE
+*.DS_Store
 mt-*-argocd-*.yaml
 internal-*-argocd-*.yaml
 mt-*-values-*.yaml
