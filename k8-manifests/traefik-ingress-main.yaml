@@ -1,0 +1,64 @@
+# This is a DUPLICATE of the Helm-managed main-ingress-resource, configured
+# for Traefik instead of NGINX. It allows testing Traefik routing without
+# modifying any existing Helm charts.
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-main-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.middlewares: default-nbs-custom-headers@kubernetescrd,default-body-size-limit@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: app.EXAMPLE_DOMAIN
+      hosts:
+        - app.EXAMPLE_DOMAIN
+  rules:
+    - host: app.EXAMPLE_DOMAIN
+      http:
+        paths:
+          - path: "/auth/realms/nbs-users/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          - path: "/auth/robots.txt"
+            pathType: Exact
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          - path: "/auth/js/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          - path: "/auth/resources/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          - path: /favicon.ico
+            pathType: Prefix
+            backend:
+              service:
+                name: nbs-gateway-svc
+                port:
+                  number: 8000
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: nbs-gateway-svc
+                port:
+                  number: 8000

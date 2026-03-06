@@ -1,0 +1,132 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-dataingestion-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: EXAMPLE_DOMAIN_DATA_HOSTNAME
+      hosts:
+        - EXAMPLE_DOMAINDATA_HOSTNAME
+  rules:
+    - host: EXAMPLE_DOMAIN_DATA_HOSTNAME
+      http:
+        paths:
+          # Data Ingestion Service
+          - path: "/ingestion/"
+            pathType: Prefix
+            backend:
+              service:
+                name: dataingestion-service
+                port:
+                  number: 8081
+
+          # Reporting Services
+          - path: "/reporting/person-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: person-reporting-service
+                port:
+                  number: 8091
+          - path: "/reporting/organization-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: organization-reporting-service
+                port:
+                  number: 8092
+          - path: "/reporting/investigation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: investigation-reporting-service
+                port:
+                  number: 8093
+          - path: "/reporting/observation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: observation-reporting-service
+                port:
+                  number: 8094
+          - path: "/reporting/post-processing-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: post-processing-reporting-service
+                port:
+                  number: 8095
+          - path: "/reporting/ldfdata-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: ldfdata-reporting-service
+                port:
+                  number: 8096
+
+          # Data Processing Service
+          - path: "/rti/"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-processing-service
+                port:
+                  number: 8082
+
+          # NND Service
+          - path: "/extraction/"
+            pathType: Prefix
+            backend:
+              service:
+                name: nnd-service
+                port:
+                  number: 8083
+
+          # SRTE Data Service
+          - path: "/data/"
+            pathType: Prefix
+            backend:
+              service:
+                name: srte-data-service
+                port:
+                  number: 8084
+
+          # Data Extraction Service
+          - path: "/data-extraction/"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-extraction-service
+                port:
+                  number: 8090
+
+          # Case Notification Service
+          - path: "/case-notification/"
+            pathType: Prefix
+            backend:
+              service:
+                name: case-notification-service
+                port:
+                  number: 8089
+
+          # XML HL7 Parser Service
+          - path: "/hl7-parser/"
+            pathType: Prefix
+            backend:
+              service:
+                name: xml-hl7-parser-service
+                port:
+                  number: 8088
+
+          # Data Compare API Service
+          - path: "/comparison/"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-compare-api-service
+                port:
+                  number: 8097

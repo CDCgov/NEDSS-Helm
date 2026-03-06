@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nbs-cached-headers
+  namespace: default
+spec:
+  headers:
+    customResponseHeaders:
+      X-Frame-Options: "Allow"
+      Cross-Origin-Opener-Policy: "same-origin"
+      Cache-Control: "max-age=1209600, immutable"
