@@ -41,7 +41,7 @@ pageBuilder:
         enabled: "false"
 
 ingress:
-  enabled: true
+  enabled: false
   className: "nginx"
   tls:
     - secretName: app.EXAMPLE_DOMAIN
@@ -55,6 +55,13 @@ istioGatewayIngress:
   gatewayNamespace: "istio-ingress"
   certificateName: ""
   certificateIssuerName: "letsencrypt-production"
+
+traefikIngress:
+  enabled: true
+  bodySizeLimit:
+    # Max request body size in bytes (100MB — matches NGINX proxy-body-size: 100m)
+    maxRequestBodyBytes: 104857600
+
 
 mTLS:
   enabled: true
