@@ -1,0 +1,241 @@
+{{/*
+NGINX Ingress - Main application routes
+Only rendered when nginx.enabled is true.
+Preserves the existing NGINX routing for STLTs that haven't migrated to Traefik.
+*/}}
+{{- if .Values.nginx.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-main
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: Allow";
+      more_set_headers "Cross-Origin-Opener-Policy: same-origin";
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: {{ .Values.appHost }}
+      hosts:
+        - {{ .Values.appHost }}
+  rules:
+    - host: {{ .Values.appHost }}
+      http:
+        paths:
+          - path: "/auth/realms/nbs-users/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.keycloak.serviceName }}
+                port:
+                  name: {{ .Values.app.keycloak.portName }}
+          - path: "/auth/robots.txt"
+            pathType: Exact
+            backend:
+              service:
+                name: {{ .Values.app.keycloak.serviceName }}
+                port:
+                  name: {{ .Values.app.keycloak.portName }}
+          - path: "/auth/js/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.keycloak.serviceName }}
+                port:
+                  name: {{ .Values.app.keycloak.portName }}
+          - path: "/auth/resources/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.keycloak.serviceName }}
+                port:
+                  name: {{ .Values.app.keycloak.portName }}
+          - path: /favicon.ico
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.gateway.serviceName }}
+                port:
+                  number: {{ .Values.app.gateway.port }}
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.gateway.serviceName }}
+                port:
+                  number: {{ .Values.app.gateway.port }}
+---
+# NGINX Ingress - Cached static assets
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-cached
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: Allow";
+      more_set_headers "Cross-Origin-Opener-Policy: same-origin";
+      more_set_headers "Cache-Control: max-age=1209600, immutable";
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: {{ .Values.appHost }}
+      hosts:
+        - {{ .Values.appHost }}
+  rules:
+    - host: {{ .Values.appHost }}
+      http:
+        paths:
+          - path: "/(.+)\\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$"
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.app.gateway.serviceName }}
+                port:
+                  number: {{ .Values.app.gateway.port }}
+---
+# NGINX Ingress - Data Ingestion
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-dataingestion
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: {{ .Values.dataHost }}
+      hosts:
+        - {{ .Values.dataHost }}
+  rules:
+    - host: {{ .Values.dataHost }}
+      http:
+        paths:
+          {{- if .Values.data.ingestion.enabled }}
+          - path: "/ingestion/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.ingestion.serviceName }}
+                port:
+                  number: {{ .Values.data.ingestion.port }}
+          {{- end }}
+          {{- if .Values.data.dataProcessing.enabled }}
+          - path: "/rti/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.dataProcessing.serviceName }}
+                port:
+                  number: {{ .Values.data.dataProcessing.port }}
+          {{- end }}
+          {{- if .Values.data.nnd.enabled }}
+          - path: "/extraction/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.nnd.serviceName }}
+                port:
+                  number: {{ .Values.data.nnd.port }}
+          {{- end }}
+          {{- if .Values.data.srteData.enabled }}
+          - path: "/data/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.srteData.serviceName }}
+                port:
+                  number: {{ .Values.data.srteData.port }}
+          {{- end }}
+          {{- if .Values.data.dataExtraction.enabled }}
+          - path: "/data-extraction/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.dataExtraction.serviceName }}
+                port:
+                  number: {{ .Values.data.dataExtraction.port }}
+          {{- end }}
+          {{- if .Values.data.caseNotification.enabled }}
+          - path: "/case-notification/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.caseNotification.serviceName }}
+                port:
+                  number: {{ .Values.data.caseNotification.port }}
+          {{- end }}
+          {{- if .Values.data.xmlHl7Parser.enabled }}
+          - path: "/hl7-parser/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.xmlHl7Parser.serviceName }}
+                port:
+                  number: {{ .Values.data.xmlHl7Parser.port }}
+          {{- end }}
+          {{- if .Values.data.reporting.enabled }}
+          - path: "/reporting/person-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.person.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.person.port }}
+          - path: "/reporting/organization-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.organization.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.organization.port }}
+          - path: "/reporting/investigation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.investigation.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.investigation.port }}
+          - path: "/reporting/observation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.observation.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.observation.port }}
+          - path: "/reporting/post-processing-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.postProcessing.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.postProcessing.port }}
+          - path: "/reporting/ldfdata-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.ldfdata.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.ldfdata.port }}
+          {{- end }}
+          {{- if .Values.data.compare.enabled }}
+          - path: "/comparison/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.compare.serviceName }}
+                port:
+                  number: {{ .Values.data.compare.port }}
+          {{- end }}
+{{- end }}

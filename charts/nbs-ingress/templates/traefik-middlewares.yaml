@@ -1,25 +1,17 @@
 {{/*
 Traefik Middleware CRDs - Response headers, body size limits, cached headers
-Replaces:
-  - k8s-manifests/traefik-middleware-headers.yaml
-  - k8s-manifests/traefik-middleware-body-limit.yaml
-  - k8s-manifests/traefik-middleware-cached-headers.yaml
-Only rendered when traefikIngress.enabled is true.
+Only rendered when traefik.enabled is true.
 */}}
-{{- if .Values.traefikIngress.enabled }}
+{{- if .Values.traefik.enabled }}
 # =============================================================================
-# Custom Response Headers (replaces NGINX configuration-snippet)
-# Replaces: nginx.ingress.kubernetes.io/configuration-snippet:
-#   more_set_headers "X-Frame-Options: Allow";
-#   more_set_headers "Cross-Origin-Opener-Policy: same-origin";
+# Custom Response Headers
 # =============================================================================
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: nbs-custom-headers
   labels:
-    {{- include "modernization-api.labels" . | nindent 4 }}
-    app.kubernetes.io/component: ingress
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
 spec:
   headers:
     customResponseHeaders:
@@ -27,33 +19,30 @@ spec:
       Cross-Origin-Opener-Policy: "same-origin"
 ---
 # =============================================================================
-# Body Size Limit (replaces NGINX proxy-body-size: "100m")
+# Body Size Limit (100MB — matches NGINX proxy-body-size: 100m)
 # =============================================================================
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: body-size-limit
   labels:
-    {{- include "modernization-api.labels" . | nindent 4 }}
-    app.kubernetes.io/component: ingress
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
 spec:
   buffering:
-    maxRequestBodyBytes: {{ int64 (.Values.traefikIngress.bodySizeLimit.maxRequestBodyBytes | default 104857600) }}
-    memRequestBodyBytes: 10485760
+    maxRequestBodyBytes: {{ int64 (.Values.middlewares.bodySizeLimit.maxRequestBodyBytes | default 104857600) }}
+    memRequestBodyBytes: {{ int64 (.Values.middlewares.bodySizeLimit.memRequestBodyBytes | default 10485760) }}
     maxResponseBodyBytes: 0
     memResponseBodyBytes: 1048576
 ---
 # =============================================================================
 # Cached Asset Headers (adds Cache-Control for static assets)
-# Replaces: NGINX configuration-snippet on main-ingress-resource-cached
 # =============================================================================
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: nbs-cached-headers
   labels:
-    {{- include "modernization-api.labels" . | nindent 4 }}
-    app.kubernetes.io/component: ingress
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
 spec:
   headers:
     customResponseHeaders:

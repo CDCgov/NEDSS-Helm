@@ -1,0 +1,131 @@
+# =============================================================================
+# NBS7 Ingress Chart - values.yaml
+# =============================================================================
+# This chart manages all ingress routing for NBS7, decoupled from
+# application charts (modernization-api, dataingestion-service).
+#
+# Only one ingress provider should be enabled at a time.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# INGRESS PROVIDER SELECTION
+# -----------------------------------------------------------------------------
+# Enable exactly one provider:
+nginx:
+  enabled: false
+
+traefik:
+  enabled: true
+
+# -----------------------------------------------------------------------------
+# HOSTNAMES
+# -----------------------------------------------------------------------------
+# Replace these with your environment-specific hostnames
+appHost: "app.EXAMPLE_DOMAIN"
+dataHost: "data.EXAMPLE_DOMAIN"
+
+# -----------------------------------------------------------------------------
+# TLS
+# -----------------------------------------------------------------------------
+tls:
+  clusterIssuer: "letsencrypt-production"
+
+# -----------------------------------------------------------------------------
+# TRAEFIK MIDDLEWARE CONFIGURATION
+# -----------------------------------------------------------------------------
+middlewares:
+  # Body size limit (matches NGINX proxy-body-size: 100m)
+  bodySizeLimit:
+    maxRequestBodyBytes: 104857600
+    memRequestBodyBytes: 10485760
+
+# -----------------------------------------------------------------------------
+# NIFI
+# -----------------------------------------------------------------------------
+# NiFi is optional — most deployments don't expose it externally.
+# Enable only if you need external access to the NiFi UI.
+# NiFi serves HTTPS on port 8443 internally.
+nifi:
+  enabled: false
+  host: "nifi.EXAMPLE_DOMAIN"
+  serviceName: "nifi-efs"
+  port: 8443
+
+# -----------------------------------------------------------------------------
+# BACKEND SERVICES
+# -----------------------------------------------------------------------------
+# These match the service names and ports deployed by the application charts.
+# Only change these if your application charts use non-default names/ports.
+
+app:
+  # NBS Gateway
+  gateway:
+    serviceName: "nbs-gateway-svc"
+    port: 8000
+  # KeyCloak
+  keycloak:
+    serviceName: "keycloak"
+    portName: "http"
+
+data:
+  # Data Ingestion Service
+  ingestion:
+    enabled: true
+    serviceName: "dataingestion-service"
+    port: 8081
+  # Reporting Services
+  reporting:
+    enabled: false
+    person:
+      serviceName: "person-reporting-service"
+      port: 8091
+    organization:
+      serviceName: "organization-reporting-service"
+      port: 8092
+    investigation:
+      serviceName: "investigation-reporting-service"
+      port: 8093
+    observation:
+      serviceName: "observation-reporting-service"
+      port: 8094
+    postProcessing:
+      serviceName: "post-processing-reporting-service"
+      port: 8095
+    ldfdata:
+      serviceName: "ldfdata-reporting-service"
+      port: 8096
+  # Data Processing
+  dataProcessing:
+    enabled: true
+    serviceName: "data-processing-service"
+    port: 8082
+  # NND Service
+  nnd:
+    enabled: false
+    serviceName: "nnd-service"
+    port: 8083
+  # SRTE Data Service
+  srteData:
+    enabled: true
+    serviceName: "srte-data-service"
+    port: 8084
+  # Data Extraction
+  dataExtraction:
+    enabled: true
+    serviceName: "data-extraction-service"
+    port: 8090
+  # Case Notification
+  caseNotification:
+    enabled: false
+    serviceName: "case-notification-service"
+    port: 8089
+  # XML HL7 Parser
+  xmlHl7Parser:
+    enabled: true
+    serviceName: "xml-hl7-parser-service"
+    port: 8088
+  # Data Compare API
+  compare:
+    enabled: false
+    serviceName: "data-compare-api-service"
+    port: 8097

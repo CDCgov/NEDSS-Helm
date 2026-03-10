@@ -1,27 +1,25 @@
 {{/*
 Traefik Ingress - Main application routes (KeyCloak + NBS Gateway)
-Replaces: k8s-manifests/traefik-ingress-main.yaml
-Only rendered when traefikIngress.enabled is true.
-Only one ingress type should be enabled: nginx (ingress), istio (istioGatewayIngress), or traefik (traefikIngress).
+Only rendered when traefik.enabled is true.
 */}}
-{{- if .Values.traefikIngress.enabled }}
+{{- if .Values.traefik.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "modernization-api.fullname" . }}-traefik-ingress
+  name: {{ include "nbs-ingress.fullname" . }}-main
   labels:
-    {{- include "modernization-api.labels" . | nindent 4 }}
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
     traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-nbs-custom-headers@kubernetescrd,{{ .Release.Namespace }}-body-size-limit@kubernetescrd
 spec:
   ingressClassName: traefik
   tls:
-    - secretName: {{ .Values.ingressHost }}
+    - secretName: {{ .Values.appHost }}
       hosts:
-        - {{ .Values.ingressHost }}
+        - {{ .Values.appHost }}
   rules:
-    - host: {{ .Values.ingressHost }}
+    - host: {{ .Values.appHost }}
       http:
         paths:
           # KeyCloak auth routes
@@ -29,43 +27,43 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: keycloak
+                name: {{ .Values.app.keycloak.serviceName }}
                 port:
-                  name: http
+                  name: {{ .Values.app.keycloak.portName }}
           - path: "/auth/robots.txt"
             pathType: Exact
             backend:
               service:
-                name: keycloak
+                name: {{ .Values.app.keycloak.serviceName }}
                 port:
-                  name: http
+                  name: {{ .Values.app.keycloak.portName }}
           - path: "/auth/js/"
             pathType: Prefix
             backend:
               service:
-                name: keycloak
+                name: {{ .Values.app.keycloak.serviceName }}
                 port:
-                  name: http
+                  name: {{ .Values.app.keycloak.portName }}
           - path: "/auth/resources/"
             pathType: Prefix
             backend:
               service:
-                name: keycloak
+                name: {{ .Values.app.keycloak.serviceName }}
                 port:
-                  name: http
+                  name: {{ .Values.app.keycloak.portName }}
           # NBS Gateway routes
           - path: /favicon.ico
             pathType: Prefix
             backend:
               service:
-                name: nbs-gateway-svc
+                name: {{ .Values.app.gateway.serviceName }}
                 port:
-                  number: 8000
+                  number: {{ .Values.app.gateway.port }}
           - path: "/"
             pathType: Prefix
             backend:
               service:
-                name: nbs-gateway-svc
+                name: {{ .Values.app.gateway.serviceName }}
                 port:
-                  number: 8000
+                  number: {{ .Values.app.gateway.port }}
 {{- end }}

@@ -77,7 +77,7 @@ ingress:
     - "data.EXAMPLE_DOMAIN"
 
 traefikIngress:
-  enabled: true
+  enabled: false
 
 resources: {}
 
