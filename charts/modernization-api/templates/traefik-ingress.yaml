@@ -1,0 +1,71 @@
+{{/*
+Traefik Ingress - Main application routes (KeyCloak + NBS Gateway)
+Replaces: k8s-manifests/traefik-ingress-main.yaml
+Only rendered when traefikIngress.enabled is true.
+Only one ingress type should be enabled: nginx (ingress), istio (istioGatewayIngress), or traefik (traefikIngress).
+*/}}
+{{- if .Values.traefikIngress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "modernization-api.fullname" . }}-traefik-ingress
+  labels:
+    {{- include "modernization-api.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-nbs-custom-headers@kubernetescrd,{{ .Release.Namespace }}-body-size-limit@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: {{ .Values.ingressHost }}
+      hosts:
+        - {{ .Values.ingressHost }}
+  rules:
+    - host: {{ .Values.ingressHost }}
+      http:
+        paths:
+          # KeyCloak auth routes
+          - path: "/auth/realms/nbs-users/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          - path: "/auth/robots.txt"
+            pathType: Exact
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          - path: "/auth/js/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          - path: "/auth/resources/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  name: http
+          # NBS Gateway routes
+          - path: /favicon.ico
+            pathType: Prefix
+            backend:
+              service:
+                name: nbs-gateway-svc
+                port:
+                  number: 8000
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: nbs-gateway-svc
+                port:
+                  number: 8000
+{{- end }}
