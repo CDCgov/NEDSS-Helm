@@ -1,0 +1,66 @@
+{{/*
+NBS6 (Classic/WildFly) Ingress — Main routes
+Service: {{ .Release.Name }}-service (port 443 → targetPort 7001)
+*/}}
+
+{{/* ========== TRAEFIK PATH ========== */}}
+{{- if .Values.traefik.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs6-ingress.fullname" . }}-main
+  labels:
+    {{- include "nbs6-ingress.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-nbs6-custom-headers@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: {{ .Values.host }}
+      hosts:
+        - {{ .Values.host }}
+  rules:
+    - host: {{ .Values.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.serviceName }}
+                port:
+                  number: {{ .Values.servicePort }}
+{{- end }}
+
+{{/* ========== NGINX PATH ========== */}}
+{{- if .Values.nginx.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs6-ingress.fullname" . }}-main
+  labels:
+    {{- include "nbs6-ingress.labels" . | nindent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: Allow";
+      more_set_headers "Cross-Origin-Opener-Policy: same-origin";
+spec:
+  tls:
+    - secretName: {{ .Values.host }}
+      hosts:
+        - {{ .Values.host }}
+  rules:
+    - host: {{ .Values.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.serviceName }}
+                port:
+                  number: {{ .Values.servicePort }}
+{{- end }}

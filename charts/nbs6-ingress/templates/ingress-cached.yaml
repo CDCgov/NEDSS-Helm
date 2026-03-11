@@ -1,0 +1,62 @@
+{{/*
+NBS6 (Classic/WildFly) Ingress — Cached static assets
+Regex path excludes /auth and matches common static file extensions.
+*/}}
+
+{{/* ========== TRAEFIK PATH ========== */}}
+{{- if .Values.traefik.enabled }}
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "nbs6-ingress.fullname" . }}-cached
+  labels:
+    {{- include "nbs6-ingress.labels" . | nindent 4 }}
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`{{ .Values.host }}`) && PathRegexp(`^/(?!auth).+\\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$`)"
+      kind: Rule
+      services:
+        - name: {{ .Values.serviceName }}
+          port: {{ .Values.servicePort }}
+      middlewares:
+        - name: nbs6-cached-headers
+          namespace: {{ .Release.Namespace }}
+  tls:
+    secretName: {{ .Values.host }}
+{{- end }}
+
+{{/* ========== NGINX PATH ========== */}}
+{{- if .Values.nginx.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs6-ingress.fullname" . }}-cached
+  labels:
+    {{- include "nbs6-ingress.labels" . | nindent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: Allow";
+      more_set_headers "Cross-Origin-Opener-Policy: same-origin";
+      more_set_headers "Cache-Control: max-age=1209600, immutable";
+spec:
+  tls:
+    - secretName: {{ .Values.host }}
+      hosts:
+        - {{ .Values.host }}
+  rules:
+    - host: {{ .Values.host }}
+      http:
+        paths:
+          - path: '/(?!auth).+\.(jpg|svg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|ttf|woff|woff2)$'
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.serviceName }}
+                port:
+                  number: {{ .Values.servicePort }}
+{{- end }}
