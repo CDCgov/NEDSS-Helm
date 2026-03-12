@@ -1,0 +1,52 @@
+{{/*
+Traefik Middleware CRDs - Response headers, body size limits, cached headers
+Only rendered when traefik.enabled is true.
+*/}}
+{{- if .Values.traefik.enabled }}
+# =============================================================================
+# Custom Response Headers
+# =============================================================================
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nbs-custom-headers
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+spec:
+  headers:
+    customResponseHeaders:
+      X-Frame-Options: "Allow"
+      Cross-Origin-Opener-Policy: "same-origin"
+---
+# =============================================================================
+# Body Size Limit (100MB — matches NGINX proxy-body-size: 100m)
+# =============================================================================
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: body-size-limit
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+spec:
+  buffering:
+    maxRequestBodyBytes: {{ int64 (.Values.middlewares.bodySizeLimit.maxRequestBodyBytes | default 104857600) }}
+    memRequestBodyBytes: {{ int64 (.Values.middlewares.bodySizeLimit.memRequestBodyBytes | default 10485760) }}
+    maxResponseBodyBytes: 0
+    memResponseBodyBytes: 1048576
+---
+# =============================================================================
+# Cached Asset Headers (adds Cache-Control for static assets)
+# =============================================================================
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nbs-cached-headers
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+spec:
+  headers:
+    customResponseHeaders:
+      X-Frame-Options: "Allow"
+      Cross-Origin-Opener-Policy: "same-origin"
+      Cache-Control: "max-age=1209600, immutable"
+{{- end }}

@@ -69,12 +69,15 @@ compare:
   port: 8085
 
 ingress:
-  enabled: true
+  enabled: false
   className: "nginx"
   tls:
   - secretName: "data.EXAMPLE_DOMAIN"
     hosts:
     - "data.EXAMPLE_DOMAIN"
+
+traefikIngress:
+  enabled: false
 
 resources: {}
 

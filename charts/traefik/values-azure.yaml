@@ -1,0 +1,123 @@
+# Traefik Ingress Controller - Azure (AKS) Configuration
+# Replaces: charts/nginx-ingress/values-azure.yaml
+# Chart: traefik/traefik (v3.6.x)
+
+nodeSelector:
+  kubernetes.io/os: linux
+
+deployment:
+  enabled: true
+  kind: Deployment
+  replicas: 1
+  podAnnotations:
+    linkerd.io/inject: enabled
+
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+
+providers:
+  kubernetesCRD:
+    enabled: true
+    allowCrossNamespace: false
+    allowEmptyServices: true
+  kubernetesIngress:
+    enabled: true
+    allowEmptyServices: true
+    publishedService:
+      enabled: true
+
+ports:
+  traefik:
+    port: 9000
+    expose:
+      default: false
+    protocol: TCP
+
+  web:
+    port: 8000
+    expose:
+      default: true
+    exposedPort: 80
+    protocol: TCP
+    forwardedHeaders:
+      insecure: true
+    transport:
+      respondingTimeouts:
+        readTimeout: "300s"
+        writeTimeout: "300s"
+        idleTimeout: "300s"
+
+  websecure:
+    port: 8443
+    expose:
+      default: true
+    exposedPort: 443
+    protocol: TCP
+    http:
+      tls: {}
+    forwardedHeaders:
+      insecure: true
+    transport:
+      respondingTimeouts:
+        readTimeout: "300s"
+        writeTimeout: "300s"
+        idleTimeout: "300s"
+
+  metrics:
+    port: 9100
+    expose:
+      default: false
+    protocol: TCP
+
+service:
+  enabled: true
+  type: LoadBalancer
+  spec:
+    externalTrafficPolicy: "Local"
+    loadBalancerIP: XX.XX.XX.XX  #Populate your private IP here OR by passing it to your helm command
+  annotations:
+    #For private IP and private cluster use the following:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    service.beta.kubernetes.io/azure-load-balancer-internal-health-probe-request-path: "/ping"
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9100"
+    prometheus.io/path: /metrics
+
+additionalArguments:
+  - "--serversTransport.forwardingTimeouts.dialTimeout=300s"
+  - "--serversTransport.forwardingTimeouts.responseHeaderTimeout=300s"
+  - "--serversTransport.forwardingTimeouts.idleConnTimeout=300s"
+  - "--entryPoints.websecure.http.tls"
+
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+
+logs:
+  general:
+    level: INFO
+  access:
+    enabled: true
+
+ingressRoute:
+  dashboard:
+    enabled: true
+    entryPoints: ["traefik"]
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+rbac:
+  enabled: true
+
+# Run the following helm command after updating the load balancer IP:
+# helm upgrade --install traefik traefik/traefik --namespace traefik -f values-azure.yaml --set service.spec.loadBalancerIP=XX.XX.XX.XX

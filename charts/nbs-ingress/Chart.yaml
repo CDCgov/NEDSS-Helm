@@ -1,0 +1,6 @@
+apiVersion: v2
+name: nbs-ingress
+description: NBS7 Ingress routing resources — decoupled from application charts
+type: application
+version: 1.0.0
+appVersion: "1.0.0"

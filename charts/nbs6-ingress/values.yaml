@@ -1,0 +1,33 @@
+# =============================================================================
+# NBS6 Ingress Chart - values.yaml
+# =============================================================================
+# Manages ingress routing for the NBS6 (Classic/WildFly) application,
+# decoupled from the nbs6 application chart.
+#
+# Only one ingress provider should be enabled at a time.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# INGRESS PROVIDER SELECTION
+# -----------------------------------------------------------------------------
+nginx:
+  enabled: false
+
+traefik:
+  enabled: true
+
+# -----------------------------------------------------------------------------
+# NBS6 SERVICE CONFIGURATION
+# -----------------------------------------------------------------------------
+# The nbs6 chart creates a service named <release-name>-service
+# (e.g., if helm release is "nbs6", service is "nbs6-service")
+# Port 443 maps to targetPort 7001 (WildFly)
+host: "app-classic.EXAMPLE_DOMAIN"
+serviceName: "nbs6-service"
+servicePort: 80
+
+# -----------------------------------------------------------------------------
+# TLS
+# -----------------------------------------------------------------------------
+tls:
+  clusterIssuer: "letsencrypt-production"

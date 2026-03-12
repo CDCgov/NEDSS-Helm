@@ -1,0 +1,127 @@
+# Traefik Ingress Controller - AWS (EKS) Configuration
+# Replaces: charts/nginx-ingress/values.yaml
+# Chart: traefik/traefik (v3.6.x)
+
+nodeSelector:
+  kubernetes.io/os: linux
+  
+deployment:
+  enabled: true
+  kind: Deployment
+  replicas: 1
+  podAnnotations:
+    linkerd.io/inject: enabled
+
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+
+providers:
+  kubernetesCRD:
+    enabled: true
+    allowCrossNamespace: false
+    allowEmptyServices: true
+  kubernetesIngress:
+    enabled: true
+    allowEmptyServices: true
+    publishedService:
+      enabled: true
+
+ports:
+  traefik:
+    port: 9000
+    expose:
+      default: false
+    protocol: TCP
+
+# HTTP entrypoint
+  web:
+    port: 8000
+    expose:
+      default: true
+    exposedPort: 80
+    protocol: TCP
+    forwardedHeaders:
+      insecure: true
+    transport:
+      respondingTimeouts:
+        readTimeout: "300s"
+        writeTimeout: "300s"
+        idleTimeout: "300s"
+
+# HTTPS entrypoint
+  websecure:
+    port: 8443
+    expose:
+      default: true
+    exposedPort: 443
+    protocol: TCP
+    http:
+      tls: {}
+    forwardedHeaders:
+      insecure: true
+    transport:
+      respondingTimeouts:
+        readTimeout: "300s"
+        writeTimeout: "300s"
+        idleTimeout: "300s"
+
+# Metrics port for Prometheus scraping
+  metrics:
+    port: 9100
+    expose:
+      default: false
+    protocol: TCP
+
+service:
+  enabled: true
+  type: LoadBalancer
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9100"
+    prometheus.io/path: /metrics
+    # Optional: Assign Elastic IPs to the NLB for static IP addresses
+    # Allocate EIPs in AWS first, then reference their allocation IDs:
+    # service.beta.kubernetes.io/aws-load-balancer-eip-allocations: eipalloc-xxxxxxxxx,eipalloc-yyyyyyyyy
+    #
+    # Optional: Restrict inbound traffic to specific CIDRs
+    # service.beta.kubernetes.io/aws-load-balancer-source-ranges: "XX.XX.XX.XX/24"
+
+additionalArguments:
+  - "--serversTransport.forwardingTimeouts.dialTimeout=300s"
+  - "--serversTransport.forwardingTimeouts.responseHeaderTimeout=300s"
+  - "--serversTransport.forwardingTimeouts.idleConnTimeout=300s"
+  - "--entryPoints.websecure.http.tls"
+
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+
+logs:
+  general:
+    level: INFO
+  access:
+    enabled: true
+
+# DASHBOARD
+# Traefik includes a built-in dashboard - useful for debugging routes
+# Do NOT expose externally in production
+ingressRoute:
+  dashboard:
+    enabled: true
+    entryPoints: ["traefik"]
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+rbac:
+  enabled: true

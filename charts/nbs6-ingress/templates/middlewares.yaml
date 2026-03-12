@@ -1,0 +1,32 @@
+{{/*
+NBS6 Traefik Middleware CRDs
+Only rendered when traefik.enabled is true.
+*/}}
+{{- if .Values.traefik.enabled }}
+# Custom Response Headers for NBS6
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nbs6-custom-headers
+  labels:
+    {{- include "nbs6-ingress.labels" . | nindent 4 }}
+spec:
+  headers:
+    customResponseHeaders:
+      X-Frame-Options: "Allow"
+      Cross-Origin-Opener-Policy: "same-origin"
+---
+# Cached Asset Headers for NBS6
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nbs6-cached-headers
+  labels:
+    {{- include "nbs6-ingress.labels" . | nindent 4 }}
+spec:
+  headers:
+    customResponseHeaders:
+      X-Frame-Options: "Allow"
+      Cross-Origin-Opener-Policy: "same-origin"
+      Cache-Control: "max-age=1209600, immutable"
+{{- end }}

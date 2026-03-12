@@ -1,0 +1,95 @@
+{{/*
+NiFi Ingress — only rendered when nifi.enabled is true.
+NiFi serves HTTPS on port 8443 internally, requiring special backend handling.
+
+NGINX: Uses backend-protocol, upstream-vhost, and proxy-redirect annotations.
+Traefik: Uses ServersTransport CRD for HTTPS backend + headers middleware for upstream-vhost.
+*/}}
+
+{{- if .Values.nifi.enabled }}
+
+{{/* ========== TRAEFIK PATH ========== */}}
+{{- if .Values.traefik.enabled }}
+# ServersTransport — HTTPS backend connection to NiFi
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-nifi-transport
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+spec:
+  insecureSkipVerify: true
+---
+# Middleware — Set Host header to localhost:8443 (NiFi validates Host)
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-nifi-headers
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+spec:
+  headers:
+    customRequestHeaders:
+      Host: "localhost:8443"
+---
+# IngressRoute — NiFi routing with HTTPS backend via ServersTransport
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-nifi
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`{{ .Values.nifi.host }}`)"
+      kind: Rule
+      services:
+        - name: {{ .Values.nifi.serviceName }}
+          port: {{ .Values.nifi.port }}
+          serversTransport: {{ include "nbs-ingress.fullname" . }}-nifi-transport
+          scheme: https
+      middlewares:
+        - name: {{ include "nbs-ingress.fullname" . }}-nifi-headers
+          namespace: {{ .Release.Namespace }}
+  tls:
+    secretName: {{ .Values.nifi.host }}
+{{- end }}
+
+{{/* ========== NGINX PATH ========== */}}
+{{- if .Values.nginx.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-nifi
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "localhost:8443"
+    nginx.ingress.kubernetes.io/proxy-redirect-from: "https://localhost:8443"
+    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://{{ .Values.nifi.host }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: {{ .Values.nifi.host }}
+      hosts:
+        - {{ .Values.nifi.host }}
+  rules:
+    - host: {{ .Values.nifi.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.nifi.serviceName }}
+                port:
+                  number: {{ .Values.nifi.port }}
+{{- end }}
+
+{{- end }}

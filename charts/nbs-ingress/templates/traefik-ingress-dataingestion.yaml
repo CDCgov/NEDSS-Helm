@@ -1,0 +1,142 @@
+{{/*
+Traefik Ingress - Data Ingestion and Reporting Service routes
+Only rendered when traefik.enabled is true.
+Includes body-size-limit middleware for large ECR uploads.
+*/}}
+{{- if .Values.traefik.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-dataingestion
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-body-size-limit@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: {{ .Values.dataHost }}
+      hosts:
+        - {{ .Values.dataHost }}
+  rules:
+    - host: {{ .Values.dataHost }}
+      http:
+        paths:
+          {{- if .Values.data.ingestion.enabled }}
+          - path: "/ingestion/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.ingestion.serviceName }}
+                port:
+                  number: {{ .Values.data.ingestion.port }}
+          {{- end }}
+          {{- if .Values.data.reporting.enabled }}
+          - path: "/reporting/person-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.person.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.person.port }}
+          - path: "/reporting/organization-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.organization.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.organization.port }}
+          - path: "/reporting/investigation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.investigation.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.investigation.port }}
+          - path: "/reporting/observation-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.observation.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.observation.port }}
+          - path: "/reporting/post-processing-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.postProcessing.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.postProcessing.port }}
+          - path: "/reporting/ldfdata-svc/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.reporting.ldfdata.serviceName }}
+                port:
+                  number: {{ .Values.data.reporting.ldfdata.port }}
+          {{- end }}
+          {{- if .Values.data.dataProcessing.enabled }}
+          - path: "/rti/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.dataProcessing.serviceName }}
+                port:
+                  number: {{ .Values.data.dataProcessing.port }}
+          {{- end }}
+          {{- if .Values.data.nnd.enabled }}
+          - path: "/extraction/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.nnd.serviceName }}
+                port:
+                  number: {{ .Values.data.nnd.port }}
+          {{- end }}
+          {{- if .Values.data.srteData.enabled }}
+          - path: "/data/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.srteData.serviceName }}
+                port:
+                  number: {{ .Values.data.srteData.port }}
+          {{- end }}
+          {{- if .Values.data.dataExtraction.enabled }}
+          - path: "/data-extraction/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.dataExtraction.serviceName }}
+                port:
+                  number: {{ .Values.data.dataExtraction.port }}
+          {{- end }}
+          {{- if .Values.data.caseNotification.enabled }}
+          - path: "/case-notification/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.caseNotification.serviceName }}
+                port:
+                  number: {{ .Values.data.caseNotification.port }}
+          {{- end }}
+          {{- if .Values.data.xmlHl7Parser.enabled }}
+          - path: "/hl7-parser/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.xmlHl7Parser.serviceName }}
+                port:
+                  number: {{ .Values.data.xmlHl7Parser.port }}
+          {{- end }}
+          {{- if .Values.data.compare.enabled }}
+          - path: "/comparison/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.data.compare.serviceName }}
+                port:
+                  number: {{ .Values.data.compare.port }}
+          {{- end }}
+{{- end }}

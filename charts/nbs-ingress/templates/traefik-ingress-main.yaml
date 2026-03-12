@@ -1,0 +1,69 @@
+{{/*
+Traefik Ingress - Main application routes (KeyCloak + NBS Gateway)
+Only rendered when traefik.enabled is true.
+*/}}
+{{- if .Values.traefik.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-main
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-nbs-custom-headers@kubernetescrd,{{ .Release.Namespace }}-body-size-limit@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: {{ .Values.appHost }}
+      hosts:
+        - {{ .Values.appHost }}
+  rules:
+    - host: {{ .Values.appHost }}
+      http:
+        paths:
+          # KeyCloak auth routes
+          - path: "/auth/realms/nbs-users/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.keycloak.serviceName }}
+                port:
+                  name: {{ .Values.app.keycloak.portName }}
+          - path: "/auth/robots.txt"
+            pathType: Exact
+            backend:
+              service:
+                name: {{ .Values.app.keycloak.serviceName }}
+                port:
+                  name: {{ .Values.app.keycloak.portName }}
+          - path: "/auth/js/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.keycloak.serviceName }}
+                port:
+                  name: {{ .Values.app.keycloak.portName }}
+          - path: "/auth/resources/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.keycloak.serviceName }}
+                port:
+                  name: {{ .Values.app.keycloak.portName }}
+          # NBS Gateway routes
+          - path: /favicon.ico
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.gateway.serviceName }}
+                port:
+                  number: {{ .Values.app.gateway.port }}
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.gateway.serviceName }}
+                port:
+                  number: {{ .Values.app.gateway.port }}
+{{- end }}
