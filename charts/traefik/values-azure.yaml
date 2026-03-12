@@ -2,6 +2,9 @@
 # Replaces: charts/nginx-ingress/values-azure.yaml
 # Chart: traefik/traefik (v3.6.x)
 
+nodeSelector:
+  kubernetes.io/os: linux
+
 deployment:
   enabled: true
   kind: Deployment

@@ -24,7 +24,7 @@ traefik:
 # Port 443 maps to targetPort 7001 (WildFly)
 host: "app-classic.EXAMPLE_DOMAIN"
 serviceName: "nbs6-service"
-servicePort: 443
+servicePort: 80
 
 # -----------------------------------------------------------------------------
 # TLS
