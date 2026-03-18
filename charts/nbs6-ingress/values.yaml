@@ -31,3 +31,11 @@ servicePort: 80
 # -----------------------------------------------------------------------------
 tls:
   clusterIssuer: "letsencrypt-production"
+
+# -----------------------------------------------------------------------------
+# MIDDLEWARE CONFIGURATION
+# -----------------------------------------------------------------------------
+middlewares:
+  bodySizeLimit:
+    # Max request body size in bytes (100MB — matches NGINX proxy-body-size: 100m)
+    maxRequestBodyBytes: 104857600

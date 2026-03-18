@@ -13,7 +13,7 @@ metadata:
     {{- include "nbs6-ingress.labels" . | nindent 4 }}
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
-    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-nbs6-custom-headers@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-nbs6-custom-headers@kubernetescrd,{{ .Release.Namespace }}-nbs6-body-size-limit@kubernetescrd
 spec:
   ingressClassName: traefik
   tls:
