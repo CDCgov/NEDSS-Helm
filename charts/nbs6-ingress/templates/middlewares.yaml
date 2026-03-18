@@ -29,4 +29,18 @@ spec:
       X-Frame-Options: "Allow"
       Cross-Origin-Opener-Policy: "same-origin"
       Cache-Control: "max-age=1209600, immutable"
+---
+# Body Size Limit for NBS6 (100MB — matches NGINX proxy-body-size: 100m)
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nbs6-body-size-limit
+  labels:
+    {{- include "nbs6-ingress.labels" . | nindent 4 }}
+spec:
+  buffering:
+    maxRequestBodyBytes: {{ int64 (.Values.middlewares.bodySizeLimit.maxRequestBodyBytes | default 104857600) }}
+    memRequestBodyBytes: 10485760
+    maxResponseBodyBytes: 0
+    memResponseBodyBytes: 1048576
 {{- end }}
