@@ -44,9 +44,27 @@ metadata:
   labels:
     {{- include "nbs-ingress.labels" . | nindent 4 }}
 spec:
-  headers:
+  headers:    
     customResponseHeaders:
       X-Frame-Options: "Allow"
       Cross-Origin-Opener-Policy: "same-origin"
       Cache-Control: "max-age=1209600, immutable"
+      Pragma: ""
+    
+# # =============================================================================
+# # Strip upstream Headers 
+# # =============================================================================
+# apiVersion: traefik.io/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: nbs-strip-headers
+#   labels:
+#     {{- include "nbs-ingress.labels" . | nindent 4 }}
+# spec:
+#   headers:
+#     customResponseHeaders:
+#       X-Frame-Options: " "
+#       Cross-Origin-Opener-Policy: " "
+#       Cache-Control: " "
+#       Pragma: " "
 {{- end }}
