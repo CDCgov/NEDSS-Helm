@@ -2,6 +2,9 @@
 # Replaces: charts/nginx-ingress/values-azure.yaml
 # Chart: traefik/traefik (v3.6.x)
 
+image:
+  tag: v3.7.0-ea.1
+
 nodeSelector:
   kubernetes.io/os: linux
 
