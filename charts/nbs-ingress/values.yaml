@@ -103,7 +103,7 @@ data:
   nnd:
     enabled: false
     serviceName: "nnd-service"
-    port: 8083
+    port: 8081
   # SRTE Data Service
   srteData:
     enabled: true
