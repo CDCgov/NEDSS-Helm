@@ -44,9 +44,11 @@ metadata:
   labels:
     {{- include "nbs-ingress.labels" . | nindent 4 }}
 spec:
-  headers:
+  headers:    
     customResponseHeaders:
       X-Frame-Options: "Allow"
       Cross-Origin-Opener-Policy: "same-origin"
       Cache-Control: "max-age=1209600, immutable"
+      Pragma: ""
+
 {{- end }}
