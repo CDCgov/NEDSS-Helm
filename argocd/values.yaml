@@ -180,13 +180,6 @@ pageBuilderApi:
 rtr:
   threadPoolSize: <UPDATE_THREAD_POOL_SIZE>
 
-xmlHl7ParserService:
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
-
 splunk:
   clusterName: <UPDATE_CLUSTER_NAME>
   ingex: <UPDATE_INGEX>

@@ -60,9 +60,6 @@ caseNotification:
   enabled: "true"
   port: 8093 
 
-xmlHl7Parser:
-  enabled: "true"
-  port: 8088
 
 compare:
   enabled: "false"
