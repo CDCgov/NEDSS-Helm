@@ -36,13 +36,6 @@ on:
         type: string
         default: "charts/modernization-api/values-*, charts/nbs-gateway/values-*, charts/dataingestion-service/values-*, charts/elasticsearch-efs/values-*, charts/nifi-efs/values-*, charts/page-builder-api/values-*, charts/liquibase/values-*, charts/nnd-service/values-*, charts/investigation-reporting-service/values-*, charts/ldfdata-reporting-service/values-*, charts/observation-reporting-service/values-*, charts/organization-reporting-service/values-*, charts/person-reporting-service/values-*, charts/post-processing-reporting-service/values-*, charts/kafka-connect-sink/values-*, charts/debezium/values-*, charts/data-processing-service/values-*, charts/cluster-autoscaler/values-*, charts/case-notification-service/values-*, charts/data-extraction-service/values-*, charts/xml-hl7-parser-service/values-*, charts/debezium-case-notifications/values-*, charts/rtr/values-*"
         required: false
-    # secrets:
-    #   GIT_APP_ID:
-    #     description: "GitHub application ID."
-    #     required: true
-    #   GIT_APP_PRIVATE_KEY:
-    #     description: "GitHub application private key."
-    #     required: true
 
  #token permissions
 permissions:
