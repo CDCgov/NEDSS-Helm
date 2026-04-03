@@ -1,6 +1,6 @@
 # Traefik Ingress Controller - AWS (EKS) Configuration
 # Replaces: charts/nginx-ingress/values.yaml
-# Chart: traefik/traefik (v3.6.x)
+# Chart: traefik/traefik (v3.7.x)
 
 image:
   tag: v3.7.0-ea.1
