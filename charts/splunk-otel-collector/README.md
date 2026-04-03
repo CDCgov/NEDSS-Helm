@@ -155,10 +155,8 @@ kubectl -n observability logs -l app=splunk-otel-collector --tail=30
 # Check S3 for recent logs
 aws s3 ls s3://<BUCKET_NAME>/otel-logs/ --recursive --region <REGION> | tail -5
 
-# Effective collector config (port-forward method)
-kubectl -n observability port-forward <agent-pod> 55554:55554
-# Then in separate terminal:
-curl http://localhost:55554/debug/configz/effective
+# View effective collector config
+kubectl -n observability exec <agent-pod> -- cat /conf/relay.yaml
 ```
 
 ## Post-Deployment Checklist

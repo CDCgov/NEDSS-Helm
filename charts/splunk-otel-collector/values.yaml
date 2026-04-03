@@ -80,7 +80,7 @@ agent:
           region: "<AWS_REGION>"
           s3_bucket: "<S3_BUCKET_NAME>"
           s3_prefix: "otel-logs"
-          s3_partition: "minute"
+          s3_partition_format: "year=%Y/month=%m/day=%d/hour=%H/minute=%M"
         marshaler: otlp_json
       # Uncomment to enable Azure Blob export:
       # azureblob:
