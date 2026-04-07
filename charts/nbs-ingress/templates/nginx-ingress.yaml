@@ -176,15 +176,6 @@ spec:
                 port:
                   number: {{ .Values.data.caseNotification.port }}
           {{- end }}
-          {{- if .Values.data.xmlHl7Parser.enabled }}
-          - path: "/hl7-parser/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.data.xmlHl7Parser.serviceName }}
-                port:
-                  number: {{ .Values.data.xmlHl7Parser.port }}
-          {{- end }}
           {{- if .Values.data.reporting.enabled }}
           - path: "/reporting/person-svc/"
             pathType: Prefix
