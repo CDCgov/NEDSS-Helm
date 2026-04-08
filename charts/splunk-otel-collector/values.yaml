@@ -13,7 +13,7 @@
 # This file configures three log export destinations:
 #   1. AWS S3        — update bucket name and region below
 #   2. Azure Blob    — uncomment and update connection_string to enable
-#   3. Splunk HEC    — update token to enable
+#   3. Splunk HEC    — update token to enable for environments where a HEC token is available
 #
 # REQUIRED: update clusterName per environment before deploying.
 # =============================================================================
@@ -29,11 +29,11 @@ environment: "<ENVIRONMENT>"
 # =============================================================================
 # To enable, replace token with a real HEC token and set logsEnabled to true.
 splunkPlatform:
-  endpoint: "https://http-inputs.cdc.splunkcloudgc.com:443/services/collector/event"
+  endpoint: "https://<SPLUNK_HEC_ENDPOINT>"
   token: "placeholder"
   index: "kubernetes_logs"
   metricsIndex: "metrics_test"
-  logsEnabled: true
+  logsEnabled: false
   metricsEnabled: false
   retryOnFailure:
     enabled: true
@@ -68,6 +68,11 @@ agent:
     # The bucket must already exist. Authentication via IRSA or node
     # instance profile.
     #
+    # Partition format controls how logs are organized in S3:
+    #   Daily (default):  year=2026/month=03/day=31/
+    #   Hourly:           year=%Y/month=%m/day=%d/hour=%H
+    #   Per-minute:       year=%Y/month=%m/day=%d/hour=%H/minute=%M
+    #
     # =========================================================================
     # EXPORTER 3: Azure Blob Storage — PLACEHOLDER
     # =========================================================================
@@ -80,7 +85,7 @@ agent:
           region: "<AWS_REGION>"
           s3_bucket: "<S3_BUCKET_NAME>"
           s3_prefix: "otel-logs"
-          s3_partition_format: "year=%Y/month=%m/day=%d/hour=%H/minute=%M"
+          s3_partition_format: "year=%Y/month=%m/day=%d"
         marshaler: otlp_json
       # Uncomment to enable Azure Blob export:
       # azureblob:

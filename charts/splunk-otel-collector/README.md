@@ -5,6 +5,11 @@ OTEL Log Collector values for NBS environments — replaces FluentBit.
 ## Overview
 This directory contains the Helm values file for deploying the upstream [Splunk OpenTelemetry Collector for Kubernetes](https://github.com/signalfx/splunk-otel-collector-chart) chart to NBS clusters. No wrapper chart — just a values file passed directly to the upstream chart.
 
+Primary use case: ship container logs from NBS EKS/AKS clusters to a durable store (S3 or Azure Blob) for crash investigation and debugging. Splunk HEC is available as an additional destination but is not required
+
+### What role does Splunk play?
+Splunk is not required to use this chart. Splunk HEC is only applicable in environments where a HEC token has been provisioned. The upstream chart requires `<splunkPlatform.token>` to pass schema validation, so a `<"placeholder">` value is set in values.yaml. No data is sent to Splunk with a placeholder token and `<logsEnabled: false>`.
+
 ### Log Destinations
 
 | Destination | Status | How to Enable |
@@ -30,6 +35,7 @@ charts/splunk-otel-collector/
 - For Splunk: a HEC token
 
 ## Deploy to EKS
+ Before deploying, complete the S3 Setup for EKS section below to create the S3 bucket, IAM policy, and IRSA role. The <IRSA_ROLE_NAME> in the deploy command comes from Step 3 of that section.
 
 ```bash
 # Add upstream repo
@@ -39,7 +45,7 @@ helm repo update
 # Update placeholders in values.yaml:
 #   clusterName, environment, s3_bucket, region
 
-# Deploy
+# Deploy (replace <ACCOUNT_ID> and <IRSA_ROLE_NAME> with values from S3 Setup Step 3)
 helm install splunk-otel-collector \
   splunk-otel-collector-chart/splunk-otel-collector \
   -f values.yaml \
@@ -91,6 +97,7 @@ aws s3 mb s3://<BUCKET_NAME> --region <REGION>
 ```
 
 ### Step 3: Create IRSA role
+IRSA (IAM Roles for Service Accounts) lets the OTEL collector pods assume an IAM role without static credentials. Each EKS cluster requires its own IRSA role because each cluster has a unique OIDC provider.
 
 1. Get the cluster OIDC provider:
    ```bash
@@ -100,6 +107,8 @@ aws s3 mb s3://<BUCKET_NAME> --region <REGION>
 2. Create an IAM role with Web Identity trust policy using the OIDC URL
 3. Set the trust condition to: `system:serviceaccount:observability:splunk-otel-collector`
 4. Attach the S3 write policy to the role
+
+The role name you create here (e.g., OtelS3Role-<cluster>) is the <IRSA_ROLE_NAME> used in the Deploy to EKS command.
 
 ### Step 4: Deploy with IRSA
 
