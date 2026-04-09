@@ -33,7 +33,7 @@ splunkPlatform:
   token: "placeholder"
   index: "kubernetes_logs"
   metricsIndex: "metrics_test"
-  logsEnabled: false
+  logsEnabled: true
   metricsEnabled: false
   retryOnFailure:
     enabled: true
@@ -84,7 +84,7 @@ agent:
         s3uploader:
           region: "<AWS_REGION>"
           s3_bucket: "<S3_BUCKET_NAME>"
-          s3_prefix: "otel-logs"
+          s3_prefix: "<CLUSTER_NAME>"
           s3_partition_format: "year=%Y/month=%m/day=%d"
         marshaler: otlp_json
       # Uncomment to enable Azure Blob export:

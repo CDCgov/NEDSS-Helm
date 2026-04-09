@@ -162,7 +162,7 @@ kubectl get pods -n observability -l app=splunk-otel-collector
 kubectl -n observability logs -l app=splunk-otel-collector --tail=30
 
 # Check S3 for recent logs
-aws s3 ls s3://<BUCKET_NAME>/otel-logs/ --recursive --region <REGION> | tail -5
+aws s3 ls s3://<BUCKET_NAME>/<CLUSTER_NAME>/ --recursive --region <REGION> | tail -5
 
 # View effective collector config
 kubectl -n observability exec <agent-pod> -- cat /conf/relay.yaml
