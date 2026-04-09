@@ -1,0 +1,166 @@
+# =============================================================================
+# Splunk OpenTelemetry Collector — NBS Values File
+# =============================================================================
+# Deploy directly with the upstream chart:
+#
+#   helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
+#   helm repo update
+#   helm install splunk-otel-collector \
+#     splunk-otel-collector-chart/splunk-otel-collector \
+#     -f values.yaml \
+#     -n observability --create-namespace
+#
+# This file configures three log export destinations:
+#   1. AWS S3        — update bucket name and region below
+#   2. Azure Blob    — uncomment and update connection_string to enable
+#   3. Splunk HEC    — update token to enable for environments where a HEC token is available
+#
+# REQUIRED: update clusterName per environment before deploying.
+# =============================================================================
+
+# -- Cluster name. Update per environment.
+clusterName: "<CLUSTER_NAME>"
+
+# -- Environment tag for downstream log correlation
+environment: "<ENVIRONMENT>"
+
+# =============================================================================
+# EXPORTER 1: Splunk Platform (HEC) — PLACEHOLDER
+# =============================================================================
+# To enable, replace token with a real HEC token and set logsEnabled to true.
+splunkPlatform:
+  endpoint: "https://<SPLUNK_HEC_ENDPOINT>"
+  token: "placeholder"
+  index: "kubernetes_logs"
+  metricsIndex: "metrics_test"
+  logsEnabled: true
+  metricsEnabled: false
+  retryOnFailure:
+    enabled: true
+    initialInterval: 5s
+    maxInterval: 30s
+    maxElapsedTime: 300s
+  sendingQueue:
+    enabled: true
+    numConsumers: 10
+    queueSize: 5000
+    persistentQueue:
+      enabled: true
+      storagePath: "/var/addon/splunk/exporter_queue"
+
+# =============================================================================
+# Agent DaemonSet
+# =============================================================================
+agent:
+  hostNetwork: false
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  config:
+    # =========================================================================
+    # EXPORTER 2: AWS S3
+    # =========================================================================
+    # Writes OTLP JSON log batches to an S3 bucket, partitioned by minute.
+    # The bucket must already exist. Authentication via IRSA or node
+    # instance profile.
+    #
+    # Partition format controls how logs are organized in S3:
+    #   Daily (default):  year=2026/month=03/day=31/
+    #   Hourly:           year=%Y/month=%m/day=%d/hour=%H
+    #   Per-minute:       year=%Y/month=%m/day=%d/hour=%H/minute=%M
+    #
+    # =========================================================================
+    # EXPORTER 3: Azure Blob Storage — PLACEHOLDER
+    # =========================================================================
+    # To enable for AKS clusters, uncomment the azureblob exporter below
+    # and add it to the logs pipeline exporters list.
+    #
+    exporters:
+      awss3:
+        s3uploader:
+          region: "<AWS_REGION>"
+          s3_bucket: "<S3_BUCKET_NAME>"
+          s3_prefix: "<CLUSTER_NAME>"
+          s3_partition_format: "year=%Y/month=%m/day=%d"
+        marshaler: otlp_json
+      # Uncomment to enable Azure Blob export:
+      # azureblob:
+      #   connection_string: "<AZURE_BLOB_CONNECTION_STRING>"
+      #   container: "<AZURE_BLOB_CONTAINER>"
+      #   blob_prefix: "otel-logs"
+      #   marshaler: otlp_json
+    service:
+      pipelines:
+        logs:
+          exporters:
+            - awss3
+            # - azureblob  # Uncomment when Azure Blob is enabled
+
+# =============================================================================
+# Log Collection
+# =============================================================================
+logsCollection:
+  containers:
+    # -------------------------------------------------------------------------
+    # Exclude Paths
+    # -------------------------------------------------------------------------
+    # EKS-specific system pod exclusions. For AKS, replace with:
+    #   - '/var/log/pods/cattle-fleet-system_fleet-agent-*/fleet-agent/*.log'
+    #   - '/var/log/pods/calico-system_calico-node-*/flexvol-driver/*.log'
+    #   - '/var/log/pods/kube-system_ama-metrics-operator-targets-*/targetallocator/*.log'
+    #   - '/var/log/pods/kube-system_cloud-node-manager-*/*.log'
+    #   - '/var/log/pods/kube-system_csi-azuredisk-node-*/*.log'
+    excludePaths:
+      - '/var/log/pods/kube-system_coredns-*/coredns/*.log'
+      - '/var/log/pods/kube-system_kube-proxy-*/*.log'
+      - '/var/log/pods/kube-system_aws-node-*/*.log'
+      - '/var/log/pods/kube-system_ebs-csi-node-*/*.log'
+      - '/var/log/pods/kube-system_efs-csi-node-*/*.log'
+      - '/var/log/pods/amazon-cloudwatch_*/*.log'
+      - '/var/log/pods/observability_*splunk-otel-collector*/*.log'
+    # -------------------------------------------------------------------------
+    # Multiline Log Handling
+    # -------------------------------------------------------------------------
+    # Combines Java stack traces into single log entries.
+    # Update namespaceName to match the namespace where NBS pods are deployed.
+    multilineConfigs:
+      # NBS7 Java microservices (Spring Boot stack traces)
+      - namespaceName:
+          value: 'default'
+        podName:
+          value: '.*'
+          useRegexp: true
+        firstEntryRegex: '^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}'
+        combineWith: '\n'
+      # NBS6 WildFly — uncomment and adjust namespaceName when NBS6 pods are deployed
+      # - namespaceName:
+      #     value: 'default'
+      #   podName:
+      #     value: '.*'
+      #     useRegexp: true
+      #   firstEntryRegex: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}'
+      #   combineWith: '\n'
+      # Azure CSI driver multiline — uncomment for AKS clusters
+      # - namespaceName:
+      #     value: kube-system
+      #   podName:
+      #     value: 'csi-azurefile-node-.*'
+      #     useRegexp: true
+      #   containerName:
+      #     value: azurefile
+      #   firstEntryRegex: '[IE]\\d+\\s\\d+:\\d+:\\d+\\.\\d+'
+      #   combineWith: ''
+
+# =============================================================================
+# Cluster Receiver
+# =============================================================================
+clusterReceiver:
+  enabled: true
+  resources:
+    limits:
+      cpu: 200m
+      memory: 512Mi
