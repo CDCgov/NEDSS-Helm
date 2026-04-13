@@ -11,9 +11,9 @@
 #     -n observability --create-namespace
 #
 # This file configures three log export destinations:
-#   1. AWS S3        — update bucket name and region below
-#   2. Azure Blob    — uncomment and update connection_string to enable
-#   3. Splunk HEC    — update token to enable for environments where a HEC token is available
+#   1. Splunk HEC    — update token to enable for environments where a HEC token is available
+#   2. AWS S3        — update bucket name and region below
+#   3. Azure Blob    — uncomment and update connection_string to enable
 #
 # REQUIRED: update clusterName per environment before deploying.
 # =============================================================================
