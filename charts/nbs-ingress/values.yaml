@@ -119,11 +119,6 @@ data:
     enabled: false
     serviceName: "case-notification-service"
     port: 8089
-  # XML HL7 Parser
-  xmlHl7Parser:
-    enabled: true
-    serviceName: "xml-hl7-parser-service"
-    port: 8088
   # Data Compare API
   compare:
     enabled: false

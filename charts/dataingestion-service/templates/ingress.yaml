@@ -113,15 +113,6 @@ spec:
                 port:
                   number: {{ .Values.caseNotification.port }}
           {{- end }} 
-          {{- if eq .Values.xmlHl7Parser.enabled "true" }}
-          - path: "/hl7-parser/"
-            pathType: Prefix
-            backend:
-              service:
-                name: xml-hl7-parser-service
-                port:
-                  number: {{ .Values.xmlHl7Parser.port }}
-          {{- end }} 
           {{- if eq .Values.compare.enabled "true" }}
           - path: "/comparison/"
             pathType: Prefix
