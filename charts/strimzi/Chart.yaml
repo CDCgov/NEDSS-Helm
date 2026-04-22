@@ -1,0 +1,10 @@
+apiVersion: v2
+name: nbs-kafka
+description: A wrapper chart for Strimzi Kafka Operator that creates a kafka cluster plus brokers
+type: application
+version: 1.0.0
+
+dependencies:
+  - name: strimzi-kafka-operator
+    version: "0.51.0" # Replace with your desired version (0.45.0 max for zookeeper support see charts at https://github.com/strimzi/strimzi-kafka-operator/blob/0.45.0/examples/kafka/kafka-ephemeral.yaml)
+    repository: "https://strimzi.io/charts/"
