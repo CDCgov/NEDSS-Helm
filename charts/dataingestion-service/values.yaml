@@ -48,10 +48,6 @@ nndService:
   enabled: "true"
   port: 8081
 
-srtedataService:
-  enabled: "true"
-  port: 8084
-
 dataExtraction:
   enabled: "true"
   port: 8090

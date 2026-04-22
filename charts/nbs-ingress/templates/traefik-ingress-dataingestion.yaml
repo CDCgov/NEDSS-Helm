@@ -94,15 +94,6 @@ spec:
                 port:
                   number: {{ .Values.data.nnd.port }}
           {{- end }}
-          {{- if .Values.data.srteData.enabled }}
-          - path: "/data/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.data.srteData.serviceName }}
-                port:
-                  number: {{ .Values.data.srteData.port }}
-          {{- end }}
           {{- if .Values.data.dataExtraction.enabled }}
           - path: "/data-extraction/"
             pathType: Prefix

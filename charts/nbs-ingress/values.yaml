@@ -104,11 +104,6 @@ data:
     enabled: false
     serviceName: "nnd-service"
     port: 8081
-  # SRTE Data Service
-  srteData:
-    enabled: true
-    serviceName: "srte-data-service"
-    port: 8084
   # Data Extraction
   dataExtraction:
     enabled: true
