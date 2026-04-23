@@ -20,7 +20,10 @@ helm dependency update strimzi/
 
 # Standard installation
 helm install kafka-release ./strimzi --namespace kafka-system --create-namespace 
+```
+
 
 # TODO
-- **Storage Drivers:** - AWS: [EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver)
+- **Storage Drivers:** 
+    - AWS: [EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver)
     - Azure: [Azure File CSI Driver](https://github.com/kubernetes-sigs/azurefile-csi-driver)
