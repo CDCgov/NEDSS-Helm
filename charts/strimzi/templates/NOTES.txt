@@ -6,10 +6,10 @@ Your Kafka cluster is now running in the namespace: {{ .Release.Namespace }}
 
 ### 1. INTERNAL CONNECTION ENDPOINTS (Within Kubernetes)
 Other pods in the same namespace can use the short DNS name. 
-Bootstrap Server: {{ $.Values.clusterName }}-bootstrap
+Bootstrap Server: {{ $.Values.clusterName }}-kafka-bootstrap
 
 Pods in DIFFERENT namespaces MUST use the Fully Qualified Domain Name (FQDN).
-Bootstrap Server: {{ $.Values.clusterName }}bootstrap.{{ $.Release.Namespace }}.svc.cluster.local:9092
+Bootstrap Server: {{ $.Values.clusterName }}-kafka-bootstrap.{{ $.Release.Namespace }}.svc.cluster.local:9092
 
 ### 2. TOPIC MANAGEMENT
 To see your topics managed by the Strimzi Topic Operator:

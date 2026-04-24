@@ -1,5 +1,5 @@
 apiVersion: v2
-name: nbs-kafka
+name: nbs-strimzi
 description: A wrapper chart for Strimzi Kafka Operator that creates a kafka cluster plus brokers
 type: application
 version: 1.0.0

@@ -5,7 +5,7 @@ clusterName: "nbs-kafka"
 kafka:
   version: 4.2.0 # version format major.minor.patch
   metadataVersion: 4.2-IV1 # version format for kraft major.minor-IV1   
-  replicas: 1 # note reducing or increasing this number requires a matching change in kafka.config section
+  replicas: 3 # note reducing or increasing this number requires a matching change in kafka.config section
   storage:
     type: ephemeral # Valid types persistent-claim, ephemeral (default)
     # TODO - fix volume peristence. 
@@ -16,11 +16,11 @@ kafka:
     #     storageRequest: 100Gi
     #     storageSize: "100Gi" 
   config: # config changes significantly between kraft and zookeeper mode
-    offsets.topic.replication.factor: 1 # TODO: figure out how to define relationship between replicas and replication
-    transaction.state.log.replication.factor: 1
-    transaction.state.log.min.isr: 1
-    default.replication.factor: 1
-    min.insync.replicas: 1
+    offsets.topic.replication.factor: 3 # TODO: figure out how to define relationship between replicas and replication
+    transaction.state.log.replication.factor: 3
+    transaction.state.log.min.isr: 2
+    default.replication.factor: 3
+    min.insync.replicas: 2
 
 # Settings for the Strimzi Operator Dependency
 strimziKafkaOperator:
