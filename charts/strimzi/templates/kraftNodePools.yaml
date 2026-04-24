@@ -3,7 +3,7 @@ kind: KafkaNodePool
 metadata:
   name: controller
   labels:
-    strimzi.io/cluster: {{ .Values.clusterName | default "my-cluster" }}
+    strimzi.io/cluster: {{ include "nbs-kafka.fullname" . | default "my-cluster" }}
 spec:
   replicas: {{.Values.kafka.replicas}}
   roles:
@@ -26,7 +26,7 @@ kind: KafkaNodePool
 metadata:
   name: broker
   labels:
-    strimzi.io/cluster: {{ .Values.clusterName | default "my-cluster" }}
+    strimzi.io/cluster: {{ include "nbs-kafka.fullname" . | default "my-cluster" }}
 spec:
   replicas: {{.Values.kafka.replicas}}
   roles:
@@ -47,7 +47,7 @@ spec:
 apiVersion: kafka.strimzi.io/v1
 kind: Kafka
 metadata:
-  name: {{ .Values.clusterName | default "my-cluster" }}
+  name: {{ include "nbs-kafka.fullname" . | default "my-cluster" }}
 spec:
   kafka:
     version: {{ .Values.kafka.version }}
