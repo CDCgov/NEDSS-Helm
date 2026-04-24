@@ -1,7 +1,5 @@
 # Default values for ..
 
-clusterName: "nbs-kafka"
-
 kafka:
   version: 4.2.0 # version format major.minor.patch
   metadataVersion: 4.2-IV1 # version format for kraft major.minor-IV1   
