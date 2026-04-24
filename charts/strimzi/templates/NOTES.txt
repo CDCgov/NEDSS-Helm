@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+  {{ include "nbs-kafka.name" . | upper }} KAFKA CLUSTER DEPLOYED SUCCESSFULLY
+-------------------------------------------------------------------------------
+
+Your Kafka cluster is now running in the namespace: {{ .Release.Namespace }}
+
+### 1. INTERNAL CONNECTION ENDPOINTS (Within Kubernetes)
+Other pods in the same namespace can use the short DNS name. 
+Bootstrap Server: {{ include "nbs-kafka.name" . }}-kafka-bootstrap
+
+Pods in DIFFERENT namespaces MUST use the Fully Qualified Domain Name (FQDN).
+Bootstrap Server: {{ include "nbs-kafka.name" . }}-kafka-bootstrap.{{ $.Release.Namespace }}.svc.cluster.local:9092
+
+### 2. TOPIC MANAGEMENT
+To see your topics managed by the Strimzi Topic Operator:
+  kubectl get kafkatopics -n {{ .Release.Namespace }}
+
+### 3. VERIFY CLUSTER HEALTH
+Check the status of your Kafka Custom Resource:
+  kubectl get kafka {{ include "nbs-kafka.name" . }} -n {{ .Release.Namespace }} -o wide
+
+-------------------------------------------------------------------------------
+For more documentation, visit: https://strimzi.io/docs/operators/latest/overview
+-------------------------------------------------------------------------------

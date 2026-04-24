@@ -1,0 +1,12 @@
+# Temporary to get started. Will want reclaim volume, etc to ensure data is not lost
+{{- if and (eq .Values.kafka.storage.type "persistent-claim") (eq (lower .Values.kafka.storage.cloudProvider) "aws") }}
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ include "nbs-kafka.storageClassName" . }}
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: {{ .Values.kafka.storage.pvc.esPvClaim.efsFileSystemId | quote }}
+  directoryPerms: "700"
+{{- end }}

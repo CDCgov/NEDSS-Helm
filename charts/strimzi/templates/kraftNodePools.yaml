@@ -1,0 +1,71 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaNodePool
+metadata:
+  name: controller
+  labels:
+    strimzi.io/cluster: {{ include "nbs-kafka.name" . | default "my-cluster" }}
+spec:
+  replicas: {{.Values.kafka.replicas}}
+  roles:
+    - controller
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        kraftMetadata: shared
+        type: {{ .Values.kafka.storage.type | default "ephemeral" }}
+        {{- if eq (lower .Values.kafka.storage.type) "persistent-claim" }} 
+        size: {{ .Values.kafka.storage.pvc.esPvClaim.storageSize | quote }}
+        class: {{ include "nbs-kafka.storageClassName" . }}
+        {{- end }}
+        
+---
+
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaNodePool
+metadata:
+  name: broker
+  labels:
+    strimzi.io/cluster: {{ include "nbs-kafka.name" . | default "my-cluster" }}
+spec:
+  replicas: {{.Values.kafka.replicas}}
+  roles:
+    - broker
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        kraftMetadata: shared
+        type: {{ .Values.kafka.storage.type | default "ephemeral" }} 
+        {{- if eq (lower .Values.kafka.storage.type) "persistent-claim" }} 
+        size: {{ .Values.kafka.storage.pvc.esPvClaim.storageSize | quote }}
+        class: {{ include "nbs-kafka.storageClassName" . }} # Passed from values.yaml
+        {{- end }}
+        
+---
+
+apiVersion: kafka.strimzi.io/v1
+kind: Kafka
+metadata:
+  name: {{ include "nbs-kafka.name" . | default "my-cluster" }}
+spec:
+  kafka:
+    version: {{ .Values.kafka.version }}
+    metadataVersion: {{ .Values.kafka.metadataVersion }}
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+    config:
+    {{- range $key, $value := .Values.kafka.config }}
+      {{ $key }}: {{ $value | quote }}
+    {{- end }}    
+      
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
