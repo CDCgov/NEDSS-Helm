@@ -79,6 +79,9 @@ agent:
     # To enable for AKS clusters, uncomment the azureblob exporter below
     # and add it to the logs pipeline exporters list.
     #
+    # NOTE - if not sending logs to EITHER AWS S3 or Azure storage ensure config 
+    #        block is completely commented out by commenting out entire exporters and
+    #        service blocks.
     exporters:
       awss3:
         s3uploader:
