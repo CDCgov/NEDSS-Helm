@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    {{- include "reporting-pipeline-service.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      # Labels used to match pods created by this Deployment.
+      {{- include "reporting-pipeline-service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        # Labels applied to the pod template for identification.
+        {{- include "reporting-pipeline-service.selectorLabels" . | nindent 8 }}
+      annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+    spec:
+      # Service account name for the pod.
+      serviceAccountName: {{ .Chart.Name }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: "{{ .Values.image.pullPolicy | default "IfNotPresent" }}"
+          ports:
+            - containerPort: {{ .Values.service.port }}
+
+          # i.e. http://<pod-ip>:8095/actuator/health
+          {{- if .Values.probes.readiness.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ "/actuator/health" }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "30" }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "10" }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold | default "5" }}
+          {{- end }}
+          {{- if .Values.probes.liveness.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ "/actuator/health" }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "30" }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold | default "5" }}
+          {{- end }}
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+          # The environment variables for this container are referenced by CDCgov/NEDSS-DataReporting/reporting-pipeline-service/src/main/resources/application.yaml
+          env:
+            # The following two variables do not appear to be used/needed anywhere:
+            - name: ENV
+              value: {{ .Values.env | quote }}
+            - name: TZ
+              value: {{ .Values.timezone | quote }}
+
+            - name: DB_CONNECTION_URL # Note that in CDCgov/NEDSS-DataReporting/docker-compose.yaml this variable is named DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.secretName | quote }}
+                  key: {{ .Values.secrets.jdbc.connection_url | quote }}
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.secretName | quote }}
+                  key: {{ .Values.secrets.jdbc.username | quote }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.secretName | quote }}
+                  key: {{ .Values.secrets.jdbc.password | quote }}
+
+            - name: KAFKA_BOOTSTRAP_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.secretName | quote }}
+                  key: {{ .Values.secrets.kafka.cluster | quote }}
+
+            # Feature flags:
+            - name: FF_ES_ENABLE
+              value: {{ .Values.featureFlag.elasticSearchEnable | quote }}
+            - name: FF_PHC_DM_ENABLE
+              value: {{ .Values.featureFlag.phcDatamartEnable | quote }}
+            - name: FF_THREAD_POOL_SIZE
+              value: {{ .Values.featureFlag.threadPoolSize | quote }}
+            - name: FF_POST_PROCESSING_ENABLE
+              value: {{ .Values.featureFlag.postProcessingEnable | quote }}
