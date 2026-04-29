@@ -1,0 +1,64 @@
+# All the configuration settings for this Helm chart are shown below in this file. 
+# This chart offers a default value for some of the settings, e.g. the commented out lines in this file.
+
+# Before installing this chart, it is required that ../../k8-manifests/nbs-secrets.yaml is used to create the needed secrets in your Kubernetes cluster.
+
+replicaCount: 1
+
+env: "prod"
+
+timezone: "UTC"
+
+# The CDCgov/NEDSS-DataReporting/reporting-pipeline-service/Dockerfile for the image below specifies a HEALTHCHECK, but it is still a Kubernetes best practice to also specify readiness and liveness probes.
+
+image:
+  repository: "quay.io/us-cdcgov/cdc-nbs-modernization/reporting-pipeline-service"
+  tag: "v1.3.0-prerelease.31084a3"
+# pullPolicy: IfNotPresent
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: "/actuator/prometheus"
+  prometheus.io/port: "8081"
+
+service:
+  type: ClusterIP
+  port: 8095
+
+resources:
+  limits:
+    memory: "512Mi"
+    cpu: "250m"
+  requests:
+    memory: "256Mi"
+    cpu: "125m"
+
+featureFlag:
+  elasticSearchEnable: "false"
+  phcDatamartEnable: "false"
+  threadPoolSize: "1"
+  postProcessingEnable: "true"
+
+probes:
+  readiness:
+    enabled: true
+    initialDelaySeconds: 60
+#   periodSeconds: 10
+#   failureThreshold: 5
+  liveness:
+    enabled: true
+#   initialDelaySeconds: 60
+#   periodSeconds: 30
+#   failureThreshold: 5
+
+secrets:
+  secretName: "reporting-pipeline-service-access"
+  jdbc:
+    connection_url: "db_connection_url" # The database for this NBS environment
+    # The credentials that the service created by this chart is to use to connect to the database:
+    username: "db_user"
+    password: "db_password"
+  kafka:
+    # The following configuration setting is a comma-separated list of the endpoint(s) of Kafka broker(s) for the given Kubernetes cluster.
+    # e.g. for an AWS MSK provisioned cluster: b-<broker-id>.<cluster-name>.<unique-id>.c<cluster-number>.<aws-region>.amazonaws.com:<port>
+    cluster: "kafka_cluster_url"
