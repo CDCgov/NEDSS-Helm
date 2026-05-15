@@ -104,11 +104,6 @@ data:
     enabled: false
     serviceName: "nnd-service"
     port: 8081
-  # Data Extraction
-  dataExtraction:
-    enabled: true
-    serviceName: "data-extraction-service"
-    port: 8090
   # Case Notification
   caseNotification:
     enabled: false

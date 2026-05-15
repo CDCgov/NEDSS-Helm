@@ -51,13 +51,6 @@ caseNotificationService:
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
 
-dataExtractionService:
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
-
 dataProcessingService:
   authUsername: <UPDATE_AUTH_USERNAME>
   modernizedMatchingEnabled: <UPDATE_MODERNIZED_MATCHING_ENABLED>
