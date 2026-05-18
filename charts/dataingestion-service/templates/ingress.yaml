@@ -86,15 +86,6 @@ spec:
                 port:
                   number: {{ .Values.nndService.port }}
           {{- end }}
-          {{- if eq .Values.dataExtraction.enabled "true" }}
-          - path: "/data-extraction/"
-            pathType: Prefix
-            backend:
-              service:
-                name: data-extraction-service
-                port:
-                  number: {{ .Values.dataExtraction.port }}
-          {{- end }}  
           {{- if eq .Values.caseNotification.enabled "true" }}
           - path: "/case-notification/"
             pathType: Prefix

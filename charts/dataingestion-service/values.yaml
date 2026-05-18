@@ -48,10 +48,6 @@ nndService:
   enabled: "true"
   port: 8081
 
-dataExtraction:
-  enabled: "true"
-  port: 8090
-
 caseNotification:
   enabled: "true"
   port: 8093

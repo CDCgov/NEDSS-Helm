@@ -29,12 +29,12 @@ on:
       paths:
         description: "paths - A CSV string detailing which files and directories should be included in the artifact. If not provided only the standard artifacts will be created."
         type: string
-        default: "charts/modernization-api, charts/nbs-gateway, charts/dataingestion-service, charts/traefik, charts/nbs-ingress, charts/elasticsearch-efs, charts/nifi-efs, charts/page-builder-api, charts/keycloak, charts/liquibase, charts/nnd-service, charts/kafka-connect-sink, charts/debezium, charts/data-processing-service, charts/cluster-autoscaler, k8-manifests/cluster-issuer-prod.yaml, charts/case-notification-service, charts/data-extraction-service, charts/debezium-case-notifications, k8-manifests/nbs-secrets.yaml, charts/rtr"
+        default: "charts/modernization-api, charts/nbs-gateway, charts/dataingestion-service, charts/traefik, charts/nbs-ingress, charts/elasticsearch-efs, charts/nifi-efs, charts/page-builder-api, charts/keycloak, charts/liquibase, charts/nnd-service, charts/kafka-connect-sink, charts/debezium, charts/data-processing-service, charts/cluster-autoscaler, k8-manifests/cluster-issuer-prod.yaml, charts/case-notification-service, charts/debezium-case-notifications, k8-manifests/nbs-secrets.yaml, charts/rtr"
         required: false
       excluded_paths:
         description: "excluded_paths - A CSV list detailing specific files and directories to exclude from the provided paths (this variable serves only to limit scope of the paths variable)."
         type: string
-        default: "charts/modernization-api/values-*, charts/nbs-gateway/values-*, charts/dataingestion-service/values-*, charts/elasticsearch-efs/values-*, charts/nifi-efs/values-*, charts/page-builder-api/values-*, charts/liquibase/values-*, charts/nnd-service/values-*, charts/kafka-connect-sink/values-*, charts/debezium/values-*, charts/data-processing-service/values-*, charts/cluster-autoscaler/values-*, charts/case-notification-service/values-*, charts/data-extraction-service/values-*, charts/debezium-case-notifications/values-*, charts/rtr/values-*"
+        default: "charts/modernization-api/values-*, charts/nbs-gateway/values-*, charts/dataingestion-service/values-*, charts/elasticsearch-efs/values-*, charts/nifi-efs/values-*, charts/page-builder-api/values-*, charts/liquibase/values-*, charts/nnd-service/values-*, charts/kafka-connect-sink/values-*, charts/debezium/values-*, charts/data-processing-service/values-*, charts/cluster-autoscaler/values-*, charts/case-notification-service/values-*, charts/debezium-case-notifications/values-*, charts/rtr/values-*"
         required: false
 
  #token permissions
