@@ -1,5 +1,5 @@
 1. Get the application URL by running these commands:
-{{- if .Values.ui.ingress.enabled }}
+{{- if and .Values.ui.ingress.enabled .Values.ui.enabled }}
   http://{{ .Values.ui.ingress.host }}
 {{- else if contains "NodePort" .Values.connect.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "debezium.fullname" . }})

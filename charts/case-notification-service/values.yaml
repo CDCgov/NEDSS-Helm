@@ -1,8 +1,7 @@
 replicaCount: 1
 
-env: "prod"
-
-authUri: ""
+# More info at: https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/case-notification.html#keycloak-configuration
+authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-case-notification-service/case-notification-service"
@@ -10,6 +9,7 @@ image:
   tag: "v1.0.3"
 
 imagePullSecrets: []
+
 nameOverride: ""
 fullnameOverride: ""
 
@@ -32,34 +32,28 @@ service:
   port: 8093
   httpsPort: 443
 
-
-resources: {}
-
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
+  #targetMemoryUtilizationPercentage: 80
 
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-
-ingressHost: ""
+ingressHost: "data.EXAMPLE_DOMAIN"
 
 kafka:
-  cluster: ""
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
-# dbserver is passed in as an environment variable. It is just the database endpoint
+# dbserver is just the database endpoint/hostname - not with the port number.
 jdbc:
-  dbserver: ""
-  username: ""
-  password: ""
+  dbserver: "EXAMPLE_DB_ENDPOINT"
+  username: "EXAMPLE_ODSE_DB_USER"
+  password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 timezone: "UTC"
+
 api:
-  host: ""
-  clientId: ""
-  secret: ""
+  host: "https://<data.EXAMPLE_DOMAIN>/hl7-parser"
+  # The following two values are specified in Keycloak, and are needed by the XML HL7 Parser library (which is part of this case-notification-service).
+  clientId: "xml-hl7-parser-keycloak-client"
+  secret: "EXAMPLE_XML-HL7-Parser_CLIENT_SECRET"
