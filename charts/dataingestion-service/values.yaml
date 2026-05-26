@@ -1,14 +1,12 @@
 replicaCount: 1
 
-env: "prod"
-
 image:
-  #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/data-ingestion-service"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-ingestion-service"
   pullPolicy: IfNotPresent
   tag: "v1.3.1"
 
 imagePullSecrets: []
+
 nameOverride: ""
 fullnameOverride: ""
 
@@ -31,41 +29,30 @@ service:
   port: 8081
   httpsPort: 443
 
-reportingService:
-  enabled: "true"
+# An ingress is created for the following enabled services.
+reportingService: # RTR
+  enabled: "false"
   personReportingServicePort: 8091
   organizationReportingServicePort: 8092
   investigationReportingServicePort: 8093
   observationReportingServicePort: 8094
   postProcessingReportingServicePort: 8095
   ldfdataReportingServicePort: 8097
-
-dataprocessingService:
+dataprocessingService: # data-processing-service - AKA Real Time Ingestion (RTI)
   enabled: "true"
   port: 8082
-
-nndService:
-  enabled: "true"
+nndService: # nnd-service
+  enabled: "false"
   port: 8081
-
-caseNotification:
+caseNotification: # case-notification-service
   enabled: "true"
   port: 8093
-
-compare:
-  enabled: "false"
+compare: # data-compare-api-service
+  enabled: "true"
   port: 8085
 
 ingress:
-  enabled: false
   className: "nginx"
-  tls:
-  - secretName: "data.EXAMPLE_DOMAIN"
-    hosts:
-    - "data.EXAMPLE_DOMAIN"
-
-traefikIngress:
-  enabled: false
 
 resources: {}
 
@@ -74,6 +61,7 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
+  #targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
@@ -83,18 +71,19 @@ affinity: {}
 
 ingressHost: "data.EXAMPLE_DOMAIN"
 
-# dbserver is passed in as an environment variable. It is just the database endpoint
+# dbserver is just the database endpoint/hostname - not with the port number.
 jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
   username: "EXAMPLE_ODSE_DB_USER"
   password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 kafka:
-  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINTS"
 
 log:
   path: "/usr/share/dataingestion/data"
 
+# This can be set to "aws" or "azure".
 cloudProvider: aws
 
 #Azure PVC Settings#
@@ -106,29 +95,26 @@ azure:
     storageRequest: 20Gi
 
 #AWS PVC Settings#
-
 pvc:
   diPvClaim:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
 
+# Only for AWS
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
-#authUri: "http://keycloak.keycloak.svc.cluster.local/realms/NBS"
+# More info at: https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/case-notification.html#keycloak-configuration
 authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
 sftp:
-  enabled: "EXAMPLE_SFTP_ENABLED"
+  enabled: false
   host: "EXAMPLE_SFTP_HOST"
   username: "EXAMPLE_SFTP_USER"
   password: "EXAMPLE_SFTP_PASS"
-  # need to fix search and replace for both these examples <<EXAMPLE_FIXME_SFTP_SEARCH_AND_REPLACE>>
-  #elrFileExtns: "EXAMPLE_SFTP_FILE_EXTNS"
-  #filePaths: "EXAMPLE_SFTP_FILE_PATHS"
-  elrFileExtns: "hl7,txt"
-  filePaths: "/"  
-# filePaths value should be comma seperated like "/,/LAB-1,/lab-2,/lab-2/lab2-sub-folder"
-##################################
+  elrFileExtns: "EXAMPLE_SFTP_FILE_EXTNS" # e.g. "hl7,txt"
+  filePaths: "EXAMPLE_SFTP_FILE_PATHS" # e.g. "/"
+  # filePaths value should be comma seperated like "/,/LAB-1,/lab-2,/lab-2/lab2-sub-folder"
+
 features:
   obrSplitting:
     enabled: false
@@ -137,7 +123,7 @@ features:
 
 apiPayloadMaxSize: "100MB"
 
-# To enable swagger: https://<data.EXAMPLE_DOMAIN>/ingestion/swagger-ui/index.html#/ 
+# When this is set to "dev" then Swagger will be enabled and accessible via https://<data.EXAMPLE_DOMAIN>/ingestion/swagger-ui/index.html
 springBootProfile: "dev"
 
 # Override available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
