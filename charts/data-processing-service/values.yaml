@@ -1,13 +1,12 @@
 replicaCount: 1
 
-env: "demo"
-
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
   pullPolicy: IfNotPresent
   tag: "v1.0.6"
 
 imagePullSecrets: []
+
 nameOverride: ""
 fullnameOverride: ""
 
@@ -30,14 +29,6 @@ service:
   port: 8082
   httpsPort: 443
 
-ingress:
-  enabled: true
-  className: "nginx"
-  tls:
-  - secretName: "app.EXAMPLE_DOMAIN"
-    hosts:
-    - app.EXAMPLE_DOMAIN
-
 # Kubernetes resource limits
 resources: {}
 
@@ -46,14 +37,13 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
+  #targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
-
-ingressHost: "app.EXAMPLE_DOMAIN"
 
 jdbc:
   dbserver: "EXAMPLE_DB_ENDPOINT"
@@ -65,10 +55,6 @@ nbs:
 
 kafka:
   cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-
-
-log:
-  path: "/usr/share/dataprocessing/data"
 
 dataingestion:
   uri: "data.EXAMPLE_DOMAIN"
