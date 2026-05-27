@@ -70,7 +70,7 @@ spec:
             - name: DI_AUTH_URI
               value: {{ .Values.authUri }}
             - name: DI_SFTP_ENABLED
-              value: {{ .Values.sftp.enabled }}
+              value: {{ .Values.sftp.enabled | default false | quote}}
             - name: DI_SFTP_HOST
               value: {{ .Values.sftp.host }}  
             - name: DI_SFTP_USER
@@ -86,11 +86,11 @@ spec:
             - name: SERVICE_TZ
               value: {{ .Values.timezone | default "UTC" }}
             - name: KAFKA_CONCURRENCY
-              value: "{{ .Values.kafkaConcurrency}}"
+              value: {{ .Values.kafkaConcurrency | default 1 | quote}}
             - name: API_PAYLOAD_MAX_SIZE
-              value: "{{ .Values.apiPayloadMaxSize}}"
+              value: {{ .Values.apiPayloadMaxSize }}
             - name: SPRING_PROFILES_ACTIVE
-              value: "{{ .Values.springBootProfile}}"
+              value: {{ .Values.springBootProfile }}
             - name: OBR_SPLITTING_ENABLED
               value: {{ .Values.features.obrSplitting.enabled | default false | quote}}
             - name: HL7_BATCH_SPLITTING_ENABLED
