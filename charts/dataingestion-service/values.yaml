@@ -48,7 +48,8 @@ caseNotification: # case-notification-service
   enabled: "true"
   port: 8093
 compare: # data-compare-api-service
-  enabled: "true"
+  # Note that when the reportingService.enabled value above is "false" then the following value should be "false" as well.
+  enabled: "false"
   port: 8085
 
 ingress:
