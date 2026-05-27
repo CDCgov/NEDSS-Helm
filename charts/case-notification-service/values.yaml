@@ -53,7 +53,6 @@ jdbc:
 timezone: "UTC"
 
 api:
-  host: "https://<data.EXAMPLE_DOMAIN>/hl7-parser"
   # The following two values are specified in Keycloak, and are needed by the XML HL7 Parser library (which is part of this case-notification-service).
   clientId: "xml-hl7-parser-keycloak-client"
   secret: "EXAMPLE_XML-HL7-Parser_CLIENT_SECRET"
