@@ -65,14 +65,3 @@ app.kubernetes.io/name: {{ include "debezium.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/app: ui
 {{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "debezium.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "debezium.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}

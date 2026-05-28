@@ -1,8 +1,16 @@
 nameOverride: "case-notification"
 fullnameOverride: ""
+
 log_level: INFO
+
 connect:
+  #affinity
+  #nodeSelector
+  #podAnnotations
+  #tolerations
+
   replicaCount: 1
+
   imagePullSecrets: [ ]
 
   image:
@@ -16,9 +24,6 @@ connect:
     protocol: TCP
     name: http
 
-  ingress:
-    enabled: false
-
   autoscaling:
     enabled: false
 
@@ -27,8 +32,8 @@ connect:
       cpu: 1000m
       memory: 1Gi
     requests:
-      cpu: 500m
-      memory: 500m
+      cpu: 500m 
+      memory: 500Mi
 
   properties:
     group_id: "debezium-odse-case-notifications-connector-v061725-2"
@@ -39,8 +44,6 @@ connect:
     sql_server_agent_override: false
     sql_server_agent_status: ""
     bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-
-  # dbserver: "EXAMPLE_DB_ENDPOINT"
 
   connector_enable:
     nbs_case_notification: "enabled"
@@ -124,7 +127,14 @@ connect:
 
 ui:
   enabled: false
+
+  #affinity
+  #nodeSelector
+  #podAnnotations
+  #tolerations
+
   replicaCount: 1
+
   imagePullSecrets: [ ]
 
   image:
@@ -151,7 +161,7 @@ ui:
       cpu: 500m
       memory: 1Gi
     requests:
-      cpu: 500m
+      cpu: 500m 
       memory: 1Gi
 
   env:
@@ -159,4 +169,3 @@ ui:
       value: "http://debezium-case-notifications-connect:8083"
     - name: TZ
       value: "UTC"
-
