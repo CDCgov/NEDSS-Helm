@@ -10,7 +10,9 @@ This chart manages two main components:
 ## 2. Prerequisites
 - **Helm 3.x+**
 - **Kubernetes 1.25+**
-
+- **Drivers for Kubernetes Persistent Volumes**
+    - AWS EBS #documentation https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+    - Azure Disk
 ## 3. Dependency Management
 The Strimzi Operator is not stored in this repository. You must fetch it before installation.
 

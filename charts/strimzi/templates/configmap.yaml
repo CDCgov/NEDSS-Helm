@@ -1,0 +1,9 @@
+# In namespace: order-processing
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-config
+  namespace: {{ .Values.configmap_namespace | quote }}
+data:
+  # This DNS pointer can cross namespace boundaries natively
+  KAFKA_BOOTSTRAP_SERVERS: "{{ include "nbs-kafka.name" . }}-kafka-bootstrap.{{ $.Release.Namespace }}.svc.cluster.local:9092"
