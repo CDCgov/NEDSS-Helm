@@ -9,13 +9,18 @@ spec:
   roles:
     - controller
   storage:
+    {{- if eq (lower .Values.kafka.storage.type) "persistent-claim" }} 
     type: jbod
+    {{- end }}
+    {{- if eq (lower .Values.kafka.storage.type) "ephemeral" }} 
+    type: ephemeral
+    {{- end }}
     volumes:
       - id: 0
         kraftMetadata: shared
         type: {{ .Values.kafka.storage.type | default "ephemeral" }}
         {{- if eq (lower .Values.kafka.storage.type) "persistent-claim" }} 
-        size: {{ .Values.kafka.storage.pvc.esPvClaim.storageSize | quote }}
+        size: {{ .Values.kafka.storage.pvc.PvClaim.storageSize | quote }}
         class: {{ include "nbs-kafka.storageClassName" . }}
         {{- end }}
         
@@ -32,13 +37,18 @@ spec:
   roles:
     - broker
   storage:
+    {{- if eq (lower .Values.kafka.storage.type) "persistent-claim" }} 
     type: jbod
+    {{- end }}
+    {{- if eq (lower .Values.kafka.storage.type) "ephemeral" }} 
+    type: ephemeral
+    {{- end }}
     volumes:
       - id: 0
         kraftMetadata: shared
         type: {{ .Values.kafka.storage.type | default "ephemeral" }} 
         {{- if eq (lower .Values.kafka.storage.type) "persistent-claim" }} 
-        size: {{ .Values.kafka.storage.pvc.esPvClaim.storageSize | quote }}
+        size: {{ .Values.kafka.storage.pvc.PvClaim.storageSize | quote }}
         class: {{ include "nbs-kafka.storageClassName" . }} # Passed from values.yaml
         {{- end }}
         
