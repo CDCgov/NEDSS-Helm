@@ -5,8 +5,7 @@ kafka:
   metadataVersion: 4.2-IV1 # version format for kraft major.minor-IV1   
   replicas: 3 # note reducing or increasing this number requires a matching change in kafka.config section
   storage:
-    type: persistent-claim # Valid types persistent-claim, ephemeral (default)
-    # TODO - fix volume peristence. 
+    type: ephemeral # Valid types persistent-claim, ephemeral (default)     
     cloudProvider: aws # valid type (only if type: persistent-claim) = aws, azure
     pvc: # only if type: persistent-claim 
       PvClaim:              
