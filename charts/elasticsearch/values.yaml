@@ -57,8 +57,10 @@ cloudProvider: aws
 azure:
   files:
     storageRequest: 100Gi
-    storageAccountName: 
-    resourceGroupName: 
+    # The storage account created by the NEDSS-Infrastructure/terraform/azure/modules/2-nbs7/storage-account module:
+    storageAccountName: "EXAMPLE_STORAGE_ACCOUNT_NAME"
+    # The resource group where the storage account lives:
+    resourceGroupName: "EXAMPLE_RESOURCE_GROUP_NAME"
 
 # AWS PVC Settings:
 pvc:
