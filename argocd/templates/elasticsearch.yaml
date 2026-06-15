@@ -12,7 +12,7 @@ spec:
     namespace: default
     server: 'https://kubernetes.default.svc'
   source:
-    path: charts/elasticsearch-efs
+    path: charts/elasticsearch
     repoURL: 'https://github.com/CDCgov/NEDSS-Helm.git'
     targetRevision: {{ .Chart.AppVersion | quote }}
     helm:
@@ -45,4 +45,3 @@ spec:
       selfHeal: true  
   sources: []
   project: default
-

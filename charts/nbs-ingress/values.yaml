@@ -48,7 +48,7 @@ middlewares:
 nifi:
   enabled: false
   host: "nifi.EXAMPLE_DOMAIN"
-  serviceName: "nifi-efs"
+  serviceName: "nifi"
   port: 8443
 
 # -----------------------------------------------------------------------------

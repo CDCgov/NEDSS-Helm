@@ -12,8 +12,8 @@ The following helm charts are contained within this repository:
 2. [nbs-gateway](charts/patient-search) - deploys the nbs spring cloud gateway NBS container
 3. [page-builder-api](charts/page-builder-api) - deploys the page builder NBS container
 4. [dataingestion-service](charts/dataingestion-service) - deploys the dataingestion service NBS container
-5. [elasticsearch-efs](charts/elasticsearch-efs) - deploys eleasticsearch service
-6. [nifi-efs](charts/nif-efs) - deploys NiFi opensource project
+5. [elasticsearch](charts/elasticsearch) - deploys eleasticsearch service
+6. [nifi](charts/nifi) - deploys NiFi opensource project
 7. [nginx-ingress](charts/nginx-ingress) - deploys nginx-ingress controller opensource project
   
 ## Public Domain Standard Notice

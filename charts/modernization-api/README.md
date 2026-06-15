@@ -4,7 +4,7 @@ The `modernization-api` Helm chart deploys core modernized NBS components within
 
 # Requirements
 
-Per https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/quickstart.html#deploy-nbs-7-microservices-helm , the `elasticsearch-efs` chart must be installed before this chart.
+Per https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/quickstart.html#deploy-nbs-7-microservices-helm , the `elasticsearch` chart must be installed before this chart.
 
 Also see https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/prerequisites.html#software-versions .
 
