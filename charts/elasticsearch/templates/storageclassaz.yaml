@@ -16,8 +16,7 @@ mountOptions:
  - nobrl  # disable sending byte range lock requests to the server and for applications which have challenges with posix locks
 parameters:
   skuName: Standard_LRS
-  #location: us-east-1
   resourceGroup: {{ .Values.azure.files.resourceGroupName | quote }}
   storageAccount: {{ .Values.azure.files.storageAccountName | quote }}
   shareName: nbs-es
-{{- end }} 
+{{- end }}

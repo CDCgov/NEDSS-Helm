@@ -1,33 +1,22 @@
 # Overview
 
-This helm chart (nifi) deploys Apache NIFI in Kubernetes with NBS configuration.
+This Helm chart deploys NiFi in Kubernetes.
 
-# Requirements
-
-Kubernetes >=1.20.0-0
-Elastic Search
-Modernization API
+The [Elasticsearch](https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/elasticsearch.html) and [Modernization API](https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/modernization-api.html) NBS 7 microservices must already be installed/deployed before installing this chart/microservice.
 
 # Install Chart
-**Note: Please ensure image.repository, image.tag, tls.secretName, tls.hosts[1], hosts.host, jdbcConnectionString, singleUserCrentialsPassword, proxy-redirect-to under annotations values are populated before running this helm chart. Please see Values section below for more details.**
-Make sure the helm chart is on your local machine and run the following commands:
 
-**Mac OS/Linux**
+See https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/nifi.html .
 
-helm install nifi -f ./nifi/values.yaml nifi
+# Uninstall Chart
 
-**Windows**
+To uninstall this chart, run the following command:
 
-helm install nifi -f .\nifi\values.yaml nifi
-
-# Remove Chart
-To uninstall helm chart, run the following command:
-
-helm uninstall nifi
+`helm uninstall nifi`
 
 ## Values
 
-Default values for nifi charts.
+Default values for this chart:
 
 | Key | Type | Default | Description | Required |
 | -------------- | -------------- | -------------- | -------------- | -------------- |

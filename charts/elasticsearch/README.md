@@ -1,30 +1,23 @@
 # Overview
-This helm chart (elasticsearch-efs) deploys elastic search in Kubernetes with AWS EFS back-end.
 
-# Requirements
-Kubernetes >=1.20.0-0
-AWS EFS
+This Helm chart deploys Elasticsearch in Kubernetes with back-end persistent storage:
+
+- AWS: EFS
+- Azure: Private Azure Files storage, with the Azure Files CSI driver.
 
 # Install Chart
-**Note: Please ensure image.repository, image.tag, and efsFileSystemId values are populated before running this helm chart. Please see Values section below for more details.**
-Make sure the helm chart is on your local machine and run the following commands:
 
-**Mac OS/Linux**
+See https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/elasticsearch.html .
 
-helm install elasticsearch -f ./elasticsearch-efs/values.yaml elasticsearch
+# Uninstall Chart
 
-**Windows**
+To uninstall this chart, run the following command:
 
-helm install elasticsearch -f .\elasticsearch-efs\values.yaml elasticsearch
-
-# Remove Chart
-To uninstall helm chart, run the following command:
-
-helm uninstall elasticsearch
+`helm uninstall elasticsearch`
 
 ## Values
 
-Default values for elasticsearch-efs charts.
+Default values for this chart:
 
 | Key | Type | Default | Description | Required |
 | -------------- | -------------- | -------------- | -------------- | -------------- | 

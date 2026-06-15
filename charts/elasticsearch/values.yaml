@@ -50,20 +50,21 @@ tolerations: []
 
 affinity: {}
 
-
+# "aws" and "azure" are the supported values
 cloudProvider: aws
 
+# For Azure:
 azure:
   files:
     storageRequest: 100Gi
     storageAccountName: 
     resourceGroupName: 
 
-#AWS PVC Settings
-
+# AWS PVC Settings:
 pvc:
   esPvClaim:
     storageClass: efs-es
     storageRequest: 100Gi
 
+# For AWS:
 efsFileSystemId: "EXAMPLE_EFS_ID"
