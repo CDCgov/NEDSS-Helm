@@ -38,7 +38,7 @@ connect:
     default_cleanup: "compact"
     sql_server_agent_override: false
     sql_server_agent_status: ""
-    bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+    bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT"
 
   # dbserver: "EXAMPLE_DB_ENDPOINT"
 
@@ -58,7 +58,7 @@ connect:
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
       "database.server.name": "odse",
-      "database.history.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
+      "database.history.kafka.bootstrap.servers": "EXAMPLE_KAFKA_ENDPOINT",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -70,7 +70,7 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
+      "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_KAFKA_ENDPOINT",
       "table.include.list": "dbo.Person, dbo.Organization, dbo.Observation, dbo.Public_health_case, dbo.Treatment,
                           dbo.state_defined_field_data, dbo.Notification, dbo.Interview, 
                           dbo.Place, dbo.CT_contact, dbo.Auth_user, dbo.Intervention, dbo.Act_relationship",
@@ -102,7 +102,7 @@ connect:
       "database.dbname": "nbs_odse",
       "database.names": "nbs_odse",
       "database.server.name": "odse-meta",
-      "database.history.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
+      "database.history.kafka.bootstrap.servers": "EXAMPLE_KAFKA_ENDPOINT",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -114,7 +114,7 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "odse-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
+      "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_KAFKA_ENDPOINT",
       "table.include.list": "dbo.Page_cond_mapping, dbo.NBS_page, dbo.NBS_ui_metadata,  dbo.NBS_rdb_metadata,
                              dbo.state_defined_field_metadata, dbo.NBS_configuration, dbo.LOOKUP_QUESTION",
       "tasks.max": "1",
@@ -159,7 +159,7 @@ connect:
       "database.dbname": "nbs_srte",
       "database.names": "nbs_srte",
       "database.server.name": "srte",
-      "database.history.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
+      "database.history.kafka.bootstrap.servers": "EXAMPLE_KAFKA_ENDPOINT",
       "database.history.kafka.topic": "dbhistory.database_server_name.database_name",
       # Uncomment following to manually bypass the sqlserver agent status query results
       #"database.sqlserver.agent.status.query": "select dbo.IsSqlAgentRunning()",
@@ -171,7 +171,7 @@ connect:
       "producer.message.max.bytes": "10000000", #10MB
       "snapshot.mode": "no_data",
       "schema.history.internal.kafka.topic": "srte-schema-history",
-      "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_MSK_KAFKA_ENDPOINT",
+      "schema.history.internal.kafka.bootstrap.servers": "EXAMPLE_KAFKA_ENDPOINT",
       "table.include.list": "dbo.Condition_code,dbo.Program_area_code,dbo.Language_code,dbo.State_code,dbo.Unit_code,
                              dbo.Cntycity_code_value,dbo.Lab_result,dbo.Country_code,dbo.Labtest_loinc,dbo.ELR_XREF,
                              dbo.Loinc_condition,dbo.Loinc_snomed_condition,dbo.Lab_test,dbo.Zip_code_value,
@@ -272,7 +272,7 @@ connect:
 
   env:
     - name: BOOTSTRAP_SERVERS
-      value: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+      value: "EXAMPLE_KAFKA_ENDPOINT"
     - name: LOG_LEVEL
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS

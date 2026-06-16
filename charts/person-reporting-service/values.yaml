@@ -56,7 +56,7 @@ featureFlag:
   elasticSearchEnable: "false"
 
 kafka:
-  cluster: "<<EXAMPLE_MSK_KAFKA_ENDPOINT>>"
+  cluster: "<<EXAMPLE_KAFKA_ENDPOINT>>"
 
 log:
   path: "/usr/share/person-reporting/data"

@@ -54,7 +54,7 @@ nbs:
   authuser: "EXAMPLE_NBS_AUTHUSER"
 
 kafka:
-  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+  cluster: "EXAMPLE_KAFKA_ENDPOINT"
 
 dataingestion:
   uri: "data.EXAMPLE_DOMAIN"

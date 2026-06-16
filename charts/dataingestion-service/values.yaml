@@ -79,7 +79,7 @@ jdbc:
   password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 kafka:
-  cluster: "EXAMPLE_MSK_KAFKA_ENDPOINTS"
+  cluster: "EXAMPLE_KAFKA_ENDPOINTS"
 
 log:
   path: "/usr/share/dataingestion/data"
