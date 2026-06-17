@@ -58,6 +58,11 @@ spec:
             - name: TZ
               value: {{ .Values.timezone | quote }}
 
+            - name: DEBEZIUM_CONNECT_URL
+              value: {{ .Values.debeziumConnectUrl | quote }}
+            - name: KAFKA_CONNECT_URL
+              value: {{ .Values.kafkaConnectUrl | quote }}
+
             - name: DB_CONNECTION_URL # Note that in CDCgov/NEDSS-DataReporting/docker-compose.yaml this variable is named DB_HOST
               valueFrom:
                 secretKeyRef:
