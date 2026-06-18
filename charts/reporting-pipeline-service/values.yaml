@@ -9,8 +9,6 @@ env: "prod"
 
 timezone: "UTC"
 
-debeziumConnectUrl: ""
-kafkaConnectUrl: ""
 
 # The CDCgov/NEDSS-DataReporting/reporting-pipeline-service/Dockerfile for the image below specifies a HEALTHCHECK, but it is still a Kubernetes best practice to also specify readiness and liveness probes.
 

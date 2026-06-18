@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "debezium.labels.connect" . | nindent 4 }}
 data:
+  DEBEZIUM_CONNECT_URL: "http://{{ include "debezium.fullname" . }}-connect.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.connect.service.port }}"
   connect-distributed.properties: |
     group.id={{ .Values.connect.properties.group_id }}
     plugin.path=/kafka/connect

@@ -8,6 +8,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
+  KAFKA_CONNECT_URL: "http://{{ template "cp-kafka-connect.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.servicePort }}"
   log4j.properties: |
     log4j.rootLogger={{ .Values.log_level }}, stdout
     log4j.appender.stdout=org.apache.log4j.ConsoleAppender
