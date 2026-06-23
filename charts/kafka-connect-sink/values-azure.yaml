@@ -35,52 +35,12 @@ configurationOverrides:
   "offset.storage.replication.factor": "2"
   "status.storage.replication.factor": "2"
 
-sqlServerConnectorEnabled: true
-sqlServerConnector: {
-  "name": "Kafka-Connect-SqlServer-Sink-V1",
-  "config": {
-    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
-    "tasks.max": "1",
-    "offset.flush.interval.ms": "2000",
-    "connection.url": "jdbc:sqlserver://tf-cdc-nbs6-sql-managed-instance.cdf5734b998e.database.windows.net:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;",
-    "connection.user": "",
-    "connection.password": "",
-    "connection.pool.min_size": "5",
-    "connection.pool.max_size": "32",
-    "connection.pool.acquire_increment": "32",
-    "connection.pool.timeout": "1800",
-    "insert.mode": "upsert",
-    "delete.enabled": "true",
-    "pk.mode": "record_key",
-    "schema.evolution": "basic",
-    "database.time_zone": "UTC",
-    "topics.regex": "nrt_[a-zA-Z_]+",
-    "database.trustServerCertificate": "true",
-    "quote.identifiers": "true",
-    "key.converter.schemas.enable": "true",
-    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
-    "value.converter.schemas.enable": "true",
-    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-    "dialect.name": "SqlServerDatabaseDialect",
-    "errors.deadletterqueue.topic.name": "nrt-nbs-dlq-1",
-    "errors.deadletterqueue.topic.replication.factor": "2",
-    "errors.deadletterqueue.context.headers.enable": "true",
-    "errors.tolerance": "all",
-    "errors.log.enable": "true",
-    "errors.log.include.messages": "true"
-  }
-}
-
-kafkaConnectJdbc: "confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.7.6"
-
 ## Kafka Connect JVM Heap Option
 heapOptions: "-Xms512M -Xmx512M"
 
 ## Additional env variables
 ## CUSTOM_SCRIPT_PATH is the path of the custom shell script to be run mounted in a volume
 customEnv: { }
-SQL_SERVER_CONNECTOR_CONFIG: /etc/sqlServerConnector.json
-JDBC_CONNECTOR_CONFIG: /etc/jdbcConnector.sh
 
 
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -148,21 +108,11 @@ cp-schema-registry:
 
 ## List of volumeMounts for connect server container
 ## ref: https://kubernetes.io/docs/concepts/storage/volumes/
-volumeMounts:
-  - name: config
-    mountPath: /etc/sqlServerConnector.json
-    subPath: sqlServerConnector.json
-#  - name: config
-#    mountPath: /etc/jdbcConnector.sh
-#    subPath: jdbcConnector.sh
+volumeMounts: []
 
-## List of volumeMounts for connect server container
+## List of volumes for connect server container
 ## ref: https://kubernetes.io/docs/concepts/storage/volumes/
-volumes:
-  - name: config
-    configMap:
-      name: cp-kafka-connect-sqlserver-connect
-      defaultMode: 0777
+volumes: []
 
 ## Secret with multiple keys to serve the purpose of multiple secrets
 ## Values for all the keys will be base64 encoded when the Secret is created or updated

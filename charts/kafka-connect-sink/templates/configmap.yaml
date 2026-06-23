@@ -8,12 +8,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
-{{/*  jdbcConnector.sh: |*/}}
-{{/*    {{- include "jdbcConnector" . | indent 4 }}*/}}
-
-  sqlServerConnector.json: |-
-      {{- .Values.sqlServerConnector| toPrettyJson | nindent 4 }}
-
+  KAFKA_CONNECT_URL: "http://{{ template "cp-kafka-connect.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.servicePort }}"
   log4j.properties: |
     log4j.rootLogger={{ .Values.log_level }}, stdout
     log4j.appender.stdout=org.apache.log4j.ConsoleAppender
