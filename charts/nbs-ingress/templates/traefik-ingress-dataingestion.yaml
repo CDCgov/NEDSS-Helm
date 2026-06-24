@@ -32,49 +32,14 @@ spec:
                 port:
                   number: {{ .Values.data.ingestion.port }}
           {{- end }}
-          {{- if .Values.data.reporting.enabled }}
-          - path: "/reporting/person-svc/"
+          {{- if .Values.data.reportingPipeline.enabled }}
+          - path: "/reporting-pipeline-svc/"
             pathType: Prefix
             backend:
               service:
-                name: {{ .Values.data.reporting.person.serviceName }}
+                name: {{ .Values.data.reportingPipeline.serviceName }}
                 port:
-                  number: {{ .Values.data.reporting.person.port }}
-          - path: "/reporting/organization-svc/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.data.reporting.organization.serviceName }}
-                port:
-                  number: {{ .Values.data.reporting.organization.port }}
-          - path: "/reporting/investigation-svc/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.data.reporting.investigation.serviceName }}
-                port:
-                  number: {{ .Values.data.reporting.investigation.port }}
-          - path: "/reporting/observation-svc/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.data.reporting.observation.serviceName }}
-                port:
-                  number: {{ .Values.data.reporting.observation.port }}
-          - path: "/reporting/post-processing-svc/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.data.reporting.postProcessing.serviceName }}
-                port:
-                  number: {{ .Values.data.reporting.postProcessing.port }}
-          - path: "/reporting/ldfdata-svc/"
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.data.reporting.ldfdata.serviceName }}
-                port:
-                  number: {{ .Values.data.reporting.ldfdata.port }}
+                  number: {{ .Values.data.reportingPipeline.port }}
           {{- end }}
           {{- if .Values.data.dataProcessing.enabled }}
           - path: "/rti/"

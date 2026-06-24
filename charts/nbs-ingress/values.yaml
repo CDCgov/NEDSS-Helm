@@ -73,27 +73,11 @@ data:
     enabled: true
     serviceName: "dataingestion-service"
     port: 8081
-  # Reporting Services
-  reporting:
-    enabled: false
-    person:
-      serviceName: "person-reporting-service"
-      port: 8091
-    organization:
-      serviceName: "organization-reporting-service"
-      port: 8092
-    investigation:
-      serviceName: "investigation-reporting-service"
-      port: 8093
-    observation:
-      serviceName: "observation-reporting-service"
-      port: 8094
-    postProcessing:
-      serviceName: "post-processing-reporting-service"
-      port: 8095
-    ldfdata:
-      serviceName: "ldfdata-reporting-service"
-      port: 8096
+  # Reporting Pipeline
+  reportingPipeline:
+    enabled: true
+    serviceName: "reporting-pipeline-service"
+    port: 8095
   # Data Processing
   dataProcessing:
     enabled: true
