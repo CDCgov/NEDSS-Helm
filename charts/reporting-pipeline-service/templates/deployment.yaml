@@ -94,8 +94,6 @@ spec:
             # Feature flags:
             - name: FF_ES_ENABLE
               value: {{ .Values.featureFlag.elasticSearchEnable | quote }}
-            - name: FF_PHC_DM_ENABLE
-              value: {{ .Values.featureFlag.phcDatamartEnable | quote }}
             - name: FF_THREAD_POOL_SIZE
               value: {{ .Values.featureFlag.threadPoolSize | quote }}
             - name: FF_POST_PROCESSING_ENABLE

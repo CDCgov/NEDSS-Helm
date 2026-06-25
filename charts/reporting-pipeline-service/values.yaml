@@ -36,7 +36,6 @@ resources:
 
 featureFlag:
   elasticSearchEnable: "false"
-  phcDatamartEnable: "false"
   threadPoolSize: "1"
   postProcessingEnable: "true"
 
@@ -55,8 +54,9 @@ probes:
 secrets:
   secretName: "reporting-pipeline-service-access"
   jdbc:
-    connection_url: "db_connection_url" # The database for this NBS environment
-    # The credentials that the service created by this chart is to use to connect to the database:
+    # The reporting database for this NBS environment
+    connection_url: "db_connection_url"
+    # The credentials used to run this service
     username: "db_user"
     password: "db_password"
   kafka:
