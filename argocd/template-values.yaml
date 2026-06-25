@@ -132,6 +132,16 @@ modernizationApi:
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
+reportExecution:
+  enabled: <UPDATE_REPORT_EXECUTION_ENABLED>
+  imageTag: <UPDATE_IMAGE_TAG>
+  maxRowLimitRun: <UPDATE_MAX_ROW_LIMIT_RUN>
+  maxRowLimitExport: <UPDATE_MAX_ROW_LIMIT_EXPORT>
+  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
+  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
+  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
+  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+
 
 nbsGateway:
   clientSecret: <<UPDATE_CLIENT_SECRET>>

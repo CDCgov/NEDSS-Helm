@@ -1,0 +1,97 @@
+{{- if eq (toString .Values.reportExecution.enabled) "true" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "modernization-api.reportExecution.fullname" . }}
+  labels:
+    {{- include "modernization-api.reportExecution.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.reportExecution.autoscaling.enabled }}
+  replicas: {{ .Values.reportExecution.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "modernization-api.reportExecution.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "modernization-api.reportExecution.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "modernization-api.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: report-execution
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.reportExecution.image.repository }}:{{ .Values.reportExecution.image.tag }}"
+          imagePullPolicy: {{ .Values.reportExecution.image.pullPolicy }}
+          {{- if .Values.reportExecution.probes.readiness.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.reportExecution.probes.readiness.path | quote }}
+              port: http
+            initialDelaySeconds: {{ .Values.reportExecution.probes.readiness.initialDelaySeconds | default "10" }}
+            periodSeconds: {{ .Values.reportExecution.probes.readiness.periodSeconds | default "10" }}
+            failureThreshold: {{ .Values.reportExecution.probes.readiness.failureThreshold | default "5" }}
+          {{- end }}
+          {{- if .Values.reportExecution.probes.liveness.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.reportExecution.probes.liveness.path | quote }}
+              port: http
+            initialDelaySeconds: {{ .Values.reportExecution.probes.liveness.initialDelaySeconds | default "30" }}
+            periodSeconds: {{ .Values.reportExecution.probes.liveness.periodSeconds | default "30" }}
+            failureThreshold: {{ .Values.reportExecution.probes.liveness.failureThreshold | default "5" }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.reportExecution.service.port }}
+              protocol: TCP
+          env:
+            - name: UVICORN_HOST
+              value: "0.0.0.0"
+            - name: UVICORN_PORT
+              value: {{ .Values.reportExecution.service.port | quote }}
+            - name: LOG_LEVEL
+              value: {{ .Values.reportExecution.logLevel | quote }}
+            {{- if .Values.reportExecution.database.existingSecret.enabled }}
+            - name: DATABASE_CONN_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.reportExecution.database.existingSecret.name | quote }}
+                  key: {{ .Values.reportExecution.database.existingSecret.connectionStringKey | quote }}
+            {{- else }}
+            - name: DATABASE_CONN_STRING
+              value: {{ .Values.reportExecution.database.connectionString | quote }}
+            {{- end }}
+            - name: REPORT_MAX_ROW_LIMIT_RUN
+              value: {{ .Values.reportExecution.report.maxRowLimitRun | quote }}
+            - name: REPORT_MAX_ROW_LIMIT_EXPORT
+              value: {{ .Values.reportExecution.report.maxRowLimitExport | quote }}
+            - name: REPORT_EXPORT_DATE_FORMAT
+              value: {{ .Values.reportExecution.report.exportDateFormat | quote }}
+            - name: REPORT_EXPORT_DATETIME_FORMAT
+              value: {{ .Values.reportExecution.report.exportDateTimeFormat | quote }}
+            {{- with .Values.reportExecution.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          resources:
+            {{- toYaml .Values.reportExecution.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

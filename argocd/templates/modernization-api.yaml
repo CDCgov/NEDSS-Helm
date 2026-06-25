@@ -33,6 +33,26 @@ spec:
           value: {{ .Values.env.ODSUsername }}
         - name: jdbc.password
           value: {{ .Values.env.ODSPassword }}
+        - name: reportExecution.enabled
+          value: {{ .Values.reportExecution.enabled }}
+        - name: reportExecution.image.tag
+          value: {{ .Values.reportExecution.imageTag }}
+        - name: reportExecution.database.connectionString
+          value: "Server={{ .Values.env.dbEndpoint }};UID={{ .Values.env.ODSUsername }};PWD={{ .Values.env.ODSPassword }};Database=NBS_ODSE;TrustServerCertificate=yes;"
+        - name: reportExecution.report.maxRowLimitRun
+          value: {{ .Values.reportExecution.maxRowLimitRun }}
+        - name: reportExecution.report.maxRowLimitExport
+          value: {{ .Values.reportExecution.maxRowLimitExport }}
+        - name: ui.report.execution.enabled
+          value: {{ .Values.reportExecution.enabled }}
+        - name: reportExecution.resources.requests.cpu
+          value: {{ .Values.reportExecution.podRequestCPU }}
+        - name: reportExecution.resources.limits.cpu
+          value: {{ .Values.reportExecution.podLimitCPU }}
+        - name: reportExecution.resources.requests.memory
+          value: {{ .Values.reportExecution.podRequestMemory }}
+        - name: reportExecution.resources.limits.memory
+          value: {{ .Values.reportExecution.podLimitMemory }}
         - name: nbsExternalName
           value: {{ .Values.env.classicAppUrl }}
         - name: ingressHost
