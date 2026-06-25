@@ -59,16 +59,8 @@ spec:
               value: {{ .Values.reportExecution.service.port | quote }}
             - name: LOG_LEVEL
               value: {{ .Values.reportExecution.logLevel | quote }}
-            {{- if .Values.reportExecution.database.existingSecret.enabled }}
-            - name: DATABASE_CONN_STRING
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.reportExecution.database.existingSecret.name | quote }}
-                  key: {{ .Values.reportExecution.database.existingSecret.connectionStringKey | quote }}
-            {{- else }}
             - name: DATABASE_CONN_STRING
               value: {{ .Values.reportExecution.database.connectionString | quote }}
-            {{- end }}
             - name: REPORT_MAX_ROW_LIMIT_RUN
               value: {{ .Values.reportExecution.report.maxRowLimitRun | quote }}
             - name: REPORT_MAX_ROW_LIMIT_EXPORT
@@ -77,9 +69,6 @@ spec:
               value: {{ .Values.reportExecution.report.exportDateFormat | quote }}
             - name: REPORT_EXPORT_DATETIME_FORMAT
               value: {{ .Values.reportExecution.report.exportDateTimeFormat | quote }}
-            {{- with .Values.reportExecution.extraEnv }}
-            {{- toYaml . | nindent 12 }}
-            {{- end }}
           resources:
             {{- toYaml .Values.reportExecution.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
