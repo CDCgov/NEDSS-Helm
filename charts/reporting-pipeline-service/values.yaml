@@ -43,8 +43,13 @@ probes:
   readiness:
     enabled: true
     initialDelaySeconds: 60
+#   periodSeconds: 10
+#   failureThreshold: 5
   liveness:
     enabled: true
+#   initialDelaySeconds: 60
+#   periodSeconds: 30
+#   failureThreshold: 5
 
 secrets:
   secretName: "reporting-pipeline-service-access"
