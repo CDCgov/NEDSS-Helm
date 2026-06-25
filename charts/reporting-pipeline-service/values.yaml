@@ -15,6 +15,7 @@ timezone: "UTC"
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/reporting-pipeline-service"
   tag: "v1.3.0-prerelease.31084a3"
+# pullPolicy: IfNotPresent
 
 podAnnotations:
   prometheus.io/scrape: "true"
