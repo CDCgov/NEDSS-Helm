@@ -69,11 +69,11 @@ spec:
                   name: kafka-connect-config
                   key: KAFKA_CONNECT_URL
 
-            - name: DB_CONNECTION_URL # Note that in CDCgov/NEDSS-DataReporting/docker-compose.yaml this variable is named DB_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.secretName | quote }}
-                  key: {{ .Values.secrets.jdbc.connection_url | quote }}
+            - name: KAFKA_BOOTSTRAP_SERVER
+              value: {{ .Values.kafka.cluster | quote }}
+            - name: DB_CONNECTION_URL
+              value: {{ .Values.jdbc.connection_url | quote }}
+
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -84,12 +84,6 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secrets.secretName | quote }}
                   key: {{ .Values.secrets.jdbc.password | quote }}
-
-            - name: KAFKA_BOOTSTRAP_SERVER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.secretName | quote }}
-                  key: {{ .Values.secrets.kafka.cluster | quote }}
 
             # Feature flags:
             - name: FF_ES_ENABLE
