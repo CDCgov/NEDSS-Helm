@@ -70,6 +70,7 @@ spec:
             '--spring.datasource.url={{ .Values.jdbc.connectionString }}', 
             '--spring.datasource.username={{ .Values.jdbc.user }}', 
             '--spring.datasource.password={{ .Values.jdbc.password }}', 
+            '--spring.liquibase.enabled={{ (((.Values).spring).liquibase).enabled | default "false" }}',
             '--nbs.report.execution.host={{ include "modernization-api.reportExecution.fullname" . }}',
             '--nbs.report.execution.port={{ .Values.reportExecution.service.port }}',
             '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}', 

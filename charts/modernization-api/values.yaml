@@ -183,3 +183,7 @@ probes:
     enabled: true
   liveness:
     enabled: true
+
+spring:
+  liquibase:
+    enabled: false

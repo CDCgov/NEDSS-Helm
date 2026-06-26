@@ -45,6 +45,8 @@ spec:
           value: {{ .Values.reportExecution.maxRowLimitExport }}
         - name: ui.report.execution.enabled
           value: {{ .Values.reportExecution.enabled }}
+        - name: spring.liquibase.enabled
+          value: {{ .Values.reportExecution.enabled }}
         - name: reportExecution.resources.requests.cpu
           value: {{ .Values.reportExecution.podRequestCPU }}
         - name: reportExecution.resources.limits.cpu
