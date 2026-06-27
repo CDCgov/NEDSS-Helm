@@ -61,12 +61,12 @@ spec:
             - name: DEBEZIUM_CONNECT_URL
               valueFrom:
                 configMapKeyRef:
-                  name: debezium-connect-config
+                  name: debezium-rtr-connect
                   key: DEBEZIUM_CONNECT_URL
             - name: KAFKA_CONNECT_URL
               valueFrom:
                 configMapKeyRef:
-                  name: kafka-connect-config
+                  name: cp-kafka-connect-sqlserver-connect
                   key: KAFKA_CONNECT_URL
 
             - name: KAFKA_BOOTSTRAP_SERVER
