@@ -6,7 +6,7 @@ Traefik v3.x replaces the NGINX Ingress Controller for NBS7 Kubernetes deploymen
 
 ## Deployment
 
-Please note that a **specific version** (39.0.5) of the Helm chart for Traefik is required for this release, since the deployment is utilizing a pre-release image of the Traefik container. This extra `--version` tag is slated to be removed in future releases.
+Please note that this release pins Traefik to chart version `41.0.1` (app version `v3.7.5`).
 
 ### AWS (EKS)
 
@@ -14,7 +14,7 @@ Please note that a **specific version** (39.0.5) of the Helm chart for Traefik i
 helm repo add traefik https://traefik.github.io/charts
 helm repo update
 helm install traefik-crds traefik/traefik-crds --namespace traefik --create-namespace
-helm install traefik traefik/traefik --namespace traefik --values values.yaml --skip-crds --version 39.0.5
+helm install traefik traefik/traefik --namespace traefik --values values.yaml --skip-crds --version 41.0.1
 ```
 
 ### Azure (AKS)
@@ -23,7 +23,7 @@ helm install traefik traefik/traefik --namespace traefik --values values.yaml --
 helm repo add traefik https://traefik.github.io/charts
 helm repo update
 helm install traefik-crds traefik/traefik-crds --namespace traefik --create-namespace
-helm install traefik traefik/traefik --namespace traefik --values values-azure.yaml --skip-crds --version 39.0.5 --set service.spec.loadBalancerIP=XX.XX.XX.XX
+helm install traefik traefik/traefik --namespace traefik --values values-azure.yaml --skip-crds --version 41.0.1 --set service.spec.loadBalancerIP=XX.XX.XX.XX
 ```
 
 ## Files
