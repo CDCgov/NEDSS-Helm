@@ -48,16 +48,12 @@ probes:
 #   initialDelaySeconds: 60
 #   periodSeconds: 30
 #   failureThreshold: 5
-#
 
 jdbc:
-  # jdbc url connection string for the reporting database
-  # e.g. jdbc:sqlserver://<db-host>:1433;databaseName=RDB;encrypt=true;trustServerCertificate=true;
-  connection_url: "db_connection_url"
-  username: "db_user"
-  password: "db_password"
+  connection_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:EXAMPLE_DB_PORT;databaseName=EXAMPLE_DB_NAME;encrypt=true;trustServerCertificate=true;"
+  username: "EXAMPLE_DB_USERNAME"
+  password: "EXAMPLE_DB_PASSWORD"
 
 kafka:
-  # The following configuration setting is a comma-separated list of the endpoint(s) of Kafka broker(s) for the given Kubernetes cluster.
   # e.g. for an AWS MSK provisioned cluster: b-<broker-id>.<cluster-name>.<unique-id>.c<cluster-number>.<aws-region>.amazonaws.com:<port>
-  cluster: "kafka_cluster_url"
+  cluster: "EXAMPLE_KAFKA_ENDPOINT"
