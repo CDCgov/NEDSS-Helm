@@ -51,7 +51,11 @@ ingress:
 
 resources: 
   limits:
-    memory: "6Gi"
+    cpu: "1000m"
+    memory: "3Gi"
+  requests:
+    cpu: "500m"
+    memory: "1536Mi"
 
 autoscaling:
   enabled: false
@@ -87,8 +91,8 @@ efsFileSystemId: "EXAMPLE_EFS_ID"
 ### Nifi Configurations ###
 
 jvmheap:
-  init: "4g"
-  max: "4g"
+  init: "1g"
+  max: "2g"
 
 # jdbcConnectionString is passed in as an override and all values must be supplied. 
 # Replace <db_endpoint>, <database>, <username>, and <password> in the following:
