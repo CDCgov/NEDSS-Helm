@@ -1,8 +1,6 @@
 # All the configuration settings for this Helm chart are shown below in this file. 
 # This chart offers a default value for some of the settings, e.g. the commented out lines in this file.
 
-# Before installing this chart, it is required that ../../k8-manifests/nbs-secrets.yaml is used to create the needed secrets in your Kubernetes cluster.
-
 replicaCount: 1
 
 env: "prod"
@@ -50,21 +48,12 @@ probes:
 #   initialDelaySeconds: 60
 #   periodSeconds: 30
 #   failureThreshold: 5
-#
 
 jdbc:
-  # jdbc url connection string for the reporting database
-  # e.g. jdbc:sqlserver://<db-host>:1433;databaseName=RDB;encrypt=true;trustServerCertificate=true;
-  connection_url: "db_connection_url"
+  connection_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:EXAMPLE_DB_PORT;databaseName=EXAMPLE_DB_NAME;encrypt=true;trustServerCertificate=true;"
+  username: "EXAMPLE_DB_USERNAME"
+  password: "EXAMPLE_DB_PASSWORD"
 
 kafka:
-  # The following configuration setting is a comma-separated list of the endpoint(s) of Kafka broker(s) for the given Kubernetes cluster.
   # e.g. for an AWS MSK provisioned cluster: b-<broker-id>.<cluster-name>.<unique-id>.c<cluster-number>.<aws-region>.amazonaws.com:<port>
-  cluster: "kafka_cluster_url"
-
-secrets:
-  secretName: "reporting-pipeline-service-access"
-  jdbc:
-    # The credentials used to run this service
-    username: "db_user"
-    password: "db_password"
+  cluster: "EXAMPLE_KAFKA_ENDPOINT"

@@ -75,15 +75,9 @@ spec:
               value: {{ .Values.jdbc.connection_url | quote }}
 
             - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.secretName | quote }}
-                  key: {{ .Values.secrets.jdbc.username | quote }}
+              value: {{ .Values.jdbc.username | quote }}
             - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.secretName | quote }}
-                  key: {{ .Values.secrets.jdbc.password | quote }}
+              value: {{ .Values.jdbc.password | quote }}
 
             # Feature flags:
             - name: FF_ES_ENABLE
