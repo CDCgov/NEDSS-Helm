@@ -64,3 +64,35 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create the report execution service name owned by this chart.
+*/}}
+{{- define "modernization-api.reportExecution.fullname" -}}
+{{- $name := include "modernization-api.fullname" . | trunc 46 | trimSuffix "-" }}
+{{- printf "%s-report-execution" $name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{/*
+Selector labels for report execution resources.
+*/}}
+{{- define "modernization-api.reportExecution.selectorLabels" -}}
+app: NBS
+type: App
+app.kubernetes.io/name: {{ include "modernization-api.reportExecution.fullname" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{/*
+Common labels for report execution resources.
+*/}}
+{{- define "modernization-api.reportExecution.labels" -}}
+app: NBS
+type: App
+helm.sh/chart: {{ include "modernization-api.chart" . }}
+{{ include "modernization-api.reportExecution.selectorLabels" . }}
+{{- if .Values.reportExecution.image.tag }}
+app.kubernetes.io/version: {{ .Values.reportExecution.image.tag | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}

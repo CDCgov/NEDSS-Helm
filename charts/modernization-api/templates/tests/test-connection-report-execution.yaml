@@ -1,0 +1,17 @@
+{{- if eq (toString .Values.reportExecution.enabled) "true" }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "modernization-api.reportExecution.fullname" . }}-test-connection"
+  labels:
+    {{- include "modernization-api.reportExecution.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "modernization-api.reportExecution.fullname" . }}:{{ .Values.reportExecution.service.port }}/status']
+  restartPolicy: Never
+{{- end }}

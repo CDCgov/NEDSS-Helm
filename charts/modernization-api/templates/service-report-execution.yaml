@@ -1,0 +1,17 @@
+{{- if eq (toString .Values.reportExecution.enabled) "true" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "modernization-api.reportExecution.fullname" . }}
+  labels:
+    {{- include "modernization-api.reportExecution.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.reportExecution.service.type }}
+  ports:
+    - port: {{ .Values.reportExecution.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "modernization-api.reportExecution.selectorLabels" . | nindent 4 }}
+{{- end }}

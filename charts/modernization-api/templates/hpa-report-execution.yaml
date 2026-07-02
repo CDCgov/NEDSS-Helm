@@ -1,0 +1,22 @@
+{{- if and (eq (toString .Values.reportExecution.enabled) "true") .Values.reportExecution.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "modernization-api.reportExecution.fullname" . }}
+  labels:
+    {{- include "modernization-api.reportExecution.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "modernization-api.reportExecution.fullname" . }}
+  minReplicas: {{ .Values.reportExecution.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.reportExecution.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.reportExecution.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.reportExecution.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+{{- end }}
