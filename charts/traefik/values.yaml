@@ -3,11 +3,11 @@
 # Chart: traefik/traefik (v3.7.x)
 
 image:
-  tag: v3.7.0-ea.1
+  tag: v3.7.5
 
 nodeSelector:
   kubernetes.io/os: linux
-  
+
 deployment:
   enabled: true
   kind: Deployment
