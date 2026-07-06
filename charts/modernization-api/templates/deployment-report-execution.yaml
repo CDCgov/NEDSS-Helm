@@ -61,14 +61,6 @@ spec:
               value: {{ .Values.reportExecution.logLevel | quote }}
             - name: DATABASE_CONN_STRING
               value: {{ .Values.reportExecution.database.connectionString | quote }}
-            - name: REPORT_MAX_ROW_LIMIT_RUN
-              value: {{ .Values.reportExecution.report.maxRowLimitRun | quote }}
-            - name: REPORT_MAX_ROW_LIMIT_EXPORT
-              value: {{ .Values.reportExecution.report.maxRowLimitExport | quote }}
-            - name: REPORT_EXPORT_DATE_FORMAT
-              value: {{ .Values.reportExecution.report.exportDateFormat | quote }}
-            - name: REPORT_EXPORT_DATETIME_FORMAT
-              value: {{ .Values.reportExecution.report.exportDateTimeFormat | quote }}
           resources:
             {{- toYaml .Values.reportExecution.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
