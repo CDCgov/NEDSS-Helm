@@ -1,0 +1,102 @@
+---
+# The nbs6 helm chart targets Windows nodes (hardcoded nodeSelector).
+# This standalone manifest is used for local minikube development instead.
+apiVersion: v1
+kind: Service
+metadata:
+  name: nedssdev
+  namespace: default
+  labels:
+    app: nedssdev
+spec:
+  type: ClusterIP
+  selector:
+    app: nedssdev
+  ports:
+    - name: http
+      port: 7001
+      targetPort: 7001
+    - name: https
+      port: 7443
+      targetPort: 7443
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nedssdev
+  namespace: default
+  labels:
+    app: nedssdev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nedssdev
+  template:
+    metadata:
+      labels:
+        app: nedssdev
+    spec:
+      containers:
+        - name: nedssdev
+          image: ghcr.io/cdcent/nedssdev:6.0.18.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 7001
+          env:
+            - name: DATABASE_ENDPOINT
+              value: "nbs-mssql"
+            - name: odse_user
+              valueFrom:
+                secretKeyRef:
+                  name: nbs-mssql-secret
+                  key: odse-user
+            - name: odse_pass
+              valueFrom:
+                secretKeyRef:
+                  name: nbs-mssql-secret
+                  key: odse-password
+            - name: srte_user
+              valueFrom:
+                secretKeyRef:
+                  name: nbs-mssql-secret
+                  key: srte-user
+            - name: srte_pass
+              valueFrom:
+                secretKeyRef:
+                  name: nbs-mssql-secret
+                  key: srte-password
+            - name: rdb_user
+              valueFrom:
+                secretKeyRef:
+                  name: nbs-mssql-secret
+                  key: rdb-user
+            - name: rdb_pass
+              valueFrom:
+                secretKeyRef:
+                  name: nbs-mssql-secret
+                  key: rdb-password
+            - name: DISABLED_SCHEDULED_TASKS
+              value: "SendAlertEMail.bat,DeDuplicationSimilarBatchProcess.bat,UserProfileUpdateProcess.bat"
+            - name: JAVA_MEMORY
+              value: "2g"
+          readinessProbe:
+            httpGet:
+              path: /nbs/login
+              port: 7001
+            initialDelaySeconds: 120
+            periodSeconds: 30
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /nbs/login
+              port: 7001
+            initialDelaySeconds: 180
+            periodSeconds: 60
+            failureThreshold: 5
+          resources:
+            requests:
+              memory: "4Gi"
+              cpu: "500m"
+            limits:
+              memory: "6Gi"
