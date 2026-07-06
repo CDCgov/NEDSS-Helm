@@ -79,7 +79,7 @@ reportExecution:
     type: ClusterIP
     port: 8001
   database:
-    connectionString: "Server=EXAMPLE_DB_ENDPOINT;UID=EXAMPLE_ODSE_DB_USER;PWD=EXAMPLE_ODSE_DB_USER_PASSWORD;Database=NBS_ODSE;TrustServerCertificate=yes;"
+    connectionString: "Server=EXAMPLE_DB_ENDPOINT;UID=EXAMPLE_ODSE_DB_USER;PWD=EXAMPLE_ODSE_DB_USER_PASSWORD;Database=NBS_ODSE;TrustServerCertificate=true;"
   report:
     maxRowLimitRun: "10000"
     maxRowLimitExport: "100000"
