@@ -38,7 +38,7 @@ spec:
         - name: reportExecution.image.tag
           value: {{ .Values.reportExecution.imageTag }}
         - name: reportExecution.database.connectionString
-          value: "Server={{ .Values.env.dbEndpoint }};UID={{ .Values.env.ODSUsername }};PWD={{ .Values.env.ODSPassword }};Database=NBS_ODSE;TrustServerCertificate=yes;"
+          value: "Server={{ .Values.reportExecution.database.host | default .Values.env.dbEndpoint }};UID={{ .Values.reportExecution.database.username | default .Values.env.ODSUsername }};PWD={{ .Values.reportExecution.database.password | default .Values.env.ODSPassword }};Database=NBS_ODSE;TrustServerCertificate=true;"
         - name: reportExecution.report.maxRowLimitRun
           value: {{ .Values.reportExecution.maxRowLimitRun }}
         - name: reportExecution.report.maxRowLimitExport

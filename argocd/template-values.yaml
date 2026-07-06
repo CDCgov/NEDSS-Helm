@@ -141,6 +141,12 @@ reportExecution:
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
+  # Optional overrides so report execution can use its own (e.g. read-only) DB credentials.
+  # Leave blank to fall back to env.dbEndpoint / env.ODSUsername / env.ODSPassword above.
+  database:
+    host: ""
+    username: ""
+    password: ""
 
 
 nbsGateway:
