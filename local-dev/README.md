@@ -52,6 +52,49 @@ kubectl get pods -w
 kubectl logs -f deployment/nedssdev
 ```
 
+## Using a Local Docker Image in Minikube
+
+If you want to run a Helm chart against a locally built image instead of pulling from a remote registry, build the image into Minikube’s Docker environment and set the chart to use `imagePullPolicy: Never`.
+
+Example for `reporting-pipeline-service`:
+
+```bash
+# Point Docker at the Minikube daemon for the nbs-local profile
+eval "$(minikube -p nbs-local docker-env)"
+
+# Build the image locally inside Minikube
+cd <path-to-reporting-pipeline-service-repo>
+docker build -t reporting-pipeline-service:local .
+```
+
+Then install or upgrade the chart with local image values:
+
+```yaml
+# local-dev/values/reporting-pipeline-service-local.yaml
+image:
+  repository: reporting-pipeline-service
+  tag: local
+  pullPolicy: Never
+```
+
+```bash
+helm upgrade --install reporting-pipeline-service ./charts/reporting-pipeline-service \
+  -f local-dev/values/reporting-pipeline-service-local.yaml
+```
+
+If you built the image with your normal Docker daemon instead, load it into Minikube directly:
+
+```bash
+minikube -p nbs-local image load reporting-pipeline-service:local
+```
+
+After the install, if the pod does not start, confirm the image is present in Minikube:
+
+```bash
+minikube -p nbs-local image ls | grep reporting-pipeline-service
+kubectl describe pod -l app.kubernetes.io/name=reporting-pipeline-service
+```
+
 ## Connection Details
 
 ### In-cluster (helm chart values)
