@@ -33,9 +33,9 @@ resources:
     cpu: "125m"
 
 featureFlag:
-  elasticSearchEnable: "false"
   threadPoolSize: "1"
-  postProcessingEnable: "true"
+  elasticSearchEnable: "false"
+  postProcessingEnable: "false"
 
 probes:
   readiness:
