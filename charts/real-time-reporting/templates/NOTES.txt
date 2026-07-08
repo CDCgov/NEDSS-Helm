@@ -1,0 +1,5 @@
+Real-time reporting has been installed.
+
+Useful commands:
+- helm status {{ .Release.Name }}
+- helm get values {{ .Release.Name }}
