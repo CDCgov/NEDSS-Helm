@@ -40,14 +40,33 @@ featureFlag:
 probes:
   readiness:
     enabled: true
+    path: /actuator/health
     initialDelaySeconds: 60
 #   periodSeconds: 10
 #   failureThreshold: 5
   liveness:
     enabled: true
+    path: /actuator/health
 #   initialDelaySeconds: 60
 #   periodSeconds: 30
 #   failureThreshold: 5
+
+connectUrls:
+  debezium:
+    configMapName: debezium-rtr-connect
+    key: DEBEZIUM_CONNECT_URL
+  kafkaConnect:
+    configMapName: cp-kafka-connect-sqlserver-connect
+    key: KAFKA_CONNECT_URL
+
+startupDependencies:
+  enabled: false
+  image: curlimages/curl:8.8.0
+  timeoutSeconds: 300
+  pollIntervalSeconds: 5
+  endpoints:
+    debezium: ""
+    kafkaConnect: ""
 
 jdbc:
   connection_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:EXAMPLE_DB_PORT;databaseName=EXAMPLE_DB_NAME;encrypt=true;trustServerCertificate=true;"

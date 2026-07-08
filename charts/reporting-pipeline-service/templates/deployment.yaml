@@ -20,6 +20,38 @@ spec:
     spec:
       # Service account name for the pod.
       serviceAccountName: {{ .Chart.Name }}
+      {{- if .Values.startupDependencies.enabled }}
+      initContainers:
+        - name: wait-for-reporting-dependencies
+          image: "{{ .Values.startupDependencies.image }}"
+          imagePullPolicy: "{{ .Values.startupDependencies.imagePullPolicy | default "IfNotPresent" }}"
+          command:
+            - sh
+            - -ec
+            - |
+              timeout_seconds="{{ .Values.startupDependencies.timeoutSeconds | default 300 }}"
+              interval_seconds="{{ .Values.startupDependencies.pollIntervalSeconds | default 5 }}"
+              start="$(date +%s)"
+              wait_for() {
+                name="$1"
+                url="$2"
+                while true; do
+                  if curl -fsS "$url" >/dev/null; then
+                    echo "$name is ready"
+                    return 0
+                  fi
+                  now="$(date +%s)"
+                  if [ "$((now - start))" -ge "$timeout_seconds" ]; then
+                    echo "timed out waiting for $name at $url after ${timeout_seconds}s"
+                    exit 1
+                  fi
+                  echo "waiting for $name at $url..."
+                  sleep "$interval_seconds"
+                done
+              }
+              wait_for "debezium" "{{ .Values.startupDependencies.endpoints.debezium }}"
+              wait_for "kafka-connect" "{{ .Values.startupDependencies.endpoints.kafkaConnect }}"
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -31,7 +63,7 @@ spec:
           {{- if .Values.probes.readiness.enabled }}
           readinessProbe:
             httpGet:
-              path: {{ "/actuator/health" }}
+              path: {{ .Values.probes.readiness.path | default "/actuator/health" }}
               port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "30" }}
             periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "10" }}
@@ -40,7 +72,7 @@ spec:
           {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
             httpGet:
-              path: {{ "/actuator/health" }}
+              path: {{ .Values.probes.liveness.path | default "/actuator/health" }}
               port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
             periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "30" }}
@@ -61,13 +93,13 @@ spec:
             - name: DEBEZIUM_CONNECT_URL
               valueFrom:
                 configMapKeyRef:
-                  name: debezium-rtr-connect
-                  key: DEBEZIUM_CONNECT_URL
+                  name: {{ .Values.connectUrls.debezium.configMapName }}
+                  key: {{ .Values.connectUrls.debezium.key }}
             - name: KAFKA_CONNECT_URL
               valueFrom:
                 configMapKeyRef:
-                  name: cp-kafka-connect-sqlserver-connect
-                  key: KAFKA_CONNECT_URL
+                  name: {{ .Values.connectUrls.kafkaConnect.configMapName }}
+                  key: {{ .Values.connectUrls.kafkaConnect.key }}
 
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster | quote }}
