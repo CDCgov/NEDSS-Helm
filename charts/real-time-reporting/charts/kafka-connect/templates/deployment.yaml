@@ -96,10 +96,21 @@ spec:
               value: {{ template "kafka-connect.cp-schema-registry.service-name" .}}
             - name: KAFKA_HEAP_OPTS
               value: "{{ .Values.heapOptions }}"
+            {{- $configReplicationFactor := default .Values.kafka.default_replication_factor (index .Values.configurationOverrides "config.storage.replication.factor") }}
+            {{- $offsetReplicationFactor := default .Values.kafka.default_replication_factor (index .Values.configurationOverrides "offset.storage.replication.factor") }}
+            {{- $statusReplicationFactor := default .Values.kafka.default_replication_factor (index .Values.configurationOverrides "status.storage.replication.factor") }}
             {{- range $key, $value := .Values.configurationOverrides }}
+            {{- if and (ne $key "config.storage.replication.factor") (ne $key "offset.storage.replication.factor") (ne $key "status.storage.replication.factor") }}
             - name: {{ printf "CONNECT_%s" $key | replace "." "_" | upper | quote }}
               value: {{ $value | quote }}
             {{- end }}
+            {{- end }}
+            - name: CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR
+              value: {{ $configReplicationFactor | quote }}
+            - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR
+              value: {{ $offsetReplicationFactor | quote }}
+            - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR
+              value: {{ $statusReplicationFactor | quote }}
             {{- range $key, $value := .Values.customEnv }}
             - name: {{ $key | quote }}
               value: {{ $value | quote }}

@@ -2,7 +2,7 @@
 
 Umbrella chart for deploying:
 
-- `debezium-rtr`
+- `debezium`
 - `kafka-connect`
 - `reporting-pipeline-service`
 
@@ -20,7 +20,7 @@ helm upgrade --install real-time-reporting charts/real-time-reporting \
 
 ## Image overrides
 
-Set repository overrides once at the umbrella level:
+Set repository overrides once at the umbrella level for Debezium and Kafka Connect:
 
 ```yaml
 global:
@@ -30,8 +30,16 @@ global:
         repository: your-registry/debezium-connect
     kafkaConnect:
       repository: your-registry/kafka-connect
-    reportingPipelineService:
-      repository: your-registry/reporting-pipeline-service
+```
+
+Reporting Pipeline Service uses its own chart values:
+
+```yaml
+reporting-pipeline-service:
+  image:
+    repository: your-registry/reporting-pipeline-service
+    tag: latest
+    pullPolicy: Never
 ```
 
 ## Notes
