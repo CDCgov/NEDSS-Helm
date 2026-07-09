@@ -61,41 +61,27 @@ spec:
             - name: DEBEZIUM_CONNECT_URL
               valueFrom:
                 configMapKeyRef:
-                  name: debezium-connect-config
+                  name: debezium-rtr-connect
                   key: DEBEZIUM_CONNECT_URL
             - name: KAFKA_CONNECT_URL
               valueFrom:
                 configMapKeyRef:
-                  name: kafka-connect-config
+                  name: cp-kafka-connect-sqlserver-connect
                   key: KAFKA_CONNECT_URL
 
-            - name: DB_CONNECTION_URL # Note that in CDCgov/NEDSS-DataReporting/docker-compose.yaml this variable is named DB_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.secretName | quote }}
-                  key: {{ .Values.secrets.jdbc.connection_url | quote }}
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.secretName | quote }}
-                  key: {{ .Values.secrets.jdbc.username | quote }}
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.secretName | quote }}
-                  key: {{ .Values.secrets.jdbc.password | quote }}
-
             - name: KAFKA_BOOTSTRAP_SERVER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.secretName | quote }}
-                  key: {{ .Values.secrets.kafka.cluster | quote }}
+              value: {{ .Values.kafka.cluster | quote }}
+            - name: DB_CONNECTION_URL
+              value: {{ .Values.jdbc.connection_url | quote }}
+
+            - name: DB_USERNAME
+              value: {{ .Values.jdbc.username | quote }}
+            - name: DB_PASSWORD
+              value: {{ .Values.jdbc.password | quote }}
 
             # Feature flags:
             - name: FF_ES_ENABLE
               value: {{ .Values.featureFlag.elasticSearchEnable | quote }}
-            - name: FF_PHC_DM_ENABLE
-              value: {{ .Values.featureFlag.phcDatamartEnable | quote }}
             - name: FF_THREAD_POOL_SIZE
               value: {{ .Values.featureFlag.threadPoolSize | quote }}
             - name: FF_POST_PROCESSING_ENABLE

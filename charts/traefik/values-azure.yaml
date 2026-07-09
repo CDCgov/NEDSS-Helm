@@ -1,9 +1,9 @@
 # Traefik Ingress Controller - Azure (AKS) Configuration
 # Replaces: charts/nginx-ingress/values-azure.yaml
-# Chart: traefik/traefik (v3.6.x)
+# Chart: traefik/traefik (v3.7.x)
 
 image:
-  tag: v3.7.0-ea.1
+  tag: v3.7.5
 
 nodeSelector:
   kubernetes.io/os: linux
@@ -100,11 +100,10 @@ metrics:
     addRoutersLabels: true
     addServicesLabels: true
 
-logs:
-  general:
-    level: INFO
-  access:
-    enabled: true
+log:
+  level: INFO
+accessLog:
+  enabled: true
 
 ingressRoute:
   dashboard:

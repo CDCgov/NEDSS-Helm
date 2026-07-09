@@ -3,11 +3,11 @@
 # Chart: traefik/traefik (v3.7.x)
 
 image:
-  tag: v3.7.0-ea.1
+  tag: v3.7.5
 
 nodeSelector:
   kubernetes.io/os: linux
-  
+
 deployment:
   enabled: true
   kind: Deployment
@@ -104,11 +104,10 @@ metrics:
     addRoutersLabels: true
     addServicesLabels: true
 
-logs:
-  general:
-    level: INFO
-  access:
-    enabled: true
+log:
+  level: INFO
+accessLog:
+  enabled: true
 
 # DASHBOARD
 # Traefik includes a built-in dashboard - useful for debugging routes

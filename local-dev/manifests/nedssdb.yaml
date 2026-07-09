@@ -1,0 +1,75 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nbs-mssql-secret
+  namespace: default
+type: Opaque
+stringData:
+  sa-password: "PizzaIsGood33!"
+  odse-user: "nbs_ods"
+  odse-password: "ods"
+  srte-user: "nbs_srte"
+  srte-password: "admin"
+  rdb-user: "nbs_rdb"
+  rdb-password: "rdb"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nbs-mssql
+  namespace: default
+  labels:
+    app: nbs-mssql
+spec:
+  type: ClusterIP
+  selector:
+    app: nbs-mssql
+  ports:
+    - name: mssql
+      port: 1433
+      targetPort: 1433
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nbs-mssql
+  namespace: default
+  labels:
+    app: nbs-mssql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nbs-mssql
+  template:
+    metadata:
+      labels:
+        app: nbs-mssql
+    spec:
+      containers:
+        - name: nbs-mssql
+          image: ghcr.io/cdcent/nedssdb:6.0.17.0-replacement-beta
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 1433
+          env:
+            - name: DATABASE_VERSION
+              value: "6.0.18.1"
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nbs-mssql-secret
+                  key: sa-password
+          readinessProbe:
+            tcpSocket:
+              port: 1433
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 10
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"

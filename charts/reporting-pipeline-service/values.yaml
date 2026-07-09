@@ -1,8 +1,6 @@
 # All the configuration settings for this Helm chart are shown below in this file. 
 # This chart offers a default value for some of the settings, e.g. the commented out lines in this file.
 
-# Before installing this chart, it is required that ../../k8-manifests/nbs-secrets.yaml is used to create the needed secrets in your Kubernetes cluster.
-
 replicaCount: 1
 
 env: "prod"
@@ -35,10 +33,9 @@ resources:
     cpu: "125m"
 
 featureFlag:
-  elasticSearchEnable: "false"
-  phcDatamartEnable: "false"
   threadPoolSize: "1"
-  postProcessingEnable: "true"
+  elasticSearchEnable: "false"
+  postProcessingEnable: "false"
 
 probes:
   readiness:
@@ -52,14 +49,11 @@ probes:
 #   periodSeconds: 30
 #   failureThreshold: 5
 
-secrets:
-  secretName: "reporting-pipeline-service-access"
-  jdbc:
-    connection_url: "db_connection_url" # The database for this NBS environment
-    # The credentials that the service created by this chart is to use to connect to the database:
-    username: "db_user"
-    password: "db_password"
-  kafka:
-    # The following configuration setting is a comma-separated list of the endpoint(s) of Kafka broker(s) for the given Kubernetes cluster.
-    # e.g. for an AWS MSK provisioned cluster: b-<broker-id>.<cluster-name>.<unique-id>.c<cluster-number>.<aws-region>.amazonaws.com:<port>
-    cluster: "kafka_cluster_url"
+jdbc:
+  connection_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:EXAMPLE_DB_PORT;databaseName=EXAMPLE_DB_NAME;encrypt=true;trustServerCertificate=true;"
+  username: "EXAMPLE_DB_USERNAME"
+  password: "EXAMPLE_DB_PASSWORD"
+
+kafka:
+  # e.g. for an AWS MSK provisioned cluster: b-<broker-id>.<cluster-name>.<unique-id>.c<cluster-number>.<aws-region>.amazonaws.com:<port>
+  cluster: "EXAMPLE_KAFKA_ENDPOINT"
