@@ -54,7 +54,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ include "reporting-pipeline-service.imageRepository" . }}:{{ .Values.image.tag }}"
           imagePullPolicy: "{{ .Values.image.pullPolicy | default "IfNotPresent" }}"
           ports:
             - containerPort: {{ .Values.service.port }}
@@ -104,7 +104,7 @@ spec:
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster | quote }}
             - name: DB_CONNECTION_URL
-              value: {{ .Values.jdbc.connection_url | quote }}
+              value: {{ tpl .Values.jdbc.connection_url . | quote }}
 
             - name: DB_USERNAME
               value: {{ .Values.jdbc.username | quote }}

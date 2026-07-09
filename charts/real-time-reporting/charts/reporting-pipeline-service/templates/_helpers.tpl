@@ -15,3 +15,13 @@ Selector labels
 app.kubernetes.io/name: {{ .Chart.Name }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Resolve the reporting pipeline image repository, preferring umbrella-level overrides.
+*/}}
+{{- define "reporting-pipeline-service.imageRepository" -}}
+{{- $global := default dict (fromYaml (toYaml $.Values.global)) -}}
+{{- $images := default dict (index $global "images") -}}
+{{- $reporting := default dict (index $images "reportingPipelineService") -}}
+{{- coalesce (index $reporting "repository") .Values.image.repository -}}
+{{- end -}}

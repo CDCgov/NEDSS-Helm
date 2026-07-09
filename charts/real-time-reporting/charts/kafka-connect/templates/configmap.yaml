@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "cp-kafka-connect.name" . }}-sqlserver-connect
+  name: {{ template "kafka-connect.name" . }}-sqlserver-connect
   labels:
-    app: {{ template "cp-kafka-connect.name" . }}
-    chart: {{ template "cp-kafka-connect.chart" . }}
+    app: {{ template "kafka-connect.name" . }}
+    chart: {{ template "kafka-connect.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
-  KAFKA_CONNECT_URL: "http://{{ template "cp-kafka-connect.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.servicePort }}"
+  KAFKA_CONNECT_URL: "http://{{ template "kafka-connect.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.servicePort }}"
   log4j.properties: |
     log4j.rootLogger={{ .Values.log_level }}, stdout
     log4j.appender.stdout=org.apache.log4j.ConsoleAppender

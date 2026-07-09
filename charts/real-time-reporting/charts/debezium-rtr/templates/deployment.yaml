@@ -31,7 +31,7 @@ spec:
             defaultMode: 0744
       containers:
         - name: {{ .Chart.Name }}-connect
-          image: "{{ .Values.connect.image.repository }}:{{ .Values.connect.image.tag | default .Chart.AppVersion }}"
+          image: "{{ include "debezium.connectImageRepository" . }}:{{ .Values.connect.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.connect.image.pullPolicy }}
           ports:
             - name: {{ .Values.connect.service.name }}
@@ -118,7 +118,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}-ui
-          image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag | default .Chart.AppVersion }}"
+          image: "{{ include "debezium.uiImageRepository" . }}:{{ .Values.ui.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.ui.image.pullPolicy }}
           ports:
             - name: {{ .Values.ui.service.name}}

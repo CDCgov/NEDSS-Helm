@@ -1,8 +1,10 @@
-# Default values for cp-kafka-connect.
+# Default values for kafka-connect.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
+
+global: {}
 
 ## Image Info
 ## ref: https://hub.docker.com/r/confluentinc/cp-kafka/
@@ -16,7 +18,7 @@ imagePullPolicy: IfNotPresent
 ## Specify an array of imagePullSecrets.
 ## Secrets must be manually created in the namespace.
 ## ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
-imagePullSecrets:
+imagePullSecrets: []
 
 servicePort: 8083
 
@@ -42,18 +44,19 @@ heapOptions: "-Xms512M -Xmx512M"
 ## CUSTOM_SCRIPT_PATH is the path of the custom shell script to be run mounted in a volume
 customEnv: { }
 
-
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-resources:
+# We usually recommend not to specify default resources and to leave this as a conscious
+# choice for the user. This also increases chances charts run on environments with little
+# resources, such as Minikube. If you do want to specify resources, uncomment the following
+# lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+resources: { }
 #  limits:
 #    memory: "2Gi"
 #    cpu: "1000m"
-#  requests:
-#    memory: "1Gi"
-#    cpu: "500m"
+#    requests:
+#      memory: "1Gi"
+#      cpu: "500m"
+
+
 
 ## Custom pod annotations
 podAnnotations: { }
@@ -96,7 +99,8 @@ prometheus:
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
-  bootstrapServers: "wn0-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn1-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092,wn2-dev-hd.dsnw3omymczu3cea2rtxoridtc.bx.internal.cloudapp.net:9092"
+  # this may not be right: bootstrapServers: "EXAMPLE_FIXME_KAFKA_ENDPOINT"
+  bootstrapServers: "EXAMPLE_KAFKA_ENDPOINT"
   default_replication_factor: 2
   default_partitions: 10
   default_cleanup: "compact"

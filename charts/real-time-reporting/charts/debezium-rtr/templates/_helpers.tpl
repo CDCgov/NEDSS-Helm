@@ -76,3 +76,25 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Resolve the connect image repository, preferring umbrella-level overrides.
+*/}}
+{{- define "debezium.connectImageRepository" -}}
+{{- $global := default dict (fromYaml (toYaml $.Values.global)) -}}
+{{- $images := default dict (index $global "images") -}}
+{{- $debezium := default dict (index $images "debezium") -}}
+{{- $connect := default dict (index $debezium "connect") -}}
+{{- coalesce (index $connect "repository") .Values.connect.image.repository -}}
+{{- end -}}
+
+{{/*
+Resolve the UI image repository, preferring umbrella-level overrides.
+*/}}
+{{- define "debezium.uiImageRepository" -}}
+{{- $global := default dict (fromYaml (toYaml $.Values.global)) -}}
+{{- $images := default dict (index $global "images") -}}
+{{- $debezium := default dict (index $images "debezium") -}}
+{{- $ui := default dict (index $debezium "ui") -}}
+{{- coalesce (index $ui "repository") .Values.ui.image.repository -}}
+{{- end -}}
