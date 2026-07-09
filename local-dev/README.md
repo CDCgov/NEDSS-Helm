@@ -78,7 +78,7 @@ image:
 ```
 
 ```bash
-helm upgrade --install reporting-pipeline-service ./charts/reporting-pipeline-service \
+helm upgrade --install reporting-pipeline-service ./charts/real-time-reporting/charts/reporting-pipeline-service \
   -f local-dev/values/reporting-pipeline-service-local.yaml
 ```
 

@@ -1,32 +1,49 @@
+---
+kafkaEndpoint: &kafkaEndpoint "kafka:29092"
+dbEndpoint: &dbEndpoint "nbs-mssql"
+dbName: &dbName "RDB"
+dbUsername: &dbUsername "nbs_rdb"
+dbPassword: &dbPassword "rdb"
+dbPort: &dbPort "1433"
+
+global:
+  dbEndpoint: *dbEndpoint
+  dbName: *dbName
+  dbUsername: *dbUsername
+  dbPassword: *dbPassword
+  dbPort: *dbPort
+  images:
+    reportingPipelineService:
+      repository: "nbs7-rtr-reporting-pipeline-service"
+      tag: latest
+      pullPolicy: Never
+
 debezium-rtr:
   enabled: true
   connect:
     properties:
-      bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT"
+      bootstrap_server: *kafkaEndpoint
     env:
       - name: BOOTSTRAP_SERVERS
-        value: "EXAMPLE_KAFKA_ENDPOINT"
+        value: *kafkaEndpoint
 
-cp-kafka-connect:
+kafka-connect:
   enabled: true
   kafka:
-    bootstrapServers: "EXAMPLE_KAFKA_ENDPOINT"
+    bootstrapServers: *kafkaEndpoint
 
 reporting-pipeline-service:
   enabled: true
+  featureFlag:
+    threadPoolSize: "1"
+    elasticSearchEnable: "false"
+    postProcessingEnable: "false"
   kafka:
-    cluster: "EXAMPLE_KAFKA_ENDPOINT"
+    cluster: *kafkaEndpoint
   jdbc:
-    connection_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;"
-    username: "EXAMPLE_DB_USERNAME"
-    password: "EXAMPLE_DB_PASSWORD"
-  connectUrls:
-    debezium:
-      configMapName: debezium-rtr-connect
-      key: DEBEZIUM_CONNECT_URL
-    kafkaConnect:
-      configMapName: cp-kafka-connect-sqlserver-connect
-      key: KAFKA_CONNECT_URL
+    connection_url: "jdbc:sqlserver://{{ .Values.global.dbEndpoint }}:{{ .Values.global.dbPort }};databaseName={{ .Values.global.dbName }};encrypt=true;trustServerCertificate=true;"
+    username: *dbUsername
+    password: *dbPassword
   startupDependencies:
     enabled: true
     image: curlimages/curl:8.8.0
@@ -34,4 +51,4 @@ reporting-pipeline-service:
     pollIntervalSeconds: 5
     endpoints:
       debezium: "http://real-time-reporting-debezium-rtr-connect.<namespace>.svc.cluster.local:8083/connectors"
-      kafkaConnect: "http://real-time-reporting-cp-kafka-connect.<namespace>.svc.cluster.local:8083/connectors"
+      kafkaConnect: "http://real-time-reporting-kafka-connect.<namespace>.svc.cluster.local:8083/connectors"

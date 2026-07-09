@@ -1,6 +1,6 @@
 apiVersion: v2
 name: real-time-reporting
-description: Umbrella chart for RTR Debezium, Kafka Connect sink, and Reporting Pipeline Service
+description: Umbrella chart for RTR Debezium, Kafka Connect, and Reporting Pipeline Service
 type: application
 version: 0.1.0
 appVersion: "0.1.0"
@@ -8,13 +8,13 @@ appVersion: "0.1.0"
 dependencies:
   - name: debezium-rtr
     version: 0.0.2
-    repository: file://../debezium
+    repository: file://charts/debezium-rtr
     condition: debezium-rtr.enabled
-  - name: cp-kafka-connect
+  - name: kafka-connect
     version: 0.1.0
-    repository: file://../kafka-connect-sink
-    condition: cp-kafka-connect.enabled
+    repository: file://charts/kafka-connect
+    condition: kafka-connect.enabled
   - name: reporting-pipeline-service
     version: 1.3.1
-    repository: file://../reporting-pipeline-service
+    repository: file://charts/reporting-pipeline-service
     condition: reporting-pipeline-service.enabled
