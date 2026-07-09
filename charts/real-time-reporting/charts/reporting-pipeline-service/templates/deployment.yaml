@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ include "reporting-pipeline-service.fullname" . }}
   labels:
     {{- include "reporting-pipeline-service.labels" . | nindent 4 }}
 spec:
@@ -19,41 +19,11 @@ spec:
         {{- toYaml .Values.podAnnotations | nindent 8 }}
     spec:
       # Service account name for the pod.
-      serviceAccountName: {{ .Chart.Name }}
-      {{- if .Values.startupDependencies.enabled }}
-      initContainers:
-        - name: wait-for-reporting-dependencies
-          image: "{{ .Values.startupDependencies.image }}"
-          imagePullPolicy: "{{ .Values.startupDependencies.imagePullPolicy | default "IfNotPresent" }}"
-          command:
-            - sh
-            - -ec
-            - |
-              timeout_seconds="{{ .Values.startupDependencies.timeoutSeconds | default 300 }}"
-              interval_seconds="{{ .Values.startupDependencies.pollIntervalSeconds | default 5 }}"
-              start="$(date +%s)"
-              wait_for() {
-                name="$1"
-                url="$2"
-                while true; do
-                  if curl -fsS "$url" >/dev/null; then
-                    echo "$name is ready"
-                    return 0
-                  fi
-                  now="$(date +%s)"
-                  if [ "$((now - start))" -ge "$timeout_seconds" ]; then
-                    echo "timed out waiting for $name at $url after ${timeout_seconds}s"
-                    exit 1
-                  fi
-                  echo "waiting for $name at $url..."
-                  sleep "$interval_seconds"
-                done
-              }
-              wait_for "debezium" "{{ .Values.startupDependencies.endpoints.debezium }}"
-              wait_for "kafka-connect" "{{ .Values.startupDependencies.endpoints.kafkaConnect }}"
-      {{- end }}
+      serviceAccountName: {{ include "reporting-pipeline-service.fullname" . }}
+      # The application retries its connector clients internally, so we let it start
+      # immediately and rely on readiness/liveness probes to gate traffic.
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ include "reporting-pipeline-service.fullname" . }}
           image: "{{ include "reporting-pipeline-service.imageRepository" . }}:{{ .Values.image.tag }}"
           imagePullPolicy: "{{ .Values.image.pullPolicy | default "IfNotPresent" }}"
           ports:

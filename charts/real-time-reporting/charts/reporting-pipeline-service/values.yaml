@@ -55,20 +55,11 @@ probes:
 
 connectUrls:
   debezium:
-    configMapName: debezium-rtr-connect
+    configMapName: debezium-connect
     key: DEBEZIUM_CONNECT_URL
   kafkaConnect:
     configMapName: kafka-connect-sqlserver-connect
     key: KAFKA_CONNECT_URL
-
-startupDependencies:
-  enabled: false
-  image: curlimages/curl:8.8.0
-  timeoutSeconds: 300
-  pollIntervalSeconds: 5
-  endpoints:
-    debezium: ""
-    kafkaConnect: ""
 
 jdbc:
   connection_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:EXAMPLE_DB_PORT;databaseName=EXAMPLE_DB_NAME;encrypt=true;trustServerCertificate=true;"
