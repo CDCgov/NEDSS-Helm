@@ -1,5 +1,5 @@
 apiVersion: v2
-name: debezium-rtr
+name: debezium
 description: Debezium & Debezium UI Chart
 icon: https://debezium.io/assets/images/color_white_debezium_type_600px.svg
 

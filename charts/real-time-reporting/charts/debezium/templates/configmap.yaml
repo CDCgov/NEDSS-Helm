@@ -14,7 +14,7 @@ data:
     #client.config.override.policy=all
     key.converter=org.apache.kafka.connect.json.JsonConverter
     key.converter.schemas.enable=false
-    min.in.sync.replicas=2
+    min.in.sync.replicas={{ .Values.connect.properties.min_in_sync_replicas | default .Values.connect.properties.default_replication_factor }}
     max.request.size=10000000
     message.max.bytes=10000000
     offset.flush.timeout.ms=30000
@@ -41,6 +41,11 @@ data:
     {{end}}
 
   log4j.properties: |
+    log4j.rootLogger={{ .Values.log_level }}, stdout
+    log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+    log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+    log4j.appender.stdout.layout.ConversionPattern=[%d] %p %m (%c:%L)%n
+  connect-log4j.properties: |
     log4j.rootLogger={{ .Values.log_level }}, stdout
     log4j.appender.stdout=org.apache.log4j.ConsoleAppender
     log4j.appender.stdout.layout=org.apache.log4j.PatternLayout

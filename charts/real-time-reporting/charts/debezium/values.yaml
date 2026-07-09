@@ -35,6 +35,7 @@ connect:
     group_id: "debezium-odse-srte-connector-v081525"
     topics_basename: "debezium-odse-srte-connector-v081525"
     default_replication_factor: 2
+    min_in_sync_replicas: 2
     default_partitions: 10
     default_cleanup: "compact"
     sql_server_agent_override: false
@@ -47,7 +48,7 @@ connect:
     - name: LOG_LEVEL
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
-      value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
+      value: "-Dlog4j.configuration=file:/kafka/config/connect-log4j.properties"
     - name: NAME
       value: "debezium-odse-srte-connector-v081525"
     - name: TZ

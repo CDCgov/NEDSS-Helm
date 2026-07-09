@@ -68,6 +68,9 @@ spec:
               mountPath: /kafka/config/log4j.properties
               subPath: log4j.properties
             - name: config
+              mountPath: /kafka/config/connect-log4j.properties
+              subPath: connect-log4j.properties
+            - name: config
               mountPath: /kafka/config/connect-distributed.properties
               subPath: connect-distributed.properties
           {{- with .Values.connect.env }}
