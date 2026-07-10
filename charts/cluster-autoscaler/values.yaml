@@ -14,7 +14,7 @@ autoDiscovery:
   # Enable autodiscovery for `cloudProvider=clusterapi`, for groups matching `autoDiscovery.labels`.
   # Enable autodiscovery for `cloudProvider=gce`, but no MIG tagging required.
   # Enable autodiscovery for `cloudProvider=magnum`, for groups matching `autoDiscovery.roles`.
-  clusterName: <<EXAMPLE_EKS_CLUSTER_NAME>> # cluster.local
+  clusterName: <<YOUR_EKS_CLUSTER_NAME>> # cluster.local
 
   # autoDiscovery.namespace -- Enable autodiscovery via cluster namespace for for `cloudProvider=clusterapi`
   namespace: default
@@ -33,7 +33,9 @@ autoDiscovery:
   labels: []
     # - color: green
     # - shape: circle
-# autoscalingGroups -- For AWS, Azure AKS, Exoscale or Magnum. At least one element is required if not using `autoDiscovery`. For example:
+# autoscalingGroups -- Not needed when using autoDiscovery (recommended).
+# Only configure this if you are NOT using autoDiscovery.
+# For AWS, Azure AKS, Exoscale or Magnum. At least one element is required if not using `autoDiscovery`. For example:
 # <pre>
 # - name: asg1<br />
 #   maxSize: 2<br />
@@ -48,9 +50,9 @@ autoDiscovery:
 #   region: FSN1
 # </pre>
 autoscalingGroups:
-  - name: <<EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>>
-    maxSize: 5
-    minSize: 3
+# - name: <<EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>>
+#  maxSize: 5
+#    minSize: 3
 # - name: asg2
 #   maxSize: 2
 #   minSize: 1
@@ -74,7 +76,7 @@ awsAccessKeyID: ""
 
 # awsRegion -- AWS region (required if `cloudProvider=aws`)
 # awsRegion -- <<EXAMPLE_AWS_REGION_FIXME>>
-awsRegion: us-east-1
+awsRegion: <YOUR_REGION> # e.g. us-east-2
 
 # awsSecretAccessKey -- AWS access secret key ([if AWS user keys used](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md#using-aws-credentials))
 awsSecretAccessKey: ""
@@ -360,7 +362,11 @@ rbac:
   clusterScoped: true
   serviceAccount:
     # rbac.serviceAccount.annotations -- Additional Service Account annotations.
-    annotations: {}
+    # For AWS EKS: Set the IRSA role ARN to grant the autoscaler AWS permissions for node scaling.
+    # This role is created by Terraform when create_cluster_autoscaler_irsa = true in the eks-nbs module.
+    # Without this annotation, the autoscaler will deploy but have no AWS permissions.
+    annotations:
+      eks.amazonaws.com/role-arn: "<YOUR_CLUSTER_AUTOSCALER_ROLE_ARN>"
     # rbac.serviceAccount.create -- If `true` and `rbac.create` is also true, a Service Account will be created.
     create: true
     # rbac.serviceAccount.name -- The name of the ServiceAccount to use. If not set and create is `true`, a name is generated using the fullname template.
