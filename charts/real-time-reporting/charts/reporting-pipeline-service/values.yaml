@@ -54,12 +54,8 @@ probes:
 #   failureThreshold: 5
 
 connectUrls:
-  debezium:
-    configMapName: debezium-connect
-    key: DEBEZIUM_CONNECT_URL
-  kafkaConnect:
-    configMapName: kafka-connect-sqlserver-connect
-    key: KAFKA_CONNECT_URL
+  debezium: "http://EXAMPLE_DEBEZIUM_CONNECT_HOST:8083"
+  kafkaConnect: "http://EXAMPLE_KAFKA_CONNECT_HOST:8083"
 
 jdbc:
   connection_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:EXAMPLE_DB_PORT;databaseName=EXAMPLE_DB_NAME;encrypt=true;trustServerCertificate=true;"

@@ -27,7 +27,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ include "debezium.name" . }}-connect
+            name: {{ include "debezium.connectConfigMapName" . }}
             defaultMode: 0744
       containers:
         - name: {{ .Chart.Name }}-connect

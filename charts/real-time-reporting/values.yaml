@@ -46,6 +46,9 @@ reporting-pipeline-service:
     threadPoolSize: "1"
     elasticSearchEnable: "false"
     postProcessingEnable: "false"
+  connectUrls:
+    debezium: 'http://{{ include "real-time-reporting.debeziumConnectServiceName" . }}.{{ .Release.Namespace }}.svc.cluster.local:8083'
+    kafkaConnect: 'http://{{ include "real-time-reporting.kafkaConnectServiceName" . }}.{{ .Release.Namespace }}.svc.cluster.local:8083'
   kafka:
     cluster: *kafkaEndpoint
   jdbc:

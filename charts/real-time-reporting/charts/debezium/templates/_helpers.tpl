@@ -67,6 +67,13 @@ app.kubernetes.io/app: ui
 {{- end }}
 
 {{/*
+Create the name of the Debezium Connect configuration ConfigMap.
+*/}}
+{{- define "debezium.connectConfigMapName" -}}
+{{- printf "%s-connect-config" (include "debezium.fullname" .) | trunc 63 | trimSuffix "-" -}}
+{{- end }}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "debezium.serviceAccountName" -}}
