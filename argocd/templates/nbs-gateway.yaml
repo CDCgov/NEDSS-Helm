@@ -35,6 +35,8 @@ spec:
           value: {{ .Values.env.pageBuilderManagementCreateEnabled }}
         - name: pageBuilder.page.management.edit.enabled
           value: {{ .Values.env.pageBuilderManagementEditEnabled }}
+        - name: reportExecution.enabled
+          value: {{ .Values.reportExecution.enabled }}
         - name: nbsExternalName
           value: {{ .Values.env.classicAppUrl }}
         - name: ingressHost
