@@ -33,6 +33,24 @@ spec:
           value: {{ .Values.env.ODSUsername }}
         - name: jdbc.password
           value: {{ .Values.env.ODSPassword }}
+        - name: reportExecution.enabled
+          value: {{ .Values.reportExecution.enabled }}
+        - name: reportExecution.image.tag
+          value: {{ .Values.reportExecution.imageTag }}
+        - name: reportExecution.database.connectionString
+          value: "Server={{ .Values.reportExecution.database.host | default .Values.env.dbEndpoint }};UID={{ .Values.reportExecution.database.username | default .Values.env.ODSUsername }};PWD={{ .Values.reportExecution.database.password | default .Values.env.ODSPassword }};Database=NBS_ODSE;TrustServerCertificate=true;"
+        - name: ui.report.execution.enabled
+          value: {{ .Values.reportExecution.enabled }}
+        - name: spring.liquibase.enabled
+          value: {{ .Values.reportExecution.enabled }}
+        - name: reportExecution.resources.requests.cpu
+          value: {{ .Values.reportExecution.podRequestCPU }}
+        - name: reportExecution.resources.limits.cpu
+          value: {{ .Values.reportExecution.podLimitCPU }}
+        - name: reportExecution.resources.requests.memory
+          value: {{ .Values.reportExecution.podRequestMemory }}
+        - name: reportExecution.resources.limits.memory
+          value: {{ .Values.reportExecution.podLimitMemory }}
         - name: nbsExternalName
           value: {{ .Values.env.classicAppUrl }}
         - name: ingressHost

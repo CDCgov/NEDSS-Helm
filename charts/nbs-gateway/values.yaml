@@ -56,6 +56,10 @@ system:
     # Enables modernized System Management
     enabled: "false"
 
+reportExecution:
+  # Enables routing eligible report execution requests to the modernized report runner.
+  enabled: "false"
+
 resources: {}
 
 nbsExternalName: app-classic.EXAMPLE_DOMAIN
