@@ -29,17 +29,14 @@ env:
   pageBuilderManagementCreateEnabled: <UPDATE_PAGEBUILDER_MANAGEMENT_CREATE_ENABLED>
   pageBuilderManagementEditEnabled: <UPDATE_PAGEBUILDER_MANAGEMENT_EDIT_ENABLED>
 
-
 #Update parameters only if using AWS, do NOT Delete
 aws:
   efsId: <UPDATE_EFS_ID>
-
 
 #Update parameters only if using Azure, do NOT Delete
 azure:
   ResourceGroup: <UPDATE_RESOURCE_GROUP>
   FileStorageName: <UPDATE_FILE_STORAGE_NAME>
-
 
 caseNotificationService:
   apiClientId: <UPDATE_API_CLIENTID>
@@ -50,7 +47,6 @@ caseNotificationService:
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
-
 dataProcessingService:
   authUsername: <UPDATE_AUTH_USERNAME>
   modernizedMatchingEnabled: <UPDATE_MODERNIZED_MATCHING_ENABLED>
@@ -60,7 +56,6 @@ dataProcessingService:
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
 
 dataIngestionService:
   sftpEnabled: <UPDATE_SFTP_ENABLED>
@@ -74,20 +69,11 @@ dataIngestionService:
   obrSplittingEnabled: <UPDATE_DI_OBRSPLITTINGENABLE>
   hl7BatchSplittingEnabled: <UPDATE_DI_HL7VBATCHSPLITTINGENABLE>
 
-debezium:
-  debeziumDBUser: <<UPDATE_DEBEZIUM_DB_USER>>
-  debeziumDBPass: <<UPDATE_DEBEZIUM_DB_PASSWORD>>
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
 debezium-case-notifications:
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
 
 elasticsearch:
   storageRequest: <UPDATE_STORAGE_REQUEST>
@@ -104,7 +90,6 @@ kafka:
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
-
 keycloak:
   dbPassword: <<UPDATE_DB_PASSWORD>>
   adminPassword: <<UPDATE_ADMIN_PASSWORD>>
@@ -112,15 +97,6 @@ keycloak:
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
-liquibase:
-  LiquibaseDBUser: <<UPDATE_LIQUIBASE_DB_USER>>
-  LiquibaseDBPass: <<UPDATE_LIQUIBASE_DB_PASSWORD>>
-  podRequestCPU: <UPDATE_POD_REQUEST_CPU>
-  podLimitCPU: <UPDATE_POD_LIMIT_CPU>
-  podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
-  podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
 
 modernizationApi:
   smartKey: <UPDATE_SMART_KEY>
@@ -146,7 +122,6 @@ reportExecution:
     username: ""
     password: ""
 
-
 nbsGateway:
   clientSecret: <<UPDATE_CLIENT_SECRET>>
   welcomePage: <UPDATE_WELCOME_PAGE>
@@ -155,7 +130,6 @@ nbsGateway:
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
 
 nifi:
   adminUsername: <UPDATE_ADMIN_USERNAME>
@@ -170,7 +144,6 @@ nifi:
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
 
-
 nnd:
   podRequestCPU: <UPDATE_POD_REQUEST_CPU>
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
@@ -183,9 +156,6 @@ pageBuilderApi:
   podLimitCPU: <UPDATE_POD_LIMIT_CPU>
   podRequestMemory: <UPDATE_POD_REQUEST_MEMORY>
   podLimitMemory: <UPDATE_POD_LIMIT_MEMORY>
-
-rtr:
-  threadPoolSize: <UPDATE_THREAD_POOL_SIZE>
 
 splunk:
   clusterName: <UPDATE_CLUSTER_NAME>
