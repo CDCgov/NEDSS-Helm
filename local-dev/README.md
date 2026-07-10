@@ -54,45 +54,43 @@ kubectl logs -f deployment/nedssdev
 
 ## Using a Local Docker Image in Minikube
 
-If you want to run a Helm chart against a locally built image instead of pulling from a remote registry, build the image locally with Docker, then manually load it into Minikube and set the chart to use `imagePullPolicy: Never`.
+To run a Helm chart against a locally built image instead of pulling from a remote registry, build the image with Docker, load it into Minikube, and set `imagePullPolicy: Never`.
 
-Example for `reporting-pipeline-service`:
+Example for `modernization-api`:
 
 ```bash
 # Build the image locally with Docker
-cd <path-to-reporting-pipeline-service-repo>
-docker build -t reporting-pipeline-service:latest .
+cd <path-to-modernization-api-repo>
+docker build -t modernization-api:local .
 
-# Load that local image into the nbs-local Minikube cluster
-minikube -p nbs-local image load reporting-pipeline-service:latest
+# Load the image into the nbs-local Minikube cluster
+minikube -p nbs-local image load modernization-api:local
 ```
 
-Then install or upgrade the chart with local image values:
+Create `local-dev/values/` if needed, then add a local values file that selects the loaded image:
 
 ```yaml
-# local-dev/values/reporting-pipeline-service-local.yaml
+# local-dev/values/modernization-api-local.yaml
 image:
-  repository: reporting-pipeline-service
+  repository: modernization-api
   tag: local
   pullPolicy: Never
 ```
 
-```bash
-helm upgrade --install reporting-pipeline-service ./charts/real-time-reporting/charts/reporting-pipeline-service \
-  -f local-dev/values/reporting-pipeline-service-local.yaml
-```
-
-If you built the image with your normal Docker daemon instead, load it into Minikube directly:
+Install or upgrade the chart with those values:
 
 ```bash
-minikube -p nbs-local image load reporting-pipeline-service:local
+helm upgrade --install modernization-api ./charts/modernization-api \
+  -f local-dev/values/modernization-api-local.yaml
 ```
+
+The image override does not configure the API's runtime dependencies. Provide suitable values for JDBC, Elasticsearch, classic NBS, and OIDC before expecting the pod to become ready. The local stack supplies SQL Server and classic NBS, but not Elasticsearch or Keycloak.
 
 After the install, if the pod does not start, confirm the image is present in Minikube:
 
 ```bash
-minikube -p nbs-local image ls | grep reporting-pipeline-service
-kubectl describe pod -l app.kubernetes.io/name=reporting-pipeline-service
+minikube -p nbs-local image ls | grep modernization-api
+kubectl describe pod -l app.kubernetes.io/name=modernization-api
 ```
 
 ## Connection Details
