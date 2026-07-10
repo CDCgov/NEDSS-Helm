@@ -5,22 +5,22 @@ apiVersion: apps/v1beta2
 {{- end }}
 kind: Deployment
 metadata:
-  name: {{ template "cp-kafka-connect.fullname" . }}
+  name: {{ template "kafka-connect.fullname" . }}
   labels:
-    app: {{ template "cp-kafka-connect.name" . }}
-    chart: {{ template "cp-kafka-connect.chart" . }}
+    app: {{ template "kafka-connect.name" . }}
+    chart: {{ template "kafka-connect.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "cp-kafka-connect.name" . }}
+      app: {{ template "kafka-connect.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "cp-kafka-connect.name" . }}
+        app: {{ template "kafka-connect.name" . }}
         release: {{ .Release.Name }}
       {{- if or .Values.podAnnotations .Values.prometheus.jmx.enabled }}
       annotations:
@@ -56,8 +56,8 @@ spec:
             - name: jmx-config
               mountPath: /etc/jmx-kafka-connect
         {{- end }}
-        - name: {{ template "cp-kafka-connect.name" . }}-server
-          image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+        - name: {{ template "kafka-connect.name" . }}-server
+          image: "{{ include "kafka-connect.imageRepository" . }}:{{ .Values.imageTag }}"
           imagePullPolicy: "{{ .Values.imagePullPolicy }}"
           ports:
             - name: kafka-connect
@@ -81,9 +81,9 @@ spec:
                 fieldRef:
                   fieldPath: status.podIP
             - name: CONNECT_BOOTSTRAP_SERVERS
-              value: {{ template "cp-kafka-connect.kafka.bootstrapServers" . }}
+              value: {{ template "kafka-connect.kafka.bootstrapServers" . }}
             - name: CONNECT_GROUP_ID
-              value: {{ template "cp-kafka-connect.groupId" . }}
+              value: {{ template "kafka-connect.groupId" . }}
             - name: CONNECT_CONFIG_STORAGE_TOPIC
               value: {{ .Values.configurationOverrides.topics_basename }}-config
             - name: CONNECT_OFFSET_STORAGE_TOPIC
@@ -91,15 +91,26 @@ spec:
             - name: CONNECT_STATUS_STORAGE_TOPIC
               value: {{ .Values.configurationOverrides.topics_basename }}-status
             - name: CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL
-              value: {{ template "cp-kafka-connect.cp-schema-registry.service-name" .}}
+              value: {{ template "kafka-connect.cp-schema-registry.service-name" .}}
             - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL
-              value: {{ template "cp-kafka-connect.cp-schema-registry.service-name" .}}
+              value: {{ template "kafka-connect.cp-schema-registry.service-name" .}}
             - name: KAFKA_HEAP_OPTS
               value: "{{ .Values.heapOptions }}"
+            {{- $configReplicationFactor := default .Values.kafka.default_replication_factor (index .Values.configurationOverrides "config.storage.replication.factor") }}
+            {{- $offsetReplicationFactor := default .Values.kafka.default_replication_factor (index .Values.configurationOverrides "offset.storage.replication.factor") }}
+            {{- $statusReplicationFactor := default .Values.kafka.default_replication_factor (index .Values.configurationOverrides "status.storage.replication.factor") }}
             {{- range $key, $value := .Values.configurationOverrides }}
+            {{- if and (ne $key "config.storage.replication.factor") (ne $key "offset.storage.replication.factor") (ne $key "status.storage.replication.factor") }}
             - name: {{ printf "CONNECT_%s" $key | replace "." "_" | upper | quote }}
               value: {{ $value | quote }}
             {{- end }}
+            {{- end }}
+            - name: CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR
+              value: {{ $configReplicationFactor | quote }}
+            - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR
+              value: {{ $offsetReplicationFactor | quote }}
+            - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR
+              value: {{ $statusReplicationFactor | quote }}
             {{- range $key, $value := .Values.customEnv }}
             - name: {{ $key | quote }}
               value: {{ $value | quote }}
@@ -123,7 +134,7 @@ spec:
       {{- if .Values.prometheus.jmx.enabled }}
         - name: jmx-config
           configMap:
-            name: {{ template "cp-kafka-connect.fullname" . }}-jmx-configmap
+            name: {{ template "kafka-connect.fullname" . }}-jmx-configmap
       {{- end }}
       {{- if .Values.nodeSelector }}
       nodeSelector:

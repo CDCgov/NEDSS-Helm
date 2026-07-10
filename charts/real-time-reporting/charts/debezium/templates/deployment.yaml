@@ -27,11 +27,11 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ include "debezium.name" . }}-connect
+            name: {{ include "debezium.connectConfigMapName" . }}
             defaultMode: 0744
       containers:
         - name: {{ .Chart.Name }}-connect
-          image: "{{ .Values.connect.image.repository }}:{{ .Values.connect.image.tag | default .Chart.AppVersion }}"
+          image: "{{ include "debezium.connectImageRepository" . }}:{{ .Values.connect.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.connect.image.pullPolicy }}
           ports:
             - name: {{ .Values.connect.service.name }}
@@ -67,6 +67,9 @@ spec:
             - name: config
               mountPath: /kafka/config/log4j.properties
               subPath: log4j.properties
+            - name: config
+              mountPath: /kafka/config/connect-log4j.properties
+              subPath: connect-log4j.properties
             - name: config
               mountPath: /kafka/config/connect-distributed.properties
               subPath: connect-distributed.properties
@@ -118,7 +121,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}-ui
-          image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag | default .Chart.AppVersion }}"
+          image: "{{ include "debezium.uiImageRepository" . }}:{{ .Values.ui.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.ui.image.pullPolicy }}
           ports:
             - name: {{ .Values.ui.service.name}}

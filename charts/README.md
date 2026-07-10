@@ -12,4 +12,5 @@ The following helm charts are contained within this repository:
 1. [nginx-ingress](charts/nginx-ingress) - deploys nginx-ingress controller opensource project
 1. [hybrid-integration](charts/hybrid-integration) - deploys nginx container for routing application traffic5
 1. [kafka](charts/kafka) - (local or on-prem only) deploys kafka service
+1. [real-time-reporting](charts/real-time-reporting) - umbrella chart for RTR Debezium, Kafka Connect sink, and Reporting Pipeline Service
 1. [common-asset-server](charts/common-asset-server) - (currrently not in use) deploys resources in a common space to be used by existing microservices

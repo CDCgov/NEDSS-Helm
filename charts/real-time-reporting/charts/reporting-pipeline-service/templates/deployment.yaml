@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ include "reporting-pipeline-service.fullname" . }}
   labels:
     {{- include "reporting-pipeline-service.labels" . | nindent 4 }}
 spec:
@@ -19,10 +19,12 @@ spec:
         {{- toYaml .Values.podAnnotations | nindent 8 }}
     spec:
       # Service account name for the pod.
-      serviceAccountName: {{ .Chart.Name }}
+      serviceAccountName: {{ include "reporting-pipeline-service.fullname" . }}
+      # The application retries its connector clients internally, so we let it start
+      # immediately and rely on readiness/liveness probes to gate traffic.
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: {{ include "reporting-pipeline-service.fullname" . }}
+          image: "{{ include "reporting-pipeline-service.imageRepository" . }}:{{ .Values.image.tag }}"
           imagePullPolicy: "{{ .Values.image.pullPolicy | default "IfNotPresent" }}"
           ports:
             - containerPort: {{ .Values.service.port }}
@@ -31,7 +33,7 @@ spec:
           {{- if .Values.probes.readiness.enabled }}
           readinessProbe:
             httpGet:
-              path: {{ "/actuator/health" }}
+              path: {{ .Values.probes.readiness.path | default "/actuator/health" }}
               port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds | default "30" }}
             periodSeconds: {{ .Values.probes.readiness.periodSeconds | default "10" }}
@@ -40,7 +42,7 @@ spec:
           {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
             httpGet:
-              path: {{ "/actuator/health" }}
+              path: {{ .Values.probes.liveness.path | default "/actuator/health" }}
               port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds | default "60" }}
             periodSeconds: {{ .Values.probes.liveness.periodSeconds | default "30" }}
@@ -59,20 +61,14 @@ spec:
               value: {{ .Values.timezone | quote }}
 
             - name: DEBEZIUM_CONNECT_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: debezium-rtr-connect
-                  key: DEBEZIUM_CONNECT_URL
+              value: {{ tpl .Values.connectUrls.debezium . | quote }}
             - name: KAFKA_CONNECT_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: cp-kafka-connect-sqlserver-connect
-                  key: KAFKA_CONNECT_URL
+              value: {{ tpl .Values.connectUrls.kafkaConnect . | quote }}
 
             - name: KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.kafka.cluster | quote }}
             - name: DB_CONNECTION_URL
-              value: {{ .Values.jdbc.connection_url | quote }}
+              value: {{ tpl .Values.jdbc.connection_url . | quote }}
 
             - name: DB_USERNAME
               value: {{ .Values.jdbc.username | quote }}

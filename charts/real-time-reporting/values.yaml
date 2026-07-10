@@ -1,0 +1,57 @@
+---
+kafkaEndpoint: &kafkaEndpoint "EXAMPLE_KAFKA_ENDPOINT"
+debeziumReplicationFactor: &debeziumReplicationFactor "2"
+kafkaConnectReplicationFactor: &kafkaConnectReplicationFactor "2"
+dbEndpoint: &dbEndpoint "EXAMPLE_DB_ENDPOINT"
+dbName: &dbName "EXAMPLE_DB_NAME"
+dbUsername: &dbUsername "EXAMPLE_DB_USER"
+dbPassword: &dbPassword "EXAMPLE_DB_PASSWORD"
+dbPort: &dbPort "1433"
+
+global:
+  dbEndpoint: *dbEndpoint
+  dbName: *dbName
+  dbUsername: *dbUsername
+  dbPassword: *dbPassword
+  dbPort: *dbPort
+
+debezium:
+  enabled: true
+  connect:
+    properties:
+      bootstrap_server: *kafkaEndpoint
+      default_replication_factor: *debeziumReplicationFactor
+      min_in_sync_replicas: *debeziumReplicationFactor
+    env:
+      - name: BOOTSTRAP_SERVERS
+        value: *kafkaEndpoint
+
+kafka-connect:
+  enabled: true
+  kafka:
+    bootstrapServers: *kafkaEndpoint
+    default_replication_factor: *kafkaConnectReplicationFactor
+  configurationOverrides:
+    "config.storage.replication.factor": *kafkaConnectReplicationFactor
+    "offset.storage.replication.factor": *kafkaConnectReplicationFactor
+    "status.storage.replication.factor": *kafkaConnectReplicationFactor
+
+reporting-pipeline-service:
+  enabled: true
+  image:
+    repository: nbs7-rtr-reporting-pipeline-service
+    tag: latest
+    pullPolicy: Never
+  featureFlag:
+    threadPoolSize: "1"
+    elasticSearchEnable: "false"
+    postProcessingEnable: "false"
+  connectUrls:
+    debezium: 'http://{{ include "real-time-reporting.debeziumConnectServiceName" . }}.{{ .Release.Namespace }}.svc.cluster.local:8083'
+    kafkaConnect: 'http://{{ include "real-time-reporting.kafkaConnectServiceName" . }}.{{ .Release.Namespace }}.svc.cluster.local:8083'
+  kafka:
+    cluster: *kafkaEndpoint
+  jdbc:
+    connection_url: "jdbc:sqlserver://{{ .Values.global.dbEndpoint }}:{{ .Values.global.dbPort }};databaseName={{ .Values.global.dbName }};encrypt=true;trustServerCertificate=true;"
+    username: *dbUsername
+    password: *dbPassword

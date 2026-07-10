@@ -3,6 +3,8 @@
 
 replicaCount: 1
 
+global: {}
+
 env: "prod"
 
 timezone: "UTC"
@@ -40,14 +42,20 @@ featureFlag:
 probes:
   readiness:
     enabled: true
+    path: /actuator/health
     initialDelaySeconds: 60
 #   periodSeconds: 10
 #   failureThreshold: 5
   liveness:
     enabled: true
+    path: /actuator/health
 #   initialDelaySeconds: 60
 #   periodSeconds: 30
 #   failureThreshold: 5
+
+connectUrls:
+  debezium: "http://EXAMPLE_DEBEZIUM_CONNECT_HOST:8083"
+  kafkaConnect: "http://EXAMPLE_KAFKA_CONNECT_HOST:8083"
 
 jdbc:
   connection_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:EXAMPLE_DB_PORT;databaseName=EXAMPLE_DB_NAME;encrypt=true;trustServerCertificate=true;"
