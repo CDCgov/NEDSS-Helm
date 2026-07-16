@@ -73,6 +73,7 @@ spec:
             - "bash"
             - "-c"
             - |
+              set -euo pipefail
               confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.7.6
               exec /etc/confluent/docker/run
           env:
