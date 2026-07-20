@@ -12,7 +12,7 @@ timezone: "UTC"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/reporting-pipeline-service"
-  tag: "v1.3.0-prerelease.31084a3"
+  tag: "v1.3.0-prerelease.12cea9e"
 # pullPolicy: IfNotPresent
 
 podAnnotations:
@@ -56,4 +56,4 @@ jdbc:
 
 kafka:
   # e.g. for an AWS MSK provisioned cluster: b-<broker-id>.<cluster-name>.<unique-id>.c<cluster-number>.<aws-region>.amazonaws.com:<port>
-  cluster: "EXAMPLE_KAFKA_ENDPOINT"
+  cluster: "EXAMPLE_KAFKA_ENDPOINT_AND_PORT"

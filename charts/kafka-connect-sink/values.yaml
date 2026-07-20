@@ -97,8 +97,7 @@ prometheus:
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
-  # this may not be right: bootstrapServers: "EXAMPLE_FIXME_KAFKA_ENDPOINT"
-  bootstrapServers: "EXAMPLE_KAFKA_ENDPOINT"
+  bootstrapServers: "EXAMPLE_KAFKA_ENDPOINT_AND_PORT"
   default_replication_factor: 2
   default_partitions: 10
   default_cleanup: "compact"
