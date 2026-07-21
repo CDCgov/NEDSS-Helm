@@ -1,18 +1,14 @@
 # All the configuration settings for this Helm chart are shown below in this file. 
 # This chart offers a default value for some of the settings, e.g. the commented out lines in this file.
-
 replicaCount: 1
 
 env: "prod"
 
 timezone: "UTC"
 
-
-# The CDCgov/NEDSS-DataReporting/reporting-pipeline-service/Dockerfile for the image below specifies a HEALTHCHECK, but it is still a Kubernetes best practice to also specify readiness and liveness probes.
-
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/reporting-pipeline-service"
-  tag: "v1.3.0-prerelease.12cea9e"
+  tag: "v1.3.0-prerelease.542a428"
 # pullPolicy: IfNotPresent
 
 podAnnotations:
@@ -41,8 +37,8 @@ probes:
   readiness:
     enabled: true
     initialDelaySeconds: 60
+    failureThreshold: 10
 #   periodSeconds: 10
-#   failureThreshold: 5
   liveness:
     enabled: true
 #   initialDelaySeconds: 60
@@ -56,4 +52,4 @@ jdbc:
 
 kafka:
   # e.g. for an AWS MSK provisioned cluster: b-<broker-id>.<cluster-name>.<unique-id>.c<cluster-number>.<aws-region>.amazonaws.com:<port>
-  cluster: "EXAMPLE_KAFKA_ENDPOINT_AND_PORT"
+  cluster: "EXAMPLE_KAFKA_ENDPOINT:EXAMPLE_KAFKA_PORT"
