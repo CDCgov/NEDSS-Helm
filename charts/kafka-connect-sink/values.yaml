@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+overrideGroupId: "rtr-kafka-connect-sink"
+
 ## Image Info
 ## ref: https://hub.docker.com/r/confluentinc/cp-kafka/
 image: confluentinc/cp-kafka-connect
@@ -20,11 +22,18 @@ imagePullSecrets: []
 
 servicePort: 8083
 
+## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
+kafka:
+  bootstrapServers: "EXAMPLE_KAFKA_ENDPOINT:EXAMPLE_KAFKA_PORT"
+  default_replication_factor: 2
+  default_partitions: 10
+  default_cleanup: "compact"
+
 ## Kafka Connect properties
 ## ref: https://docs.confluent.io/current/connect/userguide.html#configuring-workers
 configurationOverrides:
   "plugin.path": "/usr/share/confluent-hub-components,/usr/share/java"
-  "topics_basename": "kafka-sink-connector-062725"
+  "topics_basename": "rtr-kafka-connect-sink"
   "key.converter": "org.apache.kafka.connect.json.JsonConverter"
   "value.converter": "org.apache.kafka.connect.json.JsonConverter"
   "key.converter.schemas.enable": "false"
@@ -53,7 +62,6 @@ resources: { }
 #    requests:
 #      memory: "1Gi"
 #      cpu: "500m"
-
 
 
 ## Custom pod annotations
@@ -93,14 +101,6 @@ prometheus:
     ## Resources configuration for the JMX exporter container.
     ## See the `resources` documentation above for details.
     resources: { }
-
-## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
-## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
-kafka:
-  bootstrapServers: "EXAMPLE_KAFKA_ENDPOINT_AND_PORT"
-  default_replication_factor: 2
-  default_partitions: 10
-  default_cleanup: "compact"
 
 ## If the Kafka Chart is disabled a URL and port are required to connect
 ## e.g. gnoble-panther-cp-schema-registry:8081
