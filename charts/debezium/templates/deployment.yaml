@@ -41,15 +41,13 @@ spec:
             {{- toYaml .Values.connect.resources | nindent 12 }}
 
           livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.connect.service.port }}
             initialDelaySeconds: 60        # Wait 60s after container starts before first check
             periodSeconds: 20              # Check every 20s
             timeoutSeconds: 5              # Timeout for each check
             failureThreshold: 3            # Mark container unhealthy after 3 consecutive failures
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - curl --request GET -sf http://localhost:8083/connectors
 
           # Readiness probe: Checks if container is ready to accept traffic
           readinessProbe:
