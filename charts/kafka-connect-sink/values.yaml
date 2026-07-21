@@ -115,22 +115,18 @@ volumeMounts: []
 ## ref: https://kubernetes.io/docs/concepts/storage/volumes/
 volumes: []
 
-## Secret with multiple keys to serve the purpose of multiple secrets
-## Values for all the keys will be base64 encoded when the Secret is created or updated
-## ref: https://kubernetes.io/docs/concepts/configuration/secret/
-secrets:
-# username: kafka123
-# password: connect321
-
-## These values are used only when "customEnv.CUSTOM_SCRIPT_PATH" is defined.
-## "livenessProbe" is required only for the edge cases where the custom script to be run takes too much time
-## and errors by the ENTRYPOINT are ignored by the container
-## As an example such a similar script is added to "cp-helm-charts/examples/create-connectors.sh"
-## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
-livenessProbe:
-# httpGet:
-#   path: /connectors
-#   port: 8083
-# initialDelaySeconds: 60
-# periodSeconds: 5
-# failureThreshold: 10
+probes:
+  readiness:
+    enabled: true
+    path: /connectors
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+  liveness:
+    enabled: true
+    path: /
+    initialDelaySeconds: 60
+    periodSeconds: 30
+    timeoutSeconds: 5
+    failureThreshold: 5
