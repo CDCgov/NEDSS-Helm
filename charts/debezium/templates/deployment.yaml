@@ -51,15 +51,13 @@ spec:
 
           # Readiness probe: Checks if container is ready to accept traffic
           readinessProbe:
+            httpGet:
+              path: /connectors
+              port: {{ .Values.connect.service.port }}
             initialDelaySeconds: 60
             periodSeconds: 20
             timeoutSeconds: 5
             failureThreshold: 3
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - curl --request GET -sf http://localhost:8083/connectors
 
           volumeMounts:
             - name: config
