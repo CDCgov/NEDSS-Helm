@@ -17,9 +17,6 @@ connect:
     protocol: TCP
     name: http
 
-  ingress:
-    enabled: false
-
   autoscaling:
     enabled: false
 
@@ -68,11 +65,6 @@ ui:
     port: "8080"
     protocol: TCP
     name: http
-
-  ingress:
-    enabled: true
-    router: private
-    host: DEBEZIUM_UI_HOST_ADDRESS
 
   autoscaling:
     enabled: false
