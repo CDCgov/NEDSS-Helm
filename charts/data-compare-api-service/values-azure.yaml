@@ -71,13 +71,14 @@ cloudProvider: azure
 
 azure:
   files:
-    resourceGroupName: 
-    storageAccountName: 
+    # Please see the commentary in ../elasticsearch/values.yaml about the following two values
+    resourceGroupName: "EXAMPLE_RESOURCE_GROUP_NAME"
+    storageAccountName: "EXAMPLE_STORAGE_ACCOUNT_NAME"
     storageClass: azurefile-csi-private-datacompareapi
     storageRequest: 20Gi
-  storageAccountName: "AZURE_STORAGE_ACCOUNT_NAME"
-  containerName: "AZURE_CONTAINER_NAME"
-  connectionString: "AZURE_CONNECTION_STRING"
-  sasToken: "AZURE_SAS_TOKEN"
+  storageAccountName: "EXAMPLE_STORAGE_ACCOUNT_NAME"
+  containerName: "EXAMPLE_CONTAINER_NAME"
+  connectionString: "EXAMPLE_CONNECTION_STRING"
+  sasToken: "EXAMPLE_SAS_TOKEN"
   managedIdentity:
     enabled: false
