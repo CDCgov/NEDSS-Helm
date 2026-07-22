@@ -58,6 +58,8 @@ s3:
   bucketName: ""
   region: ""
 
+
+# Note that some of these values are used by ./templates/deployment.yaml
 azure:
   storageAccountName: ""
   containerName: ""
@@ -65,6 +67,16 @@ azure:
   sasToken: ""
   managedIdentity:
     enabled: false
+
+cloudProvider: aws
+
+# For AWS:
+pvc:
+  dcPvClaim:
+    storageClass: efs-datacompareapi
+    storageRequest: 20Gi
+efsFileSystemId: "EXAMPLE_EFS_ID"
+
 
 kafka:
   cluster: "EXAMPLE_KAFKA_ENDPOINT"

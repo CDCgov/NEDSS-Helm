@@ -1,6 +1,6 @@
 replicaCount: 1
 
-env: "azure"
+env: "prod"
 
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-compare-api-service"
@@ -66,6 +66,9 @@ kafka:
 log:
   path: "/usr/share/datacompareapi/data"
 
+
+cloudProvider: azure
+
 azure:
   files:
     resourceGroupName: 
@@ -78,11 +81,3 @@ azure:
   sasToken: "AZURE_SAS_TOKEN"
   managedIdentity:
     enabled: false
-
-#AWS PVC Settings#
-pvc:
-  dcPvClaim:
-    storageClass: efs-datacompareapi
-    storageRequest: 20Gi
-
-efsFileSystemId: "EXAMPLE_EFS_ID"
