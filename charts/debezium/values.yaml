@@ -42,6 +42,8 @@ connect:
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
+    - name: KAFKA_HEAP_OPTS
+      value: "-Xms256M -Xmx1G"
     - name: TZ
       value: "UTC"
 
