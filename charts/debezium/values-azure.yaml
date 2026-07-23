@@ -17,9 +17,6 @@ connect:
     protocol: TCP
     name: http
 
-  ingress:
-    enabled: false
-
   autoscaling:
     enabled: false
 
@@ -48,6 +45,8 @@ connect:
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
+    - name: KAFKA_HEAP_OPTS
+      value: "-Xms256M -Xmx1G"
     - name: NAME
       value: "debezium-odse-srte-connector-v081525"
     - name: TZ
@@ -68,11 +67,6 @@ ui:
     port: "8080"
     protocol: TCP
     name: http
-
-  ingress:
-    enabled: true
-    router: private
-    host: DEBEZIUM_UI_HOST_ADDRESS
 
   autoscaling:
     enabled: false

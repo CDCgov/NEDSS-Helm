@@ -3,7 +3,7 @@ fullnameOverride: ""
 log_level: INFO
 connect:
   replicaCount: 1
-  imagePullSecrets: [ ]
+  imagePullSecrets: []
 
   image:
     repository: quay.io/debezium/connect
@@ -15,9 +15,6 @@ connect:
     port: 8083
     protocol: TCP
     name: http
-
-  ingress:
-    enabled: false
 
   autoscaling:
     enabled: false
@@ -31,9 +28,9 @@ connect:
       memory: 1Gi
 
   properties:
-    bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT_AND_PORT"
-    group_id: "debezium-odse-srte-connector-v081525"
-    topics_basename: "debezium-odse-srte-connector-v081525"
+    bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT:EXAMPLE_KAFKA_PORT"
+    group_id: "rtr-debezium"
+    topics_basename: "rtr-debezium"
     default_replication_factor: 2
     default_partitions: 10
     default_cleanup: "compact"
@@ -45,13 +42,15 @@ connect:
       value: "INFO"
     - name: KAFKA_LOG4J_OPTS
       value: "-Dlog4j.configuration=file:/kafka/config/log4j.properties"
+    - name: KAFKA_HEAP_OPTS
+      value: "-Xms256M -Xmx1G"
     - name: TZ
       value: "UTC"
 
 ui:
   enabled: false
   replicaCount: 1
-  imagePullSecrets: [ ]
+  imagePullSecrets: []
 
   image:
     repository: debezium/debezium-ui
@@ -63,11 +62,6 @@ ui:
     port: "8080"
     protocol: TCP
     name: http
-
-  ingress:
-    enabled: true
-    router: private
-    host: EXAMPLE_FIXME_DEBEZIUM_UI_HOST_ADDRESS
 
   autoscaling:
     enabled: false
