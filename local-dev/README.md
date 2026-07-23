@@ -52,6 +52,18 @@ kubectl get pods -w
 kubectl logs -f deployment/nedssdev
 ```
 
+## Recommended Local Overrides
+
+When using the local Helm values files under [local-dev/values](local-dev/values), a couple of settings are worth adjusting for a smoother first run:
+
+- In [local-dev/values/debezium-rtr-local.yaml](local-dev/values/debezium-rtr-local.yaml), set `connect.properties.default_replication_factor` to `1` so it matches the single-broker local Kafka setup.
+- In [local-dev/values/reporting-pipeline-service-local.yaml](local-dev/values/reporting-pipeline-service-local.yaml), override the probe startup delay if the service needs more time to become healthy during the initial boot. For example:
+
+  ```yaml
+  probes.readiness.initialDelaySeconds: 300
+  probes.liveness.initialDelaySeconds: 300
+  ```
+
 ## Using a Local Docker Image in Minikube
 
 If you want to run a Helm chart against a locally built image instead of pulling from a remote registry, build the image into Minikube’s Docker environment and set the chart to use `imagePullPolicy: Never`.
