@@ -58,13 +58,13 @@ affinity: {}
 # "aws" and "azure" are the supported values
 cloudProvider: aws
 
-# For Azure:
+# For Azure (used to create a PVC and StorageClass):
 azure:
   files:
     storageRequest: 100Gi
-    # The storage account created by the NEDSS-Infrastructure/terraform/azure/modules/2-nbs7/storage-account module (see NEDSS-Infrastructure/terraform/azure/samples/2-nbs7/ for an example of that module being used):
+    # The storage account created by the NEDSS-Infrastructure/terraform/azure/modules/1-nbs7/storage-account module (see NEDSS-Infrastructure/terraform/azure/samples/1-nbs7/ for an example of that module being used):
     storageAccountName: "EXAMPLE_STORAGE_ACCOUNT_NAME"
-    # The resource group (specified by NEDSS-Infrastructure/terraform/azure/samples/2-nbs7/terraform.tfvars) where the storage account lives:
+    # The resource group (specified by NEDSS-Infrastructure/terraform/azure/samples/1-nbs7/terraform.tfvars) where the storage account lives:
     resourceGroupName: "EXAMPLE_RESOURCE_GROUP_NAME"
 
 # For AWS:
@@ -72,4 +72,5 @@ pvc:
   esPvClaim:
     storageClass: efs-es
     storageRequest: 100Gi
+# Used to create a StorageClass:
 efsFileSystemId: "EXAMPLE_EFS_ID"

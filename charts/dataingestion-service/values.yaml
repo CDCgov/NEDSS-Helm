@@ -101,6 +101,7 @@ pvc:
   diPvClaim:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
+# Used to create a StorageClass:
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
 

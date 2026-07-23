@@ -59,6 +59,8 @@ s3:
   region: ""
 
 
+cloudProvider: aws
+
 # Note that some of these values are used by ./templates/deployment.yaml
 azure:
   storageAccountName: "EXAMPLE_STORAGE_ACCOUNT_NAME"
@@ -68,13 +70,12 @@ azure:
   managedIdentity:
     enabled: false
 
-cloudProvider: aws
-
 # For AWS:
 pvc:
   dcPvClaim:
     storageClass: efs-datacompareapi
     storageRequest: 20Gi
+# Used to create a StorageClass:
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
 
