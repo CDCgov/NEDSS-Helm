@@ -60,13 +60,26 @@ s3:
   bucketName: ""
   region: ""
 
+
+cloudProvider: aws
+
+# Note that some of these values are used by ./templates/deployment.yaml
 azure:
-  storageAccountName: ""
-  containerName: ""
-  connectionString: ""
-  sasToken: ""
+  storageAccountName: "EXAMPLE_STORAGE_ACCOUNT_NAME"
+  containerName: "EXAMPLE_CONTAINER_NAME"
+  connectionString: "EXAMPLE_CONNECTION_STRING"
+  sasToken: "EXAMPLE_SAS_TOKEN"
   managedIdentity:
     enabled: false
+
+# For AWS:
+pvc:
+  dcPvClaim:
+    storageClass: efs-datacompareprocessor
+    storageRequest: 20Gi
+# Used to create a StorageClass:
+efsFileSystemId: "EXAMPLE_EFS_ID"
+
 
 ses:
   recipients: ""

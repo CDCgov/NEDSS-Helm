@@ -35,21 +35,22 @@ keycloak:
 kubernetesClusterDomain: cluster.local
 
 
+# "aws" and "azure" are the supported values
 cloudProvider: aws
 
+# For Azure:
 azure:
   files:
     storageRequest: 1Gi
-    storageAccountName: 
-    resourceGroupName: 
+    # Please see the commentary in ../elasticsearch/values.yaml about these values
+    storageAccountName: "EXAMPLE_STORAGE_ACCOUNT_NAME"
+    resourceGroupName: "EXAMPLE_RESOURCE_GROUP_NAME"
 
-#AWS PVC Settings
-
+# For AWS:
 pvc:
   kcPvClaim:
     storageClass: efs-kc
     storageRequest: 1Gi
-
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
 
