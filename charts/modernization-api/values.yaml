@@ -171,7 +171,7 @@ ui:
     management:
       # Enable access to System Management screen
       enabled: false
-    execution:
+    reportExecution:
       # Enables access to modernized report execution
       enabled: true
 
