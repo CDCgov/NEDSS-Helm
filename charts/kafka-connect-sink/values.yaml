@@ -24,7 +24,7 @@ servicePort: 8083
 
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 kafka:
-  bootstrapServers: "EXAMPLE_KAFKA_ENDPOINT:EXAMPLE_KAFKA_PORT"
+  bootstrapServers: "EXAMPLE_KAFKA_ENDPOINT_AND_PORT"
   default_replication_factor: 2
   default_partitions: 10
   default_cleanup: "compact"

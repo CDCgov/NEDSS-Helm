@@ -28,7 +28,7 @@ connect:
       memory: 1Gi
 
   properties:
-    bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT:EXAMPLE_KAFKA_PORT"
+    bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT_AND_PORT"
     group_id: "rtr-debezium"
     topics_basename: "rtr-debezium"
     default_replication_factor: 2
