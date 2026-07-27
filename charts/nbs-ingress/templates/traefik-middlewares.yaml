@@ -17,6 +17,10 @@ spec:
     customResponseHeaders:
       X-Frame-Options: "Allow"
       Cross-Origin-Opener-Policy: "same-origin"
+      # Keycloak 25+ removed the built-in /auth/robots.txt endpoint. Replace it
+      # with X-Robots-Tag at the edge so Keycloak's /auth/* pages (which route
+      # through here, not nbs-gateway) stay out of search indexes.
+      X-Robots-Tag: "none"
 ---
 # =============================================================================
 # Body Size Limit (100MB — matches NGINX proxy-body-size: 100m)
