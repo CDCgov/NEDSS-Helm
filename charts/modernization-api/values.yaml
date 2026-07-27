@@ -73,7 +73,7 @@ jdbc:
   password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
 
 reportExecution:
-  enabled: false
+  enabled: true
   replicaCount: 1
   image:
     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nbs7-report-execution"
@@ -87,11 +87,11 @@ reportExecution:
   logLevel: "INFO"
   resources:
     limits:
-      memory: "512Mi"
+      memory: "1Gi"
       cpu: "500m"
     requests:
-      memory: "256Mi"
-      cpu: "125m"
+      memory: "1Gi"
+      cpu: "500m"
   autoscaling:
     enabled: false
     minReplicas: 1
@@ -174,7 +174,7 @@ ui:
   report:
     execution:
       # Enables access to modernized report execution
-      enabled: false
+      enabled: true
 
 # Below you have the option to override the values for readiness and liveness probes: port, initialDelaySeconds, periodSeconds, and failureThreshold.
 probes:
@@ -185,4 +185,4 @@ probes:
 
 spring:
   liquibase:
-    enabled: false
+    enabled: true

@@ -84,25 +84,26 @@ kafka:
 log:
   path: "/usr/share/dataingestion/data"
 
+
 # This can be set to "aws" or "azure".
 cloudProvider: aws
 
-#Azure PVC Settings#
+# For Azure:
 azure:
   files:
-    resourceGroupName: 
-    storageAccountName: 
+    resourceGroupName: "EXAMPLE_RESOURCE_GROUP_NAME"
+    storageAccountName: "EXAMPLE_STORAGE_ACCOUNT_NAME"
     storageClass: azurefile-csi-private-di
     storageRequest: 20Gi
 
-#AWS PVC Settings#
+# For AWS:
 pvc:
   diPvClaim:
     storageClass: efs-dataingestion
     storageRequest: 20Gi
-
-# Only for AWS
+# Used to create a StorageClass:
 efsFileSystemId: "EXAMPLE_EFS_ID"
+
 
 # More info at: https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/case-notification.html#keycloak-configuration
 authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"

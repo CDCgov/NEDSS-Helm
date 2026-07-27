@@ -52,6 +52,18 @@ kubectl get pods -w
 kubectl logs -f deployment/nedssdev
 ```
 
+## Recommended Local Overrides
+
+When using the local Helm values files under [local-dev/values](local-dev/values), a couple of settings are worth adjusting for a smoother first run:
+
+- In [local-dev/values/debezium-rtr-local.yaml](local-dev/values/debezium-rtr-local.yaml), set `connect.properties.default_replication_factor` to `1` so it matches the single-broker local Kafka setup.
+- In [local-dev/values/reporting-pipeline-service-local.yaml](local-dev/values/reporting-pipeline-service-local.yaml), override the probe startup delay if the service needs more time to become healthy during the initial boot. For example:
+
+  ```yaml
+  probes.readiness.initialDelaySeconds: 300
+  probes.liveness.initialDelaySeconds: 300
+  ```
+
 ## Using a Local Docker Image in Minikube
 
 If you want to run a Helm chart against a locally built image instead of pulling from a remote registry, build the image into Minikube’s Docker environment and set the chart to use `imagePullPolicy: Never`.
@@ -146,13 +158,48 @@ To fully remove the cluster and reclaim disk:
 minikube delete --profile nbs-local
 ```
 
-## Customizing Resources
+## Minikube Resource Management
 
-The scripts respect environment variables for minikube sizing:
+The start script creates a single-node Minikube cluster with 2 CPUs and 8 GB of memory by default. The workloads deployed by `start.sh` request most of that capacity:
+
+| Deployment | Replicas | CPU request | Memory request | Memory limit |
+|---|---:|---:|---:|---:|
+| `nbs-mssql` | 1 | `500m` | `2Gi` | `4Gi` |
+| `kafka` | 1 | `200m` | `512Mi` | `1Gi` |
+| `nedssdev` | 1 | `500m` | `4Gi` | `6Gi` |
+| **Total** | **3** | **`1200m`** | **`6.5Gi`** | **`11Gi`** |
+
+Kubernetes schedules pods using requests, not current usage or limits. Minikube also reserves capacity for Kubernetes system pods and the ingress addon, so not all 2 CPUs and 8 GB are allocatable to application workloads. For example, two default Debezium replicas add 1 CPU and 2 GiB of requested capacity, bringing the total to 2.2 CPUs and 8.5 GiB before system workloads; one of those replicas will generally remain `Pending`.
+
+Check scheduling and capacity with:
 
 ```bash
-MINIKUBE_CPUS=2 MINIKUBE_MEMORY=8g ./local-dev/scripts/start.sh
+kubectl describe node nbs-local
+kubectl describe pod <pending-pod-name>
+kubectl get events --sort-by=.lastTimestamp
 ```
 
-Default resource requests in the manifests are set conservatively for local dev and are much lower
-than the production values (e.g. nedssdev uses `JAVA_MEMORY=2g` vs `10g` in production).
+Look for `Insufficient cpu` or `Insufficient memory` in the pending pod's events.
+
+To inspect current usage, enable Metrics Server and use `kubectl top`:
+
+```bash
+minikube addons enable metrics-server --profile nbs-local
+kubectl top node nbs-local
+kubectl top pods --all-namespaces --containers
+```
+
+The start script accepts environment variables for larger clusters:
+
+```bash
+MINIKUBE_CPUS=4 MINIKUBE_MEMORY=12g ./local-dev/scripts/start.sh
+```
+
+To resize an existing profile reliably, delete and recreate it. This removes local cluster data:
+
+```bash
+minikube delete --profile nbs-local
+MINIKUBE_CPUS=4 MINIKUBE_MEMORY=12g ./local-dev/scripts/start.sh
+```
+
+Alternatively, reduce workload resource requests in a local Helm values file. Keep enough memory above the JVM heap maximum for metaspace, thread stacks, native buffers, and other non-heap usage.
