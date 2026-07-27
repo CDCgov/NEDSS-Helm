@@ -58,7 +58,7 @@ system:
 
 reportExecution:
   # Enables routing eligible report execution requests to the modernized report runner.
-  enabled: "false"
+  enabled: "true"
 
 resources: {}
 
