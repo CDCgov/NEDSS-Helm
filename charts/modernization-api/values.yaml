@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: "v1.4.1"
+  tag: "v1.4.2"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -76,9 +76,9 @@ reportExecution:
   enabled: true
   replicaCount: 1
   image:
-    repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nbs7-report-execution"
+    repository: "quay.io/us-cdcgov/cdc-nbs-modernization/report-execution"
     pullPolicy: IfNotPresent
-    tag: "latest"
+    tag: "v1.0.0"
   service:
     type: ClusterIP
     port: 8001
