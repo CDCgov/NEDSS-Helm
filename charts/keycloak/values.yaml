@@ -16,7 +16,7 @@ deployment:
       kcProxyHeaders: xforwarded
     image:
       repository: quay.io/keycloak/keycloak
-      tag: 26.6.6
+      tag: 26.6.4
   replicas: 1
 
 # This can be used to load the theme
