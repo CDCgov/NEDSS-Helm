@@ -53,3 +53,8 @@ jdbc:
 kafka:
   # e.g. for an AWS MSK provisioned cluster: b-<broker-id>.<cluster-name>.<unique-id>.c<cluster-number>.<aws-region>.amazonaws.com:<port>
   cluster: "EXAMPLE_KAFKA_ENDPOINT_AND_PORT"
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true

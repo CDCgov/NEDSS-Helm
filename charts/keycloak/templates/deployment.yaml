@@ -17,8 +17,23 @@ spec:
         app: keycloak
       {{- include "keycloak.selectorLabels" . | nindent 8 }}
     spec:
-      {{- if .Values.initContainers.enabled }}
+      {{- if or .Values.initContainers.enabled (and .Values.linkerd .Values.linkerd.enabled .Values.linkerd.waitForStartup) }}
       initContainers:
+        {{- if and .Values.linkerd .Values.linkerd.enabled .Values.linkerd.waitForStartup }}
+        - name: wait-for-linkerd
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Waiting for Linkerd proxy injector service..."
+              until nslookup linkerd-proxy-injector.linkerd.svc.cluster.local > /dev/null 2>&1; do
+                echo "Linkerd service not found, retrying in 2s..."
+                sleep 2
+              done
+              echo "Linkerd proxy injector service is available!"
+        {{- end }}
+        {{- if .Values.initContainers.enabled }}
         - name: theme-copy
           image: {{ .Values.initContainers.image }}
           command:
@@ -33,6 +48,7 @@ spec:
           volumeMounts:
             - name: kc-persistent-storage
               mountPath: /keycloak/themes
+        {{- end }}
       {{- end }}
 
       containers:

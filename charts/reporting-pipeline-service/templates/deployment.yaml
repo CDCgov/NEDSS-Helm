@@ -20,6 +20,21 @@ spec:
     spec:
       # Service account name for the pod.
       serviceAccountName: {{ .Chart.Name }}
+      {{- if and .Values.linkerd .Values.linkerd.enabled .Values.linkerd.waitForStartup }}
+      initContainers:
+        - name: wait-for-linkerd
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Waiting for Linkerd proxy injector service..."
+              until nslookup linkerd-proxy-injector.linkerd.svc.cluster.local > /dev/null 2>&1; do
+                echo "Linkerd service not found, retrying in 2s..."
+                sleep 2
+              done
+              echo "Linkerd proxy injector service is available!"
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

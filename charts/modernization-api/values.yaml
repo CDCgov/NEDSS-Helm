@@ -186,3 +186,8 @@ probes:
 spring:
   liquibase:
     enabled: true
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true
