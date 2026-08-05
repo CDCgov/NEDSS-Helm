@@ -153,7 +153,7 @@ ui:
   patient:
     file:
       # Enables access to the modernized Patient File
-      enabled: true
+      enabled: false
       # Enables presence of Merge History card in Patient File
       mergeHistory:
         enabled: false
