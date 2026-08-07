@@ -1,6 +1,5 @@
 # Traefik Ingress Controller - Azure (AKS) Configuration
-# Replaces: charts/nginx-ingress/values-azure.yaml
-# Chart: traefik/traefik (v3.7.x)
+# (Replaces: charts/nginx-ingress/values-azure.yaml)
 
 image:
   tag: v3.7.5

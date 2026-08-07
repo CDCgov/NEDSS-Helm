@@ -1,28 +1,12 @@
-# Traefik Ingress Controller
+# If you are not already using Traefik
 
-Traefik v3.x replaces the NGINX Ingress Controller for NBS7 Kubernetes deployments.
+As of the NBS `7.12` release, Traefik replaces the NGINX Ingress Controller. There is more info at [Migrate from Ingress NGINX Controller to Traefik](https://doc.traefik.io/traefik/migrate/nginx-to-traefik/). For NBS7-specific migration instructions, see the [NBS 7.12-GA Traefik Installation Guide](https://nbscentral.cdc.gov/documents/883).
 
-[https://doc.traefik.io/traefik/migrate/nginx-to-traefik/]
+# Info about this Traefik Ingress Controller Helm chart
 
-## Deployment
+Please note that this release pins Traefik to chart [v41.0.1](https://github.com/traefik/traefik-helm-chart/releases#release-v41.0.1) (`appVersion` [v3.7.5](https://github.com/traefik/traefik-helm-chart/blob/v41.0.1/traefik/Chart.yaml#L7)).
 
-Please note that this release pins Traefik to chart version `41.0.1` (app version `v3.7.5`).
-
-### AWS (EKS)
-
-```bash
-helm repo add traefik https://traefik.github.io/charts
-helm repo update
-helm install traefik traefik/traefik --namespace traefik --values values.yaml --version 41.0.1
-```
-
-### Azure (AKS)
-
-```bash
-helm repo add traefik https://traefik.github.io/charts
-helm repo update
-helm install traefik traefik/traefik --namespace traefik --values values-azure.yaml --version 41.0.1
-```
+Info about how to use this Helm chart is in the NBS 7 System Administrator Guide: https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html 
 
 ## Files
 
@@ -31,10 +15,6 @@ helm install traefik traefik/traefik --namespace traefik --values values-azure.y
 | `values.yaml` | Helm values for AWS (EKS) with NLB |
 | `values-azure.yaml` | Helm values for Azure (AKS) with internal load balancer |
 
-## Verification
+## Deployment
 
-```bash
-kubectl get pods -n traefik
-kubectl get svc -n traefik
-kubectl get ingressclass
-```
+Follow the aforementioned Sys Admin Guide page, except for the `helm install` command include the `--version 41.0.1` flag if you wish to use that version which has been verified with NBS 7.
