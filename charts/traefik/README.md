@@ -13,8 +13,7 @@ Please note that this release pins Traefik to chart version `41.0.1` (app versio
 ```bash
 helm repo add traefik https://traefik.github.io/charts
 helm repo update
-helm install traefik-crds traefik/traefik-crds --namespace traefik --create-namespace
-helm install traefik traefik/traefik --namespace traefik --values values.yaml --skip-crds --version 41.0.1
+helm install traefik traefik/traefik --namespace traefik --values values.yaml --version 41.0.1
 ```
 
 ### Azure (AKS)
@@ -22,8 +21,7 @@ helm install traefik traefik/traefik --namespace traefik --values values.yaml --
 ```bash
 helm repo add traefik https://traefik.github.io/charts
 helm repo update
-helm install traefik-crds traefik/traefik-crds --namespace traefik --create-namespace
-helm install traefik traefik/traefik --namespace traefik --values values-azure.yaml --skip-crds --version 41.0.1 --set service.spec.loadBalancerIP=XX.XX.XX.XX
+helm install traefik traefik/traefik --namespace traefik --values values-azure.yaml --version 41.0.1 --set service.spec.loadBalancerIP=XX.XX.XX.XX
 ```
 
 ## Files
