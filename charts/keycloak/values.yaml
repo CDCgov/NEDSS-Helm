@@ -68,3 +68,8 @@ resources:
   requests:
     memory: "512Mi"  
     cpu: "250m"
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true
