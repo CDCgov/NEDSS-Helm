@@ -19,24 +19,24 @@ To uninstall this chart, run the following command:
 
 Default values for this chart:
 
-| Key | Type | Default | Description | Required |
+| Key            | Type           | Default        | Description    | Required       |
 | -------------- | -------------- | -------------- | -------------- | -------------- | 
-| replicaCount | int | 1 | Number of Pods maintained. Defaulted to 1 | N |
-| image | string |  |  Elastic search container image. Needs to point to the latest image from the public repository  | N |
-| imagePullSecrets | string |  | Secrets for build image. Not required if pulling from public repository  | N |
-| tag | string |  | Point to release tag that needs to be installed with NBS. This is required  | N |
-| nameOverride | string | "" | replaces name of chart on install. Not required. | N |
-| fullnameOverride | string | "" | replaces full generated name on install. Not required. | N |
-| serviceAccount | string |  | Used to created a service account. Not required. | N |
-| podAnnotations | object | {} | Attach metadata. Not required. | N |
-| podSecurityContext | object | {} | Defines privilege and access control. Not Required | N |
-| securityContext | object | runAsUser: 1000 fsGroup: 1000 | Defines privilege and access control. The default security context defines the user permissions required to run the elastic search service. | N |
-| service | object | By default clusterIP service with ports 9200 and 9300 is configured | Configures service ClusterIP | N |
-| ingress | boolean | false | Creation of Ingress resource. Not required since elastic search is an internal service. | N |
-| resources | object | limits memory to 6GB | Enable default resources | N |
-| autoscaling | object | false | Kubernetes POD autoscaler | N |
-| nodeSelector | object | {} | Node assignment to Pod | N |
-| tolerations | list | [] | Set Pod tolerations | N |
-| affinity | object | {} | Define needed contraints | N |
-| pvc | object | Defaulted to 100GB | Persistent volume claim | N |
-| efsFileSystemId | string | "" | Populate the elastic file system ID from your AWS console. This is required. | Y |
+| `replicaCount` | Integer | `1` | Number of Kubernetes Pods maintained. | Yes when `autoscaling` is not enabled |
+| `image.tag` | String | See `./values.yaml` | Points to the release tag to be installed. If not specified then `appVersion` from `./Chart.yaml` is used. | N |
+| `imagePullSecrets` | List | `[]` | Secrets for build image. | Yes if not pulling image from public repository |
+| `nameOverride` | String | `""` | Replaces name of chart on install. | N |
+| `fullnameOverride` | String | `""` | Replaces full generated name on install. | N |
+| `serviceAccount` | Nested values | enabled | Used to created a service account. | N |
+| `podAnnotations` | Map | `{}` | Key-value pairs to attach as metadata to the Pod. | N |
+| `securityContext` | Nested values | See `./values.yaml` | 'runAsUser' is the User ID (UID) that executes the container's processes, and 'fsGroup' is the filesystem group ID (GID) to use for any volume mounted on the pod. | Y |
+| `service` | Nested values | See `./values.yaml` | Configures the Kubernetes Service | Y |
+| `ingress` | Nested values | disabled | Creation of Ingress resource. | N (because elastic search is an internal service) |
+| `resources` | Nested values | See `./values.yaml` | Sets limits and requests for resources | N |
+| `autoscaling` | Nested values | disabled | Kubernetes Pod autoscaler | `autoscaling.enabled` is always required, and the rest of the nested values are required only when this autoscaling feature is enabled. |
+| `nodeSelector` | Map | `{}` | Node assignment to Pod | N |
+| `tolerations` | List | `[]` | The Pod's tolerations | N |
+| `affinity` | Map | `{}` | The Pod's scheduling constraints - e.g. co-locate this pod in the same node, zone, etc. as some other pod(s). | N |
+| `cloudProvider` | String | aws | Set to your cloud provider | Y |
+| `azure` | Nested values | See `./values.yaml` | Creates a PersistentVolumeClaim (PVC) and StorageClass for Azure | Yes when `cloudProvider` is azure, otherwise ignored |
+| `pvc` | Nested values | See `./values.yaml` | Creates a PVC for AWS | Yes when `cloudProvider` is aws, otherwise ignored |
+| `efsFileSystemId` | String | `""` | Creates a StorageClass for AWS | Yes when `cloudProvider` is aws, otherwise ignored |
