@@ -29,7 +29,6 @@ Default values for this chart:
 | fullnameOverride | string | "" | replaces full generated name on install. Not required. | N |
 | serviceAccount | string |  | Used to created a service account. Not required. | N |
 | podAnnotations | object | {} | Attach metadata. Not required. | N |
-| podSecurityContext | object | {} | Defines privilege and access control. Not Required | N |
 | securityContext | object | runAsUser: 1000 fsGroup: 1000 | Defines privilege and access control. The default security context defines the user permissions required to run the elastic search service. | N |
 | service | object | By default clusterIP service with ports 9200 and 9300 is configured | Configures service ClusterIP | N |
 | ingress | boolean | false | Creation of Ingress resource. Not required since elastic search is an internal service. | N |
