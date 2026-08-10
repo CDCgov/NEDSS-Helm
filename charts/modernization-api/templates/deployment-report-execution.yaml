@@ -48,6 +48,10 @@ spec:
             periodSeconds: {{ .Values.reportExecution.probes.liveness.periodSeconds | default "30" }}
             failureThreshold: {{ .Values.reportExecution.probes.liveness.failureThreshold | default "5" }}
           {{- end }}
+          volumeMounts:
+            - mountPath: {{ .Values.reportExecution.customLibPath }}
+              name: {{ include "modernization-api.reportExecution.fullname" . }}-configmap
+              readOnly: true
           ports:
             - name: http
               containerPort: {{ .Values.reportExecution.service.port }}
@@ -63,6 +67,11 @@ spec:
               value: {{ .Values.reportExecution.database.connectionString | quote }}
           resources:
             {{- toYaml .Values.reportExecution.resources | nindent 12 }}
+      volumes:
+        - name: {{ include "modernization-api.reportExecution.fullname" . }}-configmap
+          configMap:
+            name: {{ include "modernization-api.reportExecution.fullname" . }}-configmap
+            defaultMode: 0777
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

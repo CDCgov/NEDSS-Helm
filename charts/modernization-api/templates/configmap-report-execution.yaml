@@ -1,0 +1,8 @@
+{{- if eq (toString .Values.reportExecution.enabled) "true" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "modernization-api.reportExecution.fullname" . }}-configmap
+binaryData:
+  {{- (.Files.Glob "custom-libs/*.py").AsSecrets | nindent 2 }}
+{{- end }}
