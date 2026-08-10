@@ -17,4 +17,8 @@ Info about how to use this Helm chart is in the NBS 7 System Administrator Guide
 
 ## Deployment
 
-Follow the aforementioned Sys Admin Guide page, except for the `helm install` command include the `--version 41.0.1` flag if you wish to use that version which has been verified with NBS 7.
+Follow the aforementioned Sys Admin Guide page, except for the `helm install` command:
+
+- include the `--version 41.0.1` flag if you wish to use that version which has been verified with NBS 7.
+
+- include the `--set service.spec.loadBalancerIP=XX.XX.XX.XX` flag (and fill in the IP address of your load balancer for your AKS Node Pool) if you're deploying to Azure (AKS).
