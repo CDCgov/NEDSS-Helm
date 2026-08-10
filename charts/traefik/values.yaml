@@ -35,8 +35,7 @@ ports:
     expose:
       default: false
     protocol: TCP
-
-# HTTP entrypoint
+  # HTTP entrypoint:
   web:
     port: 8000
     expose:
@@ -50,8 +49,7 @@ ports:
         readTimeout: "300s"
         writeTimeout: "300s"
         idleTimeout: "300s"
-
-# HTTPS entrypoint
+  # HTTPS entrypoint:
   websecure:
     port: 8443
     expose:
@@ -67,8 +65,7 @@ ports:
         readTimeout: "300s"
         writeTimeout: "300s"
         idleTimeout: "300s"
-
-# Metrics port for Prometheus scraping
+  # Metrics port for Prometheus scraping:
   metrics:
     port: 9100
     expose:
@@ -83,6 +80,7 @@ service:
     prometheus.io/scrape: "true"
     prometheus.io/port: "9100"
     prometheus.io/path: /metrics
+    #
     # Optional: Assign Elastic IPs to the NLB for static IP addresses
     # Allocate EIPs in AWS first, then reference their allocation IDs:
     # service.beta.kubernetes.io/aws-load-balancer-eip-allocations: eipalloc-xxxxxxxxx,eipalloc-yyyyyyyyy
