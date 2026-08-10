@@ -2,7 +2,7 @@ deployment:
   keycloak:
     env:
       kcDb: mssql
-      kcDbPassword: '<<EXAMPLE_KC_DB_USER_PASSWORD>>'
+      kcDbPassword: "EXAMPLE_KCDB_PASS8675309"
       kcDbUrl: jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;
       kcDbUsername: NBS_keycloak
       kcHealthEnabled: "true"
@@ -12,19 +12,20 @@ deployment:
       kcMetricsEnabled: "true"
       kcTransactionXaEnabled: "false"
       keycloakAdmin: admin
-      keycloakAdminPassword: "<<EXAMPLE_KEYCLOAK_ADMIN_PASSWORD>>"
+      keycloakAdminPassword: "EXAMPLE_KC_PASS8675309"
       kcProxyHeaders: xforwarded
     image:
       repository: quay.io/keycloak/keycloak
       tag: 24.0.4
   replicas: 1
 
-# this will load the theme, edit for the current release number
+# This can be used to load the theme
 initContainers:
   enabled: true
+  # The following tag/version is from https://hub.docker.com/_/alpine/tags
   image: "alpine:3.12"
-  sleepDuration: 30  # Default is 5 minutes (300 seconds). Use "infinite" for infinite sleep.
-  #sleepDuration: "infinite"  # Default is 5 minutes (300 seconds). Use "infinite" for infinite sleep.
+  sleepDuration: 30 # in seconds
+  #sleepDuration: "infinite" # This can be used for infinite sleep.
 keycloak:
   ports:
   - name: http
@@ -32,6 +33,8 @@ keycloak:
     protocol: TCP
     targetPort: 8080
   type: ClusterIP
+
+# Also part of the keycloak env vars:
 kubernetesClusterDomain: cluster.local
 
 
@@ -54,12 +57,19 @@ pvc:
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
 
-# Overide available for readiness and liveness probes: path, port, initialDelaySeconds, periodSeconds, failureThreshold
 probes:
   readiness:
     enabled: true
+    #port: xxxx
+    #initialDelaySeconds: xx
+    #periodSeconds: xx
+    #failureThreshold: x
   liveness:
     enabled: true
+    #port: xxxx
+    #initialDelaySeconds: xx
+    #periodSeconds: xx
+    #failureThreshold: x
 
 resources:
   limits:

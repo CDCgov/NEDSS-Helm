@@ -1,10 +1,15 @@
 
+# Overview
 
-This keycloak helm chart adds a keycloak container to the same namespace as
-the NBS modern system.
+This Helm chart deploys Keycloak in Kubernetes.
 
-There is a required realm in the imports directory with file name
-nbs-users.json.
+# Install Chart
+
+For info on how to install this chart, search for "Keycloak" in the NBS 7 System Administrator Guide: https://cdcgov.github.io/NEDSS-SystemAdminGuide/
+
+# Optional Keycloak theme
+
+NOTE: It is recommended for simplicity to skip this optional section.
 
 There is also a sample theme added, it requires a persistent volume
 currently tested using AWS EFS.  The theme needs to be loaded in
@@ -35,41 +40,46 @@ Note a non default theme is selected in keycloak (and then recorded in the
 database) if it is later missing it will generate a white label error on
 login.
 
+## Copy the theme files to the pod
 
-# Deploy the Helm Chart:
-
-helm install keycloak ./keycloak
-
-After the Helm chart is deployed, use the following command to copy the
+After the Helm chart is deployed (via the `helm install` command for keycloak in the Sys Admin Guide), use the following command to copy the
 theme files from your local machine to the Kubernetes pod:
 
-kubectl get pods
-
+```
 export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 )
+```
 
-# get a shell on init container
+## Get a shell on init container
 
+```
 alias kcbi='export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 );  kubectl exec -it -c theme-copy --namespace default "${POD_NAME}" -- sh'
 
 kcbi
+```
 
-# actually copy the theme
+## Actually copy the theme
 
+```
 export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 )
 
 kubectl cp keycloak/theme/nbs/login ${POD_NAME}:/keycloak/themes/ -c theme-copy
+```
 
 ( need to clean up mount point to be consistent between init container and final container from charts dir )
 
-# check location to see files were copied
+## Check location to see files were copied
 
+```
 export POD_NAME=$(kubectl get pods --namespace default -o name | grep keycloak | sed 's?pod/??g' | tail -1 )
 
 kubectl exec -it -c theme-copy --namespace default "${POD_NAME}" -- ls -l /keycloak/themes
+```
 
-# Terminate the Init Container:
+## Terminate the Init Container
 
 Once the files are copied, you can terminate the init container by running
 the following command:
 
+```
 kubectl exec ${POD_NAME} -c theme-copy -- pkill sleep
+```
