@@ -7,13 +7,7 @@ This Helm chart deploys Elasticsearch in Kubernetes with back-end persistent sto
 
 # Install Chart
 
-See https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/elasticsearch.html .
-
-# Uninstall Chart
-
-To uninstall this chart, run the following command:
-
-`helm uninstall elasticsearch`
+See https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/elasticsearch.html , and the following `Values` section provides additional info.
 
 ## Values
 
@@ -40,3 +34,9 @@ Default values for this chart:
 | `azure` | Nested values | See `./values.yaml` | Creates a PersistentVolumeClaim (PVC) and StorageClass for Azure | Yes when `cloudProvider` is azure, otherwise ignored |
 | `pvc` | Nested values | See `./values.yaml` | Creates a PVC for AWS | Yes when `cloudProvider` is aws, otherwise ignored |
 | `efsFileSystemId` | String | `""` | Creates a StorageClass for AWS | Yes when `cloudProvider` is aws, otherwise ignored |
+
+# Uninstall Chart
+
+To uninstall this chart, run the following command:
+
+`helm uninstall elasticsearch`

@@ -80,14 +80,10 @@ spec:
           value: {{ quote .Values.deployment.keycloak.env.kcMetricsEnabled }}
         - name: KC_HTTP_RELATIVE_PATH
           value: {{ quote .Values.deployment.keycloak.env.kcHttpRelativePath }}
-        #- name: KC_HOSTNAME
-        #  value: {{ quote .Values.deployment.keycloak.env.kcHostname }}
         - name: KC_HOSTNAME_STRICT
           value: {{ quote .Values.deployment.keycloak.env.kcHostnameStrict }}
         - name: KC_HTTP_ENABLED
           value: {{ quote .Values.deployment.keycloak.env.kcHttpEnabled }}
-        #- name: KC_PROXY
-        #  value: {{ quote .Values.deployment.keycloak.env.kcProxy }}
         - name: KC_PROXY_HEADERS
           value: {{ quote .Values.deployment.keycloak.env.kcProxyHeaders }}
         - name: KUBERNETES_CLUSTER_DOMAIN
