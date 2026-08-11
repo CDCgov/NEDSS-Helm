@@ -1,3 +1,6 @@
+# For info on how to install this AWS Cluster Autoscaler, search for "Autoscaler" in the NBS 7 System Administrator Guide: https://cdcgov.github.io/NEDSS-SystemAdminGuide/
+#  * Note that at least through NBS 7.13 this Cluster Autoscaler feature is not yet fully released/supported. The Sys Admin Guide for your NBS 7 release will provide information on this feature if it's supported in that given release.
+
 ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 # affinity -- Affinity for pod assignment
 affinity: {}
@@ -14,10 +17,10 @@ autoDiscovery:
   # Enable autodiscovery for `cloudProvider=clusterapi`, for groups matching `autoDiscovery.labels`.
   # Enable autodiscovery for `cloudProvider=gce`, but no MIG tagging required.
   # Enable autodiscovery for `cloudProvider=magnum`, for groups matching `autoDiscovery.roles`.
-  clusterName: <<EXAMPLE_EKS_CLUSTER_NAME>> # cluster.local
+  clusterName: <EXAMPLE_EKS_CLUSTER_NAME>
 
   # autoDiscovery.namespace -- Enable autodiscovery via cluster namespace for for `cloudProvider=clusterapi`
-  namespace: default
+  namespace: kube-system
 
   # autoDiscovery.tags -- ASG tags to match, run through `tpl`.
   tags:
@@ -33,27 +36,12 @@ autoDiscovery:
   labels: []
     # - color: green
     # - shape: circle
-# autoscalingGroups -- For AWS, Azure AKS, Exoscale or Magnum. At least one element is required if not using `autoDiscovery`. For example:
-# <pre>
-# - name: asg1<br />
-#   maxSize: 2<br />
-#   minSize: 1
-# </pre>
-# For Hetzner Cloud, the `instanceType` and `region` keys are also required.
-# <pre>
-# - name: mypool<br />
-#   maxSize: 2<br />
-#   minSize: 1<br />
-#   instanceType: CPX21<br />
-#   region: FSN1
-# </pre>
-autoscalingGroups:
-  - name: <<EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>>
-    maxSize: 5
-    minSize: 3
-# - name: asg2
-#   maxSize: 2
-#   minSize: 1
+
+# At least one 'autoscalingGroups' element is required if not using 'autoDiscovery' above. For example:
+# autoscalingGroups:
+# - name: <EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>
+#   maxSize: 5
+#   minSize: 3
 
 # autoscalingGroupsnamePrefix -- For GCE. At least one element is required if not using `autoDiscovery`. For example:
 # <pre>
@@ -73,8 +61,8 @@ autoscalingGroupsnamePrefix: []
 awsAccessKeyID: ""
 
 # awsRegion -- AWS region (required if `cloudProvider=aws`)
-# awsRegion -- <<EXAMPLE_AWS_REGION_FIXME>>
-awsRegion: us-east-1
+# awsRegion -- e.g. us-east-1
+awsRegion: <EXAMPLE_AWS_REGION>
 
 # awsSecretAccessKey -- AWS access secret key ([if AWS user keys used](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md#using-aws-credentials))
 awsSecretAccessKey: ""
@@ -360,7 +348,10 @@ rbac:
   clusterScoped: true
   serviceAccount:
     # rbac.serviceAccount.annotations -- Additional Service Account annotations.
-    annotations: {}
+    annotations:
+      # The following ARN can be retrieved by running this command in your "1-nbs7" Terraform folder/layer (which comes from https://github.com/CDCgov/NEDSS-Infrastructure/tree/main/terraform/aws/samples/1-nbs7 ): 
+      #   `terraform output -json main | jq '.nbs7.cluster_autoscaler_irsa_role_arn'`
+      eks.amazonaws.com/role-arn: <EXAMPLE_CLUSTER_AUTOSCALER_ROLE_ARN>
     # rbac.serviceAccount.create -- If `true` and `rbac.create` is also true, a Service Account will be created.
     create: true
     # rbac.serviceAccount.name -- The name of the ServiceAccount to use. If not set and create is `true`, a name is generated using the fullname template.
