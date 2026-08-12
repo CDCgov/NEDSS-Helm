@@ -1,5 +1,5 @@
 # Traefik Ingress Controller - AWS (EKS) Configuration
-# (Replaces: charts/nginx-ingress/values.yaml)
+# (Replaces: NEDSS-Helm/charts/nginx-ingress/values.yaml)
 
 image:
   tag: v3.7.5
@@ -77,6 +77,7 @@ service:
   type: LoadBalancer
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    #
     prometheus.io/scrape: "true"
     prometheus.io/port: "9100"
     prometheus.io/path: /metrics
