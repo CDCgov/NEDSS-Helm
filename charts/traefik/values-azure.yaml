@@ -1,5 +1,5 @@
 # Traefik Ingress Controller - Azure (AKS) Configuration
-# (Replaces: charts/nginx-ingress/values-azure.yaml)
+# (Replaces: NEDSS-Helm/charts/nginx-ingress/values-azure.yaml)
 
 image:
   tag: v3.7.5
@@ -35,7 +35,7 @@ ports:
     expose:
       default: false
     protocol: TCP
-
+  # HTTP entrypoint:
   web:
     port: 8000
     expose:
@@ -49,7 +49,7 @@ ports:
         readTimeout: "300s"
         writeTimeout: "300s"
         idleTimeout: "300s"
-
+  # HTTPS entrypoint:
   websecure:
     port: 8443
     expose:
@@ -65,7 +65,7 @@ ports:
         readTimeout: "300s"
         writeTimeout: "300s"
         idleTimeout: "300s"
-
+  # Metrics port for Prometheus scraping:
   metrics:
     port: 9100
     expose:
@@ -77,11 +77,12 @@ service:
   type: LoadBalancer
   spec:
     externalTrafficPolicy: "Local"
-    loadBalancerIP: XX.XX.XX.XX  #Populate your private IP here OR by passing it to your helm command
+    loadBalancerIP: EXAMPLE_XX.XX.XX.XX # Populate with the private IP of your load balancer in Azure. (Also, see the helm command documented at the bottom of this file.)
   annotations:
-    #For private IP and private cluster use the following:
+    # For private IP and private cluster use the following:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     service.beta.kubernetes.io/azure-load-balancer-internal-health-probe-request-path: "/ping"
+    #
     prometheus.io/scrape: "true"
     prometheus.io/port: "9100"
     prometheus.io/path: /metrics
@@ -104,6 +105,9 @@ log:
 accessLog:
   enabled: true
 
+# DASHBOARD
+# Traefik includes a built-in dashboard - useful for debugging routes
+# Do NOT expose externally in production
 ingressRoute:
   dashboard:
     enabled: true
@@ -120,5 +124,5 @@ resources:
 rbac:
   enabled: true
 
-# Run the following helm command after updating the load balancer IP:
-# helm upgrade --install traefik traefik/traefik --namespace traefik -f values-azure.yaml --set service.spec.loadBalancerIP=XX.XX.XX.XX
+# Run the following command (from your NEDSS-Helm/charts/ directory) if/when the load balancer IP is updated:
+# helm upgrade --install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml --set service.spec.loadBalancerIP=EXAMPLE_XX.XX.XX.XX
