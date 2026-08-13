@@ -1,4 +1,4 @@
-# NOTE: Unless otherwise specified, all values in this file are used only by the modernization-api pod (not also by the modernization-api-report-execution pod).
+# NOTE: Unless otherwise specified, all values in this file are used only by the modernization-api pod.
 
 # Info about the 'probes' nested values in this file: 
 # * If probes.*.enabled is disabled then the other sibling keys (under that probes.* parent) are ignored,
