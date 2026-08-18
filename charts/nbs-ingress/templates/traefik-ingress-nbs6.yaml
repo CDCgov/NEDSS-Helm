@@ -1,0 +1,38 @@
+{{/*
+Traefik Ingress - NBS6 legacy routes (/nbs/*)
+Scoped Ingress that handles NBS6 traffic separately from the main Ingress.
+Attaches upgrade-insecure-requests to NBS6 responses only. Keycloak, mod-api, and other routes on the main Ingress are unaffected.
+
+Traefik picks the longer path prefix, so /nbs/ here takes precedence over
+the / catch-all in traefik-ingress-main.yaml.
+
+Only rendered when traefik.enabled is true.
+*/}}
+{{- if .Values.traefik.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nbs-ingress.fullname" . }}-nbs6
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer | quote }}
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-nbs-custom-headers@kubernetescrd,{{ .Release.Namespace }}-body-size-limit@kubernetescrd,{{ .Release.Namespace }}-nbs-upgrade-insecure-requests@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: {{ .Values.appHost }}
+      hosts:
+        - {{ .Values.appHost }}
+  rules:
+    - host: {{ .Values.appHost }}
+      http:
+        paths:
+          - path: "/nbs/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.gateway.serviceName }}
+                port:
+                  number: {{ .Values.app.gateway.port }}
+{{- end }}
