@@ -112,10 +112,10 @@ reportExecution:
   resources:
     limits:
       memory: "2Gi"
-      cpu: "1Gi"
+      cpu: "500m"
     requests:
       memory: "2Gi"
-      cpu: "1Gi"
+      cpu: "500m"
   autoscaling:
     enabled: false
     minReplicas: 1
