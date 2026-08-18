@@ -111,11 +111,11 @@ reportExecution:
   logLevel: "INFO"
   resources:
     limits:
-      memory: "1Gi"
-      cpu: "500m"
+      memory: "2Gi"
+      cpu: "1Gi"
     requests:
-      memory: "1Gi"
-      cpu: "500m"
+      memory: "2Gi"
+      cpu: "1Gi"
   autoscaling:
     enabled: false
     minReplicas: 1
