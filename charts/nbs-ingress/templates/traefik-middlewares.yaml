@@ -50,5 +50,23 @@ spec:
       Cross-Origin-Opener-Policy: "same-origin"
       Cache-Control: "max-age=1209600, immutable"
       Pragma: ""
-
+---
+# =============================================================================
+# Upgrade Insecure Requests — fixes mixed content on NBS6 report pages
+# =============================================================================
+# NBS6 returns HTTP URLs in report iframe/form actions. Browsers block these
+# as mixed active content on HTTPS pages. This CSP directive tells the
+# browser to transparently upgrade HTTP resources to HTTPS.
+#
+# Only upgrade-insecure-requests — no default-src or other CSP directives.
+# Applied via the main Ingress (traefik-ingress-main.yaml).
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nbs-upgrade-insecure-requests
+  labels:
+    {{- include "nbs-ingress.labels" . | nindent 4 }}
+spec:
+  headers:
+    contentSecurityPolicy: "upgrade-insecure-requests"
 {{- end }}
