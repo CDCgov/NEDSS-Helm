@@ -59,7 +59,7 @@ spec:
 # browser to transparently upgrade HTTP resources to HTTPS.
 #
 # Only upgrade-insecure-requests — no default-src or other CSP directives.
-# Scoped: attached only to the /nbs/* Ingress (traefik-ingress-nbs6.yaml).
+# Applied via the main Ingress (traefik-ingress-main.yaml).
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
