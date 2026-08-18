@@ -73,6 +73,7 @@ spec:
             '--spring.liquibase.enabled={{ (((.Values).spring).liquibase).enabled | default "false" }}',
             '--nbs.report.execution.host={{ include "modernization-api.reportExecution.fullname" . }}',
             '--nbs.report.execution.port={{ .Values.reportExecution.service.port }}',
+            '--nbs.report.execution.max_size={{ .Values.reportExecution.max_report_size }}',
             '--nbs.wildfly.url=https://{{ .Values.nbsExternalName }}', 
             '--nbs.ui.features.pageBuilder.enabled={{ ((.Values).pageBuilder).enabled | default "false" }}', 
             '--nbs.ui.features.pageBuilder.page.library.enabled={{ ((((.Values).pageBuilder).page).library).enabled | default "false" }}', 

@@ -106,6 +106,8 @@ reportExecution:
     port: 8001
   database:
     connectionString: "Server=EXAMPLE_DB_ENDPOINT;UID=EXAMPLE_ODSE_DB_USER;PWD=EXAMPLE_ODSE_DB_USER_PASSWORD;Database=NBS_ODSE;TrustServerCertificate=yes;"
+  # Maximum size in number of characters of the CSV-ified report result
+  max_report_size: 2457600000 # 100k rows x 1024 cols x 24chars
   logLevel: "INFO"
   resources:
     limits:
