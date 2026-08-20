@@ -10,7 +10,7 @@ replicaCount: 1
 image:
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
   pullPolicy: IfNotPresent
-  tag: "v1.5.2"
+  tag: "v1.5.3"
 
 imagePullSecrets: [] # Used by both pods (i.e. modernization-api and modernization-api-report-execution)
 
@@ -100,7 +100,7 @@ reportExecution:
   image:
     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/report-execution"
     pullPolicy: IfNotPresent
-    tag: "v1.0.1"
+    tag: "v1.0.2"
   service:
     type: ClusterIP
     port: 8001
