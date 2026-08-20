@@ -108,8 +108,6 @@ reportExecution:
     config.linkerd.io/skip-outbound-ports: "EXAMPLE_DB_PORT"
   database:
     connectionString: "Server=EXAMPLE_DB_ENDPOINT;UID=EXAMPLE_ODSE_DB_USER;PWD=EXAMPLE_ODSE_DB_USER_PASSWORD;Database=NBS_ODSE;TrustServerCertificate=yes;"
-  # Maximum size in number of characters of the CSV-ified report result
-  max_report_size: 2000000000 # 100k rows x 1000 cols x 20chars
   logLevel: "INFO"
   resources:
     limits:
