@@ -14,7 +14,7 @@ and [Docker BuildKit attestations documentation](https://docs.docker.com/build/m
 Requires Docker with `buildx` (Docker Desktop 4.x+, Docker Engine 23.0+). Public
 NBS repositories on Quay.io allow anonymous read, so no login is required.
 
-​```sh
+​```
 docker buildx imagetools inspect \
   quay.io/us-cdcgov/cdc-nbs-modernization/<repo>:<tag> \
   --format "{{ json .Provenance }}"
