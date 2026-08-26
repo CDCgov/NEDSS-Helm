@@ -78,3 +78,8 @@ pvc:
     storageRequest: 100Gi
 # Used to create a StorageClass:
 efsFileSystemId: "EXAMPLE_EFS_ID"
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true

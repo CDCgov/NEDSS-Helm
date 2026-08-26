@@ -109,3 +109,8 @@ singleUserCredentialsPassword: "EXAMPLE_NIFI_ADMIN_USER_PASSWORD"
 # NiFi Sensitive Props Key. Specifies the source string used to derive an encryption key.
 # The Sensitive Properties Key is not the encryption key itself, but the password from which NiFi derives the actual encryption key.
 nifiSensitivePropsKey: "EXAMPLE_NIFI_SENSITIVE_PROPS"
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true
