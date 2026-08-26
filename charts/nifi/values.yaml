@@ -1,24 +1,25 @@
 replicaCount: 1
 
 image:
-  #repository: "public.ecr.aws/o1z7u2g7/cdc-nbs-modernization/nifi"
   repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nifi"
   pullPolicy: IfNotPresent
   tag: "v1.1.1"
 
 imagePullSecrets: []
+
 nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
   create: true
+  # If 'create' is "true" then either/both of the following two values can optionally be set to non-default values, otherwise those two values are ignored.
   annotations: {}
   name: ""
 
 podAnnotations: {}
 
+# Defines privilege and access control (../elasticsearch/values.yaml has an example of setting 'securityContext' to a non-default value).
 podSecurityContext: {}
-
 securityContext: {}
 
 service:
@@ -57,6 +58,7 @@ resources:
     cpu: "500m"
     memory: "1536Mi"
 
+# Kubernetes Pod autoscaler
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -90,22 +92,22 @@ pvc:
 efsFileSystemId: "EXAMPLE_EFS_ID"
 
 
-### Nifi Configurations ###
+### Environment variables for the NiFi container: ###
 
 jvmheap:
   init: "1g"
   max: "2g"
 
-# jdbcConnectionString is passed in as an override and all values must be supplied. 
-# Replace <db_endpoint>, <database>, <username>, and <password> in the following:
-# "jdbc:sqlserver://<db_endpoint>:1433;databaseName=<database>;user=<username>;password=<password>;encrypt=true;trustServerCertificate=true;"
 jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
+
+# "elasticsearch" in the following URL must match the name of the Kubernetes Deployment created by the ../elasticsearch/ Helm chart.
 elasticSearchHost: "http://elasticsearch.default.svc.cluster.local:9200"
 
-# Default NiFi Admin Username and Password. Password must be minimum of 12 characters
+# Choose any username except admin.
 singleUserCredentialsUsername: "EXAMPLE_NIFI_ADMIN_USER"
+# The following password must be a minimum of 12 characters.
 singleUserCredentialsPassword: "EXAMPLE_NIFI_ADMIN_USER_PASSWORD"
 
-# NiFi Sensitive Props Key. Specifies the source string used to derive an encryption key.
-# The Sensitive Properties Key is not the encryption key itself, but the password from which NiFi derives the actual encryption key.
+# Specifies the source string used to derive an encryption key. This is not the encryption key itself, but the password from which NiFi derives the actual encryption key.
+# Generate a random value of at least 12 characters with: openssl rand -base64 32 | cut -c1-32
 nifiSensitivePropsKey: "EXAMPLE_NIFI_SENSITIVE_PROPS"
