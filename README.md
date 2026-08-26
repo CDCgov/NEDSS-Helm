@@ -15,6 +15,11 @@ The following helm charts are contained within this repository:
 5. [elasticsearch](charts/elasticsearch) - deploys eleasticsearch service
 6. [nifi](charts/nifi) - deploys NiFi opensource project
 7. [nginx-ingress](charts/nginx-ingress) - deploys nginx-ingress controller opensource project
+
+## Verifying container image provenance
+
+Container images referenced by these Helm charts include SLSA v0.2 provenance attestations that can be used to verify each image was built by the CI pipeline.
+See [BUILD-PROVENANCE.md](BUILD-PROVENANCE.md) for verification instructions.
   
 ## Public Domain Standard Notice
 
