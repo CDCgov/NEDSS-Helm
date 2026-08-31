@@ -15,6 +15,10 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Frame-Options: Allow";
       more_set_headers "Cross-Origin-Opener-Policy: same-origin";
+      # Keycloak 25+ removed the built-in /auth/robots.txt endpoint. Replace it
+      # with X-Robots-Tag at the edge so Keycloak's /auth/* pages (which route
+      # through here, not nbs-gateway) stay out of search indexes.
+      more_set_headers "X-Robots-Tag: none";
     nginx.ingress.kubernetes.io/service-upstream: "true"
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
@@ -29,13 +33,6 @@ spec:
         paths:
           - path: "/auth/realms/nbs-users/"
             pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.app.keycloak.serviceName }}
-                port:
-                  name: {{ .Values.app.keycloak.portName }}
-          - path: "/auth/robots.txt"
-            pathType: Exact
             backend:
               service:
                 name: {{ .Values.app.keycloak.serviceName }}
