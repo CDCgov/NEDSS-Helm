@@ -25,13 +25,6 @@ spec:
                 port:
                   number: {{ $svcPort }}
           {{- if eq .Values.reportingService.enabled "true" }}
-          - path: "/reporting/person-svc/"
-            pathType: Prefix
-            backend:
-              service:
-                name: person-reporting-service
-                port:
-                  number: {{ .Values.reportingService.personReportingServicePort }}
           - path: "/reporting/organization-svc/"
             pathType: Prefix
             backend:
