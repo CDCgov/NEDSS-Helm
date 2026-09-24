@@ -30,13 +30,6 @@ spec:
                 name: {{ .Values.app.keycloak.serviceName }}
                 port:
                   name: {{ .Values.app.keycloak.portName }}
-          - path: "/auth/robots.txt"
-            pathType: Exact
-            backend:
-              service:
-                name: {{ .Values.app.keycloak.serviceName }}
-                port:
-                  name: {{ .Values.app.keycloak.portName }}
           - path: "/auth/js/"
             pathType: Prefix
             backend:

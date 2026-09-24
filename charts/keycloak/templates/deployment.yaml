@@ -60,8 +60,10 @@ spec:
         {{- end }}  
 
         env:
+        # DEPRECATED in Keycloak 26 -> replace with KC_BOOTSTRAP_ADMIN_USERNAME (still honored in 26.6.x; rename later)
         - name: KEYCLOAK_ADMIN
           value: {{ quote .Values.deployment.keycloak.env.keycloakAdmin }}
+        # DEPRECATED in Keycloak 26 -> replace with KC_BOOTSTRAP_ADMIN_PASSWORD (still honored in 26.6.x; rename later)
         - name: KEYCLOAK_ADMIN_PASSWORD
           value: {{ quote .Values.deployment.keycloak.env.keycloakAdminPassword }}
         - name: KC_DB
