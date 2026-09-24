@@ -169,3 +169,8 @@ ui:
       value: "http://debezium-case-notifications-connect:8083"
     - name: TZ
       value: "UTC"
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true

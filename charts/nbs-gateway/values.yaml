@@ -107,3 +107,8 @@ probes:
 
 # NBS filename from "logos" folder (WARNING: Size of logo image must be smaller than 1 MB)
 nbsLogoFilename: "nedssLogo.jpg"
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true

@@ -136,3 +136,8 @@ probes:
     enabled: true
 
 timezone: "UTC"
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true

@@ -97,3 +97,8 @@ uid:
 timezone: "UTC"
 
 springBootProfile: ""
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true

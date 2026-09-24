@@ -111,3 +111,8 @@ singleUserCredentialsPassword: "EXAMPLE_NIFI_ADMIN_USER_PASSWORD"
 # Specifies the source string used to derive an encryption key. This is not the encryption key itself, but the password from which NiFi derives the actual encryption key.
 # Generate a random value of at least 12 characters with: openssl rand -base64 32 | cut -c1-32
 nifiSensitivePropsKey: "EXAMPLE_NIFI_SENSITIVE_PROPS"
+
+# Linkerd service mesh configuration
+linkerd:
+  enabled: true
+  waitForStartup: true
